@@ -1,0 +1,43 @@
+{
+  "base_url": "http://192.168.88.67:8000/",
+  "api_base_url": "http://192.168.88.67:8000/api/",
+  "media_url": "http://192.168.88.67:8000/",
+  "show_messages": "dialogueModel",
+  "theme": {
+    "screenBackgroundColor": "0xff5864FF",
+    "displayText": "Fahad",
+    "buttonColor": "0xff1DA1F2",
+    "primaryColor": "0xff1DA1F2",
+    "logo":"images/dummyLogo.png"
+  },
+  "currency": {
+    "type": "PK"
+  },
+  "splashData": {
+    "title": "E commerce",
+    "subTitle": "Multi Vendor App",
+    "splashLogo": "assets/images/logoNictus.png",
+    "splashBackground": "assets/images/splashBackground.png",
+    "poweredByLogo": "assets/images/invictusLogo.png"
+  },
+  "onBoardData": {
+    "length": 3,
+    "data": [
+      {
+        "title": "WELCOME TO OUR APP",
+        "subTitle": "Get the hottest fashion by trend and season right on your pocket",
+        "logo": "assets/images/onBoard1.png"
+      },
+      {
+        "title": "WELCOME TO OUR APP",
+        "subTitle": "Get the hottest fashion by trend and season right on your pocket",
+        "logo": "assets/images/onBoard2.png"
+      },
+      {
+        "title": "WELCOME TO OUR APP",
+        "subTitle": "Get the hottest fashion by trend and season right on your pocket",
+        "logo": "assets/images/onBoard3.png"
+      }]
+  }
+
+}

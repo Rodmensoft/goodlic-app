@@ -1,0 +1,57 @@
+1--> get:
+	Use this package for routing, dependencies, stateManagement.
+
+2--> get_storage:
+	Use this package for local storage.
+
+3--> dio:
+	Use this package for Http client for Dart, which supports Interceptors, Global configuration, FormData, Request Cancellation, File downloading, Timeout etc.
+
+4--> intl_utils:
+	Use this package for localization that creates a binding between your translations from .arb files and your Flutter app.
+
+5--> global_configuration:
+	Use this package for managing different configurations by merging them together and making them available everywhere inside the app via a singleton.
+
+6--> dropdown_search:
+	Simple and robust DropdownSearch with item search feature.
+
+7--> skeleton_loader:
+	A Flutter Package which provides a fully customizable loading skeleton for your app.
+
+8--> carousel_slider:
+    A carousel slider widget.
+
+9--> flutter_rating_bar:
+    A simple yet fully customizable rating bar for flutter which also include a rating bar indicator, supporting any fraction of rating.
+
+10--> flutter_staggered_grid_view:
+    For Custom Grid View
+
+11--> sticky_headers:
+    For stick headers on top of screen.
+
+12--> flutter_svg:
+    For display SVG format images.
+
+13--> dotted_border:
+    For creating Dotted border of box.
+
+14--> progress_indicator:
+    For creating progress bar according to percentage.
+
+15--> image_picker_gallery_camera:
+    For pick images and videos.
+
+16--> geolocator:
+    For pick current location.
+
+17--> google_maps_flutter:
+    For display locations in map.
+
+18--> modal_progress_hud:
+    Display progress indicator for showing that task is in process.
+
+18--> uuid:
+    For generating unique id for diff tasks.
+
