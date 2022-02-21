@@ -21,8 +21,9 @@ class ConsultantProfileLogic extends GetxController {
   ];
 }
 class AppointmentTypesCustomClass {
-  AppointmentTypesCustomClass({this.title, this.image});
+  AppointmentTypesCustomClass({this.title, this.image,this.fee});
 
   String? title;
   String? image;
+  String? fee;
 }

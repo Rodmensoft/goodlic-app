@@ -1,6 +1,8 @@
+import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
+import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -86,7 +88,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                         Padding(
                           padding: const EdgeInsetsDirectional.only(end: 15),
                           child: SvgPicture.asset(
-                              'assets/Icons/notificationIcon.svg',color: Colors.white,),
+                              'assets/Icons/notificationIcon.svg',),
                         )
                       ],
                       flexibleSpace: FlexibleSpaceBar(
@@ -96,13 +98,13 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                             SvgPicture.asset(
                               'assets/images/bookAppointmentAppBar.svg',
                               width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * .24,
+                              height: MediaQuery.of(context).size.height * .4,
                               fit: BoxFit.fill,
                             ),
                             SafeArea(
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.w, 20.h, 16.w, 16.h),
+                                    16.w, 25.h, 16.w, 16.h),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -118,9 +120,14 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                                       height: 10.h,
                                     ),
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           'By just few easy steps',
+                                          style: state.appBarSubTitleTextStyle,
+                                        ),
+                                        Text(
+                                          'Step 1 Of 3',
                                           style: state.appBarSubTitleTextStyle,
                                         ),
                                       ],
@@ -136,9 +143,96 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                     ),
                   ];
                 },
-                body: ListView(
-                    padding: const EdgeInsets.only(top: 0),
-                    children: const [])),
+                body: Stack(
+                  children: [
+                    ListView(
+                        padding:
+                        EdgeInsetsDirectional.fromSTEB(15.w, 20.h, 15.w, 0),
+                        children:  [
+                          Text(
+                            'Select Option',
+                            style: state.headingTextStyle,
+                          ),
+                          SizedBox(
+                            height: 18.h,
+                          ),
+                          Wrap(
+                            children: List.generate(
+                                _bookAppointmentLogic
+                                    .appointmentTypes.length, (index) {
+                              return Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0, 0, 18.w, 11.h),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                      BorderRadius.circular(8.r),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color:
+                                          Colors.grey.withOpacity(0.2),
+                                          spreadRadius: -2,
+                                          blurRadius: 15,
+                                          // offset: Offset(1,5)
+                                        )
+                                      ]),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 14.w,vertical: 13.h),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                                '${_bookAppointmentLogic.appointmentTypes[index].image}',),
+                                            SizedBox(
+                                              width: 10.w,
+                                            ),Text(
+                                              '${_bookAppointmentLogic.appointmentTypes[index].title}',
+                                              style: state.typeTextStyle,
+                                            ),
+
+                                          ],
+                                        ),SizedBox(
+                                          height: 5.h,
+                                        ),
+                                        Padding(
+                                          padding:  EdgeInsets.only(left: 28.w),
+                                          child: Text(
+                                            '${_bookAppointmentLogic.appointmentTypes[index].fee}',
+                                            style: state.typePriceTextStyle,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                          )
+                        ]),
+
+                    ///---bottom-bar
+                    Positioned(
+                      bottom: 25.h,
+                      left: 15.w,
+                      right: 15.w,
+                      child: InkWell(
+                        onTap: (){
+                          // Get.toNamed(PageRoutes.bookAppointment);
+                        },
+                        child: const MyCustomBottomBar(
+                          title: 'Continue',
+                          disable: true,
+                        ),
+                      ),
+                    )
+                  ],
+                )),
           ),
         );
       });

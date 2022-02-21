@@ -398,7 +398,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
 
                     ///---bottom-bar
                     Positioned(
-                      bottom: 35.h,
+                      bottom: 25.h,
                       left: 15.w,
                       right: 15.w,
                       child: InkWell(
@@ -407,6 +407,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                         },
                         child: const MyCustomBottomBar(
                           title: 'Book Appointment',
+                          disable: false,
                         ),
                       ),
                     )
