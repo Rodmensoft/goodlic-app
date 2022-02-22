@@ -1,5 +1,6 @@
 import 'package:consultant_product/src/modules/login/view.dart';
 import 'package:consultant_product/src/modules/sign_up/view.dart';
+import 'package:consultant_product/src/modules/user/all_consultants/view.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/view.dart';
 import 'package:consultant_product/src/modules/user/home/view.dart';
@@ -16,6 +17,8 @@ routes() => [
           transition: Transition.zoom),
       GetPage(
           name: "/bookAppointment", page: () => const BookAppointmentPage()),
+  GetPage(
+      name: "/allConsultants", page: () => const AllConsultantsPage()),
     ];
 
 class PageRoutes {
@@ -24,6 +27,7 @@ class PageRoutes {
   static const String userHome = '/userHome';
   static const String consultantProfileForUser = '/consultantProfileForUser';
   static const String bookAppointment = '/bookAppointment';
+  static const String allConsultants = '/allConsultants';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -32,6 +36,7 @@ class PageRoutes {
       userHome: (context) => const UserHomePage(),
       consultantProfileForUser: (context) => const ConsultantProfilePage(),
       bookAppointment: (context) => const BookAppointmentPage(),
+      allConsultants: (context) => const AllConsultantsPage(),
     };
   }
 }
