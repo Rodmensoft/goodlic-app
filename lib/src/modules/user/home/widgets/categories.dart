@@ -6,6 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import '../../../../../route_generator.dart';
+
 class CategoriesWidget extends StatefulWidget {
   const CategoriesWidget({Key? key}) : super(key: key);
 
@@ -35,9 +37,14 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                     'Categories',
                     style: state.subHeadingTextStyle,
                   ),
-                  Text(
-                    'View All',
-                    style: state.viewAllTextStyle,
+                  InkWell(
+                    onTap: (){
+                      Get.toNamed(PageRoutes.allConsultants);
+                    },
+                    child: Text(
+                      'View All',
+                      style: state.viewAllTextStyle,
+                    ),
                   ),
                 ],
               ),
