@@ -20,48 +20,55 @@ class _MyCustomBottomBarState extends State<MyCustomBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55.h,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-          color: customThemeColor,
-          borderRadius: BorderRadius.circular(5.r),
-          boxShadow: [
-            BoxShadow(
-                color: customThemeColor.withOpacity(0.7),
-                spreadRadius: -18,
-                blurRadius: 30,
-                offset: const Offset(0, 35))
-          ]),
-      child: Stack(
-        children: [
-          Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${widget.title}',
-                    style: const TextStyle(
-                        fontFamily: SarabunFontFamily.bold,
-                        fontSize: 16,
-                        color: Colors.white),
+
+      color: Colors.white,
+      child: Padding(
+        padding:  EdgeInsets.only(bottom: 25.h),
+        child: Container(
+          height: 55.h,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              color: customThemeColor,
+              borderRadius: BorderRadius.circular(5.r),
+              boxShadow: [
+                BoxShadow(
+                    color: customThemeColor.withOpacity(0.7),
+                    spreadRadius: -18,
+                    blurRadius: 30,
+                    offset: const Offset(0, 35))
+              ]),
+          child: Stack(
+            children: [
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${widget.title}',
+                        style: const TextStyle(
+                            fontFamily: SarabunFontFamily.bold,
+                            fontSize: 16,
+                            color: Colors.white),
+                      ),
+                      SvgPicture.asset(
+                        'assets/Icons/whiteForwardIcon.svg',
+                        height: 29.h,
+                        width: 29.w,
+                      )
+                    ],
                   ),
-                  SvgPicture.asset(
-                    'assets/Icons/whiteForwardIcon.svg',
-                    height: 29.h,
-                    width: 29.w,
-                  )
-                ],
+                ),
               ),
-            ),
+              widget.disable!
+                  ? Container(
+                      color: Colors.white.withOpacity(0.5),
+                    )
+                  : const SizedBox()
+            ],
           ),
-          widget.disable!
-              ? Container(
-                  color: Colors.white.withOpacity(0.5),
-                )
-              : const SizedBox()
-        ],
+        ),
       ),
     );
   }

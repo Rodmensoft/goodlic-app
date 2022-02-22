@@ -1,7 +1,8 @@
 import 'package:consultant_product/src/modules/login/view.dart';
 import 'package:consultant_product/src/modules/sign_up/view.dart';
-import 'package:consultant_product/src/modules/user/all_consultants/view.dart';
-import 'package:consultant_product/src/modules/user/book_appointment/view.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/view_appointment_question.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/view_payment.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/view_slot_selection.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/view.dart';
 import 'package:consultant_product/src/modules/user/home/view.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,13 @@ routes() => [
           page: () => const ConsultantProfilePage(),
           transition: Transition.zoom),
       GetPage(
-          name: "/bookAppointment", page: () => const BookAppointmentPage()),
-  GetPage(
-      name: "/allConsultants", page: () => const AllConsultantsPage()),
+          name: "/slotSelection", page: () => const SlotSelection()),
+      GetPage(
+          name: "/appointmentQuestion", page: () => const AppointmentQuestionPage(),
+      transition: Transition.noTransition),
+      GetPage(
+          name: "/paymentView", page: () => const PaymentView(),
+      transition: Transition.noTransition),
     ];
 
 class PageRoutes {
@@ -26,8 +31,9 @@ class PageRoutes {
   static const String signUp = '/signUp';
   static const String userHome = '/userHome';
   static const String consultantProfileForUser = '/consultantProfileForUser';
-  static const String bookAppointment = '/bookAppointment';
-  static const String allConsultants = '/allConsultants';
+  static const String slotSelection = '/slotSelection';
+  static const String appointmentQuestion = '/appointmentQuestion';
+  static const String paymentView = '/paymentView';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -35,8 +41,9 @@ class PageRoutes {
       signUp: (context) => const SignUpPage(),
       userHome: (context) => const UserHomePage(),
       consultantProfileForUser: (context) => const ConsultantProfilePage(),
-      bookAppointment: (context) => const BookAppointmentPage(),
-      allConsultants: (context) => const AllConsultantsPage(),
+      slotSelection: (context) => const SlotSelection(),
+      appointmentQuestion: (context) => const AppointmentQuestionPage(),
+      paymentView: (context) => const PaymentView(),
     };
   }
 }

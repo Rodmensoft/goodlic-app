@@ -397,13 +397,14 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                         ]),
 
                     ///---bottom-bar
+
                     Positioned(
-                      bottom: 25.h,
+                      bottom: 0.h,
                       left: 15.w,
                       right: 15.w,
                       child: InkWell(
                         onTap: (){
-                          Get.toNamed(PageRoutes.bookAppointment);
+                          Get.toNamed(PageRoutes.slotSelection);
                         },
                         child: const MyCustomBottomBar(
                           title: 'Book Appointment',
