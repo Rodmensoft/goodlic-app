@@ -34,7 +34,7 @@ class BookAppointmentState {
         fontSize: 18.sp,
         color: customOrangeColor);
     shiftTitleTextStyle = TextStyle(
-        fontFamily: SarabunFontFamily.medium,
+        fontFamily: SarabunFontFamily.regular,
         fontSize: 14.sp,
         color: customTextBlackColor);
   }
