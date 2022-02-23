@@ -370,7 +370,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                 border: Border.all(
                                     color: customTextBlackColor, width: 1)),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(20.w, 25.h, 20.w, 7.h),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20.w, 25.h, 20.w, 7.h),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -387,15 +388,21 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                         _bookAppointmentLogic
                                             .paymentMethodList.length, (index) {
                                       return Padding(
-                                        padding: index%2 == 0
-                                            ?EdgeInsetsDirectional.fromSTEB(0, 0, 8.w, 18.h)
-                                            : EdgeInsetsDirectional.fromSTEB(8.w, 0.h, 0.w, 18.h),
+                                        padding: index % 2 == 0
+                                            ? EdgeInsetsDirectional.fromSTEB(
+                                                0, 0, 8.w, 18.h)
+                                            : EdgeInsetsDirectional.fromSTEB(
+                                                8.w, 0.h, 0.w, 18.h),
                                         child: InkWell(
-                                          onTap: (){
-                                            _bookAppointmentLogic.paymentMethodList.forEach((element) {
+                                          onTap: () {
+                                            _bookAppointmentLogic
+                                                .paymentMethodList
+                                                .forEach((element) {
                                               element.isSelected = false;
                                             });
-                                            _bookAppointmentLogic.paymentMethodList[index].isSelected = true;
+                                            _bookAppointmentLogic
+                                                .paymentMethodList[index]
+                                                .isSelected = true;
                                             _bookAppointmentLogic.update();
                                             setState(() {
                                               disableButton = false;
@@ -403,17 +410,20 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                           },
                                           child: Container(
                                             height: 61.h,
-                                            width: MediaQuery.of(context).size.width*.38,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .38,
                                             decoration: BoxDecoration(
                                                 color: Colors.white,
                                                 border: Border.all(
-                                                  color: _bookAppointmentLogic
-                                                      .paymentMethodList[index]
-                                                      .isSelected!
-                                                      ?customLightThemeColor
-                                                      :Colors.white,
-                                                  width: 2
-                                                ),
+                                                    color: _bookAppointmentLogic
+                                                            .paymentMethodList[
+                                                                index]
+                                                            .isSelected!
+                                                        ? customLightThemeColor
+                                                        : Colors.white,
+                                                    width: 2),
                                                 borderRadius:
                                                     BorderRadius.circular(8.r),
                                                 boxShadow: [
@@ -432,12 +442,17 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                   )
                                                 ]),
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Image.asset(
                                                   '${_bookAppointmentLogic.paymentMethodList[index].image}',
-                                                  width: MediaQuery.of(context).size.width*.15,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .15,
                                                 ),
                                               ],
                                             ),

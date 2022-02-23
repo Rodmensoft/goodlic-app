@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
@@ -35,9 +36,14 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                   'Top Rated Consultants',
                   style: state.subHeadingTextStyle,
                 ),
-                Text(
-                  'View All',
-                  style: state.viewAllTextStyle,
+                InkWell(
+                  onTap: () {
+                    Get.toNamed(PageRoutes.newPassword);
+                  },
+                  child: Text(
+                    'View All',
+                    style: state.viewAllTextStyle,
+                  ),
                 ),
               ],
             ),
@@ -96,6 +102,7 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                               SizedBox(
                                 height: 6.h,
                               ),
+
                               ///---title
                               Text(
                                 '${_userHomeLogic.topRatedConsultantList[index].title}',
@@ -107,6 +114,7 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                               SizedBox(
                                 height: 5.h,
                               ),
+
                               ///---sub-title
                               Text(
                                 '${_userHomeLogic.topRatedConsultantList[index].subTitle}',
@@ -116,6 +124,7 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                     .copyWith(color: customTextBlackColor),
                               ),
                               const Spacer(),
+
                               ///---rating-bar
                               RatingBar.builder(
                                 ignoreGestures: true,
@@ -139,8 +148,9 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                             ],
                           ),
                           const Spacer(),
-                          SvgPicture.asset('assets/Icons/forwardBlueIcon.svg',
-                          width: 29.w,
+                          SvgPicture.asset(
+                            'assets/Icons/forwardBlueIcon.svg',
+                            width: 29.w,
                             height: 29.h,
                           )
                         ],

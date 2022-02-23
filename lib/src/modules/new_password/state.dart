@@ -3,25 +3,29 @@ import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:resize/resize.dart';
 
-class ResetPasswordState {
+class NewPasswordState {
   TextStyle? headingTextStyle;
   TextStyle? descTextStyle;
   TextStyle? subHeadingTextStyle;
-
-  ResetPasswordState() {
+  TextStyle? hintTextStyle;
+  NewPasswordState() {
     ///Initialize variables
 
     headingTextStyle = TextStyle(
-        fontSize: 28.sp,
         fontFamily: SarabunFontFamily.bold,
+        fontSize: 28.sp,
         color: customTextBlackColor);
     descTextStyle = TextStyle(
-        fontSize: 12.sp,
         fontFamily: SarabunFontFamily.medium,
+        fontSize: 12.sp,
         color: customLightThemeColor);
     subHeadingTextStyle = TextStyle(
-        fontSize: 18.sp,
         fontFamily: SarabunFontFamily.extraBold,
+        fontSize: 18.sp,
         color: customTextBlackColor);
+    hintTextStyle = TextStyle(
+        fontFamily: SarabunFontFamily.regular,
+        fontSize: 16.sp,
+        color: customTextGreyColor);
   }
 }
