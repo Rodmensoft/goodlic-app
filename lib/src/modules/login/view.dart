@@ -2,6 +2,7 @@ import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_app_bar.dart';
+import 'package:consultant_product/src/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -57,7 +58,8 @@ class _LoginPageState extends State<LoginPage> {
                   ///---body
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 0.h),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 0.h),
                       child: SingleChildScrollView(
                         child: Padding(
                           padding: EdgeInsets.only(
@@ -76,7 +78,8 @@ class _LoginPageState extends State<LoginPage> {
                                 style: state.captionTextStyle,
                               ),
                               SizedBox(
-                                  height: MediaQuery.of(context).size.height * .06),
+                                  height:
+                                      MediaQuery.of(context).size.height * .06),
                               Text(
                                 'Enter Login Details',
                                 style: state.subHeadingTextStyle,
@@ -88,7 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                   contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          25.w, 15.h, 25.w, 15.h),
                                   hintText: 'Email Address',
                                   hintStyle: state.hintTextStyle,
                                   fillColor: customTextFieldColor,
@@ -129,19 +133,20 @@ class _LoginPageState extends State<LoginPage> {
                                 obscureText: obscureText!,
                                 decoration: InputDecoration(
                                   contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      25.w, 15.h, 25.w, 15.h),
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          25.w, 15.h, 25.w, 15.h),
                                   suffixIcon: InkWell(
-                                    onTap: (){
+                                    onTap: () {
                                       setState(() {
                                         obscureText = !obscureText!;
                                       });
                                     },
-                                    child:  Icon(
+                                    child: Icon(
                                         obscureText!
-                                            ?Icons.visibility
-                                            :Icons.visibility_off,
-                                        size: 20, color: const Color(0xff8085BA)),
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        size: 20,
+                                        color: const Color(0xff8085BA)),
                                   ),
                                   hintText: 'Password',
                                   hintStyle: state.hintTextStyle,
@@ -162,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                                   errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8.r),
                                       borderSide:
-                                      const BorderSide(color: Colors.red)),
+                                          const BorderSide(color: Colors.red)),
                                 ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
@@ -185,45 +190,53 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                               SizedBox(
-                                  height: MediaQuery.of(context).size.height * .055),
+                                  height: MediaQuery.of(context).size.height *
+                                      .055),
 
                               ///---login-button
-                              Center(
-                                child: Container(
-                                  height: 55.h,
-                                  width: MediaQuery.of(context).size.width * .73,
-                                  decoration: BoxDecoration(
-                                      color: customThemeColor,
-                                      borderRadius: BorderRadius.circular(5.r),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: customThemeColor.withOpacity(0.5),
-                                            spreadRadius: -18,
-                                            blurRadius: 30,
-                                            offset: const Offset(0, 35))
-                                      ]),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 25.w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Login',
-                                          style: state.buttonTextStyle,
-                                        ),
-                                        SvgPicture.asset(
-                                          'assets/Icons/whiteForwardIcon.svg',
-                                          width: 29.w,
-                                          height: 29.h,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                              const Center(
+                                child: CustomButton(
+                                  title: 'Login',
                                 ),
+                                // child: Container(
+                                //   height: 55.h,
+                                //   width:
+                                //       MediaQuery.of(context).size.width * .73,
+                                //   decoration: BoxDecoration(
+                                //       color: customThemeColor,
+                                //       borderRadius: BorderRadius.circular(5.r),
+                                //       boxShadow: [
+                                //         BoxShadow(
+                                //             color: customThemeColor
+                                //                 .withOpacity(0.5),
+                                //             spreadRadius: -18,
+                                //             blurRadius: 30,
+                                //             offset: const Offset(0, 35))
+                                //       ]),
+                                //   child: Padding(
+                                //     padding:
+                                //         EdgeInsets.symmetric(horizontal: 25.w),
+                                //     child: Row(
+                                //       mainAxisAlignment:
+                                //           MainAxisAlignment.spaceBetween,
+                                //       children: [
+                                //         Text(
+                                //           'Login',
+                                //           style: state.buttonTextStyle,
+                                //         ),
+                                //         SvgPicture.asset(
+                                //           'assets/Icons/whiteForwardIcon.svg',
+                                //           width: 29.w,
+                                //           height: 29.h,
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
                               ),
                               SizedBox(
-                                  height: MediaQuery.of(context).size.height * .07),
+                                  height:
+                                      MediaQuery.of(context).size.height * .07),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -311,16 +324,18 @@ class _LoginPageState extends State<LoginPage> {
                                     style: state.descTextStyle,
                                   ),
                                   InkWell(
-                                    onTap: (){
+                                    onTap: () {
                                       Get.toNamed(PageRoutes.signUp);
                                     },
                                     child: Padding(
-                                      padding:  EdgeInsetsDirectional.fromSTEB(0, 5.h, 0, 5.h),
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 5.h, 0, 5.h),
                                       child: Text(
                                         'Register now',
                                         style: state.descTextStyle!.copyWith(
                                             color: customThemeColor,
-                                            decoration: TextDecoration.underline),
+                                            decoration:
+                                                TextDecoration.underline),
                                       ),
                                     ),
                                   ),
