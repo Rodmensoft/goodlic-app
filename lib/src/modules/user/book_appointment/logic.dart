@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import 'package:intl/intl.dart' show DateFormat;
-
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'state.dart';
 
 class BookAppointmentLogic extends GetxController {
   final BookAppointmentState state = BookAppointmentState();
+
+
+  var cardNumberMask = MaskTextInputFormatter(mask: '#### #### #### ####');
+  var cardExpiryMask = MaskTextInputFormatter(mask: '##/##');
 
   ///----app-bar-settings-----start
   ScrollController? scrollController;
