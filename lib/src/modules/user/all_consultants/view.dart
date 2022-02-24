@@ -1,5 +1,7 @@
 import 'package:consultant_product/src/modules/user/all_consultants/widgets/medical.dart';
 import 'package:consultant_product/src/utils/colors.dart';
+import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
+import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -72,74 +74,10 @@ class _AllConsultantsPageState extends State<AllConsultantsPage>
                       (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       ///---header
-                      SliverAppBar(
-                        expandedHeight: MediaQuery.of(context).size.height * .2,
-                        floating: true,
-                        pinned: true,
-                        snap: true,
-                        elevation: 0,
-                        backgroundColor: _allConsultantsLogic.isShrink
-                            ? customThemeColor
-                            : Colors.white,
-                        leading: InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                  'assets/Icons/whiteBackArrow.svg'),
-                            ],
-                          ),
-                        ),
-                        actions: [
-                          ///---notifications
-                          Padding(
-                            padding: const EdgeInsetsDirectional.only(end: 15),
-                            child: SvgPicture.asset(
-                              'assets/Icons/notificationIcon.svg',
-                            ),
-                          )
-                        ],
-                        flexibleSpace: FlexibleSpaceBar(
-                          centerTitle: true,
-                          background: Stack(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/bookAppointmentAppBar.svg',
-                                width: MediaQuery.of(context).size.width,
-                                height: MediaQuery.of(context).size.height * .4,
-                                fit: BoxFit.fill,
-                              ),
-                              SafeArea(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.w, 25.h, 16.w, 16.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        height: 25.h,
-                                      ),
-                                      Text('Consultant',
-                                          style: state.headingTextStyle),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      Text(
-                                          'Best consultants just one click away',
-                                          style: state.subHeadingTextStyle),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      MyCustomSliverAppBar(
+                        heading: 'Consultant',
+                        subHeading: 'Best consultants just one click away',
+                        isShrink: _allConsultantsLogic.isShrink,
                       ),
                       SliverPersistentHeader(
                         delegate: _SliverAppBarDelegate(

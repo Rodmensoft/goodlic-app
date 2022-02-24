@@ -5,6 +5,7 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
+import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -61,13 +62,8 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                       backgroundColor: customLightThemeColor,
                       actions: [
                         ///---notifications
-                        Padding(
-                          padding: const EdgeInsetsDirectional.only(end: 15),
-                          child: SvgPicture.asset(
-                            'assets/Icons/notificationIcon.svg',
-                            color: Colors.white,
-                          ),
-                        )
+
+                        CustomNotificationIcon(color:Colors.white)
                       ],
                       bottom: PreferredSize(
                         preferredSize: const Size.fromHeight(30),

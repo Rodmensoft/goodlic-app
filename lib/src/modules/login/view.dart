@@ -2,6 +2,7 @@ import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_app_bar.dart';
+import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -183,9 +184,14 @@ class _LoginPageState extends State<LoginPage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(
-                                    'Forgot Password?',
-                                    style: state.forgotTextStyle,
+                                  InkWell(
+                                    onTap: (){
+                                      Get.toNamed(PageRoutes.resetPassword);
+                                    },
+                                    child: Text(
+                                      'Forgot Password?',
+                                      style: state.forgotTextStyle,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -194,49 +200,15 @@ class _LoginPageState extends State<LoginPage> {
                                       .055),
 
                               ///---login-button
-                              const Center(
-                                child: CustomButton(
-                                  title: 'Login',
-                                ),
-                                // child: Container(
-                                //   height: 55.h,
-                                //   width:
-                                //       MediaQuery.of(context).size.width * .73,
-                                //   decoration: BoxDecoration(
-                                //       color: customThemeColor,
-                                //       borderRadius: BorderRadius.circular(5.r),
-                                //       boxShadow: [
-                                //         BoxShadow(
-                                //             color: customThemeColor
-                                //                 .withOpacity(0.5),
-                                //             spreadRadius: -18,
-                                //             blurRadius: 30,
-                                //             offset: const Offset(0, 35))
-                                //       ]),
-                                //   child: Padding(
-                                //     padding:
-                                //         EdgeInsets.symmetric(horizontal: 25.w),
-                                //     child: Row(
-                                //       mainAxisAlignment:
-                                //           MainAxisAlignment.spaceBetween,
-                                //       children: [
-                                //         Text(
-                                //           'Login',
-                                //           style: state.buttonTextStyle,
-                                //         ),
-                                //         SvgPicture.asset(
-                                //           'assets/Icons/whiteForwardIcon.svg',
-                                //           width: 29.w,
-                                //           height: 29.h,
-                                //         ),
-                                //       ],
-                                //     ),
-                                //   ),
-                                // ),
+                              Padding(
+                                padding:  EdgeInsets.symmetric(horizontal: 30.w),
+                                child: InkWell(
+                                    onTap: (){},
+                                    child: const MyCustomBottomBar(title: 'Login', disable: false)),
                               ),
                               SizedBox(
                                   height:
-                                      MediaQuery.of(context).size.height * .07),
+                                      MediaQuery.of(context).size.height * .055),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

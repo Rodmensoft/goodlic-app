@@ -1,3 +1,4 @@
+import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -132,20 +133,6 @@ class _OtpPageState extends State<OtpPage> {
                                   )
                                 ],
                               ),
-                              // SizedBox(
-                              //   height:
-                              //       MediaQuery.of(context).size.height * .24,
-                              // ),
-                              // Padding(
-                              //   padding: EdgeInsetsDirectional.fromSTEB(
-                              //       0, 0, 0, 20.h),
-                              //   child: InkWell(
-                              //     onTap: () {},
-                              //     child: const CustomButton(
-                              //       title: 'Confirm',
-                              //     ),
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),
@@ -161,7 +148,9 @@ class _OtpPageState extends State<OtpPage> {
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 45.h),
                   child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(PageRoutes.newPassword);
+                      },
                       child: const MyCustomBottomBar(
                           title: 'Confirm', disable: false)),
                 ),

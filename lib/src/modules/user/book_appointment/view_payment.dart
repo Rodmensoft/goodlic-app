@@ -1,10 +1,13 @@
 import 'dart:developer';
 
+import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
+import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
+import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -58,146 +61,11 @@ class _PaymentViewState extends State<PaymentView> {
                     (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
                     ///---header
-                    SliverAppBar(
-                      expandedHeight: MediaQuery.of(context).size.height * .35,
-                      floating: true,
-                      pinned: true,
-                      snap: true,
-                      elevation: 0,
-                      backgroundColor: _bookAppointmentLogic.isShrink3
-                          ? customThemeColor
-                          : Colors.white,
-                      leading: InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset('assets/Icons/whiteBackArrow.svg'),
-                          ],
-                        ),
-                      ),
-                      actions: [
-                        ///---notifications
-                        Padding(
-                          padding: const EdgeInsetsDirectional.only(end: 15),
-                          child: SvgPicture.asset(
-                            'assets/Icons/notificationIcon.svg',
-                          ),
-                        )
-                      ],
-                      flexibleSpace: FlexibleSpaceBar(
-                        centerTitle: true,
-                        background: Container(
-                          decoration: BoxDecoration(
-                              color: customLightThemeColor,
-                              borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(40.r))),
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/images/bookAppointmentAppBar.svg',
-                                    width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height *
-                                        .27,
-                                    fit: BoxFit.fill,
-                                  ),
-                                  SafeArea(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.w, 25.h, 16.w, 16.h),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            height: 25.h,
-                                          ),
-                                          Text(
-                                            'Book Appointment',
-                                            style: state.appBarTitleTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 10.h,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'By just few easy steps',
-                                                style: state
-                                                    .appBarSubTitleTextStyle,
-                                              ),
-                                              Text(
-                                                'Step 3 Of 3',
-                                                style: state
-                                                    .appBarSubTitleTextStyle,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'You Will Pay',
-                                    style: TextStyle(
-                                        fontFamily: SarabunFontFamily.medium,
-                                        fontSize: 12.sp,
-                                        color: Colors.white),
-                                  ),
-                                  // SizedBox(
-                                  //   height: 8.h,
-                                  // ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                        'assets/Icons/videoCallIcon.svg',
-                                        color: Colors.white,
-                                        height: 12.h,
-                                        width: 18.w,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      SizedBox(
-                                        width: 12.w,
-                                      ),
-                                      Text(
-                                        '\$25',
-                                        style: TextStyle(
-                                            fontFamily: SarabunFontFamily.bold,
-                                            fontSize: 28.sp,
-                                            color: Colors.white),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    MyCustomSliverAppBar(
+                      heading: 'Book Appointment',
+                      subHeading: 'By just few easy steps',
+                      trailing: 'Step 3 Of 3',
+                      isShrink: _bookAppointmentLogic.isShrink3,
                     ),
                   ];
                 },
@@ -667,6 +535,7 @@ class _PaymentViewState extends State<PaymentView> {
                               },
                               onHorizontalDragEnd: (event){
                                 log('END---->>>');
+                                Get.toNamed(PageRoutes.appointmentConfirmation);
                               },
                               child: Container(
                                 height: 56.h,

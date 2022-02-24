@@ -6,10 +6,12 @@ import 'package:consultant_product/src/modules/reset_password/view.dart';
 import 'package:consultant_product/src/modules/sign_up/view.dart';
 import 'package:consultant_product/src/modules/user/all_consultants/view.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_appointment_question.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/view_confirmation.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_payment.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_slot_selection.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/view.dart';
 import 'package:consultant_product/src/modules/user/home/view.dart';
+import 'package:consultant_product/src/modules/user/user_drawer/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,21 +32,21 @@ routes() => [
           name: "/paymentView",
           page: () => const PaymentView(),
           transition: Transition.noTransition),
+      GetPage(name: "/allConsultants", page: () => const AllConsultantsPage()),
+      GetPage(name: "/resetPassword", page: () => const ResetPasswordPage()),
+      GetPage(name: "/enterOtp", page: () => const OtpPage()),
+      GetPage(name: "/newPassword", page: () => const NewPasswordPage()),
       GetPage(
-          name: "/allConsultants",
-          page: () => const AllConsultantsPage()),
+          name: "/createdPassword", page: () => const CreatedPasswordPage()),
       GetPage(
-          name: "/resetPassword",
-          page: () => const ResetPasswordPage()),
+          name: "/appointmentConfirmation",
+          page: () => const AppointmentConfirmationView()),
       GetPage(
-          name: "/enterOtp",
-          page: () => const OtpPage()),
-      GetPage(
-          name: "/newPassword",
-          page: () => const NewPasswordPage()),
-      GetPage(
-          name: "/createdPassword",
-          page: () => const CreatedPasswordPage()),
+        name: "/userDrawer",
+        page: () => const UserDrawerPage(),
+        transition: Transition.leftToRight,
+        transitionDuration: const Duration(milliseconds: 500),
+      ),
     ];
 
 class PageRoutes {
@@ -60,6 +62,8 @@ class PageRoutes {
   static const String enterOtp = '/enterOtp';
   static const String newPassword = '/newPassword';
   static const String createdPassword = '/createdPassword';
+  static const String appointmentConfirmation = '/appointmentConfirmation';
+  static const String userDrawer = '/userDrawer';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -75,6 +79,8 @@ class PageRoutes {
       enterOtp: (context) => const OtpPage(),
       newPassword: (context) => const NewPasswordPage(),
       createdPassword: (context) => const CreatedPasswordPage(),
+      appointmentConfirmation: (context) => const AppointmentConfirmationView(),
+      userDrawer: (context) => const UserDrawerPage(),
     };
   }
 }

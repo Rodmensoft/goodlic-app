@@ -1,3 +1,4 @@
+import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
-import '../../../../../route_generator.dart';
 
 class CategoriesWidget extends StatefulWidget {
   const CategoriesWidget({Key? key}) : super(key: key);
@@ -38,7 +38,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.toNamed(PageRoutes.enterOtp);
+                      Get.toNamed(PageRoutes.allConsultants);
                     },
                     child: Text(
                       'View All',

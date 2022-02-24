@@ -35,7 +35,7 @@ class _MyCustomBottomBarState extends State<MyCustomBottomBar> {
                     color: customThemeColor.withOpacity(0.7),
                     spreadRadius: -18,
                     blurRadius: 30,
-                    offset: const Offset(0, 35))
+                    offset: const Offset(0, 30))
               ]),
           child: Stack(
             children: [

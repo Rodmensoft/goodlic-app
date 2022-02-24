@@ -1,4 +1,6 @@
+import 'package:consultant_product/route_generator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import '../../controller/general_controller.dart';
@@ -42,42 +44,31 @@ class _CreatedPasswordPageState extends State<CreatedPasswordPage> {
               //  SizedBox(height: MediaQuery.of(context).size.height * .23),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 0.h),
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * .23),
-                        Image.asset(
-                          'assets/images/successfull.png',
-                          height: 177.h,
-                          width: 120.w,
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * .02),
-                        Center(
-                          child: Text(
-                            'Password Created',
-                            style: state.headingTextStyle,
-                          ),
-                        ),
-                        SizedBox(height: 12.h),
-                        Text(
-                          'Successfully',
-                          style: state.subheadingTextStyle,
-                        ),
-                        // SizedBox(
-                        //   height:
-                        //       MediaQuery.of(context).size.height * 0.24,
-                        // ),
-                        // const CustomButton(title: 'Confirm')
-                      ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * .3),
+                    SvgPicture.asset(
+                      'assets/images/successfullImage.svg',
+                      height: 120.h,
+                      width: 177.w,
                     ),
-                  ),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * .03),
+                    Center(
+                      child: Text(
+                        'Password Created',
+                        style: state.headingTextStyle,
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      'Successfully',
+                      style: state.subheadingTextStyle,
+                    ),
+                  ],
                 ),
               ),
               Positioned(
@@ -87,7 +78,9 @@ class _CreatedPasswordPageState extends State<CreatedPasswordPage> {
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 45.h),
                   child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.offAllNamed(PageRoutes.login);
+                      },
                       child: const MyCustomBottomBar(
                           title: 'Confirm', disable: false)),
                 ),

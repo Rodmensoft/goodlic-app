@@ -37,9 +37,7 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                   style: state.subHeadingTextStyle,
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.toNamed(PageRoutes.newPassword);
-                  },
+                  onTap: () {},
                   child: Text(
                     'View All',
                     style: state.viewAllTextStyle,

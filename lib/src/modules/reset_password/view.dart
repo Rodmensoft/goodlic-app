@@ -191,7 +191,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 45.h),
                   child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(PageRoutes.enterOtp);
+                      },
                       child: const MyCustomBottomBar(
                           title: 'Confirm', disable: false)),
                 ),
