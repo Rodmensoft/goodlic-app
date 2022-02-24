@@ -1,3 +1,4 @@
+import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -108,7 +109,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                         size: 20,
                                         color: const Color(0xff8085BA)),
                                   ),
-                                  hintText: 'Password',
+                                  hintText: 'New Password',
                                   hintStyle: state.hintTextStyle,
                                   fillColor: customTextFieldColor,
                                   filled: true,
@@ -196,18 +197,6 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                 height:
                                     MediaQuery.of(context).size.height * .35,
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 0, 0, 20.h),
-                                child: InkWell(
-                                  onTap: () {
-                                    Get.toNamed(PageRoutes.createdPassword);
-                                  },
-                                  child: const CustomButton(
-                                    title: 'Reset Password',
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -215,6 +204,20 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                     ),
                   ),
                 ],
+              ),
+              Positioned(
+                bottom: 0.h,
+                left: 55.w,
+                right: 55.w,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 45.h),
+                  child: InkWell(
+                      onTap: () {
+                        Get.toNamed(PageRoutes.createdPassword);
+                      },
+                      child: const MyCustomBottomBar(
+                          title: 'Reset Password', disable: false)),
+                ),
               ),
             ]),
           ),

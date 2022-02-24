@@ -32,24 +32,19 @@ routes() => [
           transition: Transition.noTransition),
       GetPage(
           name: "/allConsultants",
-          page: () => const AllConsultantsPage(),
-          transition: Transition.noTransition),
+          page: () => const AllConsultantsPage()),
       GetPage(
           name: "/resetPassword",
-          page: () => const ResetPasswordPage(),
-          transition: Transition.noTransition),
+          page: () => const ResetPasswordPage()),
       GetPage(
           name: "/enterOtp",
-          page: () => const OtpPage(),
-          transition: Transition.noTransition),
+          page: () => const OtpPage()),
       GetPage(
           name: "/newPassword",
-          page: () => const NewPasswordPage(),
-          transition: Transition.noTransition),
+          page: () => const NewPasswordPage()),
       GetPage(
           name: "/createdPassword",
-          page: () => const CreatedPasswordPage(),
-          transition: Transition.noTransition),
+          page: () => const CreatedPasswordPage()),
     ];
 
 class PageRoutes {
