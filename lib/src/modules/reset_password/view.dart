@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:resize/resize.dart';
 
+import '../../../route_generator.dart';
 import '../../controller/general_controller.dart';
 import '../../utils/colors.dart';
 import '../../widgets/custom_app_bar.dart';
@@ -159,20 +160,20 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                     ),
                                   ),
                                   // SizedBox(height: 250.h),
-                                  SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height * .4,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 20.h),
-                                    child: InkWell(
-                                      onTap: () {},
-                                      child: const CustomButton(
-                                        title: 'Confirm',
-                                      ),
-                                    ),
-                                  ),
+                                  // SizedBox(
+                                  //   height:
+                                  //       MediaQuery.of(context).size.height * .4,
+                                  // ),
+                                  // Padding(
+                                  //   padding: EdgeInsetsDirectional.fromSTEB(
+                                  //       0, 0, 0, 20.h),
+                                  //   child: InkWell(
+                                  //     onTap: () {},
+                                  //     child: const CustomButton(
+                                  //       title: 'Confirm',
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ],
@@ -182,6 +183,18 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     ),
                   ),
                 ],
+              ),
+              Positioned(
+                bottom: 0.h,
+                left: 55.w,
+                right: 55.w,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 45.h),
+                  child: InkWell(
+                      onTap: () {},
+                      child: const MyCustomBottomBar(
+                          title: 'Confirm', disable: false)),
+                ),
               ),
             ]),
           ),

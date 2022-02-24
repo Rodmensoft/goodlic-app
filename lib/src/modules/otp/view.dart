@@ -6,7 +6,7 @@ import 'package:resize/resize.dart';
 
 import '../../controller/general_controller.dart';
 import '../../widgets/custom_app_bar.dart';
-import '../../widgets/custom_button.dart';
+import '../../widgets/custom_bottom_bar.dart';
 import 'logic.dart';
 
 class OtpPage extends StatefulWidget {
@@ -89,22 +89,23 @@ class _OtpPageState extends State<OtpPage> {
 
                               /// OTP Fields ///
                               PinCodeTextField(
+                                animationType: AnimationType.none,
                                 enableActiveFill: true,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceEvenly,
                                 appContext: context,
                                 pastedTextStyle: TextStyle(
                                   color: Colors.green.shade600,
                                   fontWeight: FontWeight.bold,
                                 ),
-                                length: 4,
+                                length: 6,
                                 obscureText: false,
                                 onChanged: (String value) {},
                                 pinTheme: PinTheme(
                                   shape: PinCodeFieldShape.box,
                                   borderRadius: BorderRadius.circular(8),
                                   fieldHeight: 62.h,
-                                  fieldWidth: 74.w,
+                                  fieldWidth: 50.w,
                                   selectedColor: customThemeColor,
                                   activeColor: Colors.transparent,
                                   inactiveColor: Colors.transparent,
@@ -131,20 +132,20 @@ class _OtpPageState extends State<OtpPage> {
                                   )
                                 ],
                               ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * .24,
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 0, 0, 20.h),
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: const CustomButton(
-                                    title: 'Confirm',
-                                  ),
-                                ),
-                              ),
+                              // SizedBox(
+                              //   height:
+                              //       MediaQuery.of(context).size.height * .24,
+                              // ),
+                              // Padding(
+                              //   padding: EdgeInsetsDirectional.fromSTEB(
+                              //       0, 0, 0, 20.h),
+                              //   child: InkWell(
+                              //     onTap: () {},
+                              //     child: const CustomButton(
+                              //       title: 'Confirm',
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -152,6 +153,18 @@ class _OtpPageState extends State<OtpPage> {
                     ),
                   ),
                 ],
+              ),
+              Positioned(
+                bottom: 0.h,
+                left: 55.w,
+                right: 55.w,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 45.h),
+                  child: InkWell(
+                      onTap: () {},
+                      child: const MyCustomBottomBar(
+                          title: 'Confirm', disable: false)),
+                ),
               ),
             ]),
           ),

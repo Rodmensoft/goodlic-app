@@ -1,9 +1,8 @@
-import 'package:consultant_product/src/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
-
 import '../../controller/general_controller.dart';
+import '../../widgets/custom_bottom_bar.dart';
 import 'logic.dart';
 
 class CreatedPasswordPage extends StatefulWidget {
@@ -40,59 +39,58 @@ class _CreatedPasswordPageState extends State<CreatedPasswordPage> {
                 right: 0,
                 top: 0,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  // ///---appBar
-                  // const MyCustomAppBar(
-                  //   drawerShow: false,
-                  //   whiteBackground: true,
-                  // ),
-
-                  ///---body
-                  SizedBox(height: MediaQuery.of(context).size.height * .23),
-                  Expanded(
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 0.h),
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).viewInsets.bottom),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                'assets/images/successfull.png',
-                                height: 177.h,
-                                width: 120.w,
-                              ),
-                              SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height * .02),
-                              Text(
-                                'Password Created',
-                                style: state.headingTextStyle,
-                              ),
-                              SizedBox(height: 12.h),
-                              Text(
-                                'Successfully',
-                                style: state.subheadingTextStyle,
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.24,
-                              ),
-                              const CustomButton(title: 'Confirm')
-                            ],
+              //  SizedBox(height: MediaQuery.of(context).size.height * .23),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 0.h),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * .23),
+                        Image.asset(
+                          'assets/images/successfull.png',
+                          height: 177.h,
+                          width: 120.w,
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * .02),
+                        Center(
+                          child: Text(
+                            'Password Created',
+                            style: state.headingTextStyle,
                           ),
                         ),
-                      ),
+                        SizedBox(height: 12.h),
+                        Text(
+                          'Successfully',
+                          style: state.subheadingTextStyle,
+                        ),
+                        // SizedBox(
+                        //   height:
+                        //       MediaQuery.of(context).size.height * 0.24,
+                        // ),
+                        // const CustomButton(title: 'Confirm')
+                      ],
                     ),
                   ),
-                ],
+                ),
+              ),
+              Positioned(
+                bottom: 0.h,
+                left: 55.w,
+                right: 55.w,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 45.h),
+                  child: InkWell(
+                      onTap: () {},
+                      child: const MyCustomBottomBar(
+                          title: 'Confirm', disable: false)),
+                ),
               ),
             ]),
           ),

@@ -28,8 +28,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding:
-              EdgeInsetsDirectional.fromSTEB(0.w, 0.h, 11.w, 0.h),
+              padding: EdgeInsetsDirectional.fromSTEB(0.w, 0.h, 11.w, 0.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -38,8 +37,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                     style: state.subHeadingTextStyle,
                   ),
                   InkWell(
-                    onTap: (){
-                      Get.toNamed(PageRoutes.allConsultants);
+                    onTap: () {
+                      Get.toNamed(PageRoutes.enterOtp);
                     },
                     child: Text(
                       'View All',
@@ -54,8 +53,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
             ),
             Center(
               child: Wrap(
-                children: List.generate(
-                    _userHomeLogic.categoriesList.length, (index) {
+                children: List.generate(_userHomeLogic.categoriesList.length,
+                    (index) {
                   return Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 11.w, 12.h),
                     child: Container(
@@ -75,14 +74,15 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                             height: 40.h,
                             width: 40.w,
                             decoration: BoxDecoration(
-                                color: _userHomeLogic
-                                    .categoriesList[index].color,
+                                color:
+                                    _userHomeLogic.categoriesList[index].color,
                                 shape: BoxShape.circle),
                             child: Center(
                                 child: SvgPicture.asset(
-                                  '${_userHomeLogic.categoriesList[index].image}',
-                                  height: 20.h,
-                                  width: 23.w,)),
+                              '${_userHomeLogic.categoriesList[index].image}',
+                              height: 20.h,
+                              width: 23.w,
+                            )),
                           ),
                           SizedBox(
                             height: 24.h,
@@ -92,8 +92,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                             style: TextStyle(
                                 fontFamily: SarabunFontFamily.semiBold,
                                 fontSize: 14,
-                                color: _userHomeLogic
-                                    .categoriesList[index].color),
+                                color:
+                                    _userHomeLogic.categoriesList[index].color),
                           ),
                           Text(
                             '${_userHomeLogic.categoriesList[index].subTitle}',
