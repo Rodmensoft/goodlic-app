@@ -62,6 +62,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                       subHeading: 'By just few easy steps',
                       trailing: 'Step 2 Of 3',
                       isShrink: _bookAppointmentLogic.isShrink2,
+                      fee: '25',
                     ),
                   ];
                 },

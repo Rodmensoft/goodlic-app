@@ -1,3 +1,5 @@
+import 'package:consultant_product/route_generator.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'state.dart';
@@ -19,6 +21,59 @@ class UserDrawerLogic extends GetxController {
     DrawerTile(
         title: 'Privacy Policy', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
   ];
+
+
+  userDrawerNavigation(
+      int? index,
+      BuildContext context,
+      ) {
+    switch (index) {
+      case 0:
+        {
+          Get.back();
+          return Get.offAllNamed(PageRoutes.userHome);
+        }
+      case 1:
+        {
+          Get.back();
+          return Get.toNamed(PageRoutes.allConsultants);
+        }
+      case 2:
+        {
+          Get.back();
+          return Get.toNamed(PageRoutes.myAppointment);
+        }
+      case 3:
+        {
+          Get.back();
+          return null;
+        }
+      case 4:
+        {
+          Get.back();
+          return null;
+        }
+      case 5:
+        {
+          Get.back();
+          return null;
+        }
+      case 6:
+        {
+          Get.back();
+          return null;
+        }
+      default:
+        {
+          return Scaffold(
+            body: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+            ),
+          );
+        }
+    }
+  }
 }
 
 class DrawerTile {

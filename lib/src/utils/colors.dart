@@ -7,6 +7,8 @@ const Color customDialogQuestionColor = Color(0xff528AF7);
 
 const Color customThemeColor = Color(0xff101276);
 const Color customLightThemeColor = Color(0xff3EABF4);
+const Color customGreenColor = Color(0xff00E66B);
+const Color customRedColor = Color(0xffE60047);
 const Color customOrangeColor = Color(0xffFF6600);
 const Color customLightOrangeColor = Color(0xffFFE8D9);
 const Color customIconBackgroundThemeColor = Color(0xffCAE8FC);

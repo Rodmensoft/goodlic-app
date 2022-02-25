@@ -65,6 +65,7 @@ class _PaymentViewState extends State<PaymentView> {
                       heading: 'Book Appointment',
                       subHeading: 'By just few easy steps',
                       trailing: 'Step 3 Of 3',
+                      fee: '25',
                       isShrink: _bookAppointmentLogic.isShrink3,
                     ),
                   ];

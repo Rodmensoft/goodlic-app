@@ -106,6 +106,9 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ListTile(
+                                    onTap: (){
+                                      _userDrawerLogic.userDrawerNavigation(index, context);
+                                    },
                                     leading: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,

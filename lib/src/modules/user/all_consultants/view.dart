@@ -2,6 +2,7 @@ import 'package:consultant_product/src/modules/user/all_consultants/widgets/medi
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
 import 'package:consultant_product/src/widgets/notififcation_icon.dart';
+import 'package:consultant_product/src/widgets/sliver_delegate_tab_fix.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -80,7 +81,7 @@ class _AllConsultantsPageState extends State<AllConsultantsPage>
                         isShrink: _allConsultantsLogic.isShrink,
                       ),
                       SliverPersistentHeader(
-                        delegate: _SliverAppBarDelegate(
+                        delegate: SliverAppBarDelegate(
                           TabBar(
                               indicator: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
@@ -122,27 +123,3 @@ class _AllConsultantsPageState extends State<AllConsultantsPage>
   }
 }
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
-
-  final TabBar _tabBar;
-
-  @override
-  double get minExtent => _tabBar.preferredSize.height;
-  @override
-  double get maxExtent => _tabBar.preferredSize.height;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white, // ADD THE COLOR YOU WANT AS BACKGROUND.
-      child: _tabBar,
-    );
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
-  }
-}

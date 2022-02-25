@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:resize/resize.dart';
 
-class AppointmentDetailBox extends StatelessWidget {
-  const AppointmentDetailBox({Key? key,required this.title,required this.image}) : super(key: key);
+class BookAppointmentDetailBox extends StatelessWidget {
+  const BookAppointmentDetailBox({Key? key,required this.title,required this.image}) : super(key: key);
 
   final String? title;
   final String? image;

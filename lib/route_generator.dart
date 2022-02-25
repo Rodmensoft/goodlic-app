@@ -5,12 +5,14 @@ import 'package:consultant_product/src/modules/otp/view.dart';
 import 'package:consultant_product/src/modules/reset_password/view.dart';
 import 'package:consultant_product/src/modules/sign_up/view.dart';
 import 'package:consultant_product/src/modules/user/all_consultants/view.dart';
+import 'package:consultant_product/src/modules/user/appointment_detail/view.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_appointment_question.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_confirmation.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_payment.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_slot_selection.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/view.dart';
 import 'package:consultant_product/src/modules/user/home/view.dart';
+import 'package:consultant_product/src/modules/user/my_appointment/view.dart';
 import 'package:consultant_product/src/modules/user/user_drawer/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,6 +49,8 @@ routes() => [
         transition: Transition.leftToRight,
         transitionDuration: const Duration(milliseconds: 500),
       ),
+      GetPage(name: "/myAppointment", page: () => const MyAppointmentPage()),
+      GetPage(name: "/appointmentDetail", page: () => const AppointmentDetailPage()),
     ];
 
 class PageRoutes {
@@ -64,6 +68,8 @@ class PageRoutes {
   static const String createdPassword = '/createdPassword';
   static const String appointmentConfirmation = '/appointmentConfirmation';
   static const String userDrawer = '/userDrawer';
+  static const String myAppointment = '/myAppointment';
+  static const String appointmentDetail = '/appointmentDetail';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -81,6 +87,8 @@ class PageRoutes {
       createdPassword: (context) => const CreatedPasswordPage(),
       appointmentConfirmation: (context) => const AppointmentConfirmationView(),
       userDrawer: (context) => const UserDrawerPage(),
+      myAppointment: (context) => const MyAppointmentPage(),
+      appointmentDetail: (context) => const AppointmentDetailPage(),
     };
   }
 }

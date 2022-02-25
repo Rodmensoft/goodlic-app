@@ -140,7 +140,7 @@ class _AppointmentConfirmationViewState
                                     Expanded(
                                       child: Padding(
                                         padding: EdgeInsets.only(right: 8.w),
-                                        child: const AppointmentDetailBox(
+                                        child: const BookAppointmentDetailBox(
                                           title: 'Video Call',
                                           image:
                                               'assets/Icons/videoCallIcon.svg',
@@ -151,7 +151,7 @@ class _AppointmentConfirmationViewState
                                     Expanded(
                                       child: Padding(
                                         padding: EdgeInsets.only(left: 8.w),
-                                        child: const AppointmentDetailBox(
+                                        child: const BookAppointmentDetailBox(
                                           title: '\$25 Fees',
                                           image: 'assets/Icons/feeIcon.svg',
                                         ),
@@ -170,7 +170,7 @@ class _AppointmentConfirmationViewState
                                     Expanded(
                                       child: Padding(
                                         padding: EdgeInsets.only(right: 8.w),
-                                        child: const AppointmentDetailBox(
+                                        child: const BookAppointmentDetailBox(
                                           title: '17/02/22',
                                           image:
                                               'assets/Icons/calenderIcon.svg',
@@ -181,7 +181,7 @@ class _AppointmentConfirmationViewState
                                     Expanded(
                                       child: Padding(
                                         padding: EdgeInsets.only(left: 8.w),
-                                        child: const AppointmentDetailBox(
+                                        child: const BookAppointmentDetailBox(
                                           title: '9:10 AM',
                                           image: 'assets/Icons/timeIcon.svg',
                                         ),
