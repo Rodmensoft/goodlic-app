@@ -74,7 +74,7 @@ getMethod(
             functionCall: () {
               Navigator.pop(context);
             },
-            img: 'assets/dialog_error.svg',
+            img: 'assets/Icons/dialog_error.svg',
           );
         });
     Get.find<ApiLogic>().changeInternetCheckerState(false);

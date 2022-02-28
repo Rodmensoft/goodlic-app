@@ -10,3 +10,17 @@ final String mediaUrl = GlobalConfiguration().get('media_url');
 
 ///---fcm
 String fcmService = 'https://fcm.googleapis.com/fcm/send';
+
+
+///---auth
+String signUpWithEmailURL = apiBaseUrl + 'signup-email';
+String loginWithEmailURL = apiBaseUrl + 'login-email';
+
+
+///---user
+String getUserProfileURL = apiBaseUrl + 'get-mentee-profile';
+
+
+///---categories
+String getCategoriesURL = apiBaseUrl + 'mentorCategories';
+

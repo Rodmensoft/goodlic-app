@@ -292,6 +292,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             ),
                                             Text(
                                               '${_bookAppointmentLogic.shiftList[index].title}',
+                                              softWrap: true,
+                                              overflow: TextOverflow.ellipsis,
                                               style: _bookAppointmentLogic
                                                       .shiftList[index]
                                                       .isSelected!
