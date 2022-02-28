@@ -69,7 +69,7 @@ class _WalletPageState extends State<WalletPage> {
                         pinned: true,
                         snap: true,
                         elevation: 0,
-                        backgroundColor: _walletLogic.isShrink!
+                        backgroundColor: _walletLogic.isShrink
                             ? customThemeColor
                             : Colors.transparent,
                         leading: InkWell(
@@ -170,7 +170,9 @@ class _WalletPageState extends State<WalletPage> {
                             child: SfCartesianChart(
                       primaryXAxis: CategoryAxis(),
                       tooltipBehavior: _tooltipBehavior,
-                    )))
+                    ))),
+                    SizedBox(height: 30.h),
+                    Text('transaction', style: state.recordTextStyle)
                   ],
                 )),
           ),

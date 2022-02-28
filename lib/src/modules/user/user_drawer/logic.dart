@@ -32,11 +32,10 @@ class UserDrawerLogic extends GetxController {
         title: 'Privacy Policy', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
   ];
 
-
   userLoginDrawerNavigation(
-      int? index,
-      BuildContext context,
-      ) {
+    int? index,
+    BuildContext context,
+  ) {
     switch (index) {
       case 0:
         {
@@ -51,7 +50,7 @@ class UserDrawerLogic extends GetxController {
       case 2:
         {
           Get.back();
-          return Get.toNamed(PageRoutes.myAppointment);
+          return Get.toNamed(PageRoutes.walletScreen);
         }
       case 3:
         {
@@ -84,10 +83,11 @@ class UserDrawerLogic extends GetxController {
         }
     }
   }
+
   userDrawerNavigation(
-      int? index,
-      BuildContext context,
-      ) {
+    int? index,
+    BuildContext context,
+  ) {
     switch (index) {
       case 0:
         {
