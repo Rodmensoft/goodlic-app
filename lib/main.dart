@@ -21,7 +21,6 @@ Future<void> main() async {
   Get.put(GeneralController());
   Get.put(ApiLogic());
 
-
   //-----load-configurations-from-local-json
   await GlobalConfiguration().loadFromAsset("configurations");
 

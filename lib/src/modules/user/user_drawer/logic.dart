@@ -22,11 +22,10 @@ class UserDrawerLogic extends GetxController {
         title: 'Privacy Policy', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
   ];
 
-
   userDrawerNavigation(
-      int? index,
-      BuildContext context,
-      ) {
+    int? index,
+    BuildContext context,
+  ) {
     switch (index) {
       case 0:
         {
@@ -46,7 +45,7 @@ class UserDrawerLogic extends GetxController {
       case 3:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.walletScreen);
         }
       case 4:
         {

@@ -16,8 +16,7 @@ class MyCustomSliverAppBar extends StatefulWidget {
       this.fee,
       this.isShrink,
       this.searchIconShow,
-
-      })
+      this.onTapTrailing})
       : super(key: key);
 
   final String? heading;
@@ -27,6 +26,7 @@ class MyCustomSliverAppBar extends StatefulWidget {
   final String? fee;
   final bool? isShrink;
   final bool? searchIconShow;
+  final Function? onTapTrailing;
 
   @override
   _MyCustomSliverAppBarState createState() => _MyCustomSliverAppBarState();
@@ -145,17 +145,20 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
                               : PositionedDirectional(
                                   end: 0,
                                   top: 45.h,
-                                  child: CircleAvatar(
-                                    radius: 20.r,
-                                    backgroundColor: Colors.white,
-                                    child: Center(
-                                        child: SvgPicture.asset(
-                                      widget.trailingIcon!,
-                                      height: 20.h,
-                                      width: 20.w,
-                                      color: customOrangeColor,
-                                      fit: BoxFit.cover,
-                                    )),
+                                  child: InkWell(
+                                    onTap: () => widget.onTapTrailing!(),
+                                    child: CircleAvatar(
+                                      radius: 20.r,
+                                      backgroundColor: Colors.white,
+                                      child: Center(
+                                          child: SvgPicture.asset(
+                                        widget.trailingIcon!,
+                                        height: 20.h,
+                                        width: 20.w,
+                                        color: customOrangeColor,
+                                        fit: BoxFit.cover,
+                                      )),
+                                    ),
                                   ),
                                 ),
                         ],

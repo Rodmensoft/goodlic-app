@@ -1,3 +1,4 @@
+import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/widget/bottom_sheet.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/widgets/appontment_detail_box.dart';
@@ -64,6 +65,9 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                       subHeading: 'Your Appointment Detail With William Smith',
                       isShrink: _appointmentDetailLogic.isShrink,
                       trailingIcon: 'assets/Icons/chatIcon.svg',
+                      onTapTrailing: () {
+                        Get.toNamed(PageRoutes.chatScreen);
+                      },
                     ),
                   ];
                 },
