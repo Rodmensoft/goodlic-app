@@ -76,9 +76,9 @@ class _AllConsultantsPageState extends State<AllConsultantsPage>
                     return <Widget>[
                       ///---header
                       MyCustomSliverAppBar(
-                        heading: 'Consultant',
+                        heading: 'Consultants',
                         subHeading: 'Best consultants just one click away',
-                        isShrink: _allConsultantsLogic.isShrink,
+                        isShrink: _allConsultantsLogic.isShrink,searchIconShow: true,
                       ),
                       SliverPersistentHeader(
                         delegate: SliverAppBarDelegate(
@@ -122,4 +122,3 @@ class _AllConsultantsPageState extends State<AllConsultantsPage>
     });
   }
 }
-

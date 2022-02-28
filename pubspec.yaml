@@ -46,7 +46,6 @@ dependencies:
 
   modal_progress_hud_nsn: ^0.1.0-nullsafety-1
   skeleton_loader: ^2.0.0+4
-  image_loader: ^1.2.0
 
   file_picker: ^4.4.0
   image_picker_gallery_camera: ^0.2.2

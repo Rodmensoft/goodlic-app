@@ -1,3 +1,5 @@
+import 'package:consultant_product/src/modules/user/home/model_get_categories.dart';
+import 'package:consultant_product/src/modules/user/home/model_user_profile.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +9,10 @@ import 'state.dart';
 
 class UserHomeLogic extends GetxController {
   final UserHomeState state = UserHomeState();
+
+  GetUserProfileModel getUserProfileModel = GetUserProfileModel();
+
+
 
   ///----app-bar-settings-----start
   ScrollController? scrollController;
@@ -55,44 +61,16 @@ class UserHomeLogic extends GetxController {
   ];
 
   ///-------
-  List<HomeStyling> categoriesList = [
-    HomeStyling(
-      title: 'Medical',
-      subTitle: '(15 Consultants)',
-      image: 'assets/Icons/dummyCategoryIcon1.svg',
-      color: customLightThemeColor
-    ),
-    HomeStyling(
-      title: 'Maintenance',
-        subTitle: '(15 Consultants)',
-        image: 'assets/Icons/dummyCategoryIcon2.svg',
-      color: customOrangeColor
-    ),
-    HomeStyling(
-      title: 'Cultural',
-        subTitle: '(15 Consultants)',
-        image: 'assets/Icons/dummyCategoryIcon2.svg',
-      color: customThemeColor
-    ),
-    HomeStyling(
-      title: 'Cultural',
-        subTitle: '(15 Consultants)',
-        image: 'assets/Icons/dummyCategoryIcon2.svg',
-      color: customThemeColor
-    ),
-    HomeStyling(
-        title: 'Maintenance',
-        subTitle: '(15 Consultants)',
-        image: 'assets/Icons/dummyCategoryIcon2.svg',
-        color: customOrangeColor
-    ),
-    HomeStyling(
-        title: 'Medical',
-        subTitle: '(15 Consultants)',
-        image: 'assets/Icons/dummyCategoryIcon1.svg',
-        color: customLightThemeColor
-    ),
-  ];
+
+  GetCategoriesModel getCategoriesModel = GetCategoriesModel();
+  bool? categoriesLoader = true;
+  updateCategoriesLoader(bool? newValue){
+    categoriesLoader = newValue;
+    update();
+  }
+
+
+  List<HomeStyling> categoriesList = [];
 
   ///-------
   List<HomeStyling> topRatedConsultantList = [

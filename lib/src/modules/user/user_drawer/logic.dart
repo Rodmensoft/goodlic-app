@@ -7,7 +7,7 @@ import 'state.dart';
 class UserDrawerLogic extends GetxController {
   final UserDrawerState state = UserDrawerState();
 
-  List<DrawerTile> drawerList = [
+  List<DrawerTile> drawerLoginList = [
     DrawerTile(title: 'Home', icon: 'assets/Icons/drawerHomeIcon.svg'),
     DrawerTile(
         title: 'Categories', icon: 'assets/Icons/drawerCategoryIcon.svg'),
@@ -21,9 +21,19 @@ class UserDrawerLogic extends GetxController {
     DrawerTile(
         title: 'Privacy Policy', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
   ];
+  List<DrawerTile> drawerList = [
+    DrawerTile(title: 'Home', icon: 'assets/Icons/drawerHomeIcon.svg'),
+    DrawerTile(
+        title: 'Categories', icon: 'assets/Icons/drawerCategoryIcon.svg'),
+    DrawerTile(
+        title: 'Contact US', icon: 'assets/Icons/drawerContactUsIcon.svg'),
+    DrawerTile(title: 'Blogs', icon: 'assets/Icons/drawerBlogIcon.svg'),
+    DrawerTile(
+        title: 'Privacy Policy', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
+  ];
 
 
-  userDrawerNavigation(
+  userLoginDrawerNavigation(
       int? index,
       BuildContext context,
       ) {
@@ -59,6 +69,47 @@ class UserDrawerLogic extends GetxController {
           return null;
         }
       case 6:
+        {
+          Get.back();
+          return null;
+        }
+      default:
+        {
+          return Scaffold(
+            body: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+            ),
+          );
+        }
+    }
+  }
+  userDrawerNavigation(
+      int? index,
+      BuildContext context,
+      ) {
+    switch (index) {
+      case 0:
+        {
+          Get.back();
+          return Get.offAllNamed(PageRoutes.userHome);
+        }
+      case 1:
+        {
+          Get.back();
+          return Get.toNamed(PageRoutes.allConsultants);
+        }
+      case 2:
+        {
+          Get.back();
+          return null;
+        }
+      case 3:
+        {
+          Get.back();
+          return null;
+        }
+      case 4:
         {
           Get.back();
           return null;

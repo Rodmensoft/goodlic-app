@@ -1,5 +1,8 @@
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/get_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/user/home/get_repo.dart';
 import 'package:consultant_product/src/modules/user/home/widgets/categories.dart';
 import 'package:consultant_product/src/modules/user/home/widgets/top_consultants.dart';
 import 'package:consultant_product/src/modules/user/home/widgets/top_rated_consultant.dart';
@@ -28,7 +31,25 @@ class _UserHomePageState extends State<UserHomePage> {
   @override
   void initState() {
     super.initState();
-
+    if(Get.find<GeneralController>().storageBox.hasData('userID')){
+      getMethod(
+          context,
+          getUserProfileURL,
+          {
+            'token': '123',
+            'user_id': Get.find<GeneralController>().storageBox.read('userID')
+          },
+          true,
+          getUserProfileRepo);
+    }
+    getMethod(
+        context,
+        getCategoriesURL,
+        {
+          'token': '123'
+        },
+        false,
+        getCategoriesRepo);
     Get.find<UserHomeLogic>().scrollController = ScrollController()
       ..addListener(Get.find<UserHomeLogic>().scrollListener);
   }
@@ -68,7 +89,7 @@ class _UserHomePageState extends State<UserHomePage> {
                           : Colors.white,
                       // backgroundColor: customThemeColor,
                       leading: InkWell(
-                        onTap: (){
+                        onTap: () {
                           Get.toNamed(PageRoutes.userDrawer);
                         },
                         child: Column(
@@ -79,7 +100,7 @@ class _UserHomePageState extends State<UserHomePage> {
                           ],
                         ),
                       ),
-                      actions: [
+                      actions: const [
                         ///---notifications
                         CustomNotificationIcon()
                       ],
