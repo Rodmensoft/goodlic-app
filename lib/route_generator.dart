@@ -1,3 +1,4 @@
+import 'package:consultant_product/src/modules/chat/view.dart';
 import 'package:consultant_product/src/modules/created_password/view.dart';
 import 'package:consultant_product/src/modules/login/view.dart';
 import 'package:consultant_product/src/modules/new_password/view.dart';
@@ -14,6 +15,7 @@ import 'package:consultant_product/src/modules/user/consultant_profile/view.dart
 import 'package:consultant_product/src/modules/user/home/view.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/view.dart';
 import 'package:consultant_product/src/modules/user/user_drawer/view.dart';
+import 'package:consultant_product/src/modules/wallet/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,7 +52,11 @@ routes() => [
         transitionDuration: const Duration(milliseconds: 500),
       ),
       GetPage(name: "/myAppointment", page: () => const MyAppointmentPage()),
-      GetPage(name: "/appointmentDetail", page: () => const AppointmentDetailPage()),
+      GetPage(
+          name: "/appointmentDetail",
+          page: () => const AppointmentDetailPage()),
+      GetPage(name: "/chatScreen", page: () => const ChatPage()),
+      GetPage(name: "/walletScreen", page: () => const WalletPage()),
     ];
 
 class PageRoutes {
@@ -70,6 +76,8 @@ class PageRoutes {
   static const String userDrawer = '/userDrawer';
   static const String myAppointment = '/myAppointment';
   static const String appointmentDetail = '/appointmentDetail';
+  static const String chatScreen = '/chatScreen';
+  static const String walletScreen = '/walletScreen';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -89,6 +97,8 @@ class PageRoutes {
       userDrawer: (context) => const UserDrawerPage(),
       myAppointment: (context) => const MyAppointmentPage(),
       appointmentDetail: (context) => const AppointmentDetailPage(),
+      chatScreen: (context) => const ChatPage(),
+      walletScreen: (context) => const WalletPage(),
     };
   }
 }

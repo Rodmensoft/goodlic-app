@@ -59,6 +59,7 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
 
   permission_handler: ^8.3.0
+  syncfusion_flutter_charts: ^19.4.53
 
 dev_dependencies:
   flutter_test:
