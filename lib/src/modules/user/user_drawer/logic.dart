@@ -102,7 +102,7 @@ class UserDrawerLogic extends GetxController {
       case 2:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.walletScreen);
         }
       case 3:
         {

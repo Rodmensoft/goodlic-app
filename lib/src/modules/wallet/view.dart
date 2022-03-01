@@ -172,7 +172,94 @@ class _WalletPageState extends State<WalletPage> {
                       tooltipBehavior: _tooltipBehavior,
                     ))),
                     SizedBox(height: 30.h),
-                    Text('transaction', style: state.recordTextStyle)
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text('transaction', style: state.recordTextStyle),
+                        ],
+                      ),
+                    ),
+                    //  SizedBox(height: 20.h),
+                    Expanded(
+                      child: ListView(
+                          children: List.generate(
+                        4,
+                        (index) => Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.w, 0, 16.w, 15.h),
+                          child: Container(
+                            height: 90.h,
+                            width: 340.w,
+                            decoration: const BoxDecoration(
+                                color: customTextFieldColor),
+                            child: Row(
+                              children: [
+                                Container(
+                                  child: Image.asset(
+                                    'assets/images/paypal.png',
+                                  ),
+                                ),
+                                SizedBox(width: 20.w),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'William Smith',
+                                        style: state.transactionTextStyle,
+                                      ),
+                                      SizedBox(height: 15.h),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/Icons/feeIcon.svg'),
+                                          Text(
+                                            '  \$25 fees',
+                                            style: state.feeTextStyle,
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12.w, 0, 0, 0),
+                                      child: Text(
+                                        '17/02/22',
+                                        style: state.dateTextStyle,
+                                      ),
+                                    ),
+                                    SizedBox(height: 15.h),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/Icons/videoCallIcon.svg',
+                                          color: customLightThemeColor,
+                                        ),
+                                        Text(
+                                          '  \$25 fees',
+                                          style: state.feeTextStyle,
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      )),
+                    )
                   ],
                 )),
           ),
