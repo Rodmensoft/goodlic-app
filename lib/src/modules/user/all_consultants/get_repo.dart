@@ -1,0 +1,59 @@
+import 'dart:developer';
+
+import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/user/all_consultants/logic.dart';
+import 'package:consultant_product/src/modules/user/all_consultants/model_all_consultant.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+getCategoriesWithConsultantRepo(
+    BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    Get.find<AllConsultantsLogic>().allCategoriesWithConsultantModel =
+        AllCategoriesWithConsultantModel.fromJson(response);
+    Get.find<AllConsultantsLogic>().update();
+    if (Get.find<AllConsultantsLogic>()
+            .allCategoriesWithConsultantModel
+            .status
+            .toString() ==
+        'true') {
+      Get.find<AllConsultantsLogic>().allCategoriesList.clear();
+      Get.find<AllConsultantsLogic>().allConsultantList.clear();
+
+      ///---get-consultant --------------------- open
+      Get.find<AllConsultantsLogic>().allConsultantList =
+          Get.find<AllConsultantsLogic>()
+              .allCategoriesWithConsultantModel
+              .data!
+              .categories!;
+
+      ///---get-consultant --------------------- close
+      ///---get-categories --------------------- open
+      for (var element in Get.find<AllConsultantsLogic>()
+          .allCategoriesWithConsultantModel
+          .data!
+          .categories!) {
+        Get.find<AllConsultantsLogic>()
+            .allCategoriesList
+            .add(Tab(text: element.name!));
+      }
+      Get.find<AllConsultantsLogic>().update();
+      Get.find<AllConsultantsLogic>().tabController = TabController(
+          length: Get.find<AllConsultantsLogic>().allCategoriesList.length,
+          vsync: Get.find<AllConsultantsLogic>().reference!);
+
+      ///---get-categories --------------------- close
+
+      Get.find<AllConsultantsLogic>().updateAllConsultantLoader(false);
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    } else {
+      Get.find<AllConsultantsLogic>().updateAllConsultantLoader(false);
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    }
+  } else if (!responseCheck) {
+    Get.find<AllConsultantsLogic>().updateAllConsultantLoader(false);
+    Get.find<GeneralController>().updateFormLoaderController(false);
+
+    log('Exception........................');
+  }
+}

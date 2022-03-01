@@ -1,7 +1,10 @@
 import 'dart:developer';
 
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/user/consultant_profile/get_repo.dart';
+import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
@@ -11,7 +14,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
+import 'package:skeleton_loader/skeleton_loader.dart';
 
+import '../../../api_services/urls.dart';
 import 'logic.dart';
 
 class ConsultantProfilePage extends StatefulWidget {
@@ -25,6 +30,21 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
   final logic = Get.put(ConsultantProfileLogic());
 
   final state = Get.find<ConsultantProfileLogic>().state;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getMethod(
+        context,
+        getConsultantProfileByIDURL,
+        {
+          'token': '123',
+          'user_id': Get.find<UserHomeLogic>().selectedConsultantID
+        },
+        true,
+        getConsultantProfileRepo);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +80,10 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                         ),
                       ),
                       backgroundColor: customLightThemeColor,
-                      actions: [
+                      actions: const [
                         ///---notifications
 
-                        CustomNotificationIcon(color:Colors.white)
+                        CustomNotificationIcon(color: Colors.white)
                       ],
                       bottom: PreferredSize(
                         preferredSize: const Size.fromHeight(30),
@@ -72,342 +92,466 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(30.r)),
-                              color: Colors.white),
+                              color: Colors.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Colors.white,
+                                    spreadRadius: 3,
+                                    offset: Offset(0, 1))
+                              ]),
                         ),
                       ),
                       flexibleSpace: FlexibleSpaceBar(
                           centerTitle: true,
-                          background: SafeArea(
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  top: 0,
-                                  child: SizedBox(
+                          background: _consultantProfileLogic
+                                  .consultantProfileLoader!
+                              ? SkeletonLoader(
+                                  period: const Duration(seconds: 2),
+                                  highlightColor: Colors.grey,
+                                  direction: SkeletonDirection.ltr,
+                                  builder: Container(
+                                    color: Colors.white,
                                     width: MediaQuery.of(context).size.width,
-                                    child: Center(
-                                      child: Image.asset(
-                                        'assets/images/stackImage.png',
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .5,
-                                        fit: BoxFit.cover,
+                                  ))
+                              : SafeArea(
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                        top: 0,
+                                        child: Container(
+                                          color: customLightThemeColor,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: Center(
+                                            child: _consultantProfileLogic
+                                                        .consultantProfileModel
+                                                        .data!
+                                                        .userDetail!
+                                                        .imagePath ==
+                                                    null
+                                                ? Image.asset(
+                                                    'assets/images/stackImage.png',
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .5,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : Image.network(
+                                                    '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          )),
+                                )),
                     ),
                   ];
                 },
                 body: Stack(
                   children: [
-                    ListView(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 0),
-                        children: [
-                          ///---name
-                          Text(
-                            'William Smith',
-                            style: state.profileNameTextStyle,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-
-                          ///---category-rating
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              ///---category
-                              Text(
-                                'Financial Advisor',
-                                style: state.categoryTextStyle,
-                              ),
-
-                              ///---rating-bar
-                              RatingBar.builder(
-                                ignoreGestures: true,
-                                initialRating: 5,
-                                minRating: 1,
-                                direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                itemCount: 5,
-                                itemSize: 15,
-                                itemPadding:
-                                    const EdgeInsets.symmetric(horizontal: 0.0),
-                                itemBuilder: (context, _) => SvgPicture.asset(
-                                    'assets/Icons/ratingStarIcon.svg'),
-                                onRatingUpdate: (rating) {
-                                  log('Rating--->>$rating');
-                                },
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(
-                            height: 25.h,
-                          ),
-
-                          ///---about-detail
-                          Row(
-                            children: [
-                              ///---rating
-                              Container(
-                                height: 73.h,
-                                width: 106.w,
-                                decoration: BoxDecoration(
-                                    color: customTextFieldColor,
-                                    borderRadius: BorderRadius.circular(8.r)),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 14.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SvgPicture.asset(
-                                              'assets/Icons/ratingStarIcon.svg'),
-                                          SizedBox(
-                                            width: 4.w,
-                                          ),
-                                          const Text(
-                                            '5.0',
-                                            style: TextStyle(
-                                                fontFamily:
-                                                    SarabunFontFamily.extraBold,
-                                                fontSize: 16,
-                                                color: customThemeColor),
-                                          )
-                                        ],
-                                      ),
-                                      const Text(
-                                        'Positive Rating',
-                                        style: TextStyle(
-                                            fontFamily:
-                                                SarabunFontFamily.medium,
-                                            fontSize: 12,
-                                            color: customTextBlackColor),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const Spacer(),
-
-                              ///---consultancy-count
-                              Container(
-                                height: 73.h,
-                                width: 106.w,
-                                decoration: BoxDecoration(
-                                    color: customTextFieldColor,
-                                    borderRadius: BorderRadius.circular(8.r)),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 14.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SvgPicture.asset(
-                                              'assets/Icons/consultancyCountIcon.svg'),
-                                          SizedBox(
-                                            width: 4.w,
-                                          ),
-                                          const Text(
-                                            '200+',
-                                            style: TextStyle(
-                                                fontFamily:
-                                                    SarabunFontFamily.extraBold,
-                                                fontSize: 16,
-                                                color: customThemeColor),
-                                          )
-                                        ],
-                                      ),
-                                      const Text(
-                                        'Consultancy',
-                                        style: TextStyle(
-                                            fontFamily:
-                                                SarabunFontFamily.medium,
-                                            fontSize: 12,
-                                            color: customTextBlackColor),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              const Spacer(),
-
-                              ///---experience
-                              Container(
-                                height: 73.h,
-                                width: 106.w,
-                                decoration: BoxDecoration(
-                                    color: customTextFieldColor,
-                                    borderRadius: BorderRadius.circular(8.r)),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 14.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SvgPicture.asset(
-                                              'assets/Icons/checkIcon.svg'),
-                                          SizedBox(
-                                            width: 4.w,
-                                          ),
-                                          const Text(
-                                            '4+',
-                                            style: TextStyle(
-                                                fontFamily:
-                                                    SarabunFontFamily.extraBold,
-                                                fontSize: 16,
-                                                color: customThemeColor),
-                                          )
-                                        ],
-                                      ),
-                                      const Text(
-                                        'Years Of Exp',
-                                        style: TextStyle(
-                                            fontFamily:
-                                                SarabunFontFamily.medium,
-                                            fontSize: 12,
-                                            color: customTextBlackColor),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(
-                            height: 30.h,
-                          ),
-
-                          ///---about
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                'About',
-                                style: state.headingTextStyle,
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              Text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque lorem nunc, pellentesque et rhoncus ac, sodales vel tellus.',
-                                style: state.dataTextStyle,
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(
-                            height: 30.h,
-                          ),
-
-                          ///---types
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Available Options',
-                                style: state.headingTextStyle,
-                              ),
-                              SizedBox(
-                                height: 18.h,
-                              ),
-                              Wrap(
-                                children: List.generate(
-                                    _consultantProfileLogic
-                                        .appointmentTypes.length, (index) {
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 18.w, 11.h),
-                                    child: Container(
-                                      height: 47.h,
+                    _consultantProfileLogic.consultantProfileLoader!
+                        ? SkeletonLoader(
+                            period: const Duration(seconds: 2),
+                            highlightColor: Colors.grey,
+                            direction: SkeletonDirection.ltr,
+                            builder: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: 15.h,
+                                      width: 80,
                                       decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.2),
-                                              spreadRadius: -2,
-                                              blurRadius: 15,
-                                              // offset: Offset(1,5)
-                                            )
-                                          ]),
+                                              BorderRadius.circular(8.r)),
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Container(
+                                      height: 15.h,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8.r)),
+                                    ),
+                                    SizedBox(
+                                      height: 25.h,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          height: 73.h,
+                                          width: 106.w,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r)),
+                                        ),
+                                        const Spacer(),
+                                        Container(
+                                          height: 73.h,
+                                          width: 106.w,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r)),
+                                        ),
+                                        const Spacer(),
+                                        Container(
+                                          height: 73.h,
+                                          width: 106.w,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r)),
+                                        ),
+                                      ],
+                                    ),
+                                  ]),
+                            ))
+                        : ListView(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                15.w, 0, 15.w, 0),
+                            children: [
+                                ///---name
+                                Text(
+                                  '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.firstName ?? '...'} '
+                                  '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.lastName ?? ''}',
+                                  style: state.profileNameTextStyle,
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+
+                                ///---category-rating
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ///---category
+                                    Text(
+                                      '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories!.category!.name}',
+                                      style: state.categoryTextStyle,
+                                    ),
+
+                                    ///---rating-bar
+                                    RatingBar.builder(
+                                      ignoreGestures: true,
+                                      initialRating: double.parse(
+                                          _consultantProfileLogic
+                                              .consultantProfileModel
+                                              .data!
+                                              .userDetail!
+                                              .ratingsAvg
+                                              .toString()),
+                                      minRating: 1,
+                                      direction: Axis.horizontal,
+                                      allowHalfRating: true,
+                                      itemCount: 5,
+                                      itemSize: 15,
+                                      itemPadding: const EdgeInsets.symmetric(
+                                          horizontal: 0.0),
+                                      itemBuilder: (context, _) =>
+                                          SvgPicture.asset(
+                                              'assets/Icons/ratingStarIcon.svg'),
+                                      onRatingUpdate: (rating) {
+                                        log('Rating--->>$rating');
+                                      },
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(
+                                  height: 25.h,
+                                ),
+
+                                ///---about-detail
+                                Row(
+                                  children: [
+                                    ///---rating
+                                    Container(
+                                      height: 73.h,
+                                      width: 106.w,
+                                      decoration: BoxDecoration(
+                                          color: customTextFieldColor,
+                                          borderRadius:
+                                              BorderRadius.circular(8.r)),
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 14.w),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
+                                            vertical: 14.h),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            SvgPicture.asset(
-                                                '${_consultantProfileLogic.appointmentTypes[index].image}'),
-                                            SizedBox(
-                                              width: 8.w,
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(
+                                                    'assets/Icons/ratingStarIcon.svg'),
+                                                SizedBox(
+                                                  width: 4.w,
+                                                ),
+                                                Text(
+                                                  '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.ratingsAvg}.0',
+                                                  style: const TextStyle(
+                                                      fontFamily:
+                                                          SarabunFontFamily
+                                                              .extraBold,
+                                                      fontSize: 16,
+                                                      color: customThemeColor),
+                                                )
+                                              ],
                                             ),
-                                            Text(
-                                              '${_consultantProfileLogic.appointmentTypes[index].title}',
-                                              style: state.typesTextStyle,
+                                            const Text(
+                                              'Positive Rating',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      SarabunFontFamily.medium,
+                                                  fontSize: 12,
+                                                  color: customTextBlackColor),
                                             )
                                           ],
                                         ),
                                       ),
                                     ),
-                                  );
-                                }),
-                              )
-                            ],
-                          ),
-                        ]),
+                                    const Spacer(),
+
+                                    ///---consultancy-count
+                                    Container(
+                                      height: 73.h,
+                                      width: 106.w,
+                                      decoration: BoxDecoration(
+                                          color: customTextFieldColor,
+                                          borderRadius:
+                                              BorderRadius.circular(8.r)),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 14.h),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(
+                                                    'assets/Icons/consultancyCountIcon.svg'),
+                                                SizedBox(
+                                                  width: 4.w,
+                                                ),
+                                                Text(
+                                                  '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.appointmentCount}+',
+                                                  style: const TextStyle(
+                                                      fontFamily:
+                                                          SarabunFontFamily
+                                                              .extraBold,
+                                                      fontSize: 16,
+                                                      color: customThemeColor),
+                                                )
+                                              ],
+                                            ),
+                                            const Text(
+                                              'Consultancy',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      SarabunFontFamily.medium,
+                                                  fontSize: 12,
+                                                  color: customTextBlackColor),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+
+                                    const Spacer(),
+
+                                    ///---experience
+                                    Container(
+                                      height: 73.h,
+                                      width: 106.w,
+                                      decoration: BoxDecoration(
+                                          color: customTextFieldColor,
+                                          borderRadius:
+                                              BorderRadius.circular(8.r)),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 14.h),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(
+                                                    'assets/Icons/checkIcon.svg'),
+                                                SizedBox(
+                                                  width: 4.w,
+                                                ),
+                                                Text(
+                                                  '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.experience}+',
+                                                  style: const TextStyle(
+                                                      fontFamily:
+                                                          SarabunFontFamily
+                                                              .extraBold,
+                                                      fontSize: 16,
+                                                      color: customThemeColor),
+                                                )
+                                              ],
+                                            ),
+                                            const Text(
+                                              'Years Of Exp',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      SarabunFontFamily.medium,
+                                                  fontSize: 12,
+                                                  color: customTextBlackColor),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(
+                                  height: 30.h,
+                                ),
+
+                                ///---about
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'About',
+                                      style: state.headingTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 15.h,
+                                    ),
+                                    Text(
+                                      '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.about}',
+                                      style: state.dataTextStyle,
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(
+                                  height: 30.h,
+                                ),
+
+                                ///---types
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Available Options',
+                                      style: state.headingTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 18.h,
+                                    ),
+                                    Wrap(
+                                      children: List.generate(
+                                          _consultantProfileLogic
+                                              .appointmentTypes
+                                              .length, (index) {
+                                        return Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 18.w, 11.h),
+                                          child: Container(
+                                            height: 47.h,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.2),
+                                                    spreadRadius: -2,
+                                                    blurRadius: 15,
+                                                    // offset: Offset(1,5)
+                                                  )
+                                                ]),
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 14.w),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  SvgPicture.asset(
+                                                      '${_consultantProfileLogic.imagesForAppointmentTypes[_consultantProfileLogic.appointmentTypes[index].appointmentTypeId! - 1]}'),
+                                                  SizedBox(
+                                                    width: 8.w,
+                                                  ),
+                                                  Text(
+                                                    _consultantProfileLogic
+                                                        .appointmentTypes[index]
+                                                        .appointmentType!
+                                                        .name!
+                                                        .toUpperCase(),
+                                                    style: state.typesTextStyle,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                    )
+                                  ],
+                                ),
+                              ]),
 
                     ///---bottom-bar
 
-                    Positioned(
-                      bottom: 0.h,
-                      left: 15.w,
-                      right: 15.w,
-                      child: InkWell(
-                        onTap: (){
-                          Get.toNamed(PageRoutes.slotSelection);
-                        },
-                        child: const MyCustomBottomBar(
-                          title: 'Book Appointment',
-                          disable: false,
-                        ),
-                      ),
-                    )
+                    _consultantProfileLogic.consultantProfileLoader!
+                        ? const SizedBox()
+                        : Positioned(
+                            bottom: 0.h,
+                            left: 15.w,
+                            right: 15.w,
+                            child: InkWell(
+                              onTap: () {
+                                Get.toNamed(PageRoutes.slotSelection);
+                              },
+                              child: const MyCustomBottomBar(
+                                title: 'Book Appointment',
+                                disable: false,
+                              ),
+                            ),
+                          )
                   ],
                 )),
           ),

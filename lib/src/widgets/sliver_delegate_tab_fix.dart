@@ -14,8 +14,7 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.transparent, // ADD THE COLOR YOU WANT AS BACKGROUND.
+    return SizedBox.expand(
       child: Container(
           color: customTextFieldColor,
           child: _tabBar),
@@ -23,7 +22,7 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(SliverAppBarDelegate oldDelegate) {
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
     return false;
   }
 }

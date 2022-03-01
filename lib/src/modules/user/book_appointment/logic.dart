@@ -8,6 +8,7 @@ import 'state.dart';
 
 class BookAppointmentLogic extends GetxController {
   final BookAppointmentState state = BookAppointmentState();
+  final consultantProfileLogic = Get.find<ConsultantProfileLogic>();
 
 
   var cardNumberMask = MaskTextInputFormatter(mask: '#### #### #### ####');
@@ -58,23 +59,7 @@ class BookAppointmentLogic extends GetxController {
 
   ///----app-bar-settings-----end
 
-  List<AppointmentTypesCustomClass> appointmentTypes = [
-    AppointmentTypesCustomClass(
-        title: 'Video Appointment',
-        image: 'assets/Icons/videoCallIcon.svg',
-        fee: '\$25',
-        isSelected: false),
-    AppointmentTypesCustomClass(
-        title: 'Online Chat',
-        image: 'assets/Icons/chatIcon.svg',
-        fee: '\$15',
-        isSelected: false),
-    AppointmentTypesCustomClass(
-        title: 'Physical Appointment',
-        image: 'assets/Icons/physicalIcon.svg',
-        fee: '\$53',
-        isSelected: false),
-  ];
+  int? selectedAppointmentTypeID;
 
   List<ShiftType> shiftList = [
     ShiftType(
