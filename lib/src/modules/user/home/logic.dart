@@ -1,4 +1,6 @@
+import 'package:consultant_product/src/modules/user/home/model_featured.dart';
 import 'package:consultant_product/src/modules/user/home/model_get_categories.dart';
+import 'package:consultant_product/src/modules/user/home/model_top_rated.dart';
 import 'package:consultant_product/src/modules/user/home/model_user_profile.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ class UserHomeLogic extends GetxController {
 
   GetUserProfileModel getUserProfileModel = GetUserProfileModel();
 
+  int? selectedConsultantID;
 
 
   ///----app-bar-settings-----start
@@ -33,32 +36,13 @@ class UserHomeLogic extends GetxController {
 
   ///----app-bar-settings-----end
 
-  List<HomeStyling> topConsultants = [
-    HomeStyling(
-      title: 'John Doe',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/stackImage.png',
-      color: customLightThemeColor
-    ),
-    HomeStyling(
-      title: 'John Doe',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/stackImage.png',
-      color: customOrangeColor
-    ),
-    HomeStyling(
-      title: 'John Doe',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/stackImage.png',
-      color: customLightThemeColor
-    ),
-    HomeStyling(
-      title: 'John Doe',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/stackImage.png',
-      color: customOrangeColor
-    ),
-  ];
+  FeaturedConsultantModel featuredConsultantModel = FeaturedConsultantModel();
+  bool? featuredConsultantLoader = true;
+  updateFeaturedConsultantLoader(bool? newValue){
+    featuredConsultantLoader = newValue;
+    update();
+  }
+  List<HomeStyling> topConsultants = [];
 
   ///-------
 
@@ -71,65 +55,45 @@ class UserHomeLogic extends GetxController {
 
 
   List<HomeStyling> categoriesList = [];
+  List categoriesColor = [
+    customLightThemeColor,
+    customOrangeColor,
+    customThemeColor,
+    customThemeColor,
+    customLightThemeColor,
+    customOrangeColor
+  ];
 
   ///-------
-  List<HomeStyling> topRatedConsultantList = [
-    HomeStyling(
-      title: 'Amanda Smith',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/dummyTopRatedConsultant.png',
-      color: customLightThemeColor
-    ),
-    HomeStyling(
-      title: 'John Doe',
-        subTitle: 'Property Consultant',
-        image: 'assets/images/dummyTopRatedConsultant.png',
-      color: customOrangeColor
-    ),
-    HomeStyling(
-        title: 'Amanda Smith',
-        subTitle: 'Financial Advisor',
-        image: 'assets/images/dummyTopRatedConsultant.png',
-        color: customLightThemeColor
-    ),
-    HomeStyling(
-        title: 'John Doe',
-        subTitle: 'Property Consultant',
-        image: 'assets/images/dummyTopRatedConsultant.png',
-        color: customOrangeColor
-    ),
-    HomeStyling(
-        title: 'Amanda Smith',
-        subTitle: 'Financial Advisor',
-        image: 'assets/images/dummyTopRatedConsultant.png',
-        color: customLightThemeColor
-    ),
-    HomeStyling(
-        title: 'John Doe',
-        subTitle: 'Property Consultant',
-        image: 'assets/images/dummyTopRatedConsultant.png',
-        color: customOrangeColor
-    ),
-    HomeStyling(
-        title: 'Amanda Smith',
-        subTitle: 'Financial Advisor',
-        image: 'assets/images/dummyTopRatedConsultant.png',
-        color: customLightThemeColor
-    ),
-    HomeStyling(
-        title: 'John Doe',
-        subTitle: 'Property Consultant',
-        image: 'assets/images/dummyTopRatedConsultant.png',
-        color: customOrangeColor
-    ),
-  ];
+  TopRatedModel topRatedModel = TopRatedModel();
+  bool? topRatedLoader = true;
+  updateTopRatedLoader(bool? newValue){
+    topRatedLoader = newValue;
+    update();
+  }
+  bool? topRatedLoaderMore = false;
+  updateTopRatedLoaderMore(bool? newValue){
+    topRatedLoaderMore = newValue;
+    update();
+  }
+  List<TopRatedStyling> topRatedConsultantList = [];
 }
 
 class HomeStyling {
-  HomeStyling({this.title, this.subTitle, this.image, this.color});
+  HomeStyling({required this.id,this.title, this.subTitle, this.image, this.color});
 
+  int? id;
   String? title;
   String? subTitle;
   String? image;
   Color? color;
+}
+class TopRatedStyling {
+  TopRatedStyling({required this.id,this.title, this.subTitle, this.image, this.rating});
+
+  int? id;
+  String? title;
+  String? subTitle;
+  String? image;
+  int? rating;
 }

@@ -121,7 +121,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                       width: 40.w,
                                       decoration: BoxDecoration(
                                           color: _userHomeLogic
-                                              .categoriesList[index].color,
+                                              .categoriesColor[index],
                                           shape: BoxShape.circle),
                                       child: Center(
                                           child: Image.network(
@@ -142,7 +142,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                               SarabunFontFamily.semiBold,
                                           fontSize: 14,
                                           color: _userHomeLogic
-                                              .categoriesList[index].color),
+                                              .categoriesColor[index]),
                                     ),
                                     Text(
                                       '(${_userHomeLogic.categoriesList[index].subTitle} Consultants)',

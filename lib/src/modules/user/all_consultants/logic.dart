@@ -1,3 +1,4 @@
+import 'package:consultant_product/src/modules/user/all_consultants/model_all_consultant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -8,48 +9,22 @@ class AllConsultantsLogic extends GetxController {
 
   late TabController tabController;
 
-  /// consulatants rating style///
+  TickerProvider? reference;
+  /// consultants rating style///
 
-  List<RatingStyling> consultantsRating = [
-    RatingStyling(
-      title: 'Amanda Smith',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/consultant1.png',
-    ),
-    RatingStyling(
-      title: 'John Doe',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/consultant2.png',
-    ),
-    RatingStyling(
-      title: 'William Smith',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/consultant1.png',
-    ),
-    RatingStyling(
-      title: 'John Doe',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/consultant2.png',
-    ),
-    RatingStyling(
-      title: 'John Smith',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/consultant1.png',
-    ),
-    RatingStyling(
-      title: 'John Doe',
-      subTitle: 'Financial Advisor',
-      image: 'assets/images/consultant2.png',
-    ),
-  ];
+  AllCategoriesWithConsultantModel allCategoriesWithConsultantModel = AllCategoriesWithConsultantModel();
+  bool? allConsultantLoader = true;
 
-  List<Tab> tabBarList = const [
-    Tab(text: "Medical"),
-    Tab(text: "Cultural"),
-    Tab(text: "Financial"),
-    Tab(text: "Educational"),
-    Tab(text: "Agricultural"),
-  ];
+  updateAllConsultantLoader(bool? newValue) {
+    allConsultantLoader = newValue;
+    update();
+  }
+
+
+  List<Tab> allCategoriesList = [];
+  List<Categories> allConsultantList = [];
+
+
 
   ///----app-bar-settings-----start
   ScrollController? scrollController;
@@ -69,10 +44,4 @@ class AllConsultantsLogic extends GetxController {
   }
 }
 
-class RatingStyling {
-  RatingStyling({this.title, this.subTitle, this.image});
 
-  String? title;
-  String? subTitle;
-  String? image;
-}

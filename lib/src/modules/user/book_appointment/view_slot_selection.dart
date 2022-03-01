@@ -46,7 +46,7 @@ class _SlotSelectionState extends State<SlotSelection> {
 
   bool? disableButton = true;
   int? selectedSlotID;
-  int? selectedSlotIndex ;
+  int? selectedSlotIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -89,27 +89,29 @@ class _SlotSelectionState extends State<SlotSelection> {
                           ///---types
                           Wrap(
                             children: List.generate(
-                                _bookAppointmentLogic.appointmentTypes.length,
-                                (index) {
+                                _bookAppointmentLogic.consultantProfileLogic
+                                    .appointmentTypes.length, (index) {
                               return Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0, 0, 18.w, 11.h),
                                 child: InkWell(
                                   onTap: () {
-                                    _bookAppointmentLogic.appointmentTypes
-                                        .forEach((element) {
-                                      element.isSelected = false;
-                                    });
                                     _bookAppointmentLogic
-                                        .appointmentTypes[index]
-                                        .isSelected = true;
+                                            .selectedAppointmentTypeID =
+                                        _bookAppointmentLogic
+                                            .consultantProfileLogic
+                                            .appointmentTypes[index]
+                                            .appointmentTypeId;
                                     _bookAppointmentLogic.update();
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: _bookAppointmentLogic
-                                                .appointmentTypes[index]
-                                                .isSelected!
+                                                    .selectedAppointmentTypeID ==
+                                                _bookAppointmentLogic
+                                                    .consultantProfileLogic
+                                                    .appointmentTypes[index]
+                                                    .appointmentTypeId
                                             ? customLightThemeColor
                                             : Colors.white,
                                         borderRadius:
@@ -117,8 +119,11 @@ class _SlotSelectionState extends State<SlotSelection> {
                                         boxShadow: [
                                           BoxShadow(
                                             color: _bookAppointmentLogic
-                                                    .appointmentTypes[index]
-                                                    .isSelected!
+                                                        .selectedAppointmentTypeID ==
+                                                    _bookAppointmentLogic
+                                                        .consultantProfileLogic
+                                                        .appointmentTypes[index]
+                                                        .appointmentTypeId
                                                 ? customLightThemeColor
                                                     .withOpacity(0.6)
                                                 : Colors.grey.withOpacity(0.2),
@@ -140,10 +145,14 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               SvgPicture.asset(
-                                                '${_bookAppointmentLogic.appointmentTypes[index].image}',
+                                                '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes[_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId! - 1]}',
                                                 color: _bookAppointmentLogic
-                                                        .appointmentTypes[index]
-                                                        .isSelected!
+                                                            .selectedAppointmentTypeID ==
+                                                        _bookAppointmentLogic
+                                                            .consultantProfileLogic
+                                                            .appointmentTypes[
+                                                                index]
+                                                            .appointmentTypeId
                                                     ? Colors.white
                                                     : customThemeColor,
                                               ),
@@ -151,10 +160,19 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                 width: 10.w,
                                               ),
                                               Text(
-                                                '${_bookAppointmentLogic.appointmentTypes[index].title}',
+                                                _bookAppointmentLogic
+                                                    .consultantProfileLogic
+                                                    .appointmentTypes[index]
+                                                    .appointmentType!
+                                                    .name!
+                                                    .toString().capitalizeFirst!,
                                                 style: _bookAppointmentLogic
-                                                        .appointmentTypes[index]
-                                                        .isSelected!
+                                                            .selectedAppointmentTypeID ==
+                                                        _bookAppointmentLogic
+                                                            .consultantProfileLogic
+                                                            .appointmentTypes[
+                                                                index]
+                                                            .appointmentTypeId
                                                     ? state.typeTextStyle!
                                                         .copyWith(
                                                             color: Colors.white)
@@ -169,10 +187,14 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             padding:
                                                 EdgeInsets.only(left: 28.w),
                                             child: Text(
-                                              '${_bookAppointmentLogic.appointmentTypes[index].fee}',
+                                              '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].fee}',
                                               style: _bookAppointmentLogic
-                                                      .appointmentTypes[index]
-                                                      .isSelected!
+                                                          .selectedAppointmentTypeID ==
+                                                      _bookAppointmentLogic
+                                                          .consultantProfileLogic
+                                                          .appointmentTypes[
+                                                              index]
+                                                          .appointmentTypeId
                                                   ? state.typePriceTextStyle!
                                                       .copyWith(
                                                           color: Colors.white)
@@ -318,7 +340,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                           Wrap(
                             children: List.generate(15, (secondIndex) {
                               return Padding(
-                                padding:  EdgeInsets.fromLTRB(0, 0, 12.w, 6),
+                                padding: EdgeInsets.fromLTRB(0, 0, 12.w, 6),
                                 child: InkWell(
                                   onTap: () {
                                     setState(() {
@@ -331,19 +353,20 @@ class _SlotSelectionState extends State<SlotSelection> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: selectedSlotIndex == secondIndex
-                                            ?customLightThemeColor
-                                            :Colors.white,
+                                            ? customLightThemeColor
+                                            : Colors.white,
                                         borderRadius:
                                             BorderRadius.circular(100)),
                                     child: Padding(
-                                      padding:
-                                           EdgeInsets.fromLTRB(11.w, 4.h, 11.w, 4.h),
+                                      padding: EdgeInsets.fromLTRB(
+                                          11.w, 4.h, 11.w, 4.h),
                                       child: Text(
                                         '7:00 pm',
                                         textDirection: TextDirection.ltr,
-                                        style:  selectedSlotIndex == secondIndex
-                                            ?state.shiftTitleTextStyle!.copyWith(color: Colors.white)
-                                            :state.shiftTitleTextStyle,
+                                        style: selectedSlotIndex == secondIndex
+                                            ? state.shiftTitleTextStyle!
+                                                .copyWith(color: Colors.white)
+                                            : state.shiftTitleTextStyle,
                                       ),
                                     ),
                                   ),
@@ -353,7 +376,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                           ),
 
                           SizedBox(
-                            height: MediaQuery.of(context).size.height*.15,
+                            height: MediaQuery.of(context).size.height * .15,
                           ),
                         ]),
 
@@ -367,7 +390,6 @@ class _SlotSelectionState extends State<SlotSelection> {
                           if (!disableButton!) {
                             Get.toNamed(PageRoutes.appointmentQuestion);
                           }
-
                         },
                         child: MyCustomBottomBar(
                           title: 'Continue',

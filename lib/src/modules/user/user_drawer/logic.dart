@@ -50,12 +50,12 @@ class UserDrawerLogic extends GetxController {
       case 2:
         {
           Get.back();
-          return Get.toNamed(PageRoutes.walletScreen);
+          return Get.toNamed(PageRoutes.myAppointment);
         }
       case 3:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.walletScreen);
         }
       case 4:
         {

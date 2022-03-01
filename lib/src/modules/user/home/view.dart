@@ -31,7 +31,8 @@ class _UserHomePageState extends State<UserHomePage> {
   @override
   void initState() {
     super.initState();
-    if(Get.find<GeneralController>().storageBox.hasData('userID')){
+    if (Get.find<GeneralController>().storageBox.hasData('userID')) {
+      ///---get-user-API-call
       getMethod(
           context,
           getUserProfileURL,
@@ -42,14 +43,17 @@ class _UserHomePageState extends State<UserHomePage> {
           true,
           getUserProfileRepo);
     }
+    ///---featured-API-call
+    getMethod(context, getFeaturedURL, {'token': '123'}, false,
+        getFeaturedConsultantRepo);
+    ///---categories-API-call
     getMethod(
-        context,
-        getCategoriesURL,
-        {
-          'token': '123'
-        },
-        false,
-        getCategoriesRepo);
+        context, getCategoriesURL, {'token': '123'}, false, getCategoriesRepo);
+
+    ///---top-rated-API-call
+    getMethod(context, getTopRatedConsultantURL, {'token': '123'}, false,
+        getTopRatedConsultantRepo);
+
     Get.find<UserHomeLogic>().scrollController = ScrollController()
       ..addListener(Get.find<UserHomeLogic>().scrollListener);
   }

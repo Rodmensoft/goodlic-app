@@ -11,16 +11,24 @@ final String mediaUrl = GlobalConfiguration().get('media_url');
 ///---fcm
 String fcmService = 'https://fcm.googleapis.com/fcm/send';
 
-
 ///---auth
 String signUpWithEmailURL = apiBaseUrl + 'signup-email';
 String loginWithEmailURL = apiBaseUrl + 'login-email';
 
-
 ///---user
 String getUserProfileURL = apiBaseUrl + 'get-mentee-profile';
 
+///---consultant-profile-by-id
+String getConsultantProfileByIDURL = apiBaseUrl + 'getUserById';
+
+///---featured
+String getFeaturedURL = apiBaseUrl + 'get-featured-mentors';
 
 ///---categories
 String getCategoriesURL = apiBaseUrl + 'mentorCategories';
 
+///---top-rated
+String getTopRatedConsultantURL = apiBaseUrl + 'topRatedMentors';
+
+///---categories-with-mentor
+String getCategoriesWithMentorURL = apiBaseUrl + 'categories/with/mentors';

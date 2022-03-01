@@ -1,14 +1,15 @@
-import 'package:consultant_product/src/modules/user/all_consultants/widgets/medical.dart';
+import 'package:consultant_product/src/api_services/get_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
+import 'package:consultant_product/src/modules/user/all_consultants/get_repo.dart';
+import 'package:consultant_product/src/modules/user/all_consultants/widgets/consultant_grid_view.dart';
+import 'package:consultant_product/src/modules/user/all_consultants/widgets/page_loader.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
-import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:consultant_product/src/widgets/sliver_delegate_tab_fix.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
-
+import 'package:skeleton_loader/skeleton_loader.dart';
 import '../../../controller/general_controller.dart';
 import 'logic.dart';
 
@@ -25,8 +26,6 @@ class _AllConsultantsPageState extends State<AllConsultantsPage>
 
   final state = Get.find<AllConsultantsLogic>().state;
 
-  // int _selectedIndex = 0;
-
   @override
   void initState() {
     super.initState();
@@ -37,16 +36,10 @@ class _AllConsultantsPageState extends State<AllConsultantsPage>
     /// for tab
 
     super.initState();
-    // Create TabController for getting the index of current tab
-    logic.tabController =
-        TabController(length: logic.tabBarList.length, vsync: this);
 
-    // logic.tabController.addListener(() {
-    //   setState(() {
-    //     _selectedIndex = logic.tabController.index;
-    //   });
-    //   print("Selected Index: " + logic.tabController.index.toString());
-    // });
+    logic.reference = this;
+    getMethod(context, getCategoriesWithMentorURL, null, false,
+        getCategoriesWithConsultantRepo);
   }
 
   @override
@@ -67,55 +60,54 @@ class _AllConsultantsPageState extends State<AllConsultantsPage>
             _generalController.focusOut(context);
           },
           child: Scaffold(
-            body: DefaultTabController(
-              length: _allConsultantsLogic.tabBarList.length,
-              child: NestedScrollView(
-                  controller: _allConsultantsLogic.scrollController,
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
-                    return <Widget>[
-                      ///---header
-                      MyCustomSliverAppBar(
-                        heading: 'Consultants',
-                        subHeading: 'Best consultants just one click away',
-                        isShrink: _allConsultantsLogic.isShrink,searchIconShow: true,
-                      ),
-                      SliverPersistentHeader(
-                        delegate: SliverAppBarDelegate(
-                          TabBar(
-                              indicator: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      6), // Creates border
-                                  color: customLightThemeColor),
-                              //  labelPadding: const EdgeInsets.all(10.0),
-                              indicatorSize: TabBarIndicatorSize.tab,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.w, 10.h, 10.w, 5.h),
-                              // indicatorPadding: const EdgeInsets.all(10.0),
-                              automaticIndicatorColorAdjustment: true,
-                              isScrollable: true,
-                              controller: _allConsultantsLogic.tabController,
-                              labelColor: Colors.white,
-                              unselectedLabelColor: customLightThemeColor,
-                              indicatorColor: Colors.transparent,
-                              tabs: _allConsultantsLogic.tabBarList),
-                        ),
-                        pinned: true,
-                      ),
-                    ];
-                  },
-                  body: TabBarView(
-                    physics: const BouncingScrollPhysics(),
-                    controller: _allConsultantsLogic.tabController,
-                    children: const [
-                      Medical(),
-                      Medical(),
-                      Medical(),
-                      Medical(),
-                      Medical(),
-                    ],
-                  )),
-            ),
+            body: _allConsultantsLogic.allConsultantLoader!
+                ? const PageLoader()
+                : NestedScrollView(
+                controller: _allConsultantsLogic.scrollController,
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    ///---header
+                    MyCustomSliverAppBar(
+                      heading: 'Consultants',
+                      subHeading: 'Best consultants just one click away',
+                      isShrink: _allConsultantsLogic.isShrink,
+                      searchIconShow: true,
+                    ),
+                    SliverPersistentHeader(
+                            delegate: SliverAppBarDelegate(
+                              TabBar(
+                                  indicator: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          6), // Creates border
+                                      color: customLightThemeColor),
+                                  labelPadding:
+                                      EdgeInsets.symmetric(horizontal: 25.w),
+                                  indicatorSize: TabBarIndicatorSize.tab,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.w, 5.h, 10.w, 5.h),
+                                  automaticIndicatorColorAdjustment: true,
+                                  isScrollable: true,
+                                  controller:
+                                      _allConsultantsLogic.tabController,
+                                  labelColor: Colors.white,
+                                  unselectedLabelColor: customLightThemeColor,
+                                  indicatorColor: Colors.transparent,
+                                  tabs: _allConsultantsLogic.allCategoriesList),
+                            ),
+                            pinned: true,
+                          ),
+                  ];
+                },
+                body: TabBarView(
+                  physics: const BouncingScrollPhysics(),
+                  controller: _allConsultantsLogic.tabController,
+                  children: List.generate(
+                      _allConsultantsLogic.allConsultantList.length,
+                      (index) => ConsultantGridView(
+                            parentIndex: index,
+                          )),
+                )),
           ),
         );
       });
