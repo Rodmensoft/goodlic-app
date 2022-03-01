@@ -7,9 +7,11 @@ import 'package:resize/resize.dart';
 class WalletState {
   TextStyle? headingTextStyle;
   TextStyle? descTextStyle;
-  TextStyle? subheadingTextStyle;
+  // TextStyle? subheadingTextStyle;
   TextStyle? recordTextStyle;
-  TextStyle? walletTextStyle;
+  TextStyle? transactionTextStyle;
+  TextStyle? feeTextStyle;
+  TextStyle? dateTextStyle;
 
   WalletState() {
     ///Initialize variables
@@ -24,20 +26,30 @@ class WalletState {
       fontFamily: SarabunFontFamily.medium,
       color: Colors.white,
     );
-    subheadingTextStyle = TextStyle(
+    // subheadingTextStyle = TextStyle(
+    //   fontSize: 18.sp,
+    //   fontFamily: SarabunFontFamily.extraBold,
+    //   color: customTextBlackColor,
+    // );
+    recordTextStyle = TextStyle(
       fontSize: 18.sp,
       fontFamily: SarabunFontFamily.extraBold,
       color: customTextBlackColor,
     );
-    recordTextStyle = TextStyle(
+    transactionTextStyle = TextStyle(
       fontSize: 16.sp,
       fontFamily: SarabunFontFamily.extraBold,
       color: customTextBlackColor,
     );
-    walletTextStyle = TextStyle(
+    feeTextStyle = TextStyle(
       fontSize: 14.sp,
       fontFamily: SarabunFontFamily.regular,
       color: customTextBlackColor,
+    );
+    dateTextStyle = TextStyle(
+      fontSize: 14.sp,
+      fontFamily: SarabunFontFamily.semiBold,
+      color: const Color(0xffA2A7AA),
     );
   }
 }
