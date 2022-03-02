@@ -242,7 +242,9 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                   children: [
                                     ///---category
                                     Text(
-                                      '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories!.category!.name}',
+                                      _consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories!.category == null
+                                          ?'...'
+                                          :'${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories!.category!.name}',
                                       style: state.categoryTextStyle,
                                     ),
 
@@ -511,7 +513,10 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   SvgPicture.asset(
-                                                      '${_consultantProfileLogic.imagesForAppointmentTypes[_consultantProfileLogic.appointmentTypes[index].appointmentTypeId! - 1]}'),
+                                                      '${_consultantProfileLogic.imagesForAppointmentTypes[_consultantProfileLogic.appointmentTypes[index].appointmentTypeId! - 1]}',
+                                                  height: 12.h,width: 19.w,
+                                                  ),
+
                                                   SizedBox(
                                                     width: 8.w,
                                                   ),
@@ -538,16 +543,31 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
 
                     _consultantProfileLogic.consultantProfileLoader!
                         ? const SizedBox()
-                        : Positioned(
+                        : Get.find<GeneralController>().storageBox.hasData('authToken')
+                        ?Positioned(
+                      bottom: 0.h,
+                      left: 15.w,
+                      right: 15.w,
+                      child: InkWell(
+                        onTap: () {
+                          Get.toNamed(PageRoutes.slotSelection);
+                        },
+                        child: const MyCustomBottomBar(
+                          title: 'Book Appointment',
+                          disable: false,
+                        ),
+                      ),
+                    )
+                        :Positioned(
                             bottom: 0.h,
                             left: 15.w,
                             right: 15.w,
                             child: InkWell(
                               onTap: () {
-                                Get.toNamed(PageRoutes.slotSelection);
+                                Get.toNamed(PageRoutes.login);
                               },
                               child: const MyCustomBottomBar(
-                                title: 'Book Appointment',
+                                title: 'Login',
                                 disable: false,
                               ),
                             ),

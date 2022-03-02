@@ -61,7 +61,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
 
-    if (Get.find<GeneralController>().storageBox.hasData('userId') &&
+    if (Get.find<GeneralController>().storageBox.hasData('userID') &&
         !Get.find<GeneralController>().storageBox.hasData('onlineStatus')) {
       switch (state) {
         case AppLifecycleState.resumed:

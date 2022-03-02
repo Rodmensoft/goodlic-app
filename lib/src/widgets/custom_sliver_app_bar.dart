@@ -14,6 +14,7 @@ class MyCustomSliverAppBar extends StatefulWidget {
       this.trailing,
       this.trailingIcon,
       this.fee,
+        this.feeImage,
       this.isShrink,
       this.searchIconShow,
       this.onTapTrailing})
@@ -24,6 +25,7 @@ class MyCustomSliverAppBar extends StatefulWidget {
   final String? trailing;
   final String? trailingIcon;
   final String? fee;
+  final String? feeImage;
   final bool? isShrink;
   final bool? searchIconShow;
   final Function? onTapTrailing;
@@ -192,17 +194,17 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(
-                              'assets/Icons/videoCallIcon.svg',
+                              widget.feeImage!,
                               color: Colors.white,
                               height: 12.h,
-                              width: 18.w,
+                              width: 19.w,
                               fit: BoxFit.cover,
                             ),
                             SizedBox(
                               width: 12.w,
                             ),
                             Text(
-                              '\$25',
+                              '${widget.fee}',
                               style: TextStyle(
                                   fontFamily: SarabunFontFamily.bold,
                                   fontSize: 28.sp,

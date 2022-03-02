@@ -17,7 +17,7 @@ class ConsultantProfileLogic extends GetxController {
   List<ScheduleTypes> appointmentTypes = [];
   List imagesForAppointmentTypes = [
     ///---audio
-    'assets/Icons/videoCallIcon.svg',
+    'assets/Icons/audio.svg',
 
     ///---video
     'assets/Icons/videoCallIcon.svg',
@@ -29,7 +29,7 @@ class ConsultantProfileLogic extends GetxController {
     'assets/Icons/physicalIcon.svg',
 
     ///---home-visit
-    'assets/Icons/physicalIcon.svg',
+    'assets/Icons/house-fill.svg',
   ];
 }
 

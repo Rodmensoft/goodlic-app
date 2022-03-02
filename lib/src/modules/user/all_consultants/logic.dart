@@ -1,4 +1,5 @@
 import 'package:consultant_product/src/modules/user/all_consultants/model_all_consultant.dart';
+import 'package:consultant_product/src/modules/user/all_consultants/model_all_consultant_more.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -13,13 +14,21 @@ class AllConsultantsLogic extends GetxController {
   /// consultants rating style///
 
   AllCategoriesWithConsultantModel allCategoriesWithConsultantModel = AllCategoriesWithConsultantModel();
+  AllCategoriesWithConsultantMoreModel allCategoriesWithConsultantMoreModel = AllCategoriesWithConsultantMoreModel();
   bool? allConsultantLoader = true;
 
   updateAllConsultantLoader(bool? newValue) {
     allConsultantLoader = newValue;
     update();
   }
+  bool? allConsultantMoreLoader = false;
 
+  updateAllConsultantMoreLoader(bool? newValue) {
+    allConsultantMoreLoader = newValue;
+    update();
+  }
+
+  int? selectedParentIndexForMore;
 
   List<Tab> allCategoriesList = [];
   List<Categories> allConsultantList = [];

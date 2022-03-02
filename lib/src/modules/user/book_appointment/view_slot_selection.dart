@@ -1,7 +1,11 @@
 import 'dart:developer';
 
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/get_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/get_repo.dart';
+import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
@@ -11,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
+import 'package:skeleton_loader/skeleton_loader.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import 'logic.dart';
@@ -96,13 +101,42 @@ class _SlotSelectionState extends State<SlotSelection> {
                                     0, 0, 18.w, 11.h),
                                 child: InkWell(
                                   onTap: () {
+                                    setState(() {
+                                      disableButton = true;
+                                    });
+                                    _bookAppointmentLogic.morningSlots.clear();
+                                    _bookAppointmentLogic.afterNoonSlots.clear();
+                                    _bookAppointmentLogic.eveningSlots.clear();
                                     _bookAppointmentLogic
                                             .selectedAppointmentTypeID =
                                         _bookAppointmentLogic
                                             .consultantProfileLogic
                                             .appointmentTypes[index]
                                             .appointmentTypeId;
+                                    _bookAppointmentLogic.selectedAppointmentTypeIndex = index;
+                                    _bookAppointmentLogic.updateSelectMentorAppointmentType(
+                                        _bookAppointmentLogic
+                                            .consultantProfileLogic
+                                            .appointmentTypes[index]
+                                    );
                                     _bookAppointmentLogic.update();
+                                    _bookAppointmentLogic
+                                        .updateCalenderLoader(true);
+                                    getMethod(
+                                        context,
+                                        getScheduleAvailableDaysURL,
+                                        {
+                                          'token': '123',
+                                          'mentor_id': Get.find<UserHomeLogic>()
+                                              .selectedConsultantID,
+                                          'appointment_type_id':
+                                              _bookAppointmentLogic
+                                                  .consultantProfileLogic
+                                                  .appointmentTypes[index]
+                                                  .appointmentTypeId,
+                                        },
+                                        true,
+                                        getScheduleAvailableDaysRepo);
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -146,6 +180,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             children: [
                                               SvgPicture.asset(
                                                 '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes[_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId! - 1]}',
+                                                height: 12.h,width: 19.w,
                                                 color: _bookAppointmentLogic
                                                             .selectedAppointmentTypeID ==
                                                         _bookAppointmentLogic
@@ -165,7 +200,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                     .appointmentTypes[index]
                                                     .appointmentType!
                                                     .name!
-                                                    .toString().capitalizeFirst!,
+                                                    .toString()
+                                                    .capitalizeFirst!,
                                                 style: _bookAppointmentLogic
                                                             .selectedAppointmentTypeID ==
                                                         _bookAppointmentLogic
@@ -215,165 +251,557 @@ class _SlotSelectionState extends State<SlotSelection> {
                           ),
 
                           ///---calender
-                          Container(
-                            height: 300.h,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: -2,
-                                    blurRadius: 15,
-                                    // offset: Offset(1,5)
-                                  )
-                                ]),
-                            child: _getCustomizedDatePicker([]),
-                          ),
+                          _bookAppointmentLogic.calenderLoader!
+                              ? SkeletonLoader(
+                                  period: const Duration(seconds: 2),
+                                  highlightColor: Colors.grey,
+                                  direction: SkeletonDirection.ltr,
+                                  builder: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 300.h,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ))
+                              : _bookAppointmentLogic
+                                          .getScheduleAvailableDays.data ==
+                                      null
+                                  ? const SizedBox()
+                                  : Container(
+                                      height: 300.h,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8.r),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.2),
+                                              spreadRadius: -2,
+                                              blurRadius: 15,
+                                              // offset: Offset(1,5)
+                                            )
+                                          ]),
+                                      child: _getCustomizedDatePicker(
+                                          _bookAppointmentLogic
+                                              .availableScheduleDaysList!),
+                                    ),
 
                           SizedBox(
                             height: 30.h,
                           ),
 
                           ///---shift-heading
-                          Text(
-                            'Select Shift',
-                            style: state.headingTextStyle,
-                          ),
-                          SizedBox(
-                            height: 16.h,
-                          ),
 
-                          ///---shift
-                          Row(
-                            children: List.generate(
-                                _bookAppointmentLogic.shiftList.length,
-                                (index) {
-                              return Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 11.w, 0.h),
-                                  child: InkWell(
-                                    onTap: () {
-                                      _bookAppointmentLogic.shiftList
-                                          .forEach((element) {
-                                        element.isSelected = false;
-                                      });
-                                      _bookAppointmentLogic
-                                          .shiftList[index].isSelected = true;
-                                      _bookAppointmentLogic.update();
-                                    },
-                                    child: Container(
-                                      height: 78.h,
-                                      decoration: BoxDecoration(
-                                          color: _bookAppointmentLogic
-                                                  .shiftList[index].isSelected!
-                                              ? customLightThemeColor
-                                              : Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: _bookAppointmentLogic
-                                                      .shiftList[index]
-                                                      .isSelected!
-                                                  ? customLightThemeColor
-                                                      .withOpacity(0.5)
-                                                  : Colors.grey
-                                                      .withOpacity(0.2),
-                                              spreadRadius: -2,
-                                              blurRadius: 15,
-                                              // offset: Offset(1,5)
-                                            )
-                                          ]),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 14.w, vertical: 13.h),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            _bookAppointmentLogic
-                                                    .shiftList[index]
-                                                    .isSelected!
-                                                ? SvgPicture.asset(
-                                                    '${_bookAppointmentLogic.shiftList[index].image}',
-                                                    color: Colors.white,
-                                                    height: 20.h,
-                                                    width: 20.w,
-                                                  )
-                                                : SvgPicture.asset(
-                                                    '${_bookAppointmentLogic.shiftList[index].image}',
-                                                    height: 20.h,
-                                                    width: 20.w,
+                          _bookAppointmentLogic.morningSlots.isEmpty &&
+                                  _bookAppointmentLogic
+                                      .afterNoonSlots.isEmpty &&
+                                  _bookAppointmentLogic.eveningSlots.isEmpty &&
+                                  !_bookAppointmentLogic
+                                      .getScheduleSlotsForMenteeLoader!
+                              ? const SizedBox()
+                              : _bookAppointmentLogic
+                                      .getScheduleSlotsForMenteeLoader!
+                                  ? SkeletonLoader(
+                                      period: const Duration(seconds: 2),
+                                      highlightColor: Colors.grey,
+                                      direction: SkeletonDirection.ltr,
+                                      builder: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            height: 15.h,
+                                            width: 80.w,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15.h,
+                                          ),
+                                          Row(
+                                            children: List.generate(3, (index) {
+                                              return Expanded(
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0, 0, 11.w, 0.h),
+                                                  child: Container(
+                                                    height: 78.h,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.r),
+                                                    ),
                                                   ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            Text(
-                                              '${_bookAppointmentLogic.shiftList[index].title}',
-                                              softWrap: true,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: _bookAppointmentLogic
-                                                      .shiftList[index]
-                                                      .isSelected!
-                                                  ? state.typeTextStyle!
-                                                      .copyWith(
-                                                          color: Colors.white)
-                                                  : state.typeTextStyle,
-                                            ),
-                                          ],
+                                                ),
+                                              );
+                                            }),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Wrap(
+                                            children: List.generate(6, (index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(0, 0, 10, 6),
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 60,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100)),
+                                                ),
+                                              );
+                                            }),
+                                          ),
+                                        ],
+                                      ))
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Select Shift',
+                                          style: state.headingTextStyle,
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }),
-                          ),
+                                        SizedBox(
+                                          height: 16.h,
+                                        ),
 
-                          SizedBox(
-                            height: 25.h,
-                          ),
-                          Wrap(
-                            children: List.generate(15, (secondIndex) {
-                              return Padding(
-                                padding: EdgeInsets.fromLTRB(0, 0, 12.w, 6),
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedSlotIndex = secondIndex;
-                                    });
-                                    setState(() {
-                                      disableButton = false;
-                                    });
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: selectedSlotIndex == secondIndex
-                                            ? customLightThemeColor
-                                            : Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                    child: Padding(
-                                      padding: EdgeInsets.fromLTRB(
-                                          11.w, 4.h, 11.w, 4.h),
-                                      child: Text(
-                                        '7:00 pm',
-                                        textDirection: TextDirection.ltr,
-                                        style: selectedSlotIndex == secondIndex
-                                            ? state.shiftTitleTextStyle!
-                                                .copyWith(color: Colors.white)
-                                            : state.shiftTitleTextStyle,
-                                      ),
+                                        ///---shift
+                                        Row(
+                                          children: List.generate(
+                                              _bookAppointmentLogic
+                                                  .shiftList.length, (index) {
+                                            return Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 11.w, 0.h),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    for (var element
+                                                        in _bookAppointmentLogic
+                                                            .shiftList) {
+                                                      element.isSelected =
+                                                          false;
+                                                    }
+                                                    _bookAppointmentLogic
+                                                        .shiftList[index]
+                                                        .isSelected = true;
+                                                    _bookAppointmentLogic
+                                                        .updateAppointmentShiftType(
+                                                            index);
+                                                    _bookAppointmentLogic
+                                                        .update();
+                                                  },
+                                                  child: Container(
+                                                    height: 78.h,
+                                                    decoration: BoxDecoration(
+                                                        color: _bookAppointmentLogic
+                                                                .appointmentShiftType == index
+                                                            ? customLightThemeColor
+                                                            : Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.r),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: _bookAppointmentLogic
+                                                                    .appointmentShiftType == index
+                                                                ? customLightThemeColor
+                                                                    .withOpacity(
+                                                                        0.5)
+                                                                : Colors.grey
+                                                                    .withOpacity(
+                                                                        0.2),
+                                                            spreadRadius: -2,
+                                                            blurRadius: 15,
+                                                            // offset: Offset(1,5)
+                                                          )
+                                                        ]),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 14.w,
+                                                              vertical: 13.h),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          _bookAppointmentLogic
+                                                                  .appointmentShiftType == index
+                                                              ? SvgPicture
+                                                                  .asset(
+                                                                  '${_bookAppointmentLogic.shiftList[index].image}',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  height: 20.h,
+                                                                  width: 20.w,
+                                                                )
+                                                              : SvgPicture
+                                                                  .asset(
+                                                                  '${_bookAppointmentLogic.shiftList[index].image}',
+                                                                  height: 20.h,
+                                                                  width: 20.w,
+                                                                ),
+                                                          SizedBox(
+                                                            height: 10.h,
+                                                          ),
+                                                          Text(
+                                                            '${_bookAppointmentLogic.shiftList[index].title}',
+                                                            softWrap: true,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: _bookAppointmentLogic
+                                                                    .appointmentShiftType == index
+                                                                ? state
+                                                                    .typeTextStyle!
+                                                                    .copyWith(
+                                                                        color: Colors
+                                                                            .white)
+                                                                : state
+                                                                    .typeTextStyle,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                        ),
+
+                                        SizedBox(
+                                          height: 25.h,
+                                        ),
+
+                                        ///---morning-slots
+                                        _bookAppointmentLogic
+                                                    .appointmentShiftType ==
+                                                0
+                                            ? _bookAppointmentLogic
+                                                    .morningSlots.isEmpty
+                                                ? Text(
+                                                    'no_slots_available'.tr,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            SarabunFontFamily
+                                                                .regular,
+                                                        fontSize: 16.sp,
+                                                        color:
+                                                            customTextBlackColor),
+                                                  )
+                                                : Wrap(
+                                                    children: List.generate(
+                                                        _bookAppointmentLogic
+                                                            .morningSlots
+                                                            .length,
+                                                        (secondIndex) {
+                                                      return Padding(
+                                                        padding:
+                                                            EdgeInsets.fromLTRB(
+                                                                0, 0, 6.w, 6.h),
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              selectedSlotID =
+                                                                  _bookAppointmentLogic
+                                                                      .morningSlots[
+                                                                          secondIndex]
+                                                                      .id!;
+                                                              _bookAppointmentLogic
+                                                                      .selectedTimeForAppointment =
+                                                                  _bookAppointmentLogic
+                                                                      .morningSlots[
+                                                                          secondIndex]
+                                                                      .startTime!;
+                                                              disableButton = false;
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                                color: _bookAppointmentLogic
+                                                                            .morningSlots[
+                                                                                secondIndex]
+                                                                            .id ==
+                                                                        selectedSlotID
+                                                                    ? customThemeColor
+                                                                    : Colors
+                                                                        .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100)),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .fromLTRB(
+                                                                          11.w,
+                                                                          4.h,
+                                                                          11.w,
+                                                                          4.h),
+                                                              child: Text(
+                                                                '${_bookAppointmentLogic.morningSlots[secondIndex].startTime}',
+                                                                textDirection:
+                                                                    TextDirection
+                                                                        .ltr,
+                                                                style: _bookAppointmentLogic
+                                                                            .morningSlots[
+                                                                                secondIndex]
+                                                                            .id ==
+                                                                        selectedSlotID
+                                                                    ? state
+                                                                        .shiftTitleTextStyle!
+                                                                        .copyWith(
+                                                                            color: Colors
+                                                                                .white)
+                                                                    : state
+                                                                        .shiftTitleTextStyle,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }),
+                                                  )
+                                            : const SizedBox(),
+
+                                        ///---afternoon-slots
+                                        _bookAppointmentLogic
+                                                    .appointmentShiftType ==
+                                                1
+                                            ? _bookAppointmentLogic
+                                                    .afterNoonSlots.isEmpty
+                                                ? Text(
+                                                    'no_slots_available'.tr,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            SarabunFontFamily
+                                                                .regular,
+                                                        fontSize: 16.sp,
+                                                        color:
+                                                            customTextBlackColor),
+                                                  )
+                                                : Wrap(
+                                                    children: List.generate(
+                                                        _bookAppointmentLogic
+                                                            .afterNoonSlots
+                                                            .length,
+                                                        (secondIndex) {
+                                                      return Padding(
+                                                        padding:
+                                                            EdgeInsets.fromLTRB(
+                                                                0, 0, 6.w, 6.h),
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              selectedSlotID =
+                                                                  _bookAppointmentLogic
+                                                                      .afterNoonSlots[
+                                                                          secondIndex]
+                                                                      .id!;
+                                                              _bookAppointmentLogic
+                                                                      .selectedTimeForAppointment =
+                                                                  _bookAppointmentLogic
+                                                                      .afterNoonSlots[
+                                                                          secondIndex]
+                                                                      .startTime!;
+                                                              disableButton = false;
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                                color: _bookAppointmentLogic
+                                                                            .afterNoonSlots[
+                                                                                secondIndex]
+                                                                            .id ==
+                                                                        selectedSlotID
+                                                                    ? customThemeColor
+                                                                    : Colors
+                                                                        .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100)),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .fromLTRB(
+                                                                          11.w,
+                                                                          4.h,
+                                                                          11.w,
+                                                                          4.h),
+                                                              child: Text(
+                                                                '${_bookAppointmentLogic.afterNoonSlots[secondIndex].startTime}',
+                                                                textDirection:
+                                                                    TextDirection
+                                                                        .ltr,
+                                                                style: _bookAppointmentLogic
+                                                                            .afterNoonSlots[
+                                                                                secondIndex]
+                                                                            .id ==
+                                                                        selectedSlotID
+                                                                    ? state
+                                                                        .shiftTitleTextStyle!
+                                                                        .copyWith(
+                                                                            color: Colors
+                                                                                .white)
+                                                                    : state
+                                                                        .shiftTitleTextStyle,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }),
+                                                  )
+                                            : const SizedBox(),
+
+                                        ///---evening-slots
+                                        _bookAppointmentLogic
+                                                    .appointmentShiftType ==
+                                                2
+                                            ? _bookAppointmentLogic
+                                                    .eveningSlots.isEmpty
+                                                ? Text(
+                                                    'no_slots_available'.tr,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            SarabunFontFamily
+                                                                .regular,
+                                                        fontSize: 16.sp,
+                                                        color:
+                                                            customTextBlackColor),
+                                                  )
+                                                : Wrap(
+                                                    children: List.generate(
+                                                        _bookAppointmentLogic
+                                                            .eveningSlots
+                                                            .length,
+                                                        (secondIndex) {
+                                                      return Padding(
+                                                        padding:
+                                                            EdgeInsets.fromLTRB(
+                                                                0, 0, 6.w, 6.h),
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              selectedSlotID =
+                                                                  _bookAppointmentLogic
+                                                                      .eveningSlots[
+                                                                          secondIndex]
+                                                                      .id!;
+                                                              _bookAppointmentLogic
+                                                                      .selectedTimeForAppointment =
+                                                                  _bookAppointmentLogic
+                                                                      .eveningSlots[
+                                                                          secondIndex]
+                                                                      .startTime!;
+                                                              disableButton = false;
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                                color: _bookAppointmentLogic
+                                                                            .eveningSlots[
+                                                                                secondIndex]
+                                                                            .id ==
+                                                                        selectedSlotID
+                                                                    ? customThemeColor
+                                                                    : Colors
+                                                                        .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100)),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .fromLTRB(
+                                                                          11.w,
+                                                                          4.h,
+                                                                          11.w,
+                                                                          4.h),
+                                                              child: Text(
+                                                                '${_bookAppointmentLogic.eveningSlots[secondIndex].startTime}',
+                                                                textDirection:
+                                                                    TextDirection
+                                                                        .ltr,
+                                                                style: _bookAppointmentLogic
+                                                                            .eveningSlots[
+                                                                                secondIndex]
+                                                                            .id ==
+                                                                        selectedSlotID
+                                                                    ? state
+                                                                        .shiftTitleTextStyle!
+                                                                        .copyWith(
+                                                                            color: Colors
+                                                                                .white)
+                                                                    : state
+                                                                        .shiftTitleTextStyle,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }),
+                                                  )
+                                            : const SizedBox(),
+                                        // Wrap(
+                                        //   children: List.generate(15, (secondIndex) {
+                                        //     return Padding(
+                                        //       padding: EdgeInsets.fromLTRB(0, 0, 12.w, 6),
+                                        //       child: InkWell(
+                                        //         onTap: () {
+                                        //           setState(() {
+                                        //             selectedSlotIndex = secondIndex;
+                                        //           });
+                                        //           setState(() {
+                                        //             disableButton = false;
+                                        //           });
+                                        //         },
+                                        //         child: Container(
+                                        //           decoration: BoxDecoration(
+                                        //               color: selectedSlotIndex == secondIndex
+                                        //                   ? customLightThemeColor
+                                        //                   : Colors.white,
+                                        //               borderRadius:
+                                        //               BorderRadius.circular(100)),
+                                        //           child: Padding(
+                                        //             padding: EdgeInsets.fromLTRB(
+                                        //                 11.w, 4.h, 11.w, 4.h),
+                                        //             child: Text(
+                                        //               '07:50 pm',
+                                        //               textDirection: TextDirection.ltr,
+                                        //               style: selectedSlotIndex == secondIndex
+                                        //                   ? state.shiftTitleTextStyle!
+                                        //                   .copyWith(color: Colors.white)
+                                        //                   : state.shiftTitleTextStyle,
+                                        //             ),
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     );
+                                        //   }),
+                                        // ),
+                                      ],
                                     ),
-                                  ),
-                                ),
-                              );
-                            }),
-                          ),
 
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .15,
@@ -413,31 +841,25 @@ class _SlotSelectionState extends State<SlotSelection> {
         setState(() {
           selectedSlotID = null;
         });
-        // Get.find<BookAppointmentLogic>()
-        //     .updateGetScheduleSlotsForMenteeLoader(true);
-        // Get.find<BookAppointmentLogic>().emptyMorningSlots();
-        // Get.find<BookAppointmentLogic>().emptyAfterNoonSlots();
-        // Get.find<BookAppointmentLogic>().emptyEveningSlots();
-        // getMethod(
-        //     context,
-        //     getScheduleSlotsForMenteeUrl,
-        //     {
-        //       'token': '123',
-        //       'mentor_id': Get.find<GeneralController>().selectedMentor.userId,
-        //       'date': Get.find<BookAppointmentLogic>()
-        //           .selectedDateForAppointment
-        //           .substring(0, 11),
-        //       'appointment_type_id':
-        //       Get.find<SingleCategoryMentorListPageLogic>()
-        //           .selectMentorAppointmentType!
-        //           .appointmentTypeId
-        //       // 'token': '123',
-        //       // 'mentor_id': Get.find<GeneralController>().selectedMentor.userId,
-        //       // 'date': '2021-12-07',
-        //       // 'appointment_type_id': 1
-        //     },
-        //     true,
-        //     getScheduleSlotsRepo);
+        Get.find<BookAppointmentLogic>()
+            .updateGetScheduleSlotsForMenteeLoader(true);
+        Get.find<BookAppointmentLogic>().emptyMorningSlots();
+        Get.find<BookAppointmentLogic>().emptyAfterNoonSlots();
+        Get.find<BookAppointmentLogic>().emptyEveningSlots();
+        getMethod(
+            context,
+            getScheduleSlotsForMenteeUrl,
+            {
+              'token': '123',
+              'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
+              'date': Get.find<BookAppointmentLogic>()
+                  .selectedDateForAppointment
+                  .substring(0, 11),
+              'appointment_type_id':
+                  Get.find<BookAppointmentLogic>().selectedAppointmentTypeID
+            },
+            true,
+            getScheduleSlotsRepo);
         Get.find<BookAppointmentLogic>().update();
         // log('MentorID--->>${Get.find<GeneralController>().selectedMentor.userId}');
         log('SelectedDate--->>${Get.find<BookAppointmentLogic>().selectedDateForAppointment.substring(0, 11)}');
@@ -448,7 +870,7 @@ class _SlotSelectionState extends State<SlotSelection> {
   SfDateRangePicker _getCustomizedDatePicker(List<DateTime> specialDates) {
     return SfDateRangePicker(
       selectionShape: DateRangePickerSelectionShape.rectangle,
-      selectionColor: customLightThemeColor,
+      selectionColor: customThemeColor,
       selectionTextStyle: TextStyle(
           fontFamily: SarabunFontFamily.regular,
           fontSize: 14.sp,
@@ -468,7 +890,7 @@ class _SlotSelectionState extends State<SlotSelection> {
       monthCellStyle: DateRangePickerMonthCellStyle(
         specialDatesDecoration: const MonthCellDecoration(
             borderColor: null,
-            backgroundColor: Colors.blueGrey,
+            backgroundColor: customLightThemeColor,
             showIndicator: true,
             indicatorColor: customThemeColor),
         // textStyle: TextStyle(color: const Color(0xffe2d7fe), fontSize: 14),

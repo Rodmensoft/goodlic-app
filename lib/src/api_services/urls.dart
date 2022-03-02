@@ -9,7 +9,7 @@ final String apiBaseUrl = GlobalConfiguration().get('api_base_url');
 final String mediaUrl = GlobalConfiguration().get('media_url');
 
 ///---fcm
-String fcmService = 'https://fcm.googleapis.com/fcm/send';
+const String fcmService = 'https://fcm.googleapis.com/fcm/send';
 
 ///---auth
 String signUpWithEmailURL = apiBaseUrl + 'signup-email';
@@ -32,3 +32,10 @@ String getTopRatedConsultantURL = apiBaseUrl + 'topRatedMentors';
 
 ///---categories-with-mentor
 String getCategoriesWithMentorURL = apiBaseUrl + 'categories/with/mentors';
+
+///---book-appointment
+String getScheduleAvailableDaysURL = apiBaseUrl + 'get-scheduled-available-days';
+String getScheduleSlotsForMenteeUrl = apiBaseUrl + 'get-date-schedule';
+String bookAppointmentUrl = apiBaseUrl + 'bookAppointment';
+
+
