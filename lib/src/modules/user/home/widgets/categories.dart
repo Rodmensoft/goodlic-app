@@ -81,6 +81,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                             ),
                             InkWell(
                               onTap: () {
+                                _userHomeLogic.selectedCategoryId = null;
+                                _userHomeLogic.update();
                                 Get.toNamed(PageRoutes.allConsultants);
                               },
                               child: Text(
@@ -103,55 +105,62 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                               (index) {
                             return Padding(
                               padding: EdgeInsets.fromLTRB(0, 0, 11.w, 12.h),
-                              child: Container(
-                                height: 123.h,
-                                width: 106.w,
-                                decoration: BoxDecoration(
-                                    color: customTextFieldColor,
-                                    borderRadius: BorderRadius.circular(8)),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: 14.h,
-                                    ),
-                                    Container(
-                                      height: 40.h,
-                                      width: 40.w,
-                                      decoration: BoxDecoration(
-                                          color: _userHomeLogic
-                                              .categoriesColor[index],
-                                          shape: BoxShape.circle),
-                                      child: Center(
-                                          child: Image.network(
-                                        _userHomeLogic
-                                            .categoriesList[index].image!,
-                                        height: 20.h,
-                                        width: 23.w,
-                                        color: Colors.white,
-                                      )),
-                                    ),
-                                    SizedBox(
-                                      height: 24.h,
-                                    ),
-                                    Text(
-                                      '${_userHomeLogic.categoriesList[index].title}',
-                                      style: TextStyle(
-                                          fontFamily:
-                                              SarabunFontFamily.semiBold,
-                                          fontSize: 14,
-                                          color: _userHomeLogic
-                                              .categoriesColor[index]),
-                                    ),
-                                    Text(
-                                      '(${_userHomeLogic.categoriesList[index].subTitle} Consultants)',
-                                      style: const TextStyle(
-                                          fontFamily: SarabunFontFamily.light,
-                                          fontSize: 10,
-                                          color: customTextGreyColor),
-                                    ),
-                                  ],
+                              child: InkWell(
+                                onTap: (){
+                                  _userHomeLogic.selectedCategoryId = _userHomeLogic.categoriesList[index].id;
+                                  _userHomeLogic.update();
+                                  Get.toNamed(PageRoutes.allConsultants);
+                                },
+                                child: Container(
+                                  height: 123.h,
+                                  width: 106.w,
+                                  decoration: BoxDecoration(
+                                      color: customTextFieldColor,
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 14.h,
+                                      ),
+                                      Container(
+                                        height: 40.h,
+                                        width: 40.w,
+                                        decoration: BoxDecoration(
+                                            color: _userHomeLogic
+                                                .categoriesColor[index],
+                                            shape: BoxShape.circle),
+                                        child: Center(
+                                            child: Image.network(
+                                          _userHomeLogic
+                                              .categoriesList[index].image!,
+                                          height: 20.h,
+                                          width: 23.w,
+                                          color: Colors.white,
+                                        )),
+                                      ),
+                                      SizedBox(
+                                        height: 24.h,
+                                      ),
+                                      Text(
+                                        '${_userHomeLogic.categoriesList[index].title}',
+                                        style: TextStyle(
+                                            fontFamily:
+                                                SarabunFontFamily.semiBold,
+                                            fontSize: 14,
+                                            color: _userHomeLogic
+                                                .categoriesColor[index]),
+                                      ),
+                                      Text(
+                                        '(${_userHomeLogic.categoriesList[index].subTitle} Consultants)',
+                                        style: const TextStyle(
+                                            fontFamily: SarabunFontFamily.light,
+                                            fontSize: 10,
+                                            color: customTextGreyColor),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );

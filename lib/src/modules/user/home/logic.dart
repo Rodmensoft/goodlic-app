@@ -54,6 +54,7 @@ class UserHomeLogic extends GetxController {
   }
 
 
+  int? selectedCategoryId;
   List<HomeStyling> categoriesList = [];
   List categoriesColor = [
     customLightThemeColor,

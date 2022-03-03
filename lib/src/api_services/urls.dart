@@ -38,4 +38,7 @@ String getScheduleAvailableDaysURL = apiBaseUrl + 'get-scheduled-available-days'
 String getScheduleSlotsForMenteeUrl = apiBaseUrl + 'get-date-schedule';
 String bookAppointmentUrl = apiBaseUrl + 'bookAppointment';
 
+///---appointment-log-user
+String getUserAllAppointmentsURL = apiBaseUrl + 'all-status-menteeAppointments';
+
 

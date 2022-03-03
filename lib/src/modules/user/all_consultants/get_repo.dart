@@ -4,6 +4,7 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/all_consultants/logic.dart';
 import 'package:consultant_product/src/modules/user/all_consultants/model_all_consultant.dart';
 import 'package:consultant_product/src/modules/user/all_consultants/model_all_consultant_more.dart';
+import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,10 +39,26 @@ getCategoriesWithConsultantRepo(
             .allCategoriesList
             .add(Tab(text: element.name!));
       }
+
       Get.find<AllConsultantsLogic>().update();
       Get.find<AllConsultantsLogic>().tabController = TabController(
           length: Get.find<AllConsultantsLogic>().allCategoriesList.length,
           vsync: Get.find<AllConsultantsLogic>().reference!);
+      if (Get.find<UserHomeLogic>().selectedCategoryId != null) {
+        for (var element in Get.find<AllConsultantsLogic>()
+            .allCategoriesWithConsultantModel
+            .data!
+            .categories!) {
+          if (Get.find<UserHomeLogic>().selectedCategoryId == element.id) {
+            Get.find<AllConsultantsLogic>().tabController.index =
+                Get.find<AllConsultantsLogic>()
+                    .allCategoriesWithConsultantModel
+                    .data!
+                    .categories!
+                    .indexOf(element);
+          }
+        }
+      }
 
       ///---get-categories --------------------- close
 

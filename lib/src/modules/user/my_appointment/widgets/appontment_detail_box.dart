@@ -234,42 +234,69 @@ class AppointmentDetailBox extends StatelessWidget {
                             ),
 
                             ///---date-time
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                            dateTimeRow()
+                          ],
+                        ),
+                      )
+                    : const SizedBox(),
+                ///---accepted-status-date-time
+                status == 1
+                    ? Container(
+                        height: 45.h,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: color!,
+                            borderRadius: BorderRadius.circular(5.r)),
+                        child: Row(
+                          children: [
+                            ///---status
+                            Container(
+                              height: 45.h,
+                              width: 87.w,
+                              decoration: BoxDecoration(
+                                color: color!,
+                                borderRadius: BorderRadius.circular(5.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: const Color(0xff707070)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 15,
+                                      offset: const Offset(0, 5))
+                                ],
+                              ),
+                              child: Padding(
+                                padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    ///---date
-                                    Text(
-                                      date!,
-                                      style: _myAppointmentLogic
-                                          .state.dateTimeTextStyle,
+                                    SvgPicture.asset('assets/Icons/completeAppointmentIcon.svg',
+                                      height: 12.h,
+                                      width: 12.w,
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
                                     ),
                                     Text(
-                                      '  -  ',
-                                      style: _myAppointmentLogic
-                                          .state.dateTimeTextStyle,
-                                    ),
-
-                                    ///---time
-                                    Text(
-                                      time!,
-                                      style: _myAppointmentLogic
-                                          .state.dateTimeTextStyle,
-                                    ),
+                                      'ACCEPTED',
+                                      style: _myAppointmentLogic.state.statusTextStyle,
+                                    )
                                   ],
                                 ),
-                              ),
-                            )
+                              )
+                            ),
+
+                            ///---date-time
+
+                            dateTimeRow()
                           ],
                         ),
                       )
                     : const SizedBox(),
 
                 ///---completed-status-date-time
-                status == 1
+                status == 2
                     ? Container(
                         height: 45.h,
                         width: MediaQuery.of(context).size.width,
@@ -317,42 +344,14 @@ class AppointmentDetailBox extends StatelessWidget {
                             ),
 
                             ///---date-time
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ///---date
-                                    Text(
-                                      date!,
-                                      style: _myAppointmentLogic
-                                          .state.dateTimeTextStyle,
-                                    ),
-                                    Text(
-                                      '  -  ',
-                                      style: _myAppointmentLogic
-                                          .state.dateTimeTextStyle,
-                                    ),
-
-                                    ///---time
-                                    Text(
-                                      time!,
-                                      style: _myAppointmentLogic
-                                          .state.dateTimeTextStyle,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
+                            dateTimeRow()
                           ],
                         ),
                       )
                     : const SizedBox(),
 
                 ///---cancelled-status-date-time
-                status == 2
+                status == 3
                     ? Container(
                         height: 45.h,
                         width: MediaQuery.of(context).size.width,
@@ -400,35 +399,7 @@ class AppointmentDetailBox extends StatelessWidget {
                             ),
 
                             ///---date-time
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ///---date
-                                    Text(
-                                      date!,
-                                      style: _myAppointmentLogic
-                                          .state.dateTimeTextStyle,
-                                    ),
-                                    Text(
-                                      '  -  ',
-                                      style: _myAppointmentLogic
-                                          .state.dateTimeTextStyle,
-                                    ),
-
-                                    ///---time
-                                    Text(
-                                      time!,
-                                      style: _myAppointmentLogic
-                                          .state.dateTimeTextStyle,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
+                            dateTimeRow()
                           ],
                         ),
                       )
@@ -439,5 +410,38 @@ class AppointmentDetailBox extends StatelessWidget {
         ),
       );
     });
+  }
+  Widget dateTimeRow(){
+    return date == null
+        ?const SizedBox()
+        :Expanded(
+      child: Align(
+        alignment: Alignment.center,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ///---date
+            Text(
+              date!,
+              style: Get.find<MyAppointmentLogic>()
+                  .state.dateTimeTextStyle,
+            ),
+            Text(
+              '  -  ',
+              style: Get.find<MyAppointmentLogic>()
+                  .state.dateTimeTextStyle,
+            ),
+
+            ///---time
+            Text(
+              time!,
+              style: Get.find<MyAppointmentLogic>()
+                  .state.dateTimeTextStyle,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

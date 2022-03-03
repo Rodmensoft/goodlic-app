@@ -1,3 +1,4 @@
+import 'package:consultant_product/src/modules/user/my_appointment/model_get_user_appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -7,7 +8,15 @@ import 'state.dart';
 class MyAppointmentLogic extends GetxController {
   final MyAppointmentState state = MyAppointmentState();
 
+
   late TabController tabController;
+
+  GetUserAppointmentModel getUserAppointmentModel = GetUserAppointmentModel();
+  bool? getUserAppointmentLoader = true;
+  updateGetUserAppointmentLoader(bool? newValue){
+    getUserAppointmentLoader = newValue;
+    update();
+  }
 
   ///----app-bar-settings-----start
   ScrollController? scrollController;
@@ -28,6 +37,7 @@ class MyAppointmentLogic extends GetxController {
 
   List<Tab> tabBarList = const [
     Tab( text: "Pending",),
+    Tab( text: "Accepted",),
     Tab( text: "Completed"),
     Tab( text: "Cancelled"),
   ];

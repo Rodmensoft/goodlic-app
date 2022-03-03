@@ -101,42 +101,65 @@ class _SlotSelectionState extends State<SlotSelection> {
                                     0, 0, 18.w, 11.h),
                                 child: InkWell(
                                   onTap: () {
-                                    setState(() {
-                                      disableButton = true;
-                                    });
-                                    _bookAppointmentLogic.morningSlots.clear();
-                                    _bookAppointmentLogic.afterNoonSlots.clear();
-                                    _bookAppointmentLogic.eveningSlots.clear();
-                                    _bookAppointmentLogic
-                                            .selectedAppointmentTypeID =
-                                        _bookAppointmentLogic
-                                            .consultantProfileLogic
-                                            .appointmentTypes[index]
-                                            .appointmentTypeId;
-                                    _bookAppointmentLogic.selectedAppointmentTypeIndex = index;
-                                    _bookAppointmentLogic.updateSelectMentorAppointmentType(
-                                        _bookAppointmentLogic
-                                            .consultantProfileLogic
-                                            .appointmentTypes[index]
-                                    );
-                                    _bookAppointmentLogic.update();
-                                    _bookAppointmentLogic
-                                        .updateCalenderLoader(true);
-                                    getMethod(
-                                        context,
-                                        getScheduleAvailableDaysURL,
-                                        {
-                                          'token': '123',
-                                          'mentor_id': Get.find<UserHomeLogic>()
-                                              .selectedConsultantID,
-                                          'appointment_type_id':
-                                              _bookAppointmentLogic
-                                                  .consultantProfileLogic
-                                                  .appointmentTypes[index]
-                                                  .appointmentTypeId,
-                                        },
-                                        true,
-                                        getScheduleAvailableDaysRepo);
+                                    if(_bookAppointmentLogic.consultantProfileLogic
+                                        .appointmentTypes[index].appointmentType!.isScheduleRequired == 1){
+                                      setState(() {
+                                        disableButton = true;
+                                      });
+                                      _bookAppointmentLogic.morningSlots.clear();
+                                      _bookAppointmentLogic.afterNoonSlots.clear();
+                                      _bookAppointmentLogic.eveningSlots.clear();
+                                      _bookAppointmentLogic
+                                          .selectedAppointmentTypeID =
+                                          _bookAppointmentLogic
+                                              .consultantProfileLogic
+                                              .appointmentTypes[index]
+                                              .appointmentTypeId;
+                                      _bookAppointmentLogic.selectedAppointmentTypeIndex = index;
+                                      _bookAppointmentLogic.updateSelectMentorAppointmentType(
+                                          _bookAppointmentLogic
+                                              .consultantProfileLogic
+                                              .appointmentTypes[index]
+                                      );
+                                      _bookAppointmentLogic.update();
+                                      _bookAppointmentLogic
+                                          .updateCalenderLoader(true);
+                                      getMethod(
+                                          context,
+                                          getScheduleAvailableDaysURL,
+                                          {
+                                            'token': '123',
+                                            'mentor_id': Get.find<UserHomeLogic>()
+                                                .selectedConsultantID,
+                                            'appointment_type_id':
+                                            _bookAppointmentLogic
+                                                .consultantProfileLogic
+                                                .appointmentTypes[index]
+                                                .appointmentTypeId,
+                                          },
+                                          true,
+                                          getScheduleAvailableDaysRepo);
+                                    }else{
+                                      setState(() {
+                                        disableButton = false;
+                                      });
+                                      _bookAppointmentLogic.morningSlots.clear();
+                                      _bookAppointmentLogic.afterNoonSlots.clear();
+                                      _bookAppointmentLogic.eveningSlots.clear();
+                                      _bookAppointmentLogic
+                                          .selectedAppointmentTypeID =
+                                          _bookAppointmentLogic
+                                              .consultantProfileLogic
+                                              .appointmentTypes[index]
+                                              .appointmentTypeId;
+                                      _bookAppointmentLogic.selectedAppointmentTypeIndex = index;
+                                      _bookAppointmentLogic.updateSelectMentorAppointmentType(
+                                          _bookAppointmentLogic
+                                              .consultantProfileLogic
+                                              .appointmentTypes[index]
+                                      );
+                                      _bookAppointmentLogic.update();
+                                    }
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
