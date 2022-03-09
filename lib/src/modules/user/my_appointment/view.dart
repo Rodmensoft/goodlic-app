@@ -70,182 +70,198 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
             backgroundColor: const Color(0xffFBFBFB),
             body: _myAppointmentLogic.getUserAppointmentLoader!
                 ? const PageLoaderForAppointments()
-                :NestedScrollView(
-                controller: _myAppointmentLogic.scrollController,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  return <Widget>[
-                    ///---header
-                    MyCustomSliverAppBar(
-                      heading: 'My Appointments',
-                      subHeading: 'Manage and See Your Appointments Log',
-                      isShrink: _myAppointmentLogic.isShrink,
-                    ),
-                    SliverPersistentHeader(
-                      delegate: SliverAppBarDelegate(TabBar(
-                        indicator: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(6), // Creates border
-                            color: customLightThemeColor),
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.w, 5.h, 10.w, 5.h),
-                        labelPadding: EdgeInsets.symmetric(horizontal: 25.w),
-                        automaticIndicatorColorAdjustment: true,
-                        isScrollable: true,
-                        controller: _myAppointmentLogic.tabController,
-                        labelColor: Colors.white,
-                        labelStyle: state.tabBarSelectedTextStyle,
-                        unselectedLabelStyle: state.tabBarUnSelectedTextStyle,
-                        unselectedLabelColor: customLightThemeColor,
-                        tabs: _myAppointmentLogic.tabBarList,
-                      )),
-                      pinned: true,
-                    ),
-                  ];
-                },
-                body: TabBarView(
-                  physics: const BouncingScrollPhysics(),
-                  controller: _myAppointmentLogic.tabController,
-                  children: [
-                    ///---pending
-                    _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data!.isEmpty
-                        ?const SizedBox()
-                        :ListView(
-                      padding: const EdgeInsetsDirectional.all(0),
-                      children: List.generate(_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data!.length, (index) {
-                        return Column(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Get.toNamed(PageRoutes.appointmentDetail);
-                              },
-                              child:  AppointmentDetailBox(
-                                image:
-                                    'assets/images/dummyTopRatedConsultant.png',
-                                name: 'William Smith',
-                                category: 'Financial Advisor',
-                                fee: '\$${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!
-                                    .data![index].payment!} Fees',
-                                type: 'Video Call',
-                                typeIcon: 'assets/Icons/videoCallIcon.svg',
-                                status: 0,
-                                date: '17/02/22',
-                                time: '9:10 AM',
-                                color: customOrangeColor,
-                                rating: 4.0,
+                : NestedScrollView(
+                    controller: _myAppointmentLogic.scrollController,
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxIsScrolled) {
+                      return <Widget>[
+                        ///---header
+                        MyCustomSliverAppBar(
+                          heading: 'My Appointments',
+                          subHeading: 'Manage and See Your Appointments Log',
+                          isShrink: _myAppointmentLogic.isShrink,
+                        ),
+                        SliverPersistentHeader(
+                          delegate: SliverAppBarDelegate(TabBar(
+                            indicator: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(6), // Creates border
+                                color: customLightThemeColor),
+                            indicatorSize: TabBarIndicatorSize.tab,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.w, 5.h, 10.w, 5.h),
+                            labelPadding:
+                                EdgeInsets.symmetric(horizontal: 25.w),
+                            automaticIndicatorColorAdjustment: true,
+                            isScrollable: true,
+                            controller: _myAppointmentLogic.tabController,
+                            labelColor: Colors.white,
+                            labelStyle: state.tabBarSelectedTextStyle,
+                            unselectedLabelStyle:
+                                state.tabBarUnSelectedTextStyle,
+                            unselectedLabelColor: customLightThemeColor,
+                            tabs: _myAppointmentLogic.tabBarList,
+                          )),
+                          pinned: true,
+                        ),
+                      ];
+                    },
+                    body: TabBarView(
+                      physics: const BouncingScrollPhysics(),
+                      controller: _myAppointmentLogic.tabController,
+                      children: [
+                        ///---pending
+                        _myAppointmentLogic.getUserAppointmentModel.data!
+                                .pendingAppointments!.data!.isEmpty
+                            ? const SizedBox()
+                            : ListView(
+                                padding: const EdgeInsetsDirectional.all(0),
+                                children: List.generate(
+                                    _myAppointmentLogic
+                                        .getUserAppointmentModel
+                                        .data!
+                                        .pendingAppointments!
+                                        .data!
+                                        .length, (index) {
+                                  return Column(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Get.toNamed(
+                                              PageRoutes.appointmentDetail);
+                                        },
+                                        child: AppointmentDetailBox(
+                                          image:
+                                              'assets/images/dummyTopRatedConsultant.png',
+                                          name: 'William Smith',
+                                          category: 'Financial Advisor',
+                                          fee:
+                                              '\$${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].payment!} Fees',
+                                          type: 'Video Call',
+                                          typeIcon:
+                                              'assets/Icons/videoCallIcon.svg',
+                                          status: 0,
+                                          date: '17/02/22',
+                                          time: '9:10 AM',
+                                          color: customOrangeColor,
+                                          rating: 4.0,
+                                        ),
+                                      ),
+                                      index == 5
+                                          ? SizedBox(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  .1,
+                                            )
+                                          : const SizedBox()
+                                    ],
+                                  );
+                                }),
                               ),
-                            ),
-                            index == 5
-                                ? SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height * .1,
-                                  )
-                                : const SizedBox()
-                          ],
-                        );
-                      }),
-                    ),
 
-                    ///---accepted
-                    ListView(
-                      padding: const EdgeInsetsDirectional.all(0),
-                      children: List.generate(6, (index) {
-                        return Column(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Get.toNamed(PageRoutes.appointmentDetail);
-                              },
-                              child: const AppointmentDetailBox(
-                                image:
-                                    'assets/images/dummyTopRatedConsultant.png',
-                                name: 'William Smith',
-                                category: 'Financial Advisor',
-                                fee: '\$25 Fees',
-                                type: 'Video Call',
-                                typeIcon: 'assets/Icons/videoCallIcon.svg',
-                                status: 1,
-                                date: '17/02/22',
-                                time: '9:10 AM',
-                                color: customLightThemeColor,
-                                rating: 4.0,
-                              ),
-                            ),
-                            index == 5
-                                ? SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height * .1,
-                                  )
-                                : const SizedBox()
-                          ],
-                        );
-                      }),
-                    ),
+                        ///---accepted
+                        ListView(
+                          padding: const EdgeInsetsDirectional.all(0),
+                          children: List.generate(6, (index) {
+                            return Column(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Get.toNamed(PageRoutes.appointmentDetail);
+                                  },
+                                  child: const AppointmentDetailBox(
+                                    image:
+                                        'assets/images/dummyTopRatedConsultant.png',
+                                    name: 'William Smith',
+                                    category: 'Financial Advisor',
+                                    fee: '\$25 Fees',
+                                    type: 'Video Call',
+                                    typeIcon: 'assets/Icons/videoCallIcon.svg',
+                                    status: 1,
+                                    date: '17/02/22',
+                                    time: '9:10 AM',
+                                    color: customLightThemeColor,
+                                    rating: 4.0,
+                                  ),
+                                ),
+                                index == 5
+                                    ? SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                .1,
+                                      )
+                                    : const SizedBox()
+                              ],
+                            );
+                          }),
+                        ),
 
-                    ///---completed
-                    ListView(
-                      padding: const EdgeInsetsDirectional.all(0),
-                      children: List.generate(6, (index) {
-                        return Column(
-                          children: [
-                            const AppointmentDetailBox(
-                              image:
-                                  'assets/images/dummyTopRatedConsultant.png',
-                              name: 'William Smith',
-                              category: 'Financial Advisor',
-                              fee: '\$25 Fees',
-                              type: 'Video Call',
-                              typeIcon: 'assets/Icons/videoCallIcon.svg',
-                              date: '17/02/22',
-                              time: '9:10 AM',
-                              status: 2,
-                              color: customGreenColor,
-                              rating: 4.0,
-                            ),
-                            index == 5
-                                ? SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height * .1,
-                                  )
-                                : const SizedBox()
-                          ],
-                        );
-                      }),
-                    ),
+                        ///---completed
+                        ListView(
+                          padding: const EdgeInsetsDirectional.all(0),
+                          children: List.generate(6, (index) {
+                            return Column(
+                              children: [
+                                const AppointmentDetailBox(
+                                  image:
+                                      'assets/images/dummyTopRatedConsultant.png',
+                                  name: 'William Smith',
+                                  category: 'Financial Advisor',
+                                  fee: '\$25 Fees',
+                                  type: 'Video Call',
+                                  typeIcon: 'assets/Icons/videoCallIcon.svg',
+                                  date: '17/02/22',
+                                  time: '9:10 AM',
+                                  status: 2,
+                                  color: customGreenColor,
+                                  rating: 4.0,
+                                ),
+                                index == 5
+                                    ? SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                .1,
+                                      )
+                                    : const SizedBox()
+                              ],
+                            );
+                          }),
+                        ),
 
-                    ///---cancelled
-                    ListView(
-                      padding: const EdgeInsetsDirectional.all(0),
-                      children: List.generate(6, (index) {
-                        return Column(
-                          children: [
-                            const AppointmentDetailBox(
-                              image:
-                                  'assets/images/dummyTopRatedConsultant.png',
-                              name: 'William Smith',
-                              category: 'Financial Advisor',
-                              fee: '\$25 Fees',
-                              type: 'Video Call',
-                              typeIcon: 'assets/Icons/videoCallIcon.svg',
-                              date: '17/02/22',
-                              time: '9:10 AM',
-                              status: 3,
-                              color: customRedColor,
-                              rating: 4.0,
-                            ),
-                            index == 5
-                                ? SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height * .1,
-                                  )
-                                : const SizedBox()
-                          ],
-                        );
-                      }),
-                    ),
-                  ],
-                )),
+                        ///---cancelled
+                        ListView(
+                          padding: const EdgeInsetsDirectional.all(0),
+                          children: List.generate(6, (index) {
+                            return Column(
+                              children: [
+                                const AppointmentDetailBox(
+                                  image:
+                                      'assets/images/dummyTopRatedConsultant.png',
+                                  name: 'William Smith',
+                                  category: 'Financial Advisor',
+                                  fee: '\$25 Fees',
+                                  type: 'Video Call',
+                                  typeIcon: 'assets/Icons/videoCallIcon.svg',
+                                  date: '17/02/22',
+                                  time: '9:10 AM',
+                                  status: 3,
+                                  color: customRedColor,
+                                  rating: 4.0,
+                                ),
+                                index == 5
+                                    ? SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                .1,
+                                      )
+                                    : const SizedBox()
+                              ],
+                            );
+                          }),
+                        ),
+                      ],
+                    )),
           ),
         );
       });
