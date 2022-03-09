@@ -34,11 +34,13 @@ String getTopRatedConsultantURL = apiBaseUrl + 'topRatedMentors';
 String getCategoriesWithMentorURL = apiBaseUrl + 'categories/with/mentors';
 
 ///---book-appointment
-String getScheduleAvailableDaysURL = apiBaseUrl + 'get-scheduled-available-days';
+String getScheduleAvailableDaysURL =
+    apiBaseUrl + 'get-scheduled-available-days';
 String getScheduleSlotsForMenteeUrl = apiBaseUrl + 'get-date-schedule';
 String bookAppointmentUrl = apiBaseUrl + 'bookAppointment';
 
 ///---appointment-log-user
 String getUserAllAppointmentsURL = apiBaseUrl + 'all-status-menteeAppointments';
 
-
+///---appointment-log-user
+String getAppointmentsDetailURL = apiBaseUrl + 'appointmentDetails';
