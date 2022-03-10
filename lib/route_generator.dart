@@ -2,6 +2,10 @@ import 'package:consultant_product/src/modules/chat/view.dart';
 import 'package:consultant_product/src/modules/created_password/view.dart';
 import 'package:consultant_product/src/modules/login/view.dart';
 import 'package:consultant_product/src/modules/new_password/view.dart';
+import 'package:consultant_product/src/modules/on_board/view_1.dart';
+import 'package:consultant_product/src/modules/on_board/view_2.dart';
+import 'package:consultant_product/src/modules/on_board/view_3.dart';
+import 'package:consultant_product/src/modules/on_board/view_4.dart';
 import 'package:consultant_product/src/modules/otp/view.dart';
 import 'package:consultant_product/src/modules/reset_password/view.dart';
 import 'package:consultant_product/src/modules/sign_up/view.dart';
@@ -57,6 +61,10 @@ routes() => [
           page: () => const AppointmentDetailPage()),
       GetPage(name: "/chatScreen", page: () => const ChatPage()),
       GetPage(name: "/walletScreen", page: () => const WalletPage()),
+      GetPage(name: "/onBoard1Screen", page: () => const OnBoard1Page()),
+      GetPage(name: "/onBoard2Screen", page: () => const OnBoard2Page()),
+      GetPage(name: "/onBoard3Screen", page: () => const OnBoard3Page()),
+      GetPage(name: "/onBoard4Screen", page: () => const OnBoard4Page()),
     ];
 
 class PageRoutes {
@@ -78,6 +86,10 @@ class PageRoutes {
   static const String appointmentDetail = '/appointmentDetail';
   static const String chatScreen = '/chatScreen';
   static const String walletScreen = '/walletScreen';
+  static const String onBoard1Screen = '/onBoard1Screen';
+  static const String onBoard2Screen = '/onBoard2Screen';
+  static const String onBoard3Screen = '/onBoard3Screen';
+  static const String onBoard4Screen = '/onBoard4Screen';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -99,6 +111,10 @@ class PageRoutes {
       appointmentDetail: (context) => const AppointmentDetailPage(),
       chatScreen: (context) => const ChatPage(),
       walletScreen: (context) => const WalletPage(),
+      onBoard1Screen: (context) => const OnBoard1Page(),
+      onBoard2Screen: (context) => const OnBoard2Page(),
+      onBoard3Screen: (context) => const OnBoard3Page(),
+      onBoard4Screen: (context) => const OnBoard4Page(),
     };
   }
 }
