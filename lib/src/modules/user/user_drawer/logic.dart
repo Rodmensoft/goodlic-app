@@ -107,7 +107,7 @@ class UserDrawerLogic extends GetxController {
       case 3:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.onBoard1Screen);
         }
       case 4:
         {

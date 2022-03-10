@@ -21,22 +21,28 @@
     "poweredByLogo": "assets/images/invictusLogo.png"
   },
   "onBoardData": {
-    "length": 3,
+    "length": 4,
     "data": [
       {
-        "title": "WELCOME TO OUR APP",
-        "subTitle": "Get the hottest fashion by trend and season right on your pocket",
-        "logo": "assets/images/onBoard1.png"
+        "firstTitle": "Become",
+        "secondTitle": "A Consultant",
+        "subTitle": "In Few Easy Steps"
       },
       {
-        "title": "WELCOME TO OUR APP",
-        "subTitle": "Get the hottest fashion by trend and season right on your pocket",
-        "logo": "assets/images/onBoard2.png"
+        "firstTitle": "Become",
+        "secondTitle": "A Mentee ",
+        "subTitle": "Is Just One Step Away"
       },
       {
-        "title": "WELCOME TO OUR APP",
-        "subTitle": "Get the hottest fashion by trend and season right on your pocket",
-        "logo": "assets/images/onBoard3.png"
+        "firstTitle": "Top",
+        "secondTitle": "Consultants",
+        "subTitle": "Consult With Professional Consultants"
+
+      },
+      {
+        "firstTitle": "Ask Your",
+        "secondTitle": "Questions",
+        "subTitle": "And Quickly Pay The Fee"
       }]
   }
 
