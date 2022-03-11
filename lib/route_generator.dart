@@ -1,4 +1,5 @@
 import 'package:consultant_product/src/modules/chat/view.dart';
+import 'package:consultant_product/src/modules/consultant/general_info/view.dart';
 import 'package:consultant_product/src/modules/created_password/view.dart';
 import 'package:consultant_product/src/modules/login/view.dart';
 import 'package:consultant_product/src/modules/new_password/view.dart';
@@ -65,6 +66,7 @@ routes() => [
       GetPage(name: "/onBoard2Screen", page: () => const OnBoard2Page()),
       GetPage(name: "/onBoard3Screen", page: () => const OnBoard3Page()),
       GetPage(name: "/onBoard4Screen", page: () => const OnBoard4Page()),
+      GetPage(name: "/generalInfoScreen", page: () => const GeneralInfoPage()),
     ];
 
 class PageRoutes {
@@ -90,6 +92,7 @@ class PageRoutes {
   static const String onBoard2Screen = '/onBoard2Screen';
   static const String onBoard3Screen = '/onBoard3Screen';
   static const String onBoard4Screen = '/onBoard4Screen';
+  static const String generalInfoScreen = '/generalInfoScreen';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -115,6 +118,7 @@ class PageRoutes {
       onBoard2Screen: (context) => const OnBoard2Page(),
       onBoard3Screen: (context) => const OnBoard3Page(),
       onBoard4Screen: (context) => const OnBoard4Page(),
+      generalInfoScreen: (context) => const GeneralInfoPage(),
     };
   }
 }

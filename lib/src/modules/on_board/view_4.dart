@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import '../../../route_generator.dart';
 import '../../utils/constants.dart';
 import 'logic.dart';
 
@@ -96,7 +97,7 @@ class _OnBoard4PageState extends State<OnBoard4Page> {
                           decorationColor: Colors.white)),
                   InkWell(
                       onTap: () {
-                        //  Get.toNamed(PageRoutes.onBoard3Screen);
+                        Get.toNamed(PageRoutes.generalInfoScreen);
                       },
                       child: SvgPicture.asset(
                           'assets/Icons/forwardBlackIcon.svg')),
