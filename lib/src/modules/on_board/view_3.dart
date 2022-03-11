@@ -83,7 +83,7 @@ class _OnBoard3PageState extends State<OnBoard3Page> {
                   ),
                 ],
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * .1),
+              SizedBox(height: MediaQuery.of(context).size.height * .08),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -102,7 +102,7 @@ class _OnBoard3PageState extends State<OnBoard3Page> {
                           'assets/Icons/forwardBlackIcon.svg')),
                 ],
               ),
-              const SizedBox(height: 50),
+              SizedBox(height: MediaQuery.of(context).size.height * .06),
               Image.asset(
                 'assets/images/screenPointer3.png',
                 width: 78.h,
