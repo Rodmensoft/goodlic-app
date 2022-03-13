@@ -500,6 +500,89 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                       ),
 
                       /// Dropdown fields
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(
+                        16.w, 0.h, 16.w, 16.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children:[ SizedBox(
+                         height: 60,
+                         width: 160,
+                         child: FormField<String>(
+                            builder: (FormFieldState<String> state) {
+                              return InputDecorator(
+                                decoration: InputDecoration(
+                                  //  labelStyle: textStyle,
+                                    errorStyle:  const TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                                    hintText: 'Please select expense',
+                                    fillColor: Colors.white,
+                                    filled: true,
+
+                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+                                isEmpty: _currentSelectedValue == 'bnbnbbnb',
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    value: _currentSelectedValue,
+                                    isDense: true,
+                                    onChanged: ( newValue) {
+                                      setState(() {
+                                        _currentSelectedValue = newValue;
+                                        state.didChange(newValue);
+                                      });
+                                    },
+                                    items: _currencies.map((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                       ),
+                         SizedBox(
+                           height: 60,
+                           width: 160,
+                           child: FormField<String>(
+                             builder: (FormFieldState<String> state) {
+                               return InputDecorator(
+                                 decoration: InputDecoration(
+                                     labelStyle: const TextStyle(fontSize: 12, color: Colors.black),
+                                     errorStyle:  const TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                                     hintText: 'Gender',
+                                     hintStyle: const TextStyle(fontSize: 12,color: Colors.black),
+                                     fillColor: Colors.white,
+                                     filled: true,
+
+                                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+                                 isEmpty: _currentSelectedValue == 'bnbnbbnb',
+                                 child: DropdownButtonHideUnderline(
+                                   child: DropdownButton<String>(
+                                     value: _currentSelectedValue,
+                                     isDense: true,
+                                     onChanged: ( newValue) {
+                                       setState(() {
+                                         _currentSelectedValue = newValue;
+                                         state.didChange(newValue);
+                                       });
+                                     },
+                                     items: _currencies.map((String value) {
+                                       return DropdownMenuItem<String>(
+                                         value: value,
+                                         child: Text(value),
+                                       );
+                                     }).toList(),
+                                   ),
+                                 ),
+                               );
+                             },
+                           ),
+                         )
+                         ]
+                    ),
+                  )
                     ],
                   ),
                 )),
