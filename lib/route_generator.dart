@@ -1,5 +1,8 @@
 import 'package:consultant_product/src/modules/chat/view.dart';
+import 'package:consultant_product/src/modules/consultant/educational_info/view.dart';
 import 'package:consultant_product/src/modules/consultant/general_info/view.dart';
+import 'package:consultant_product/src/modules/consultant/schedule_info/view.dart';
+import 'package:consultant_product/src/modules/consultant/skill_info/view.dart';
 import 'package:consultant_product/src/modules/created_password/view.dart';
 import 'package:consultant_product/src/modules/login/view.dart';
 import 'package:consultant_product/src/modules/new_password/view.dart';
@@ -67,6 +70,12 @@ routes() => [
       GetPage(name: "/onBoard3Screen", page: () => const OnBoard3Page()),
       GetPage(name: "/onBoard4Screen", page: () => const OnBoard4Page()),
       GetPage(name: "/generalInfoScreen", page: () => const GeneralInfoPage()),
+      GetPage(
+          name: "/educationalInfoScreen",
+          page: () => const EducationalInfoPage()),
+      GetPage(name: "/skillInfoScreen", page: () => const SkillInfoPage()),
+      GetPage(
+          name: "/scheduleInfoScreen", page: () => const ScheduleInfoPage()),
     ];
 
 class PageRoutes {
@@ -93,6 +102,9 @@ class PageRoutes {
   static const String onBoard3Screen = '/onBoard3Screen';
   static const String onBoard4Screen = '/onBoard4Screen';
   static const String generalInfoScreen = '/generalInfoScreen';
+  static const String educationalInfoScreen = '/educationalInfoScreen';
+  static const String skillInfoScreen = '/skillInfoScreen';
+  static const String scheduleInfoScreen = '/scheduleInfoScreen';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -119,6 +131,9 @@ class PageRoutes {
       onBoard3Screen: (context) => const OnBoard3Page(),
       onBoard4Screen: (context) => const OnBoard4Page(),
       generalInfoScreen: (context) => const GeneralInfoPage(),
+      educationalInfoScreen: (context) => const EducationalInfoPage(),
+      skillInfoScreen: (context) => const SkillInfoPage(),
+      scheduleInfoScreen: (context) => const ScheduleInfoPage(),
     };
   }
 }
