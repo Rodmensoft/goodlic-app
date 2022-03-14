@@ -20,6 +20,25 @@ class _ScheduleInfoPageState extends State<ScheduleInfoPage> {
   final state = Get.find<ScheduleInfoLogic>().state;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Get.find<ScheduleInfoLogic>().scrollController = ScrollController()
+      ..addListener(Get.find<ScheduleInfoLogic>().scrollListener);
+  }
+
+  @override
+  void dispose() {
+    Get.find<ScheduleInfoLogic>()
+        .scrollController!
+        .removeListener(Get.find<ScheduleInfoLogic>().scrollListener);
+    Get.find<ScheduleInfoLogic>().scrollController!.dispose();
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
       return GetBuilder<ScheduleInfoLogic>(builder: (_scheduleInfoLogic) {
@@ -155,33 +174,32 @@ class _ScheduleInfoPageState extends State<ScheduleInfoPage> {
                                                 width: 40.h,
                                                 decoration: const BoxDecoration(
                                                     shape: BoxShape.circle,
-                                                    color: customOrangeColor),
+                                                    color: customGreenColor),
                                                 child: Center(
-                                                  child: Text('03',
-                                                      style: state
-                                                          .numberTextStyle!),
+                                                  child: Icon(
+                                                    Icons.check,
+                                                    size: 22.sp,
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
                                               ),
                                               SizedBox(height: 5.h),
                                               Container(
                                                 height: 5.h,
                                                 width: 50.w,
-                                                color: Colors.white,
+                                                color: customGreenColor,
                                               ),
                                               Container(
                                                 height: 40.h,
                                                 width: 40.h,
                                                 decoration: const BoxDecoration(
                                                     shape: BoxShape.circle,
-                                                    color: Colors.white),
+                                                    color: customOrangeColor),
                                                 child: Center(
                                                   child: Text(
                                                     '04',
                                                     style: state
                                                         .numberTextStyle!
-                                                        .copyWith(
-                                                            color:
-                                                                customTextGreyColor),
                                                   ),
                                                 ),
                                               ),
@@ -251,7 +269,13 @@ class _ScheduleInfoPageState extends State<ScheduleInfoPage> {
                       ))
                 ];
               },
-              body: Container(),
+              body: Container(    height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                    color: customTextFieldColor,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25.0),
+                        topRight: Radius.circular(25.0))),),
             ),
           ),
         );
