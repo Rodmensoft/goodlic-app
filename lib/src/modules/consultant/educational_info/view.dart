@@ -1,4 +1,3 @@
-import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,33 +7,26 @@ import 'package:resize/resize.dart';
 import '../../../../route_generator.dart';
 import '../../../controller/general_controller.dart';
 import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
 import '../../../widgets/custom_bottom_bar.dart';
 import 'logic.dart';
 
-class GeneralInfoPage extends StatefulWidget {
-  const GeneralInfoPage({Key? key}) : super(key: key);
+class EducationalInfoPage extends StatefulWidget {
+  const EducationalInfoPage({Key? key}) : super(key: key);
 
   @override
-  State<GeneralInfoPage> createState() => _GeneralInfoPageState();
+  State<EducationalInfoPage> createState() => _EducationalInfoPageState();
 }
 
-class _GeneralInfoPageState extends State<GeneralInfoPage> {
-  final logic = Get.put(GeneralInfoLogic());
+class _EducationalInfoPageState extends State<EducationalInfoPage> {
+  final logic = Get.put(EducationalInfoLogic());
 
-  final state = Get.find<GeneralInfoLogic>().state;
+  final state = Get.find<EducationalInfoLogic>().state;
 
-  /// gender
   String? _currentGenderValue;
   final _gender = [
     "Male",
     "Female",
-    "Others",
-  ];
-
-  /// religion
-  String? _currentReligionValue;
-  final _religion = [
-    "Islam",
     "Others",
   ];
 
@@ -43,23 +35,23 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
     // TODO: implement initState
     super.initState();
 
-    Get.find<GeneralInfoLogic>().scrollController = ScrollController()
-      ..addListener(Get.find<GeneralInfoLogic>().scrollListener);
+    Get.find<EducationalInfoLogic>().scrollController = ScrollController()
+      ..addListener(Get.find<EducationalInfoLogic>().scrollListener);
   }
 
   @override
   void dispose() {
-    Get.find<GeneralInfoLogic>()
+    Get.find<EducationalInfoLogic>()
         .scrollController!
-        .removeListener(Get.find<GeneralInfoLogic>().scrollListener);
-    Get.find<GeneralInfoLogic>().scrollController!.dispose();
+        .removeListener(Get.find<EducationalInfoLogic>().scrollListener);
+    Get.find<EducationalInfoLogic>().scrollController!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
-      return GetBuilder<GeneralInfoLogic>(builder: (_generalInfoLogic) {
+      return GetBuilder<EducationalInfoLogic>(builder: (_educationalInfoLogic) {
         return GestureDetector(
           onTap: () {
             _generalController.focusOut(context);
@@ -68,7 +60,7 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
             resizeToAvoidBottomInset: false,
             backgroundColor: customThemeColor,
             body: NestedScrollView(
-                controller: _generalInfoLogic.scrollController,
+                controller: _educationalInfoLogic.scrollController,
                 headerSliverBuilder:
                     (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
@@ -80,7 +72,7 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                         pinned: true,
                         snap: true,
                         elevation: 0,
-                        backgroundColor: _generalInfoLogic.isShrink
+                        backgroundColor: _educationalInfoLogic.isShrink
                             ? customThemeColor
                             : Colors.transparent,
                         leading: InkWell(
@@ -92,8 +84,7 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
-                                  'assets/Icons/whiteBackArrow.svg',
-                              ),
+                                  'assets/Icons/whiteBackArrow.svg'),
                             ],
                           ),
                         ),
@@ -116,7 +107,8 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                                     top: 0,
                                     child: Image.asset(
                                       'assets/images/registrationBackground.png',
-                                      width: MediaQuery.of(context).size.width * .8,
+                                      width: MediaQuery.of(context).size.width *
+                                          .8,
                                     ),
                                   ),
                                   SafeArea(
@@ -158,20 +150,19 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                                                           shape:
                                                               BoxShape.circle,
                                                           color:
-                                                              customOrangeColor),
+                                                              customGreenColor),
                                                   child: Center(
-                                                    child: Text(
-                                                      '01',
-                                                      style:
-                                                          state.numberTextStyle,
-                                                    ),
-                                                  ),
+                                                      child: Icon(
+                                                    Icons.check,
+                                                    color: Colors.white,
+                                                    size: 22.sp,
+                                                  )),
                                                 ),
                                                 SizedBox(height: 5.h),
                                                 Container(
                                                   height: 5.h,
                                                   width: 50.w,
-                                                  color: Colors.white,
+                                                  color: customGreenColor,
                                                 ),
                                                 Container(
                                                   height: 40.h,
@@ -180,16 +171,12 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                                                       const BoxDecoration(
                                                           shape:
                                                               BoxShape.circle,
-                                                          color: Colors.white),
+                                                          color:
+                                                              customOrangeColor),
                                                   child: Center(
-                                                    child: Text(
-                                                      '02',
-                                                      style: state
-                                                          .numberTextStyle!
-                                                          .copyWith(
-                                                              color:
-                                                                  customTextGreyColor),
-                                                    ),
+                                                    child: Text('02',
+                                                        style: state
+                                                            .numberTextStyle!),
                                                   ),
                                                 ),
                                                 SizedBox(height: 5.h),
@@ -315,106 +302,234 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(25.0),
                           topRight: Radius.circular(25.0))),
-                  child: Stack(
-                    children:[  SingleChildScrollView(
+                  child: Stack(children: [
+                    SingleChildScrollView(
                       child: Column(
                         children: [
                           SizedBox(height: 25.h),
-                          InkWell(
-                            onTap: () {},
-                            child: Image.asset(
-                              'assets/images/upload.png',
-                              height: 103.h,
-                              width: 190.w,
-                            ),
-                          ),
-                          // SizedBox(height: 20.h),
-                          /// your name field
+
+                          /// Institute field
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                16.w, 20.h, 16.w, 16.h),
-                            child: TextFormField(
-                              keyboardType: TextInputType.name,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp("[a-z A-Z ]"))
-                              ],
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    25.w, 15.h, 25.w, 15.h),
-                                hintText: 'Your Name',
-                                hintStyle: state.hintTextStyle,
-                                fillColor: Colors.white,
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: customLightThemeColor)),
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide:
-                                        const BorderSide(color: Colors.red)),
-                              ),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Field is required';
-                                } else {
-                                  return null;
-                                }
+                                16.w, 0.0, 16.w, 16.h),
+                            child: FormField<String>(
+                              builder: (FormFieldState<String> state) {
+                                return InputDecorator(
+                                  decoration: InputDecoration(
+                                      //  labelStyle: textStyle,
+                                      errorStyle: const TextStyle(
+                                          color: Colors.redAccent,
+                                          fontSize: 16.0),
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8.r),
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8.r),
+                                          borderSide: const BorderSide(
+                                              color: customLightThemeColor)),
+                                      errorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(
+                                              color: Colors.red)),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8.r),
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent))),
+                                  //   isEmpty: _currentGenderValue == '',
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      icon: SvgPicture.asset(
+                                          'assets/Icons/dropdownIcon.svg'),
+                                      hint: Text('Institute',
+                                          style: TextStyle(
+                                              fontFamily:
+                                                  SarabunFontFamily.regular,
+                                              fontSize: 16.sp,
+                                              color: customTextGreyColor)),
+                                      value: _currentGenderValue,
+                                      isDense: true,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          _currentGenderValue = newValue;
+                                          state.didChange(newValue);
+                                        });
+                                      },
+                                      items: _gender.map((String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                           ),
 
-                          /// father name field
+                          /// Dropdowns  ///
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.w, 0.h, 16.w, 16.h),
-                            child: TextFormField(
-                              keyboardType: TextInputType.name,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp("[a-z A-Z ]"))
-                              ],
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    25.w, 15.h, 25.w, 15.h),
-                                hintText: 'Father Name',
-                                hintStyle: state.hintTextStyle,
-                                fillColor: Colors.white,
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: customLightThemeColor)),
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide:
-                                        const BorderSide(color: Colors.red)),
-                              ),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Field is required';
-                                } else {
-                                  return null;
-                                }
-                              },
-                            ),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  /// Dropdown Degree field
+                                  SizedBox(
+                                    height: 65,
+                                    width: 160,
+                                    child: FormField<String>(
+                                      builder: (FormFieldState<String> state) {
+                                        return InputDecorator(
+                                          decoration: InputDecoration(
+                                              //  labelStyle: textStyle,
+                                              errorStyle: const TextStyle(
+                                                  color: Colors.redAccent,
+                                                  fontSize: 16.0),
+                                              fillColor: Colors.white,
+                                              filled: true,
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  borderSide: const BorderSide(
+                                                      color:
+                                                          Colors.transparent)),
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  borderSide: const BorderSide(
+                                                      color:
+                                                          customLightThemeColor)),
+                                              errorBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.red)),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8.r),
+                                                  borderSide: const BorderSide(color: Colors.transparent))),
+                                          //   isEmpty: _currentGenderValue == '',
+                                          child: DropdownButtonHideUnderline(
+                                            child: DropdownButton<String>(
+                                              icon: SvgPicture.asset(
+                                                  'assets/Icons/dropdownIcon.svg'),
+                                              hint: Text('Degree',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          SarabunFontFamily
+                                                              .regular,
+                                                      fontSize: 16.sp,
+                                                      color:
+                                                          customTextGreyColor)),
+                                              value: _currentGenderValue,
+                                              isDense: true,
+                                              onChanged: (newValue) {
+                                                setState(() {
+                                                  _currentGenderValue =
+                                                      newValue;
+                                                  state.didChange(newValue);
+                                                });
+                                              },
+                                              items:
+                                                  _gender.map((String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value),
+                                                );
+                                              }).toList(),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+
+                                  /// Dropdown Subject field
+                                  SizedBox(
+                                    height: 65,
+                                    width: 160,
+                                    child: FormField<String>(
+                                      builder: (FormFieldState<String> state) {
+                                        return InputDecorator(
+                                          decoration: InputDecoration(
+                                              labelStyle: const TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.black),
+                                              errorStyle: const TextStyle(
+                                                  color: Colors.redAccent,
+                                                  fontSize: 16.0),
+                                              fillColor: Colors.white,
+                                              filled: true,
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(
+                                                      5.0),
+                                                  borderSide: const BorderSide(
+                                                      color:
+                                                          Colors.transparent)),
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: const BorderSide(
+                                                      color:
+                                                          customLightThemeColor)),
+                                              errorBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide:
+                                                      const BorderSide(color: Colors.red)),
+                                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0), borderSide: const BorderSide(color: Colors.transparent))),
+
+                                          //   isEmpty: _currentReligionValue == '',
+                                          child: DropdownButtonHideUnderline(
+                                            child: DropdownButton<String>(
+                                              icon: SvgPicture.asset(
+                                                  'assets/Icons/dropdownIcon.svg'),
+                                              hint: Text(
+                                                'Subject',
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        SarabunFontFamily
+                                                            .regular,
+                                                    fontSize: 16.sp,
+                                                    color: customTextGreyColor),
+                                              ),
+                                              value: _currentGenderValue,
+                                              isDense: true,
+                                              onChanged: (newValue) {
+                                                setState(() {
+                                                  _currentGenderValue =
+                                                      newValue;
+                                                  state.didChange(newValue);
+                                                });
+                                              },
+                                              items:
+                                                  _gender.map((String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value),
+                                                );
+                                              }).toList(),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                ]),
                           ),
 
                           /// enter CNIC field
@@ -424,7 +539,8 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                             child: TextFormField(
                               keyboardType: TextInputType.phone,
                               inputFormatters: [
-                                FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+                                FilteringTextInputFormatter.allow(
+                                    RegExp("[0-9]"))
                               ],
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
@@ -460,60 +576,15 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                             ),
                           ),
 
-                          /// Address field
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.w, 0.h, 16.w, 16.h),
-                            child: TextFormField(
-                              maxLines: 6,
-                              minLines: 3,
-
-                              keyboardType: TextInputType.text,
-                              // inputFormatters: [
-                              //   FilteringTextInputFormatter.allow(RegExp("[0-9]"))
-                              // ],
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    25.w, 15.h, 25.w, 15.h),
-                                hintText: 'Enter Address',
-                                hintStyle: state.hintTextStyle,
-                                fillColor: Colors.white,
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: customLightThemeColor)),
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide:
-                                        const BorderSide(color: Colors.red)),
-                              ),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Field is required';
-                                } else {
-                                  return null;
-                                }
-                              },
-                            ),
-                          ),
-
                           /// Dropdowns  ///
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.w, 0.h, 16.w, 16.h),
                             child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  /// Dropdown gender field
+                                  /// Dropdown From field
                                   SizedBox(
                                     height: 65,
                                     width: 160,
@@ -529,186 +600,34 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                                               filled: true,
                                               enabledBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(8.r),
+                                                      BorderRadius.circular(
+                                                          8.r),
                                                   borderSide: const BorderSide(
-                                                      color: Colors.transparent)),
+                                                      color:
+                                                          Colors.transparent)),
                                               focusedBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(8.r),
+                                                      BorderRadius.circular(
+                                                          8.r),
                                                   borderSide: const BorderSide(
                                                       color:
                                                           customLightThemeColor)),
                                               errorBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(5.0),
+                                                      BorderRadius.circular(
+                                                          5.0),
                                                   borderSide: const BorderSide(
                                                       color: Colors.red)),
                                               border: OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(8.r),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent))),
-                                          //   isEmpty: _currentGenderValue == '',
-                                          child: DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              icon: SvgPicture.asset(
-                                                  'assets/Icons/dropdownIcon.svg'),
-                                              hint: Text('Gender',
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          SarabunFontFamily
-                                                              .regular,
-                                                      fontSize: 16.sp,
-                                                      color:
-                                                          customTextGreyColor)),
-                                              value: _currentGenderValue,
-                                              isDense: true,
-                                              onChanged: (newValue) {
-                                                setState(() {
-                                                  _currentGenderValue = newValue;
-                                                  state.didChange(newValue);
-                                                });
-                                              },
-                                              items: _gender.map((String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-
-                                  /// Dropdown Religion field
-                                  SizedBox(
-                                    height: 65,
-                                    width: 160,
-                                    child: FormField<String>(
-                                      builder: (FormFieldState<String> state) {
-                                        return InputDecorator(
-                                          decoration: InputDecoration(
-                                              labelStyle: const TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.black),
-                                              errorStyle: const TextStyle(
-                                                  color: Colors.redAccent,
-                                                  fontSize: 16.0),
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          customLightThemeColor)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.red)),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent))),
-
-                                          //   isEmpty: _currentReligionValue == '',
-                                          child: DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              icon: SvgPicture.asset(
-                                                  'assets/Icons/dropdownIcon.svg'),
-                                              hint: Text(
-                                                'Religion',
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        SarabunFontFamily.regular,
-                                                    fontSize: 16.sp,
-                                                    color: customTextGreyColor),
-                                              ),
-                                              value: _currentReligionValue,
-                                              isDense: true,
-                                              onChanged: (newValue) {
-                                                setState(() {
-                                                  _currentReligionValue =
-                                                      newValue;
-                                                  state.didChange(newValue);
-                                                });
-                                              },
-                                              items:
-                                                  _religion.map((String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  )
-                                ]),
-                          ),
-
-                          /// Dropdowns ///
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.w, 0.h, 16.w, 16.h),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  /// Dropdown DOB field
-                                  SizedBox(
-                                    height: 65,
-                                    width: 160,
-                                    child: FormField<String>(
-                                      builder: (FormFieldState<String> state) {
-                                        return InputDecorator(
-                                          decoration: InputDecoration(
-                                              //  labelStyle: textStyle,
-                                              errorStyle: const TextStyle(
-                                                  color: Colors.redAccent,
-                                                  fontSize: 16.0),
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8.r),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8.r),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          customLightThemeColor)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.red)),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8.r),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent))),
+                                                  borderSide: const BorderSide(color: Colors.transparent))),
                                           //   isEmpty: _currentGenderValue == '',
                                           child: DropdownButtonHideUnderline(
                                             child: DropdownButton<String>(
                                               icon: SvgPicture.asset(
                                                   'assets/Icons/calendarIcon.svg'),
-                                              hint: Text('DOB',
+                                              hint: Text('From',
                                                   style: TextStyle(
                                                       fontFamily:
                                                           SarabunFontFamily
@@ -720,11 +639,13 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                                               isDense: true,
                                               onChanged: (newValue) {
                                                 setState(() {
-                                                  _currentGenderValue = newValue;
+                                                  _currentGenderValue =
+                                                      newValue;
                                                   state.didChange(newValue);
                                                 });
                                               },
-                                              items: _gender.map((String value) {
+                                              items:
+                                                  _gender.map((String value) {
                                                 return DropdownMenuItem<String>(
                                                   value: value,
                                                   child: Text(value),
@@ -737,7 +658,7 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                                     ),
                                   ),
 
-                                  /// Dropdown Occupation field
+                                  /// Dropdown To field
                                   SizedBox(
                                     height: 65,
                                     width: 160,
@@ -754,206 +675,51 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                                               fillColor: Colors.white,
                                               filled: true,
                                               enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5.0),
+                                                  borderRadius: BorderRadius.circular(
+                                                      5.0),
                                                   borderSide: const BorderSide(
-                                                      color: Colors.transparent)),
+                                                      color:
+                                                          Colors.transparent)),
                                               focusedBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(5.0),
+                                                      BorderRadius.circular(
+                                                          5.0),
                                                   borderSide: const BorderSide(
                                                       color:
                                                           customLightThemeColor)),
                                               errorBorder: OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.red)),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent))),
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide:
+                                                      const BorderSide(color: Colors.red)),
+                                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0), borderSide: const BorderSide(color: Colors.transparent))),
 
                                           //   isEmpty: _currentReligionValue == '',
                                           child: DropdownButtonHideUnderline(
                                             child: DropdownButton<String>(
                                               icon: SvgPicture.asset(
-                                                  'assets/Icons/dropdownIcon.svg'),
+                                                  'assets/Icons/calendarIcon.svg'),
                                               hint: Text(
-                                                'Occupation',
+                                                'To',
                                                 style: TextStyle(
                                                     fontFamily:
-                                                        SarabunFontFamily.regular,
+                                                        SarabunFontFamily
+                                                            .regular,
                                                     fontSize: 16.sp,
                                                     color: customTextGreyColor),
                                               ),
-                                              value: _currentReligionValue,
-                                              isDense: true,
-                                              onChanged: (newValue) {
-                                                setState(() {
-                                                  _currentReligionValue =
-                                                      newValue;
-                                                  state.didChange(newValue);
-                                                });
-                                              },
-                                              items:
-                                                  _religion.map((String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  )
-                                ]),
-                          ),
-
-                          /// Dropdowns ///
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.w, 0.h, 16.w, 16.h),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  /// Dropdown Country field
-                                  SizedBox(
-                                    height: 65,
-                                    width: 160,
-                                    child: FormField<String>(
-                                      builder: (FormFieldState<String> state) {
-                                        return InputDecorator(
-                                          decoration: InputDecoration(
-                                            //  labelStyle: textStyle,
-                                              errorStyle: const TextStyle(
-                                                  color: Colors.redAccent,
-                                                  fontSize: 16.0),
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                      customLightThemeColor)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.red)),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                      Colors.transparent))),
-                                          //   isEmpty: _currentGenderValue == '',
-                                          child: DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              icon: SvgPicture.asset(
-                                                  'assets/Icons/dropdownIcon.svg'),
-                                              hint: Text('Country',
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      SarabunFontFamily
-                                                          .regular,
-                                                      fontSize: 16.sp,
-                                                      color:
-                                                      customTextGreyColor)),
                                               value: _currentGenderValue,
                                               isDense: true,
                                               onChanged: (newValue) {
                                                 setState(() {
-                                                  _currentGenderValue = newValue;
-                                                  state.didChange(newValue);
-                                                });
-                                              },
-                                              items: _gender.map((String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-
-                                  /// Dropdown City field
-                                  SizedBox(
-                                    height: 65,
-                                    width: 160,
-                                    child: FormField<String>(
-                                      builder: (FormFieldState<String> state) {
-                                        return InputDecorator(
-                                          decoration: InputDecoration(
-                                              labelStyle: const TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.black),
-                                              errorStyle: const TextStyle(
-                                                  color: Colors.redAccent,
-                                                  fontSize: 16.0),
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                      customLightThemeColor)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.red)),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                      Colors.transparent))),
-
-                                          //   isEmpty: _currentReligionValue == '',
-                                          child: DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              icon: SvgPicture.asset(
-                                                  'assets/Icons/dropdownIcon.svg'),
-                                              hint: Text(
-                                                'City',
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                    SarabunFontFamily.regular,
-                                                    fontSize: 16.sp,
-                                                    color: customTextGreyColor),
-                                              ),
-                                              value: _currentReligionValue,
-                                              isDense: true,
-                                              onChanged: (newValue) {
-                                                setState(() {
-                                                  _currentReligionValue =
+                                                  _currentGenderValue =
                                                       newValue;
                                                   state.didChange(newValue);
                                                 });
                                               },
                                               items:
-                                              _religion.map((String value) {
+                                                  _gender.map((String value) {
                                                 return DropdownMenuItem<String>(
                                                   value: value,
                                                   child: Text(value),
@@ -967,25 +733,170 @@ class _GeneralInfoPageState extends State<GeneralInfoPage> {
                                   )
                                 ]),
                           ),
+
+                          InkWell(
+                            onTap: () {},
+                            child: Image.asset(
+                              'assets/images/upload.png',
+                              height: 103.h,
+                              width: 190.w,
+                            ),
+                          ),
+                          SizedBox(height: 25.h),
+
+                          /// Button
+                          Container(
+                              height: 40.h,
+                              width: 165.w,
+                              decoration: BoxDecoration(
+                                  color: customLightThemeColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8.r))),
+                              child: Center(
+                                child: Text(
+                                  '+Add Education',
+                                  style: state.numberTextStyle,
+                                ),
+                              )),
+
+                          /// Education detail Container
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.w, 25.h, 16.w, 16.h),
+                            child: Container(
+                              // height: 172.h,
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0))),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    18.w, 20.h, 18.w, 20.h),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Institution',
+                                          style:
+                                              state.educationHeadingTextStyle,
+                                        ),
+                                        SvgPicture.asset(
+                                            'assets/Icons/trashIcon.svg'),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10.h),
+                                    Text(
+                                      'GC University Faisalabad',
+                                      style: state.educationSubHeadingTextStyle,
+                                    ),
+                                    SizedBox(height: 18.h),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            'Degree',
+                                            style:
+                                                state.educationHeadingTextStyle,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'Subject',
+                                            style:
+                                                state.educationHeadingTextStyle,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(height: 10.h),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            'BSCS',
+                                            style: state
+                                                .educationSubHeadingTextStyle,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'Computer Science',
+                                            style: state
+                                                .educationSubHeadingTextStyle,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(height: 18.h),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            'From Date',
+                                            style:
+                                                state.educationHeadingTextStyle,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'To Date',
+                                            style:
+                                                state.educationHeadingTextStyle,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(height: 10.h),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            '16-2-21',
+                                            style: state
+                                                .educationSubHeadingTextStyle,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            '16-2-21',
+                                            style: state
+                                                .educationSubHeadingTextStyle,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
-                      Positioned(
-                        bottom: 0.h,
-                        left: 15.w,
-                        right: 15.w,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 45.h),
-                          child: InkWell(
-                              onTap: () {
-                                Get.toNamed(PageRoutes.educationalInfoScreen);
-                              },
-                              child: const MyCustomBottomBar(
-                                  title: 'Next Step', disable: false)),
-                        ),
+                    Positioned(
+                      bottom: 0.h,
+                      left: 15.w,
+                      right: 15.w,
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 45.h),
+                        child: InkWell(
+                            onTap: () {
+                              Get.toNamed(PageRoutes.skillInfoScreen);
+                            },
+                            child: const MyCustomBottomBar(
+                                title: 'Next Step', disable: false)),
                       ),
-            ]
-                  ),
+                    ),
+                  ]),
                 )),
           ),
         );

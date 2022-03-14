@@ -10,7 +10,6 @@ import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
-import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -101,26 +100,34 @@ class _SlotSelectionState extends State<SlotSelection> {
                                     0, 0, 18.w, 11.h),
                                 child: InkWell(
                                   onTap: () {
-                                    if(_bookAppointmentLogic.consultantProfileLogic
-                                        .appointmentTypes[index].appointmentType!.isScheduleRequired == 1){
+                                    if (_bookAppointmentLogic
+                                            .consultantProfileLogic
+                                            .appointmentTypes[index]
+                                            .appointmentType!
+                                            .isScheduleRequired ==
+                                        1) {
                                       setState(() {
                                         disableButton = true;
                                       });
-                                      _bookAppointmentLogic.morningSlots.clear();
-                                      _bookAppointmentLogic.afterNoonSlots.clear();
-                                      _bookAppointmentLogic.eveningSlots.clear();
+                                      _bookAppointmentLogic.morningSlots
+                                          .clear();
+                                      _bookAppointmentLogic.afterNoonSlots
+                                          .clear();
+                                      _bookAppointmentLogic.eveningSlots
+                                          .clear();
                                       _bookAppointmentLogic
-                                          .selectedAppointmentTypeID =
+                                              .selectedAppointmentTypeID =
                                           _bookAppointmentLogic
                                               .consultantProfileLogic
                                               .appointmentTypes[index]
                                               .appointmentTypeId;
-                                      _bookAppointmentLogic.selectedAppointmentTypeIndex = index;
-                                      _bookAppointmentLogic.updateSelectMentorAppointmentType(
-                                          _bookAppointmentLogic
-                                              .consultantProfileLogic
-                                              .appointmentTypes[index]
-                                      );
+                                      _bookAppointmentLogic
+                                          .selectedAppointmentTypeIndex = index;
+                                      _bookAppointmentLogic
+                                          .updateSelectMentorAppointmentType(
+                                              _bookAppointmentLogic
+                                                  .consultantProfileLogic
+                                                  .appointmentTypes[index]);
                                       _bookAppointmentLogic.update();
                                       _bookAppointmentLogic
                                           .updateCalenderLoader(true);
@@ -129,35 +136,40 @@ class _SlotSelectionState extends State<SlotSelection> {
                                           getScheduleAvailableDaysURL,
                                           {
                                             'token': '123',
-                                            'mentor_id': Get.find<UserHomeLogic>()
-                                                .selectedConsultantID,
+                                            'mentor_id':
+                                                Get.find<UserHomeLogic>()
+                                                    .selectedConsultantID,
                                             'appointment_type_id':
-                                            _bookAppointmentLogic
-                                                .consultantProfileLogic
-                                                .appointmentTypes[index]
-                                                .appointmentTypeId,
+                                                _bookAppointmentLogic
+                                                    .consultantProfileLogic
+                                                    .appointmentTypes[index]
+                                                    .appointmentTypeId,
                                           },
                                           true,
                                           getScheduleAvailableDaysRepo);
-                                    }else{
+                                    } else {
                                       setState(() {
                                         disableButton = false;
                                       });
-                                      _bookAppointmentLogic.morningSlots.clear();
-                                      _bookAppointmentLogic.afterNoonSlots.clear();
-                                      _bookAppointmentLogic.eveningSlots.clear();
+                                      _bookAppointmentLogic.morningSlots
+                                          .clear();
+                                      _bookAppointmentLogic.afterNoonSlots
+                                          .clear();
+                                      _bookAppointmentLogic.eveningSlots
+                                          .clear();
                                       _bookAppointmentLogic
-                                          .selectedAppointmentTypeID =
+                                              .selectedAppointmentTypeID =
                                           _bookAppointmentLogic
                                               .consultantProfileLogic
                                               .appointmentTypes[index]
                                               .appointmentTypeId;
-                                      _bookAppointmentLogic.selectedAppointmentTypeIndex = index;
-                                      _bookAppointmentLogic.updateSelectMentorAppointmentType(
-                                          _bookAppointmentLogic
-                                              .consultantProfileLogic
-                                              .appointmentTypes[index]
-                                      );
+                                      _bookAppointmentLogic
+                                          .selectedAppointmentTypeIndex = index;
+                                      _bookAppointmentLogic
+                                          .updateSelectMentorAppointmentType(
+                                              _bookAppointmentLogic
+                                                  .consultantProfileLogic
+                                                  .appointmentTypes[index]);
                                       _bookAppointmentLogic.update();
                                     }
                                   },
@@ -203,7 +215,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             children: [
                                               SvgPicture.asset(
                                                 '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes[_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId! - 1]}',
-                                                height: 12.h,width: 19.w,
+                                                height: 12.h,
+                                                width: 19.w,
                                                 color: _bookAppointmentLogic
                                                             .selectedAppointmentTypeID ==
                                                         _bookAppointmentLogic
@@ -431,7 +444,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                     height: 78.h,
                                                     decoration: BoxDecoration(
                                                         color: _bookAppointmentLogic
-                                                                .appointmentShiftType == index
+                                                                    .appointmentShiftType ==
+                                                                index
                                                             ? customLightThemeColor
                                                             : Colors.white,
                                                         borderRadius:
@@ -440,7 +454,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                         boxShadow: [
                                                           BoxShadow(
                                                             color: _bookAppointmentLogic
-                                                                    .appointmentShiftType == index
+                                                                        .appointmentShiftType ==
+                                                                    index
                                                                 ? customLightThemeColor
                                                                     .withOpacity(
                                                                         0.5)
@@ -466,7 +481,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                                 .center,
                                                         children: [
                                                           _bookAppointmentLogic
-                                                                  .appointmentShiftType == index
+                                                                      .appointmentShiftType ==
+                                                                  index
                                                               ? SvgPicture
                                                                   .asset(
                                                                   '${_bookAppointmentLogic.shiftList[index].image}',
@@ -491,7 +507,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                                 TextOverflow
                                                                     .ellipsis,
                                                             style: _bookAppointmentLogic
-                                                                    .appointmentShiftType == index
+                                                                        .appointmentShiftType ==
+                                                                    index
                                                                 ? state
                                                                     .typeTextStyle!
                                                                     .copyWith(
@@ -554,7 +571,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                                       .morningSlots[
                                                                           secondIndex]
                                                                       .startTime!;
-                                                              disableButton = false;
+                                                              disableButton =
+                                                                  false;
                                                             });
                                                           },
                                                           child: Container(
@@ -645,7 +663,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                                       .afterNoonSlots[
                                                                           secondIndex]
                                                                       .startTime!;
-                                                              disableButton = false;
+                                                              disableButton =
+                                                                  false;
                                                             });
                                                           },
                                                           child: Container(
@@ -736,7 +755,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                                       .eveningSlots[
                                                                           secondIndex]
                                                                       .startTime!;
-                                                              disableButton = false;
+                                                              disableButton =
+                                                                  false;
                                                             });
                                                           },
                                                           child: Container(
