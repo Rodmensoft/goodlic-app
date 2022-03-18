@@ -4,24 +4,8 @@ import 'package:resize/resize.dart';
 
 import 'state.dart';
 
-class EducationalInfoLogic extends GetxController {
-  final EducationalInfoState state = EducationalInfoState();
-
-  DateTime? selectedFromDate;
-  DateTime? selectedToDate;
-
-  String? selectedGender;
-  List<String> genderDropDownList = [];
-
-  updateGenderDropDownList(String newValue) {
-    genderDropDownList.add(newValue);
-    update();
-  }
-
-  emptyGenderDropDownList() {
-    genderDropDownList = [];
-    update();
-  }
+class ProfileCreatedLogic extends GetxController {
+  final ProfileCreatedState state = ProfileCreatedState();
 
   ScrollController? scrollController;
   bool lastStatus = true;

@@ -48,7 +48,12 @@ class _OnBoard3PageState extends State<OnBoard3Page> {
             child: Column(children: [
               Stack(
                 children: [
-                  Image.asset('assets/images/onBoard3.png'),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    width: double.infinity,
+                    child: Image.asset('assets/images/onBoard3.png',
+                        fit: BoxFit.fill),
+                  ),
                   Positioned(
                     bottom: 0.h,
                     child: Padding(

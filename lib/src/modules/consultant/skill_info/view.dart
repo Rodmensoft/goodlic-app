@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -305,135 +307,161 @@ class _SkillInfoPageState extends State<SkillInfoPage> {
                         children: [
                           SizedBox(height: 25.h),
 
-                          /// Institute field
+                          /// Department field
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                16.w, 0.0, 16.w, 16.h),
-                            child: FormField<String>(
-                              builder: (FormFieldState<String> state) {
-                                return InputDecorator(
-                                  decoration: InputDecoration(
-                                      //  labelStyle: textStyle,
-                                      errorStyle: const TextStyle(
-                                          color: Colors.redAccent,
-                                          fontSize: 16.0),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: customLightThemeColor)),
-                                      errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.red)),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent))),
-                                  //   isEmpty: _currentGenderValue == '',
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton<String>(
-                                      icon: SvgPicture.asset(
-                                          'assets/Icons/dropdownIcon.svg'),
-                                      hint: Text('Department',
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  SarabunFontFamily.regular,
-                                              fontSize: 16.sp,
-                                              color: customTextGreyColor)),
-                                      value: _currentGenderValue,
-                                      isDense: true,
-                                      onChanged: (newValue) {
-                                        setState(() {
-                                          _currentGenderValue = newValue;
-                                          state.didChange(newValue);
-                                        });
-                                      },
-                                      items: _gender.map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
+                                16.w, 0.h, 16.w, 16.h),
+                            child: ButtonTheme(
+                              alignedDropdown: true,
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButtonFormField<String>(
+                                  hint: Text('Department',
+                                      style: TextStyle(
+                                          fontFamily: SarabunFontFamily.regular,
+                                          fontSize: 16.sp,
+                                          color: customTextGreyColor)),
+                                  onTap: () {
+                                    FocusScopeNode currentFocus =
+                                        FocusScope.of(context);
+                                    if (!currentFocus.hasPrimaryFocus) {
+                                      currentFocus.unfocus();
+                                    }
+                                  },
+                                  decoration: const InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 0.0),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: customThemeColor)),
+                                    errorBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent)),
+                                    border: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color(0xffDEE8EE))),
                                   ),
-                                );
-                              },
+                                  focusColor: Colors.white,
+                                  isExpanded: true,
+                                  style: state.textFieldTextStyle,
+                                  iconEnabledColor: customThemeColor,
+                                  icon: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 20.w, 0),
+                                    child: SvgPicture.asset(
+                                        'assets/Icons/dropdownIcon.svg'),
+                                  ),
+                                  value: _skillInfoLogic.selectedDepartment,
+                                  items: _skillInfoLogic.departmentDropDownList
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: state.textFieldTextStyle,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    log(value.toString());
+                                    setState(() {
+                                      _skillInfoLogic.selectedDepartment =
+                                          value;
+                                    });
+                                  },
+                                  validator: (String? value) {
+                                    if (value == null) {
+                                      return 'field_required'.tr;
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                ),
+                              ),
                             ),
                           ),
 
                           /// Category field
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                16.w, 0.0, 16.w, 16.h),
-                            child: FormField<String>(
-                              builder: (FormFieldState<String> state) {
-                                return InputDecorator(
-                                  decoration: InputDecoration(
-                                      //  labelStyle: textStyle,
-                                      errorStyle: const TextStyle(
-                                          color: Colors.redAccent,
-                                          fontSize: 16.0),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: customLightThemeColor)),
-                                      errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.red)),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent))),
-                                  //   isEmpty: _currentGenderValue == '',
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton<String>(
-                                      icon: SvgPicture.asset(
-                                          'assets/Icons/dropdownIcon.svg'),
-                                      hint: Text('Category',
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  SarabunFontFamily.regular,
-                                              fontSize: 16.sp,
-                                              color: customTextGreyColor)),
-                                      value: _currentGenderValue,
-                                      isDense: true,
-                                      onChanged: (newValue) {
-                                        setState(() {
-                                          _currentGenderValue = newValue;
-                                          state.didChange(newValue);
-                                        });
-                                      },
-                                      items: _gender.map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
+                                16.w, 0.h, 16.w, 16.h),
+                            child: ButtonTheme(
+                              alignedDropdown: true,
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButtonFormField<String>(
+                                  hint: Text('Category',
+                                      style: TextStyle(
+                                          fontFamily: SarabunFontFamily.regular,
+                                          fontSize: 16.sp,
+                                          color: customTextGreyColor)),
+                                  onTap: () {
+                                    FocusScopeNode currentFocus =
+                                        FocusScope.of(context);
+                                    if (!currentFocus.hasPrimaryFocus) {
+                                      currentFocus.unfocus();
+                                    }
+                                  },
+                                  decoration: const InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 0.0),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: customThemeColor)),
+                                    errorBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent)),
+                                    border: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color(0xffDEE8EE))),
                                   ),
-                                );
-                              },
+                                  focusColor: Colors.white,
+                                  isExpanded: true,
+                                  style: state.textFieldTextStyle,
+                                  iconEnabledColor: customThemeColor,
+                                  icon: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 20.w, 0),
+                                    child: SvgPicture.asset(
+                                        'assets/Icons/dropdownIcon.svg'),
+                                  ),
+                                  value: _skillInfoLogic.selectedDepartment,
+                                  items: _skillInfoLogic.departmentDropDownList
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: state.textFieldTextStyle,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    log(value.toString());
+                                    setState(() {
+                                      _skillInfoLogic.selectedDepartment =
+                                          value;
+                                    });
+                                  },
+                                  validator: (String? value) {
+                                    if (value == null) {
+                                      return 'field_required'.tr;
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(height: 25.h),
@@ -523,15 +551,12 @@ class _SkillInfoPageState extends State<SkillInfoPage> {
                       bottom: 0.h,
                       left: 15.w,
                       right: 15.w,
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 45.h),
-                        child: InkWell(
-                            onTap: () {
-                              Get.toNamed(PageRoutes.scheduleInfoScreen);
-                            },
-                            child: const MyCustomBottomBar(
-                                title: 'Next Step', disable: false)),
-                      ),
+                      child: InkWell(
+                          onTap: () {
+                            Get.toNamed(PageRoutes.profileCreatedScreen);
+                          },
+                          child: const MyCustomBottomBar(
+                              title: 'Next Step', disable: false)),
                     ),
                   ]),
                 )),
