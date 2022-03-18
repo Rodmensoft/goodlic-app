@@ -13,6 +13,7 @@ class EducationalInfoState {
   TextStyle? buttonTextStyle;
   TextStyle? educationHeadingTextStyle;
   TextStyle? educationSubHeadingTextStyle;
+  TextStyle? textFieldTextStyle;
   EducationalInfoState() {
     ///Initialize variables
     headingTextStyle = TextStyle(
@@ -49,5 +50,9 @@ class EducationalInfoState {
         fontFamily: SarabunFontFamily.medium,
         fontSize: 12.sp,
         color: customTextBlackColor);
+    textFieldTextStyle = TextStyle(
+        fontFamily: SarabunFontFamily.regular,
+        fontSize: 15.sp,
+        color: Colors.black);
   }
 }
