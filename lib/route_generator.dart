@@ -22,6 +22,7 @@ import 'package:consultant_product/src/modules/user/book_appointment/view_confir
 import 'package:consultant_product/src/modules/user/book_appointment/view_payment.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_slot_selection.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/view.dart';
+import 'package:consultant_product/src/modules/user/edit_user_profile/view.dart';
 import 'package:consultant_product/src/modules/user/home/view.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/view.dart';
 import 'package:consultant_product/src/modules/user/user_drawer/view.dart';
@@ -79,9 +80,7 @@ routes() => [
       GetPage(
           name: "/scheduleInfoScreen", page: () => const ScheduleInfoPage()),
       GetPage(
-          name: "/profileCreatedScreen",
-          page: () => const ProfileCreatedPage()),
-      GetPage(name: "/dashboardScreen", page: () => const DashboardPage()),
+          name: "/editUserProfile", page: () => const EditUserProfilePage()),
     ];
 
 class PageRoutes {
@@ -111,8 +110,7 @@ class PageRoutes {
   static const String educationalInfoScreen = '/educationalInfoScreen';
   static const String skillInfoScreen = '/skillInfoScreen';
   static const String scheduleInfoScreen = '/scheduleInfoScreen';
-  static const String profileCreatedScreen = '/profileCreatedScreen';
-  static const String dashboardScreen = '/dashboardScreen';
+  static const String editUserProfile = '/editUserProfile';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -142,8 +140,7 @@ class PageRoutes {
       educationalInfoScreen: (context) => const EducationalInfoPage(),
       skillInfoScreen: (context) => const SkillInfoPage(),
       scheduleInfoScreen: (context) => const ScheduleInfoPage(),
-      profileCreatedScreen: (context) => const ProfileCreatedPage(),
-      dashboardScreen: (context) => const DashboardPage(),
+      editUserProfile: (context) => const EditUserProfilePage(),
     };
   }
 }

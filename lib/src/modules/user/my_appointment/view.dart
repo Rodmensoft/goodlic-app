@@ -1,15 +1,18 @@
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/user/appointment_detail/logic.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/get_repo.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/widgets/appontment_detail_box.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/widgets/page_loader.dart';
 import 'package:consultant_product/src/utils/colors.dart';
+import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
 import 'package:consultant_product/src/widgets/sliver_delegate_tab_fix.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
+import 'package:intl/intl.dart';
 
 import '../../../api_services/urls.dart';
 import 'logic.dart';
@@ -113,7 +116,15 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                         ///---pending
                         _myAppointmentLogic.getUserAppointmentModel.data!
                                 .pendingAppointments!.data!.isEmpty
-                            ? const SizedBox()
+                            ? Center(
+                                child: Text(
+                                  'No Record Found',
+                                  style: TextStyle(
+                                      fontFamily: SarabunFontFamily.regular,
+                                      fontSize: 16.sp,
+                                      color: customTextBlackColor),
+                                ),
+                              )
                             : ListView(
                                 padding: const EdgeInsetsDirectional.all(0),
                                 children: List.generate(
@@ -127,27 +138,282 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                     children: [
                                       InkWell(
                                         onTap: () {
+                                          Get.put(AppointmentDetailLogic());
+                                          Get.find<AppointmentDetailLogic>()
+                                                  .selectedAppointmentData =
+                                              _myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .pendingAppointments!
+                                                  .data![index];
+
+                                          Get.find<AppointmentDetailLogic>()
+                                              .appointmentStatus = 0;
+                                          Get.find<AppointmentDetailLogic>()
+                                              .update();
                                           Get.toNamed(
                                               PageRoutes.appointmentDetail);
                                         },
                                         child: AppointmentDetailBox(
-                                          image:
-                                              'assets/images/dummyTopRatedConsultant.png',
-                                          name: 'William Smith',
-                                          category: 'Financial Advisor',
+                                          image: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .pendingAppointments!
+                                              .data![index]
+                                              .mentor!
+                                              .imagePath,
+                                          name: _myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .pendingAppointments!
+                                                      .data![index]
+                                                      .mentor!
+                                                      .firstName ==
+                                                  null
+                                              ? '...'
+                                              : '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].mentor!.firstName} '
+                                                  '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].mentor!.lastName}',
+                                          category:
+                                              '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].category}',
                                           fee:
                                               '\$${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].payment!} Fees',
-                                          type: 'Video Call',
-                                          typeIcon:
-                                              'assets/Icons/videoCallIcon.svg',
+                                          type:
+                                              '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeString}'
+                                                  .capitalizeFirst,
+                                          typeIcon: _myAppointmentLogic
+                                                  .imagesForAppointmentTypes[
+                                              (_myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .pendingAppointments!
+                                                      .data![index]
+                                                      .appointmentTypeId!) -
+                                                  1],
                                           status: 0,
-                                          date: '17/02/22',
-                                          time: '9:10 AM',
+                                          date: DateFormat('dd/MM/yy').format(
+                                              DateTime.parse(_myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .pendingAppointments!
+                                                  .data![index]
+                                                  .date!)),
+                                          time: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .pendingAppointments!
+                                              .data![index]
+                                              .time!,
                                           color: customOrangeColor,
-                                          rating: 4.0,
+                                          rating: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .pendingAppointments!
+                                              .data![index]
+                                              .rating!
+                                              .toDouble(),
                                         ),
                                       ),
-                                      index == 5
+                                      index ==
+                                              _myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .pendingAppointments!
+                                                      .data!
+                                                      .length -
+                                                  1
+                                          ? Column(
+                                            children: [
+                                              _myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .pendingAppointments!
+                                                  .currentPage! <
+                                                  _myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .pendingAppointments!.lastPage!
+                                                  ? _myAppointmentLogic.getUserAppointmentMoreLoader!
+                                                  ? Padding(
+                                                padding: EdgeInsets.only(top: 25.h),
+                                                child: const Center(
+                                                  child: CircularProgressIndicator(
+                                                    color: customThemeColor,
+                                                  ),
+                                                ),
+                                              )
+                                                  : Padding(
+                                                padding: EdgeInsets.only(top: 25.h),
+                                                child: Center(
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(bottom: 30.h),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        _myAppointmentLogic.update();
+                                                        _myAppointmentLogic
+                                                            .updateGetUserAppointmentMoreLoader(true);
+
+                                                        getMethod(
+                                                            context,
+                                                            getUserAllAppointmentsURL,
+                                                            {
+                                                              'token': '123',
+                                                              'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
+                                                              'appointment_status': _myAppointmentLogic
+                                                                  .getUserAppointmentModel
+                                                                  .data!
+                                                                  .pendingAppointments!.data![index].appointmentStatus,
+                                                              'page': _myAppointmentLogic
+                                                                  .getUserAppointmentModel
+                                                                  .data!
+                                                                  .pendingAppointments!
+                                                                  .currentPage!+1
+                                                            },
+                                                            true,
+                                                            getUserAllAppointmentsMoreRepo);
+                                                      },
+                                                      child: Container(
+                                                        height: 36.h,
+                                                        width: 116.w,
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            border: Border.all(color: customThemeColor),
+                                                            borderRadius: BorderRadius.circular(18.r)),
+                                                        child: Center(
+                                                          child: Text(
+                                                            'Load More',
+                                                            style: TextStyle(
+                                                                fontFamily: SarabunFontFamily.medium,
+                                                                fontSize: 12.sp,
+                                                                color: customThemeColor),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                                  : const SizedBox(),
+                                              SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      .1,
+                                                ),
+                                            ],
+                                          )
+                                          : const SizedBox()
+                                    ],
+                                  );
+                                }),
+                              ),
+
+                        ///---accepted
+                        _myAppointmentLogic.getUserAppointmentModel.data!
+                                .acceptedAppointments!.data!.isEmpty
+                            ? Center(
+                                child: Text(
+                                  'No Record Found',
+                                  style: TextStyle(
+                                      fontFamily: SarabunFontFamily.regular,
+                                      fontSize: 16.sp,
+                                      color: customTextBlackColor),
+                                ),
+                              )
+                            : ListView(
+                                padding: const EdgeInsetsDirectional.all(0),
+                                children: List.generate(
+                                    _myAppointmentLogic
+                                        .getUserAppointmentModel
+                                        .data!
+                                        .acceptedAppointments!
+                                        .data!
+                                        .length, (index) {
+                                  return Column(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Get.put(AppointmentDetailLogic());
+                                          Get.find<AppointmentDetailLogic>()
+                                                  .selectedAppointmentData =
+                                              _myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .acceptedAppointments!
+                                                  .data![index];
+                                          Get.find<AppointmentDetailLogic>()
+                                              .appointmentStatus = 1;
+                                          Get.find<AppointmentDetailLogic>()
+                                              .update();
+                                          Get.toNamed(
+                                              PageRoutes.appointmentDetail);
+                                        },
+                                        child: AppointmentDetailBox(
+                                          image: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .acceptedAppointments!
+                                              .data![index]
+                                              .mentor!
+                                              .imagePath,
+                                          name: _myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .acceptedAppointments!
+                                                      .data![index]
+                                                      .mentor!
+                                                      .firstName ==
+                                                  null
+                                              ? '...'
+                                              : '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].mentor!.firstName} '
+                                                  '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].mentor!.lastName}',
+                                          category:
+                                              '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].category}',
+                                          fee:
+                                              '\$${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].payment!} Fees',
+                                          type:
+                                              '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeString}'
+                                                  .capitalizeFirst,
+                                          typeIcon: _myAppointmentLogic
+                                                  .imagesForAppointmentTypes[
+                                              (_myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .acceptedAppointments!
+                                                      .data![index]
+                                                      .appointmentTypeId!) -
+                                                  1],
+                                          status: 1,
+                                          date: DateFormat('dd/MM/yy').format(
+                                              DateTime.parse(_myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .acceptedAppointments!
+                                                  .data![index]
+                                                  .date!)),
+                                          time: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .acceptedAppointments!
+                                              .data![index]
+                                              .time!,
+                                          color: customLightThemeColor,
+                                          rating: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .acceptedAppointments!
+                                              .data![index]
+                                              .rating!
+                                              .toDouble(),
+                                        ),
+                                      ),
+                                      index ==
+                                              _myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .acceptedAppointments!
+                                                      .data!
+                                                      .length -
+                                                  1
                                           ? SizedBox(
                                               height: MediaQuery.of(context)
                                                       .size
@@ -160,106 +426,243 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                 }),
                               ),
 
-                        ///---accepted
-                        ListView(
-                          padding: const EdgeInsetsDirectional.all(0),
-                          children: List.generate(6, (index) {
-                            return Column(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Get.toNamed(PageRoutes.appointmentDetail);
-                                  },
-                                  child: const AppointmentDetailBox(
-                                    image:
-                                        'assets/images/dummyTopRatedConsultant.png',
-                                    name: 'William Smith',
-                                    category: 'Financial Advisor',
-                                    fee: '\$25 Fees',
-                                    type: 'Video Call',
-                                    typeIcon: 'assets/Icons/videoCallIcon.svg',
-                                    status: 1,
-                                    date: '17/02/22',
-                                    time: '9:10 AM',
-                                    color: customLightThemeColor,
-                                    rating: 4.0,
-                                  ),
-                                ),
-                                index == 5
-                                    ? SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                .1,
-                                      )
-                                    : const SizedBox()
-                              ],
-                            );
-                          }),
-                        ),
-
                         ///---completed
-                        ListView(
-                          padding: const EdgeInsetsDirectional.all(0),
-                          children: List.generate(6, (index) {
-                            return Column(
-                              children: [
-                                const AppointmentDetailBox(
-                                  image:
-                                      'assets/images/dummyTopRatedConsultant.png',
-                                  name: 'William Smith',
-                                  category: 'Financial Advisor',
-                                  fee: '\$25 Fees',
-                                  type: 'Video Call',
-                                  typeIcon: 'assets/Icons/videoCallIcon.svg',
-                                  date: '17/02/22',
-                                  time: '9:10 AM',
-                                  status: 2,
-                                  color: customGreenColor,
-                                  rating: 4.0,
+                        _myAppointmentLogic.getUserAppointmentModel.data!
+                                .completedAppointments!.data!.isEmpty
+                            ? Center(
+                                child: Text(
+                                  'No Record Found',
+                                  style: TextStyle(
+                                      fontFamily: SarabunFontFamily.regular,
+                                      fontSize: 16.sp,
+                                      color: customTextBlackColor),
                                 ),
-                                index == 5
-                                    ? SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                .1,
-                                      )
-                                    : const SizedBox()
-                              ],
-                            );
-                          }),
-                        ),
+                              )
+                            : ListView(
+                                padding: const EdgeInsetsDirectional.all(0),
+                                children: List.generate(
+                                    _myAppointmentLogic
+                                        .getUserAppointmentModel
+                                        .data!
+                                        .completedAppointments!
+                                        .data!
+                                        .length, (index) {
+                                  return Column(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Get.put(AppointmentDetailLogic());
+                                          Get.find<AppointmentDetailLogic>()
+                                                  .selectedAppointmentData =
+                                              _myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .completedAppointments!
+                                                  .data![index];
+                                          Get.find<AppointmentDetailLogic>()
+                                              .appointmentStatus = 2;
+                                          Get.find<AppointmentDetailLogic>()
+                                              .update();
+                                          Get.toNamed(
+                                              PageRoutes.appointmentDetail);
+                                        },
+                                        child: AppointmentDetailBox(
+                                          image: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .completedAppointments!
+                                              .data![index]
+                                              .mentor!
+                                              .imagePath,
+                                          name: _myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .completedAppointments!
+                                                      .data![index]
+                                                      .mentor!
+                                                      .firstName ==
+                                                  null
+                                              ? '...'
+                                              : '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].mentor!.firstName} '
+                                                  '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].mentor!.lastName}',
+                                          category:
+                                              '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].category}',
+                                          fee:
+                                              '\$${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].payment!} Fees',
+                                          type:
+                                              '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeString}'
+                                                  .capitalizeFirst,
+                                          typeIcon: _myAppointmentLogic
+                                                  .imagesForAppointmentTypes[
+                                              (_myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .completedAppointments!
+                                                      .data![index]
+                                                      .appointmentTypeId!) -
+                                                  1],
+                                          date: DateFormat('dd/MM/yy').format(
+                                              DateTime.parse(_myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .completedAppointments!
+                                                  .data![index]
+                                                  .date!)),
+                                          time: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .completedAppointments!
+                                              .data![index]
+                                              .time!,
+                                          rating: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .completedAppointments!
+                                              .data![index]
+                                              .rating!
+                                              .toDouble(),
+                                          status: 2,
+                                          color: customGreenColor,
+                                        ),
+                                      ),
+                                      index ==
+                                              _myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .completedAppointments!
+                                                      .data!
+                                                      .length -
+                                                  1
+                                          ? SizedBox(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  .1,
+                                            )
+                                          : const SizedBox()
+                                    ],
+                                  );
+                                }),
+                              ),
 
                         ///---cancelled
-                        ListView(
-                          padding: const EdgeInsetsDirectional.all(0),
-                          children: List.generate(6, (index) {
-                            return Column(
-                              children: [
-                                const AppointmentDetailBox(
-                                  image:
-                                      'assets/images/dummyTopRatedConsultant.png',
-                                  name: 'William Smith',
-                                  category: 'Financial Advisor',
-                                  fee: '\$25 Fees',
-                                  type: 'Video Call',
-                                  typeIcon: 'assets/Icons/videoCallIcon.svg',
-                                  date: '17/02/22',
-                                  time: '9:10 AM',
-                                  status: 3,
-                                  color: customRedColor,
-                                  rating: 4.0,
+                        _myAppointmentLogic.getUserAppointmentModel.data!
+                                .cancelledAppointments!.data!.isEmpty
+                            ? Center(
+                                child: Text(
+                                  'No Record Found',
+                                  style: TextStyle(
+                                      fontFamily: SarabunFontFamily.regular,
+                                      fontSize: 16.sp,
+                                      color: customTextBlackColor),
                                 ),
-                                index == 5
-                                    ? SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                .1,
-                                      )
-                                    : const SizedBox()
-                              ],
-                            );
-                          }),
-                        ),
+                              )
+                            : ListView(
+                                padding: const EdgeInsetsDirectional.all(0),
+                                children: List.generate(
+                                    _myAppointmentLogic
+                                        .getUserAppointmentModel
+                                        .data!
+                                        .cancelledAppointments!
+                                        .data!
+                                        .length, (index) {
+                                  return Column(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Get.put(AppointmentDetailLogic());
+                                          Get.find<AppointmentDetailLogic>()
+                                                  .selectedAppointmentData =
+                                              _myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .cancelledAppointments!
+                                                  .data![index];
+                                          Get.find<AppointmentDetailLogic>()
+                                              .appointmentStatus = 3;
+                                          Get.find<AppointmentDetailLogic>()
+                                              .update();
+                                          Get.toNamed(
+                                              PageRoutes.appointmentDetail);
+                                        },
+                                        child: AppointmentDetailBox(
+                                          image: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .cancelledAppointments!
+                                              .data![index]
+                                              .mentor!
+                                              .imagePath,
+                                          name: _myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .cancelledAppointments!
+                                                      .data![index]
+                                                      .mentor!
+                                                      .firstName ==
+                                                  null
+                                              ? '...'
+                                              : '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].mentor!.firstName} '
+                                                  '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].mentor!.lastName}',
+                                          category:
+                                              '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].category}',
+                                          fee:
+                                              '\$${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].payment!} Fees',
+                                          type:
+                                              '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeString}'
+                                                  .capitalizeFirst,
+                                          typeIcon: _myAppointmentLogic
+                                                  .imagesForAppointmentTypes[
+                                              (_myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .cancelledAppointments!
+                                                      .data![index]
+                                                      .appointmentTypeId!) -
+                                                  1],
+                                          date: DateFormat('dd/MM/yy').format(
+                                              DateTime.parse(_myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .cancelledAppointments!
+                                                  .data![index]
+                                                  .date!)),
+                                          time: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .cancelledAppointments!
+                                              .data![index]
+                                              .time!,
+                                          rating: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .cancelledAppointments!
+                                              .data![index]
+                                              .rating!
+                                              .toDouble(),
+                                          status: 3,
+                                          color: customRedColor,
+                                        ),
+                                      ),
+                                      index ==
+                                              _myAppointmentLogic
+                                                      .getUserAppointmentModel
+                                                      .data!
+                                                      .cancelledAppointments!
+                                                      .data!
+                                                      .length -
+                                                  1
+                                          ? SizedBox(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  .1,
+                                            )
+                                          : const SizedBox()
+                                    ],
+                                  );
+                                }),
+                              ),
                       ],
                     )),
           ),

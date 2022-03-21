@@ -47,9 +47,9 @@ class _MyCustomBottomBarState extends State<MyCustomBottomBar> {
                     children: [
                       Text(
                         '${widget.title}',
-                        style: const TextStyle(
+                        style:  TextStyle(
                             fontFamily: SarabunFontFamily.bold,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             color: Colors.white),
                       ),
                       SvgPicture.asset(

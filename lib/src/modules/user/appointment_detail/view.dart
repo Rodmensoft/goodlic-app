@@ -2,6 +2,7 @@ import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/get_repo.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/widget/bottom_sheet.dart';
+import 'package:consultant_product/src/modules/user/my_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/widgets/appontment_detail_box.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
@@ -16,6 +17,7 @@ import 'package:skeleton_loader/skeleton_loader.dart';
 import '../../../api_services/get_service.dart';
 import '../../../api_services/urls.dart';
 import 'logic.dart';
+import 'package:intl/intl.dart';
 
 class AppointmentDetailPage extends StatefulWidget {
   const AppointmentDetailPage({Key? key}) : super(key: key);
@@ -34,16 +36,16 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
     // TODO: implement initState
     super.initState();
 
-    getMethod(
-        context,
-        getAppointmentsDetailURL,
-        {
-          'token': '123',
-          'appointment_id': 19,
-          'user_id': Get.find<GeneralController>().storageBox.read('userID')
-        },
-        true,
-        getAppointmentDetailRepo);
+    // getMethod(
+    //     context,
+    //     getAppointmentsDetailURL,
+    //     {
+    //       'token': '123',
+    //       'appointment_id': 19,
+    //       'user_id': Get.find<GeneralController>().storageBox.read('userID')
+    //     },
+    //     true,
+    //     getAppointmentDetailRepo);
 
     Get.find<AppointmentDetailLogic>().scrollController = ScrollController()
       ..addListener(Get.find<AppointmentDetailLogic>().scrollListener);
@@ -79,39 +81,50 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                       heading: 'Appt. Detail',
                       subHeading: 'Your Appointment Detail With William Smith',
                       isShrink: _appointmentDetailLogic.isShrink,
-                      trailingIcon: 'assets/Icons/chatIcon.svg',
+                      trailingIcon: Get.find<MyAppointmentLogic>()
+                          .imagesForAppointmentTypes[(_appointmentDetailLogic
+                          .selectedAppointmentData.appointmentTypeId!) -
+                          1],
                       onTapTrailing: () {
-                        Get.toNamed(PageRoutes.chatScreen);
+                        // Get.toNamed(PageRoutes.chatScreen);
                       },
                     ),
                   ];
                 },
                 body: Column(
                   children: [
-                    _appointmentDetailLogic.getAppointmentDetailLoader!
-                        ? SkeletonLoader(
-                            period: const Duration(seconds: 2),
-                            highlightColor: Colors.grey,
-                            direction: SkeletonDirection.ltr,
-                            builder: Container(
-                              color: Colors.white,
-                              width: MediaQuery.of(context).size.width,
-                            ))
-                        : AppointmentDetailBox(
-                            image: 'assets/images/dummyTopRatedConsultant.png',
-                            name: 'William Smith',
-                            category: 'Financial Advisor',
-                            fee:
-                                '\$${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.payment} fees',
-                            type:
-                                '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.appointmentTypeString}',
-                            typeIcon: 'assets/Icons/chatIcon.svg',
-                            status: 0,
-                            date: '17/02/22',
-                            time: '9:10 AM',
-                            color: customLightThemeColor,
-                            rating: 5.0,
-                          ),
+                    AppointmentDetailBox(
+                      image: _appointmentDetailLogic
+                          .selectedAppointmentData.mentor!.imagePath,
+                      name: _appointmentDetailLogic
+                                  .selectedAppointmentData.mentor!.firstName ==
+                              null
+                          ? '...'
+                          : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.firstName} '
+                              '${_appointmentDetailLogic.selectedAppointmentData.mentor!.lastName}',
+                      category:
+                          '${_appointmentDetailLogic.selectedAppointmentData.category}',
+                      fee:
+                          '\$${_appointmentDetailLogic.selectedAppointmentData.payment!} Fees',
+                      type:
+                          '${_appointmentDetailLogic.selectedAppointmentData.appointmentTypeString}'
+                              .capitalizeFirst,
+                      typeIcon: Get.find<MyAppointmentLogic>()
+                          .imagesForAppointmentTypes[(_appointmentDetailLogic
+                              .selectedAppointmentData.appointmentTypeId!) -
+                          1],
+                      date:DateFormat('dd/MM/yy').format(
+                          DateTime.parse(
+                              _appointmentDetailLogic.selectedAppointmentData.date!)),
+                      time:
+                          _appointmentDetailLogic.selectedAppointmentData.time!,
+                      rating: _appointmentDetailLogic
+                          .selectedAppointmentData.rating!
+                          .toDouble(),
+                      status: _appointmentDetailLogic.appointmentStatus,
+                      color: _appointmentDetailLogic.colorForAppointmentTypes[
+                          _appointmentDetailLogic.appointmentStatus!],
+                    )
                   ],
                 )),
             bottomNavigationBar: GestureDetector(

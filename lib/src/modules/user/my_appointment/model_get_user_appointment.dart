@@ -202,6 +202,17 @@ class AppointmentsPageData {
   dynamic get to => _to;
   int? get total => _total;
 
+
+  set currentPage(int? value) {
+    _currentPage = value;
+  }
+  set lastPage(int? value) {
+    _lastPage = value;
+  }
+  set data(List<UserAppointmentsData>? value) {
+    _data = value;
+  }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['current_page'] = _currentPage;
@@ -248,6 +259,8 @@ class UserAppointmentsData {
       int? refund, 
       String? createdAt, 
       String? updatedAt,
+    int? rating,
+    String? category,
     UserAppointmentsDataMentor? mentor,}){
     _id = id;
     _menteeId = menteeId;
@@ -269,6 +282,8 @@ class UserAppointmentsData {
     _refund = refund;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
+    _rating = rating;
+    _category = category;
     _mentor = mentor;
 }
 
@@ -293,6 +308,8 @@ class UserAppointmentsData {
     _refund = json['refund'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
+    _rating = json['rating'];
+    _category = json['category'];
     _mentor = json['mentor'] != null ? UserAppointmentsDataMentor.fromJson(json['mentor']) : null;
   }
   int? _id;
@@ -315,6 +332,8 @@ class UserAppointmentsData {
   int? _refund;
   String? _createdAt;
   String? _updatedAt;
+  int? _rating;
+      String? _category;
   UserAppointmentsDataMentor? _mentor;
 
   int? get id => _id;
@@ -337,6 +356,8 @@ class UserAppointmentsData {
   int? get refund => _refund;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
+  int? get rating => _rating;
+  String? get category => _category;
   UserAppointmentsDataMentor? get mentor => _mentor;
 
   Map<String, dynamic> toJson() {
@@ -361,6 +382,8 @@ class UserAppointmentsData {
     map['refund'] = _refund;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
+    map['rating'] = _rating;
+    map['category'] = _category;
     if (_mentor != null) {
       map['mentor'] = _mentor?.toJson();
     }

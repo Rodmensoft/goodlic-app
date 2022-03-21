@@ -148,15 +148,15 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                         style: TextStyle(
                                             fontFamily:
                                                 SarabunFontFamily.semiBold,
-                                            fontSize: 14,
+                                            fontSize: 14.sp,
                                             color: _userHomeLogic
                                                 .categoriesColor[index]),
                                       ),
                                       Text(
                                         '(${_userHomeLogic.categoriesList[index].subTitle} Consultants)',
-                                        style: const TextStyle(
+                                        style:  TextStyle(
                                             fontFamily: SarabunFontFamily.light,
-                                            fontSize: 10,
+                                            fontSize: 10.sp,
                                             color: customTextGreyColor),
                                       ),
                                     ],

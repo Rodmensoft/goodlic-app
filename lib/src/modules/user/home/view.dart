@@ -129,11 +129,11 @@ class _UserHomePageState extends State<UserHomePage> {
                                     SizedBox(
                                       height: 50.h,
                                     ),
-                                    const Text(
+                                     Text(
                                       'Find Your',
                                       style: TextStyle(
                                           fontFamily: SarabunFontFamily.medium,
-                                          fontSize: 17,
+                                          fontSize: 17.sp,
                                           color: Colors.white),
                                     ),
                                     SizedBox(

@@ -22,7 +22,7 @@ getMethod(
 
   // dio.options.connectTimeout = 10000;
   // dio.options.receiveTimeout = 6000;
-  log('test ${Get.find<ApiLogic>().storageBox.read('authToken')}');
+  // log('test ${Get.find<ApiLogic>().storageBox.read('authToken')}');
 
   if (addAuthHeader && Get.find<ApiLogic>().storageBox.hasData('authToken')) {
     setCustomHeader(dio, 'Authorization',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:resize/resize.dart';
 
 class CustomDialogBox extends StatefulWidget {
   final String? title, descriptions, text;
@@ -60,7 +61,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                   : Text(
                       widget.title!,
                       style: TextStyle(
-                          fontSize: 23,
+                          fontSize: 23.sp,
                           fontWeight: FontWeight.bold,
                           color: widget.titleColor),
                     ),
@@ -92,7 +93,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                         child: Text(
                           widget.text!,
                           style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.w500),
                           textAlign: TextAlign.center,
