@@ -956,7 +956,7 @@ class _SlotSelectionState extends State<SlotSelection> {
         viewHeaderStyle: DateRangePickerViewHeaderStyle(
             textStyle: TextStyle(
                 fontFamily: SarabunFontFamily.medium,
-                fontSize: 16,
+                fontSize: 16.sp,
                 color: customTextBlackColor)),
         // dayFormat: 'EEE',
         showTrailingAndLeadingDates: false,

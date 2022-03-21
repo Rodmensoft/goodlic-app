@@ -26,651 +26,614 @@ class ModalInsideModal extends StatelessWidget {
                     BorderRadius.vertical(top: Radius.circular(30.r))),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
-              child: _appointmentDetailLogic.getAppointmentDetailLoader!
-                  ? SkeletonLoader(
-                      period: const Duration(seconds: 2),
-                      highlightColor: Colors.grey,
-                      direction: SkeletonDirection.ltr,
-                      builder: Container(
-                        color: Colors.white,
-                        width: MediaQuery.of(context).size.width,
-                      ))
-                  : Column(
+              child: Column(
+                children: [
+                  Center(
+                      child: SvgPicture.asset(
+                          'assets/Icons/bottomDownArrowIcon.svg')),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Expanded(
+                    child: ListView(
+                      padding: const EdgeInsets.all(0),
                       children: [
-                        Center(
-                            child: SvgPicture.asset(
-                                'assets/Icons/bottomDownArrowIcon.svg')),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        Expanded(
-                          child: _appointmentDetailLogic
-                                  .getAppointmentDetailLoader!
-                              ? SkeletonLoader(
-                                  period: const Duration(seconds: 2),
-                                  highlightColor: Colors.grey,
-                                  direction: SkeletonDirection.ltr,
-                                  builder: Container(
-                                    color: Colors.white,
-                                    width: MediaQuery.of(context).size.width,
-                                  ))
-                              : ListView(
-                                  padding: const EdgeInsets.all(0),
+                        ///---appointment-info
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.r),
+                              color: Colors.white),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 20.h, horizontal: 15.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Appointment Info',
+                                  style: state.sectionHeadingTextStyle,
+                                ),
+                                SizedBox(
+                                  height: 20.h,
+                                ),
+
+                                ///---date-time-reg.
+                                Row(
                                   children: [
-                                    ///---appointment-info
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          color: Colors.white),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 20.h, horizontal: 15.w),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Appointment Info',
-                                              style:
-                                                  state.sectionHeadingTextStyle,
-                                            ),
-                                            SizedBox(
-                                              height: 20.h,
-                                            ),
-
-                                            ///---date-time-reg.
-                                            Row(
-                                              children: [
-                                                ///---date
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Date',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        DateFormat('dd/MM/yy')
-                                                            .format(DateTime.parse(
-                                                                '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.createdAt}')),
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                ///---time
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Time',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        'Male',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                ///---reg. no
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Reg No.',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        '53564463',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 18.h,
-                                            ),
-
-                                            ///---type-doc.
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                ///---type
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Appointment Type',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.appointmentTypeString}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                ///---document
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Document',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        'Male',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-
-                                    ///---consultant-info
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          color: Colors.white),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 20.h, horizontal: 15.w),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Consultant Info',
-                                              style:
-                                                  state.sectionHeadingTextStyle,
-                                            ),
-                                            SizedBox(
-                                              height: 20.h,
-                                            ),
-
-                                            ///---name-gender-status.
-                                            Row(
-                                              children: [
-                                                ///---name
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Name',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.mentor!.firstName}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                ///---gender
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Gender',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.mentor!.gender}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                ///---status
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Status',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.mentor!.onlineStatus}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 18.h,
-                                            ),
-
-                                            ///---phone-city-cnic
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                ///---phone
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Phone',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.mentor!.phone}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                ///---city
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'City',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.mentor!.city}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                ///---cnic
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'CNIC',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.mentor!.cnic}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 18.h,
-                                            ),
-
-                                            ///---reg.date-address
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                ///---reg.date
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Reg. Date',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        DateFormat('dd/MM/yy')
-                                                            .format(DateTime.parse(
-                                                                '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.mentor!.createdAt}')),
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                ///---address
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Address',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        '${_appointmentDetailLogic.getAppointmentDetailModel.data!.appointment!.mentor!.address}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-
-                                    ///---reschedule-button
-                                    Center(
-                                      child: Container(
-                                        height: 55.h,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .7,
-                                        decoration: BoxDecoration(
-                                          color: customThemeColor,
-                                          borderRadius:
-                                              BorderRadius.circular(5.r),
-                                        ),
-                                        child: Center(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 25.w),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                const Text(
-                                                  'Reschedule',
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          SarabunFontFamily
-                                                              .bold,
-                                                      fontSize: 16,
-                                                      color: Colors.white),
-                                                ),
-                                                SvgPicture.asset(
-                                                  'assets/Icons/whiteForwardIcon.svg',
-                                                  height: 29.h,
-                                                  width: 29.w,
-                                                )
-                                              ],
-                                            ),
+                                    ///---date
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Date',
+                                            style: state.sectionLabelTextStyle,
                                           ),
-                                        ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            DateFormat('dd/MM/yy').format(
+                                                DateTime.parse(
+                                                    _appointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .date!)),
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 15.h,
                                     ),
 
-                                    ///---refund-button
-                                    Center(
-                                      child: Container(
-                                        color: Colors.white,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  40.w, 0, 40.w, 0),
-                                          child: Container(
-                                            height: 55.h,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border.all(
-                                                  color: customRedColor),
-                                              borderRadius:
-                                                  BorderRadius.circular(5.r),
-                                            ),
-                                            child: Center(
-                                              child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 25.w),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    const Text(
-                                                      'Get Refund',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              SarabunFontFamily
-                                                                  .bold,
-                                                          fontSize: 16,
-                                                          color:
-                                                              customRedColor),
-                                                    ),
-                                                    SvgPicture.asset(
-                                                      'assets/Icons/forwardArrowRedIcon.svg',
-                                                      height: 29.h,
-                                                      width: 29.w,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
+                                    ///---time
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Time',
+                                            style: state.sectionLabelTextStyle,
                                           ),
-                                        ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            _appointmentDetailLogic
+                                                .selectedAppointmentData.time!,
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 10.h,
+
+                                    ///---reg. no
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Reg No.',
+                                            style: state.sectionLabelTextStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            _appointmentDetailLogic
+                                                .selectedAppointmentData.id
+                                                .toString(),
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  height: 18.h,
+                                ),
+
+                                ///---type-doc.
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ///---type
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Appointment Type',
+                                            style: state.sectionLabelTextStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            _appointmentDetailLogic
+                                                .selectedAppointmentData
+                                                .appointmentTypeString!
+                                                .capitalizeFirst!,
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    ///---document
+                                    _appointmentDetailLogic
+                                                    .selectedAppointmentData
+                                                    .file ==
+                                                null ||
+                                            _appointmentDetailLogic
+                                                    .selectedAppointmentData
+                                                    .file ==
+                                                ''
+                                        ? const SizedBox()
+                                        : Expanded(
+                                            flex: 2,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Document',
+                                                  style: state
+                                                      .sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  _appointmentDetailLogic
+                                                      .selectedAppointmentData
+                                                      .fileType!,
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: state
+                                                      .sectionDataTextStyle,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+
+                        ///---consultant-info
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.r),
+                              color: Colors.white),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 20.h, horizontal: 15.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Consultant Info',
+                                  style: state.sectionHeadingTextStyle,
+                                ),
+                                SizedBox(
+                                  height: 20.h,
+                                ),
+
+                                ///---name-gender-status.
+                                Row(
+                                  children: [
+                                    ///---name
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Name',
+                                            style: state.sectionLabelTextStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            _appointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .mentor!
+                                                        .firstName ==
+                                                    null
+                                                ? '...'
+                                                : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.firstName!} '
+                                                    '${_appointmentDetailLogic.selectedAppointmentData.mentor!.lastName!}',
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    ///---gender
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Gender',
+                                            style: state.sectionLabelTextStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            _appointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .mentor!
+                                                        .gender ==
+                                                    null
+                                                ? '...'
+                                                : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.gender!}',
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    ///---religion
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Religion',
+                                            style: state.sectionLabelTextStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            _appointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .mentor!
+                                                        .religion ==
+                                                    null
+                                                ? '...'
+                                                : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.religion!}',
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 18.h,
+                                ),
+
+                                ///---phone-city-cnic
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ///---phone
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Phone',
+                                            style: state.sectionLabelTextStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            _appointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .mentor!
+                                                        .phone ==
+                                                    null
+                                                ? '...'
+                                                : _appointmentDetailLogic
+                                                    .selectedAppointmentData
+                                                    .mentor!
+                                                    .phone!,
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    ///---city
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'City',
+                                            style: state.sectionLabelTextStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            _appointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .mentor!
+                                                        .city ==
+                                                    null
+                                                ? '...'
+                                                : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.city!}',
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    ///---cnic
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'CNIC',
+                                            style: state.sectionLabelTextStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            _appointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .mentor!
+                                                        .cnic ==
+                                                    null
+                                                ? '...'
+                                                : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.cnic!}',
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 18.h,
+                                ),
+
+                                ///---reg.date-address
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ///---reg.date
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Reg. Date',
+                                            style: state.sectionLabelTextStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            DateFormat('dd/MM/yy').format(
+                                                DateTime.parse(
+                                                    '${_appointmentDetailLogic.selectedAppointmentData.mentor!.createdAt}')),
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    ///---address
+                                    Expanded(
+                                      flex: 2,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Address',
+                                            style: state.sectionLabelTextStyle,
+                                          ),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            _appointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .mentor!
+                                                        .address ==
+                                                    null
+                                                ? '...'
+                                                : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.address!}',
+                                            softWrap: true,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: state.sectionDataTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+
+                        ///---reschedule-button
+                        Center(
+                          child: Container(
+                            height: 55.h,
+                            width: MediaQuery.of(context).size.width * .7,
+                            decoration: BoxDecoration(
+                              color: customThemeColor,
+                              borderRadius: BorderRadius.circular(5.r),
+                            ),
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 25.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Reschedule',
+                                      style: TextStyle(
+                                          fontFamily: SarabunFontFamily.bold,
+                                          fontSize: 16.sp,
+                                          color: Colors.white),
+                                    ),
+                                    SvgPicture.asset(
+                                      'assets/Icons/whiteForwardIcon.svg',
+                                      height: 29.h,
+                                      width: 29.w,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+
+                        ///---refund-button
+                        Center(
+                          child: Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  40.w, 0, 40.w, 0),
+                              child: Container(
+                                height: 55.h,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(color: customRedColor),
+                                  borderRadius: BorderRadius.circular(5.r),
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25.w),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Get Refund',
+                                          style: TextStyle(
+                                              fontFamily:
+                                                  SarabunFontFamily.bold,
+                                              fontSize: 16.sp,
+                                              color: customRedColor),
+                                        ),
+                                        SvgPicture.asset(
+                                          'assets/Icons/forwardArrowRedIcon.svg',
+                                          height: 29.h,
+                                          width: 29.w,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
                         ),
                       ],
                     ),
+                  ),
+                ],
+              ),
             )),
       );
     });

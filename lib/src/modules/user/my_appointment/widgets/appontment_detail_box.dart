@@ -73,7 +73,9 @@ class AppointmentDetailBox extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.r)),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.r),
-                          child: Image.asset(
+                          child: image == null
+                              ?const SizedBox()
+                              :Image.network(
                             image!,
                             fit: BoxFit.cover,
                           )),

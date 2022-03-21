@@ -157,7 +157,10 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                                 borderRadius:
                                                     BorderRadius.circular(8.r),
                                                 child: Image.network(
-                                                  '${_userHomeLogic.topRatedConsultantList[index].image}',
+                                                  _userHomeLogic.topRatedConsultantList[index].image!
+                                                    .contains('assets')
+                                                      ? '$mediaUrl${_userHomeLogic.topRatedConsultantList[index].image}'
+                                                      : '${_userHomeLogic.topRatedConsultantList[index].image}',
                                                   width: 76.w,
                                                   height: 85.h,
                                                   fit: BoxFit.cover,

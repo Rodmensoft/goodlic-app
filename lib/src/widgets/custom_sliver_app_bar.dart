@@ -155,8 +155,8 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
                                       child: Center(
                                           child: SvgPicture.asset(
                                         widget.trailingIcon!,
-                                        height: 20.h,
-                                        width: 20.w,
+                                        height: 15.h,
+                                        width: 15.w,
                                         color: customOrangeColor,
                                         fit: BoxFit.cover,
                                       )),

@@ -43,16 +43,16 @@ class GetUserAppointmentModelMore {
 
 class GetUserAppointmentModelMoreData {
   GetUserAppointmentModelMoreData({
-    UserAppointmentsData? appointments,}){
+    AppointmentsPageData? appointments,}){
     _appointments = appointments;
 }
 
   GetUserAppointmentModelMoreData.fromJson(dynamic json) {
-    _appointments = json['appointments'] != null ? UserAppointmentsData.fromJson(json['appointments']) : null;
+    _appointments = json['appointments'] != null ? AppointmentsPageData.fromJson(json['appointments']) : null;
   }
-  UserAppointmentsData? _appointments;
+  AppointmentsPageData? _appointments;
 
-  UserAppointmentsData? get appointments => _appointments;
+  AppointmentsPageData? get appointments => _appointments;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

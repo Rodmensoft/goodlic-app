@@ -129,11 +129,11 @@ class _PaymentViewState extends State<PaymentView> {
                                                         color: Colors.white),
                                                   ),
                                                   TextFormField(
-                                                    style: const TextStyle(
+                                                    style:  TextStyle(
                                                         fontFamily:
                                                             SarabunFontFamily
                                                                 .semiBold,
-                                                        fontSize: 16,
+                                                        fontSize: 16.sp,
                                                         color: Colors.white),
                                                     cursorColor: Colors.white,
                                                     keyboardType:
@@ -236,11 +236,11 @@ class _PaymentViewState extends State<PaymentView> {
                                                                 Colors.white),
                                                       ),
                                                       TextFormField(
-                                                        style: const TextStyle(
+                                                        style:  TextStyle(
                                                             fontFamily:
                                                                 SarabunFontFamily
                                                                     .semiBold,
-                                                            fontSize: 14,
+                                                            fontSize: 14.sp,
                                                             color:
                                                                 Colors.white),
                                                         cursorColor:
@@ -334,11 +334,11 @@ class _PaymentViewState extends State<PaymentView> {
                                                       ),
                                                       TextFormField(
                                                         textAlign: TextAlign.center,
-                                                        style: const TextStyle(
+                                                        style:  TextStyle(
                                                             fontFamily:
                                                                 SarabunFontFamily
                                                                     .semiBold,
-                                                            fontSize: 14,
+                                                            fontSize: 14.sp,
                                                             color:
                                                                 Colors.white),
                                                         cursorColor:
@@ -432,11 +432,11 @@ class _PaymentViewState extends State<PaymentView> {
                                                       ),
                                                       TextFormField(
                                                         textAlign: TextAlign.center,
-                                                        style: const TextStyle(
+                                                        style:  TextStyle(
                                                             fontFamily:
                                                                 SarabunFontFamily
                                                                     .semiBold,
-                                                            fontSize: 14,
+                                                            fontSize: 14.sp,
                                                             color:
                                                                 Colors.white),
                                                         cursorColor:
@@ -572,12 +572,12 @@ class _PaymentViewState extends State<PaymentView> {
                                               )
                                             : const SizedBox(),
                                         myWidth == 0.0
-                                            ? const Text(
+                                            ?  Text(
                                                 'Slide To Pay',
                                                 style: TextStyle(
                                                     fontFamily:
                                                         SarabunFontFamily.bold,
-                                                    fontSize: 16,
+                                                    fontSize: 16.sp,
                                                     color: Color(0xff8889BB)),
                                               )
                                             : const SizedBox(),

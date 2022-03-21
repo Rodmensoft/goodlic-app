@@ -18,6 +18,11 @@ String loginWithEmailURL = apiBaseUrl + 'login-email';
 ///---user
 String getUserProfileURL = apiBaseUrl + 'get-mentee-profile';
 
+ String updateMenteeProfileUrl = apiBaseUrl + 'update-mentee-profile';
+ String mentorProfileGenericDataUrl = apiBaseUrl + 'generic_mentor';
+ String getCitiesByIdUrl = apiBaseUrl + 'cities';
+ String getCountriesUrl = apiBaseUrl + 'countries';
+
 ///---consultant-profile-by-id
 String getConsultantProfileByIDURL = apiBaseUrl + 'getUserById';
 

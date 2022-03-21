@@ -303,11 +303,11 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                             maxLines: 1,
                                                             overflow:
                                                                 TextOverflow.ellipsis,
-                                                            style: const TextStyle(
+                                                            style:  TextStyle(
                                                                 fontFamily:
                                                                     SarabunFontFamily
                                                                         .medium,
-                                                                fontSize: 12,
+                                                                fontSize: 12.sp,
                                                                 color:
                                                                     customOrangeColor),
                                                           ),
@@ -341,13 +341,13 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                         SizedBox(
                                                           width: 10.w,
                                                         ),
-                                                        const Text(
+                                                         Text(
                                                           'Upload Here',
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
                                                                       .medium,
-                                                              fontSize: 12,
+                                                              fontSize: 12.sp,
                                                               color:
                                                                   customOrangeColor),
                                                         )

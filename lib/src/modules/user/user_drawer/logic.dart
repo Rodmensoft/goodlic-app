@@ -14,6 +14,7 @@ class UserDrawerLogic extends GetxController {
     DrawerTile(
         title: 'Appointments Log',
         icon: 'assets/Icons/drawerAppointmentIcon.svg'),
+    DrawerTile(title: 'Edit Profile', icon: 'assets/Icons/feeIcon.svg'),
     DrawerTile(title: 'My Wallet', icon: 'assets/Icons/feeIcon.svg'),
     DrawerTile(
         title: 'Contact US', icon: 'assets/Icons/drawerContactUsIcon.svg'),
@@ -55,12 +56,12 @@ class UserDrawerLogic extends GetxController {
       case 3:
         {
           Get.back();
-          return Get.toNamed(PageRoutes.walletScreen);
+          return Get.toNamed(PageRoutes.editUserProfile);
         }
       case 4:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.walletScreen);
         }
       case 5:
         {
@@ -68,6 +69,11 @@ class UserDrawerLogic extends GetxController {
           return null;
         }
       case 6:
+        {
+          Get.back();
+          return null;
+        }
+      case 7:
         {
           Get.back();
           return null;

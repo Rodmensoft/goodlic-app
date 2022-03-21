@@ -1,4 +1,5 @@
 import 'package:consultant_product/src/modules/user/my_appointment/model_get_user_appointment.dart';
+import 'package:consultant_product/src/modules/user/my_appointment/model_get_user_appointment_more.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -12,11 +13,20 @@ class MyAppointmentLogic extends GetxController {
   late TabController tabController;
 
   GetUserAppointmentModel getUserAppointmentModel = GetUserAppointmentModel();
+  GetUserAppointmentModelMore getUserAppointmentModelMore = GetUserAppointmentModelMore();
+
+
   bool? getUserAppointmentLoader = true;
   updateGetUserAppointmentLoader(bool? newValue){
     getUserAppointmentLoader = newValue;
     update();
   }
+  bool? getUserAppointmentMoreLoader = false;
+  updateGetUserAppointmentMoreLoader(bool? newValue){
+    getUserAppointmentMoreLoader = newValue;
+    update();
+  }
+
 
   ///----app-bar-settings-----start
   ScrollController? scrollController;
@@ -40,5 +50,22 @@ class MyAppointmentLogic extends GetxController {
     Tab( text: "Accepted",),
     Tab( text: "Completed"),
     Tab( text: "Cancelled"),
+  ];
+
+  List imagesForAppointmentTypes = [
+    ///---audio
+    'assets/Icons/audio.svg',
+
+    ///---video
+    'assets/Icons/videoCallIcon.svg',
+
+    ///---chat
+    'assets/Icons/chatIcon.svg',
+
+    ///---on-site
+    'assets/Icons/physicalIcon.svg',
+
+    ///---home-visit
+    'assets/Icons/house-fill.svg',
   ];
 }

@@ -1,5 +1,6 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -131,56 +132,65 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                               ],
                                             ),
                                           )
-                                        : InkWell(
-                                            onTap: () {},
-                                            child: Row(
+                                        : Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            ///---image
+                                            Container(
+                                              height: 49.h,
+                                              width: 49.w,
+                                              decoration:
+                                                  const BoxDecoration(
+                                                      color: Colors.grey,
+                                                      shape:
+                                                          BoxShape.circle),
+                                              child: _userHomeLogic.getUserProfileModel.data!.user!.imagePath! == null
+                                                  ? const SizedBox()
+                                                  : ClipRRect(
+                                                borderRadius: BorderRadius.circular(30),
+                                                    child: Image.network(
+                                                    _userHomeLogic.getUserProfileModel.data!.user!.imagePath!
+                                                        .contains('assets')
+                                                        ? '$mediaUrl${_userHomeLogic.getUserProfileModel.data!.user!.imagePath}'
+                                                        : '${_userHomeLogic.getUserProfileModel.data!.user!.imagePath}',
+                                                      fit: BoxFit.cover,
+                                              ),
+                                                  ),
+                                            ),
+                                            SizedBox(
+                                              width: 15.w,
+                                            ),
+                                            Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                                  CrossAxisAlignment.start,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                                  MainAxisAlignment.center,
                                               children: [
-                                                ///---image
-                                                Container(
-                                                  height: 49.h,
-                                                  width: 49.w,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          color: Colors.grey,
-                                                          shape:
-                                                              BoxShape.circle),
+                                                ///---name
+                                                Text(
+                                                  _userHomeLogic.getUserProfileModel.data!.user!.firstName ?? '',
+                                                  style:
+                                                      state.nameTextStyle,
                                                 ),
+
                                                 SizedBox(
-                                                  width: 15.w,
+                                                  height: 5.h,
                                                 ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    ///---name
-                                                    Text(
-                                                      _userHomeLogic.getUserProfileModel.data!.user!.firstName ?? '',
-                                                      style:
-                                                          state.nameTextStyle,
-                                                    ),
 
-                                                    SizedBox(
-                                                      height: 5.h,
-                                                    ),
-
-                                                    ///---email
-                                                    Text(
-                                                      _userHomeLogic.getUserProfileModel.data!.user!.email ?? '',
-                                                      style:
-                                                          state.emailTextStyle,
-                                                    ),
-                                                  ],
+                                                ///---email
+                                                Text(
+                                                  _userHomeLogic.getUserProfileModel.data!.user!.email ?? '',
+                                                  style:
+                                                      state.emailTextStyle,
                                                 ),
-                                                const Spacer()
                                               ],
                                             ),
-                                          ),
+                                            const Spacer()
+                                          ],
+                                        ),
                                   ),
                                   InkWell(
                                       onTap: () {

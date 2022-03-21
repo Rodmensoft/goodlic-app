@@ -5,6 +5,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:resize/resize.dart';
 
 class GeneralController extends GetxController {
   GetStorage storageBox = GetStorage();
@@ -231,9 +232,9 @@ class GeneralController extends GetxController {
                             Text(
                               'select_language'.tr,
                               textAlign: TextAlign.start,
-                              style: const TextStyle(
+                              style:  TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 24,
+                                  fontSize: 24.sp,
                                   color: Colors.black),
                             ),
                           ],
@@ -270,16 +271,16 @@ class GeneralController extends GetxController {
                                   children: [
                                     Text(
                                       localeList[index].name,
-                                      style: const TextStyle(
+                                      style:  TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 18,
+                                          fontSize: 18.sp,
                                           color: Colors.black),
                                     ),
                                     Text(
                                       localeList[index].flag,
-                                      style: const TextStyle(
+                                      style:  TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 20,
+                                          fontSize: 20.sp,
                                           color: Colors.black),
                                     ),
                                   ],

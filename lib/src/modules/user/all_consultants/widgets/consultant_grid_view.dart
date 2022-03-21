@@ -38,7 +38,7 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
             child: Center(
               child: _allConsultantsLogic.allConsultantList[widget.parentIndex!]
                       .mentors!.data!.isEmpty
-                  ?  Text(
+                  ? Text(
                       'No Record Found',
                       style: TextStyle(
                           fontFamily: SarabunFontFamily.regular,
@@ -58,9 +58,14 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                         (index) => Padding(
                           padding: EdgeInsets.only(top: 0.h),
                           child: InkWell(
-                            onTap: (){
+                            onTap: () {
                               Get.find<UserHomeLogic>().selectedConsultantID =
-                                  _allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].user!.id;
+                                  _allConsultantsLogic
+                                      .allConsultantList[widget.parentIndex!]
+                                      .mentors!
+                                      .data![index]
+                                      .user!
+                                      .id;
                               Get.find<UserHomeLogic>().update();
                               Get.toNamed(PageRoutes.consultantProfileForUser);
                             },
@@ -150,8 +155,9 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                                     itemSize: 15,
                                     itemPadding: const EdgeInsets.symmetric(
                                         horizontal: 0.0),
-                                    itemBuilder: (context, _) => SvgPicture.asset(
-                                        'assets/Icons/ratingStarIcon.svg'),
+                                    itemBuilder: (context, _) =>
+                                        SvgPicture.asset(
+                                            'assets/Icons/ratingStarIcon.svg'),
                                     onRatingUpdate: (rating) {
                                       log('Rating--->>$rating');
                                     },
@@ -165,18 +171,19 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                       )),
             ),
           ),
-          _allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.currentPage! <
+          _allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!
+                      .currentPage! <
                   _allConsultantsLogic
                       .allConsultantList[widget.parentIndex!].mentors!.lastPage!
               ? _allConsultantsLogic.allConsultantMoreLoader!
                   ? Padding(
-            padding: EdgeInsets.only(top: 25.h),
-                    child: const Center(
-                      child: CircularProgressIndicator(
+                      padding: EdgeInsets.only(top: 25.h),
+                      child: const Center(
+                        child: CircularProgressIndicator(
                           color: customThemeColor,
                         ),
-                    ),
-                  )
+                      ),
+                    )
                   : Padding(
                       padding: EdgeInsets.only(top: 25.h),
                       child: Center(
