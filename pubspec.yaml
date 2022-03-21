@@ -61,6 +61,9 @@ dependencies:
   permission_handler: ^8.3.0
   syncfusion_flutter_charts: ^19.4.53
 
+  rounded_expansion_tile: ^0.0.13
+  progress_indicator: ^0.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

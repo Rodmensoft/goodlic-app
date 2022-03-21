@@ -8,6 +8,34 @@ import 'state.dart';
 class SkillInfoLogic extends GetxController {
   final SkillInfoState state = SkillInfoState();
 
+  String? selectedDepartment;
+  List<String> departmentDropDownList = [];
+
+  updateDepartmentDropDownList(String newValue) {
+    departmentDropDownList.add(newValue);
+    update();
+  }
+
+  emptyDepartmentDropDownList() {
+    departmentDropDownList = [];
+    update();
+  }
+
+  ///
+
+  String? selectedCategory;
+  List<String> categoryDropDownList = [];
+
+  updateCategoryDropDownList(String newValue) {
+    categoryDropDownList.add(newValue);
+    update();
+  }
+
+  emptyCategoryDropDownList() {
+    categoryDropDownList = [];
+    update();
+  }
+
   ScrollController? scrollController;
   bool lastStatus = true;
   double height = 100.h;

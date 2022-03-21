@@ -1,7 +1,11 @@
+import 'dart:developer';
+
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:resize/resize.dart';
 
 import '../../../../route_generator.dart';
@@ -309,68 +313,146 @@ class _EducationalInfoPageState extends State<EducationalInfoPage> {
                           SizedBox(height: 25.h),
 
                           /// Institute field
+                          // Padding(
+                          //   padding: EdgeInsetsDirectional.fromSTEB(
+                          //       16.w, 0.0, 16.w, 16.h),
+                          //   child: FormField<String>(
+                          //     builder: (FormFieldState<String> state) {
+                          //       return InputDecorator(
+                          //         decoration: InputDecoration(
+                          //             //  labelStyle: textStyle,
+                          //             errorStyle: const TextStyle(
+                          //                 color: Colors.redAccent,
+                          //                 fontSize: 16.0),
+                          //             fillColor: Colors.white,
+                          //             filled: true,
+                          //             enabledBorder: OutlineInputBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(8.r),
+                          //                 borderSide: const BorderSide(
+                          //                     color: Colors.transparent)),
+                          //             focusedBorder: OutlineInputBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(8.r),
+                          //                 borderSide: const BorderSide(
+                          //                     color: customLightThemeColor)),
+                          //             errorBorder: OutlineInputBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(5.0),
+                          //                 borderSide: const BorderSide(
+                          //                     color: Colors.red)),
+                          //             border: OutlineInputBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(8.r),
+                          //                 borderSide: const BorderSide(
+                          //                     color: Colors.transparent))),
+                          //         //   isEmpty: _currentGenderValue == '',
+                          //         child: DropdownButtonHideUnderline(
+                          //           child: DropdownButton<String>(
+                          //             icon: SvgPicture.asset(
+                          //                 'assets/Icons/dropdownIcon.svg'),
+                          //             hint: Text('Institute',
+                          //                 style: TextStyle(
+                          //                     fontFamily:
+                          //                         SarabunFontFamily.regular,
+                          //                     fontSize: 16.sp,
+                          //                     color: customTextGreyColor)),
+                          //             value: _currentGenderValue,
+                          //             isDense: true,
+                          //             onChanged: (newValue) {
+                          //               setState(() {
+                          //                 _currentGenderValue = newValue;
+                          //                 state.didChange(newValue);
+                          //               });
+                          //             },
+                          //             items: _gender.map((String value) {
+                          //               return DropdownMenuItem<String>(
+                          //                 value: value,
+                          //                 child: Text(value),
+                          //               );
+                          //             }).toList(),
+                          //           ),
+                          //         ),
+                          //       );
+                          //     },
+                          //   ),
+                          // ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                16.w, 0.0, 16.w, 16.h),
-                            child: FormField<String>(
-                              builder: (FormFieldState<String> state) {
-                                return InputDecorator(
-                                  decoration: InputDecoration(
-                                      //  labelStyle: textStyle,
-                                      errorStyle: const TextStyle(
-                                          color: Colors.redAccent,
-                                          fontSize: 16.0),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: customLightThemeColor)),
-                                      errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.red)),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent))),
-                                  //   isEmpty: _currentGenderValue == '',
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton<String>(
-                                      icon: SvgPicture.asset(
-                                          'assets/Icons/dropdownIcon.svg'),
-                                      hint: Text('Institute',
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  SarabunFontFamily.regular,
-                                              fontSize: 16.sp,
-                                              color: customTextGreyColor)),
-                                      value: _currentGenderValue,
-                                      isDense: true,
-                                      onChanged: (newValue) {
-                                        setState(() {
-                                          _currentGenderValue = newValue;
-                                          state.didChange(newValue);
-                                        });
-                                      },
-                                      items: _gender.map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
+                                16.w, 0.h, 16.w, 16.h),
+                            child: ButtonTheme(
+                              alignedDropdown: true,
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButtonFormField<String>(
+                                  hint: Text('Institute',
+                                      style: TextStyle(
+                                          fontFamily: SarabunFontFamily.regular,
+                                          fontSize: 16.sp,
+                                          color: customTextGreyColor)),
+                                  onTap: () {
+                                    FocusScopeNode currentFocus =
+                                        FocusScope.of(context);
+                                    if (!currentFocus.hasPrimaryFocus) {
+                                      currentFocus.unfocus();
+                                    }
+                                  },
+                                  decoration: const InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 0.0),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: customThemeColor)),
+                                    errorBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent)),
+                                    border: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color(0xffDEE8EE))),
                                   ),
-                                );
-                              },
+                                  focusColor: Colors.white,
+                                  isExpanded: true,
+                                  style: state.textFieldTextStyle,
+                                  iconEnabledColor: customThemeColor,
+                                  icon: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 20.w, 0),
+                                    child: SvgPicture.asset(
+                                        'assets/Icons/dropdownIcon.svg'),
+                                  ),
+                                  value: _educationalInfoLogic.selectedGender,
+                                  items: _educationalInfoLogic
+                                      .genderDropDownList
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: state.textFieldTextStyle,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    log(value.toString());
+                                    setState(() {
+                                      _educationalInfoLogic.selectedGender =
+                                          value;
+                                    });
+                                  },
+                                  validator: (String? value) {
+                                    if (value == null) {
+                                      return 'field_required'.tr;
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                ),
+                              ),
                             ),
                           ),
 
@@ -379,157 +461,337 @@ class _EducationalInfoPageState extends State<EducationalInfoPage> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.w, 0.h, 16.w, 16.h),
                             child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  /// Dropdown Degree field
-                                  SizedBox(
-                                    height: 65,
-                                    width: 160,
-                                    child: FormField<String>(
-                                      builder: (FormFieldState<String> state) {
-                                        return InputDecorator(
-                                          decoration: InputDecoration(
-                                              //  labelStyle: textStyle,
-                                              errorStyle: const TextStyle(
-                                                  color: Colors.redAccent,
-                                                  fontSize: 16.0),
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          customLightThemeColor)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.red)),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8.r),
-                                                  borderSide: const BorderSide(color: Colors.transparent))),
-                                          //   isEmpty: _currentGenderValue == '',
-                                          child: DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              icon: SvgPicture.asset(
-                                                  'assets/Icons/dropdownIcon.svg'),
-                                              hint: Text('Degree',
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          SarabunFontFamily
-                                                              .regular,
-                                                      fontSize: 16.sp,
-                                                      color:
-                                                          customTextGreyColor)),
-                                              value: _currentGenderValue,
-                                              isDense: true,
-                                              onChanged: (newValue) {
-                                                setState(() {
-                                                  _currentGenderValue =
-                                                      newValue;
-                                                  state.didChange(newValue);
-                                                });
-                                              },
-                                              items:
-                                                  _gender.map((String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            ),
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ///---degree
+                                Expanded(
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 0),
+                                    child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButtonHideUnderline(
+                                        child: DropdownButtonFormField<String>(
+                                          hint: Text('Degree',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      SarabunFontFamily.regular,
+                                                  fontSize: 16.sp,
+                                                  color: customTextGreyColor)),
+                                          onTap: () {
+                                            FocusScopeNode currentFocus =
+                                                FocusScope.of(context);
+                                            if (!currentFocus.hasPrimaryFocus) {
+                                              currentFocus.unfocus();
+                                            }
+                                          },
+                                          decoration: const InputDecoration(
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    vertical: 10.0,
+                                                    horizontal: 0.0),
+                                            fillColor: Colors.white,
+                                            filled: true,
+                                            focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: customThemeColor)),
+                                            errorBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.red)),
+                                            enabledBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent)),
+                                            border: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Color(0xffDEE8EE))),
                                           ),
-                                        );
-                                      },
+                                          focusColor: Colors.white,
+                                          isExpanded: true,
+                                          style: state.textFieldTextStyle,
+                                          iconEnabledColor: customThemeColor,
+                                          icon: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 20.w, 0),
+                                            child: SvgPicture.asset(
+                                                'assets/Icons/dropdownIcon.svg'),
+                                          ),
+                                          value: _educationalInfoLogic
+                                              .selectedGender,
+                                          items: _educationalInfoLogic
+                                              .genderDropDownList
+                                              .map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(
+                                                value,
+                                                style: state.textFieldTextStyle,
+                                              ),
+                                            );
+                                          }).toList(),
+                                          onChanged: (String? value) {
+                                            log(value.toString());
+                                            setState(() {
+                                              _educationalInfoLogic
+                                                  .selectedGender = value;
+                                            });
+                                          },
+                                          validator: (String? value) {
+                                            if (value == null) {
+                                              return 'field_required'.tr;
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                        ),
+                                      ),
                                     ),
                                   ),
+                                ),
 
-                                  /// Dropdown Subject field
-                                  SizedBox(
-                                    height: 65,
-                                    width: 160,
-                                    child: FormField<String>(
-                                      builder: (FormFieldState<String> state) {
-                                        return InputDecorator(
-                                          decoration: InputDecoration(
-                                              labelStyle: const TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.black),
-                                              errorStyle: const TextStyle(
-                                                  color: Colors.redAccent,
-                                                  fontSize: 16.0),
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(
-                                                      5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          customLightThemeColor)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide:
-                                                      const BorderSide(color: Colors.red)),
-                                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0), borderSide: const BorderSide(color: Colors.transparent))),
-
-                                          //   isEmpty: _currentReligionValue == '',
-                                          child: DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              icon: SvgPicture.asset(
-                                                  'assets/Icons/dropdownIcon.svg'),
-                                              hint: Text(
-                                                'Subject',
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        SarabunFontFamily
-                                                            .regular,
-                                                    fontSize: 16.sp,
-                                                    color: customTextGreyColor),
-                                              ),
-                                              value: _currentGenderValue,
-                                              isDense: true,
-                                              onChanged: (newValue) {
-                                                setState(() {
-                                                  _currentGenderValue =
-                                                      newValue;
-                                                  state.didChange(newValue);
-                                                });
-                                              },
-                                              items:
-                                                  _gender.map((String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            ),
+                                ///---subject
+                                Expanded(
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            10, 0, 0, 0),
+                                    child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButtonHideUnderline(
+                                        child: DropdownButtonFormField<String>(
+                                          hint: Text('Subject',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      SarabunFontFamily.regular,
+                                                  fontSize: 16.sp,
+                                                  color: customTextGreyColor)),
+                                          onTap: () {
+                                            FocusScopeNode currentFocus =
+                                                FocusScope.of(context);
+                                            if (!currentFocus.hasPrimaryFocus) {
+                                              currentFocus.unfocus();
+                                            }
+                                          },
+                                          decoration: const InputDecoration(
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    vertical: 10.0,
+                                                    horizontal: 0.0),
+                                            fillColor: Colors.white,
+                                            filled: true,
+                                            focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: customThemeColor)),
+                                            errorBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.red)),
+                                            enabledBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent)),
+                                            border: UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Color(0xffDEE8EE))),
                                           ),
-                                        );
-                                      },
+                                          focusColor: Colors.white,
+                                          isExpanded: true,
+                                          style: state.textFieldTextStyle,
+                                          iconEnabledColor: customThemeColor,
+                                          icon: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 20.w, 0),
+                                            child: SvgPicture.asset(
+                                                'assets/Icons/dropdownIcon.svg'),
+                                          ),
+                                          value: _educationalInfoLogic
+                                              .selectedGender,
+                                          items: _educationalInfoLogic
+                                              .genderDropDownList
+                                              .map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(
+                                                value,
+                                                style: state.textFieldTextStyle,
+                                              ),
+                                            );
+                                          }).toList(),
+                                          onChanged: (String? value) {
+                                            log(value.toString());
+                                            setState(() {
+                                              _educationalInfoLogic
+                                                  .selectedGender = value;
+                                            });
+                                          },
+                                          validator: (String? value) {
+                                            if (value == null) {
+                                              return 'field_required'.tr;
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                        ),
+                                      ),
                                     ),
-                                  )
-                                ]),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // Row(
+                            //     mainAxisAlignment:
+                            //         MainAxisAlignment.spaceBetween,
+                            //     children: [
+                            //       /// Dropdown Degree field
+                            //       SizedBox(
+                            //         height: 65,
+                            //         width: 160,
+                            //         child: FormField<String>(
+                            //           builder: (FormFieldState<String> state) {
+                            //             return InputDecorator(
+                            //               decoration: InputDecoration(
+                            //                   //  labelStyle: textStyle,
+                            //                   errorStyle: const TextStyle(
+                            //                       color: Colors.redAccent,
+                            //                       fontSize: 16.0),
+                            //                   fillColor: Colors.white,
+                            //                   filled: true,
+                            //                   enabledBorder: OutlineInputBorder(
+                            //                       borderRadius:
+                            //                           BorderRadius.circular(
+                            //                               8.r),
+                            //                       borderSide: const BorderSide(
+                            //                           color:
+                            //                               Colors.transparent)),
+                            //                   focusedBorder: OutlineInputBorder(
+                            //                       borderRadius:
+                            //                           BorderRadius.circular(
+                            //                               8.r),
+                            //                       borderSide: const BorderSide(
+                            //                           color:
+                            //                               customLightThemeColor)),
+                            //                   errorBorder: OutlineInputBorder(
+                            //                       borderRadius:
+                            //                           BorderRadius.circular(
+                            //                               5.0),
+                            //                       borderSide: const BorderSide(
+                            //                           color: Colors.red)),
+                            //                   border: OutlineInputBorder(
+                            //                       borderRadius:
+                            //                           BorderRadius.circular(8.r),
+                            //                       borderSide: const BorderSide(color: Colors.transparent))),
+                            //               //   isEmpty: _currentGenderValue == '',
+                            //               child: DropdownButtonHideUnderline(
+                            //                 child: DropdownButton<String>(
+                            //                   icon: SvgPicture.asset(
+                            //                       'assets/Icons/dropdownIcon.svg'),
+                            //                   hint: Text('Degree',
+                            //                       style: TextStyle(
+                            //                           fontFamily:
+                            //                               SarabunFontFamily
+                            //                                   .regular,
+                            //                           fontSize: 16.sp,
+                            //                           color:
+                            //                               customTextGreyColor)),
+                            //                   value: _currentGenderValue,
+                            //                   isDense: true,
+                            //                   onChanged: (newValue) {
+                            //                     setState(() {
+                            //                       _currentGenderValue =
+                            //                           newValue;
+                            //                       state.didChange(newValue);
+                            //                     });
+                            //                   },
+                            //                   items:
+                            //                       _gender.map((String value) {
+                            //                     return DropdownMenuItem<String>(
+                            //                       value: value,
+                            //                       child: Text(value),
+                            //                     );
+                            //                   }).toList(),
+                            //                 ),
+                            //               ),
+                            //             );
+                            //           },
+                            //         ),
+                            //       ),
+                            //
+                            //       /// Dropdown Subject field
+                            //       SizedBox(
+                            //         height: 65,
+                            //         width: 160,
+                            //         child: FormField<String>(
+                            //           builder: (FormFieldState<String> state) {
+                            //             return InputDecorator(
+                            //               decoration: InputDecoration(
+                            //                   labelStyle: const TextStyle(
+                            //                       fontSize: 12,
+                            //                       color: Colors.black),
+                            //                   errorStyle: const TextStyle(
+                            //                       color: Colors.redAccent,
+                            //                       fontSize: 16.0),
+                            //                   fillColor: Colors.white,
+                            //                   filled: true,
+                            //                   enabledBorder: OutlineInputBorder(
+                            //                       borderRadius: BorderRadius.circular(
+                            //                           5.0),
+                            //                       borderSide: const BorderSide(
+                            //                           color:
+                            //                               Colors.transparent)),
+                            //                   focusedBorder: OutlineInputBorder(
+                            //                       borderRadius:
+                            //                           BorderRadius.circular(
+                            //                               5.0),
+                            //                       borderSide: const BorderSide(
+                            //                           color:
+                            //                               customLightThemeColor)),
+                            //                   errorBorder: OutlineInputBorder(
+                            //                       borderRadius:
+                            //                           BorderRadius.circular(
+                            //                               5.0),
+                            //                       borderSide:
+                            //                           const BorderSide(color: Colors.red)),
+                            //                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0), borderSide: const BorderSide(color: Colors.transparent))),
+                            //
+                            //               //   isEmpty: _currentReligionValue == '',
+                            //               child: DropdownButtonHideUnderline(
+                            //                 child: DropdownButton<String>(
+                            //                   icon: SvgPicture.asset(
+                            //                       'assets/Icons/dropdownIcon.svg'),
+                            //                   hint: Text(
+                            //                     'Subject',
+                            //                     style: TextStyle(
+                            //                         fontFamily:
+                            //                             SarabunFontFamily
+                            //                                 .regular,
+                            //                         fontSize: 16.sp,
+                            //                         color: customTextGreyColor),
+                            //                   ),
+                            //                   value: _currentGenderValue,
+                            //                   isDense: true,
+                            //                   onChanged: (newValue) {
+                            //                     setState(() {
+                            //                       _currentGenderValue =
+                            //                           newValue;
+                            //                       state.didChange(newValue);
+                            //                     });
+                            //                   },
+                            //                   items:
+                            //                       _gender.map((String value) {
+                            //                     return DropdownMenuItem<String>(
+                            //                       value: value,
+                            //                       child: Text(value),
+                            //                     );
+                            //                   }).toList(),
+                            //                 ),
+                            //               ),
+                            //             );
+                            //           },
+                            //         ),
+                            //       )
+                            //     ]),
                           ),
 
                           /// enter CNIC field
@@ -576,162 +838,333 @@ class _EducationalInfoPageState extends State<EducationalInfoPage> {
                             ),
                           ),
 
-                          /// Dropdowns  ///
+                          /// Dropdowns To date From date  ///
+                          // Padding(
+                          //   padding: EdgeInsetsDirectional.fromSTEB(
+                          //       16.w, 0.h, 16.w, 16.h),
+                          //   child: Row(
+                          //       mainAxisAlignment:
+                          //           MainAxisAlignment.spaceBetween,
+                          //       children: [
+                          //         /// Dropdown From field
+                          //         SizedBox(
+                          //           height: 65,
+                          //           width: 160,
+                          //           child: FormField<String>(
+                          //             builder: (FormFieldState<String> state) {
+                          //               return InputDecorator(
+                          //                 decoration: InputDecoration(
+                          //                     //  labelStyle: textStyle,
+                          //                     errorStyle: const TextStyle(
+                          //                         color: Colors.redAccent,
+                          //                         fontSize: 16.0),
+                          //                     fillColor: Colors.white,
+                          //                     filled: true,
+                          //                     enabledBorder: OutlineInputBorder(
+                          //                         borderRadius:
+                          //                             BorderRadius.circular(
+                          //                                 8.r),
+                          //                         borderSide: const BorderSide(
+                          //                             color:
+                          //                                 Colors.transparent)),
+                          //                     focusedBorder: OutlineInputBorder(
+                          //                         borderRadius:
+                          //                             BorderRadius.circular(
+                          //                                 8.r),
+                          //                         borderSide: const BorderSide(
+                          //                             color:
+                          //                                 customLightThemeColor)),
+                          //                     errorBorder: OutlineInputBorder(
+                          //                         borderRadius:
+                          //                             BorderRadius.circular(
+                          //                                 5.0),
+                          //                         borderSide: const BorderSide(
+                          //                             color: Colors.red)),
+                          //                     border: OutlineInputBorder(
+                          //                         borderRadius:
+                          //                             BorderRadius.circular(8.r),
+                          //                         borderSide: const BorderSide(color: Colors.transparent))),
+                          //                 //   isEmpty: _currentGenderValue == '',
+                          //                 child: DropdownButtonHideUnderline(
+                          //                   child: DropdownButton<String>(
+                          //                     icon: SvgPicture.asset(
+                          //                         'assets/Icons/calendarIcon.svg'),
+                          //                     hint: Text('From',
+                          //                         style: TextStyle(
+                          //                             fontFamily:
+                          //                                 SarabunFontFamily
+                          //                                     .regular,
+                          //                             fontSize: 16.sp,
+                          //                             color:
+                          //                                 customTextGreyColor)),
+                          //                     value: _currentGenderValue,
+                          //                     isDense: true,
+                          //                     onChanged: (newValue) {
+                          //                       setState(() {
+                          //                         _currentGenderValue =
+                          //                             newValue;
+                          //                         state.didChange(newValue);
+                          //                       });
+                          //                     },
+                          //                     items:
+                          //                         _gender.map((String value) {
+                          //                       return DropdownMenuItem<String>(
+                          //                         value: value,
+                          //                         child: Text(value),
+                          //                       );
+                          //                     }).toList(),
+                          //                   ),
+                          //                 ),
+                          //               );
+                          //             },
+                          //           ),
+                          //         ),
+                          //
+                          //         /// Dropdown To field
+                          //         SizedBox(
+                          //           height: 65,
+                          //           width: 160,
+                          //           child: FormField<String>(
+                          //             builder: (FormFieldState<String> state) {
+                          //               return InputDecorator(
+                          //                 decoration: InputDecoration(
+                          //                     labelStyle: const TextStyle(
+                          //                         fontSize: 12,
+                          //                         color: Colors.black),
+                          //                     errorStyle: const TextStyle(
+                          //                         color: Colors.redAccent,
+                          //                         fontSize: 16.0),
+                          //                     fillColor: Colors.white,
+                          //                     filled: true,
+                          //                     enabledBorder: OutlineInputBorder(
+                          //                         borderRadius: BorderRadius.circular(
+                          //                             5.0),
+                          //                         borderSide: const BorderSide(
+                          //                             color:
+                          //                                 Colors.transparent)),
+                          //                     focusedBorder: OutlineInputBorder(
+                          //                         borderRadius:
+                          //                             BorderRadius.circular(
+                          //                                 5.0),
+                          //                         borderSide: const BorderSide(
+                          //                             color:
+                          //                                 customLightThemeColor)),
+                          //                     errorBorder: OutlineInputBorder(
+                          //                         borderRadius:
+                          //                             BorderRadius.circular(
+                          //                                 5.0),
+                          //                         borderSide:
+                          //                             const BorderSide(color: Colors.red)),
+                          //                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0), borderSide: const BorderSide(color: Colors.transparent))),
+                          //
+                          //                 //   isEmpty: _currentReligionValue == '',
+                          //                 child: DropdownButtonHideUnderline(
+                          //                   child: DropdownButton<String>(
+                          //                     icon: SvgPicture.asset(
+                          //                         'assets/Icons/calendarIcon.svg'),
+                          //                     hint: Text(
+                          //                       'To',
+                          //                       style: TextStyle(
+                          //                           fontFamily:
+                          //                               SarabunFontFamily
+                          //                                   .regular,
+                          //                           fontSize: 16.sp,
+                          //                           color: customTextGreyColor),
+                          //                     ),
+                          //                     value: _currentGenderValue,
+                          //                     isDense: true,
+                          //                     onChanged: (newValue) {
+                          //                       setState(() {
+                          //                         _currentGenderValue =
+                          //                             newValue;
+                          //                         state.didChange(newValue);
+                          //                       });
+                          //                     },
+                          //                     items:
+                          //                         _gender.map((String value) {
+                          //                       return DropdownMenuItem<String>(
+                          //                         value: value,
+                          //                         child: Text(value),
+                          //                       );
+                          //                     }).toList(),
+                          //                   ),
+                          //                 ),
+                          //               );
+                          //             },
+                          //           ),
+                          //         )
+                          //       ]),
+                          // ),
+
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.w, 0.h, 16.w, 16.h),
                             child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  /// Dropdown From field
-                                  SizedBox(
-                                    height: 65,
-                                    width: 160,
-                                    child: FormField<String>(
-                                      builder: (FormFieldState<String> state) {
-                                        return InputDecorator(
-                                          decoration: InputDecoration(
-                                              //  labelStyle: textStyle,
-                                              errorStyle: const TextStyle(
-                                                  color: Colors.redAccent,
-                                                  fontSize: 16.0),
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          customLightThemeColor)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.red)),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8.r),
-                                                  borderSide: const BorderSide(color: Colors.transparent))),
-                                          //   isEmpty: _currentGenderValue == '',
-                                          child: DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              icon: SvgPicture.asset(
-                                                  'assets/Icons/calendarIcon.svg'),
-                                              hint: Text('From',
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          SarabunFontFamily
-                                                              .regular,
-                                                      fontSize: 16.sp,
-                                                      color:
-                                                          customTextGreyColor)),
-                                              value: _currentGenderValue,
-                                              isDense: true,
-                                              onChanged: (newValue) {
-                                                setState(() {
-                                                  _currentGenderValue =
-                                                      newValue;
-                                                  state.didChange(newValue);
-                                                });
-                                              },
-                                              items:
-                                                  _gender.map((String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ),
-                                        );
-                                      },
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ///---From date
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 10.w, 0),
+                                    child: Theme(
+                                      data:
+                                          ThemeData(primarySwatch: Colors.blue),
+                                      child: DateTimeField(
+                                        style: state.textFieldTextStyle,
+                                        decoration: InputDecoration(
+                                            hintText: 'From',
+                                            hintStyle: TextStyle(
+                                                fontFamily: SarabunFontFamily
+                                                    .regular,
+                                                fontSize: 16.sp,
+                                                color: customTextGreyColor),
+                                            fillColor: Colors.white,
+                                            filled: true,
+                                            focusedBorder:
+                                                const UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color:
+                                                            customThemeColor)),
+                                            errorBorder:
+                                                const UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.red)),
+                                            enabledBorder:
+                                                const UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors
+                                                            .transparent)),
+                                            border: const UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Color(0xffDEE8EE))),
+                                            suffixIcon: Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .all(15.0),
+                                              child: SvgPicture.asset(
+                                                'assets/Icons/calendarIcon.svg',
+                                              ),
+                                            )),
+                                        initialValue: _educationalInfoLogic
+                                            .selectedFromDate,
+                                        format: DateFormat('dd-MM-yyyy'),
+                                        onShowPicker:
+                                            (context, currentValue) async {
+                                          final date = await showDatePicker(
+                                              context: context,
+                                              firstDate: DateTime(1900),
+                                              initialDate: currentValue ??
+                                                  DateTime.now(),
+                                              lastDate: DateTime.now());
+                                          if (date != null) {
+                                            return date;
+                                          } else {
+                                            return currentValue;
+                                          }
+                                        },
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return 'field_required'.tr;
+                                          }
+                                          return null;
+                                        },
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _educationalInfoLogic
+                                                .selectedFromDate = value;
+                                          });
+                                          log(DateFormat('dd-MM-yyyy').format(
+                                              _educationalInfoLogic
+                                                  .selectedFromDate!));
+                                        },
+                                      ),
                                     ),
                                   ),
+                                ),
 
-                                  /// Dropdown To field
-                                  SizedBox(
-                                    height: 65,
-                                    width: 160,
-                                    child: FormField<String>(
-                                      builder: (FormFieldState<String> state) {
-                                        return InputDecorator(
-                                          decoration: InputDecoration(
-                                              labelStyle: const TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.black),
-                                              errorStyle: const TextStyle(
-                                                  color: Colors.redAccent,
-                                                  fontSize: 16.0),
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(
-                                                      5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          customLightThemeColor)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide:
-                                                      const BorderSide(color: Colors.red)),
-                                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0), borderSide: const BorderSide(color: Colors.transparent))),
-
-                                          //   isEmpty: _currentReligionValue == '',
-                                          child: DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              icon: SvgPicture.asset(
-                                                  'assets/Icons/calendarIcon.svg'),
-                                              hint: Text(
-                                                'To',
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        SarabunFontFamily
-                                                            .regular,
-                                                    fontSize: 16.sp,
-                                                    color: customTextGreyColor),
+                                ///---To date
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0.w, 0),
+                                    child: Theme(
+                                      data:
+                                          ThemeData(primarySwatch: Colors.blue),
+                                      child: DateTimeField(
+                                        style: state.textFieldTextStyle,
+                                        decoration: InputDecoration(
+                                            hintText: 'To',
+                                            hintStyle: TextStyle(
+                                                fontFamily: SarabunFontFamily
+                                                    .regular,
+                                                fontSize: 16.sp,
+                                                color: customTextGreyColor),
+                                            fillColor: Colors.white,
+                                            filled: true,
+                                            focusedBorder:
+                                                const UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color:
+                                                            customThemeColor)),
+                                            errorBorder:
+                                                const UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.red)),
+                                            enabledBorder:
+                                                const UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors
+                                                            .transparent)),
+                                            border: const UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Color(0xffDEE8EE))),
+                                            suffixIcon: Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .all(15.0),
+                                              child: SvgPicture.asset(
+                                                'assets/Icons/calendarIcon.svg',
                                               ),
-                                              value: _currentGenderValue,
-                                              isDense: true,
-                                              onChanged: (newValue) {
-                                                setState(() {
-                                                  _currentGenderValue =
-                                                      newValue;
-                                                  state.didChange(newValue);
-                                                });
-                                              },
-                                              items:
-                                                  _gender.map((String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ),
-                                        );
-                                      },
+                                            )),
+                                        initialValue: _educationalInfoLogic
+                                            .selectedToDate,
+                                        format: DateFormat('dd-MM-yyyy'),
+                                        onShowPicker:
+                                            (context, currentValue) async {
+                                          final date = await showDatePicker(
+                                              context: context,
+                                              firstDate: DateTime(1900),
+                                              initialDate: currentValue ??
+                                                  DateTime.now(),
+                                              lastDate: DateTime.now());
+                                          if (date != null) {
+                                            return date;
+                                          } else {
+                                            return currentValue;
+                                          }
+                                        },
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return 'field_required'.tr;
+                                          }
+                                          return null;
+                                        },
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _educationalInfoLogic
+                                                .selectedToDate = value;
+                                          });
+                                          log(DateFormat('dd-MM-yyyy').format(
+                                              _educationalInfoLogic
+                                                  .selectedToDate!));
+                                        },
+                                      ),
                                     ),
-                                  )
-                                ]),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
 
                           InkWell(
@@ -886,15 +1319,12 @@ class _EducationalInfoPageState extends State<EducationalInfoPage> {
                       bottom: 0.h,
                       left: 15.w,
                       right: 15.w,
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 45.h),
-                        child: InkWell(
-                            onTap: () {
-                              Get.toNamed(PageRoutes.skillInfoScreen);
-                            },
-                            child: const MyCustomBottomBar(
-                                title: 'Next Step', disable: false)),
-                      ),
+                      child: InkWell(
+                          onTap: () {
+                            Get.toNamed(PageRoutes.skillInfoScreen);
+                          },
+                          child: const MyCustomBottomBar(
+                              title: 'Next Step', disable: false)),
                     ),
                   ]),
                 )),

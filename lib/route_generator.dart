@@ -1,6 +1,8 @@
 import 'package:consultant_product/src/modules/chat/view.dart';
+import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
 import 'package:consultant_product/src/modules/consultant/educational_info/view.dart';
 import 'package:consultant_product/src/modules/consultant/general_info/view.dart';
+import 'package:consultant_product/src/modules/consultant/profile_created/view.dart';
 import 'package:consultant_product/src/modules/consultant/schedule_info/view.dart';
 import 'package:consultant_product/src/modules/consultant/skill_info/view.dart';
 import 'package:consultant_product/src/modules/created_password/view.dart';

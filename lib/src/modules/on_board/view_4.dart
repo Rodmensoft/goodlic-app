@@ -49,7 +49,12 @@ class _OnBoard4PageState extends State<OnBoard4Page> {
               Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  Image.asset('assets/images/onBoard4.png'),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    width: double.infinity,
+                    child: Image.asset('assets/images/onBoard4.png',
+                        fit: BoxFit.fill),
+                  ),
                   Positioned(
                     bottom: 0.h,
                     child: Padding(

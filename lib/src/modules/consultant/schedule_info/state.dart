@@ -9,6 +9,11 @@ class ScheduleInfoState {
   TextStyle? subHeadingTextStyle;
   TextStyle? descTextStyle;
   TextStyle? numberTextStyle;
+  TextStyle? textFieldTextStyle;
+  TextStyle? hintTextStyle;
+  TextStyle? slotsTitleTextStyle;
+  TextStyle? typeTextStyle;
+  TextStyle? scheduleDayTextStyle;
   ScheduleInfoState() {
     ///Initialize variables
     headingTextStyle = TextStyle(
@@ -29,5 +34,25 @@ class ScheduleInfoState {
       fontFamily: SarabunFontFamily.regular,
       color: Colors.white,
     );
+    textFieldTextStyle = TextStyle(
+        fontFamily: SarabunFontFamily.regular,
+        fontSize: 15.sp,
+        color: Colors.black);
+    hintTextStyle = TextStyle(
+        fontFamily: SarabunFontFamily.regular,
+        fontSize: 16.sp,
+        color: customTextGreyColor);
+    slotsTitleTextStyle = TextStyle(
+        fontFamily: SarabunFontFamily.semiBold,
+        fontSize: 16.sp,
+        color: customTextBlackColor);
+    typeTextStyle = TextStyle(
+        fontFamily: SarabunFontFamily.medium,
+        fontSize: 14.sp,
+        color: customTextBlackColor);
+    scheduleDayTextStyle = const TextStyle(
+        fontSize: 14,
+        fontFamily: SarabunFontFamily.regular,
+        color: customTextBlackColor);
   }
 }

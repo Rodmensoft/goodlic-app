@@ -1,18 +1,18 @@
-import 'package:consultant_product/src/utils/colors.dart';
-import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:resize/resize.dart';
 
-class GeneralInfoState {
+import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
+
+class ProfileCreatedState {
   TextStyle? headingTextStyle;
   TextStyle? subHeadingTextStyle;
   TextStyle? descTextStyle;
   TextStyle? numberTextStyle;
-  TextStyle? hintTextStyle;
-  TextStyle? textFieldTextStyle;
-  GeneralInfoState() {
+  TextStyle? successHeadingTextStyle;
+  TextStyle? successSubHeadingTextStyle;
+  ProfileCreatedState() {
     ///Initialize variables
-
     headingTextStyle = TextStyle(
         fontSize: 28.sp,
         fontFamily: SarabunFontFamily.bold,
@@ -31,13 +31,15 @@ class GeneralInfoState {
       fontFamily: SarabunFontFamily.regular,
       color: Colors.white,
     );
-    hintTextStyle = TextStyle(
-        fontFamily: SarabunFontFamily.regular,
-        fontSize: 16.sp,
-        color: customTextGreyColor);
-    textFieldTextStyle = TextStyle(
-        fontFamily: SarabunFontFamily.regular,
-        fontSize: 15.sp,
-        color: Colors.black);
+    successHeadingTextStyle = TextStyle(
+      fontSize: 28.sp,
+      fontFamily: SarabunFontFamily.bold,
+      color: customTextBlackColor,
+    );
+    successSubHeadingTextStyle = TextStyle(
+      fontSize: 16.sp,
+      fontFamily: SarabunFontFamily.medium,
+      color: customOrangeColor,
+    );
   }
 }

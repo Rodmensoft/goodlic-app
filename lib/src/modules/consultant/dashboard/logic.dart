@@ -4,25 +4,32 @@ import 'package:resize/resize.dart';
 
 import 'state.dart';
 
-class EducationalInfoLogic extends GetxController {
-  final EducationalInfoState state = EducationalInfoState();
+class DashboardLogic extends GetxController {
+  final DashboardState state = DashboardState();
 
-  DateTime? selectedFromDate;
-  DateTime? selectedToDate;
+  bool? getTodayAppointmentLoader = true;
 
-  String? selectedGender;
-  List<String> genderDropDownList = [];
-
-  updateGenderDropDownList(String newValue) {
-    genderDropDownList.add(newValue);
+  updateGetTodayAppointmentLoader(bool? newValue) {
+    getTodayAppointmentLoader = newValue;
     update();
   }
 
-  emptyGenderDropDownList() {
-    genderDropDownList = [];
+  List getTodayAppointmentList = [];
+
+  emptyGetTodayAppointmentList() {
+    getTodayAppointmentList = [];
     update();
   }
 
+  /// rating loader
+
+  bool ratingLoader = true;
+  updateRatingLoader(bool value) {
+    ratingLoader = value;
+    update();
+  }
+
+  ///----app-bar-settings-----start
   ScrollController? scrollController;
   bool lastStatus = true;
   double height = 100.h;
