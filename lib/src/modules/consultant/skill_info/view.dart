@@ -553,7 +553,7 @@ class _SkillInfoPageState extends State<SkillInfoPage> {
                       right: 15.w,
                       child: InkWell(
                           onTap: () {
-                            Get.toNamed(PageRoutes.profileCreatedScreen);
+                            Get.toNamed(PageRoutes.scheduleInfoScreen);
                           },
                           child: const MyCustomBottomBar(
                               title: 'Next Step', disable: false)),

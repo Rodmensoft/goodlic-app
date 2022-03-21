@@ -408,6 +408,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  progress_indicator:
+    dependency: "direct main"
+    description:
+      name: progress_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   resize:
     dependency: "direct main"
     description:
@@ -415,6 +422,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  rounded_expansion_tile:
+    dependency: "direct main"
+    description:
+      name: rounded_expansion_tile
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.13"
   shimmer:
     dependency: transitive
     description:
