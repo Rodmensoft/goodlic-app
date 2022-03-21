@@ -7,6 +7,60 @@ import 'state.dart';
 class ScheduleInfoLogic extends GetxController {
   final ScheduleInfoState state = ScheduleInfoState();
 
+  String? selectedType;
+  List<String> typeDropDownList = [];
+
+  updateTypeDropDownList(String newValue) {
+    typeDropDownList.add(newValue);
+    update();
+  }
+
+  emptyTypeDropDownList() {
+    typeDropDownList = [];
+    update();
+  }
+
+  int? appointmentShiftType = 0;
+
+  updateAppointmentShiftType(int? newValue) {
+    appointmentShiftType = newValue;
+    update();
+  }
+
+  List<ShiftType> shiftList = [
+    ShiftType(
+        title: 'Morning',
+        image: 'assets/Icons/morningShiftIcon.svg',
+        isSelected: true),
+    ShiftType(
+        title: 'Afternoon',
+        image: 'assets/Icons/afterNoonShiftIcon.svg',
+        isSelected: false),
+    ShiftType(
+        title: 'Evening',
+        image: 'assets/Icons/nightShiftIcon.svg',
+        isSelected: false),
+  ];
+
+  ///
+
+  List<DaySelectorForScheduleModel> dayListForHoliday = [
+    DaySelectorForScheduleModel(
+        title: 'M', slug: 'monday', isSelected: false, isCompleted: false),
+    DaySelectorForScheduleModel(
+        title: 'T', slug: 'tuesday', isSelected: false, isCompleted: false),
+    DaySelectorForScheduleModel(
+        title: 'W', slug: 'wednesday', isSelected: false, isCompleted: false),
+    DaySelectorForScheduleModel(
+        title: 'T', slug: 'thursday', isSelected: false, isCompleted: false),
+    DaySelectorForScheduleModel(
+        title: 'F', slug: 'friday', isSelected: false, isCompleted: false),
+    DaySelectorForScheduleModel(
+        title: 'S', slug: 'saturday', isSelected: false, isCompleted: false),
+    DaySelectorForScheduleModel(
+        title: 'S', slug: 'sunday', isSelected: false, isCompleted: false),
+  ];
+
   ScrollController? scrollController;
   bool lastStatus = true;
   double height = 100.h;
@@ -22,4 +76,22 @@ class ScheduleInfoLogic extends GetxController {
       update();
     }
   }
+}
+
+class ShiftType {
+  ShiftType({this.title, this.image, this.isSelected});
+
+  String? title;
+  String? image;
+  bool? isSelected;
+}
+
+class DaySelectorForScheduleModel {
+  DaySelectorForScheduleModel(
+      {this.title, this.slug, this.isSelected, this.isCompleted});
+
+  String? title;
+  String? slug;
+  bool? isSelected;
+  bool? isCompleted;
 }

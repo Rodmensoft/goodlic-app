@@ -1,4 +1,5 @@
 import 'package:consultant_product/src/modules/chat/view.dart';
+import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
 import 'package:consultant_product/src/modules/consultant/educational_info/view.dart';
 import 'package:consultant_product/src/modules/consultant/general_info/view.dart';
 import 'package:consultant_product/src/modules/consultant/profile_created/view.dart';
@@ -80,6 +81,7 @@ routes() => [
       GetPage(
           name: "/profileCreatedScreen",
           page: () => const ProfileCreatedPage()),
+      GetPage(name: "/dashboardScreen", page: () => const DashboardPage()),
     ];
 
 class PageRoutes {
@@ -110,6 +112,7 @@ class PageRoutes {
   static const String skillInfoScreen = '/skillInfoScreen';
   static const String scheduleInfoScreen = '/scheduleInfoScreen';
   static const String profileCreatedScreen = '/profileCreatedScreen';
+  static const String dashboardScreen = '/dashboardScreen';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -140,6 +143,7 @@ class PageRoutes {
       skillInfoScreen: (context) => const SkillInfoPage(),
       scheduleInfoScreen: (context) => const ScheduleInfoPage(),
       profileCreatedScreen: (context) => const ProfileCreatedPage(),
+      dashboardScreen: (context) => const DashboardPage(),
     };
   }
 }
