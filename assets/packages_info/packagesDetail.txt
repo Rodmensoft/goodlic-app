@@ -55,3 +55,6 @@
 18--> uuid:
     For generating unique id for diff tasks.
 
+19--> rounded_expansion_tile:
+    For simple combination of widgets to provide an Expansiontile with rounded corners
+

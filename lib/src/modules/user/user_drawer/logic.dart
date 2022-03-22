@@ -113,7 +113,7 @@ class UserDrawerLogic extends GetxController {
       case 3:
         {
           Get.back();
-          return Get.toNamed(PageRoutes.onBoard1Screen);
+          return Get.toNamed(PageRoutes.blogsScreen);
         }
       case 4:
         {

@@ -1,0 +1,35 @@
+import 'package:consultant_product/src/utils/colors.dart';
+import 'package:consultant_product/src/utils/constants.dart';
+import 'package:flutter/material.dart';
+import 'package:resize/resize.dart';
+
+class BlogsState {
+  TextStyle? headingTextStyle;
+  TextStyle? categoryTextStyle;
+  TextStyle? blogCategoryTextStyle;
+  TextStyle? blogNameTextStyle;
+  TextStyle? authorNameTextStyle;
+  BlogsState() {
+    ///Initialize variables
+    headingTextStyle = TextStyle(
+        fontSize: 18.sp,
+        fontFamily: SarabunFontFamily.extraBold,
+        color: customTextBlackColor);
+    categoryTextStyle = TextStyle(
+        fontSize: 16.sp,
+        fontFamily: SarabunFontFamily.extraBold,
+        color: Colors.white);
+    blogCategoryTextStyle = TextStyle(
+        fontSize: 10.sp,
+        fontFamily: SarabunFontFamily.medium,
+        color: customOrangeColor);
+    blogNameTextStyle = TextStyle(
+        fontSize: 16.sp,
+        fontFamily: SarabunFontFamily.semiBold,
+        color: customThemeColor);
+    authorNameTextStyle = TextStyle(
+        fontSize: 12.sp,
+        fontFamily: SarabunFontFamily.medium,
+        color: customTextBlackColor);
+  }
+}

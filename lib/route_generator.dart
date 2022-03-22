@@ -1,8 +1,9 @@
+import 'package:consultant_product/src/modules/blogs/view.dart';
+import 'package:consultant_product/src/modules/blogs/view_blogs_detail.dart';
 import 'package:consultant_product/src/modules/chat/view.dart';
-import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
 import 'package:consultant_product/src/modules/consultant/educational_info/view.dart';
 import 'package:consultant_product/src/modules/consultant/general_info/view.dart';
-import 'package:consultant_product/src/modules/consultant/profile_created/view.dart';
+import 'package:consultant_product/src/modules/consultant/my_profile/view.dart';
 import 'package:consultant_product/src/modules/consultant/schedule_info/view.dart';
 import 'package:consultant_product/src/modules/consultant/skill_info/view.dart';
 import 'package:consultant_product/src/modules/created_password/view.dart';
@@ -81,6 +82,9 @@ routes() => [
           name: "/scheduleInfoScreen", page: () => const ScheduleInfoPage()),
       GetPage(
           name: "/editUserProfile", page: () => const EditUserProfilePage()),
+      GetPage(name: "/myProfileScreen", page: () => const MyProfilePage()),
+      GetPage(name: "/blogsScreen", page: () => const BlogsPage()),
+      GetPage(name: "/blogDetailScreen", page: () => const BlogDetailPage()),
     ];
 
 class PageRoutes {
@@ -111,6 +115,9 @@ class PageRoutes {
   static const String skillInfoScreen = '/skillInfoScreen';
   static const String scheduleInfoScreen = '/scheduleInfoScreen';
   static const String editUserProfile = '/editUserProfile';
+  static const String myProfileScreen = '/myProfileScreen';
+  static const String blogsScreen = '/blogsScreen';
+  static const String blogDetailScreen = '/blogDetailScreen';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -141,6 +148,9 @@ class PageRoutes {
       skillInfoScreen: (context) => const SkillInfoPage(),
       scheduleInfoScreen: (context) => const ScheduleInfoPage(),
       editUserProfile: (context) => const EditUserProfilePage(),
+      myProfileScreen: (context) => const MyProfilePage(),
+      blogsScreen: (context) => const BlogsPage(),
+      blogDetailScreen: (context) => const BlogDetailPage(),
     };
   }
 }
