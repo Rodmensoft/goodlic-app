@@ -67,23 +67,29 @@ class LoginModel {
 class LoginModelData {
   LoginModelData({
     LoginUserModel? user,
+    String? role,
   }) {
     _user = user;
+    _role = role;
   }
 
   LoginModelData.fromJson(dynamic json) {
     _user = json['user'] != null ? LoginUserModel.fromJson(json['user']) : null;
+    _role = json['role'];
   }
 
   LoginUserModel? _user;
+  String? _role;
 
   LoginUserModel? get user => _user;
+  String? get role => _role;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (_user != null) {
       map['user'] = _user?.toJson();
     }
+    map['role'] = _role;
     return map;
   }
 }

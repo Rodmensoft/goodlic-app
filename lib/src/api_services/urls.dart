@@ -1,8 +1,8 @@
 import 'package:global_configuration/global_configuration.dart';
 
-// const String baseUrl = 'https://mashvra.softwaresbranding.com/api/';
-// const String mediaUrl = 'https://mashvra.softwaresbranding.com/';
-// const String paymentBaseUrl = 'https://mashvra.softwaresbranding.com/';
+// const String apiBaseUrl = 'https://consultation.softwaresbranding.com/api/';
+// const String baseUrl = 'https://consultation.softwaresbranding.com/';
+// const String mediaUrl = 'https://consultation.softwaresbranding.com';
 
 final String baseUrl = GlobalConfiguration().get('base_url');
 final String apiBaseUrl = GlobalConfiguration().get('api_base_url');
@@ -15,16 +15,31 @@ const String fcmService = 'https://fcm.googleapis.com/fcm/send';
 String signUpWithEmailURL = apiBaseUrl + 'signup-email';
 String loginWithEmailURL = apiBaseUrl + 'login-email';
 
+String mentorApprovalStatusUrl = apiBaseUrl + 'mentorStatus';
+
 ///---user
 String getUserProfileURL = apiBaseUrl + 'get-mentee-profile';
 
- String updateMenteeProfileUrl = apiBaseUrl + 'update-mentee-profile';
- String mentorProfileGenericDataUrl = apiBaseUrl + 'generic_mentor';
- String getCitiesByIdUrl = apiBaseUrl + 'cities';
- String getCountriesUrl = apiBaseUrl + 'countries';
+String updateMenteeProfileUrl = apiBaseUrl + 'update-mentee-profile';
 
 ///---consultant-profile-by-id
 String getConsultantProfileByIDURL = apiBaseUrl + 'getUserById';
+
+///---consultant-profile-section
+String mentorProfileGenericDataUrl = apiBaseUrl + 'generic_mentor';
+String getCitiesByIdUrl = apiBaseUrl + 'cities';
+String getCountriesUrl = apiBaseUrl + 'countries';
+String mentorParentCategoryDataUrl = apiBaseUrl + 'mentorCategoriesList';
+String mentorChildCategoryDataUrl = apiBaseUrl + 'mentorChildCategoriesList';
+String mentorGeneralInfoPostUrl = apiBaseUrl + 'updateMentorProfile';
+String mentorEducationalInfoPostUrl = apiBaseUrl + 'mentorEducation';
+String mentorExperienceInfoUrl = apiBaseUrl + 'mentorExperience';
+String mentorSkillInfoUrl = apiBaseUrl + 'mentorSkill';
+String mentorAccountInfoUrl = apiBaseUrl + 'mentor_card';
+String mentorEducationalInfoDeleteUrl = apiBaseUrl + 'mentorEducationDelete';
+String mentorExperienceInfoDeleteUrl = apiBaseUrl + 'mentorExperienceDelete';
+String mentorSkillInfoDeleteUrl = apiBaseUrl + 'mentorSkillDelete';
+String mentorRatingsUrl = apiBaseUrl + 'get-ratings-detail';
 
 ///---featured
 String getFeaturedURL = apiBaseUrl + 'get-featured-mentors';

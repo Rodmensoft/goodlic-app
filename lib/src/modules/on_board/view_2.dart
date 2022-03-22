@@ -1,4 +1,5 @@
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,8 +17,6 @@ class OnBoard2Page extends StatefulWidget {
 }
 
 class _OnBoard2PageState extends State<OnBoard2Page> {
-  final logic = Get.put(OnBoardLogic());
-
   final state = Get.find<OnBoardLogic>().state;
 
   @override
@@ -47,16 +46,20 @@ class _OnBoard2PageState extends State<OnBoard2Page> {
             padding: EdgeInsetsDirectional.fromSTEB(0, 10.h, 0, 0),
             child: Column(children: [
               Stack(
+                clipBehavior: Clip.none,
                 alignment: Alignment.bottomRight,
                 children: [
+                  ///---image
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.75,
+                    // height: MediaQuery.of(context).size.height * 0.75,
                     width: double.infinity,
                     child: Image.asset('assets/images/onBoard2.png',
-                        fit: BoxFit.fill),
+                        fit: BoxFit.cover),
                   ),
+
+                  ///---text-area
                   Positioned(
-                    bottom: 0.h,
+                    bottom: -15.h,
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15.w, .0),
                       child: Column(
@@ -71,7 +74,7 @@ class _OnBoard2PageState extends State<OnBoard2Page> {
                             color: customOrangeColor,
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  25.w, 0, 25.w, 0),
+                                  40.w, 0, 40.w, 0),
                               child: Text(
                                 'A Mentee',
                                 style: state.firstTitle,
@@ -89,30 +92,51 @@ class _OnBoard2PageState extends State<OnBoard2Page> {
                   ),
                 ],
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * .08),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text('Skip',
-                      style: TextStyle(
-                          fontFamily: SarabunFontFamily.medium,
-                          fontSize: 14.sp,
-                          color: Colors.white,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Colors.white)),
-                  InkWell(
-                      onTap: () {
-                        Get.toNamed(PageRoutes.onBoard3Screen);
-                      },
-                      child: SvgPicture.asset(
-                          'assets/Icons/forwardBlackIcon.svg')),
-                ],
+              const Spacer(
+                flex: 2,
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * .06),
-              Image.asset(
-                'assets/images/screenPointer2.png',
-                width: 78.h,
-                height: 9.w,
+
+              ///---buttons
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ///---skip
+                    InkWell(
+                      onTap: () {
+                        Get.find<GeneralController>().storageBox.write('onBoard', 'true');
+                        Get.offAllNamed(PageRoutes.userHome);
+                      },
+                      child: Text('Skip',
+                          style: TextStyle(
+                              fontFamily: SarabunFontFamily.medium,
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.white)),
+                    ),
+
+                    ///---next
+                    InkWell(
+                        onTap: () {
+                          Get.toNamed(PageRoutes.onBoard3Screen);
+                        },
+                        child: SvgPicture.asset(
+                            'assets/Icons/forwardBlackIcon.svg')),
+                  ],
+                ),
+              ),
+              const Spacer(
+                flex: 1,
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 30.h),
+                child: Image.asset(
+                  'assets/images/screenPointer2.png',
+                  width: 78.h,
+                  height: 9.w,
+                ),
               ),
             ]),
           ),

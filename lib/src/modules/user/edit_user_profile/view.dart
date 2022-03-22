@@ -722,7 +722,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                         functionCall: () {
                                           Navigator.pop(context);
                                         },
-                                        img: 'assets/dialog_error.svg',
+                                        img: 'assets/Icons/dialog_error.svg',
                                       );
                                     });
                               }

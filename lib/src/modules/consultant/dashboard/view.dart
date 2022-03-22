@@ -1,3 +1,10 @@
+import 'dart:async';
+
+import 'package:consultant_product/src/api_services/get_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
+import 'package:consultant_product/src/modules/consultant/dashboard/get_repo.dart';
+import 'package:consultant_product/src/modules/consultant/dashboard/view_approval_waiting.dart';
+import 'package:consultant_product/src/modules/user_profile/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +20,14 @@ import '../../../widgets/custom_sliver_app_bar.dart';
 import '../../../widgets/linear_progress_bar.dart';
 import 'logic.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class ConsultantDashboardPage extends StatefulWidget {
+  const ConsultantDashboardPage({Key? key}) : super(key: key);
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<ConsultantDashboardPage> createState() => _ConsultantDashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
   final logic = Get.put(DashboardLogic());
 
   final state = Get.find<DashboardLogic>().state;
@@ -38,6 +45,7 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 
+  Timer? _timer;
   @override
   void initState() {
     // TODO: implement initState
@@ -45,6 +53,30 @@ class _DashboardPageState extends State<DashboardPage> {
 
     Get.find<DashboardLogic>().scrollController = ScrollController()
       ..addListener(Get.find<DashboardLogic>().scrollListener);
+    getMethod(
+        context,
+        getConsultantProfileByIDURL,
+        {
+          'token': '123',
+          'user_id': Get.find<GeneralController>().storageBox.read('userID')
+        },
+        true,
+        getUserProfileRepo);
+    _timer = Timer.periodic(const Duration(seconds: 2), (Timer t) {
+      if (!logic.approvalCheckerApiStopLoader!) {
+        getMethod(
+            context,
+            mentorApprovalStatusUrl,
+            {
+              'token': '123',
+              'mentor_id':
+              Get.find<GeneralController>().storageBox.read('userID')
+            },
+            true,
+            getMentorApprovalRepo);
+      }
+    });
+
   }
 
   @override
@@ -53,6 +85,7 @@ class _DashboardPageState extends State<DashboardPage> {
         .scrollController!
         .removeListener(Get.find<DashboardLogic>().scrollListener);
     Get.find<DashboardLogic>().scrollController!.dispose();
+    _timer!.cancel();
     super.dispose();
   }
 
@@ -61,7 +94,24 @@ class _DashboardPageState extends State<DashboardPage> {
     String greetingMes = greetingMessage();
     return GetBuilder<GeneralController>(builder: (_generalController) {
       return GetBuilder<DashboardLogic>(
-          builder: (_dashboardLogic) => ModalProgressHUD(
+          builder: (_dashboardLogic) => _dashboardLogic.approvalCheckerApiLoader!
+              ? Scaffold(
+            body: SafeArea(
+              child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                      child: Image.asset(
+                        'assets/animationLoader-1.gif',
+                        width: MediaQuery.of(context).size.width * .6,
+                      ))),
+            ),
+          )
+              : _dashboardLogic
+              .mentorApprovalCheckModel.data!.mentor!.status ==
+              0
+              ? const MentorApprovalWaitingView()
+              : ModalProgressHUD(
                 progressIndicator:
                     const CircularProgressIndicator(color: customThemeColor),
                 inAsyncCall: _generalController.formLoaderController!,
@@ -70,7 +120,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     _generalController.focusOut(context);
                   },
                   child: Scaffold(
-                    backgroundColor: const Color(0xffFBFBFB),
+                    backgroundColor: Colors.white,
                     body: NestedScrollView(
                         controller: _dashboardLogic.scrollController,
                         headerSliverBuilder:
@@ -89,21 +139,21 @@ class _DashboardPageState extends State<DashboardPage> {
                           width: MediaQuery.of(context).size.width,
                           color: Colors.white,
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0, 10, 0, 0),
+                            padding:  EdgeInsetsDirectional.fromSTEB(
+                                0, 10.h, 0, 0),
                             child: ListView(
                               children: [
                                 ///---mentor-detail
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      15, 0, 15, 0.h),
+                                      15.w, 0, 15.w, 0.h),
                                   child: Material(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8.r)),
                                     color: customTextFieldColor,
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 10, 0, 20.h),
+                                          0, 10.h, 0, 20.h),
                                       child: ListTile(
                                         leading: CircleAvatar(
                                           radius: 35,
@@ -153,7 +203,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                           children: [
                                             Row(
                                               children: [
-                                                Text('Good Morning ',
+                                                Text('$greetingMes ',
                                                     style: state
                                                         .mentorDetailTileTitle2TextStyle),
                                                 Text('Doctor Sultan',

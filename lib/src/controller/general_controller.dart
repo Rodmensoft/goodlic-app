@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as math;
 
+import 'package:consultant_product/src/modules/user_profile/get_user_profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -15,6 +16,9 @@ class GeneralController extends GetxController {
     final bool isRTL = currentDirection == TextDirection.rtl;
     return isRTL;
   }
+
+  ///---get-user-profile
+  GetUserProfileModel getUserProfileModel = GetUserProfileModel();
 
   bool? formLoaderController = false;
 

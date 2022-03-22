@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:resize/resize.dart';
 
 import '../logic.dart';
@@ -103,7 +102,13 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                                               null
                                           ? const SizedBox()
                                           : Image.network(
-                                              '${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].user!.imagePath}',
+                                        _allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!
+                                            .data![index].user!.imagePath!
+                                            .contains('assets')
+                                            ? '$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex!]
+                                            .mentors!.data![index].user!.imagePath}'
+                                            :'${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!
+                                            .data![index].user!.imagePath}',
                                               fit: BoxFit.cover,
                                             ),
                                     ),

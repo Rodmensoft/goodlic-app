@@ -190,7 +190,14 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                       .appointmentTypeId!) -
                                                   1],
                                           status: 0,
-                                          date: DateFormat('dd/MM/yy').format(
+                                          date: _myAppointmentLogic
+                                      .getUserAppointmentModel
+                                      .data!
+                                      .pendingAppointments!
+                                      .data![index]
+                                      .date == null
+                                              ?null
+                                              :DateFormat('dd/MM/yy').format(
                                               DateTime.parse(_myAppointmentLogic
                                                   .getUserAppointmentModel
                                                   .data!
@@ -202,7 +209,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               .data!
                                               .pendingAppointments!
                                               .data![index]
-                                              .time!,
+                                              .time,
                                           color: customOrangeColor,
                                           rating: _myAppointmentLogic
                                               .getUserAppointmentModel
@@ -383,7 +390,14 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                       .appointmentTypeId!) -
                                                   1],
                                           status: 1,
-                                          date: DateFormat('dd/MM/yy').format(
+                                          date: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .acceptedAppointments!
+                                              .data![index]
+                                              .date==null
+                                              ?null
+                                              :DateFormat('dd/MM/yy').format(
                                               DateTime.parse(_myAppointmentLogic
                                                   .getUserAppointmentModel
                                                   .data!
@@ -395,7 +409,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               .data!
                                               .acceptedAppointments!
                                               .data![index]
-                                              .time!,
+                                              .time,
                                           color: customLightThemeColor,
                                           rating: _myAppointmentLogic
                                               .getUserAppointmentModel
@@ -501,7 +515,14 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                       .data![index]
                                                       .appointmentTypeId!) -
                                                   1],
-                                          date: DateFormat('dd/MM/yy').format(
+                                          date: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .completedAppointments!
+                                              .data![index]
+                                              .date==null
+                                              ?null
+                                              :DateFormat('dd/MM/yy').format(
                                               DateTime.parse(_myAppointmentLogic
                                                   .getUserAppointmentModel
                                                   .data!
@@ -513,7 +534,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               .data!
                                               .completedAppointments!
                                               .data![index]
-                                              .time!,
+                                              .time,
                                           rating: _myAppointmentLogic
                                               .getUserAppointmentModel
                                               .data!
@@ -620,7 +641,14 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                       .data![index]
                                                       .appointmentTypeId!) -
                                                   1],
-                                          date: DateFormat('dd/MM/yy').format(
+                                          date: _myAppointmentLogic
+                                              .getUserAppointmentModel
+                                              .data!
+                                              .cancelledAppointments!
+                                              .data![index]
+                                              .date==null
+                                              ?null
+                                              :DateFormat('dd/MM/yy').format(
                                               DateTime.parse(_myAppointmentLogic
                                                   .getUserAppointmentModel
                                                   .data!
@@ -632,7 +660,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               .data!
                                               .cancelledAppointments!
                                               .data![index]
-                                              .time!,
+                                              .time,
                                           rating: _myAppointmentLogic
                                               .getUserAppointmentModel
                                               .data!
