@@ -311,7 +311,7 @@ class _ProfileCreatedPageState extends State<ProfileCreatedPage> {
                     right: 15.w,
                     child: InkWell(
                         onTap: () {
-                          Get.toNamed(PageRoutes.dashboardScreen);
+                          // Get.toNamed(PageRoutes.dashboardScreen);
                         },
                         child: const MyCustomBottomBar(
                             title: 'Go To Dashboard', disable: false)),

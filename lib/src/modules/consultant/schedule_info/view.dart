@@ -670,7 +670,7 @@ class _ScheduleInfoPageState extends State<ScheduleInfoPage> {
                     right: 15.w,
                     child: InkWell(
                         onTap: () {
-                          Get.toNamed(PageRoutes.profileCreatedScreen);
+                          // Get.toNamed(PageRoutes.profileCreatedScreen);
                         },
                         child: const MyCustomBottomBar(
                             title: 'Save & Continue', disable: false)),
