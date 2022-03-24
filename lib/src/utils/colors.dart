@@ -16,3 +16,4 @@ const Color customIconBackgroundWhiteColor = Color(0xff4E519B);
 const Color customTextBlackColor = Color(0xff2B2B2B);
 const Color customTextGreyColor = Color(0xff787B7E);
 const Color customTextFieldColor = Color(0xffF2FAFF);
+const Color customLightGreenColor = Color(0xffC9FADF);
