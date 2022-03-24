@@ -102,6 +102,9 @@ routes() => [
       GetPage(
           name: "/consultantDashboard",
           page: () => const ConsultantDashboardPage()),
+      GetPage(name: "/blogsScreen", page: () => const BlogsPage()),
+      GetPage(name: "/blogDetailScreen", page: () => const BlogDetailPage()),
+      GetPage(name: "/consultantProfile", page: () => const MyProfilePage()),
     ];
 
 class PageRoutes {
@@ -134,6 +137,9 @@ class PageRoutes {
   static const String editUserProfile = '/editUserProfile';
   static const String createConsultantProfile = '/createConsultantProfile';
   static const String consultantDashboard = '/consultantDashboard';
+  static const String blogsScreen = '/blogsScreen';
+  static const String blogDetailScreen = '/blogDetailScreen';
+  static const String consultantProfile = '/consultantProfile';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -166,6 +172,9 @@ class PageRoutes {
       editUserProfile: (context) => const EditUserProfilePage(),
       createConsultantProfile: (context) => const CreateProfilePage(),
       consultantDashboard: (context) => const ConsultantDashboardPage(),
+      blogsScreen: (context) => const BlogsPage(),
+      blogDetailScreen: (context) => const BlogDetailPage(),
+      consultantProfile: (context) => const MyProfilePage(),
     };
   }
 }

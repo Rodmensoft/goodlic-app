@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import '../../api_services/urls.dart';
 import '../../controller/general_controller.dart';
 import '../../utils/colors.dart';
 import '../../widgets/notififcation_icon.dart';
@@ -23,7 +24,7 @@ class _BlogDetailPage extends State<BlogDetailPage> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
-      return GetBuilder<BlogsLogic>(builder: (_blogDetailLogic) {
+      return GetBuilder<BlogsLogic>(builder: (_blogsLogic) {
         return GestureDetector(
           onTap: () {
             _generalController.focusOut(context);
@@ -76,10 +77,17 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                       ),
                       flexibleSpace: FlexibleSpaceBar(
                           centerTitle: true,
-                          background: Image.asset(
-                            'assets/images/real-estate-01.png',
-                            fit: BoxFit.cover,
-                          )
+                          background: _blogsLogic.selectedBlogForView.imagePath
+                                      .toString() !=
+                                  'null'
+                              ? Image.network(
+                                  '$mediaUrl${_blogsLogic.selectedBlogForView.imagePath}',
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/images/real-estate-01.png',
+                                  fit: BoxFit.cover,
+                                )
                           // SafeArea(
                           //   child: Stack(
                           //     children: [
@@ -110,26 +118,130 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                     color: Colors.white,
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 15.h),
-                          Container(
-                            height: 25.h,
-                            width: 108.w,
-                            decoration: BoxDecoration(
-                                color: customLightGreenColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(6.r))),
-                            child: Center(
-                              child: Text(
-                                'REAL ESTATE',
-                                style: state.blogCategoryTextStyle
-                                    ?.copyWith(color: customGreenColor),
-                              ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 15.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  height: 25.h,
+                                  width: 108.w,
+                                  decoration: BoxDecoration(
+                                      color: customLightGreenColor,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(6.r))),
+                                  child: Center(
+                                    child: Text(
+                                      'REAL ESTATE',
+                                      style: state.blogCategoryTextStyle
+                                          ?.copyWith(color: customGreenColor),
+                                    ),
+                                  ),
+                                ),
+
+                                /// Time
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                        'assets/Icons/blogTimeIcon.svg'),
+                                    Text(
+                                      '  ${_blogsLogic.selectedBlogForView.createdAt!.substring(0, 10)}',
+                                      style: state.blogCategoryTextStyle
+                                          ?.copyWith(
+                                              color: customTextBlackColor),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          )
-                        ],
+                            SizedBox(height: 20.h),
+
+                            /// Text
+                            Text(
+                              '${_blogsLogic.selectedBlogForView.title}',
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: state.blogNameTextStyle,
+                            ),
+                            SizedBox(height: 23.h),
+
+                            /// Author name
+                            // Row(
+                            //   children: [
+                            //     Container(
+                            //       height: 50.h,
+                            //       width: 50.w,
+                            //       child: ClipRRect(
+                            //         borderRadius: BorderRadius.circular(25),
+                            //         child: _blogsLogic
+                            //                     .selectedBlogForView.imagePath
+                            //                     .toString() !=
+                            //                 'null'
+                            //             ? Image.network(
+                            //                 '$mediaUrl${_blogsLogic.selectedBlogForView.imagePath}',
+                            //                 fit: BoxFit.cover,
+                            //                 height: 60,
+                            //                 width: 60,
+                            //               )
+                            //             : Container(
+                            //                 height: 50.h,
+                            //                 width: 50.w,
+                            //                 decoration: const BoxDecoration(
+                            //                     color: Colors.grey,
+                            //                     shape: BoxShape.circle),
+                            //               ),
+                            //       ),
+                            //     ),
+                            //     SizedBox(width: 8.w),
+                            //     Text(
+                            //       'John Doe',
+                            //       softWrap: true,
+                            //       overflow: TextOverflow.ellipsis,
+                            //       maxLines: 1,
+                            //       style: state.blogNameTextStyle,
+                            //     ),
+                            //   ],
+                            // ),
+                            // SizedBox(height: 20.h),
+
+                            ///Divider
+                            const Divider(
+                              color: Colors.grey,
+                            ),
+                            SizedBox(height: 20.h),
+
+                            /// Text
+                            Text(
+                              '${_blogsLogic.selectedBlogForView.title}.',
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: state.blogNameTextStyle
+                                  ?.copyWith(color: customTextBlackColor),
+                            ),
+                            SizedBox(height: 18.h),
+                            Text(
+                              '${_blogsLogic.selectedBlogForView.description}',
+                              // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                              // ' Vivamus sagittis, quam id hendrerit tempus, elit mi fringilla nunc, '
+                              // 'et imperdiet mauris erat semper libero. Aenean efficitur, est in efficitur '
+                              // 'maximus, lacus eros sodales metus,'
+                              // ' Vivamus sagittis, quam id hendrerit tempus, elit mi fringilla nunc, '
+                              // 'et imperdiet mauris erat semper libero. Aenean efficitur, est in efficitur '
+                              // 'maximus, lacus eros sodales metus, Vivamus sagittis, quam id hendrerit tempus, elit mi fringilla nunc, '
+                              // 'et imperdiet mauris erat semper libero. Aenean efficitur, est in efficitur '
+                              // 'maximus, lacus eros sodales metus, Vivamus sagittis, quam id hendrerit tempus, elit mi fringilla nunc, '
+                              // 'et imperdiet mauris erat semper libero. Aenean efficitur, est in efficitur '
+                              // 'maximus, lacus eros sodales metus,',
+                              style: state.blogDescTextStyle,
+                              textAlign: TextAlign.justify,
+                            )
+                          ],
+                        ),
                       ),
                     ))),
           ),

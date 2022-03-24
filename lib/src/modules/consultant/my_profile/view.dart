@@ -23,6 +23,27 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   final state = Get.find<MyProfileLogic>().state;
 
+  ///
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Get.find<MyProfileLogic>().scrollController = ScrollController()
+      ..addListener(Get.find<MyProfileLogic>().scrollListener);
+  }
+
+  @override
+  void dispose() {
+    Get.find<MyProfileLogic>()
+        .scrollController!
+        .removeListener(Get.find<MyProfileLogic>().scrollListener);
+    Get.find<MyProfileLogic>().scrollController!.dispose();
+    super.dispose();
+  }
+
+  ///
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
@@ -33,6 +54,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
           },
           child: Scaffold(
             body: NestedScrollView(
+                controller: _myProfileLogic.scrollController,
                 headerSliverBuilder:
                     (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
@@ -44,7 +66,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       // snap: true,
                       elevation: 0,
 
-                      backgroundColor: Colors.white,
+                      backgroundColor: _myProfileLogic.isShrink
+                          ? customLightThemeColor
+                          : Colors.white,
                       bottom: PreferredSize(
                         preferredSize: const Size.fromHeight(30),
                         child: Container(
@@ -67,7 +91,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                             child: Stack(
                               children: [
                                 Positioned(
-                                  top: -10,
+                                  top: -9,
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: customLightThemeColor,

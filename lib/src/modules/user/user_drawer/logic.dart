@@ -71,7 +71,7 @@ class UserDrawerLogic extends GetxController {
       case 6:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.blogsScreen);
         }
       case 7:
         {
@@ -108,7 +108,7 @@ class UserDrawerLogic extends GetxController {
       case 2:
         {
           Get.back();
-          return Get.toNamed(PageRoutes.walletScreen);
+          return Get.toNamed(PageRoutes.consultantProfile);
         }
       case 3:
         {

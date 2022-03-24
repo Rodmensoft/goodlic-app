@@ -64,3 +64,6 @@ String getUserAllAppointmentsURL = apiBaseUrl + 'all-status-menteeAppointments';
 
 ///---appointment-log-user
 String getAppointmentsDetailURL = apiBaseUrl + 'appointmentDetails';
+
+/// Blogs
+String blogCategoriesUrl = apiBaseUrl + 'categoriesBlogs';
