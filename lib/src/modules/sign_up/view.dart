@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -22,7 +24,8 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends State<SignUpPage>
+    with SingleTickerProviderStateMixin {
   final logic = Get.put(SignUpLogic());
 
   final state = Get.find<SignUpLogic>().state;
@@ -31,6 +34,13 @@ class _SignUpPageState extends State<SignUpPage> {
   bool? confirmObscureText = true;
 
   final GlobalKey<FormState> _signUpFormKey = GlobalKey();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    logic.tabController = TabController(length: 2, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,11 +108,57 @@ class _SignUpPageState extends State<SignUpPage> {
                                         'Welcome To Create Your Account',
                                         style: state.captionTextStyle,
                                       ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
+
+                                      SizedBox(height: 25.h),
+
+                                      ///---role-tabs
+                                      Center(
+                                        child: Container(
+                                          height: 34.h,
+                                          width: MediaQuery.of(context)
                                                   .size
-                                                  .height *
-                                              .06),
+                                                  .width *
+                                              .6,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(6.r),
+                                              color: customTextFieldColor),
+                                          child: TabBar(
+                                              onTap: (index) {
+                                                if (index == 0) {
+                                                  _signUpLogic.selectedRole =
+                                                      'Mentee';
+                                                  _signUpLogic.update();
+                                                  log('ROLE--->>>${_signUpLogic.selectedRole}');
+                                                } else {
+                                                  _signUpLogic.selectedRole =
+                                                      'Mentor';
+                                                  _signUpLogic.update();
+                                                  log('ROLE--->>>${_signUpLogic.selectedRole}');
+                                                }
+                                              },
+                                              indicator: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6
+                                                          .r), // Creates border
+                                                  color: customThemeColor),
+                                              indicatorSize:
+                                                  TabBarIndicatorSize.tab,
+                                              automaticIndicatorColorAdjustment:
+                                                  true,
+                                              controller:
+                                                  _signUpLogic.tabController,
+                                              labelColor: Colors.white,
+                                              unselectedLabelColor:
+                                                  customThemeColor,
+                                              indicatorColor:
+                                                  Colors.transparent,
+                                              tabs: _signUpLogic
+                                                  .signupRoleTabList),
+                                        ),
+                                      ),
+
+                                      SizedBox(height: 40.h),
                                       Text(
                                         'Enter Details',
                                         style: state.subHeadingTextStyle,
@@ -214,37 +270,32 @@ class _SignUpPageState extends State<SignUpPage> {
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         decoration: InputDecoration(
-                                          contentPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  25.w, 15.h, 25.w, 15.h),
-                                          hintText: 'Email Address',
-                                          hintStyle: state.hintTextStyle,
-                                          fillColor: customTextFieldColor,
-                                          filled: true,
-                                          enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
-                                          border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
-                                          focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color:
-                                                      customLightThemeColor)),
-                                          errorBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.red)),
-                                          errorText: _signUpLogic.emailValidator
-                                        ),
-                                        onChanged: (value){
+                                            contentPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    25.w, 15.h, 25.w, 15.h),
+                                            hintText: 'Email Address',
+                                            hintStyle: state.hintTextStyle,
+                                            fillColor: customTextFieldColor,
+                                            filled: true,
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.transparent)),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.transparent)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                borderSide: const BorderSide(
+                                                    color:
+                                                        customLightThemeColor)),
+                                            errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                                            errorText: _signUpLogic.emailValidator),
+                                        onChanged: (value) {
                                           _signUpLogic.emailValidator = null;
                                           _signUpLogic.update();
                                         },
@@ -394,7 +445,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                             onTap: () {
                                               if (_signUpFormKey.currentState!
                                                   .validate()) {
-                                                _generalController.updateFormLoaderController(true);
+                                                _generalController
+                                                    .updateFormLoaderController(
+                                                        true);
                                                 postMethod(
                                                     context,
                                                     signUpWithEmailURL,
@@ -406,8 +459,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                           .lastNameController
                                                           .text,
                                                       'email': _signUpLogic
-                                                          .emailController
-                                                          .text,
+                                                          .emailController.text,
                                                       'password': _signUpLogic
                                                           .passwordController
                                                           .text,
@@ -415,6 +467,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                           _signUpLogic
                                                               .confirmPasswordController
                                                               .text,
+                                                      'role':_signUpLogic.selectedRole
                                                     },
                                                     false,
                                                     signUpWithEmailRepo);
@@ -429,6 +482,91 @@ class _SignUpPageState extends State<SignUpPage> {
                                                   .size
                                                   .height *
                                               .04),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'or sign up with',
+                                            style: state.orTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 28.h),
+
+                                      ///---social-buttons
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ///---google-button
+                                          Container(
+                                            height: 57.h,
+                                            width: 57.w,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color:
+                                                          customLightThemeColor
+                                                              .withOpacity(0.2),
+                                                      spreadRadius: 1,
+                                                      blurRadius: 30,
+                                                      offset:
+                                                          const Offset(0, 15))
+                                                ]),
+                                            child: Center(
+                                                child: SvgPicture.asset(
+                                                    'assets/Icons/googleIcon.svg')),
+                                          ),
+                                          SizedBox(width: 17.w),
+
+                                          ///---fb-button
+                                          Container(
+                                            height: 57.h,
+                                            width: 57.w,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color:
+                                                          customLightThemeColor
+                                                              .withOpacity(0.2),
+                                                      spreadRadius: 1,
+                                                      blurRadius: 30,
+                                                      offset:
+                                                          const Offset(0, 15))
+                                                ]),
+                                            child: Center(
+                                                child: SvgPicture.asset(
+                                                    'assets/Icons/fbIcon.svg')),
+                                          ),
+                                          SizedBox(width: 17.w),
+
+                                          ///---twitter-button
+                                          Container(
+                                            height: 57.h,
+                                            width: 57.w,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color:
+                                                          customLightThemeColor
+                                                              .withOpacity(0.2),
+                                                      spreadRadius: 1,
+                                                      blurRadius: 30,
+                                                      offset:
+                                                          const Offset(0, 15))
+                                                ]),
+                                            child: Center(
+                                                child: SvgPicture.asset(
+                                                    'assets/Icons/twitterIcon.svg')),
+                                          ),
+                                        ],
+                                      ),
+
+                                      SizedBox(height: 30.h),
 
                                       ///---signup-route
                                       Row(
@@ -481,7 +619,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 10.h),
+                                      SizedBox(height: 20.h),
                                     ],
                                   ),
                                 ),

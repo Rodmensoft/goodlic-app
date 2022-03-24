@@ -147,7 +147,7 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                                       color: Colors.grey,
                                                       shape:
                                                           BoxShape.circle),
-                                              child: _userHomeLogic.getUserProfileModel.data!.user!.imagePath! == null
+                                              child: _userHomeLogic.getUserProfileModel.data!.user!.imagePath == null
                                                   ? const SizedBox()
                                                   : ClipRRect(
                                                 borderRadius: BorderRadius.circular(30),

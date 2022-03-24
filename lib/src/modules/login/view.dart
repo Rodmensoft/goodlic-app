@@ -6,7 +6,6 @@ import 'package:consultant_product/src/modules/login/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_app_bar.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
-import 'package:consultant_product/src/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -22,12 +21,20 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   final logic = Get.put(LoginLogic());
 
   final state = Get.find<LoginLogic>().state;
   bool? obscureText = true;
   final GlobalKey<FormState> _loginFormKey = GlobalKey();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    logic.tabController = TabController(length: 2, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +99,50 @@ class _LoginPageState extends State<LoginPage> {
                                       'Welcome Back To Your Account',
                                       style: state.captionTextStyle,
                                     ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                .06),
+                                    SizedBox(height: 25.h),
+
+                                    ///---role-tabs
+                                    Center(
+                                      child: Container(
+                                        height: 34.h,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .6,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(6.r),
+                                            color: customTextFieldColor),
+                                        child: TabBar(
+                                            onTap: (index) {
+                                              if(index == 0){
+                                                _loginLogic.selectedRole = 'Mentee';
+                                                _loginLogic.update();
+                                              }else{
+
+                                                _loginLogic.selectedRole = 'Mentor';
+                                                _loginLogic.update();
+                                              }
+                                            },
+                                            indicator: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        6.r), // Creates border
+                                                color: customThemeColor),
+                                            indicatorSize:
+                                                TabBarIndicatorSize.tab,
+                                            automaticIndicatorColorAdjustment:
+                                                true,
+                                            controller:
+                                                _loginLogic.tabController,
+                                            labelColor: Colors.white,
+                                            unselectedLabelColor:
+                                                customThemeColor,
+                                            indicatorColor: Colors.transparent,
+                                            tabs: _loginLogic.loginRoleTabList),
+                                      ),
+                                    ),
+
+                                    SizedBox(height: 40.h),
                                     Text(
                                       'Enter Login Details',
                                       style: state.subHeadingTextStyle,
@@ -225,7 +272,7 @@ class _LoginPageState extends State<LoginPage> {
                                     SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
-                                                .055),
+                                                .05),
 
                                     ///---login-button
                                     Padding(
@@ -235,7 +282,9 @@ class _LoginPageState extends State<LoginPage> {
                                           onTap: () {
                                             if (_loginFormKey.currentState!
                                                 .validate()) {
-                                              _generalController.updateFormLoaderController(true);
+                                              _generalController
+                                                  .updateFormLoaderController(
+                                                      true);
                                               postMethod(
                                                   context,
                                                   loginWithEmailURL,
@@ -245,6 +294,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     'password': _loginLogic
                                                         .passwordController
                                                         .text,
+                                                    'role':_loginLogic.selectedRole
                                                   },
                                                   false,
                                                   loginWithEmailRepo);
@@ -256,7 +306,7 @@ class _LoginPageState extends State<LoginPage> {
                                     SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
-                                                .055),
+                                                .04),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -335,7 +385,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ],
                                     ),
 
-                                    SizedBox(height: 35.h),
+                                    SizedBox(height: 30.h),
 
                                     ///---signup-route
                                     Row(
@@ -386,7 +436,7 @@ class _LoginPageState extends State<LoginPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 5.h),
+                                    SizedBox(height: 20.h),
                                   ],
                                 ),
                               ),

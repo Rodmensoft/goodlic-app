@@ -9,6 +9,14 @@ class LoginLogic extends GetxController {
 
   LoginModel loginModel = LoginModel();
 
+  late TabController tabController;
+
+  List<Tab> loginRoleTabList = [
+    const Tab(text: 'User'),
+    const Tab(text: 'Consultant')
+  ];
+
+  String? selectedRole = 'Mentee';
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 

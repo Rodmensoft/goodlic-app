@@ -21,8 +21,23 @@ loginWithEmailRepo(
           .storageBox
           .write('userID', Get.find<LoginLogic>().loginModel.data!.user!.id);
 
-      Get.find<GeneralController>().updateFormLoaderController(false);
-      Get.offAllNamed(PageRoutes.userHome);
+      if (Get.find<LoginLogic>().loginModel.data!.role == 'Mentee') {
+        Get.find<GeneralController>()
+            .storageBox
+            .write('userRole', Get.find<LoginLogic>().loginModel.data!.role);
+
+        Get.find<GeneralController>().updateFormLoaderController(false);
+        Get.offAllNamed(PageRoutes.userHome);
+        log('loginRepoMentee ------>> ${Get.find<LoginLogic>().loginModel.data}');
+      } else {
+        Get.find<GeneralController>()
+            .storageBox
+            .write('userRole', Get.find<LoginLogic>().loginModel.data!.role);
+
+        Get.find<GeneralController>().updateFormLoaderController(false);
+        Get.offAllNamed(PageRoutes.consultantDashboard);
+        log('loginRepoMentor ------>> ${Get.find<LoginLogic>().loginModel.data}');
+      }
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
       showDialog(

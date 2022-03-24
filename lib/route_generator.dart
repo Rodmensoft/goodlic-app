@@ -1,6 +1,8 @@
 import 'package:consultant_product/src/modules/blogs/view.dart';
 import 'package:consultant_product/src/modules/blogs/view_blogs_detail.dart';
 import 'package:consultant_product/src/modules/chat/view.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/view.dart';
+import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
 import 'package:consultant_product/src/modules/consultant/educational_info/view.dart';
 import 'package:consultant_product/src/modules/consultant/general_info/view.dart';
 import 'package:consultant_product/src/modules/consultant/my_profile/view.dart';
@@ -69,10 +71,22 @@ routes() => [
           page: () => const AppointmentDetailPage()),
       GetPage(name: "/chatScreen", page: () => const ChatPage()),
       GetPage(name: "/walletScreen", page: () => const WalletPage()),
-      GetPage(name: "/onBoard1Screen", page: () => const OnBoard1Page()),
-      GetPage(name: "/onBoard2Screen", page: () => const OnBoard2Page()),
-      GetPage(name: "/onBoard3Screen", page: () => const OnBoard3Page()),
-      GetPage(name: "/onBoard4Screen", page: () => const OnBoard4Page()),
+      GetPage(
+          name: "/onBoard1Screen",
+          page: () => const OnBoard1Page(),
+          transition: Transition.noTransition),
+      GetPage(
+          name: "/onBoard2Screen",
+          page: () => const OnBoard2Page(),
+          transition: Transition.noTransition),
+      GetPage(
+          name: "/onBoard3Screen",
+          page: () => const OnBoard3Page(),
+          transition: Transition.noTransition),
+      GetPage(
+          name: "/onBoard4Screen",
+          page: () => const OnBoard4Page(),
+          transition: Transition.noTransition),
       GetPage(name: "/generalInfoScreen", page: () => const GeneralInfoPage()),
       GetPage(
           name: "/educationalInfoScreen",
@@ -82,9 +96,12 @@ routes() => [
           name: "/scheduleInfoScreen", page: () => const ScheduleInfoPage()),
       GetPage(
           name: "/editUserProfile", page: () => const EditUserProfilePage()),
-      GetPage(name: "/myProfileScreen", page: () => const MyProfilePage()),
-      GetPage(name: "/blogsScreen", page: () => const BlogsPage()),
-      GetPage(name: "/blogDetailScreen", page: () => const BlogDetailPage()),
+      GetPage(
+          name: "/createConsultantProfile",
+          page: () => const CreateProfilePage()),
+      GetPage(
+          name: "/consultantDashboard",
+          page: () => const ConsultantDashboardPage()),
     ];
 
 class PageRoutes {
@@ -115,9 +132,8 @@ class PageRoutes {
   static const String skillInfoScreen = '/skillInfoScreen';
   static const String scheduleInfoScreen = '/scheduleInfoScreen';
   static const String editUserProfile = '/editUserProfile';
-  static const String myProfileScreen = '/myProfileScreen';
-  static const String blogsScreen = '/blogsScreen';
-  static const String blogDetailScreen = '/blogDetailScreen';
+  static const String createConsultantProfile = '/createConsultantProfile';
+  static const String consultantDashboard = '/consultantDashboard';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -148,9 +164,8 @@ class PageRoutes {
       skillInfoScreen: (context) => const SkillInfoPage(),
       scheduleInfoScreen: (context) => const ScheduleInfoPage(),
       editUserProfile: (context) => const EditUserProfilePage(),
-      myProfileScreen: (context) => const MyProfilePage(),
-      blogsScreen: (context) => const BlogsPage(),
-      blogDetailScreen: (context) => const BlogDetailPage(),
+      createConsultantProfile: (context) => const CreateProfilePage(),
+      consultantDashboard: (context) => const ConsultantDashboardPage(),
     };
   }
 }

@@ -4,6 +4,9 @@ import 'package:consultant_product/multi_language/languages.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/logic.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
+import 'package:consultant_product/src/modules/on_board/view_1.dart';
+import 'package:consultant_product/src/modules/user/home/view.dart';
 import 'package:consultant_product/src/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -107,12 +110,44 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
                 '${Get.find<GeneralController>().storageBox.read('languageCode')}',
                 '${Get.find<GeneralController>().storageBox.read('countryCode')}'),
 
-            // initialRoute: PageRoutes.login,
-            initialRoute: PageRoutes.userHome,
+            home: const ScreenController(),
+            // initialRoute: PageRoutes.createConsultantProfile,
+            // initialRoute: PageRoutes.userHome,
+            // initialRoute: PageRoutes.onBoard1Screen,
             getPages: routes(),
             themeMode: ThemeMode.light,
             theme: lightTheme(),
           );
         });
+  }
+}
+
+class ScreenController extends StatelessWidget {
+  const ScreenController({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (Get
+        .find<GeneralController>()
+        .storageBox
+        .hasData('authToken')) {
+      if (Get
+          .find<GeneralController>()
+          .storageBox
+          .read('userRole')
+          .toString() ==
+          'Mentee') {
+        return const UserHomePage();
+      } else {
+        return const ConsultantDashboardPage();
+      }
+    } else if(Get
+        .find<GeneralController>()
+        .storageBox
+        .hasData('onBoard')) {
+      return const UserHomePage();
+    } else{
+      return const OnBoard1Page();
+    }
   }
 }
