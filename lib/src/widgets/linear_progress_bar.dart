@@ -1,5 +1,6 @@
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:resize/resize.dart';
 
 class ProgressBar extends StatelessWidget {
   final double? max;
@@ -21,11 +22,12 @@ class ProgressBar extends StatelessWidget {
         return Stack(
           children: [
             Container(
-              width: x,
-              height: 8,
+              width: x.w,
+              height: 8.h,
               decoration: BoxDecoration(
-                color: customTextGreyColor,
-                borderRadius: BorderRadius.circular(40),
+                color: const Color(
+                    0xffDBDBDB),
+                borderRadius: BorderRadius.circular(40.r),
               ),
             ),
             AnimatedContainer(
@@ -34,7 +36,7 @@ class ProgressBar extends StatelessWidget {
               height: 8,
               decoration: BoxDecoration(
                 color: color,
-                borderRadius: BorderRadius.circular(35),
+                borderRadius: BorderRadius.circular(35.r),
               ),
             ),
           ],

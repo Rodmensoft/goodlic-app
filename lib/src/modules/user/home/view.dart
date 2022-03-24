@@ -35,7 +35,7 @@ class _UserHomePageState extends State<UserHomePage> {
       ///---get-user-API-call
       getMethod(
           context,
-          getUserProfileURL,
+          getMenteeProfileUrl,
           {
             'token': '123',
             'user_id': Get.find<GeneralController>().storageBox.read('userID')

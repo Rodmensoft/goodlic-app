@@ -37,7 +37,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
     super.initState();
     getMethod(
         context,
-        getConsultantProfileByIDURL,
+        getUserProfileUrl,
         {
           'token': '123',
           'user_id': Get.find<UserHomeLogic>().selectedConsultantID

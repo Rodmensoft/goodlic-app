@@ -9,9 +9,12 @@ import 'package:consultant_product/src/modules/consultant/create_profile/model_p
 import 'package:consultant_product/src/modules/consultant/create_profile/model_post_experience_info.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/model_post_general_info.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/model_post_skill_info.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/view_account_info.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/view_confirmation.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/view_educational_info.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/view_experience_info.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/view_general_info.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/view_skill_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -37,9 +40,7 @@ class CreateProfileLogic extends GetxController {
     }
   }
 
-
-
-  int? stepperIndex = 0;
+  int? stepperIndex = 3;
 
   updateStepperIndex(int? newValue) {
     stepperIndex = newValue;
@@ -77,9 +78,9 @@ class CreateProfileLogic extends GetxController {
   ];
 
   consultantProfileNavigation(
-      int? index,
-      BuildContext context,
-      ) {
+    int? index,
+    BuildContext context,
+  ) {
     switch (index) {
       case 0:
         {
@@ -95,11 +96,13 @@ class CreateProfileLogic extends GetxController {
         }
       case 3:
         {
-          return const Scaffold();
+          return const SkillInfoView();
         }
       case 4:
         {
-          return const Scaffold();
+          return showConfirmation!
+              ? const ConfirmationView()
+              : const AccountInfoView();
         }
       default:
         {
@@ -113,18 +116,27 @@ class CreateProfileLogic extends GetxController {
     }
   }
 
+  bool? showConfirmation = false;
 
-  getSetData(BuildContext context){
-    if(Get.find<GeneralController>().getUserProfileModel.data != null){
-      firstNameController.text = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.firstName!;
-      lastNameController.text = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.lastName!;
+  getSetData(BuildContext context) {
+    if (Get.find<GeneralController>().getUserProfileModel.data != null) {
+      firstNameController.text = Get.find<GeneralController>()
+          .getUserProfileModel
+          .data!
+          .userDetail!
+          .firstName!;
+      lastNameController.text = Get.find<GeneralController>()
+          .getUserProfileModel
+          .data!
+          .userDetail!
+          .lastName!;
       update();
     }
-
   }
+
   ///-------------------------------general-tab
   MentorProfileGenericDataModel mentorProfileGenericDataModel =
-  MentorProfileGenericDataModel();
+      MentorProfileGenericDataModel();
   CitiesByIdModel citiesByIdModel = CitiesByIdModel();
   GeneralInfoPostModel generalInfoPostModel = GeneralInfoPostModel();
   final TextEditingController firstNameController = TextEditingController();
@@ -185,6 +197,7 @@ class CreateProfileLogic extends GetxController {
     cityDropDownList = [];
     update();
   }
+
   saveData({String? latLong, String? place}) async {
     var data = await json.decode(latLong!);
     addressController.text = place!;
@@ -312,7 +325,6 @@ class CreateProfileLogic extends GetxController {
     update();
   }
 
-
   List<List<String>> allSubCategoriesForDropDownList = [];
 
   updateAllSubCategoriesForDropDownList(List<String> newValue) {
@@ -324,6 +336,7 @@ class CreateProfileLogic extends GetxController {
     allSubCategoriesForDropDownList = [];
     update();
   }
+
   ///-------------------------------account-tab
   AccountInfoPostModel accountInfoPostModel = AccountInfoPostModel();
   String? selectedBank;
@@ -338,8 +351,8 @@ class CreateProfileLogic extends GetxController {
     bankDropDownList = [];
     update();
   }
-
 }
+
 class Stepper {
   Stepper({this.title, this.stepperLabel, this.isSelected, this.isCompleted});
 

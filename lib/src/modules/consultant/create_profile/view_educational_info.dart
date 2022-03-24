@@ -137,7 +137,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                       decoration: InputDecoration(
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
-                                                15.w, 15.h, 15.w, 15.h),
+                                                15.w, 14.h, 15.w, 14.h),
                                         fillColor: Colors.white,
                                         filled: true,
                                         enabledBorder: OutlineInputBorder(

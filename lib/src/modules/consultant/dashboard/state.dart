@@ -1,6 +1,7 @@
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:resize/resize.dart';
 
 class DashboardState {
   TextStyle? mentorDetailTileTitleTextStyle;
@@ -14,38 +15,38 @@ class DashboardState {
   TextStyle? appointmentListValueTextStyle;
   DashboardState() {
     ///Initialize variables
-    mentorDetailTileTitleTextStyle = const TextStyle(
-        fontSize: 13,
+    mentorDetailTileTitleTextStyle =  TextStyle(
+        fontSize: 13.sp,
         fontFamily: SarabunFontFamily.bold,
         color: customLightThemeColor);
-    mentorDetailTileTitle2TextStyle = const TextStyle(
-        fontSize: 13,
+    mentorDetailTileTitle2TextStyle =  TextStyle(
+        fontSize: 13.sp,
         fontFamily: SarabunFontFamily.light,
         color: customTextBlackColor);
-    mentorDetailTileTitle3TextStyle = const TextStyle(
-        fontSize: 10,
+    mentorDetailTileTitle3TextStyle =  TextStyle(
+        fontSize: 10.sp,
         fontFamily: SarabunFontFamily.light,
         color: customTextBlackColor);
-    appointmentCountTitleTextStyle = const TextStyle(
-        fontSize: 10,
+    appointmentCountTitleTextStyle =  TextStyle(
+        fontSize: 10.sp,
         fontFamily: SarabunFontFamily.medium,
         color: Colors.white);
-    appointmentCountValueTextStyle = const TextStyle(
-        fontSize: 16, fontFamily: SarabunFontFamily.bold, color: Colors.white);
-    headingTextStyle = const TextStyle(
-        fontSize: 20,
+    appointmentCountValueTextStyle =  TextStyle(
+        fontSize: 16.sp, fontFamily: SarabunFontFamily.bold, color: Colors.white);
+    headingTextStyle =  TextStyle(
+        fontSize: 20.sp,
         fontFamily: SarabunFontFamily.extraBold,
         color: customTextBlackColor);
-    ratingTextStyle = const TextStyle(
-        fontSize: 10,
+    ratingTextStyle =  TextStyle(
+        fontSize: 10.sp,
         fontFamily: SarabunFontFamily.regular,
         color: Colors.black);
-    appointmentListLabelTextStyle = const TextStyle(
-        fontSize: 10,
+    appointmentListLabelTextStyle =  TextStyle(
+        fontSize: 10.sp,
         fontFamily: SarabunFontFamily.bold,
         color: customThemeColor);
-    appointmentListValueTextStyle = const TextStyle(
-        fontSize: 10,
+    appointmentListValueTextStyle =  TextStyle(
+        fontSize: 10.sp,
         fontFamily: SarabunFontFamily.medium,
         color: customTextBlackColor);
   }
