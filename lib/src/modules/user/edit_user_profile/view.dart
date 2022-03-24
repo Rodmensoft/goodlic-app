@@ -47,7 +47,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
     });
     getMethod(
         context,
-        getUserProfileURL,
+        getMenteeProfileUrl,
         {
           'token': '123',
           'user_id': Get.find<GeneralController>().storageBox.read('userID')
@@ -371,7 +371,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                       decoration: InputDecoration(
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
-                                                15.w, 15.h, 15.w, 15.h),
+                                                15.w, 14.h, 15.w, 14.h),
                                         fillColor: Colors.white,
                                         filled: true,
                                         enabledBorder: OutlineInputBorder(
@@ -462,8 +462,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                             decoration: InputDecoration(
                                               contentPadding:
                                                   EdgeInsetsDirectional
-                                                      .fromSTEB(15.w, 15.h,
-                                                          15.w, 15.h),
+                                                      .fromSTEB(15.w, 14.h,
+                                                          15.w, 14.h),
                                               fillColor: Colors.white,
                                               filled: true,
                                               enabledBorder: OutlineInputBorder(
@@ -580,8 +580,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                             decoration: InputDecoration(
                                               contentPadding:
                                                   EdgeInsetsDirectional
-                                                      .fromSTEB(15.w, 15.h,
-                                                          15.w, 15.h),
+                                                      .fromSTEB(15.w, 14.h,
+                                                          15.w, 14.h),
                                               fillColor: Colors.white,
                                               enabled: true,
                                               filled: true,

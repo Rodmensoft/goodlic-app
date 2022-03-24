@@ -4,18 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
-import 'modal_get_appointment_detail.dart';
 import 'state.dart';
 
 class AppointmentDetailLogic extends GetxController {
   final AppointmentDetailState state = AppointmentDetailState();
-  // ModalGetAppointmentDetail getAppointmentDetailModel =
-  //     ModalGetAppointmentDetail();
-  // bool? getAppointmentDetailLoader = true;
-  // updateGetAppointmentDetailLoader(bool? newValue) {
-  //   getAppointmentDetailLoader = newValue;
-  //   update();
-  // }
 
   UserAppointmentsData selectedAppointmentData = UserAppointmentsData();
   int? appointmentStatus;

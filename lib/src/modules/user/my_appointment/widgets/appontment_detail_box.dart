@@ -180,6 +180,8 @@ class AppointmentDetailBox extends StatelessWidget {
                             children: [
                               SvgPicture.asset(
                                 typeIcon!,
+                                height: 16.h,
+                                width: 18.w,
                                 color: customLightThemeColor,
                               ),
                               SizedBox(

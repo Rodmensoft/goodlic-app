@@ -438,7 +438,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                                         const EdgeInsetsDirectional.all(
                                                             8.0),
                                                     child: SvgPicture.asset(
-                                                        'assets/deleteIcon.svg'),
+                                                        'assets/Icons/deleteIcon.svg'),
                                                   ),
                                                 )
                                               ],

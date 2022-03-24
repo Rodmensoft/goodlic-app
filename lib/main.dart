@@ -3,7 +3,10 @@ import 'dart:developer';
 import 'package:consultant_product/multi_language/languages.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/logic.dart';
+import 'package:consultant_product/src/api_services/post_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/consultant/dashboard/repo_post.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
 import 'package:consultant_product/src/modules/on_board/view_1.dart';
 import 'package:consultant_product/src/modules/user/home/view.dart';
@@ -65,23 +68,60 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
     super.didChangeAppLifecycleState(state);
 
     if (Get.find<GeneralController>().storageBox.hasData('userID') &&
+        Get.find<GeneralController>().storageBox.hasData('authToken') &&
         !Get.find<GeneralController>().storageBox.hasData('onlineStatus')) {
       switch (state) {
         case AppLifecycleState.resumed:
           log('----->>> RESUMED <<-----');
-
+          postMethod(
+              context,
+              changeMentorOnlineStatusUrl,
+              {
+                'token': '123',
+                'user_id': Get.find<GeneralController>().storageBox.read('userID'),
+                'status':'online'
+              },
+              true,
+              changeMentorOnlineStatusRepo);
           break;
         case AppLifecycleState.inactive:
           log('----->>> INACTIVE <<-----');
-
+          postMethod(
+              context,
+              changeMentorOnlineStatusUrl,
+              {
+                'token': '123',
+                'user_id': Get.find<GeneralController>().storageBox.read('userID'),
+                'status':'offline'
+              },
+              true,
+              changeMentorOnlineStatusRepo);
           break;
         case AppLifecycleState.paused:
           log('----->>> PAUSED <<-----');
-
+          postMethod(
+              context,
+              changeMentorOnlineStatusUrl,
+              {
+                'token': '123',
+                'user_id': Get.find<GeneralController>().storageBox.read('userID'),
+                'status':'offline'
+              },
+              true,
+              changeMentorOnlineStatusRepo);
           break;
         case AppLifecycleState.detached:
           log('----->>> DETACHED <<-----');
-
+          postMethod(
+              context,
+              changeMentorOnlineStatusUrl,
+              {
+                'token': '123',
+                'user_id': Get.find<GeneralController>().storageBox.read('userID'),
+                'status':'offline'
+              },
+              true,
+              changeMentorOnlineStatusRepo);
           break;
       }
     }

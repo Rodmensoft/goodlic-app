@@ -21,7 +21,7 @@ menteeUpdateProfileRepo(
     if (response['Status'].toString() == 'true') {
       getMethod(
           context,
-          getUserProfileURL,
+          getMenteeProfileUrl,
           {
             'token': '123',
             'user_id': Get.find<GeneralController>().storageBox.read('userID')
@@ -121,7 +121,7 @@ menteeUpdateProfileImageRepo(File? file1) async {
       if (response.data['Status'].toString() == 'true') {
         getMethod(
             Get.context!,
-            getUserProfileURL,
+            getMenteeProfileUrl,
             {
               'token': '123',
               'user_id':

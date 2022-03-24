@@ -132,8 +132,8 @@ class _BlogsPageState extends State<BlogsPage> {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        Get.toNamed(
-                                            PageRoutes.blogDetailScreen);
+                                        // Get.toNamed(
+                                        //     PageRoutes.blogDetailScreen);
                                       },
                                       child: Row(
                                         mainAxisAlignment:

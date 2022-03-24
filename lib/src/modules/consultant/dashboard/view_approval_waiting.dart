@@ -1,9 +1,11 @@
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
+import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:resize/resize.dart';
 
 class MentorApprovalWaitingView extends StatefulWidget {
   const MentorApprovalWaitingView({Key? key}) : super(key: key);
@@ -17,10 +19,20 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              customThemeColor,
+              customLightThemeColor,
+            ],
+          ),
+        ),
+        child: SafeArea(
           child: Column(
             children: [
               Row(
@@ -29,33 +41,32 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(5, 10, 10, 0),
                     child: InkWell(
-                      onTap: (){
-                        Get.find<GeneralController>()
-                            .storageBox.erase();
+                      onTap: () {
+                        Get.find<GeneralController>().storageBox.erase();
                         Navigator.pop(context);
                         Get.offAllNamed(PageRoutes.userHome);
                       },
                       child: CircleAvatar(
-                        backgroundColor: customThemeColor.withOpacity(0.3),
+                        backgroundColor: customTextFieldColor.withOpacity(0.5),
                         radius: 30,
-                        child: const Icon(Icons.logout,color: Colors.red,size: 30,),
+                        child: const Icon(
+                          Icons.logout,
+                          color: Colors.red,
+                          size: 30,
+                        ),
                       ),
                     ),
                   )
                 ],
               ),
               Expanded(
+                flex:2,
                   child: Align(
                 alignment: Alignment.center,
                 child: SvgPicture.asset(
-                  'assets/appBarLogo.svg',
-                  width: MediaQuery.of(context).size.width * .35,
+                  'assets/images/waitingImage.svg',
+                  width: MediaQuery.of(context).size.width * .5,
                 ),
-              )),
-              Expanded(
-                  child: SvgPicture.asset(
-                'assets/approvalScreen.svg',
-                width: MediaQuery.of(context).size.width * .7,
               )),
               Expanded(
                 child: Column(
@@ -65,9 +76,9 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                     Text(
                       'your_profile_is_under'.tr,
                       style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xff727377)),
+                          fontSize: 14.sp,
+                          fontFamily: SarabunFontFamily.regular,
+                          color: Colors.white),
                     ),
                     const SizedBox(
                       height: 5,
@@ -78,16 +89,19 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                         Text(
                           'under'.tr,
                           style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                              fontSize: 30.sp,
+                              fontFamily: SarabunFontFamily.extraBold,
+                              color: customOrangeColor),
+                        ),
+                        SizedBox(
+                          width: 7.w,
                         ),
                         Text(
                           'review'.tr,
                           style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: customThemeColor),
+                              fontSize: 30.sp,
+                              fontFamily: SarabunFontFamily.extraBold,
+                              color: customOrangeColor),
                         ),
                       ],
                     ),
@@ -97,9 +111,9 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                     Text(
                       'you_will_be_notified_once_it_get_approve'.tr,
                       style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xff727377)),
+                          fontSize: 14.sp,
+                          fontFamily: SarabunFontFamily.regular,
+                          color: Colors.white),
                     ),
                   ],
                 ),

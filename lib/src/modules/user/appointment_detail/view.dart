@@ -1,21 +1,13 @@
-import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
-import 'package:consultant_product/src/modules/user/appointment_detail/get_repo.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/widget/bottom_sheet.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/widgets/appontment_detail_box.dart';
-import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:resize/resize.dart';
-import 'package:skeleton_loader/skeleton_loader.dart';
-
-import '../../../api_services/get_service.dart';
-import '../../../api_services/urls.dart';
 import 'logic.dart';
 import 'package:intl/intl.dart';
 

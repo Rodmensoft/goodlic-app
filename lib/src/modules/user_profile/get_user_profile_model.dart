@@ -442,7 +442,8 @@ class MentorFromGetProfile {
       int? fee, 
       String? createdAt, 
       String? updatedAt,
-    List<CategoryListFromGetProfile>? category,
+    // List<CategoryListFromGetProfile>? category,
+    CategoryFromGetProfile? category,
     // CategoryFromGetProfile? parentCategory,
   }){
     _id = id;
@@ -476,12 +477,13 @@ class MentorFromGetProfile {
     _fee = json['fee'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    if (json['categories'] != null) {
-      _category = [];
-      json['categories'].forEach((v) {
-        _category?.add(CategoryListFromGetProfile.fromJson(v));
-      });
-    }
+    // if (json['categories'] != null) {
+    //   _category = [];
+    //   json['categories'].forEach((v) {
+    //     _category?.add(CategoryListFromGetProfile.fromJson(v));
+    //   });
+    // }
+    _category = json['categories'] != null ? CategoryFromGetProfile.fromJson(json['categories']) : null;
     // _category = json['category'] != null ? CategoryListFromGetProfile.fromJson(json['category']) : null;
     // _parentCategory = json['parent_category'] != null ? CategoryFromGetProfile.fromJson(json['parent_category']) : null;
   }
@@ -498,7 +500,8 @@ class MentorFromGetProfile {
   int? _fee;
   String? _createdAt;
   String? _updatedAt;
-  List<CategoryListFromGetProfile>? _category;
+  // List<CategoryListFromGetProfile>? _category;
+  CategoryFromGetProfile? _category;
   // CategoryFromGetProfile? _parentCategory;
 
   int? get id => _id;
@@ -514,7 +517,8 @@ class MentorFromGetProfile {
   int? get fee => _fee;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
-  List<CategoryListFromGetProfile>? get category => _category;
+  // List<CategoryListFromGetProfile>? get category => _category;
+  CategoryFromGetProfile? get category => _category;
   // CategoryFromGetProfile? get parentCategory => _parentCategory;
 
   Map<String, dynamic> toJson() {
@@ -532,8 +536,11 @@ class MentorFromGetProfile {
     map['fee'] = _fee;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
+    // if (_category != null) {
+    //   map['categories'] = _category?.map((v) => v.toJson()).toList();
+    // }
     if (_category != null) {
-      map['categories'] = _category?.map((v) => v.toJson()).toList();
+      map['categories'] = _category?.toJson();
     }
     // if (_parentCategory != null) {
     //   map['parent_category'] = _parentCategory?.toJson();

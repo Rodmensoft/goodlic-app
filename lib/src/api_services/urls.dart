@@ -18,12 +18,12 @@ String loginWithEmailURL = apiBaseUrl + 'login-email';
 String mentorApprovalStatusUrl = apiBaseUrl + 'mentorStatus';
 
 ///---user
-String getUserProfileURL = apiBaseUrl + 'get-mentee-profile';
+String getMenteeProfileUrl = apiBaseUrl + 'get-mentee-profile';
 
 String updateMenteeProfileUrl = apiBaseUrl + 'update-mentee-profile';
 
 ///---consultant-profile-by-id
-String getConsultantProfileByIDURL = apiBaseUrl + 'getUserById';
+String getUserProfileUrl = apiBaseUrl + 'getUserById';
 
 ///---consultant-profile-section
 String mentorProfileGenericDataUrl = apiBaseUrl + 'generic_mentor';
@@ -40,6 +40,31 @@ String mentorEducationalInfoDeleteUrl = apiBaseUrl + 'mentorEducationDelete';
 String mentorExperienceInfoDeleteUrl = apiBaseUrl + 'mentorExperienceDelete';
 String mentorSkillInfoDeleteUrl = apiBaseUrl + 'mentorSkillDelete';
 String mentorRatingsUrl = apiBaseUrl + 'get-ratings-detail';
+
+///---mentor-schedule
+String getAppointmentTypeUrl = apiBaseUrl + 'appointmenttypes';
+String markDayHolidayUrl = apiBaseUrl + 'mark-day-holiday';
+String getAvailableDaysUrl = apiBaseUrl + 'get-available-days';
+String saveMentorSchedulesUrl = apiBaseUrl + 'save-mentor-schedule';
+String saveMentorChatFeeUrl = apiBaseUrl + 'save-mentor-chat-fee';
+String getMentorSchedulesUrl = apiBaseUrl + 'get-mentor-schedules';
+String deleteMentorScheduleUrl = apiBaseUrl + 'delete-mentor-schedule';
+
+String mentorProfileStatusUrl = apiBaseUrl + 'mentorProfile';
+
+String changeProfileVisibilityUrl = apiBaseUrl + 'toggle-visibility';
+String changeMentorOnlineStatusUrl = apiBaseUrl + 'changeOnlineStatus';
+String goLiveForMentorUrl = apiBaseUrl + 'turn-live-mentor';
+String inActiveLiveForMentorUrl = apiBaseUrl + 'turn-inactive-mentor';
+
+///---get-appointment-counts
+String getAppointmentCountUrl = apiBaseUrl + 'mentorAppointmentCount';
+String getAppointmentCountForMentorUrl = apiBaseUrl + 'appointment-count';
+
+///---mentor-appointment-log
+String mentorAllAppointmentUrl = apiBaseUrl + 'mentorAppointments';
+String mentorNewAppointmentUrl = apiBaseUrl + 'newMentorAppointments';
+String mentorTodayAppointmentUrl = apiBaseUrl + 'today-appointments';
 
 ///---featured
 String getFeaturedURL = apiBaseUrl + 'get-featured-mentors';
@@ -61,6 +86,7 @@ String bookAppointmentUrl = apiBaseUrl + 'bookAppointment';
 
 ///---appointment-log-user
 String getUserAllAppointmentsURL = apiBaseUrl + 'all-status-menteeAppointments';
+String getConsultantAllAppointmentsURL = apiBaseUrl + 'all-status-mentorAppointments';
 
 ///---appointment-log-user
 String getAppointmentsDetailURL = apiBaseUrl + 'appointmentDetails';
