@@ -90,3 +90,6 @@ String getConsultantAllAppointmentsURL = apiBaseUrl + 'all-status-mentorAppointm
 
 ///---appointment-log-user
 String getAppointmentsDetailURL = apiBaseUrl + 'appointmentDetails';
+
+/// Blogs
+String blogCategoriesUrl = apiBaseUrl + 'categoriesBlogs';

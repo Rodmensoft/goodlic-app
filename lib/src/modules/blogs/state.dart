@@ -9,6 +9,9 @@ class BlogsState {
   TextStyle? blogCategoryTextStyle;
   TextStyle? blogNameTextStyle;
   TextStyle? authorNameTextStyle;
+  TextStyle? blogDescTextStyle;
+  TextStyle? blogListTileTitle;
+  TextStyle? blogTimeTextStyle;
   BlogsState() {
     ///Initialize variables
     headingTextStyle = TextStyle(
@@ -30,6 +33,18 @@ class BlogsState {
     authorNameTextStyle = TextStyle(
         fontSize: 12.sp,
         fontFamily: SarabunFontFamily.medium,
+        color: customTextBlackColor);
+    blogDescTextStyle = TextStyle(
+        fontSize: 14.sp,
+        fontFamily: SarabunFontFamily.light,
+        color: customTextBlackColor);
+    blogListTileTitle = TextStyle(
+        fontSize: 14.sp,
+        fontFamily: SarabunFontFamily.light,
+        color: customTextBlackColor);
+    blogTimeTextStyle = TextStyle(
+        fontSize: 14.sp,
+        fontFamily: SarabunFontFamily.light,
         color: customTextBlackColor);
   }
 }
