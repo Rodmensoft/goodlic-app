@@ -63,8 +63,11 @@ dependencies:
 
   rounded_expansion_tile: ^0.0.13
   progress_indicator: ^0.2.0
+  pull_to_refresh: ^2.0.0
 
   photo_view: ^0.13.0
+  flutter_inappwebview: ^5.3.2
+  url_launcher: ^6.0.12
 
   geolocator: ^8.0.1
   geocoding: ^2.0.1
@@ -72,6 +75,21 @@ dependencies:
   app_settings: ^4.0.4
   uuid: ^3.0.5
 
+
+  #agora call video/audio
+  agora_rtc_engine: ^4.0.7
+
+  # pusher client for live chat event
+  pusher_client: ^2.0.0
+
+  firebase_core: ^1.8.0
+  firebase_auth: ^3.1.4
+
+  firebase_messaging: ^11.1.0
+  flutter_local_notifications: ^9.0.2
+  flutter_ringtone_player: ^3.1.0
+
+  device_info_plus: ^3.1.1
 
 dev_dependencies:
   flutter_test:

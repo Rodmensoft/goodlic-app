@@ -1,3 +1,7 @@
+import 'package:consultant_product/src/api_services/post_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
+import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -444,40 +448,235 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                           height: 20.h,
                         ),
 
-                        ///---reschedule-button
-                        Center(
-                          child: Container(
-                            height: 55.h,
-                            width: MediaQuery.of(context).size.width * .7,
-                            decoration: BoxDecoration(
-                              color: customThemeColor,
-                              borderRadius: BorderRadius.circular(5.r),
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25.w),
-                                child: Row(
+                        _consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus ==
+                            0
+                            ? Padding(
+                          padding:
+                          const EdgeInsetsDirectional.fromSTEB(
+                              0, 30, 0, 10),
+                          child: Row(
+                            children: [
+                              ///---action
+                              Expanded(
+                                flex: 2,
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceAround,
                                   children: [
-                                    Text(
-                                      'Reschedule',
-                                      style: TextStyle(
-                                          fontFamily: SarabunFontFamily.bold,
-                                          fontSize: 16.sp,
-                                          color: Colors.white),
-                                    ),
-                                    SvgPicture.asset(
-                                      'assets/Icons/whiteForwardIcon.svg',
-                                      height: 29.h,
-                                      width: 29.w,
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          child: InkWell(
+                                            onTap: () {
+                                              ///---make-notification
+                                              Get.find<
+                                                  GeneralController>()
+                                                  .updateNotificationBody(
+                                                  'Your Appointment is Accepted',
+                                                  '',
+                                                  null,
+                                                  'mentee/appointment/log',
+                                                  null);
+                                              Get.find<
+                                                  GeneralController>()
+                                                  .updateUserIdForSendNotification(
+                                                  _consultantAppointmentDetailLogic.selectedAppointmentData
+                                                      .menteeId);
+                                              Get.find<
+                                                  GeneralController>()
+                                                  .updateFormLoaderController(
+                                                  true);
+                                              Get.back();
+                                              Get.back();
+                                              postMethod(
+                                                  context,
+                                                  mentorChangeAppointmentStatusUrl,
+                                                  {
+                                                    'token': '123',
+                                                    'id': _consultantAppointmentDetailLogic.selectedAppointmentData
+                                                        .id,
+                                                    'status': 1
+                                                  },
+                                                  true,
+                                                  mentorAcceptAppointmentRepo);
+                                            },
+                                            child: Container(
+                                              height: 40.h,
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                  customThemeColor,
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      4)),
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets
+                                                    .fromLTRB(
+                                                    10, 5, 10, 5),
+                                                child: Center(
+                                                  child: Text(
+                                                    'accept'.tr,
+                                                    style: TextStyle(
+                                                        fontFamily: SarabunFontFamily.bold,
+                                                        fontSize: 16.sp,
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                          child: InkWell(
+                                            onTap: () {
+                                              ///---make-notification
+                                              Get.find<
+                                                  GeneralController>()
+                                                  .updateNotificationBody(
+                                                  'Your Appointment is Cancelled',
+                                                  '',
+                                                  null,
+                                                  'mentee/appointment/log',
+                                                  null);
+                                              Get.find<
+                                                  GeneralController>()
+                                                  .updateUserIdForSendNotification(
+                                                  _consultantAppointmentDetailLogic.selectedAppointmentData
+                                                      .menteeId);
+                                              Get.find<
+                                                  GeneralController>()
+                                                  .updateFormLoaderController(
+                                                  true);
+                                              Get.back();
+                                              Get.back();
+                                              postMethod(
+                                                  context,
+                                                  mentorChangeAppointmentStatusUrl,
+                                                  {
+                                                    'token': '123',
+                                                    'id': _consultantAppointmentDetailLogic.selectedAppointmentData
+                                                        .id,
+                                                    'status': 3
+                                                  },
+                                                  true,
+                                                  mentorRejectAppointmentRepo);
+                                            },
+                                            child: Container(
+                                              height: 40.h,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.red,
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(
+                                                      4)),
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets
+                                                    .fromLTRB(
+                                                    10, 5, 10, 5),
+                                                child: Center(
+                                                  child: Text(
+                                                    'reject'.tr,
+                                                    style: TextStyle(
+                                                        fontFamily: SarabunFontFamily.bold,
+                                                        fontSize: 16.sp,
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                      ],
                                     )
                                   ],
                                 ),
                               ),
+                            ],
+                          ),
+                        )
+                            : const SizedBox(),
+
+                        _consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus ==
+                            1
+                            ? Padding(
+                          padding:
+                          const EdgeInsetsDirectional.fromSTEB(
+                              0, 30, 0, 10),
+                          child: InkWell(
+                            onTap: () {
+                              ///---make-notification
+                              Get.find<GeneralController>()
+                                  .updateNotificationBody(
+                                  'Your Appointment is Completed',
+                                  '',
+                                  null,
+                                  'mentee/appointment/log',
+                                  null);
+                              Get.find<GeneralController>()
+                                  .updateUserIdForSendNotification(
+                                  _consultantAppointmentDetailLogic.selectedAppointmentData
+                                      .menteeId);
+                              Get.find<GeneralController>()
+                                  .updateFormLoaderController(true);
+                              Get.back();
+                              Get.back();
+                              postMethod(
+                                  context,
+                                  mentorChangeAppointmentStatusUrl,
+                                  {
+                                    'token': '123',
+                                    'id': _consultantAppointmentDetailLogic.selectedAppointmentData.id,
+                                    'status': 2
+                                  },
+                                  true,
+                                  mentorCompleteAppointmentRepo);
+                            },
+                            child: Container(
+                              height: 55.h,
+                              width: MediaQuery.of(context).size.width * .7,
+                              decoration: BoxDecoration(
+                                color: customThemeColor,
+                                borderRadius: BorderRadius.circular(5.r),
+                              ),
+                              child: Center(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 25.w),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'mark_as_complete'.tr,
+                                        style: TextStyle(
+                                            fontFamily: SarabunFontFamily.bold,
+                                            fontSize: 16.sp,
+                                            color: Colors.white),
+                                      ),
+                                      SvgPicture.asset(
+                                        'assets/Icons/whiteForwardIcon.svg',
+                                        height: 29.h,
+                                        width: 29.w,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        )
+                            : const SizedBox(),
                         SizedBox(
                           height: 15.h,
                         ),

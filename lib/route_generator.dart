@@ -1,4 +1,6 @@
 
+import 'package:consultant_product/src/modules/agora_call/join_channel_audio.dart';
+import 'package:consultant_product/src/modules/agora_call/join_channel_video.dart';
 import 'package:consultant_product/src/modules/blogs/view.dart';
 import 'package:consultant_product/src/modules/blogs/view_blogs_detail.dart';
 import 'package:consultant_product/src/modules/chat/view.dart';
@@ -33,6 +35,8 @@ import 'package:consultant_product/src/modules/user/home/view.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/view.dart';
 import 'package:consultant_product/src/modules/user/user_drawer/view.dart';
 import 'package:consultant_product/src/modules/wallet/view.dart';
+import 'package:consultant_product/src/modules/wallet/view_easypaisa.dart';
+import 'package:consultant_product/src/modules/wallet/view_jazzcash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -124,6 +128,14 @@ routes() => [
       GetPage(
           name: "/blogDetail",
           page: () => const BlogDetailPage()),
+  GetPage(
+      name: '/depositJazzcash', page: () => const DepositJazzCashView()),
+  GetPage(
+      name: '/depositEasypaisa', page: () => const DepositEasypaisaView()),
+
+  GetPage(name: '/videoCall', page: () => const JoinChannelVideo()),
+  GetPage(name: '/audioCall', page: () => const JoinChannelAudio()),
+  GetPage(name: '/videoCallWaiting', page: () => const CallWaitingView()),
     ];
 
 class PageRoutes {
@@ -160,6 +172,11 @@ class PageRoutes {
   static const String editConsultantProfile = '/editConsultantProfile';
   static const String blogs = '/blogs';
   static const String blogDetail = '/blogDetail';
+  static const String depositJazzcash = '/depositJazzcash';
+  static const String depositEasypaisa = '/depositEasypaisa';
+  static const String videoCall = '/videoCall';
+  static const String audioCall = '/audioCall';
+  static const String videoCallWaiting = '/videoCallWaiting';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -196,6 +213,11 @@ class PageRoutes {
       editConsultantProfile: (context) => const EditConsultantProfilePage(),
       blogs: (context) => const BlogsPage(),
       blogDetail: (context) => const BlogDetailPage(),
+      depositJazzcash: (context) => const DepositJazzCashView(),
+      depositEasypaisa: (context) => const DepositEasypaisaView(),
+      videoCall: (context) => const JoinChannelVideo(),
+      audioCall: (context) => const JoinChannelAudio(),
+      videoCallWaiting: (context) => const CallWaitingView(),
     };
   }
 }

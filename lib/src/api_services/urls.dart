@@ -57,6 +57,9 @@ String changeMentorOnlineStatusUrl = apiBaseUrl + 'changeOnlineStatus';
 String goLiveForMentorUrl = apiBaseUrl + 'turn-live-mentor';
 String inActiveLiveForMentorUrl = apiBaseUrl + 'turn-inactive-mentor';
 
+
+ String mentorChangeAppointmentStatusUrl =
+     apiBaseUrl + 'changeAppointmentStatus';
 ///---get-appointment-counts
 String getAppointmentCountUrl = apiBaseUrl + 'mentorAppointmentCount';
 String getAppointmentCountForMentorUrl = apiBaseUrl + 'appointment-count';
@@ -93,3 +96,25 @@ String getAppointmentsDetailURL = apiBaseUrl + 'appointmentDetails';
 
 /// Blogs
 String blogCategoriesUrl = apiBaseUrl + 'categoriesBlogs';
+
+/// wallet
+String getWalletBalanceUrl = apiBaseUrl + 'check-balance';
+String getWalletTransactionUrl = apiBaseUrl + 'wallet-history';
+String walletDepositUrl = apiBaseUrl + 'deposit-wallet';
+String walletDepositJazzcashUrl = apiBaseUrl + 'deposit-wallet-jazzcash';
+String walletWithdrawUrl = apiBaseUrl + 'withdraw-request';
+
+
+///---agora
+ String agoraTokenUrl = apiBaseUrl + 'agoraToken';
+
+///---send-message
+String sendSMSUrl = apiBaseUrl + 'send-sms';
+
+///---get-device-id
+String fcmUpdateUrl = apiBaseUrl + 'fcm-store-token';
+String fcmGetUrl = apiBaseUrl + 'fcm-get-tokens';
+
+///---chat services
+String fetchMessagesUrl = apiBaseUrl + 'fetch-messages';
+String sendMessageUrl = apiBaseUrl + 'send-message';
