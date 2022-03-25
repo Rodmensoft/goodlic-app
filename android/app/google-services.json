@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "883597025671",
+    "project_id": "consultant-40a1f",
+    "storage_bucket": "consultant-40a1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883597025671:android:37cb2143cf131039ab7322",
+        "android_client_info": {
+          "package_name": "com.example.consultant_product"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883597025671-euab4ve9tar69d89u8anm21su3g1fk6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHi72LCNE1o1S8cUVDqY2Ey3ne-z8aayk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883597025671-euab4ve9tar69d89u8anm21su3g1fk6b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

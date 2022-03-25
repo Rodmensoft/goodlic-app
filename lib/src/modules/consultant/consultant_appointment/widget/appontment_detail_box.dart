@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,8 @@ class AppointmentDetailBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ConsultantAppointmentLogic>(builder: (_consultantAppointmentLogic) {
+    return GetBuilder<ConsultantAppointmentLogic>(
+        builder: (_consultantAppointmentLogic) {
       return Padding(
         padding: EdgeInsetsDirectional.fromSTEB(15.w, 20.h, 15.w, 0),
         child: Container(
@@ -73,11 +75,13 @@ class AppointmentDetailBox extends StatelessWidget {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.r),
                           child: image == null
-                              ?const SizedBox()
-                              :Image.network(
-                            image!,
-                            fit: BoxFit.cover,
-                          )),
+                              ? const SizedBox()
+                              : Image.network(
+                                  image!.contains('assets')
+                                      ? '$mediaUrl$image'
+                                      : image!,
+                                  fit: BoxFit.cover,
+                                )),
                     ),
                     Expanded(
                       child: Padding(
@@ -159,7 +163,8 @@ class AppointmentDetailBox extends StatelessWidget {
                               ),
                               Text(
                                 fee!,
-                                style: _consultantAppointmentLogic.state.feeTextStyle,
+                                style: _consultantAppointmentLogic
+                                    .state.feeTextStyle,
                               )
                             ],
                           ),
@@ -188,7 +193,8 @@ class AppointmentDetailBox extends StatelessWidget {
                               ),
                               Text(
                                 type!,
-                                style: _consultantAppointmentLogic.state.feeTextStyle,
+                                style: _consultantAppointmentLogic
+                                    .state.feeTextStyle,
                               )
                             ],
                           ),
@@ -242,6 +248,7 @@ class AppointmentDetailBox extends StatelessWidget {
                         ),
                       )
                     : const SizedBox(),
+
                 ///---accepted-status-date-time
                 status == 1
                     ? Container(
@@ -254,41 +261,44 @@ class AppointmentDetailBox extends StatelessWidget {
                           children: [
                             ///---status
                             Container(
-                              height: 45.h,
-                              width: 87.w,
-                              decoration: BoxDecoration(
-                                color: color!,
-                                borderRadius: BorderRadius.circular(5.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: const Color(0xff707070)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 15,
-                                      offset: const Offset(0, 5))
-                                ],
-                              ),
-                              child: Padding(
-                                padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset('assets/Icons/completeAppointmentIcon.svg',
-                                      height: 12.h,
-                                      width: 12.w,
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Text(
-                                      'ACCEPTED',
-                                      style: _consultantAppointmentLogic.state.statusTextStyle,
-                                    )
+                                height: 45.h,
+                                width: 87.w,
+                                decoration: BoxDecoration(
+                                  color: color!,
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: const Color(0xff707070)
+                                            .withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 15,
+                                        offset: const Offset(0, 5))
                                   ],
                                 ),
-                              )
-                            ),
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/Icons/completeAppointmentIcon.svg',
+                                        height: 12.h,
+                                        width: 12.w,
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Text(
+                                        'ACCEPTED',
+                                        style: _consultantAppointmentLogic
+                                            .state.statusTextStyle,
+                                      )
+                                    ],
+                                  ),
+                                )),
 
                             ///---date-time
 
@@ -310,41 +320,44 @@ class AppointmentDetailBox extends StatelessWidget {
                           children: [
                             ///---status
                             Container(
-                              height: 45.h,
-                              width: 87.w,
-                              decoration: BoxDecoration(
-                                color: color!,
-                                borderRadius: BorderRadius.circular(5.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: const Color(0xff707070)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 15,
-                                      offset: const Offset(0, 5))
-                                ],
-                              ),
-                              child: Padding(
-                                padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset('assets/Icons/completeAppointmentIcon.svg',
-                                      height: 12.h,
-                                      width: 12.w,
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Text(
-                                      'COMPLETED',
-                                      style: _consultantAppointmentLogic.state.statusTextStyle,
-                                    )
+                                height: 45.h,
+                                width: 87.w,
+                                decoration: BoxDecoration(
+                                  color: color!,
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: const Color(0xff707070)
+                                            .withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 15,
+                                        offset: const Offset(0, 5))
                                   ],
                                 ),
-                              )
-                            ),
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/Icons/completeAppointmentIcon.svg',
+                                        height: 12.h,
+                                        width: 12.w,
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Text(
+                                        'COMPLETED',
+                                        style: _consultantAppointmentLogic
+                                            .state.statusTextStyle,
+                                      )
+                                    ],
+                                  ),
+                                )),
 
                             ///---date-time
                             dateTimeRow()
@@ -365,41 +378,44 @@ class AppointmentDetailBox extends StatelessWidget {
                           children: [
                             ///---status
                             Container(
-                              height: 45.h,
-                              width: 87.w,
-                              decoration: BoxDecoration(
-                                color: color!,
-                                borderRadius: BorderRadius.circular(5.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: const Color(0xff707070)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 15,
-                                      offset: const Offset(0, 5))
-                                ],
-                              ),
-                              child: Padding(
-                                padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset('assets/Icons/cancelAppointmentIcon.svg',
-                                      height: 12.h,
-                                      width: 12.w,
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Text(
-                                      'CANCELLED',
-                                      style: _consultantAppointmentLogic.state.statusTextStyle,
-                                    )
+                                height: 45.h,
+                                width: 87.w,
+                                decoration: BoxDecoration(
+                                  color: color!,
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: const Color(0xff707070)
+                                            .withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 15,
+                                        offset: const Offset(0, 5))
                                   ],
                                 ),
-                              )
-                            ),
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/Icons/cancelAppointmentIcon.svg',
+                                        height: 12.h,
+                                        width: 12.w,
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Text(
+                                        'CANCELLED',
+                                        style: _consultantAppointmentLogic
+                                            .state.statusTextStyle,
+                                      )
+                                    ],
+                                  ),
+                                )),
 
                             ///---date-time
                             dateTimeRow()
@@ -414,37 +430,41 @@ class AppointmentDetailBox extends StatelessWidget {
       );
     });
   }
-  Widget dateTimeRow(){
-    return date == null
-        ?const SizedBox()
-        :Expanded(
-      child: Align(
-        alignment: Alignment.center,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ///---date
-            Text(
-              date!,
-              style: Get.find<ConsultantAppointmentLogic>()
-                  .state.dateTimeTextStyle,
-            ),
-            Text(
-              '  -  ',
-              style: Get.find<ConsultantAppointmentLogic>()
-                  .state.dateTimeTextStyle,
-            ),
 
-            ///---time
-            Text(
-              time!,
-              style: Get.find<ConsultantAppointmentLogic>()
-                  .state.dateTimeTextStyle,
+  Widget dateTimeRow() {
+    return date == null
+        ? const SizedBox()
+        : Expanded(
+            child: Align(
+              alignment: Alignment.center,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ///---date
+                  Text(
+                    date!,
+                    style: Get.find<ConsultantAppointmentLogic>()
+                        .state
+                        .dateTimeTextStyle,
+                  ),
+                  Text(
+                    '  -  ',
+                    style: Get.find<ConsultantAppointmentLogic>()
+                        .state
+                        .dateTimeTextStyle,
+                  ),
+
+                  ///---time
+                  Text(
+                    time!,
+                    style: Get.find<ConsultantAppointmentLogic>()
+                        .state
+                        .dateTimeTextStyle,
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }

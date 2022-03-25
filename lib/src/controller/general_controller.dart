@@ -2,7 +2,14 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as math;
 
+import 'package:consultant_product/src/api_services/post_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
+import 'package:consultant_product/src/modules/agora_call/get_agora_token_model.dart';
+import 'package:consultant_product/src/modules/agora_call/get_fcm_token_model.dart';
+import 'package:consultant_product/src/modules/agora_call/repo.dart';
 import 'package:consultant_product/src/modules/user_profile/get_user_profile_model.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -45,130 +52,130 @@ class GeneralController extends GetxController {
     }
   }
 
-  // ///---random-string-open
-  // String chars =
-  //     'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  // math.Random rnd = math.Random();
-  //
-  // String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-  //     length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
-  //
-  // String? selectedChannel;
-  //
-  // updateSelectedChannel(String? newValue) {
-  //   selectedChannel = newValue;
-  //   update();
-  // }
-  //
-  // int callerType = 2;
-  //
-  // updateCallerType(int i) {
-  //   callerType = i;
-  //   update();
-  // }
-  //
-  // GetAgoraTokenModel getAgoraTokenModel = GetAgoraTokenModel();
-  // bool? goForCall = true;
-  //
-  // updateGoForCall(bool? newValue) {
-  //   goForCall = newValue;
-  //   update();
-  // }
-  //
-  // String? channelForCall;
-  // String? tokenForCall;
-  //
-  // updateTokenForCall(String? newValueToken) {
-  //   tokenForCall = newValueToken;
-  //   update();
-  // }
-  //
-  // updateChannelForCall(String? newValueChannel) {
-  //   channelForCall = newValueChannel;
-  //   update();
-  // }
-  //
-  // GetFcmTokenModel getFcmTokenModel = GetFcmTokenModel();
-  // int? userIdForSendNotification;
-  //
-  // updateUserIdForSendNotification(int? newValue) {
-  //   userIdForSendNotification = newValue;
-  //   update();
-  // }
-  //
-  // int? appointmentIdForSendNotification;
-  //
-  // updateAppointmentIdForSendNotification(int? newValue) {
-  //   appointmentIdForSendNotification = newValue;
-  //   update();
-  // }
-  //
-  // String? notificationTitle;
-  // String? notificationBody;
-  // String? notificationRouteApp;
-  // String? notificationRouteWeb;
-  // String? sound;
-  //
-  // updateNotificationBody(String? newTitle, String? newBody, String? newRouteApp,
-  //     String? newRouteWeb,String? newSound) {
-  //   notificationTitle = newTitle;
-  //   notificationBody = newBody;
-  //   notificationRouteApp = newRouteApp;
-  //   notificationRouteWeb = newRouteWeb;
-  //   sound = newSound;
-  //   update();
-  // }
-  //
-  // ///---fcm-token
-  // String? fcmToken;
-  //
-  // updateFcmToken(BuildContext context) async {
-  //   await FirebaseMessaging.instance.requestPermission();
-  //   await FirebaseMessaging.instance.getToken().then((value) {
-  //     fcmToken = value;
-  //     storageBox.write('fcmToken', fcmToken);
-  //     getId(context);
-  //   }).catchError((onError) {
-  //     log('Error--->>$onError');
-  //   });
-  //   log('Token--->>$fcmToken');
-  // }
-  //
-  // Future<String?> getId(BuildContext context) async {
-  //   var deviceInfo = DeviceInfoPlugin();
-  //   if (Platform.isIOS) {
-  //     // import 'dart:io'
-  //     var iosDeviceInfo = await deviceInfo.iosInfo;
-  //     log('--->>DeviceID-->> ${iosDeviceInfo.identifierForVendor}');
-  //     postMethod(
-  //         context,
-  //         fcmUpdateUrl,
-  //         {
-  //           'token': '123',
-  //           'fcm_token': fcmToken,
-  //           'device_id': iosDeviceInfo.identifierForVendor,
-  //           'user_id': Get.find<GeneralController>().storageBox.read('userId')
-  //         },
-  //         false,
-  //         updateFcmTokenRepo);
-  //     return iosDeviceInfo.identifierForVendor; // unique ID on iOS
-  //   } else {
-  //     var androidDeviceInfo = await deviceInfo.androidInfo;
-  //     log('--->>DeviceID-->> ${androidDeviceInfo.androidId}');
-  //     postMethod(
-  //         context,
-  //         fcmUpdateUrl,
-  //         {
-  //           'token': '123',
-  //           'fcm_token': fcmToken,
-  //           'device_id': androidDeviceInfo.androidId,
-  //           'user_id': Get.find<GeneralController>().storageBox.read('userId')
-  //         },
-  //         false,
-  //         updateFcmTokenRepo);
-  //     return androidDeviceInfo.androidId; // unique ID on Android
-  //   }
-  // }
+  ///---random-string-open
+  String chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  math.Random rnd = math.Random();
+
+  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+      length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
+
+  String? selectedChannel;
+
+  updateSelectedChannel(String? newValue) {
+    selectedChannel = newValue;
+    update();
+  }
+
+  int callerType = 2;
+
+  updateCallerType(int i) {
+    callerType = i;
+    update();
+  }
+
+  GetAgoraTokenModel getAgoraTokenModel = GetAgoraTokenModel();
+  bool? goForCall = true;
+
+  updateGoForCall(bool? newValue) {
+    goForCall = newValue;
+    update();
+  }
+
+  String? channelForCall;
+  String? tokenForCall;
+
+  updateTokenForCall(String? newValueToken) {
+    tokenForCall = newValueToken;
+    update();
+  }
+
+  updateChannelForCall(String? newValueChannel) {
+    channelForCall = newValueChannel;
+    update();
+  }
+
+  GetFcmTokenModel getFcmTokenModel = GetFcmTokenModel();
+  int? userIdForSendNotification;
+
+  updateUserIdForSendNotification(int? newValue) {
+    userIdForSendNotification = newValue;
+    update();
+  }
+
+  int? appointmentIdForSendNotification;
+
+  updateAppointmentIdForSendNotification(int? newValue) {
+    appointmentIdForSendNotification = newValue;
+    update();
+  }
+
+  String? notificationTitle;
+  String? notificationBody;
+  String? notificationRouteApp;
+  String? notificationRouteWeb;
+  String? sound;
+
+  updateNotificationBody(String? newTitle, String? newBody, String? newRouteApp,
+      String? newRouteWeb,String? newSound) {
+    notificationTitle = newTitle;
+    notificationBody = newBody;
+    notificationRouteApp = newRouteApp;
+    notificationRouteWeb = newRouteWeb;
+    sound = newSound;
+    update();
+  }
+
+  ///---fcm-token
+  String? fcmToken;
+
+  updateFcmToken(BuildContext context) async {
+    await FirebaseMessaging.instance.requestPermission();
+    await FirebaseMessaging.instance.getToken().then((value) {
+      fcmToken = value;
+      storageBox.write('fcmToken', fcmToken);
+      getId(context);
+    }).catchError((onError) {
+      log('Error--->>$onError');
+    });
+    log('Token--->>$fcmToken');
+  }
+
+  Future<String?> getId(BuildContext context) async {
+    var deviceInfo = DeviceInfoPlugin();
+    if (Platform.isIOS) {
+      // import 'dart:io'
+      var iosDeviceInfo = await deviceInfo.iosInfo;
+      log('--->>DeviceID-->> ${iosDeviceInfo.identifierForVendor}');
+      postMethod(
+          context,
+          fcmUpdateUrl,
+          {
+            'token': '123',
+            'fcm_token': fcmToken,
+            'device_id': iosDeviceInfo.identifierForVendor,
+            'user_id': Get.find<GeneralController>().storageBox.read('userId')
+          },
+          false,
+          updateFcmTokenRepo);
+      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
+    } else {
+      var androidDeviceInfo = await deviceInfo.androidInfo;
+      log('--->>DeviceID-->> ${androidDeviceInfo.androidId}');
+      postMethod(
+          context,
+          fcmUpdateUrl,
+          {
+            'token': '123',
+            'fcm_token': fcmToken,
+            'device_id': androidDeviceInfo.androidId,
+            'user_id': Get.find<GeneralController>().storageBox.read('userId')
+          },
+          false,
+          updateFcmTokenRepo);
+      return androidDeviceInfo.androidId; // unique ID on Android
+    }
+  }
 
   List<Language> localeList = [
     Language(1, 'English', '🇺🇸', 'en', 'US'),
