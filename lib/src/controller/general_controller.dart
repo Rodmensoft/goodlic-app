@@ -18,7 +18,7 @@ class GeneralController extends GetxController {
   }
 
   ///---get-user-profile
-  GetUserProfileModel getUserProfileModel = GetUserProfileModel();
+  GetConsultantProfileModel getConsultantProfileModel = GetConsultantProfileModel();
 
   bool? formLoaderController = false;
 

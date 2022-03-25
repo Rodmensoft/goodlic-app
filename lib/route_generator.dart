@@ -1,10 +1,14 @@
 
+import 'package:consultant_product/src/modules/blogs/view.dart';
+import 'package:consultant_product/src/modules/blogs/view_blogs_detail.dart';
 import 'package:consultant_product/src/modules/chat/view.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/view.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/view.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_drawer/view.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/view.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/view.dart';
+import 'package:consultant_product/src/modules/consultant/my_profile/view.dart';
 import 'package:consultant_product/src/modules/consultant/schedule/view.dart';
 import 'package:consultant_product/src/modules/consultant/schedule_info/view.dart';
 import 'package:consultant_product/src/modules/created_password/view.dart';
@@ -108,6 +112,18 @@ routes() => [
       GetPage(
           name: "/consultantAppointmentDetail",
           page: () => const ConsultantAppointmentDetailPage()),
+      GetPage(
+          name: "/consultantMyProfile",
+          page: () => const ConsultantMyProfilePage()),
+      GetPage(
+          name: "/editConsultantProfile",
+          page: () => const EditConsultantProfilePage()),
+      GetPage(
+          name: "/blogs",
+          page: () => const BlogsPage()),
+      GetPage(
+          name: "/blogDetail",
+          page: () => const BlogDetailPage()),
     ];
 
 class PageRoutes {
@@ -140,6 +156,10 @@ class PageRoutes {
   static const String scheduleCreate = '/scheduleCreate';
   static const String consultantAllAppointment = '/consultantAllAppointment';
   static const String consultantAppointmentDetail = '/consultantAppointmentDetail';
+  static const String consultantMyProfile = '/consultantMyProfile';
+  static const String editConsultantProfile = '/editConsultantProfile';
+  static const String blogs = '/blogs';
+  static const String blogDetail = '/blogDetail';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -172,6 +192,10 @@ class PageRoutes {
       scheduleCreate: (context) => const ScheduleCreatePage(),
       consultantAllAppointment: (context) => const ConsultantAppointmentPage(),
       consultantAppointmentDetail: (context) => const ConsultantAppointmentDetailPage(),
+      consultantMyProfile: (context) => const ConsultantMyProfilePage(),
+      editConsultantProfile: (context) => const EditConsultantProfilePage(),
+      blogs: (context) => const BlogsPage(),
+      blogDetail: (context) => const BlogDetailPage(),
     };
   }
 }

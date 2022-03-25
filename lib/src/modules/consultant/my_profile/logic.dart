@@ -1,3 +1,4 @@
+import 'package:consultant_product/src/modules/consultant/my_profile/model_get_generic_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -21,5 +22,21 @@ class MyProfileLogic extends GetxController {
       lastStatus = isShrink;
       update();
     }
+  }
+
+
+
+  MentorProfileGenericDataModel mentorProfileGenericDataModel = MentorProfileGenericDataModel();
+
+
+  bool? loader = true;
+  updateLoaderForViewProfile(bool? newValue){
+    loader = newValue;
+    update();
+  }
+  String? occupation;
+  updateOccupation(String? newValue){
+    occupation = newValue;
+    update();
   }
 }

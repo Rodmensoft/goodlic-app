@@ -2,27 +2,27 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:consultant_product/src/controller/general_controller.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_generic_data.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_get_categories.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_account_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_education_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_experience_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_general_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_skill_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/view_account_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/view_confirmation.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/view_educational_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/view_experience_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/view_general_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/view_skill_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_generic_data.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_get_categories.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_account_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_education_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_experience_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_general_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_skill_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/view_account_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/view_confirmation.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/view_educational_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/view_experience_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/view_general_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/view_skill_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
-
+import '../../user_profile/get_user_profile_model.dart';
 import 'state.dart';
 
-class CreateProfileLogic extends GetxController {
-  final CreateProfileState state = CreateProfileState();
+class EditConsultantProfileLogic extends GetxController {
+  final EditConsultantProfileState state = EditConsultantProfileState();
 
   ScrollController? scrollController;
   bool lastStatus = true;
@@ -54,27 +54,27 @@ class CreateProfileLogic extends GetxController {
         title: '${'General'.tr}\n${'Info'.tr}',
         stepperLabel: '01',
         isSelected: true,
-        isCompleted: false),
+        isCompleted: true),
     Stepper(
         title: '${'Educational'.tr}\n${'Info'.tr}',
         stepperLabel: '02',
         isSelected: false,
-        isCompleted: false),
+        isCompleted: true),
     Stepper(
         title: '${'Experience'.tr}\n${'Info'.tr}',
         stepperLabel: '03',
         isSelected: false,
-        isCompleted: false),
+        isCompleted: true),
     Stepper(
         title: 'Skill Info'.tr,
         stepperLabel: '04',
         isSelected: false,
-        isCompleted: false),
+        isCompleted: true),
     Stepper(
         title: '${'Account'.tr}\n${'Info'.tr}',
         stepperLabel: '05',
         isSelected: false,
-        isCompleted: false),
+        isCompleted: true),
   ];
 
   consultantProfileNavigation(
@@ -145,6 +145,7 @@ class CreateProfileLogic extends GetxController {
   final TextEditingController cnicController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
+  final TextEditingController dobController = TextEditingController();
   String? selectedGender;
   List<String> genderDropDownList = ['Male', 'Female', 'Other'];
   String? selectedReligion;
@@ -337,6 +338,17 @@ class CreateProfileLogic extends GetxController {
     update();
   }
 
+  List<Categories>? forDisplaySkillList = [];
+
+  updateForDisplaySkillList(Categories? newValue) {
+    forDisplaySkillList!.add(newValue!);
+    update();
+  }
+
+  emptyForDisplaySkillList() {
+    forDisplaySkillList = [];
+    update();
+  }
   ///-------------------------------account-tab
   AccountInfoPostModel accountInfoPostModel = AccountInfoPostModel();
   String? selectedBank;
@@ -351,6 +363,9 @@ class CreateProfileLogic extends GetxController {
     bankDropDownList = [];
     update();
   }
+  final TextEditingController accountTitleController = TextEditingController();
+  final TextEditingController accountNumberController =
+  TextEditingController();
 }
 
 class Stepper {

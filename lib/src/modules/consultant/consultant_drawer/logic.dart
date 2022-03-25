@@ -43,7 +43,7 @@ class ConsultantDrawerLogic extends GetxController {
       case 2:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.editConsultantProfile);
         }
       case 3:
         {
@@ -53,9 +53,19 @@ class ConsultantDrawerLogic extends GetxController {
       case 4:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.walletScreen);
         }
       case 5:
+        {
+          Get.back();
+          return null;
+        }
+      case 6:
+        {
+          Get.back();
+          return Get.toNamed(PageRoutes.blogs);
+        }
+      case 7:
         {
           Get.back();
           return null;

@@ -1,24 +1,30 @@
 import 'dart:developer';
 
+import 'package:consultant_product/src/api_services/get_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
+import 'package:consultant_product/src/modules/consultant/my_profile/get_repo.dart';
+import 'package:consultant_product/src/modules/image_full_view/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
+import 'package:skeleton_loader/skeleton_loader.dart';
 
 import '../../../controller/general_controller.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import 'logic.dart';
 
-class MyProfilePage extends StatefulWidget {
-  const MyProfilePage({Key? key}) : super(key: key);
+class ConsultantMyProfilePage extends StatefulWidget {
+  const ConsultantMyProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<MyProfilePage> createState() => _MyProfilePageState();
+  State<ConsultantMyProfilePage> createState() =>
+      _ConsultantMyProfilePageState();
 }
 
-class _MyProfilePageState extends State<MyProfilePage> {
+class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
   final logic = Get.put(MyProfileLogic());
 
   final state = Get.find<MyProfileLogic>().state;
@@ -31,6 +37,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
     Get.find<MyProfileLogic>().scrollController = ScrollController()
       ..addListener(Get.find<MyProfileLogic>().scrollListener);
+    getMethod(context, mentorProfileGenericDataUrl, {'token': '123'}, false,
+        getGenericDataForProfileViewRepo);
   }
 
   @override
@@ -53,7 +61,94 @@ class _MyProfilePageState extends State<MyProfilePage> {
             _generalController.focusOut(context);
           },
           child: Scaffold(
-            body: NestedScrollView(
+            body:  _myProfileLogic.loader!
+                ? SkeletonLoader(
+                period: const Duration(seconds: 2),
+                highlightColor: Colors.grey,
+                direction: SkeletonDirection.ltr,
+                builder: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.all(20.0),
+                        child: Container(
+                          height: 20,
+                          width: MediaQuery.of(context).size.width * .5,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height:
+                        MediaQuery.of(context).size.height * .35,
+                        color: Colors.white,
+                      ),
+
+                      Padding(
+                        padding:
+                        const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 10,
+                                width: MediaQuery.of(context).size.width * .4,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15)
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 6,
+                              ),
+
+                              Container(
+                                height: 10,
+                                width: MediaQuery.of(context).size.width * .3,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15)
+                                ),
+                              ),
+
+                              const SizedBox(
+                                height: 10,
+                              ),
+
+                              ///---rating
+                              Container(
+                                height: 10,
+                                width: MediaQuery.of(context).size.width * .5,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15)
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 20),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height:
+                          MediaQuery.of(context).size.height * .35,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                        ),
+                      ),
+                    ]))
+                :NestedScrollView(
                 controller: _myProfileLogic.scrollController,
                 headerSliverBuilder:
                     (BuildContext context, bool innerBoxIsScrolled) {
@@ -92,22 +187,85 @@ class _MyProfilePageState extends State<MyProfilePage> {
                               children: [
                                 Positioned(
                                   top: -9,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: customLightThemeColor,
-                                        borderRadius: BorderRadius.only(
-                                            bottomRight: Radius.circular(25.r),
-                                            bottomLeft: Radius.circular(25.r))),
-                                    // color: customLightThemeColor,
-                                    width: MediaQuery.of(context).size.width,
+                                  child: Hero(
+                                    tag: _generalController
+                                            .getConsultantProfileModel
+                                            .data!
+                                            .userDetail!
+                                            .imagePath!
+                                            .contains('assets')
+                                        ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                        : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
+                                    child: Material(
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.to(ImageViewScreen(
+                                            networkImage: _generalController
+                                                    .getConsultantProfileModel
+                                                    .data!
+                                                    .userDetail!
+                                                    .imagePath!
+                                                    .contains('assets')
+                                                ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                                : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
+                                          ));
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: customLightThemeColor,
+                                            borderRadius: BorderRadius.vertical(
+                                                bottom: Radius.circular(25.r)),
+                                          ),
+                                          // color: customLightThemeColor,
+                                          width:
+                                              MediaQuery.of(context).size.width,
 
-                                    child: Center(
-                                        child: Image.asset(
-                                      'assets/images/stackImage.png',
-                                      width: MediaQuery.of(context).size.width *
-                                          .5,
-                                      fit: BoxFit.cover,
-                                    )),
+                                          child: Center(
+                                              child: _generalController
+                                                          .getConsultantProfileModel
+                                                          .data!
+                                                          .userDetail!
+                                                          .imagePath
+                                                          .toString() !=
+                                                      'null'
+                                                  ? ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.vertical(
+                                                              bottom: Radius
+                                                                  .circular(
+                                                                      25.r)),
+                                                      child: Image.network(
+                                                        _generalController
+                                                                .getConsultantProfileModel
+                                                                .data!
+                                                                .userDetail!
+                                                                .imagePath!
+                                                                .contains(
+                                                                    'assets')
+                                                            ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                                            : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    )
+                                                  : ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.vertical(
+                                                              bottom: Radius
+                                                                  .circular(
+                                                                      25.r)),
+                                                      child: Image.asset(
+                                                        'assets/images/stackImage.png',
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            .5,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    )),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -124,9 +282,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         children: [
                           ///---name
                           Text(
-                            // '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.firstName ?? '...'} '
-                            //     '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.lastName ?? ''}',
-                            'William Smith',
+                            '${_generalController.getConsultantProfileModel.data!.userDetail!.firstName} '
+                            '${_generalController.getConsultantProfileModel.data!.userDetail!.lastName}',
                             style: state.profileNameTextStyle,
                           ),
                           SizedBox(
@@ -139,24 +296,19 @@ class _MyProfilePageState extends State<MyProfilePage> {
                             children: [
                               ///---category
                               Text(
-                                // _consultantProfileLogic
-                                //             .consultantProfileModel
-                                //             .data!
-                                //             .userDetail!
-                                //             .mentor!
-                                //             .categories!
-                                //             .category ==
-                                //         null
-                                //     ? '...'
-                                //     : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories!.category!.name}',
-                                'Financial Advisor',
+                                '${_generalController.getConsultantProfileModel.data!.userDetail!.mentor!.categories![0].category!.name}',
                                 style: state.categoryTextStyle,
                               ),
 
                               ///---rating-bar
                               RatingBar.builder(
                                 ignoreGestures: true,
-                                initialRating: 5.0,
+                                initialRating: _generalController
+                                    .getConsultantProfileModel
+                                    .data!
+                                    .userDetail!
+                                    .ratingsAvg!
+                                    .toDouble(),
                                 minRating: 1,
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
@@ -207,13 +359,16 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                           SizedBox(
                                             width: 4.w,
                                           ),
-                                          const Text(
-                                            //  '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.ratingsAvg}.0',
-                                            '5.0',
+                                           Text(
+                                            '${_generalController
+                                                .getConsultantProfileModel
+                                                .data!
+                                                .userDetail!
+                                                .ratingsAvg!}',
                                             style: TextStyle(
                                                 fontFamily:
                                                     SarabunFontFamily.extraBold,
-                                                fontSize: 16,
+                                                fontSize: 16.sp,
                                                 color: customThemeColor),
                                           )
                                         ],
@@ -252,13 +407,16 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                           SizedBox(
                                             width: 4.w,
                                           ),
-                                          const Text(
-                                            //  '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.appointmentCount}+',
-                                            '200+',
+                                           Text(
+                                            '${_generalController
+                                                .getConsultantProfileModel
+                                                .data!
+                                                .userDetail!
+                                                .appointmentCount}',
                                             style: TextStyle(
                                                 fontFamily:
                                                     SarabunFontFamily.extraBold,
-                                                fontSize: 16,
+                                                fontSize: 16.sp,
                                                 color: customThemeColor),
                                           )
                                         ],
@@ -298,13 +456,16 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                           SizedBox(
                                             width: 4.w,
                                           ),
-                                          const Text(
-                                            // '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.experience}+',
-                                            '4+',
+                                          Text(
+                                            '${_generalController
+                                                .getConsultantProfileModel
+                                                .data!
+                                                .userDetail!
+                                                .mentor!.experience}',
                                             style: TextStyle(
                                                 fontFamily:
                                                     SarabunFontFamily.extraBold,
-                                                fontSize: 16,
+                                                fontSize: 16.sp,
                                                 color: customThemeColor),
                                           )
                                         ],
@@ -319,14 +480,21 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           ),
 
                           SizedBox(
-                            height: 5.h,
+                            height: 20.h,
                           ),
 
                           /// General Info
 
                           Container(
                             width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
+                            decoration: BoxDecoration(boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 3,
+                                blurRadius: 15,
+                                // offset: Offset(1,5)
+                              )
+                            ],
                                 borderRadius: BorderRadius.circular(8.r),
                                 color: Colors.white),
                             child: Padding(
@@ -340,247 +508,419 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'General Info',
+                                        'general_info'.tr.capitalize!,
                                         style: state.sectionHeadingTextStyle,
                                       ),
-                                      SvgPicture.asset(
-                                        'assets/Icons/editIcon.svg',
-                                      ),
+                                      // SvgPicture.asset(
+                                      //   'assets/Icons/editIcon.svg',
+                                      // ),
                                     ],
                                   ),
                                   SizedBox(
                                     height: 20.h,
                                   ),
 
-                                  ///---name-gender-status.
+                                  ///---first-last-father-name
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment
+                                        .spaceBetween,
                                     children: [
-                                      ///---name
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Name',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            'Mentor Name',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-
-                                      ///---gender
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Gender',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            'Male',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-
-                                      ///---status
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Status',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            'Active Member',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle
-                                                ?.copyWith(
-                                                    color: customGreenColor),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 18.h,
-                                  ),
-
-                                  ///---phone-city-cnic
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      ///---phone
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Phone',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            '0315-123456789',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-
-                                      ///---city
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'City',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            'Faisalabad',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-
-                                      ///---cnic
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'CNIC',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            '331005255526',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 18.h,
-                                  ),
-
-                                  ///---reg.date-address
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      ///---reg.date
                                       Expanded(
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
                                           children: [
                                             Text(
-                                              'Reg. Date',
-                                              style:
-                                                  state.sectionLabelTextStyle,
+                                              'first_name'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
                                             ),
-                                            SizedBox(
-                                              height: 8.h,
+                                            const SizedBox(
+                                              height: 4,
                                             ),
                                             Text(
-                                              '26-2-22',
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.firstName}',
                                               softWrap: true,
-                                              overflow: TextOverflow.ellipsis,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
                                               maxLines: 1,
-                                              style: state.sectionDataTextStyle,
+                                              style: state
+                                                  .previewValueTextStyle,
                                             ),
                                           ],
                                         ),
                                       ),
-
-                                      ///---address
                                       Expanded(
-                                        flex: 2,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  30.w, 0, 0, 0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                'Address',
-                                                style:
-                                                    state.sectionLabelTextStyle,
-                                              ),
-                                              SizedBox(
-                                                height: 8.h,
-                                              ),
-                                              Text(
-                                                '102-c Peoples Colony 1, Fsd',
-                                                softWrap: true,
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                                style:
-                                                    state.sectionDataTextStyle,
-                                              ),
-                                            ],
-                                          ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'last_name'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.lastName}',
+                                              softWrap: true,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 1,
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'father_name'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.fatherName}',
+                                              softWrap: true,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 1,
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 18.h,
+                                  ),
+
+                                  ///---gender-religion-occupation
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'gender'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.gender}',
+                                              softWrap: true,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 1,
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'religion'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.religion}',
+                                              softWrap: true,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 1,
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'occupation'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_myProfileLogic.occupation}',
+                                              softWrap: true,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 1,
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 18.h,
+                                  ),
+
+                                  ///---dob-city-country
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'dat_of_birth'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.dob}',
+                                              softWrap: true,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 1,
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'city'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.city}',
+                                              softWrap: true,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 1,
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'country'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.userCountry!.name}',
+                                              softWrap: true,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 1,
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  SizedBox(
+                                    height: 18.h,
+                                  ),
+
+
+                                  ///---cnic
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'cnic'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.cnic}',
+                                              softWrap: true,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 1,
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  SizedBox(
+                                    height: 18.h,
+                                  ),
+
+
+                                  ///---email
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'email'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.email}',
+                                              softWrap: true,
+                                              overflow: TextOverflow
+                                                  .ellipsis,
+                                              maxLines: 1,
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  SizedBox(
+                                    height: 18.h,
+                                  ),
+
+                                  ///---address
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Text(
+                                              'address'.tr,
+                                              style: state
+                                                  .previewLabelTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              '${_generalController.getConsultantProfileModel.data!.userDetail!.address}',
+                                              style: state
+                                                  .previewValueTextStyle,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -589,9 +929,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                               ),
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             height: 20.h,
-                            color: const Color(0xffF6F6F6),
                           ),
 
                           /// Educational Info
@@ -599,6 +938,14 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           Container(
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    spreadRadius: 3,
+                                    blurRadius: 15,
+                                    // offset: Offset(1,5)
+                                  )
+                                ],
                                 borderRadius: BorderRadius.circular(8.r),
                                 color: Colors.white),
                             child: Padding(
@@ -612,254 +959,662 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Educational Info',
+                                        'education'.tr.capitalize!,
                                         style: state.sectionHeadingTextStyle,
                                       ),
-                                      SvgPicture.asset(
-                                        'assets/Icons/editIcon.svg',
-                                      ),
+                                      // SvgPicture.asset(
+                                      //   'assets/Icons/editIcon.svg',
+                                      // ),
                                     ],
                                   ),
                                   SizedBox(
                                     height: 20.h,
                                   ),
 
-                                  ///---name-gender-status.
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      ///---name
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                  Wrap(
+                                    children: List.generate(
+                                        _generalController
+                                            .getConsultantProfileModel
+                                            .data!
+                                            .userDetail!
+                                            .educations!
+                                            .length, (index) {
+                                      return Column(
                                         children: [
-                                          Text(
-                                            'Name',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            'Mentor Name',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-
-                                      ///---gender
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Gender',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            'Male',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-
-                                      ///---status
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Status',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            'Active Member',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle
-                                                ?.copyWith(
-                                                    color: customGreenColor),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 18.h,
-                                  ),
-
-                                  ///---phone-city-cnic
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      ///---phone
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Phone',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            '0315-123456789',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-
-                                      ///---city
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'City',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            'Faisalabad',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-
-                                      ///---cnic
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'CNIC',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            '331005255526',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 18.h,
-                                  ),
-
-                                  ///---reg.date-address
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      ///---reg.date
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'Reg. Date',
-                                              style:
-                                                  state.sectionLabelTextStyle,
-                                            ),
-                                            SizedBox(
-                                              height: 8.h,
-                                            ),
-                                            Text(
-                                              '26-2-22',
-                                              softWrap: true,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                              style: state.sectionDataTextStyle,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-
-                                      ///---address
-                                      Expanded(
-                                        flex: 2,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  30.w, 0, 0, 0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                          Column(
                                             children: [
-                                              Text(
-                                                'Address',
-                                                style:
-                                                    state.sectionLabelTextStyle,
+                                              ///---institution-year
+                                              Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .start,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        Text(
+                                                          'institute'.tr,
+                                                          style: state
+                                                              .previewLabelTextStyle,
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Text(
+                                                          '${_generalController.getConsultantProfileModel.data!.userDetail!.educations![index].institute}',
+                                                          softWrap: true,
+                                                          overflow:
+                                                          TextOverflow
+                                                              .ellipsis,
+                                                          maxLines: 1,
+                                                          style: state
+                                                              .previewValueTextStyle,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .start,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        Text(
+                                                          'year'.tr,
+                                                          style: state
+                                                              .previewLabelTextStyle,
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Text(
+                                                          '${_generalController.getConsultantProfileModel.data!.userDetail!.educations![index].period}',
+                                                          style: state
+                                                              .previewValueTextStyle,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
+
                                               SizedBox(
-                                                height: 8.h,
+                                                height: 18.h,
                                               ),
-                                              Text(
-                                                '102-c Peoples Colony 1, Fsd',
-                                                softWrap: true,
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                                style:
-                                                    state.sectionDataTextStyle,
+
+                                              ///---degree-
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .start,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        Text(
+                                                          'degree'.tr,
+                                                          style: state
+                                                              .previewLabelTextStyle,
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Text(
+                                                          '${_generalController.getConsultantProfileModel.data!.userDetail!.educations![index].degree}',
+                                                          style: state
+                                                              .previewValueTextStyle,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+
+                                              SizedBox(
+                                                height: 18.h,
+                                              ),
+
+                                              ///---subject
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .start,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        Text(
+                                                          'subject'.tr,
+                                                          style: state
+                                                              .previewLabelTextStyle,
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Text(
+                                                          '${_generalController.getConsultantProfileModel.data!.userDetail!.educations![index].subject}',
+                                                          softWrap: true,
+                                                          overflow:
+                                                          TextOverflow
+                                                              .ellipsis,
+                                                          maxLines: 1,
+                                                          style: state
+                                                              .previewValueTextStyle,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      ),
-                                    ],
+                                          index ==
+                                              _generalController
+                                                  .getConsultantProfileModel
+                                                  .data!
+                                                  .userDetail!
+                                                  .educations!
+                                                  .length -
+                                                  1
+                                              ? const SizedBox()
+                                              : Padding(
+                                            padding: const EdgeInsets
+                                                .fromLTRB(
+                                                20, 0, 20, 0),
+                                            child: Divider(
+                                              color: Colors.grey
+                                                  .withOpacity(0.5),
+                                            ),
+                                          )
+                                        ],
+                                      );
+                                    }),
                                   ),
                                 ],
                               ),
                             ),
+                          ),
+
+                          SizedBox(
+                            height: 20.h,
+                          ),
+
+                          ///---experience-info
+                          Container(
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 3,
+                                      blurRadius: 15,
+                                      // offset: Offset(1,5)
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  color: Colors.white),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 20.h, horizontal: 15.w),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'experince'.tr.capitalize!,
+                                      style: state.sectionHeadingTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 20.h,
+                                    ),
+                                    Wrap(
+                                      children: List.generate(
+                                          _generalController
+                                              .getConsultantProfileModel
+                                              .data!
+                                              .userDetail!
+                                              .experiences!
+                                              .length, (index) {
+                                        return Column(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                ///---company
+                                                Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .start,
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          Text(
+                                                            'company'.tr,
+                                                            style: state
+                                                                .previewLabelTextStyle,
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 4,
+                                                          ),
+                                                          Text(
+                                                            '${_generalController.getConsultantProfileModel.data!.userDetail!.experiences![index].company}',
+                                                            softWrap: true,
+                                                            overflow:
+                                                            TextOverflow
+                                                                .ellipsis,
+                                                            maxLines: 1,
+                                                            style: state
+                                                                .previewValueTextStyle,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 18.h,
+                                                ),
+
+                                                ///---from-to
+                                                Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .start,
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          Text(
+                                                            'from'.tr,
+                                                            style: state
+                                                                .previewLabelTextStyle,
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 4,
+                                                          ),
+                                                          Text(
+                                                            '${_generalController.getConsultantProfileModel.data!.userDetail!.experiences![index].from}',
+                                                            softWrap: true,
+                                                            overflow:
+                                                            TextOverflow
+                                                                .ellipsis,
+                                                            maxLines: 1,
+                                                            style: state
+                                                                .previewValueTextStyle,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .start,
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          Text(
+                                                            'To'.tr,
+                                                            style: state
+                                                                .previewLabelTextStyle,
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 4,
+                                                          ),
+                                                          Text(
+                                                            '${_generalController.getConsultantProfileModel.data!.userDetail!.experiences![index].to}',
+                                                            softWrap: true,
+                                                            overflow:
+                                                            TextOverflow
+                                                                .ellipsis,
+                                                            maxLines: 1,
+                                                            style: state
+                                                                .previewValueTextStyle,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            index ==
+                                                _generalController
+                                                    .getConsultantProfileModel
+                                                    .data!
+                                                    .userDetail!
+                                                    .experiences!
+                                                    .length -
+                                                    1
+                                                ? const SizedBox()
+                                                : Padding(
+                                              padding: const EdgeInsets
+                                                  .fromLTRB(
+                                                  20, 0, 20, 0),
+                                              child: Divider(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                              ),
+                                            )
+                                          ],
+                                        );
+                                      }),
+                                    ),
+                                  ],
+                                ),
+                              )),SizedBox(
+                            height: 20.h,
+                          ),
+                          ///---category-info
+                          Container(
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 3,
+                                      blurRadius: 15,
+                                      // offset: Offset(1,5)
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  color: Colors.white),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 20.h, horizontal: 15.w),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'speciality'.tr.capitalize!,
+                                      style: state.sectionHeadingTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 20.h,
+                                    ),
+                                    Column(
+                                      children: [
+                                        ///---speciality
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: List.generate(_generalController.getConsultantProfileModel
+                                              .data!.userDetail!.mentor!.categories!.length, (index) =>
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:  EdgeInsets.fromLTRB(0+(index.toDouble()*5), 5, 0, 0),
+                                                    child: Text(
+                                                      '${index+1}-> ${_generalController.getConsultantProfileModel.data!
+                                                          .userDetail!.mentor!.categories![index].category!.name}',
+                                                      softWrap: true,
+                                                      overflow: TextOverflow
+                                                          .ellipsis,
+                                                      maxLines: 1,
+                                                      style: state
+                                                          .previewValueTextStyle,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),),
+                                        ),
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment
+                                        //           .spaceBetween,
+                                        //   children: [
+                                        //     Expanded(
+                                        //       child: Column(
+                                        //         mainAxisAlignment:
+                                        //             MainAxisAlignment.start,
+                                        //         crossAxisAlignment:
+                                        //             CrossAxisAlignment
+                                        //                 .start,
+                                        //         children: [
+                                        //           Text(
+                                        //             'category'.tr,
+                                        //             style: state
+                                        //                 .previewLabelTextStyle,
+                                        //           ),
+                                        //           const SizedBox(
+                                        //             height: 4,
+                                        //           ),
+                                        //           // Text(
+                                        //           //   '${_generalController.getConsultantProfileModel.data!.userDetail!.mentor!.parentCategory!.name}',
+                                        //           //   softWrap: true,
+                                        //           //   overflow: TextOverflow
+                                        //           //       .ellipsis,
+                                        //           //   maxLines: 1,
+                                        //           //   style: state
+                                        //           //       .previewValueTextStyle,
+                                        //           // ),
+                                        //         ],
+                                        //       ),
+                                        //     ),
+                                        //     Expanded(
+                                        //       child: Column(
+                                        //         mainAxisAlignment:
+                                        //             MainAxisAlignment.start,
+                                        //         crossAxisAlignment:
+                                        //             CrossAxisAlignment
+                                        //                 .start,
+                                        //         children: [
+                                        //           Text(
+                                        //             'sub_category'.tr,
+                                        //             style: state
+                                        //                 .previewLabelTextStyle,
+                                        //           ),
+                                        //           const SizedBox(
+                                        //             height: 4,
+                                        //           ),
+                                        //           // Text(
+                                        //           //   '${_generalController.getConsultantProfileModel.data!.userDetail!.mentor!.category!.name}',
+                                        //           //   softWrap: true,
+                                        //           //   overflow: TextOverflow
+                                        //           //       .ellipsis,
+                                        //           //   maxLines: 1,
+                                        //           //   style: state
+                                        //           //       .previewValueTextStyle,
+                                        //           // ),
+                                        //         ],
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )),
+
+                          SizedBox(
+                            height: 20.h,
+                          ),
+
+
+                          ///---account-info
+                          Container(
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 3,
+                                      blurRadius: 15,
+                                      // offset: Offset(1,5)
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  color: Colors.white),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 20.h, horizontal: 15.w),
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'account_info'.tr.capitalize!,
+                                      style: state.sectionHeadingTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 20.h,
+                                    ),
+                                    Column(
+                                      children: [
+                                        ///---bank
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment
+                                                    .start,
+                                                children: [
+                                                  Text(
+                                                    'bank'.tr,
+                                                    style: state
+                                                        .previewLabelTextStyle,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                    '${_generalController.getConsultantProfileModel.data!.userDetail!.cardDetail!.bank}',
+                                                    softWrap: true,
+                                                    overflow: TextOverflow
+                                                        .ellipsis,
+                                                    maxLines: 1,
+                                                    style: state
+                                                        .previewValueTextStyle,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(
+                                          height: 18.h,
+                                        ),
+
+                                        ///---account-name
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment
+                                                    .start,
+                                                children: [
+                                                  Text(
+                                                    'account_title'.tr,
+                                                    style: state
+                                                        .previewLabelTextStyle,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                    '${_generalController.getConsultantProfileModel.data!.userDetail!.cardDetail!.accountTitle}',
+                                                    softWrap: true,
+                                                    overflow: TextOverflow
+                                                        .ellipsis,
+                                                    maxLines: 1,
+                                                    style: state
+                                                        .previewValueTextStyle,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 18.h,
+                                        ),
+
+                                        ///---account-number
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment
+                                                    .start,
+                                                children: [
+                                                  Text(
+                                                    'account_number'.tr,
+                                                    style: state
+                                                        .previewLabelTextStyle,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                    '${_generalController.getConsultantProfileModel.data!.userDetail!.cardDetail!.accountNumber}',
+                                                    softWrap: true,
+                                                    overflow: TextOverflow
+                                                        .ellipsis,
+                                                    maxLines: 1,
+                                                    style: state
+                                                        .previewValueTextStyle,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )),
+                          SizedBox(
+                            height: 20.h,
                           ),
                         ]),
                   ],

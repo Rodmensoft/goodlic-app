@@ -139,7 +139,9 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                     fit: BoxFit.cover,
                                                   )
                                                 : Image.network(
-                                                    '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
+                                              _consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath.contains('assets')
+                                                  ?'$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
+                                                  :'${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
                                                     width:
                                                         MediaQuery.of(context)
                                                             .size

@@ -1,34 +1,32 @@
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_education_info.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_experience_info.dart';
 
-
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_education_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_experience_info.dart';
-
-class GetUserProfileModel {
-  GetUserProfileModel({
-      bool? status, 
-      int? success,
-    GetUserProfileModelData? data,
-      String? msg,}){
+class GetConsultantProfileModel {
+  GetConsultantProfileModel({
+    bool? status,
+    int? success,
+    GetConsultantProfileModelData? data,
+    String? msg,}){
     _status = status;
     _success = success;
     _data = data;
     _msg = msg;
-}
+  }
 
-  GetUserProfileModel.fromJson(dynamic json) {
+  GetConsultantProfileModel.fromJson(dynamic json) {
     _status = json['Status'];
     _success = json['success'];
-    _data = json['data'] != null ? GetUserProfileModelData.fromJson(json['data']) : null;
+    _data = json['data'] != null ? GetConsultantProfileModelData.fromJson(json['data']) : null;
     _msg = json['msg'];
   }
   bool? _status;
   int? _success;
-  GetUserProfileModelData? _data;
+  GetConsultantProfileModelData? _data;
   String? _msg;
 
   bool? get status => _status;
   int? get success => _success;
-  GetUserProfileModelData? get data => _data;
+  GetConsultantProfileModelData? get data => _data;
   String? get msg => _msg;
 
   Map<String, dynamic> toJson() {
@@ -44,27 +42,21 @@ class GetUserProfileModel {
 
 }
 
-class GetUserProfileModelData {
-  GetUserProfileModelData({
-      String? accessToken,
-    UserDetailFromGetProfile? userDetail,}){
-    _accessToken = accessToken;
+class GetConsultantProfileModelData {
+  GetConsultantProfileModelData({
+    ConsultantDetailFromGetProfile? userDetail,}){
     _userDetail = userDetail;
-}
-
-  GetUserProfileModelData.fromJson(dynamic json) {
-    _accessToken = json['AccessToken'];
-    _userDetail = json['userDetail'] != null ? UserDetailFromGetProfile.fromJson(json['userDetail']) : null;
   }
-  String? _accessToken;
-  UserDetailFromGetProfile? _userDetail;
 
-  String? get accessToken => _accessToken;
-  UserDetailFromGetProfile? get userDetail => _userDetail;
+  GetConsultantProfileModelData.fromJson(dynamic json) {
+    _userDetail = json['userDetail'] != null ? ConsultantDetailFromGetProfile.fromJson(json['userDetail']) : null;
+  }
+  ConsultantDetailFromGetProfile? _userDetail;
+
+  ConsultantDetailFromGetProfile? get userDetail => _userDetail;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['AccessToken'] = _accessToken;
     if (_userDetail != null) {
       map['userDetail'] = _userDetail?.toJson();
     }
@@ -73,80 +65,96 @@ class GetUserProfileModelData {
 
 }
 
-class UserDetailFromGetProfile {
-  UserDetailFromGetProfile({
-      int? id, 
-      String? firstName, 
-      String? lastName, 
-      String? email, 
-      String? phone, 
-      String? imagePath, 
-      int? country, 
-      String? city, 
-      String? address, 
-      dynamic postalCode, 
-      dynamic isOtpVerified, 
-      String? fatherName, 
-      String? cnic, 
-      String? gender, 
-      String? religion, 
-      String? dob, 
-      int? occupation, 
-      String? onlineStatus,
-      String? createdAt,
-      String? updatedAt,
-    MentorFromGetProfile? mentor,
-      List<Education>? educations,
-      List<Experience>? experiences,
-    CardDetailFromGetProfile? cardDetail,}){
+class ConsultantDetailFromGetProfile {
+  ConsultantDetailFromGetProfile({
+    int? id,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? imagePath,
+    String? createdAt,
+    int? country,
+    String? fatherName,
+    String? cnic,
+    String? gender,
+    String? dob,
+    String? city,
+    String? address,
+    int? occupation,
+    String? religion,
+    String? onlineStatus,
+    int? ratingsAvg,
+    String? registerDate,
+    List<Schedule_types>? scheduleTypes,
+    List<Schedule_types>? withoutScheduleTypes,
+    int? appointmentCount,
+    Mentor? mentor,
+    User_country? userCountry,
+    List<Education>? educations,
+    List<Experience>? experiences,
+    Card_detail? cardDetail,}){
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
     _email = email;
-    _phone = phone;
     _imagePath = imagePath;
+    _createdAt = createdAt;
     _country = country;
-    _city = city;
-    _address = address;
-    _postalCode = postalCode;
-    _isOtpVerified = isOtpVerified;
     _fatherName = fatherName;
     _cnic = cnic;
     _gender = gender;
-    _religion = religion;
     _dob = dob;
+    _city = city;
+    _address = address;
     _occupation = occupation;
+    _religion = religion;
     _onlineStatus = onlineStatus;
-    _createdAt = createdAt;
-    _updatedAt = updatedAt;
+    _ratingsAvg = ratingsAvg;
+    _registerDate = registerDate;
+    _scheduleTypes = scheduleTypes;
+    _withoutScheduleTypes = withoutScheduleTypes;
+    _appointmentCount = appointmentCount;
     _mentor = mentor;
+    _userCountry = userCountry;
     _educations = educations;
     _experiences = experiences;
     _cardDetail = cardDetail;
-}
+  }
 
-  UserDetailFromGetProfile.fromJson(dynamic json) {
+  ConsultantDetailFromGetProfile.fromJson(dynamic json) {
     _id = json['id'];
     _firstName = json['first_name'];
     _lastName = json['last_name'];
     _email = json['email'];
-    _phone = json['phone'];
     _imagePath = json['image_path'];
+    _createdAt = json['created_at'];
     _country = json['country'];
-    _city = json['city'];
-    _address = json['address'];
-    _postalCode = json['postal_code'];
-    _isOtpVerified = json['is_otp_verified'];
     _fatherName = json['father_name'];
     _cnic = json['cnic'];
     _gender = json['gender'];
-    _religion = json['religion'];
     _dob = json['dob'];
+    _city = json['city'];
+    _address = json['address'];
     _occupation = json['occupation'];
+    _religion = json['religion'];
     _onlineStatus = json['online_status'];
-    _createdAt = json['created_at'];
-    _updatedAt = json['updated_at'];
-    _mentor = json['mentor'] != null ? MentorFromGetProfile.fromJson(json['mentor']) : null;
+    _ratingsAvg = json['ratingsAvg'];
+    _registerDate = json['register_date'];
+    if (json['schedule_types'] != null) {
+      _scheduleTypes = [];
+      json['schedule_types'].forEach((v) {
+        _scheduleTypes?.add(Schedule_types.fromJson(v));
+      });
+    }
+    if (json['without_schedule_types'] != null) {
+      _withoutScheduleTypes = [];
+      json['without_schedule_types'].forEach((v) {
+        _withoutScheduleTypes?.add(Schedule_types.fromJson(v));
+      });
+    }
+    _appointmentCount = json['appointmentCount'];
+    _mentor = json['mentor'] != null ? Mentor.fromJson(json['mentor']) : null;
+    _userCountry = json['user_country'] != null ? User_country.fromJson(json['user_country']) : null;
     if (json['educations'] != null) {
       _educations = [];
       json['educations'].forEach((v) {
@@ -159,57 +167,61 @@ class UserDetailFromGetProfile {
         _experiences?.add(Experience.fromJson(v));
       });
     }
-    _cardDetail = json['card_detail'] != null ? CardDetailFromGetProfile.fromJson(json['card_detail']) : null;
+    _cardDetail = json['card_detail'] != null ? Card_detail.fromJson(json['card_detail']) : null;
   }
   int? _id;
   String? _firstName;
   String? _lastName;
   String? _email;
-  String? _phone;
   String? _imagePath;
+  String? _createdAt;
   int? _country;
-  String? _city;
-  String? _address;
-  dynamic _postalCode;
-  dynamic _isOtpVerified;
   String? _fatherName;
   String? _cnic;
   String? _gender;
-  String? _religion;
   String? _dob;
+  String? _city;
+  String? _address;
   int? _occupation;
+  String? _religion;
   String? _onlineStatus;
-  String? _createdAt;
-  String? _updatedAt;
-  MentorFromGetProfile? _mentor;
+  int? _ratingsAvg;
+  String? _registerDate;
+  List<Schedule_types>? _scheduleTypes;
+  List<Schedule_types>? _withoutScheduleTypes;
+  int? _appointmentCount;
+  Mentor? _mentor;
+  User_country? _userCountry;
   List<Education>? _educations;
   List<Experience>? _experiences;
-  CardDetailFromGetProfile? _cardDetail;
+  Card_detail? _cardDetail;
 
   int? get id => _id;
   String? get firstName => _firstName;
   String? get lastName => _lastName;
   String? get email => _email;
-  String? get phone => _phone;
   String? get imagePath => _imagePath;
+  String? get createdAt => _createdAt;
   int? get country => _country;
-  String? get city => _city;
-  String? get address => _address;
-  dynamic get postalCode => _postalCode;
-  dynamic get isOtpVerified => _isOtpVerified;
   String? get fatherName => _fatherName;
   String? get cnic => _cnic;
   String? get gender => _gender;
-  String? get religion => _religion;
   String? get dob => _dob;
+  String? get city => _city;
+  String? get address => _address;
   int? get occupation => _occupation;
+  String? get religion => _religion;
   String? get onlineStatus => _onlineStatus;
-  String? get createdAt => _createdAt;
-  String? get updatedAt => _updatedAt;
-  MentorFromGetProfile? get mentor => _mentor;
+  int? get ratingsAvg => _ratingsAvg;
+  String? get registerDate => _registerDate;
+  List<Schedule_types>? get scheduleTypes => _scheduleTypes;
+  List<Schedule_types>? get withoutScheduleTypes => _withoutScheduleTypes;
+  int? get appointmentCount => _appointmentCount;
+  Mentor? get mentor => _mentor;
+  User_country? get userCountry => _userCountry;
   List<Education>? get educations => _educations;
   List<Experience>? get experiences => _experiences;
-  CardDetailFromGetProfile? get cardDetail => _cardDetail;
+  Card_detail? get cardDetail => _cardDetail;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -217,24 +229,32 @@ class UserDetailFromGetProfile {
     map['first_name'] = _firstName;
     map['last_name'] = _lastName;
     map['email'] = _email;
-    map['phone'] = _phone;
     map['image_path'] = _imagePath;
+    map['created_at'] = _createdAt;
     map['country'] = _country;
-    map['city'] = _city;
-    map['address'] = _address;
-    map['postal_code'] = _postalCode;
-    map['is_otp_verified'] = _isOtpVerified;
     map['father_name'] = _fatherName;
     map['cnic'] = _cnic;
     map['gender'] = _gender;
-    map['religion'] = _religion;
     map['dob'] = _dob;
+    map['city'] = _city;
+    map['address'] = _address;
     map['occupation'] = _occupation;
+    map['religion'] = _religion;
     map['online_status'] = _onlineStatus;
-    map['created_at'] = _createdAt;
-    map['updated_at'] = _updatedAt;
+    map['ratingsAvg'] = _ratingsAvg;
+    map['register_date'] = _registerDate;
+    if (_scheduleTypes != null) {
+      map['schedule_types'] = _scheduleTypes?.map((v) => v.toJson()).toList();
+    }
+    if (_withoutScheduleTypes != null) {
+      map['without_schedule_types'] = _withoutScheduleTypes?.map((v) => v.toJson()).toList();
+    }
+    map['appointmentCount'] = _appointmentCount;
     if (_mentor != null) {
       map['mentor'] = _mentor?.toJson();
+    }
+    if (_userCountry != null) {
+      map['user_country'] = _userCountry?.toJson();
     }
     if (_educations != null) {
       map['educations'] = _educations?.map((v) => v.toJson()).toList();
@@ -250,21 +270,21 @@ class UserDetailFromGetProfile {
 
 }
 
-class CardDetailFromGetProfile {
-  CardDetailFromGetProfile({
-      int? id, 
-      String? accountTitle, 
-      String? accountNumber, 
-      String? bank, 
-      int? mentorId,}){
+class Card_detail {
+  Card_detail({
+    int? id,
+    String? accountTitle,
+    String? accountNumber,
+    String? bank,
+    int? mentorId,}){
     _id = id;
     _accountTitle = accountTitle;
     _accountNumber = accountNumber;
     _bank = bank;
     _mentorId = mentorId;
-}
+  }
 
-  CardDetailFromGetProfile.fromJson(dynamic json) {
+  Card_detail.fromJson(dynamic json) {
     _id = json['id'];
     _accountTitle = json['account_title'];
     _accountNumber = json['account_number'];
@@ -295,287 +315,298 @@ class CardDetailFromGetProfile {
 
 }
 
-// class ExperiencesFromGetProfile {
-//   ExperiencesFromGetProfile({
-//       int? id,
-//       int? mentorId,
-//       String? company,
-//       String? from,
-//       String? to,
-//       String? imagePath,
-//       String? createdAt,
-//       String? updatedAt,}){
-//     _id = id;
-//     _mentorId = mentorId;
-//     _company = company;
-//     _from = from;
-//     _to = to;
-//     _imagePath = imagePath;
-//     _createdAt = createdAt;
-//     _updatedAt = updatedAt;
-// }
-//
-//   ExperiencesFromGetProfile.fromJson(dynamic json) {
-//     _id = json['id'];
-//     _mentorId = json['mentor_id'];
-//     _company = json['company'];
-//     _from = json['from'];
-//     _to = json['to'];
-//     _imagePath = json['image_path'];
-//     _createdAt = json['created_at'];
-//     _updatedAt = json['updated_at'];
-//   }
-//   int? _id;
-//   int? _mentorId;
-//   String? _company;
-//   String? _from;
-//   String? _to;
-//   String? _imagePath;
-//   String? _createdAt;
-//   String? _updatedAt;
-//
-//   int? get id => _id;
-//   int? get mentorId => _mentorId;
-//   String? get company => _company;
-//   String? get from => _from;
-//   String? get to => _to;
-//   String? get imagePath => _imagePath;
-//   String? get createdAt => _createdAt;
-//   String? get updatedAt => _updatedAt;
-//
-//   Map<String, dynamic> toJson() {
-//     final map = <String, dynamic>{};
-//     map['id'] = _id;
-//     map['mentor_id'] = _mentorId;
-//     map['company'] = _company;
-//     map['from'] = _from;
-//     map['to'] = _to;
-//     map['image_path'] = _imagePath;
-//     map['created_at'] = _createdAt;
-//     map['updated_at'] = _updatedAt;
-//     return map;
-//   }
-//
-// }
+class User_country {
+  User_country({
+    int? id,
+    String? name,
+    String? isoCode3,
+    String? isoCode2,
+    String? phoneCode,
+    String? capital,
+    String? currency,
+    String? currencySymbol,
+    String? tld,
+    String? native,
+    String? region,
+    int? isActive,
+    String? subregion,
+    String? timezones,
+    String? translations,
+    String? latitude,
+    String? longitude,
+    String? emoji,
+    String? emojiU,
+    String? createdAt,
+    String? updatedAt,
+    int? flag,
+    String? wikiDataId,}){
+    _id = id;
+    _name = name;
+    _isoCode3 = isoCode3;
+    _isoCode2 = isoCode2;
+    _phoneCode = phoneCode;
+    _capital = capital;
+    _currency = currency;
+    _currencySymbol = currencySymbol;
+    _tld = tld;
+    _native = native;
+    _region = region;
+    _isActive = isActive;
+    _subregion = subregion;
+    _timezones = timezones;
+    _translations = translations;
+    _latitude = latitude;
+    _longitude = longitude;
+    _emoji = emoji;
+    _emojiU = emojiU;
+    _createdAt = createdAt;
+    _updatedAt = updatedAt;
+    _flag = flag;
+    _wikiDataId = wikiDataId;
+  }
 
-// class EducationsFromGetProfile {
-//   EducationsFromGetProfile({
-//       int? id,
-//       int? mentorId,
-//       String? institute,
-//       String? degree,
-//       String? subject,
-//       String? period,
-//       String? imagePath,
-//       String? createdAt,
-//       String? updatedAt,}){
-//     _id = id;
-//     _mentorId = mentorId;
-//     _institute = institute;
-//     _degree = degree;
-//     _subject = subject;
-//     _period = period;
-//     _imagePath = imagePath;
-//     _createdAt = createdAt;
-//     _updatedAt = updatedAt;
-// }
-//
-//   EducationsFromGetProfile.fromJson(dynamic json) {
-//     _id = json['id'];
-//     _mentorId = json['mentor_id'];
-//     _institute = json['institute'];
-//     _degree = json['degree'];
-//     _subject = json['subject'];
-//     _period = json['period'];
-//     _imagePath = json['image_path'];
-//     _createdAt = json['created_at'];
-//     _updatedAt = json['updated_at'];
-//   }
-//   int? _id;
-//   int? _mentorId;
-//   String? _institute;
-//   String? _degree;
-//   String? _subject;
-//   String? _period;
-//   String? _imagePath;
-//   String? _createdAt;
-//   String? _updatedAt;
-//
-//   int? get id => _id;
-//   int? get mentorId => _mentorId;
-//   String? get institute => _institute;
-//   String? get degree => _degree;
-//   String? get subject => _subject;
-//   String? get period => _period;
-//   String? get imagePath => _imagePath;
-//   String? get createdAt => _createdAt;
-//   String? get updatedAt => _updatedAt;
-//
-//   Map<String, dynamic> toJson() {
-//     final map = <String, dynamic>{};
-//     map['id'] = _id;
-//     map['mentor_id'] = _mentorId;
-//     map['institute'] = _institute;
-//     map['degree'] = _degree;
-//     map['subject'] = _subject;
-//     map['period'] = _period;
-//     map['image_path'] = _imagePath;
-//     map['created_at'] = _createdAt;
-//     map['updated_at'] = _updatedAt;
-//     return map;
-//   }
-//
-// }
+  User_country.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'];
+    _isoCode3 = json['iso_code_3'];
+    _isoCode2 = json['iso_code_2'];
+    _phoneCode = json['phone_code'];
+    _capital = json['capital'];
+    _currency = json['currency'];
+    _currencySymbol = json['currency_symbol'];
+    _tld = json['tld'];
+    _native = json['native'];
+    _region = json['region'];
+    _isActive = json['is_active'];
+    _subregion = json['subregion'];
+    _timezones = json['timezones'];
+    _translations = json['translations'];
+    _latitude = json['latitude'];
+    _longitude = json['longitude'];
+    _emoji = json['emoji'];
+    _emojiU = json['emojiU'];
+    _createdAt = json['created_at'];
+    _updatedAt = json['updated_at'];
+    _flag = json['flag'];
+    _wikiDataId = json['wikiDataId'];
+  }
+  int? _id;
+  String? _name;
+  String? _isoCode3;
+  String? _isoCode2;
+  String? _phoneCode;
+  String? _capital;
+  String? _currency;
+  String? _currencySymbol;
+  String? _tld;
+  String? _native;
+  String? _region;
+  int? _isActive;
+  String? _subregion;
+  String? _timezones;
+  String? _translations;
+  String? _latitude;
+  String? _longitude;
+  String? _emoji;
+  String? _emojiU;
+  String? _createdAt;
+  String? _updatedAt;
+  int? _flag;
+  String? _wikiDataId;
 
-class MentorFromGetProfile {
-  MentorFromGetProfile({
-      int? id, 
-      int? userId, 
-      int? mentorCategoryId, 
-      int? parentCategoryId, 
-      dynamic description, 
-      dynamic paymentType, 
-      int? status, 
-      int? isProfileCompleted, 
-      int? isLive,
-      dynamic isVerified,
-      int? fee, 
-      String? createdAt, 
-      String? updatedAt,
-    // List<CategoryListFromGetProfile>? category,
-    CategoryFromGetProfile? category,
-    // CategoryFromGetProfile? parentCategory,
-  }){
+  int? get id => _id;
+  String? get name => _name;
+  String? get isoCode3 => _isoCode3;
+  String? get isoCode2 => _isoCode2;
+  String? get phoneCode => _phoneCode;
+  String? get capital => _capital;
+  String? get currency => _currency;
+  String? get currencySymbol => _currencySymbol;
+  String? get tld => _tld;
+  String? get native => _native;
+  String? get region => _region;
+  int? get isActive => _isActive;
+  String? get subregion => _subregion;
+  String? get timezones => _timezones;
+  String? get translations => _translations;
+  String? get latitude => _latitude;
+  String? get longitude => _longitude;
+  String? get emoji => _emoji;
+  String? get emojiU => _emojiU;
+  String? get createdAt => _createdAt;
+  String? get updatedAt => _updatedAt;
+  int? get flag => _flag;
+  String? get wikiDataId => _wikiDataId;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['name'] = _name;
+    map['iso_code_3'] = _isoCode3;
+    map['iso_code_2'] = _isoCode2;
+    map['phone_code'] = _phoneCode;
+    map['capital'] = _capital;
+    map['currency'] = _currency;
+    map['currency_symbol'] = _currencySymbol;
+    map['tld'] = _tld;
+    map['native'] = _native;
+    map['region'] = _region;
+    map['is_active'] = _isActive;
+    map['subregion'] = _subregion;
+    map['timezones'] = _timezones;
+    map['translations'] = _translations;
+    map['latitude'] = _latitude;
+    map['longitude'] = _longitude;
+    map['emoji'] = _emoji;
+    map['emojiU'] = _emojiU;
+    map['created_at'] = _createdAt;
+    map['updated_at'] = _updatedAt;
+    map['flag'] = _flag;
+    map['wikiDataId'] = _wikiDataId;
+    return map;
+  }
+
+}
+
+class Mentor {
+  Mentor({
+    int? id,
+    int? userId,
+    dynamic description,
+    dynamic paymentType,
+    int? status,
+    int? isProfileCompleted,
+    int? isFeatured,
+    int? isLive,
+    dynamic isVerified,
+    dynamic fee,
+    String? createdAt,
+    String? updatedAt,
+    List<Categories>? categories,
+    String? about,
+    int? experience,}){
     _id = id;
     _userId = userId;
-    _mentorCategoryId = mentorCategoryId;
-    _parentCategoryId = parentCategoryId;
     _description = description;
     _paymentType = paymentType;
     _status = status;
     _isProfileCompleted = isProfileCompleted;
+    _isFeatured = isFeatured;
     _isLive = isLive;
     _isVerified = isVerified;
     _fee = fee;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
-    _category = category;
-    // _parentCategory = parentCategory;
-}
+    _categories = categories;
+    _about = about;
+    _experience = experience;
+  }
 
-  MentorFromGetProfile.fromJson(dynamic json) {
+  Mentor.fromJson(dynamic json) {
     _id = json['id'];
     _userId = json['user_id'];
-    _mentorCategoryId = json['mentor_category_id'];
-    _parentCategoryId = json['parent_category_id'];
     _description = json['description'];
     _paymentType = json['payment_type'];
     _status = json['status'];
     _isProfileCompleted = json['is_profile_completed'];
+    _isFeatured = json['is_featured'];
     _isLive = json['is_live'];
     _isVerified = json['is_verified'];
     _fee = json['fee'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    // if (json['categories'] != null) {
-    //   _category = [];
-    //   json['categories'].forEach((v) {
-    //     _category?.add(CategoryListFromGetProfile.fromJson(v));
-    //   });
-    // }
-    _category = json['categories'] != null ? CategoryFromGetProfile.fromJson(json['categories']) : null;
-    // _category = json['category'] != null ? CategoryListFromGetProfile.fromJson(json['category']) : null;
-    // _parentCategory = json['parent_category'] != null ? CategoryFromGetProfile.fromJson(json['parent_category']) : null;
+    if (json['categories'] != null) {
+      _categories = [];
+      json['categories'].forEach((v) {
+        _categories?.add(Categories.fromJson(v));
+      });
+    }
+    _about = json['about'];
+    _experience = json['experience'];
   }
   int? _id;
   int? _userId;
-  int? _mentorCategoryId;
-  int? _parentCategoryId;
   dynamic _description;
   dynamic _paymentType;
   int? _status;
   int? _isProfileCompleted;
+  int? _isFeatured;
   int? _isLive;
   dynamic _isVerified;
-  int? _fee;
+  dynamic _fee;
   String? _createdAt;
   String? _updatedAt;
-  // List<CategoryListFromGetProfile>? _category;
-  CategoryFromGetProfile? _category;
-  // CategoryFromGetProfile? _parentCategory;
+  List<Categories>? _categories;
+  String? _about;
+  int? _experience;
 
   int? get id => _id;
   int? get userId => _userId;
-  int? get mentorCategoryId => _mentorCategoryId;
-  int? get parentCategoryId => _parentCategoryId;
   dynamic get description => _description;
   dynamic get paymentType => _paymentType;
   int? get status => _status;
   int? get isProfileCompleted => _isProfileCompleted;
+  int? get isFeatured => _isFeatured;
   int? get isLive => _isLive;
   dynamic get isVerified => _isVerified;
-  int? get fee => _fee;
+  dynamic get fee => _fee;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
-  // List<CategoryListFromGetProfile>? get category => _category;
-  CategoryFromGetProfile? get category => _category;
-  // CategoryFromGetProfile? get parentCategory => _parentCategory;
+  List<Categories>? get categories => _categories;
+  String? get about => _about;
+  int? get experience => _experience;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
     map['user_id'] = _userId;
-    map['mentor_category_id'] = _mentorCategoryId;
-    map['parent_category_id'] = _parentCategoryId;
     map['description'] = _description;
     map['payment_type'] = _paymentType;
     map['status'] = _status;
     map['is_profile_completed'] = _isProfileCompleted;
+    map['is_featured'] = _isFeatured;
     map['is_live'] = _isLive;
     map['is_verified'] = _isVerified;
     map['fee'] = _fee;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
-    // if (_category != null) {
-    //   map['categories'] = _category?.map((v) => v.toJson()).toList();
-    // }
-    if (_category != null) {
-      map['categories'] = _category?.toJson();
+    if (_categories != null) {
+      map['categories'] = _categories?.map((v) => v.toJson()).toList();
     }
-    // if (_parentCategory != null) {
-    //   map['parent_category'] = _parentCategory?.toJson();
-    // }
+    map['about'] = _about;
+    map['experience'] = _experience;
     return map;
   }
 
 }
-class CategoryListFromGetProfile {
-  CategoryListFromGetProfile({
+
+class Categories {
+  Categories({
     int? id,
     int? mentorId,
     int? categoryId,
-    CategoryFromGetProfile? category,}){
+    Category? category,}){
     _id = id;
     _mentorId = mentorId;
     _categoryId = categoryId;
     _category = category;
   }
 
-  CategoryListFromGetProfile.fromJson(dynamic json) {
+  Categories.fromJson(dynamic json) {
     _id = json['id'];
     _mentorId = json['mentor_id'];
     _categoryId = json['category_id'];
-    _category = json['category'] != null ? CategoryFromGetProfile.fromJson(json['category']) : null;
+    _category = json['category'] != null ? Category.fromJson(json['category']) : null;
   }
   int? _id;
   int? _mentorId;
   int? _categoryId;
-  CategoryFromGetProfile? _category;
+  Category? _category;
 
   int? get id => _id;
   int? get mentorId => _mentorId;
   int? get categoryId => _categoryId;
-  CategoryFromGetProfile? get category => _category;
+  Category? get category => _category;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -589,14 +620,15 @@ class CategoryListFromGetProfile {
   }
 
 }
-class CategoryFromGetProfile {
-  CategoryFromGetProfile({
+
+class Category {
+  Category({
     int? id,
     int? parentId,
     String? name,
     String? slug,
     String? imagePath,
-    dynamic description,
+    String? description,
     String? createdAt,
     String? updatedAt,}){
     _id = id;
@@ -609,7 +641,7 @@ class CategoryFromGetProfile {
     _updatedAt = updatedAt;
   }
 
-  CategoryFromGetProfile.fromJson(dynamic json) {
+  Category.fromJson(dynamic json) {
     _id = json['id'];
     _parentId = json['parent_id'];
     _name = json['name'];
@@ -624,7 +656,7 @@ class CategoryFromGetProfile {
   String? _name;
   String? _slug;
   String? _imagePath;
-  dynamic _description;
+  String? _description;
   String? _createdAt;
   String? _updatedAt;
 
@@ -633,7 +665,7 @@ class CategoryFromGetProfile {
   String? get name => _name;
   String? get slug => _slug;
   String? get imagePath => _imagePath;
-  dynamic get description => _description;
+  String? get description => _description;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
 
@@ -651,59 +683,71 @@ class CategoryFromGetProfile {
   }
 
 }
-// class CategoryFromGetProfile {
-//   CategoryFromGetProfile({
-//       int? id,
-//       int? parentId,
-//       String? name,
-//       String? imagePath,
-//       dynamic description,
-//       String? createdAt,
-//       String? updatedAt,}){
-//     _id = id;
-//     _parentId = parentId;
-//     _name = name;
-//     _imagePath = imagePath;
-//     _description = description;
-//     _createdAt = createdAt;
-//     _updatedAt = updatedAt;
-// }
-//
-//   CategoryFromGetProfile.fromJson(dynamic json) {
-//     _id = json['id'];
-//     _parentId = json['parent_id'];
-//     _name = json['name'];
-//     _imagePath = json['image_path'];
-//     _description = json['description'];
-//     _createdAt = json['created_at'];
-//     _updatedAt = json['updated_at'];
-//   }
-//   int? _id;
-//   int? _parentId;
-//   String? _name;
-//   String? _imagePath;
-//   dynamic _description;
-//   String? _createdAt;
-//   String? _updatedAt;
-//
-//   int? get id => _id;
-//   int? get parentId => _parentId;
-//   String? get name => _name;
-//   String? get imagePath => _imagePath;
-//   dynamic get description => _description;
-//   String? get createdAt => _createdAt;
-//   String? get updatedAt => _updatedAt;
-//
-//   Map<String, dynamic> toJson() {
-//     final map = <String, dynamic>{};
-//     map['id'] = _id;
-//     map['parent_id'] = _parentId;
-//     map['name'] = _name;
-//     map['image_path'] = _imagePath;
-//     map['description'] = _description;
-//     map['created_at'] = _createdAt;
-//     map['updated_at'] = _updatedAt;
-//     return map;
-//   }
-//
-// }
+
+class Schedule_types {
+  Schedule_types({
+    int? appointmentTypeId,
+    int? fee,
+    Appointment_type? appointmentType,}){
+    _appointmentTypeId = appointmentTypeId;
+    _fee = fee;
+    _appointmentType = appointmentType;
+  }
+
+  Schedule_types.fromJson(dynamic json) {
+    _appointmentTypeId = json['appointment_type_id'];
+    _fee = json['fee'];
+    _appointmentType = json['appointment_type'] != null ? Appointment_type.fromJson(json['appointment_type']) : null;
+  }
+  int? _appointmentTypeId;
+  int? _fee;
+  Appointment_type? _appointmentType;
+
+  int? get appointmentTypeId => _appointmentTypeId;
+  int? get fee => _fee;
+  Appointment_type? get appointmentType => _appointmentType;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['appointment_type_id'] = _appointmentTypeId;
+    map['fee'] = _fee;
+    if (_appointmentType != null) {
+      map['appointment_type'] = _appointmentType?.toJson();
+    }
+    return map;
+  }
+
+}
+
+class Appointment_type {
+  Appointment_type({
+    int? id,
+    String? name,
+    int? isScheduleRequired,}){
+    _id = id;
+    _name = name;
+    _isScheduleRequired = isScheduleRequired;
+  }
+
+  Appointment_type.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'];
+    _isScheduleRequired = json['is_schedule_required'];
+  }
+  int? _id;
+  String? _name;
+  int? _isScheduleRequired;
+
+  int? get id => _id;
+  String? get name => _name;
+  int? get isScheduleRequired => _isScheduleRequired;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['name'] = _name;
+    map['is_schedule_required'] = _isScheduleRequired;
+    return map;
+  }
+
+}

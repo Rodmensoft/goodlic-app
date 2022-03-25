@@ -9,8 +9,8 @@ class MyProfileState {
   TextStyle? categoryTextStyle;
   TextStyle? ratingTextStyle;
   TextStyle? sectionHeadingTextStyle;
-  TextStyle? sectionLabelTextStyle;
-  TextStyle? sectionDataTextStyle;
+  TextStyle? previewLabelTextStyle;
+  TextStyle? previewValueTextStyle;
   MyProfileState() {
     ///Initialize variables
     profileNameTextStyle = TextStyle(
@@ -29,11 +29,11 @@ class MyProfileState {
         fontFamily: SarabunFontFamily.extraBold,
         fontSize: 14.sp,
         color: customThemeColor);
-    sectionLabelTextStyle = TextStyle(
+    previewLabelTextStyle = TextStyle(
         fontFamily: SarabunFontFamily.regular,
         fontSize: 10.sp,
         color: const Color(0xff757575));
-    sectionDataTextStyle = TextStyle(
+    previewValueTextStyle = TextStyle(
         fontFamily: SarabunFontFamily.semiBold,
         fontSize: 12.sp,
         color: customTextBlackColor);

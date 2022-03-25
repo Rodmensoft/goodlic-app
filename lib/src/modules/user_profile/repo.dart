@@ -1,6 +1,9 @@
 import 'dart:developer';
 import 'package:consultant_product/src/api_services/get_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/logic.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_get.dart';
 import 'package:consultant_product/src/modules/user_profile/get_user_profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,12 +12,12 @@ import 'package:intl/intl.dart';
 getUserProfileRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    Get.find<GeneralController>().getUserProfileModel =
-        GetUserProfileModel.fromJson(response);
+    Get.find<GeneralController>().getConsultantProfileModel =
+        GetConsultantProfileModel.fromJson(response);
 
     Get.find<GeneralController>().updateFormLoaderController(false);
-    if (Get.find<GeneralController>().getUserProfileModel.status == true) {
-      log('getUserProfileRepo ------>> ${Get.find<GeneralController>().getUserProfileModel.success}');
+    if (Get.find<GeneralController>().getConsultantProfileModel.status == true) {
+      log('getUserProfileRepo ------>> ${Get.find<GeneralController>().getConsultantProfileModel.success}');
     } else {}
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
@@ -24,54 +27,54 @@ getUserProfileRepo(
 }
 
 
-// getUserProfileForEditRepo(
-//     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
-//   if (responseCheck) {
-//     Get.find<GeneralController>().getUserProfileModel =
-//         GetUserProfileModel.fromJson(response);
-//     if (Get.find<GeneralController>().getUserProfileModel.status == true) {
-//       getMethod(context, mentorProfileGenericDataUrl, {'token': '123'}, false,
-//           getGenericDataRepo);
-//       getMethod(
-//           context,
-//           getCitiesByIdUrl,
-//           {
-//             'token': '123',
-//             'country_id': Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.country
-//           },
-//           false,
-//           getCitiesRepo);
-//       getMethod(context, mentorParentCategoryDataUrl, {'token': '123'}, false,
-//           getParentCategoryRepo);
-//
-//       Get.find<MentorEditProfileLogic>().firstNameController.text = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.firstName!;
-//       Get.find<MentorEditProfileLogic>().lastNameController.text = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.lastName!;
-//       Get.find<MentorEditProfileLogic>().fatherNameController.text = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.fatherName!;
-//       Get.find<MentorEditProfileLogic>().emailController.text = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.email!;
-//       Get.find<MentorEditProfileLogic>().cnicController.text = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.cnic!;
-//       Get.find<MentorEditProfileLogic>().addressController.text = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.address!;
-//       Get.find<MentorEditProfileLogic>().selectedGender = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.gender!;
-//       Get.find<MentorEditProfileLogic>().selectedReligion = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.religion!;
-//       Get.find<MentorEditProfileLogic>().dobController.text = DateFormat('dd-MM-yyyy')
-//           .format(DateTime.parse(Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.dob!));
-//       Get.find<MentorEditProfileLogic>().selectedDob = DateTime.parse(Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.dob!);
-//       Get.find<MentorEditProfileLogic>().selectedCity = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.city!;
-//       Get.find<MentorEditProfileLogic>().forDisplayEducationList = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.educations!;
-//       Get.find<MentorEditProfileLogic>().forDisplayExperienceList = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.experiences!;
-//       Get.find<MentorEditProfileLogic>().forDisplaySkillList = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.mentor!.category!;
-//       // Get.find<MentorEditProfileLogic>().selectedSubCategory = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.mentor!.category!.name!;
-//       Get.find<MentorEditProfileLogic>().selectedBank = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.cardDetail!.bank!;
-//       Get.find<MentorEditProfileLogic>().accountTitleController.text = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.cardDetail!.accountTitle!;
-//       Get.find<MentorEditProfileLogic>().accountNumberController.text = Get.find<GeneralController>().getUserProfileModel.data!.userDetail!.cardDetail!.accountNumber!;
-//
-//       Get.find<GeneralController>().updateFormLoaderController(false);
-//       log('getUserProfileRepo ------>> ${Get.find<GeneralController>().getUserProfileModel.success}');
-//     } else {
-//       Get.find<GeneralController>().updateFormLoaderController(false);
-//     }
-//   } else if (!responseCheck) {
-//     Get.find<GeneralController>().updateFormLoaderController(false);
-//
-//     log('Exception........................');
-//   }
-// }
+getUserProfileForEditRepo(
+    BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    Get.find<GeneralController>().getConsultantProfileModel =
+        GetConsultantProfileModel.fromJson(response);
+    if (Get.find<GeneralController>().getConsultantProfileModel.status == true) {
+      getMethod(context, mentorProfileGenericDataUrl, {'token': '123'}, false,
+          getGenericDataRepo);
+      getMethod(
+          context,
+          getCitiesByIdUrl,
+          {
+            'token': '123',
+            'country_id': Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.country
+          },
+          false,
+          getCitiesRepo);
+      getMethod(context, mentorParentCategoryDataUrl, {'token': '123'}, false,
+          getParentCategoryRepo);
+
+      Get.find<EditConsultantProfileLogic>().firstNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.firstName!;
+      Get.find<EditConsultantProfileLogic>().lastNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.lastName!;
+      Get.find<EditConsultantProfileLogic>().fatherNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.fatherName!;
+      Get.find<EditConsultantProfileLogic>().emailController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.email!;
+      Get.find<EditConsultantProfileLogic>().cnicController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.cnic!;
+      Get.find<EditConsultantProfileLogic>().addressController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.address!;
+      Get.find<EditConsultantProfileLogic>().selectedGender = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.gender!;
+      Get.find<EditConsultantProfileLogic>().selectedReligion = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.religion!;
+      Get.find<EditConsultantProfileLogic>().dobController.text = DateFormat('dd-MM-yyyy')
+          .format(DateTime.parse(Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.dob!));
+      Get.find<EditConsultantProfileLogic>().selectedDob = DateTime.parse(Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.dob!);
+      Get.find<EditConsultantProfileLogic>().selectedCity = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.city!;
+      Get.find<EditConsultantProfileLogic>().forDisplayEducationList = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.educations!;
+      Get.find<EditConsultantProfileLogic>().forDisplayExperienceList = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.experiences!;
+      Get.find<EditConsultantProfileLogic>().forDisplaySkillList = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.mentor!.categories!;
+      // Get.find<EditConsultantProfileLogic>().selectedSubCategory = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.mentor!.category!.name!;
+      Get.find<EditConsultantProfileLogic>().selectedBank = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.cardDetail!.bank!;
+      Get.find<EditConsultantProfileLogic>().accountTitleController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.cardDetail!.accountTitle!;
+      Get.find<EditConsultantProfileLogic>().accountNumberController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.cardDetail!.accountNumber!;
+      Get.find<EditConsultantProfileLogic>().update();
+      Get.find<GeneralController>().updateFormLoaderController(false);
+      log('getUserProfileRepo ------>> ${Get.find<GeneralController>().getConsultantProfileModel.success}');
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    }
+  } else if (!responseCheck) {
+    Get.find<GeneralController>().updateFormLoaderController(false);
+
+    log('Exception........................');
+  }
+}

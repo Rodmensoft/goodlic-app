@@ -315,7 +315,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                           children: [
                                             ///---mentor-detail
                                             _generalController
-                                                        .getUserProfileModel
+                                                        .getConsultantProfileModel
                                                         .data ==
                                                     null
                                                 ? const SizedBox()
@@ -346,7 +346,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                 Colors
                                                                     .transparent,
                                                             child: _generalController
-                                                                        .getUserProfileModel
+                                                                        .getConsultantProfileModel
                                                                         .data!
                                                                         .userDetail!
                                                                         .imagePath ==
@@ -356,7 +356,9 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                     children: [
                                                                       Hero(
                                                                         tag:
-                                                                            '$mediaUrl${_generalController.getUserProfileModel.data!.userDetail!.imagePath}',
+                                                                        _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
+                                                                            ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                                                            : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                                         child:
                                                                             Material(
                                                                           child:
@@ -364,14 +366,18 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             onTap:
                                                                                 () {
                                                                               Get.to(ImageViewScreen(
-                                                                                networkImage: '$mediaUrl${_generalController.getUserProfileModel.data!.userDetail!.imagePath}',
+                                                                                networkImage: _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
+                                                                                    ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                                                                    : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                                               ));
                                                                             },
                                                                             child:
                                                                                 ClipRRect(
                                                                               borderRadius: BorderRadius.circular(30.r),
                                                                               child: Image.network(
-                                                                                _generalController.getUserProfileModel.data!.userDetail!.imagePath!.contains('assets') ? '$mediaUrl${_generalController.getUserProfileModel.data!.userDetail!.imagePath}' : '${_generalController.getUserProfileModel.data!.userDetail!.imagePath}',
+                                                                                _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
+                                                                                    ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                                                                    : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                                                 width: 60,
                                                                                 fit: BoxFit.cover,
                                                                               ),
@@ -379,7 +385,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                      _generalController.getUserProfileModel.data!
+                                                                      _generalController.getConsultantProfileModel.data!
                                                                           .userDetail!.onlineStatus ==
                                                                               'online'
                                                                           ? PositionedDirectional(
@@ -417,7 +423,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                           .mentorDetailTileTitle2TextStyle),
                                                                   Text(
                                                                       'Mentor '
-                                                                      '${_generalController.getUserProfileModel.data!.userDetail!.firstName}',
+                                                                      '${_generalController.getConsultantProfileModel.data!.userDetail!.firstName}',
                                                                       softWrap:
                                                                           true,
                                                                       overflow:
@@ -446,11 +452,11 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                               //         style:GoogleFonts.poppins(
                                                               //             fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)),
                                                               //     const SizedBox(width: 15,),
-                                                              //     _generalController.getUserProfileModel.data == null
+                                                              //     _generalController.getConsultantProfileModel.data == null
                                                               //         ?const SizedBox()
                                                               //         :Switch(
                                                               //       activeColor: customThemeColor,
-                                                              //       value: _generalController.getUserProfileModel
+                                                              //       value: _generalController.getConsultantProfileModel
                                                               //           .data!.userDetail!.mentor!.isLive == 0
                                                               //           ? false
                                                               //           : true,
@@ -482,7 +488,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                           ),
                                                           trailing: InkWell(
                                                             onTap: () {
-                                                              // Get.toNamed(PageRoutes.mentorProfileView);
+                                                              Get.toNamed(PageRoutes.consultantMyProfile);
                                                             },
                                                             child: Padding(
                                                               padding:

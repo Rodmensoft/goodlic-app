@@ -16,11 +16,6 @@ class ImageViewScreen extends StatefulWidget {
 class _ImageViewScreenState extends State<ImageViewScreen> {
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff252525),

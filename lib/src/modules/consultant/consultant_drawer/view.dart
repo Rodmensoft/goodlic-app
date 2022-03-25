@@ -93,7 +93,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                   children: [
                                     Expanded(
                                       child: _generalController
-                                          .getUserProfileModel
+                                          .getConsultantProfileModel
                                           .data ==
                                           null
                                           ? SkeletonLoader(
@@ -172,7 +172,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                                 shape: BoxShape.circle),
                                             child: Get
                                                 .find<GeneralController>()
-                                                .getUserProfileModel
+                                                .getConsultantProfileModel
                                                 .data!
                                                 .userDetail!
                                                 .imagePath ==
@@ -184,20 +184,20 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                               child: Image.network(
                                                 Get
                                                     .find<GeneralController>()
-                                                    .getUserProfileModel
+                                                    .getConsultantProfileModel
                                                     .data!
                                                     .userDetail!
                                                     .imagePath!
                                                     .contains('assets')
                                                     ? '$mediaUrl${Get
                                                     .find<GeneralController>()
-                                                    .getUserProfileModel
+                                                    .getConsultantProfileModel
                                                     .data!
                                                     .userDetail!
                                                     .imagePath}'
                                                     : '${Get
                                                     .find<GeneralController>()
-                                                    .getUserProfileModel
+                                                    .getConsultantProfileModel
                                                     .data!
                                                     .userDetail!
                                                     .imagePath}',
@@ -219,7 +219,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                               Text(
                                                 Get
                                                     .find<GeneralController>()
-                                                    .getUserProfileModel
+                                                    .getConsultantProfileModel
                                                     .data!
                                                     .userDetail!
                                                     .firstName ??
@@ -235,7 +235,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                               Text(
                                                 Get
                                                     .find<GeneralController>()
-                                                    .getUserProfileModel
+                                                    .getConsultantProfileModel
                                                     .data!
                                                     .userDetail!
                                                     .email ??
@@ -286,7 +286,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                   activeColor: customLightThemeColor,
                                   value: Get
                                       .find<GeneralController>()
-                                      .getUserProfileModel
+                                      .getConsultantProfileModel
                                       .data!
                                       .userDetail!
                                       .onlineStatus ==
