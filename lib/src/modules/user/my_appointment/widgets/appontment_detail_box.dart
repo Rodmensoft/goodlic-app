@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,9 @@ class AppointmentDetailBox extends StatelessWidget {
                           child: image == null
                               ?const SizedBox()
                               :Image.network(
-                            image!,
+                            image!.contains('assets')
+                                ? '$mediaUrl$image'
+                                : image!,
                             fit: BoxFit.cover,
                           )),
                     ),

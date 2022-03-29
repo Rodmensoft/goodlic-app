@@ -1,3 +1,4 @@
+import 'package:consultant_product/src/modules/chat/fetch_messages_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -14,7 +15,7 @@ class ChatLogic extends GetxController {
     update();
   }
 
-  final ScrollController messageScrollController = ScrollController();
+  // final ScrollController messageScrollController = ScrollController();
   List messageList = [];
   updateMessageList(newValue) {
     messageList.add(newValue);
@@ -45,6 +46,8 @@ class ChatLogic extends GetxController {
     receiverMessageGetId = newValue;
     update();
   }
+
+  FetchMessagesModel fetchMessagesModel = FetchMessagesModel();
 
   ScrollController? scrollController;
   bool lastStatus = true;

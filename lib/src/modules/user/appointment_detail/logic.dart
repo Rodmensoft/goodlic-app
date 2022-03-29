@@ -1,4 +1,8 @@
+import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/chat/logic.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/model_get_user_appointment.dart';
+import 'package:consultant_product/src/modules/user/ratings/rating_existance_model.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,4 +38,23 @@ class AppointmentDetailLogic extends GetxController {
       update();
     }
   }
+
+  chatOnTap(BuildContext context) {
+    Get.find<ChatLogic>().updateGetMessagesLoader(true);
+    Get.find<ChatLogic>().updateSenderMessageGetId(
+        Get.find<GeneralController>().storageBox.read('userID'));
+    Get.find<ChatLogic>()
+        .updateReceiverMessageGetId(selectedAppointmentData.menteeId);
+    Get.toNamed(PageRoutes.chatScreen);
+  }
+
+
+  RatingExistModel ratingExistModel = RatingExistModel();
+  bool? getRatingDataController = true;
+
+  updateGetRatingDataController(bool value) {
+    getRatingDataController = value;
+    update();
+  }
+  bool? isRated = false;
 }

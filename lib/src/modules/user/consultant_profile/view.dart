@@ -244,9 +244,9 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                   children: [
                                     ///---category
                                     Text(
-                                      _consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories!.category == null
+                                      _consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories![0].category == null
                                           ?'...'
-                                          :'${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories!.category!.name}',
+                                          :'${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories![0].category!.name}',
                                       style: state.categoryTextStyle,
                                     ),
 

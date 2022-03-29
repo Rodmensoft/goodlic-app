@@ -1,8 +1,19 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/get_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/agora_call/repo.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/logic.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/widget/appontment_detail_box.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/widget/bottom_sheet.dart';
+import 'package:consultant_product/src/modules/sms/logic.dart';
+import 'package:consultant_product/src/utils/colors.dart';
+import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
+import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -13,145 +24,508 @@ import 'package:intl/intl.dart';
 import 'logic.dart';
 
 class ConsultantAppointmentDetailPage extends StatefulWidget {
-
   const ConsultantAppointmentDetailPage({Key? key}) : super(key: key);
 
   @override
-  State<ConsultantAppointmentDetailPage> createState() => _ConsultantAppointmentDetailPageState();
+  State<ConsultantAppointmentDetailPage> createState() =>
+      _ConsultantAppointmentDetailPageState();
 }
 
-class _ConsultantAppointmentDetailPageState extends State<ConsultantAppointmentDetailPage> {
+class _ConsultantAppointmentDetailPageState
+    extends State<ConsultantAppointmentDetailPage> {
   final logic = Get.put(ConsultantAppointmentDetailLogic());
 
   final state = Get.find<ConsultantAppointmentDetailLogic>().state;
 
+  Timer? _timer;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
+    Get.find<ConsultantAppointmentDetailLogic>().scrollController =
+        ScrollController()
+          ..addListener(
+              Get.find<ConsultantAppointmentDetailLogic>().scrollListener);
 
-    Get.find<ConsultantAppointmentDetailLogic>().scrollController = ScrollController()
-      ..addListener(Get.find<ConsultantAppointmentDetailLogic>().scrollListener);
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      Get.find<GeneralController>().updateUserIdForSendNotification(
+          Get.find<ConsultantAppointmentDetailLogic>()
+              .selectedAppointmentData
+              .menteeId);
+      Get.find<GeneralController>().updateAppointmentIdForSendNotification(
+          Get.find<ConsultantAppointmentDetailLogic>()
+              .selectedAppointmentData
+              .id);
+      Get.find<SmsLogic>().updatePhoneNumber(
+          Get.find<ConsultantAppointmentDetailLogic>()
+              .selectedAppointmentData
+              .mentee!
+              .phone);
+    });
+    // getDifference();
+    if (Get.find<ConsultantAppointmentDetailLogic>()
+                .selectedAppointmentData
+                .date !=
+            null &&
+        Get.find<ConsultantAppointmentDetailLogic>()
+                .selectedAppointmentData
+                .time !=
+            null) {
+      _timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
+        Get.find<ConsultantAppointmentDetailLogic>().getDifference();
+      });
+    }
   }
 
   @override
   void dispose() {
     Get.find<ConsultantAppointmentDetailLogic>()
         .scrollController!
-        .removeListener(Get.find<ConsultantAppointmentDetailLogic>().scrollListener);
+        .removeListener(
+            Get.find<ConsultantAppointmentDetailLogic>().scrollListener);
     Get.find<ConsultantAppointmentDetailLogic>().scrollController!.dispose();
+    if (Get.find<ConsultantAppointmentDetailLogic>()
+                .selectedAppointmentData
+                .date !=
+            null &&
+        Get.find<ConsultantAppointmentDetailLogic>()
+                .selectedAppointmentData
+                .time !=
+            null) _timer!.cancel();
     super.dispose();
   }
-
-  
-
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
       return GetBuilder<ConsultantAppointmentDetailLogic>(
           builder: (_consultantAppointmentDetailLogic) {
-            return GestureDetector(
-              onTap: () {
-                _generalController.focusOut(context);
-              },
-              child: Scaffold(
-                backgroundColor: const Color(0xffFBFBFB),
-                body: NestedScrollView(
-                    controller: _consultantAppointmentDetailLogic.scrollController,
-                    headerSliverBuilder:
-                        (BuildContext context, bool innerBoxIsScrolled) {
-                      return <Widget>[
-                        ///---header
-                        MyCustomSliverAppBar(
-                          heading: 'Appt. Detail',
-                          subHeading: 'Your Appointment Detail With William Smith',
-                          isShrink: _consultantAppointmentDetailLogic.isShrink,
-                          trailingIcon: Get.find<ConsultantAppointmentLogic>()
-                              .imagesForAppointmentTypes[(_consultantAppointmentDetailLogic
-                              .selectedAppointmentData.appointmentTypeId!) -
-                              1],
-                          onTapTrailing: () {
-                            // Get.toNamed(PageRoutes.chatScreen);
-                          },
+        return GestureDetector(
+          onTap: () {
+            _generalController.focusOut(context);
+          },
+          child: Scaffold(
+            backgroundColor: const Color(0xffFBFBFB),
+            body: NestedScrollView(
+                controller: _consultantAppointmentDetailLogic.scrollController,
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    ///---header
+                    SliverAppBar(
+                      expandedHeight: MediaQuery.of(context).size.height * .24,
+                      floating: true,
+                      pinned: true,
+                      snap: true,
+                      elevation: 0,
+                      backgroundColor:
+                          _consultantAppointmentDetailLogic.isShrink
+                              ? customThemeColor
+                              : Colors.transparent,
+                      leading: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/Icons/whiteBackArrow.svg'),
+                          ],
                         ),
-                      ];
-                    },
-                    body: Column(
-                      children: [
-                        AppointmentDetailBox(
-                          image: _consultantAppointmentDetailLogic
-                              .selectedAppointmentData.mentee!.imagePath,
-                          name: _consultantAppointmentDetailLogic
-                              .selectedAppointmentData.mentee!.firstName ==
+                      ),
+                      actions: const [
+                        ///---notifications
+
+                        CustomNotificationIcon()
+                      ],
+                      flexibleSpace: FlexibleSpaceBar(
+                        centerTitle: true,
+                        background: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.vertical(
+                                  bottom: Radius.circular(40.r))),
+                          child: Column(
+                            children: [
+                              Stack(
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/images/bookAppointmentAppBar.svg',
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height *
+                                        .27,
+                                    fit: BoxFit.fill,
+                                  ),
+                                  SafeArea(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.w, 25.h, 16.w, 16.h),
+                                      child: Stack(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 25.h,
+                                              ),
+                                              Text(
+                                                'Appt. Detail',
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        SarabunFontFamily.bold,
+                                                    fontSize: 28.sp,
+                                                    color:
+                                                        customLightThemeColor),
+                                              ),
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'Your Appointment Detail With ${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName}',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            SarabunFontFamily
+                                                                .medium,
+                                                        fontSize: 12.sp,
+                                                        color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+
+                                          ///---CHAT
+                                          (_consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .appointmentStatus! ==
+                                                      1) &&
+                                                  (_consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .appointmentTypeString!
+                                                          .toUpperCase() ==
+                                                      'CHAT')
+                                              ? PositionedDirectional(
+                                                  end: 0,
+                                                  top: 45.h,
+                                                  child: InkWell(
+                                                    onTap: () =>
+                                                        _consultantAppointmentDetailLogic
+                                                            .chatOnTap(context),
+                                                    child: CircleAvatar(
+                                                      radius: 20.r,
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      child: Center(
+                                                          child:
+                                                              SvgPicture.asset(
+                                                        'assets/Icons/chatIcon.svg',
+                                                        height: 15.h,
+                                                        width: 15.w,
+                                                        color:
+                                                            customOrangeColor,
+                                                        fit: BoxFit.cover,
+                                                      )),
+                                                    ),
+                                                  ),
+                                                )
+                                              : const SizedBox(),
+
+                                          ///---VIDEO
+                                          (_consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .appointmentStatus! ==
+                                                      1) &&
+                                                  (_consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .appointmentTypeString!
+                                                          .toUpperCase() ==
+                                                      'VIDEO')
+                                              ? _consultantAppointmentDetailLogic
+                                                      .showCallButton!
+                                                  ? PositionedDirectional(
+                                                      end: 0,
+                                                      top: 45.h,
+                                                      child: InkWell(
+                                                        onTap: () =>
+                                                            _consultantAppointmentDetailLogic
+                                                                .videoOnTap(
+                                                                    context),
+                                                        child: CircleAvatar(
+                                                          radius: 20.r,
+                                                          backgroundColor:
+                                                              Colors.white,
+                                                          child: Center(
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                            'assets/Icons/videoCallIcon.svg',
+                                                            height: 15.h,
+                                                            width: 15.w,
+                                                            color:
+                                                                customOrangeColor,
+                                                            fit: BoxFit.cover,
+                                                          )),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : const SizedBox()
+                                              : const SizedBox(),
+
+                                          ///---AUDIO
+                                          (_consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .appointmentStatus! ==
+                                                      1) &&
+                                                  (_consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .appointmentTypeString!
+                                                          .toUpperCase() ==
+                                                      'AUDIO')
+                                              ? _consultantAppointmentDetailLogic
+                                                      .showCallButton!
+                                                  ? PositionedDirectional(
+                                                      end: 0,
+                                                      top: 45.h,
+                                                      child: InkWell(
+                                                        onTap: () =>
+                                                            _consultantAppointmentDetailLogic
+                                                                .audioOnTap(
+                                                                    context),
+                                                        child: CircleAvatar(
+                                                          radius: 20.r,
+                                                          backgroundColor:
+                                                              Colors.white,
+                                                          child: Center(
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                            'assets/Icons/audio.svg',
+                                                            height: 15.h,
+                                                            width: 15.w,
+                                                            color:
+                                                                customOrangeColor,
+                                                            fit: BoxFit.cover,
+                                                          )),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : const SizedBox()
+                                              : const SizedBox(),
+
+                                          // ///---LIVE
+                                          // (_consultantAppointmentDetailLogic
+                                          //     .selectedAppointmentData.appointmentStatus! ==
+                                          //     1) &&
+                                          //     (_consultantAppointmentDetailLogic
+                                          //         .selectedAppointmentData
+                                          //         .appointmentTypeString!
+                                          //         .toUpperCase() ==
+                                          //         'LIVE')
+                                          //     ? Row(
+                                          //   children: [
+                                          //     InkWell(
+                                          //       onTap: () {
+                                          //         Get.find<PusherChatLogic>()
+                                          //             .updateGetMessagesLoader(true);
+                                          //         Get.find<PusherChatLogic>()
+                                          //             .updateSenderMessageGetId(
+                                          //             Get.find<GeneralController>()
+                                          //                 .storageBox
+                                          //                 .read('userId'));
+                                          //         Get.find<PusherChatLogic>()
+                                          //             .updateReceiverMessageGetId(widget
+                                          //             .singleAppointmentModel!.menteeId);
+                                          //         Get.to(const ChatView());
+                                          //       },
+                                          //       child: Padding(
+                                          //         padding: const EdgeInsetsDirectional.all(8.0),
+                                          //         child: Text(
+                                          //           'chat_box'.tr,
+                                          //           style: state.chatBoxTextStyle,
+                                          //         ),
+                                          //       ),
+                                          //     ),
+                                          //     InkWell(
+                                          //       onTap: () {
+                                          //         Get.find<GeneralController>()
+                                          //             .updateSelectedChannel(
+                                          //             Get.find<GeneralController>()
+                                          //                 .getRandomString(10));
+                                          //         Get.find<GeneralController>()
+                                          //             .updateChannelForCall(
+                                          //             Get.find<GeneralController>()
+                                          //                 .selectedChannel);
+                                          //         log('----------->>> ${Get.find<GeneralController>().selectedChannel}');
+                                          //         getMethod(
+                                          //             context,
+                                          //             agoraTokenUrl,
+                                          //             {
+                                          //               'token': '123',
+                                          //               'channel': Get.find<GeneralController>()
+                                          //                   .selectedChannel
+                                          //             },
+                                          //             true,
+                                          //             getAgoraTokenRepo);
+                                          //         Get.find<GeneralController>()
+                                          //             .updateGoForCall(true);
+                                          //         Get.toNamed(PageRoutes.videoCallWaiting);
+                                          //       },
+                                          //       child: const Padding(
+                                          //         padding:
+                                          //         EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                                          //         child: Icon(
+                                          //           Icons.video_call,
+                                          //           color: customThemeColor,
+                                          //           size: 25,
+                                          //         ),
+                                          //       ),
+                                          //     ),
+                                          //     InkWell(
+                                          //       onTap: () {
+                                          //         Get.find<GeneralController>()
+                                          //             .updateSelectedChannel(
+                                          //             Get.find<GeneralController>()
+                                          //                 .getRandomString(10));
+                                          //         Get.find<GeneralController>()
+                                          //             .updateChannelForCall(
+                                          //             Get.find<GeneralController>()
+                                          //                 .selectedChannel);
+                                          //         log('----------->>> ${Get.find<GeneralController>().selectedChannel}');
+                                          //         getMethod(
+                                          //             context,
+                                          //             agoraTokenUrl,
+                                          //             {
+                                          //               'token': '123',
+                                          //               'channel': Get.find<GeneralController>()
+                                          //                   .selectedChannel
+                                          //             },
+                                          //             true,
+                                          //             getAgoraTokenForAudioRepo);
+                                          //         Get.find<GeneralController>()
+                                          //             .updateGoForCall(true);
+                                          //         Get.toNamed(PageRoutes.videoCallWaiting);
+                                          //       },
+                                          //       child: const Padding(
+                                          //         padding: EdgeInsetsDirectional.fromSTEB(
+                                          //             5, 5, 5, 5),
+                                          //         child: Icon(
+                                          //           Icons.call,
+                                          //           color: customThemeColor,
+                                          //           size: 25,
+                                          //         ),
+                                          //       ),
+                                          //     )
+                                          //   ],
+                                          // )
+                                          //     :const SizedBox(),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ];
+                },
+                body: Column(
+                  children: [
+                    AppointmentDetailBox(
+                      image: _consultantAppointmentDetailLogic
+                          .selectedAppointmentData.mentee!.imagePath,
+                      name: _consultantAppointmentDetailLogic
+                                  .selectedAppointmentData.mentee!.firstName ==
                               null
-                              ? '...'
-                              : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName} '
+                          ? '...'
+                          : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName} '
                               '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.lastName}',
-                          category:
+                      category:
                           '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.email}',
-                          fee:
+                      fee:
                           '\$${_consultantAppointmentDetailLogic.selectedAppointmentData.payment!} Fees',
-                          type:
+                      type:
                           '${_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeString}'
                               .capitalizeFirst,
-                          typeIcon: Get.find<ConsultantAppointmentLogic>()
-                              .imagesForAppointmentTypes[(_consultantAppointmentDetailLogic
-                              .selectedAppointmentData.appointmentTypeId!) -
+                      typeIcon: Get.find<ConsultantAppointmentLogic>()
+                              .imagesForAppointmentTypes[
+                          (_consultantAppointmentDetailLogic
+                                  .selectedAppointmentData.appointmentTypeId!) -
                               1],
-                          date:DateFormat('dd/MM/yy').format(
-                              DateTime.parse(
-                                  _consultantAppointmentDetailLogic.selectedAppointmentData.date!)),
-                          time:
-                          _consultantAppointmentDetailLogic.selectedAppointmentData.time!,
-                          rating: _consultantAppointmentDetailLogic
-                              .selectedAppointmentData.rating == null
-                              ?0
-                              :_consultantAppointmentDetailLogic
+                      date: _consultantAppointmentDetailLogic
+                                  .selectedAppointmentData.date ==
+                              null
+                          ? null
+                          : DateFormat('dd/MM/yy').format(DateTime.parse(
+                              _consultantAppointmentDetailLogic
+                                  .selectedAppointmentData.date!)),
+                      time: _consultantAppointmentDetailLogic
+                                  .selectedAppointmentData.time ==
+                              null
+                          ? null
+                          : _consultantAppointmentDetailLogic
+                              .selectedAppointmentData.time!,
+                      rating: _consultantAppointmentDetailLogic
+                                  .selectedAppointmentData.rating ==
+                              null
+                          ? 0
+                          : _consultantAppointmentDetailLogic
                               .selectedAppointmentData.rating!
                               .toDouble(),
-                          status: _consultantAppointmentDetailLogic.appointmentStatus,
-                          color: _consultantAppointmentDetailLogic.colorForAppointmentTypes[
+                      status:
+                          _consultantAppointmentDetailLogic.appointmentStatus,
+                      color: _consultantAppointmentDetailLogic
+                              .colorForAppointmentTypes[
                           _consultantAppointmentDetailLogic.appointmentStatus!],
-                        )
-                      ],
-                    )),
-                bottomNavigationBar: GestureDetector(
-                  onTap: () {
-                    openBottomSheet();
-                  },
-                  onVerticalDragStart: (event) {
-                    openBottomSheet();
-                  },
-                  child: Container(
-                    height: 74.h,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 2,
-                            blurRadius: 15,
-                            // offset: Offset(1,5)
-                          )
-                        ],
-                        color: Colors.white,
-                        borderRadius:
+                    )
+                  ],
+                )),
+            bottomNavigationBar: GestureDetector(
+              onTap: () {
+                openBottomSheet();
+              },
+              onVerticalDragStart: (event) {
+                openBottomSheet();
+              },
+              child: Container(
+                height: 74.h,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 2,
+                        blurRadius: 15,
+                        // offset: Offset(1,5)
+                      )
+                    ],
+                    color: Colors.white,
+                    borderRadius:
                         BorderRadius.vertical(top: Radius.circular(30.r))),
-                    child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20.h),
-                          child: SvgPicture.asset('assets/Icons/bottomUpArrowIcon.svg'),
-                        )),
-                  ),
-                ),
+                child: Center(
+                    child: Padding(
+                  padding: EdgeInsets.only(bottom: 20.h),
+                  child: SvgPicture.asset('assets/Icons/bottomUpArrowIcon.svg'),
+                )),
               ),
-            );
-          });
+            ),
+          ),
+        );
+      });
     });
   }
+
   openBottomSheet() {
     return showCupertinoModalBottomSheet(
         topRadius: Radius.circular(30.r),

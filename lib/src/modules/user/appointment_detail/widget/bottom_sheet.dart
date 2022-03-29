@@ -1,15 +1,34 @@
+import 'dart:developer';
+
+import 'package:consultant_product/src/api_services/post_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
+import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/logic.dart';
+import 'package:consultant_product/src/modules/user/ratings/create_rating_repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class ModalInsideModal extends StatelessWidget {
+class ModalInsideModal extends StatefulWidget {
   const ModalInsideModal({Key? key}) : super(key: key);
+
+  @override
+  State<ModalInsideModal> createState() => _ModalInsideModalState();
+}
+
+class _ModalInsideModalState extends State<ModalInsideModal> {
+  final GlobalKey<FormState> _ratingFormKey = GlobalKey();
+
+  final TextEditingController _commentsController = TextEditingController();
+
+  double? ratingValue = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -62,61 +81,76 @@ class ModalInsideModal extends StatelessWidget {
                                 Row(
                                   children: [
                                     ///---date
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Date',
-                                            style: state.sectionLabelTextStyle,
+                                    _appointmentDetailLogic
+                                                .selectedAppointmentData.date ==
+                                            null
+                                        ? const SizedBox()
+                                        : Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Date',
+                                                  style: state
+                                                      .sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  DateFormat('dd/MM/yy').format(
+                                                      DateTime.parse(
+                                                          _appointmentDetailLogic
+                                                              .selectedAppointmentData
+                                                              .date!)),
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: state
+                                                      .sectionDataTextStyle,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            DateFormat('dd/MM/yy').format(
-                                                DateTime.parse(
-                                                    _appointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .date!)),
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
 
                                     ///---time
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Time',
-                                            style: state.sectionLabelTextStyle,
+                                    _appointmentDetailLogic
+                                                .selectedAppointmentData.time ==
+                                            null
+                                        ? const SizedBox()
+                                        : Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Time',
+                                                  style: state
+                                                      .sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  _appointmentDetailLogic
+                                                      .selectedAppointmentData
+                                                      .time!,
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: state
+                                                      .sectionDataTextStyle,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            _appointmentDetailLogic
-                                                .selectedAppointmentData.time!,
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
 
                                     ///---reg. no
                                     Expanded(
@@ -227,6 +261,44 @@ class ModalInsideModal extends StatelessWidget {
                                           ),
                                   ],
                                 ),
+                                SizedBox(
+                                  height: 18.h,
+                                ),
+
+                                ///---question.
+                                Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      ///---question
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Question ',
+                                              style:
+                                                  state.sectionLabelTextStyle,
+                                            ),
+                                            SizedBox(
+                                              height: 8.h,
+                                            ),
+                                            Text(
+                                              _appointmentDetailLogic
+                                                  .selectedAppointmentData
+                                                  .questions!,
+                                              softWrap: true,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: state.sectionDataTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ]),
                               ],
                             ),
                           ),
@@ -544,88 +616,304 @@ class ModalInsideModal extends StatelessWidget {
                           height: 20.h,
                         ),
 
-                        ///---reschedule-button
-                        Center(
-                          child: Container(
-                            height: 55.h,
-                            width: MediaQuery.of(context).size.width * .7,
-                            decoration: BoxDecoration(
-                              color: customThemeColor,
-                              borderRadius: BorderRadius.circular(5.r),
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25.w),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Reschedule',
-                                      style: TextStyle(
-                                          fontFamily: SarabunFontFamily.bold,
-                                          fontSize: 16.sp,
-                                          color: Colors.white),
+                        /// rating button
+                        !_appointmentDetailLogic.isRated! &&
+                                _appointmentDetailLogic.selectedAppointmentData
+                                        .appointmentStatus ==
+                                    2
+                            ? Center(
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.bottomSheet(
+                                      Form(
+                                        key: _ratingFormKey,
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 20, horizontal: 30),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.vertical(
+                                                top: Radius.circular(10)),
+                                          ),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.7,
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                RichText(
+                                                    text: TextSpan(children: [
+                                                  TextSpan(
+                                                      text: 'Rate',
+                                                      style: TextStyle(
+                                                          fontSize: 22.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: customThemeColor)),
+                                                  TextSpan(
+                                                      text: ' User',
+                                                      style: TextStyle(
+                                                          fontSize: 22.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: const Color(
+                                                              0xff1B1B1C))),
+                                                ])),
+                                                const SizedBox(
+                                                  height: 22,
+                                                ),
+                                                RatingBar.builder(
+                                                  initialRating: ratingValue!,
+                                                  minRating: 1,
+                                                  direction: Axis.horizontal,
+                                                  allowHalfRating: true,
+                                                  itemCount: 5,
+                                                  itemPadding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 4.0),
+                                                  itemBuilder: (context, _) =>
+                                                      const Icon(
+                                                    Icons.star,
+                                                    color: Colors.amber,
+                                                  ),
+                                                  onRatingUpdate: (rating) {
+                                                    log(rating.toString());
+                                                    setState(() {
+                                                      ratingValue = rating;
+                                                    });
+                                                  },
+                                                ),
+                                                const SizedBox(
+                                                  height: 20,
+                                                ),
+                                                TextFormField(
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'field_required'
+                                                          .tr;
+                                                    }
+                                                    return null;
+                                                  },
+                                                  style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      color: Colors.black),
+                                                  controller:
+                                                      _commentsController,
+                                                  decoration: InputDecoration(
+                                                      contentPadding:
+                                                          const EdgeInsets.symmetric(
+                                                              vertical: 10,
+                                                              horizontal: 20),
+                                                      fillColor: Colors.grey
+                                                          .withOpacity(0.1),
+                                                      filled: true,
+                                                      hintText: 'Comments',
+                                                      // hintStyle:
+                                                      // state.hintTextStyle,
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderSide: const BorderSide(
+                                                              color:
+                                                                  Colors.white),
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  5)),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: const BorderSide(
+                                                              color:
+                                                                  Colors.white),
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  5)),
+                                                      border: OutlineInputBorder(
+                                                          borderSide: const BorderSide(
+                                                              color: Colors.white),
+                                                          borderRadius: BorderRadius.circular(5))),
+                                                ),
+                                                const SizedBox(
+                                                  height: 40,
+                                                ),
+                                                Align(
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        if (_ratingFormKey
+                                                            .currentState!
+                                                            .validate()) {
+                                                          Get.back();
+                                                          Get.find<
+                                                                  GeneralController>()
+                                                              .updateFormLoaderController(
+                                                                  true);
+                                                          postMethod(
+                                                              context,
+                                                              createRatingUrl,
+                                                              {
+                                                                'token': '123',
+                                                                'mentee_id':
+                                                                    _appointmentDetailLogic
+                                                                        .selectedAppointmentData
+                                                                        .menteeId,
+                                                                'mentor_id':
+                                                                    _appointmentDetailLogic
+                                                                        .selectedAppointmentData
+                                                                        .mentorId,
+                                                                'comments':
+                                                                    _commentsController
+                                                                        .text,
+                                                                'rating':
+                                                                    ratingValue,
+                                                                'appointment_id':
+                                                                    _appointmentDetailLogic
+                                                                        .selectedAppointmentData
+                                                                        .id
+                                                              },
+                                                              true,
+                                                              createRatingRepo);
+                                                        }
+                                                      },
+                                                      child: Container(
+                                                        height: 47,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            .5,
+                                                        decoration: BoxDecoration(
+                                                            color:
+                                                                customThemeColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10)),
+                                                        child: Center(
+                                                          child: Text(
+                                                            'submit'.tr,
+                                                            style: TextStyle(
+                                                              fontSize: 15.sp,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 55.h,
+                                    width:
+                                        MediaQuery.of(context).size.width * .7,
+                                    decoration: BoxDecoration(
+                                      color: customThemeColor,
+                                      borderRadius: BorderRadius.circular(5.r),
                                     ),
-                                    SvgPicture.asset(
-                                      'assets/Icons/whiteForwardIcon.svg',
-                                      height: 29.h,
-                                      width: 29.w,
-                                    )
-                                  ],
+                                    child: Center(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 25.w),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Rate Now',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      SarabunFontFamily.bold,
+                                                  fontSize: 16.sp,
+                                                  color: Colors.white),
+                                            ),
+                                            SvgPicture.asset(
+                                              'assets/Icons/whiteForwardIcon.svg',
+                                              height: 29.h,
+                                              width: 29.w,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ),
+                              )
+                            : const SizedBox(),
                         SizedBox(
                           height: 15.h,
                         ),
 
-                        ///---refund-button
-                        Center(
-                          child: Container(
-                            color: Colors.white,
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  40.w, 0, 40.w, 0),
-                              child: Container(
-                                height: 55.h,
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(color: customRedColor),
-                                  borderRadius: BorderRadius.circular(5.r),
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 25.w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Get Refund',
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  SarabunFontFamily.bold,
-                                              fontSize: 16.sp,
-                                              color: customRedColor),
+                        ///---invoice
+                        _appointmentDetailLogic.selectedAppointmentData
+                                    .appointmentStatus! ==
+                                2
+                            ? Center(
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.find<GeneralController>()
+                                        .updateFormLoaderController(true);
+                                    launch(
+                                        '$downloadAppointmentInvoiceForMenteeUrl?token=123&appointment_id='
+                                        '${_appointmentDetailLogic.selectedAppointmentData.id}');
+                                  },
+                                  child: Container(
+                                    color: Colors.white,
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          40.w, 0, 40.w, 0),
+                                      child: Container(
+                                        height: 55.h,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border:
+                                              Border.all(color: customRedColor),
+                                          borderRadius:
+                                              BorderRadius.circular(5.r),
                                         ),
-                                        SvgPicture.asset(
-                                          'assets/Icons/forwardArrowRedIcon.svg',
-                                          height: 29.h,
-                                          width: 29.w,
-                                        )
-                                      ],
+                                        child: Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 25.w),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Download Invoice',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          SarabunFontFamily
+                                                              .bold,
+                                                      fontSize: 16.sp,
+                                                      color: customRedColor),
+                                                ),
+                                                SvgPicture.asset(
+                                                  'assets/Icons/forwardArrowRedIcon.svg',
+                                                  height: 29.h,
+                                                  width: 29.w,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ),
+                              )
+                            : const SizedBox(),
                         SizedBox(
                           height: 10.h,
                         ),

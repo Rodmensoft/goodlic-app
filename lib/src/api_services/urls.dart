@@ -104,6 +104,9 @@ String walletDepositUrl = apiBaseUrl + 'deposit-wallet';
 String walletDepositJazzcashUrl = apiBaseUrl + 'deposit-wallet-jazzcash';
 String walletWithdrawUrl = apiBaseUrl + 'withdraw-request';
 
+/// rating
+String createRatingUrl = apiBaseUrl + 'create-rating';
+String getExistRatingUrl = apiBaseUrl + 'rating-exist-appointment';
 
 ///---agora
  String agoraTokenUrl = apiBaseUrl + 'agoraToken';
@@ -118,3 +121,6 @@ String fcmGetUrl = apiBaseUrl + 'fcm-get-tokens';
 ///---chat services
 String fetchMessagesUrl = apiBaseUrl + 'fetch-messages';
 String sendMessageUrl = apiBaseUrl + 'send-message';
+
+///---download-invoice
+String downloadAppointmentInvoiceForMenteeUrl = apiBaseUrl + 'completed-appointment-invoice';

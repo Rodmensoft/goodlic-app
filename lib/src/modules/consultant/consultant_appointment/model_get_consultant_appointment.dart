@@ -249,7 +249,8 @@ class ConsultantAppointmentsData {
       String? createdAt, 
       String? updatedAt, 
       int? rating, 
-      String? category, 
+      String? category,
+    String? endTime,
       Mentee? mentee,}){
     _id = id;
     _menteeId = menteeId;
@@ -273,6 +274,7 @@ class ConsultantAppointmentsData {
     _updatedAt = updatedAt;
     _rating = rating;
     _category = category;
+    _endTime = endTime;
     _mentee = mentee;
 }
 
@@ -299,6 +301,7 @@ class ConsultantAppointmentsData {
     _updatedAt = json['updated_at'];
     _rating = json['rating'];
     _category = json['category'];
+    _endTime = json['end_time'];
     _mentee = json['mentee'] != null ? Mentee.fromJson(json['mentee']) : null;
   }
   int? _id;
@@ -323,6 +326,7 @@ class ConsultantAppointmentsData {
   String? _updatedAt;
   int? _rating;
   String? _category;
+  String? _endTime;
   Mentee? _mentee;
 
   int? get id => _id;
@@ -347,6 +351,7 @@ class ConsultantAppointmentsData {
   String? get updatedAt => _updatedAt;
   int? get rating => _rating;
   String? get category => _category;
+  String? get endTime => _endTime;
   Mentee? get mentee => _mentee;
 
   Map<String, dynamic> toJson() {
@@ -373,6 +378,7 @@ class ConsultantAppointmentsData {
     map['updated_at'] = _updatedAt;
     map['rating'] = _rating;
     map['category'] = _category;
+    map['end_time'] = endTime;
     if (_mentee != null) {
       map['mentee'] = _mentee?.toJson();
     }

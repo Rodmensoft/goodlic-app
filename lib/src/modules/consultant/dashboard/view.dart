@@ -64,6 +64,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
 
     Get.find<DashboardLogic>().scrollController = ScrollController()
       ..addListener(Get.find<DashboardLogic>().scrollListener);
+    Get.find<GeneralController>().updateFcmToken(context);
+
     getMethod(
         context,
         getUserProfileUrl,
