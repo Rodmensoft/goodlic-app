@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:resize/resize.dart';
 
 import '../../api_services/urls.dart';
@@ -147,8 +148,12 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                                   children: [
                                     SvgPicture.asset(
                                         'assets/Icons/blogTimeIcon.svg'),
+                                    SizedBox(width: 4.w),
                                     Text(
-                                      '  ${_blogsLogic.selectedBlogForView.createdAt!.substring(0, 10)}',
+                                      //  '  ${_blogsLogic.selectedBlogForView.createdAt!.substring(0, 10)}',
+                                      DateFormat('dd-MM-yyyy').format(
+                                          DateTime.parse(
+                                              '${_blogsLogic.selectedBlogForView.createdAt}')),
                                       style: state.blogCategoryTextStyle
                                           ?.copyWith(
                                               color: customTextBlackColor),
