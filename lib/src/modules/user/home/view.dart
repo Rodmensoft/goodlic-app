@@ -32,6 +32,8 @@ class _UserHomePageState extends State<UserHomePage> {
   void initState() {
     super.initState();
     if (Get.find<GeneralController>().storageBox.hasData('userID')) {
+
+      Get.find<GeneralController>().updateFcmToken(context);
       ///---get-user-API-call
       getMethod(
           context,

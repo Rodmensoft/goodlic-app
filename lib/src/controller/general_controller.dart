@@ -154,7 +154,7 @@ class GeneralController extends GetxController {
             'token': '123',
             'fcm_token': fcmToken,
             'device_id': iosDeviceInfo.identifierForVendor,
-            'user_id': Get.find<GeneralController>().storageBox.read('userId')
+            'user_id': Get.find<GeneralController>().storageBox.read('userID')
           },
           false,
           updateFcmTokenRepo);
@@ -169,7 +169,7 @@ class GeneralController extends GetxController {
             'token': '123',
             'fcm_token': fcmToken,
             'device_id': androidDeviceInfo.androidId,
-            'user_id': Get.find<GeneralController>().storageBox.read('userId')
+            'user_id': Get.find<GeneralController>().storageBox.read('userID')
           },
           false,
           updateFcmTokenRepo);

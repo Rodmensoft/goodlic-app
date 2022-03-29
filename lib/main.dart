@@ -11,6 +11,7 @@ import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/modules/agora_call/init_video_call_view.dart';
+import 'package:consultant_product/src/modules/chat/logic.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/repo_post.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
 import 'package:consultant_product/src/modules/on_board/view_1.dart';
@@ -97,7 +98,6 @@ Future<void> main() async {
   Get.put(GeneralController());
   Get.put(ApiLogic());
   Get.put(AgoraLogic());
-  // Get.put(PusherChatLogic());
   Get.put(SmsLogic());
 
   //-----load-configurations-from-local-json
@@ -295,6 +295,8 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         allowtextScaling: true,
         size: const Size(375, 812),
         builder: () {
+
+          Get.put(ChatLogic());
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
 

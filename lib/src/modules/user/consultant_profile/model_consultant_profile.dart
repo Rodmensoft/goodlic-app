@@ -195,7 +195,7 @@ class MentorProfile {
     dynamic fee,
     String? createdAt,
     String? updatedAt,
-    Categories? categories,
+    List<Categories>? categories,
     String? about,
     int? experience,
   }) {
@@ -229,9 +229,12 @@ class MentorProfile {
     _fee = json['fee'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    _categories = json['categories'] != null
-        ? Categories.fromJson(json['categories'])
-        : null;
+    if (json['categories'] != null) {
+      _categories = [];
+      json['categories'].forEach((v) {
+        _categories?.add(Categories.fromJson(v));
+      });
+    }
     _about = json['about'];
     _experience = json['experience'];
   }
@@ -248,7 +251,7 @@ class MentorProfile {
   dynamic _fee;
   String? _createdAt;
   String? _updatedAt;
-  Categories? _categories;
+  List<Categories>? _categories;
   String? _about;
   int? _experience;
 
@@ -276,7 +279,7 @@ class MentorProfile {
 
   String? get updatedAt => _updatedAt;
 
-  Categories? get categories => _categories;
+  List<Categories>? get categories => _categories;
 
   String? get about => _about;
 
@@ -297,7 +300,7 @@ class MentorProfile {
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
     if (_categories != null) {
-      map['categories'] = _categories?.toJson();
+      map['categories'] = _categories?.map((v) => v.toJson()).toList();
     }
     map['about'] = _about;
     map['experience'] = _experience;

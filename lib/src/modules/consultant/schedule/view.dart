@@ -910,11 +910,9 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                               Widget? child) {
                                                             return Theme(
                                                               data: ThemeData(
-                                                                  primaryColor:
-                                                                  customThemeColor,
-                                                                  primarySwatch:
-                                                                  Colors
-                                                                      .green),
+                                                                  colorScheme: ColorScheme.fromSwatch()
+                                                                      .copyWith(
+                                                                      primary: customThemeColor)),
                                                               child: MediaQuery(
                                                                 data: MediaQuery.of(
                                                                     context)
@@ -1053,11 +1051,9 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                               Widget? child) {
                                                             return Theme(
                                                               data: ThemeData(
-                                                                  primaryColor:
-                                                                  customThemeColor,
-                                                                  primarySwatch:
-                                                                  Colors
-                                                                      .green),
+                                                                  colorScheme: ColorScheme.fromSwatch()
+                                                                      .copyWith(
+                                                                      primary: customThemeColor)),
                                                               child: MediaQuery(
                                                                 data: MediaQuery.of(
                                                                     context)
