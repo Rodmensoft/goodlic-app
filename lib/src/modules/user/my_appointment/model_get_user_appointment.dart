@@ -416,7 +416,8 @@ class UserAppointmentsDataMentor {
       dynamic fbId, 
       dynamic googleId, 
       String? createdAt, 
-      String? updatedAt,}){
+      String? updatedAt,
+    User_country? userCountry,}){
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -440,6 +441,7 @@ class UserAppointmentsDataMentor {
     _googleId = googleId;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
+    _userCountry = userCountry;
 }
 
   UserAppointmentsDataMentor.fromJson(dynamic json) {
@@ -466,6 +468,7 @@ class UserAppointmentsDataMentor {
     _googleId = json['google_id'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
+    _userCountry = json['user_country'] != null ? User_country.fromJson(json['user_country']) : null;
   }
   int? _id;
   dynamic _firstName;
@@ -490,6 +493,7 @@ class UserAppointmentsDataMentor {
   dynamic _googleId;
   String? _createdAt;
   String? _updatedAt;
+  User_country? _userCountry;
 
   int? get id => _id;
   dynamic get firstName => _firstName;
@@ -514,6 +518,7 @@ class UserAppointmentsDataMentor {
   dynamic get googleId => _googleId;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
+  User_country? get userCountry => _userCountry;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -540,6 +545,161 @@ class UserAppointmentsDataMentor {
     map['google_id'] = _googleId;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
+    if (_userCountry != null) {
+      map['user_country'] = _userCountry?.toJson();
+    }
+    return map;
+  }
+
+}
+class User_country {
+  User_country({
+    int? id,
+    String? name,
+    String? isoCode3,
+    String? isoCode2,
+    String? phoneCode,
+    String? capital,
+    String? currency,
+    String? currencySymbol,
+    String? tld,
+    String? native,
+    String? region,
+    int? isActive,
+    String? subregion,
+    String? timezones,
+    String? translations,
+    String? latitude,
+    String? longitude,
+    String? emoji,
+    String? emojiU,
+    String? createdAt,
+    String? updatedAt,
+    int? flag,
+    String? wikiDataId,}){
+    _id = id;
+    _name = name;
+    _isoCode3 = isoCode3;
+    _isoCode2 = isoCode2;
+    _phoneCode = phoneCode;
+    _capital = capital;
+    _currency = currency;
+    _currencySymbol = currencySymbol;
+    _tld = tld;
+    _native = native;
+    _region = region;
+    _isActive = isActive;
+    _subregion = subregion;
+    _timezones = timezones;
+    _translations = translations;
+    _latitude = latitude;
+    _longitude = longitude;
+    _emoji = emoji;
+    _emojiU = emojiU;
+    _createdAt = createdAt;
+    _updatedAt = updatedAt;
+    _flag = flag;
+    _wikiDataId = wikiDataId;
+  }
+
+  User_country.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'];
+    _isoCode3 = json['iso_code_3'];
+    _isoCode2 = json['iso_code_2'];
+    _phoneCode = json['phone_code'];
+    _capital = json['capital'];
+    _currency = json['currency'];
+    _currencySymbol = json['currency_symbol'];
+    _tld = json['tld'];
+    _native = json['native'];
+    _region = json['region'];
+    _isActive = json['is_active'];
+    _subregion = json['subregion'];
+    _timezones = json['timezones'];
+    _translations = json['translations'];
+    _latitude = json['latitude'];
+    _longitude = json['longitude'];
+    _emoji = json['emoji'];
+    _emojiU = json['emojiU'];
+    _createdAt = json['created_at'];
+    _updatedAt = json['updated_at'];
+    _flag = json['flag'];
+    _wikiDataId = json['wikiDataId'];
+  }
+  int? _id;
+  String? _name;
+  String? _isoCode3;
+  String? _isoCode2;
+  String? _phoneCode;
+  String? _capital;
+  String? _currency;
+  String? _currencySymbol;
+  String? _tld;
+  String? _native;
+  String? _region;
+  int? _isActive;
+  String? _subregion;
+  String? _timezones;
+  String? _translations;
+  String? _latitude;
+  String? _longitude;
+  String? _emoji;
+  String? _emojiU;
+  String? _createdAt;
+  String? _updatedAt;
+  int? _flag;
+  String? _wikiDataId;
+
+  int? get id => _id;
+  String? get name => _name;
+  String? get isoCode3 => _isoCode3;
+  String? get isoCode2 => _isoCode2;
+  String? get phoneCode => _phoneCode;
+  String? get capital => _capital;
+  String? get currency => _currency;
+  String? get currencySymbol => _currencySymbol;
+  String? get tld => _tld;
+  String? get native => _native;
+  String? get region => _region;
+  int? get isActive => _isActive;
+  String? get subregion => _subregion;
+  String? get timezones => _timezones;
+  String? get translations => _translations;
+  String? get latitude => _latitude;
+  String? get longitude => _longitude;
+  String? get emoji => _emoji;
+  String? get emojiU => _emojiU;
+  String? get createdAt => _createdAt;
+  String? get updatedAt => _updatedAt;
+  int? get flag => _flag;
+  String? get wikiDataId => _wikiDataId;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['name'] = _name;
+    map['iso_code_3'] = _isoCode3;
+    map['iso_code_2'] = _isoCode2;
+    map['phone_code'] = _phoneCode;
+    map['capital'] = _capital;
+    map['currency'] = _currency;
+    map['currency_symbol'] = _currencySymbol;
+    map['tld'] = _tld;
+    map['native'] = _native;
+    map['region'] = _region;
+    map['is_active'] = _isActive;
+    map['subregion'] = _subregion;
+    map['timezones'] = _timezones;
+    map['translations'] = _translations;
+    map['latitude'] = _latitude;
+    map['longitude'] = _longitude;
+    map['emoji'] = _emoji;
+    map['emojiU'] = _emojiU;
+    map['created_at'] = _createdAt;
+    map['updated_at'] = _updatedAt;
+    map['flag'] = _flag;
+    map['wikiDataId'] = _wikiDataId;
     return map;
   }
 

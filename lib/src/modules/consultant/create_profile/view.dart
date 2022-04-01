@@ -134,7 +134,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 16.w),
-                                                child: Text('Edit Profile',
+                                                child: Text('Create Profile',
                                                     style:
                                                         state.headingTextStyle),
                                               ),
@@ -144,7 +144,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 16.w),
-                                                child: Text('Edit Your Profile',
+                                                child: Text('Create Your Profile',
                                                     style: state
                                                         .subHeadingTextStyle),
                                               ),

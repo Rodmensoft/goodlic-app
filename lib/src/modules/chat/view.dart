@@ -55,7 +55,7 @@ class _ChatPageState extends State<ChatPage> {
         true,
         fetchMessagesRepo);
     pusher = PusherClient(
-      "7c77d9c90395b249e44a",
+      "fa6080bfea44424ad3c2",
       PusherOptions(
         host: '',
         cluster: 'ap2',
@@ -185,20 +185,27 @@ class _ChatPageState extends State<ChatPage> {
                                                 decoration: const BoxDecoration(
                                                     color: Colors.grey,
                                                     shape: BoxShape.circle),
+                                                child: _chatLogic.userImage == null
+                                                    ?const SizedBox()
+                                                    :ClipRRect(
+                                                  borderRadius: BorderRadius.circular(30.r),
+                                                  child: Image.network(
+                                                    _chatLogic.userImage!.contains('assets')
+                                                        ?'$mediaUrl${_chatLogic.userImage}'
+                                                        :_chatLogic.userImage!
+                                                  ),
+                                                ),
                                               ),
 
                                               ///---name
                                               title: Text(
-                                                // '${Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.mentee!.firstName} '
-                                                // '${Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.mentee!.lastName}',
-                                                '',
+                                                '${_chatLogic.userName}',
                                                 style: state.userNameTextStyle,
                                               ),
 
                                               ///---email
                                               subtitle: Text(
-                                                // '${Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.mentee!.email}',
-                                                '',
+                                                '${_chatLogic.userEmail}',
                                                 style: state.categoryTextStyle,
                                               ),
                                             ),
@@ -480,6 +487,12 @@ class _ChatPageState extends State<ChatPage> {
                                             onTap: () {
                                               Get.find<GeneralController>()
                                                   .notificationRouteApp = null;
+                                              log('SENDER-->${Get.find<
+                                                  ChatLogic>()
+                                                  .senderMessageGetId}');
+                                              log('RECIEVER-->${Get.find<
+                                                  ChatLogic>()
+                                                  .receiverMessageGetId}');
                                               postMethod(
                                                   context,
                                                   sendMessageUrl,

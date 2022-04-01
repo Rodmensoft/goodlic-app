@@ -47,6 +47,12 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Get.find<EditConsultantProfileLogic>().scrollController!.animateTo(
+        Get.find<EditConsultantProfileLogic>().scrollController!
+            .position
+            .minScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 500));
   }
 
   @override

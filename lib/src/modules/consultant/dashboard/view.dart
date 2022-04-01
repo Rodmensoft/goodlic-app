@@ -423,18 +423,20 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                       '$greetingMes ',
                                                                       style: state
                                                                           .mentorDetailTileTitle2TextStyle),
-                                                                  Text(
-                                                                      'Mentor '
-                                                                      '${_generalController.getConsultantProfileModel.data!.userDetail!.firstName}',
-                                                                      softWrap:
-                                                                          true,
-                                                                      overflow:
-                                                                          TextOverflow
-                                                                              .ellipsis,
-                                                                      maxLines:
-                                                                          1,
-                                                                      style: state
-                                                                          .mentorDetailTileTitleTextStyle),
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                        '${_generalController.getConsultantProfileModel.data!
+                                                                            .userDetail!.firstName}'.capitalize!,
+                                                                        softWrap:
+                                                                            true,
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .ellipsis,
+                                                                        maxLines:
+                                                                            1,
+                                                                        style: state
+                                                                            .mentorDetailTileTitleTextStyle),
+                                                                  ),
                                                                 ],
                                                               ),
                                                               // Text(
@@ -624,7 +626,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                         decoration:
                                                             BoxDecoration(
                                                           color:
-                                                              customLightOrangeColor,
+                                                              const Color(0xffFDDBE5),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
@@ -1130,280 +1132,283 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                           .getTodayAppointmentList
                                                                           .length,
                                                                       (index) {
-                                                                    return Container(
-                                                                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                                                                      decoration: BoxDecoration(
-                                                                        color:
-                                                                        Colors.white,
+                                                                    return Padding(
+                                                                      padding:  EdgeInsets.only(bottom: 15.h),
+                                                                      child: Container(
+                                                                        padding: EdgeInsets.symmetric(horizontal: 15.w),
+                                                                        decoration: BoxDecoration(
+                                                                          color:
+                                                                          Colors.white,
 
-                                                                          boxShadow: [
-                                                                            BoxShadow(
-                                                                              offset:
-                                                                              const Offset(
-                                                                                  0, 10),
-                                                                              color: Colors
-                                                                                  .grey
-                                                                                  .withOpacity(
-                                                                                  0.2),
-                                                                              blurRadius: 10,
-                                                                              spreadRadius: 3,
-                                                                            )
-                                                                          ],
-                                                                        borderRadius: BorderRadius.circular(8.r)
-                                                                      ),
-                                                                      child:
-                                                                          RoundedExpansionTile(
-                                                                        contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            0,
-                                                                            0),
-                                                                        shape:
-                                                                            RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
-                                                                        title:
-                                                                            Row(
-                                                                          children: [
-                                                                            ///---type
-                                                                            Expanded(
-                                                                              child: Column(
-                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    'type'.tr,
-                                                                                    style: state.appointmentListLabelTextStyle,
-                                                                                  ),
-                                                                                  const SizedBox(
-                                                                                    height: 6,
-                                                                                  ),
-                                                                                  Text(
-                                                                                    '${_dashboardLogic.getTodayAppointmentList[index].appointmentTypeString}'.toUpperCase(),
-                                                                                    style: state.appointmentListValueTextStyle,
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-
-                                                                            ///---amount
-                                                                            Expanded(
-                                                                              child: Column(
-                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    'amount'.tr,
-                                                                                    style: state.appointmentListLabelTextStyle,
-                                                                                  ),
-                                                                                  const SizedBox(
-                                                                                    height: 6,
-                                                                                  ),
-                                                                                  Text(
-                                                                                    '${'rs'.tr}.${_dashboardLogic.getTodayAppointmentList[index].payment}',
-                                                                                    style: state.appointmentListValueTextStyle?.copyWith(color: customLightThemeColor),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-
-                                                                            ///---status
-                                                                            Expanded(
-                                                                              child: Column(
-                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    'status'.tr,
-                                                                                    style: state.appointmentListLabelTextStyle,
-                                                                                  ),
-                                                                                  const SizedBox(
-                                                                                    height: 6,
-                                                                                  ),
-                                                                                  Row(
-                                                                                    children: [
-                                                                                      const Icon(
-                                                                                        Icons.check,
-                                                                                        color: customGreenColor,
-                                                                                        size: 10,
-                                                                                      ),
-                                                                                      const SizedBox(
-                                                                                        width: 5,
-                                                                                      ),
-                                                                                      Text(
-                                                                                        'accepted'.tr,
-                                                                                        style: state.appointmentListValueTextStyle,
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          ],
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                offset:
+                                                                                const Offset(
+                                                                                    0, 10),
+                                                                                color: Colors
+                                                                                    .grey
+                                                                                    .withOpacity(
+                                                                                    0.2),
+                                                                                blurRadius: 10,
+                                                                                spreadRadius: 3,
+                                                                              )
+                                                                            ],
+                                                                          borderRadius: BorderRadius.circular(8.r)
                                                                         ),
-                                                                        trailing:
-                                                                            SvgPicture.asset(
-                                                                          'assets/Icons/forwardBlueIcon.svg',
-                                                                              width: 19.w,
-                                                                              height: 19.h,
-                                                                        ),
-                                                                        children: [
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10.h),
-                                                                            child: Row(
-                                                                              children: [
-                                                                                ///---date
-                                                                                Expanded(
-                                                                                  child: Column(
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                                                    children: [
-                                                                                      Text(
-                                                                                        'date'.tr,
-                                                                                        style: state.appointmentListLabelTextStyle,
-                                                                                      ),
-                                                                                      const SizedBox(
-                                                                                        height: 6,
-                                                                                      ),
-                                                                                      Text(
-                                                                                        '${_dashboardLogic.getTodayAppointmentList[index].date}',
-                                                                                        style: state.appointmentListValueTextStyle,
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
+                                                                        child:
+                                                                            RoundedExpansionTile(
+                                                                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              0),
+                                                                          shape:
+                                                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
+                                                                          title:
+                                                                              Row(
+                                                                            children: [
+                                                                              ///---type
+                                                                              Expanded(
+                                                                                child: Column(
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      'type'.tr,
+                                                                                      style: state.appointmentListLabelTextStyle,
+                                                                                    ),
+                                                                                    const SizedBox(
+                                                                                      height: 6,
+                                                                                    ),
+                                                                                    Text(
+                                                                                      '${_dashboardLogic.getTodayAppointmentList[index].appointmentTypeString}'.toUpperCase(),
+                                                                                      style: state.appointmentListValueTextStyle,
+                                                                                    ),
+                                                                                  ],
                                                                                 ),
+                                                                              ),
 
-                                                                                ///---time
-                                                                                Expanded(
-                                                                                  child: Column(
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                                                    children: [
-                                                                                      Text(
-                                                                                        'time'.tr,
-                                                                                        style: state.appointmentListLabelTextStyle,
-                                                                                      ),
-                                                                                      const SizedBox(
-                                                                                        height: 6,
-                                                                                      ),
-                                                                                      Text(
-                                                                                        '${_dashboardLogic.getTodayAppointmentList[index].time}',
-                                                                                        style: state.appointmentListValueTextStyle,
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
+                                                                              ///---amount
+                                                                              Expanded(
+                                                                                child: Column(
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      'amount'.tr,
+                                                                                      style: state.appointmentListLabelTextStyle,
+                                                                                    ),
+                                                                                    const SizedBox(
+                                                                                      height: 6,
+                                                                                    ),
+                                                                                    Text(
+                                                                                      '${'rs'.tr}.${_dashboardLogic.getTodayAppointmentList[index].payment}',
+                                                                                      style: state.appointmentListValueTextStyle?.copyWith(color: customLightThemeColor),
+                                                                                    ),
+                                                                                  ],
                                                                                 ),
+                                                                              ),
 
-                                                                                ///---payment-status
-                                                                                Expanded(
-                                                                                  child: Column(
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                                                    children: [
-                                                                                      Text(
-                                                                                        'p_status'.tr,
-                                                                                        style: state.appointmentListLabelTextStyle,
-                                                                                      ),
-                                                                                      const SizedBox(
-                                                                                        height: 6,
-                                                                                      ),
-                                                                                      _dashboardLogic.getTodayAppointmentList[index].isPaid == 0
-                                                                                          ? Row(
-                                                                                              children: [
-                                                                                                const Icon(
-                                                                                                  Icons.cancel_outlined,
-                                                                                                  color: Colors.red,
-                                                                                                  size: 10,
-                                                                                                ),
-                                                                                                const SizedBox(
-                                                                                                  width: 5,
-                                                                                                ),
-                                                                                                Text(
-                                                                                                  'Un_paid'.tr,
-                                                                                                  style: state.appointmentListValueTextStyle,
-                                                                                                ),
-                                                                                              ],
-                                                                                            )
-                                                                                          : Row(
-                                                                                              children: [
-                                                                                                const Icon(
-                                                                                                  Icons.check,
-                                                                                                  color: customThemeColor,
-                                                                                                  size: 10,
-                                                                                                ),
-                                                                                                const SizedBox(
-                                                                                                  width: 5,
-                                                                                                ),
-                                                                                                Text(
-                                                                                                  'paid'.tr,
-                                                                                                  style: state.appointmentListValueTextStyle,
-                                                                                                ),
-                                                                                              ],
-                                                                                            ),
-                                                                                    ],
-                                                                                  ),
+                                                                              ///---status
+                                                                              Expanded(
+                                                                                child: Column(
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      'status'.tr,
+                                                                                      style: state.appointmentListLabelTextStyle,
+                                                                                    ),
+                                                                                    const SizedBox(
+                                                                                      height: 6,
+                                                                                    ),
+                                                                                    Row(
+                                                                                      children: [
+                                                                                        const Icon(
+                                                                                          Icons.check,
+                                                                                          color: customGreenColor,
+                                                                                          size: 10,
+                                                                                        ),
+                                                                                        const SizedBox(
+                                                                                          width: 5,
+                                                                                        ),
+                                                                                        Text(
+                                                                                          'accepted'.tr,
+                                                                                          style: state.appointmentListValueTextStyle,
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ],
                                                                                 ),
-                                                                                SizedBox(
-                                                                                  width: MediaQuery.of(context).size.width * .08,
-                                                                                )
-                                                                              ],
-                                                                            ),
+                                                                              ),
+                                                                            ],
                                                                           ),
-                                                                          Padding(
-                                                                            padding:  EdgeInsetsDirectional.fromSTEB(0, 10.h, 0, 10.h),
-                                                                            child: Row(
-                                                                              children: [
-                                                                                ///---action
-                                                                                Expanded(
-                                                                                  flex: 2,
-                                                                                  child: Column(
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                                                    children: [
-                                                                                      Text(
-                                                                                        'action'.tr,
-                                                                                        style: state.appointmentListLabelTextStyle,
-                                                                                      ),
-                                                                                      const SizedBox(
-                                                                                        height: 6,
-                                                                                      ),
-                                                                                      Row(
-                                                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                                                        children: [
-                                                                                          InkWell(
-                                                                                            onTap: () {
+                                                                          trailing:
+                                                                              SvgPicture.asset(
+                                                                            'assets/Icons/forwardBlueIcon.svg',
+                                                                                width: 19.w,
+                                                                                height: 19.h,
+                                                                          ),
+                                                                          children: [
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10.h),
+                                                                              child: Row(
+                                                                                children: [
+                                                                                  ///---date
+                                                                                  Expanded(
+                                                                                    child: Column(
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          'date'.tr,
+                                                                                          style: state.appointmentListLabelTextStyle,
+                                                                                        ),
+                                                                                        const SizedBox(
+                                                                                          height: 6,
+                                                                                        ),
+                                                                                        Text(
+                                                                                          '${_dashboardLogic.getTodayAppointmentList[index].date}',
+                                                                                          style: state.appointmentListValueTextStyle,
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
 
-                                                                                              Get.put(
-                                                                                                  ConsultantAppointmentLogic());
-                                                                                              Get.put(
-                                                                                                  ConsultantAppointmentDetailLogic());
-                                                                                              Get.find<ConsultantAppointmentDetailLogic>()
-                                                                                                  .selectedAppointmentData =
-                                                                                              _dashboardLogic.getTodayAppointmentList[index];
-                                                                                              Get.find<
-                                                                                                  ConsultantAppointmentDetailLogic>()
-                                                                                                  .appointmentStatus = 1;
-                                                                                              Get.find<
-                                                                                                  ConsultantAppointmentDetailLogic>()
-                                                                                                  .update();
-                                                                                              Get.toNamed(PageRoutes
-                                                                                                  .consultantAppointmentDetail);
-                                                                                            },
-                                                                                            child:  Padding(
-                                                                                              padding: EdgeInsets.fromLTRB(5.w, 0, 8, 0),
-                                                                                              child: const Icon(
-                                                                                                Icons.visibility,
-                                                                                                color: customThemeColor,
+                                                                                  ///---time
+                                                                                  Expanded(
+                                                                                    child: Column(
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          'time'.tr,
+                                                                                          style: state.appointmentListLabelTextStyle,
+                                                                                        ),
+                                                                                        const SizedBox(
+                                                                                          height: 6,
+                                                                                        ),
+                                                                                        Text(
+                                                                                          '${_dashboardLogic.getTodayAppointmentList[index].time}',
+                                                                                          style: state.appointmentListValueTextStyle,
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+
+                                                                                  ///---payment-status
+                                                                                  Expanded(
+                                                                                    child: Column(
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          'p_status'.tr,
+                                                                                          style: state.appointmentListLabelTextStyle,
+                                                                                        ),
+                                                                                        const SizedBox(
+                                                                                          height: 6,
+                                                                                        ),
+                                                                                        _dashboardLogic.getTodayAppointmentList[index].isPaid == 0
+                                                                                            ? Row(
+                                                                                                children: [
+                                                                                                  const Icon(
+                                                                                                    Icons.cancel_outlined,
+                                                                                                    color: Colors.red,
+                                                                                                    size: 10,
+                                                                                                  ),
+                                                                                                  const SizedBox(
+                                                                                                    width: 5,
+                                                                                                  ),
+                                                                                                  Text(
+                                                                                                    'Un_paid'.tr,
+                                                                                                    style: state.appointmentListValueTextStyle,
+                                                                                                  ),
+                                                                                                ],
+                                                                                              )
+                                                                                            : Row(
+                                                                                                children: [
+                                                                                                  const Icon(
+                                                                                                    Icons.check,
+                                                                                                    color: customThemeColor,
+                                                                                                    size: 10,
+                                                                                                  ),
+                                                                                                  const SizedBox(
+                                                                                                    width: 5,
+                                                                                                  ),
+                                                                                                  Text(
+                                                                                                    'paid'.tr,
+                                                                                                    style: state.appointmentListValueTextStyle,
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    width: MediaQuery.of(context).size.width * .08,
+                                                                                  )
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding:  EdgeInsetsDirectional.fromSTEB(0, 10.h, 0, 10.h),
+                                                                              child: Row(
+                                                                                children: [
+                                                                                  ///---action
+                                                                                  Expanded(
+                                                                                    flex: 2,
+                                                                                    child: Column(
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          'action'.tr,
+                                                                                          style: state.appointmentListLabelTextStyle,
+                                                                                        ),
+                                                                                        const SizedBox(
+                                                                                          height: 6,
+                                                                                        ),
+                                                                                        Row(
+                                                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                                                          children: [
+                                                                                            InkWell(
+                                                                                              onTap: () {
+
+                                                                                                Get.put(
+                                                                                                    ConsultantAppointmentLogic());
+                                                                                                Get.put(
+                                                                                                    ConsultantAppointmentDetailLogic());
+                                                                                                Get.find<ConsultantAppointmentDetailLogic>()
+                                                                                                    .selectedAppointmentData =
+                                                                                                _dashboardLogic.getTodayAppointmentList[index];
+                                                                                                Get.find<
+                                                                                                    ConsultantAppointmentDetailLogic>()
+                                                                                                    .appointmentStatus = 1;
+                                                                                                Get.find<
+                                                                                                    ConsultantAppointmentDetailLogic>()
+                                                                                                    .update();
+                                                                                                Get.toNamed(PageRoutes
+                                                                                                    .consultantAppointmentDetail);
+                                                                                              },
+                                                                                              child:  Padding(
+                                                                                                padding: EdgeInsets.fromLTRB(5.w, 0, 8, 0),
+                                                                                                child: const Icon(
+                                                                                                  Icons.visibility,
+                                                                                                  color: customThemeColor,
+                                                                                                ),
                                                                                               ),
                                                                                             ),
-                                                                                          ),
-                                                                                        ],
-                                                                                      )
-                                                                                    ],
+                                                                                          ],
+                                                                                        )
+                                                                                      ],
+                                                                                    ),
                                                                                   ),
-                                                                                ),
-                                                                              ],
+                                                                                ],
+                                                                              ),
                                                                             ),
-                                                                          ),
-                                                                        ],
+                                                                          ],
+                                                                        ),
                                                                       ),
                                                                     );
                                                                   }),

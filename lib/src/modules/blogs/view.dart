@@ -516,7 +516,7 @@ class _BlogsPageState extends State<BlogsPage> {
                                                                       Text(
                                                                         //   ' ${_blogsLogic.getAllBlogModel.data!.categoryBlogs![index].category!.createdAt!.substring(0, 10)}',
                                                                         DateFormat('dd-MM-yyyy')
-                                                                            .format(DateTime.parse('${_blogsLogic.selectedBlogForView.createdAt}')),
+                                                                            .format(DateTime.parse(_blogsLogic.getAllBlogModel.data!.categoryBlogs![index].category!.createdAt!)),
                                                                         style: state
                                                                             .blogCategoryTextStyle
                                                                             ?.copyWith(color: customTextBlackColor),

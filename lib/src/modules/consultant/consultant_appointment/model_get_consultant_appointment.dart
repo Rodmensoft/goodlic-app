@@ -411,7 +411,9 @@ class Mentee {
       dynamic fbId, 
       dynamic googleId, 
       String? createdAt, 
-      String? updatedAt,}){
+      String? updatedAt,
+    MenteeInfo? mentee,
+    User_country? userCountry,}){
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -435,6 +437,8 @@ class Mentee {
     _googleId = googleId;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
+    _mentee = mentee;
+    _userCountry = userCountry;
 }
 
   Mentee.fromJson(dynamic json) {
@@ -461,6 +465,8 @@ class Mentee {
     _googleId = json['google_id'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
+    _mentee = json['mentee'] != null ? MenteeInfo.fromJson(json['mentee']) : null;
+    _userCountry = json['user_country'] != null ? User_country.fromJson(json['user_country']) : null;
   }
   int? _id;
   String? _firstName;
@@ -485,6 +491,8 @@ class Mentee {
   dynamic _googleId;
   String? _createdAt;
   String? _updatedAt;
+  MenteeInfo? _mentee;
+  User_country? _userCountry;
 
   int? get id => _id;
   String? get firstName => _firstName;
@@ -509,6 +517,8 @@ class Mentee {
   dynamic get googleId => _googleId;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
+  MenteeInfo? get mentee => _mentee;
+  User_country? get userCountry => _userCountry;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -533,6 +543,235 @@ class Mentee {
     map['admin_user'] = _adminUser;
     map['fb_id'] = _fbId;
     map['google_id'] = _googleId;
+    map['created_at'] = _createdAt;
+    map['updated_at'] = _updatedAt;
+    if (_mentee != null) {
+      map['mentee'] = _mentee?.toJson();
+    }
+    if (_userCountry != null) {
+      map['user_country'] = _userCountry?.toJson();
+    }
+    return map;
+  }
+
+}
+
+
+class User_country {
+  User_country({
+    int? id,
+    String? name,
+    String? isoCode3,
+    String? isoCode2,
+    String? phoneCode,
+    String? capital,
+    String? currency,
+    String? currencySymbol,
+    String? tld,
+    String? native,
+    String? region,
+    int? isActive,
+    String? subregion,
+    String? timezones,
+    String? translations,
+    String? latitude,
+    String? longitude,
+    String? emoji,
+    String? emojiU,
+    String? createdAt,
+    String? updatedAt,
+    int? flag,
+    String? wikiDataId,}){
+    _id = id;
+    _name = name;
+    _isoCode3 = isoCode3;
+    _isoCode2 = isoCode2;
+    _phoneCode = phoneCode;
+    _capital = capital;
+    _currency = currency;
+    _currencySymbol = currencySymbol;
+    _tld = tld;
+    _native = native;
+    _region = region;
+    _isActive = isActive;
+    _subregion = subregion;
+    _timezones = timezones;
+    _translations = translations;
+    _latitude = latitude;
+    _longitude = longitude;
+    _emoji = emoji;
+    _emojiU = emojiU;
+    _createdAt = createdAt;
+    _updatedAt = updatedAt;
+    _flag = flag;
+    _wikiDataId = wikiDataId;
+  }
+
+  User_country.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'];
+    _isoCode3 = json['iso_code_3'];
+    _isoCode2 = json['iso_code_2'];
+    _phoneCode = json['phone_code'];
+    _capital = json['capital'];
+    _currency = json['currency'];
+    _currencySymbol = json['currency_symbol'];
+    _tld = json['tld'];
+    _native = json['native'];
+    _region = json['region'];
+    _isActive = json['is_active'];
+    _subregion = json['subregion'];
+    _timezones = json['timezones'];
+    _translations = json['translations'];
+    _latitude = json['latitude'];
+    _longitude = json['longitude'];
+    _emoji = json['emoji'];
+    _emojiU = json['emojiU'];
+    _createdAt = json['created_at'];
+    _updatedAt = json['updated_at'];
+    _flag = json['flag'];
+    _wikiDataId = json['wikiDataId'];
+  }
+  int? _id;
+  String? _name;
+  String? _isoCode3;
+  String? _isoCode2;
+  String? _phoneCode;
+  String? _capital;
+  String? _currency;
+  String? _currencySymbol;
+  String? _tld;
+  String? _native;
+  String? _region;
+  int? _isActive;
+  String? _subregion;
+  String? _timezones;
+  String? _translations;
+  String? _latitude;
+  String? _longitude;
+  String? _emoji;
+  String? _emojiU;
+  String? _createdAt;
+  String? _updatedAt;
+  int? _flag;
+  String? _wikiDataId;
+
+  int? get id => _id;
+  String? get name => _name;
+  String? get isoCode3 => _isoCode3;
+  String? get isoCode2 => _isoCode2;
+  String? get phoneCode => _phoneCode;
+  String? get capital => _capital;
+  String? get currency => _currency;
+  String? get currencySymbol => _currencySymbol;
+  String? get tld => _tld;
+  String? get native => _native;
+  String? get region => _region;
+  int? get isActive => _isActive;
+  String? get subregion => _subregion;
+  String? get timezones => _timezones;
+  String? get translations => _translations;
+  String? get latitude => _latitude;
+  String? get longitude => _longitude;
+  String? get emoji => _emoji;
+  String? get emojiU => _emojiU;
+  String? get createdAt => _createdAt;
+  String? get updatedAt => _updatedAt;
+  int? get flag => _flag;
+  String? get wikiDataId => _wikiDataId;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['name'] = _name;
+    map['iso_code_3'] = _isoCode3;
+    map['iso_code_2'] = _isoCode2;
+    map['phone_code'] = _phoneCode;
+    map['capital'] = _capital;
+    map['currency'] = _currency;
+    map['currency_symbol'] = _currencySymbol;
+    map['tld'] = _tld;
+    map['native'] = _native;
+    map['region'] = _region;
+    map['is_active'] = _isActive;
+    map['subregion'] = _subregion;
+    map['timezones'] = _timezones;
+    map['translations'] = _translations;
+    map['latitude'] = _latitude;
+    map['longitude'] = _longitude;
+    map['emoji'] = _emoji;
+    map['emojiU'] = _emojiU;
+    map['created_at'] = _createdAt;
+    map['updated_at'] = _updatedAt;
+    map['flag'] = _flag;
+    map['wikiDataId'] = _wikiDataId;
+    return map;
+  }
+
+}
+
+class MenteeInfo {
+  MenteeInfo({
+    int? id,
+    int? userId,
+    dynamic description,
+    dynamic walletId,
+    dynamic walletAmount,
+    dynamic isActive,
+    int? identityHidden,
+    String? createdAt,
+    String? updatedAt,}){
+    _id = id;
+    _userId = userId;
+    _description = description;
+    _walletId = walletId;
+    _walletAmount = walletAmount;
+    _isActive = isActive;
+    _identityHidden = identityHidden;
+    _createdAt = createdAt;
+    _updatedAt = updatedAt;
+  }
+
+  MenteeInfo.fromJson(dynamic json) {
+    _id = json['id'];
+    _userId = json['user_id'];
+    _description = json['description'];
+    _walletId = json['wallet_id'];
+    _walletAmount = json['wallet_amount'];
+    _isActive = json['is_active'];
+    _identityHidden = json['identity_hidden'];
+    _createdAt = json['created_at'];
+    _updatedAt = json['updated_at'];
+  }
+  int? _id;
+  int? _userId;
+  dynamic _description;
+  dynamic _walletId;
+  dynamic _walletAmount;
+  dynamic _isActive;
+  int? _identityHidden;
+  String? _createdAt;
+  String? _updatedAt;
+
+  int? get id => _id;
+  int? get userId => _userId;
+  dynamic get description => _description;
+  dynamic get walletId => _walletId;
+  dynamic get walletAmount => _walletAmount;
+  dynamic get isActive => _isActive;
+  int? get identityHidden => _identityHidden;
+  String? get createdAt => _createdAt;
+  String? get updatedAt => _updatedAt;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['user_id'] = _userId;
+    map['description'] = _description;
+    map['wallet_id'] = _walletId;
+    map['wallet_amount'] = _walletAmount;
+    map['is_active'] = _isActive;
+    map['identity_hidden'] = _identityHidden;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
     return map;

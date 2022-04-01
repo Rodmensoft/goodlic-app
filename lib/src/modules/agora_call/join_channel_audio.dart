@@ -2,8 +2,11 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
+import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -155,203 +158,145 @@ class _State extends State<JoinChannelAudio> {
               ? _receiverView()
               : _ringingView()
           : Scaffold(
-              body: SizedBox(
-                height: MediaQuery.of(context).size.height,
+              body: Container(
                 width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      customThemeColor,
+                      customLightThemeColor,
+                    ],
+                  ),
+                ),
                 child: SafeArea(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        height: 50,
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * .1,
                       ),
-                      Text(
-                        Get.find<GeneralController>()
-                                    .storageBox
-                                    .read('userRole')
-                                    .toString()
-                                    .toUpperCase() ==
-                                'MENTOR'
-                            ? 'MENTEE'
-                            : 'MENTOR',
-                        style: TextStyle(
-                            fontSize: 30.sp,
-                            fontWeight: FontWeight.bold,
-                            color: customThemeColor),
+                      Get.find<AgoraLogic>().userImage == null
+                          ? Container(
+                        height: 130.h,
+                        width: 130.w,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                      )
+                          : Container(
+                        height: 130.h,
+                        width: 130.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(Get.find<AgoraLogic>()
+                                    .userImage!
+                                    .contains('assets')
+                                    ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
+                                    : Get.find<AgoraLogic>().userImage!))),
                       ),
-                      const SizedBox(
-                        height: 20,
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 14.h, 0, 0),
+                        child: Text(
+                          '${Get.find<AgoraLogic>().userName}',
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              fontFamily: SarabunFontFamily.regular,
+                              color: Colors.white),
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * .2,
                       ),
                       Expanded(
-                        child: Stack(
-                          children: [
-                            Align(
-                                alignment: Alignment.center,
-                                child: SvgPicture.asset(
-                                  'assets/appBarLogo.svg',
-                                  width: MediaQuery.of(context).size.width * .7,
-                                )),
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: double.infinity,
-                              decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(40)),
-                                  color: Colors.white.withOpacity(0.7)),
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: double.infinity,
-                              decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(40)),
-                                  color: customThemeColor.withOpacity(0.4)),
-                              child: Column(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: double.infinity,
+                          child: Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      ///---mute
-                                      InkWell(
-                                        onTap: () {
-                                          _switchMicrophone();
-                                        },
-                                        child: CircleAvatar(
-                                          radius: 30,
-                                          backgroundColor: !openMicrophone
-                                              ? customThemeColor
-                                              : Colors.white,
-                                          child: Icon(
-                                            openMicrophone
-                                                ? Icons.mic
-                                                : Icons.mic_off,
-                                            color: openMicrophone
-                                                ? customThemeColor
-                                                : Colors.white,
-                                            size: 25,
-                                          ),
-                                        ),
-                                      ),
-
-                                      ///---speaker
-                                      InkWell(
-                                        onTap: () {
-                                          _switchSpeakerphone();
-                                        },
-                                        child: CircleAvatar(
-                                          radius: 30,
-                                          backgroundColor: enableSpeakerphone
-                                              ? customThemeColor
-                                              : Colors.white,
-                                          child: Icon(
-                                            enableSpeakerphone
-                                                ? Icons.volume_off
-                                                : Icons.volume_up,
-                                            color: enableSpeakerphone
-                                                ? Colors.white
-                                                : customThemeColor,
-                                            size: 25,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  ///---mute
                                   InkWell(
                                     onTap: () {
-                                      _leaveChannel();
-                                      Get.back();
+                                      _switchMicrophone();
                                     },
-                                    child: const CircleAvatar(
+                                    child: CircleAvatar(
                                       radius: 30,
-                                      backgroundColor: Colors.red,
+                                      backgroundColor: !openMicrophone
+                                          ? customThemeColor
+                                          : Colors.white,
                                       child: Icon(
-                                        Icons.call_end,
-                                        color: Colors.white,
+                                        openMicrophone
+                                            ? Icons.mic
+                                            : Icons.mic_off,
+                                        color: openMicrophone
+                                            ? customThemeColor
+                                            : Colors.white,
+                                        size: 25,
+                                      ),
+                                    ),
+                                  ),
+
+                                  ///---speaker
+                                  InkWell(
+                                    onTap: () {
+                                      _switchSpeakerphone();
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: enableSpeakerphone
+                                          ? customThemeColor
+                                          : Colors.white,
+                                      child: Icon(
+                                        enableSpeakerphone
+                                            ? Icons.volume_off
+                                            : Icons.volume_up,
+                                        color: enableSpeakerphone
+                                            ? Colors.white
+                                            : customThemeColor,
                                         size: 25,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                            )
-                          ],
+                              InkWell(
+                                onTap: () {
+                                  _leaveChannel();
+                                  Get.back();
+                                },
+                                child: const CircleAvatar(
+                                  radius: 30,
+                                  backgroundColor: Colors.red,
+                                  child: Icon(
+                                    Icons.call_end,
+                                    color: Colors.white,
+                                    size: 25,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       )
                     ],
                   ),
                 ),
               ),
-              // bottomNavigationBar: SafeArea(
-              //   child: Container(
-              //     width: MediaQuery.of(context).size.width,
-              //     height: 80,
-              //     decoration: const BoxDecoration(
-              //     color: customThemeColor,
-              //     borderRadius: BorderRadius.vertical(top: Radius.circular(20))
-              //     ),
-              //     child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //     children: [
-              //       InkWell(
-              //         onTap: (){
-              //           _switchSpeakerphone();
-              //         },
-              //         child:  CircleAvatar(
-              //           radius: 25,
-              //           backgroundColor: enableSpeakerphone
-              //               ?Colors.white24
-              //               :Colors.transparent,
-              //           child: Icon(
-              //             enableSpeakerphone
-              //                 ?Icons.volume_off
-              //                 :Icons.volume_up,
-              //             color: Colors.white,
-              //             size: 25,
-              //           ),
-              //         ),
-              //       ),
-              //       InkWell(
-              //         onTap: (){
-              //           _switchMicrophone();
-              //         },
-              //         child:  CircleAvatar(
-              //           radius: 25,
-              //           backgroundColor: !openMicrophone
-              //               ?Colors.white24
-              //               :Colors.transparent,
-              //           child: Icon(
-              //             openMicrophone
-              //                 ?Icons.mic
-              //                 :Icons.mic_off,
-              //             color: Colors.white,
-              //             size: 25,
-              //           ),
-              //         ),
-              //       ),
-              //       InkWell(
-              //         onTap: (){
-              //           _leaveChannel();
-              //           Get.back();
-              //         },
-              //         child: const CircleAvatar(
-              //           radius: 25,
-              //           backgroundColor: Colors.red,
-              //           child: Icon(
-              //             Icons.call_end,
-              //             color: Colors.white,
-              //             size: 25,
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //     ),
-              //   ),
-              // ),
+
             ),
     );
   }
@@ -363,57 +308,105 @@ class _State extends State<JoinChannelAudio> {
   _ringingView() {
     return Scaffold(
       body: Container(
-        color: Colors.white,
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          children: [
-            isJoined
-                ? Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-                    child: Text(
-                      'RINGING.....',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
-                          color: customThemeColor),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              customThemeColor,
+              customLightThemeColor,
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .1,
+              ),
+              Get.find<AgoraLogic>().userImage == null
+                  ? Container(
+                      height: 130.h,
+                      width: 130.w,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                    )
+                  : Container(
+                      height: 130.h,
+                      width: 130.w,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(Get.find<AgoraLogic>()
+                                      .userImage!
+                                      .contains('assets')
+                                  ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
+                                  : Get.find<AgoraLogic>().userImage!))),
                     ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-                    child: Text(
-                      'CALLING.....',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
-                          color: customThemeColor),
+              isJoined
+                  ? Padding(
+                      padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
+                      child: Text(
+                        'Ringing To',
+                        style: TextStyle(
+                            fontSize: 20.sp,
+                            fontFamily: SarabunFontFamily.extraBold,
+                            color: Colors.white),
+                      ),
+                    )
+                  : Padding(
+                      padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
+                      child: Text(
+                        'Calling To',
+                        style: TextStyle(
+                            fontSize: 20.sp,
+                            fontFamily: SarabunFontFamily.extraBold,
+                            color: Colors.white),
+                      ),
                     ),
-                  ),
-            Expanded(child: Image.asset('assets/calling.gif')),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: RawMaterialButton(
-                    onPressed: () {
-                      _leaveChannel();
-                      _onCallEnd(context);
-                    },
-                    child: const Icon(
-                      Icons.clear,
-                      color: Colors.white,
-                      size: 35.0,
+
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 14.h, 0, 0),
+                child: Text(
+                  '${Get.find<AgoraLogic>().userName}',
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      fontFamily: SarabunFontFamily.regular,
+                      color: Colors.white),
+                ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: RawMaterialButton(
+                      onPressed: () {
+                        _leaveChannel();
+                        _onCallEnd(context);
+                      },
+                      child: const Icon(
+                        Icons.clear,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      shape: const CircleBorder(),
+                      elevation: 2.0,
+                      fillColor: Colors.redAccent,
+                      padding: const EdgeInsets.all(15.0),
                     ),
-                    shape: const CircleBorder(),
-                    elevation: 2.0,
-                    fillColor: Colors.redAccent,
-                    padding: const EdgeInsets.all(15.0),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -421,24 +414,19 @@ class _State extends State<JoinChannelAudio> {
 
   _receiverView() {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(Icons.arrow_back_ios, color: customThemeColor)),
-        title: SvgPicture.asset(
-          'assets/appBarLogo.svg',
-          width: MediaQuery.of(context).size.width * .1,
-        ),
-        centerTitle: true,
-      ),
       body: Container(
-        color: Colors.white,
-        height: double.infinity,
-        width: double.infinity,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              customThemeColor,
+              customLightThemeColor,
+            ],
+          ),
+        ),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -446,38 +434,72 @@ class _State extends State<JoinChannelAudio> {
             children: [
               Expanded(
                   child: SvgPicture.asset(
-                'assets/callAlert.svg',
+                'assets/images/callAlert.svg',
                 width: MediaQuery.of(context).size.width * .6,
               )),
               Text(
                 'Call Alert',
                 style: TextStyle(
                     fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                    color: customThemeColor),
+                    fontFamily: SarabunFontFamily.bold,
+                    color: Colors.white),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
-                'you are receiving a call from ${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE' ? 'MENTOR' : 'MENTEE'}',
+                'you are receiving a call from '
+                    '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE'
+                    ? 'MENTOR'
+                    : 'MENTEE'}',
                 style: TextStyle(
                     fontSize: 15.sp,
-                    fontWeight: FontWeight.w400,
-                    color: customLightThemeColor),
+                    fontFamily: SarabunFontFamily.regular,
+                    color: Colors.white),
               ),
               Expanded(
-                  child: Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                        onTap: () {
-                          _joinChannel();
-                        },
-                        child: Image.asset('assets/calling.gif')),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: Colors.red,
+                              radius: 35.r,
+                              child: const Icon(
+                                Icons.clear,
+                                color: Colors.white,
+                                size: 35.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                              onTap: () {
+                                _joinChannel();
+                              },
+                              child: CircleAvatar(
+                                backgroundColor: customGreenColor,
+                                radius: 35.r,
+                                child: const Icon(
+                                  Icons.call,
+                                  color: Colors.white,
+                                  size: 35.0,
+                                ),
+                              ),),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ))
+                ),
+              ),
             ],
           ),
         ),

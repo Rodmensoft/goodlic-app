@@ -28,7 +28,9 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      Get.find<GeneralController>().updateFormLoaderController(true);
+    });
     logic.scrollController = ScrollController()
       ..addListener(Get.find<EditConsultantProfileLogic>().scrollListener);
     logic.stepperScrollController = ScrollController();

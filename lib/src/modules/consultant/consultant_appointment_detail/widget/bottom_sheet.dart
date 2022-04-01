@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:resize/resize.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../logic.dart';
 
@@ -216,32 +217,46 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                         ? const SizedBox()
                                         : Expanded(
                                             flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  'Document',
-                                                  style: state
-                                                      .sectionLabelTextStyle,
-                                                ),
-                                                SizedBox(
-                                                  height: 8.h,
-                                                ),
-                                                Text(
-                                                  _consultantAppointmentDetailLogic
-                                                      .selectedAppointmentData
-                                                      .fileType!,
-                                                  softWrap: true,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 1,
-                                                  style: state
-                                                      .sectionDataTextStyle,
-                                                ),
-                                              ],
+                                            child: InkWell(
+                                              onTap: () {
+                                                launch(
+                                                    _consultantAppointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .file!.contains('assets')?
+                                                    '$mediaUrl/${_consultantAppointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .file}'
+                                                        :'${_consultantAppointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .file}');
+                                              },
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'Document',
+                                                    style: state
+                                                        .sectionLabelTextStyle,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 8.h,
+                                                  ),
+                                                  Text(
+                                                    _consultantAppointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .fileType!,
+                                                    softWrap: true,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    style: state
+                                                        .sectionDataTextStyle!.copyWith(color: customLightThemeColor,decoration: TextDecoration.underline),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                   ],
@@ -478,10 +493,11 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                             _consultantAppointmentDetailLogic
                                                         .selectedAppointmentData
                                                         .mentee!
-                                                        .country ==
+                                                        .userCountry ==
                                                     null
                                                 ? '...'
-                                                : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.country!}',
+                                                : _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!
+                                                .userCountry!.name!,
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,

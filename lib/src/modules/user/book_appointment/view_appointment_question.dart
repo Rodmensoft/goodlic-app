@@ -296,21 +296,23 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                     child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
-                                                        Text(
-                                                            _bookAppointmentLogic
-                                                                .selectedFileName!,
-                                                            softWrap: true,
-                                                            maxLines: 1,
-                                                            overflow:
-                                                                TextOverflow.ellipsis,
-                                                            style:  TextStyle(
-                                                                fontFamily:
-                                                                    SarabunFontFamily
-                                                                        .medium,
-                                                                fontSize: 12.sp,
-                                                                color:
-                                                                    customOrangeColor),
-                                                          ),
+                                                        Expanded(
+                                                          child: Text(
+                                                              _bookAppointmentLogic
+                                                                  .selectedFileName!,
+                                                              softWrap: true,
+                                                              maxLines: 1,
+                                                              overflow:
+                                                                  TextOverflow.ellipsis,
+                                                              style:  TextStyle(
+                                                                  fontFamily:
+                                                                      SarabunFontFamily
+                                                                          .medium,
+                                                                  fontSize: 12.sp,
+                                                                  color:
+                                                                      customOrangeColor),
+                                                            ),
+                                                        ),
                                                         InkWell(
                                                           onTap: (){
                                                             _bookAppointmentLogic

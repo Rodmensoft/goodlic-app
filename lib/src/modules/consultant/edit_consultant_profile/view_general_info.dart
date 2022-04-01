@@ -13,6 +13,7 @@ import 'package:consultant_product/src/modules/consultant/edit_consultant_profil
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/place_service.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_post.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/view_location_picker.dart';
+import 'package:consultant_product/src/modules/image_full_view/view.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
@@ -49,9 +50,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      Get.find<GeneralController>().updateFormLoaderController(false);
-    });
   }
 
   @override
@@ -80,28 +78,45 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                         null &&
                                     _generalController
                                             .getConsultantProfileModel.data !=
-                                        null
-                                ? Center(
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 25.h),
-                                      child: SizedBox(
-                                        height: 103.h,
-                                        width: 190.w,
-                                        child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            child: Image.network(
-                                              _generalController
-                                                      .getConsultantProfileModel
-                                                      .data!
-                                                      .userDetail!
-                                                      .imagePath!
-                                                      .contains('assets')
-                                                  ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
-                                                  : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
-                                              fit: BoxFit.cover,
-                                            )),
+                                        null &&
+                                    profileImage == null
+                                ? InkWell(
+                                    onTap: () {
+                                      changeImagePickerDialog(
+                                          context,
+                                          _generalController
+                                                  .getConsultantProfileModel
+                                                  .data!
+                                                  .userDetail!
+                                                  .imagePath!
+                                                  .contains('assets')
+                                              ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                              : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
+                                          true,
+                                          null);
+                                    },
+                                    child: Center(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 25.h),
+                                        child: SizedBox(
+                                          height: 103.h,
+                                          width: 190.w,
+                                          child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              child: Image.network(
+                                                _generalController
+                                                        .getConsultantProfileModel
+                                                        .data!
+                                                        .userDetail!
+                                                        .imagePath!
+                                                        .contains('assets')
+                                                    ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                                    : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
+                                                fit: BoxFit.cover,
+                                              )),
+                                        ),
                                       ),
                                     ),
                                   )
@@ -140,20 +155,26 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                               ),
                                             ),
                                           )
-                                    : Center(
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 25.h),
-                                          child: SizedBox(
-                                            height: 103.h,
-                                            width: 190.w,
-                                            child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                child: Image.file(
-                                                  profileImage!,
-                                                  fit: BoxFit.cover,
-                                                )),
+                                    : InkWell(
+                                        onTap: () {
+                                          changeImagePickerDialog(context, null,
+                                              false, profileImage);
+                                        },
+                                        child: Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 25.h),
+                                            child: SizedBox(
+                                              height: 103.h,
+                                              width: 190.w,
+                                              child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  child: Image.file(
+                                                    profileImage!,
+                                                    fit: BoxFit.cover,
+                                                  )),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -1051,8 +1072,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                               Get.find<GeneralController>()
                                   .updateFormLoaderController(true);
                               mentorGeneralInfoRepo(profileImage);
-                            }
-                            else if (_editConsultantProfileLogic
+                            } else if (_editConsultantProfileLogic
                                         .generalInfoPostModel.data !=
                                     null &&
                                 profileImage == null) {
@@ -1109,9 +1129,10 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                   },
                                   true,
                                   mentorGeneralInfo2Repo);
-                            }
-                            else if (_generalController.getConsultantProfileModel.data !=
-                                null && profileImage == null) {
+                            } else if (_generalController
+                                        .getConsultantProfileModel.data !=
+                                    null &&
+                                profileImage == null) {
                               Get.find<GeneralController>()
                                   .updateFormLoaderController(true);
                               postMethod(
@@ -1123,51 +1144,49 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                         .storageBox
                                         .read('userID'),
                                     'first_name': _editConsultantProfileLogic
-                                        .firstNameController
-                                        .text,
+                                        .firstNameController.text,
                                     'last_name': _editConsultantProfileLogic
-                                        .lastNameController
-                                        .text,
+                                        .lastNameController.text,
                                     'father_name': _editConsultantProfileLogic
-                                        .fatherNameController
-                                        .text,
+                                        .fatherNameController.text,
                                     'cnic': _editConsultantProfileLogic
-                                        .cnicController
-                                        .text,
-                                    'email': _editConsultantProfileLogic.emailController.text,
+                                        .cnicController.text,
+                                    'email': _editConsultantProfileLogic
+                                        .emailController.text,
                                     'address': _editConsultantProfileLogic
-                                        .addressController
-                                        .text,
-                                    'gender':
-                                    _editConsultantProfileLogic.selectedGender,
-                                    'religion':
-                                    _editConsultantProfileLogic.selectedReligion,
+                                        .addressController.text,
+                                    'gender': _editConsultantProfileLogic
+                                        .selectedGender,
+                                    'religion': _editConsultantProfileLogic
+                                        .selectedReligion,
                                     'dob': DateFormat('yyyy-MM-dd')
-                                        .format(
-                                        _editConsultantProfileLogic.selectedDob!)
+                                        .format(_editConsultantProfileLogic
+                                            .selectedDob!)
                                         .toString(),
                                     'occupation': _editConsultantProfileLogic
                                         .mentorProfileGenericDataModel
                                         .data!
-                                        .occupations![_editConsultantProfileLogic
-                                        .occupationDropDownList
-                                        .indexOf(_editConsultantProfileLogic
-                                        .selectedOccupation!)]
+                                        .occupations![
+                                            _editConsultantProfileLogic
+                                                .occupationDropDownList
+                                                .indexOf(
+                                                    _editConsultantProfileLogic
+                                                        .selectedOccupation!)]
                                         .id,
                                     'country': _editConsultantProfileLogic
                                         .mentorProfileGenericDataModel
                                         .data!
                                         .countries![_editConsultantProfileLogic
-                                        .countryDropDownList
-                                        .indexOf(_editConsultantProfileLogic
-                                        .selectedCountry!)]
+                                            .countryDropDownList
+                                            .indexOf(_editConsultantProfileLogic
+                                                .selectedCountry!)]
                                         .id,
-                                    'city': _editConsultantProfileLogic.selectedCity,
+                                    'city': _editConsultantProfileLogic
+                                        .selectedCity,
                                   },
                                   true,
                                   mentorGeneralInfo2Repo);
-                            }
-                            else {
+                            } else {
                               showDialog(
                                   context: context,
                                   barrierDismissible: false,
@@ -1193,6 +1212,52 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                 ),
               ),
             ));
+  }
+
+  void changeImagePickerDialog(
+      BuildContext context, String? image, bool? isNetwork, File? fileImage) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            actions: <Widget>[
+              CupertinoDialogAction(
+                  isDefaultAction: true,
+                  onPressed: () {
+                    Navigator.pop(context);
+                    if (isNetwork!) {
+                      Get.to(ImageViewScreen(
+                        networkImage: image,
+                      ));
+                    } else {
+                      Get.to(ImageViewScreen(
+                        fileImage: fileImage,
+                      ));
+                    }
+                  },
+                  child: Text(
+                    "View",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(fontSize: 18),
+                  )),
+              CupertinoDialogAction(
+                  isDefaultAction: true,
+                  onPressed: () async {
+                    Navigator.pop(context);
+                    imagePickerDialog(context);
+                    },
+                  child: Text(
+                    "Change",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(fontSize: 18),
+                  )),
+            ],
+          );
+        });
   }
 
   void imagePickerDialog(BuildContext context) {

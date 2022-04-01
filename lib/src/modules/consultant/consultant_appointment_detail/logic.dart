@@ -4,6 +4,7 @@ import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/modules/agora_call/repo.dart';
 import 'package:consultant_product/src/modules/chat/logic.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/model_get_consultant_appointment.dart';
@@ -97,6 +98,10 @@ class ConsultantAppointmentDetailLogic extends GetxController {
   }
 
   chatOnTap(BuildContext context) {
+    Get.find<ChatLogic>().userName = '${selectedAppointmentData.mentee!.firstName} '
+        '${selectedAppointmentData.mentee!.lastName}';
+    Get.find<ChatLogic>().userEmail = selectedAppointmentData.mentee!.email;
+    Get.find<ChatLogic>().userImage = selectedAppointmentData.mentee!.imagePath;
     Get.find<ChatLogic>().updateGetMessagesLoader(true);
     Get.find<ChatLogic>().updateSenderMessageGetId(
         Get.find<GeneralController>().storageBox.read('userID'));
@@ -107,6 +112,10 @@ class ConsultantAppointmentDetailLogic extends GetxController {
 
 
   videoOnTap(BuildContext context) {
+    Get.find<AgoraLogic>().userName = '${selectedAppointmentData.mentee!.firstName} '
+        '${selectedAppointmentData.mentee!.lastName}';
+    Get.find<AgoraLogic>().userImage = selectedAppointmentData.mentee!.imagePath;
+    Get.find<AgoraLogic>().update();
     Get.find<GeneralController>().updateSelectedChannel(
         Get.find<GeneralController>().getRandomString(10));
     Get.find<GeneralController>()
@@ -126,6 +135,11 @@ class ConsultantAppointmentDetailLogic extends GetxController {
   }
 
   audioOnTap(BuildContext context) {
+
+    Get.find<AgoraLogic>().userName = '${selectedAppointmentData.mentee!.firstName} '
+        '${selectedAppointmentData.mentee!.lastName}';
+    Get.find<AgoraLogic>().userImage = selectedAppointmentData.mentee!.imagePath;
+    Get.find<AgoraLogic>().update();
     Get.find<GeneralController>().updateSelectedChannel(
         Get.find<GeneralController>().getRandomString(10));
     Get.find<GeneralController>()

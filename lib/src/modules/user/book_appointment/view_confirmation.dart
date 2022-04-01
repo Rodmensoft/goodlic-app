@@ -208,7 +208,7 @@ class _AppointmentConfirmationViewState
                           padding: EdgeInsetsDirectional.fromSTEB(40.w, 0, 40.w, 0),
                           child: InkWell(
                               onTap: () {
-                                Get.offAllNamed(PageRoutes.userHome);
+                                Get.offAllNamed(PageRoutes.myAppointment);
                               },
                               child: const MyCustomBottomBar(
                                   title: 'My Appointments', disable: false)),

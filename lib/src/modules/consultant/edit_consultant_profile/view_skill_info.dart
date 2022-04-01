@@ -33,6 +33,12 @@ class _SkillInfoViewState extends State<SkillInfoView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Get.find<EditConsultantProfileLogic>().scrollController!.animateTo(
+        Get.find<EditConsultantProfileLogic>().scrollController!
+            .position
+            .minScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 500));
   }
 
   @override
@@ -541,7 +547,10 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                 padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 0),
                 child: InkWell(
                     onTap: () {
-                      if (_editConsultantProfileLogic.skillInfoPostModel.data != null) {
+                      if ((_editConsultantProfileLogic.skillInfoPostModel.data != null &&
+                          _editConsultantProfileLogic.forDisplaySkillList!.isEmpty) ||
+                          (_editConsultantProfileLogic.skillInfoPostModel.data == null &&
+                              _editConsultantProfileLogic.forDisplaySkillList!.isNotEmpty)) {
                         setState(() {
                           _editConsultantProfileLogic
                               .stepperList[_editConsultantProfileLogic.stepperIndex!]

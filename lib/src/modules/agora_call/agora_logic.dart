@@ -5,4 +5,6 @@ class AgoraLogic extends GetxController {
   AgoraModel agoraModel = AgoraModel();
   AgoraModel agoraModelDefault = AgoraModel();
 
+  String? userName;
+  String? userImage;
 }

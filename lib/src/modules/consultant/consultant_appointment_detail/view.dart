@@ -280,7 +280,6 @@ class _ConsultantAppointmentDetailPageState
                                                     )
                                                   : const SizedBox()
                                               : const SizedBox(),
-
                                           ///---AUDIO
                                           (_consultantAppointmentDetailLogic
                                                           .selectedAppointmentData
@@ -320,7 +319,6 @@ class _ConsultantAppointmentDetailPageState
                                                     )
                                                   : const SizedBox()
                                               : const SizedBox(),
-
                                           // ///---LIVE
                                           // (_consultantAppointmentDetailLogic
                                           //     .selectedAppointmentData.appointmentStatus! ==

@@ -437,32 +437,60 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    ///---phone
+                                    // ///---phone
+                                    // Expanded(
+                                    //   child: Column(
+                                    //     crossAxisAlignment:
+                                    //         CrossAxisAlignment.start,
+                                    //     mainAxisAlignment:
+                                    //         MainAxisAlignment.center,
+                                    //     children: [
+                                    //       Text(
+                                    //         'Phone',
+                                    //         style: state.sectionLabelTextStyle,
+                                    //       ),
+                                    //       SizedBox(
+                                    //         height: 8.h,
+                                    //       ),
+                                    //       Text(
+                                    //         _appointmentDetailLogic
+                                    //                     .selectedAppointmentData
+                                    //                     .mentor!
+                                    //                     .phone ==
+                                    //                 null
+                                    //             ? '...'
+                                    //             : _appointmentDetailLogic
+                                    //                 .selectedAppointmentData
+                                    //                 .mentor!
+                                    //                 .phone!,
+                                    //         softWrap: true,
+                                    //         overflow: TextOverflow.ellipsis,
+                                    //         maxLines: 1,
+                                    //         style: state.sectionDataTextStyle,
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
+
+                                    ///---reg.date
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Phone',
+                                            'Reg. Date',
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentor!
-                                                        .phone ==
-                                                    null
-                                                ? '...'
-                                                : _appointmentDetailLogic
-                                                    .selectedAppointmentData
-                                                    .mentor!
-                                                    .phone!,
+                                            DateFormat('dd/MM/yy').format(
+                                                DateTime.parse(
+                                                    '${_appointmentDetailLogic.selectedAppointmentData.mentor!.createdAt}')),
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -471,7 +499,6 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                         ],
                                       ),
                                     ),
-
                                     ///---city
                                     Expanded(
                                       child: Column(
@@ -503,8 +530,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                         ],
                                       ),
                                     ),
-
-                                    ///---cnic
+                                    ///---country
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
@@ -513,7 +539,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'CNIC',
+                                            'Country',
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -523,10 +549,10 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             _appointmentDetailLogic
                                                         .selectedAppointmentData
                                                         .mentor!
-                                                        .cnic ==
+                                                        .userCountry ==
                                                     null
                                                 ? '...'
-                                                : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.cnic!}',
+                                                : _appointmentDetailLogic.selectedAppointmentData.mentor!.userCountry!.name!,
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -535,6 +561,38 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                         ],
                                       ),
                                     ),
+
+                                    // ///---cnic
+                                    // Expanded(
+                                    //   child: Column(
+                                    //     crossAxisAlignment:
+                                    //         CrossAxisAlignment.start,
+                                    //     mainAxisAlignment:
+                                    //         MainAxisAlignment.center,
+                                    //     children: [
+                                    //       Text(
+                                    //         'CNIC',
+                                    //         style: state.sectionLabelTextStyle,
+                                    //       ),
+                                    //       SizedBox(
+                                    //         height: 8.h,
+                                    //       ),
+                                    //       Text(
+                                    //         _appointmentDetailLogic
+                                    //                     .selectedAppointmentData
+                                    //                     .mentor!
+                                    //                     .cnic ==
+                                    //                 null
+                                    //             ? '...'
+                                    //             : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.cnic!}',
+                                    //         softWrap: true,
+                                    //         overflow: TextOverflow.ellipsis,
+                                    //         maxLines: 1,
+                                    //         style: state.sectionDataTextStyle,
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                                 SizedBox(
@@ -546,33 +604,6 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    ///---reg.date
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Reg. Date',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            DateFormat('dd/MM/yy').format(
-                                                DateTime.parse(
-                                                    '${_appointmentDetailLogic.selectedAppointmentData.mentor!.createdAt}')),
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
 
                                     ///---address
                                     Expanded(

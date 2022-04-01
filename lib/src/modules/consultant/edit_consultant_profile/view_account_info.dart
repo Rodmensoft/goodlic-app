@@ -30,6 +30,18 @@ class _AccountInfoViewState extends State<AccountInfoView> {
   //     TextEditingController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Get.find<EditConsultantProfileLogic>().scrollController!.animateTo(
+        Get.find<EditConsultantProfileLogic>().scrollController!
+            .position
+            .minScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 500));
+  }
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(
       builder:(_generalController)=> GetBuilder<EditConsultantProfileLogic>(

@@ -4,8 +4,11 @@ import 'dart:developer';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as rtc_local_view;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as rtc_remote_view;
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
+import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:resize/resize.dart';
@@ -254,57 +257,105 @@ class _State extends State<JoinChannelVideo> {
   _ringingView() {
     return Scaffold(
       body: Container(
-        color: Colors.white,
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          children: [
-            isJoined
-                ? Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-                    child: Text(
-                      'RINGING.....',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
-                          color: customThemeColor),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              customThemeColor,
+              customLightThemeColor,
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .1,
+              ),
+              Get.find<AgoraLogic>().userImage == null
+                  ? Container(
+                height: 130.h,
+                width: 130.w,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+              )
+                  : Container(
+                height: 130.h,
+                width: 130.w,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: NetworkImage(Get.find<AgoraLogic>()
+                            .userImage!
+                            .contains('assets')
+                            ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
+                            : Get.find<AgoraLogic>().userImage!))),
+              ),
+              isJoined
+                  ? Padding(
+                padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
+                child: Text(
+                  'Ringing To',
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontFamily: SarabunFontFamily.extraBold,
+                      color: Colors.white),
+                ),
+              )
+                  : Padding(
+                padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
+                child: Text(
+                  'Calling To',
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontFamily: SarabunFontFamily.extraBold,
+                      color: Colors.white),
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 14.h, 0, 0),
+                child: Text(
+                  '${Get.find<AgoraLogic>().userName}',
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      fontFamily: SarabunFontFamily.regular,
+                      color: Colors.white),
+                ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: RawMaterialButton(
+                      onPressed: () {
+                        _leaveChannel();
+                        _onCallEnd(context);
+                      },
+                      child: const Icon(
+                        Icons.clear,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      shape: const CircleBorder(),
+                      elevation: 2.0,
+                      fillColor: Colors.redAccent,
+                      padding: const EdgeInsets.all(15.0),
                     ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-                    child: Text(
-                      'CALLING.....',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
-                          color: customThemeColor),
-                    ),
-                  ),
-            Expanded(child: Image.asset('assets/calling.gif')),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: RawMaterialButton(
-                    onPressed: () {
-                      _leaveChannel();
-                      _onCallEnd(context);
-                    },
-                    child: const Icon(
-                      Icons.clear,
-                      color: Colors.white,
-                      size: 35.0,
-                    ),
-                    shape: const CircleBorder(),
-                    elevation: 2.0,
-                    fillColor: Colors.redAccent,
-                    padding: const EdgeInsets.all(15.0),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -312,24 +363,19 @@ class _State extends State<JoinChannelVideo> {
 
   _receiverView() {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(Icons.arrow_back_ios, color: customThemeColor)),
-        title: SvgPicture.asset(
-          'assets/appBarLogo.svg',
-          width: MediaQuery.of(context).size.width * .1,
-        ),
-        centerTitle: true,
-      ),
       body: Container(
-        color: Colors.white,
-        height: double.infinity,
-        width: double.infinity,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              customThemeColor,
+              customLightThemeColor,
+            ],
+          ),
+        ),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -337,62 +383,72 @@ class _State extends State<JoinChannelVideo> {
             children: [
               Expanded(
                   child: SvgPicture.asset(
-                'assets/callAlert.svg',
-                width: MediaQuery.of(context).size.width * .6,
-              )),
+                    'assets/images/callAlert.svg',
+                    width: MediaQuery.of(context).size.width * .6,
+                  )),
               Text(
                 'Call Alert',
                 style: TextStyle(
                     fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                    color: customThemeColor),
+                    fontFamily: SarabunFontFamily.bold,
+                    color: Colors.white),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
-                'you are receiving a call from ${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE'
-                    ?'MENTOR'
-                    :'MENTEE'}',
+                'you are receiving a call from '
+                    '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE'
+                    ? 'MENTOR'
+                    : 'MENTEE'}',
                 style: TextStyle(
                     fontSize: 15.sp,
-                    fontWeight: FontWeight.w400,
-                    color: customLightThemeColor),
+                    fontFamily: SarabunFontFamily.regular,
+                    color: Colors.white),
               ),
               Expanded(
-                  child: Row(
-                    children: [
-                      // Expanded(
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.all(0.0),
-                      //     child: RawMaterialButton(
-                      //       onPressed: () {
-                      //         setState(() {
-                      //           callEnd = 3;
-                      //         });
-                      //         // _onCallEnd(context);
-                      //       },
-                      //       child: const Icon(
-                      //         Icons.clear,
-                      //         color: Colors.white,
-                      //         size: 35.0,
-                      //       ),
-                      //       shape: const CircleBorder(),
-                      //       elevation: 2.0,
-                      //       fillColor: Colors.redAccent,
-                      //       padding: const EdgeInsets.all(15.0),
-                      //     ),
-                      //   ),
-                      // ),
-                      Expanded(
-                        child: InkWell(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: Colors.red,
+                              radius: 35.r,
+                              child: const Icon(
+                                Icons.clear,
+                                color: Colors.white,
+                                size: 35.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
                             onTap: () {
                               _joinChannel();
                             },
-                            child: Image.asset('assets/calling.gif')),
-                      ),
-                    ],
-                  ))
+                            child: CircleAvatar(
+                              backgroundColor: customGreenColor,
+                              radius: 35.r,
+                              child: const Icon(
+                                Icons.call,
+                                color: Colors.white,
+                                size: 35.0,
+                              ),
+                            ),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -413,46 +469,91 @@ class _CallWaitingViewState extends State<CallWaitingView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-              child: Text(
-                'CALLING.....',
-                style: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w600,
-                    color: customThemeColor),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              customThemeColor,
+              customLightThemeColor,
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .1,
               ),
-            ),
-            Expanded(child: Image.asset('assets/calling.gif')),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: RawMaterialButton(
-                    onPressed: () {
-                      Get.find<GeneralController>().updateGoForCall(false);
-                      Get.back();
-                    },
-                    child: const Icon(
-                      Icons.clear,
-                      color: Colors.white,
-                      size: 35.0,
+              Get.find<AgoraLogic>().userImage == null
+                  ? Container(
+                height: 130.h,
+                width: 130.w,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+              )
+                  : Container(
+                height: 130.h,
+                width: 130.w,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: NetworkImage(Get.find<AgoraLogic>()
+                            .userImage!
+                            .contains('assets')
+                            ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
+                            : Get.find<AgoraLogic>().userImage!))),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
+                child: Text(
+                  'Calling To',
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontFamily: SarabunFontFamily.extraBold,
+                      color: Colors.white),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 14.h, 0, 0),
+                child: Text(
+                  '${Get.find<AgoraLogic>().userName}',
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      fontFamily: SarabunFontFamily.regular,
+                      color: Colors.white),
+                ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: RawMaterialButton(
+                      onPressed: () {
+                        Get.find<GeneralController>().updateGoForCall(false);
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.clear,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      shape: const CircleBorder(),
+                      elevation: 2.0,
+                      fillColor: Colors.redAccent,
+                      padding: const EdgeInsets.all(15.0),
                     ),
-                    shape: const CircleBorder(),
-                    elevation: 2.0,
-                    fillColor: Colors.redAccent,
-                    padding: const EdgeInsets.all(15.0),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -183,92 +183,87 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                       flexibleSpace: FlexibleSpaceBar(
                           centerTitle: true,
                           background: SafeArea(
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  top: -9,
-                                  child: Hero(
-                                    tag: _generalController
-                                            .getConsultantProfileModel
-                                            .data!
-                                            .userDetail!
-                                            .imagePath!
-                                            .contains('assets')
-                                        ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
-                                        : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
-                                    child: Material(
-                                      child: InkWell(
-                                        onTap: () {
-                                          Get.to(ImageViewScreen(
-                                            networkImage: _generalController
+                            child: Hero(
+                              tag: _generalController
+                                      .getConsultantProfileModel
+                                      .data!
+                                      .userDetail!
+                                      .imagePath!
+                                      .contains('assets')
+                                  ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                  : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
+                              child: Material(
+                                borderRadius: BorderRadius.vertical(
+                                    bottom: Radius.circular(25.r)),
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.to(ImageViewScreen(
+                                      networkImage: _generalController
+                                              .getConsultantProfileModel
+                                              .data!
+                                              .userDetail!
+                                              .imagePath!
+                                              .contains('assets')
+                                          ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                          : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
+                                    ));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: customLightThemeColor,
+                                      borderRadius: BorderRadius.vertical(
+                                          bottom: Radius.circular(25.r)),
+                                    ),
+                                    // color: customLightThemeColor,
+                                    width:
+                                        MediaQuery.of(context).size.width,
+
+                                    child: Center(
+                                        child: _generalController
                                                     .getConsultantProfileModel
                                                     .data!
                                                     .userDetail!
-                                                    .imagePath!
-                                                    .contains('assets')
-                                                ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
-                                                : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
-                                          ));
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: customLightThemeColor,
-                                            borderRadius: BorderRadius.vertical(
-                                                bottom: Radius.circular(25.r)),
-                                          ),
-                                          // color: customLightThemeColor,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-
-                                          child: Center(
-                                              child: _generalController
+                                                    .imagePath
+                                                    .toString() !=
+                                                'null'
+                                            ? ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                        bottom: Radius
+                                                            .circular(
+                                                                25.r)),
+                                                child: Image.network(
+                                                  _generalController
                                                           .getConsultantProfileModel
                                                           .data!
                                                           .userDetail!
-                                                          .imagePath
-                                                          .toString() !=
-                                                      'null'
-                                                  ? ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.vertical(
-                                                              bottom: Radius
-                                                                  .circular(
-                                                                      25.r)),
-                                                      child: Image.network(
-                                                        _generalController
-                                                                .getConsultantProfileModel
-                                                                .data!
-                                                                .userDetail!
-                                                                .imagePath!
-                                                                .contains(
-                                                                    'assets')
-                                                            ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
-                                                            : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    )
-                                                  : ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.vertical(
-                                                              bottom: Radius
-                                                                  .circular(
-                                                                      25.r)),
-                                                      child: Image.asset(
-                                                        'assets/images/stackImage.png',
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            .5,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    )),
-                                        ),
-                                      ),
-                                    ),
+                                                          .imagePath!
+                                                          .contains(
+                                                              'assets')
+                                                      ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                                      : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              )
+                                            : ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                        bottom: Radius
+                                                            .circular(
+                                                                25.r)),
+                                                child: Image.asset(
+                                                  'assets/images/stackImage.png',
+                                                  width: MediaQuery.of(
+                                                              context)
+                                                          .size
+                                                          .width *
+                                                      .5,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              )),
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                           )),
                     ),

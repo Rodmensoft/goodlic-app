@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/notififcation_icon.dart';
@@ -35,6 +38,7 @@ class MyCustomSliverAppBar extends StatefulWidget {
 }
 
 class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
+  int i = 0;
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -48,7 +52,12 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
       backgroundColor: widget.isShrink! ? customThemeColor : Colors.transparent,
       leading: InkWell(
         onTap: () {
-          Get.back();
+           log('PREVIOUS--->>${Get.previousRoute}');
+           if(Get.previousRoute.contains('appointmentConfirmation')){
+             Get.offAllNamed(PageRoutes.userHome);
+           }else{
+             Get.back();
+           }
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

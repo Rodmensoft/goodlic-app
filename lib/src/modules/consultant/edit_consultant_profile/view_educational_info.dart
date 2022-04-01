@@ -46,6 +46,12 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Get.find<EditConsultantProfileLogic>().scrollController!.animateTo(
+        Get.find<EditConsultantProfileLogic>().scrollController!
+            .position
+            .minScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 500));
   }
 
   @override
@@ -304,6 +310,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                         TextEditingController(
                                                             text: _editConsultantProfileLogic
                                                                 .selectedYear);
+                                                    log('YEAR--->>${_yearController.text}');
                                                   });
                                                   // close the dialog when year is selected.
                                                   Navigator.pop(context);
