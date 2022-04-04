@@ -1,6 +1,5 @@
 
 import 'dart:developer';
-
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/get_ratings_model.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/logic.dart';
@@ -32,20 +31,25 @@ getMentorTodayAppointmentRepo(
         }
         Get.find<DashboardLogic>()
             .updateGetTodayAppointmentLoader(false);
+
+        Get.find<DashboardLogic>().updateRefreshController();
       } else {
         Get.find<DashboardLogic>()
             .updateGetTodayAppointmentLoader(false);
+        Get.find<DashboardLogic>().updateRefreshController();
       }
 
       log('getMentorTodayAppointmentRepo ------>> ${Get.find<DashboardLogic>().getTodayAppointmentModel.success}');
     } else {
       Get.find<DashboardLogic>()
           .updateGetTodayAppointmentLoader(false);
+      Get.find<DashboardLogic>().updateRefreshController();
     }
   } else if (!responseCheck) {
 
     Get.find<DashboardLogic>()
         .updateGetTodayAppointmentLoader(false);
+    Get.find<DashboardLogic>().updateRefreshController();
     log('Exception........................');
   }
 }
@@ -72,10 +76,12 @@ getRatingMentorRepo(
     Get.find<DashboardLogic>().getRatingsModel =
         GetRatingsModel.fromJson(response);
     Get.find<DashboardLogic>().updateRatingLoader(false);
+    Get.find<DashboardLogic>().updateRefreshController();
     if (Get.find<DashboardLogic>().getRatingsModel.status == true) {
       log('get rating------>> ${Get.find<DashboardLogic>().getRatingsModel.status}');
     } else {}
   } else if (!responseCheck) {
+    Get.find<DashboardLogic>().updateRefreshController();
     Get.find<DashboardLogic>().updateRatingLoader(false);
 
     log('Exception........................');

@@ -15,6 +15,7 @@ class UserHomeLogic extends GetxController {
   GetUserProfileModel getUserProfileModel = GetUserProfileModel();
 
   int? selectedConsultantID;
+  String? selectedConsultantName;
 
 
   ///----app-bar-settings-----start

@@ -17,13 +17,16 @@ getConsultantAllAppointmentsRepo(
             .status
             .toString() ==
         'true') {
+      Get.find<ConsultantAppointmentLogic>().updateRefreshController();
       Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(false);
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
+      Get.find<ConsultantAppointmentLogic>().updateRefreshController();
       Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(false);
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
+    Get.find<ConsultantAppointmentLogic>().updateRefreshController();
     Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
 
@@ -209,13 +212,16 @@ getConsultantAllAppointmentsRepo(
 //
 //       Get.find<ConsultantAppointmentLogic>().update();
 //
+// Get.find<ConsultantAppointmentLogic>().updateRefreshController();
 //       Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentMoreLoader(false);
 //       Get.find<GeneralController>().updateFormLoaderController(false);
 //     } else {
+// Get.find<ConsultantAppointmentLogic>().updateRefreshController();
 //       Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentMoreLoader(false);
 //       Get.find<GeneralController>().updateFormLoaderController(false);
 //     }
 //   } else if (!responseCheck) {
+// Get.find<ConsultantAppointmentLogic>().updateRefreshController();
 //     Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentMoreLoader(false);
 //     Get.find<GeneralController>().updateFormLoaderController(false);
 //

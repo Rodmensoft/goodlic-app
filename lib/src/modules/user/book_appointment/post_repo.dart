@@ -1,10 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/header.dart';
 import 'package:consultant_product/src/api_services/logic.dart';
+import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/agora_call/repo.dart';
+import 'package:consultant_product/src/modules/sms/logic.dart';
+import 'package:consultant_product/src/modules/sms/repo.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
@@ -47,15 +52,15 @@ bookAppointmentFileRepo(File file1,BuildContext context) async {
       if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status ==
           true) {
         ///----fcm-send-start
-        // getMethod(
-        //     context,
-        //     fcmGetUrl,
-        //     {
-        //       'token': '123',
-        //       'user_id': Get.find<GeneralController>().userIdForSendNotification
-        //     },
-        //     true,
-        //     getFcmTokenRepo);
+        getMethod(
+            context,
+            fcmGetUrl,
+            {
+              'token': '123',
+              'user_id': Get.find<GeneralController>().userIdForSendNotification
+            },
+            true,
+            getFcmTokenRepo);
         Get.offAllNamed(PageRoutes.appointmentConfirmation);
         // if(Get.find<BookAppointmentLogic>()
         //     .selectedPaymentType==0){
@@ -140,27 +145,27 @@ bookAppointmentWithoutFileRepo(
     Get.find<GeneralController>().updateFormLoaderController(false);
     if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
       ///----send-sms
-      // postMethod(
-      //     context,
-      //     sendSMSUrl,
-      //     {
-      //       'token': '123',
-      //       'phone': Get.find<SmsLogic>().phoneNumber,
-      //       'message': Get.find<GeneralController>().notificationTitle,
-      //     },
-      //     true,
-      //     sendSMSRepo);
+      postMethod(
+          context,
+          sendSMSUrl,
+          {
+            'token': '123',
+            'phone': Get.find<SmsLogic>().phoneNumber,
+            'message': Get.find<GeneralController>().notificationTitle,
+          },
+          true,
+          sendSMSRepo);
       ///----fcm-send-start
-      // getMethod(
-      //     context,
-      //     fcmGetUrl,
-      //     {
-      //       'token': '123',
-      //       'user_id': Get.find<GeneralController>().userIdForSendNotification
-      //     },
-      //     true,
-      //     getFcmTokenRepo);
-      // Get.offAllNamed(PageRoutes.bookingConfirmation);
+      getMethod(
+          context,
+          fcmGetUrl,
+          {
+            'token': '123',
+            'user_id': Get.find<GeneralController>().userIdForSendNotification
+          },
+          true,
+          getFcmTokenRepo);
+      Get.offAllNamed(PageRoutes.appointmentConfirmation);
       // if(Get.find<BookAppointmentLogic>()
       //     .selectedPaymentType==0){
       //   Get.find<GeneralController>().updateFormLoaderController(false);
@@ -192,7 +197,6 @@ bookAppointmentWithoutFileRepo(
       //   Get.find<GeneralController>().updateFormLoaderController(false);
       //   Get.toNamed(PageRoutes.walletPayment);
       // }
-      Get.offAllNamed(PageRoutes.appointmentConfirmation);
 
       log('bookAppointmentRepo ------>> ${Get.find<BookAppointmentLogic>().bookAppointmentModel.success}');
     } else {

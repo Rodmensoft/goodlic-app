@@ -72,23 +72,16 @@ class _BlogsPageState extends State<BlogsPage> {
                     ),
                   ];
                 },
-                body: Container(
+                body: SizedBox(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
-                  child:
-                      // _blogsLogic.blogLoader! &&
-                      //         _blogsLogic
-                      //             .getAllBlogModel.data!.featuredBlogs!.isEmpty
-                      //     ? const SizedBox()
-                      //     :
-                      Padding(
+                  child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // _blogsLogic
-                          //         .getAllBlogModel.data!.featuredBlogs!.isEmpty
+                          ///---recommended-blogs
                           !_blogsLogic.blogLoader!
                               ? SkeletonLoader(
                                   period: const Duration(seconds: 2),
@@ -123,48 +116,11 @@ class _BlogsPageState extends State<BlogsPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                          /// category Text
                                           Text(
-                                            'Categories',
+                                            'recommended_blogs'.tr,
                                             style: state.headingTextStyle,
                                           ),
                                           SizedBox(height: 16.h),
-                                          // !_blogsLogic.blogLoader!
-                                          //     ? SkeletonLoader(
-                                          //         period:
-                                          //             const Duration(seconds: 2),
-                                          //         highlightColor: Colors.grey,
-                                          //         direction: SkeletonDirection.ltr,
-                                          //         builder: SizedBox(
-                                          //           height: 207.h,
-                                          //           width: MediaQuery.of(context)
-                                          //               .size
-                                          //               .width,
-                                          //           child: ListView(
-                                          //             scrollDirection:
-                                          //                 Axis.horizontal,
-                                          //             children:
-                                          //                 List.generate(3, (index) {
-                                          //               return Padding(
-                                          //                 padding:
-                                          //                     const EdgeInsetsDirectional
-                                          //                             .fromSTEB(
-                                          //                         0, 0, 15, 0),
-                                          //                 child: Container(
-                                          //                   width: 183.w,
-                                          //                   height: 207.h,
-                                          //                   decoration:
-                                          //                       BoxDecoration(
-                                          //                     borderRadius:
-                                          //                         BorderRadius
-                                          //                             .circular(14),
-                                          //                     color: Colors.grey,
-                                          //                   ),
-                                          //                 ),
-                                          //               );
-                                          //             }),
-                                          //           ),
-                                          //         ))
                                           SizedBox(
                                             height: 207.h,
                                             width: MediaQuery.of(context)
@@ -174,7 +130,6 @@ class _BlogsPageState extends State<BlogsPage> {
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 children: List.generate(
-                                                  // 3,
                                                   _blogsLogic
                                                       .getAllBlogModel
                                                       .data!
@@ -185,103 +140,105 @@ class _BlogsPageState extends State<BlogsPage> {
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(
                                                                 0, 0, 12.w, 0),
-                                                    child: Stack(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        children: [
-                                                          Container(
-                                                            height: 207.h,
-                                                            width: 183.w,
-                                                            foregroundDecoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          14),
-                                                              gradient:
-                                                                  LinearGradient(
-                                                                colors: [
-                                                                  customThemeColor
-                                                                      .withOpacity(
-                                                                          0.1),
-                                                                  customThemeColor
-                                                                      .withOpacity(
-                                                                          0.2),
-                                                                  customThemeColor
-                                                                      .withOpacity(
-                                                                          0.5),
-                                                                  customThemeColor
-                                                                      .withOpacity(
-                                                                          0.7),
-                                                                ],
-                                                                begin: Alignment
-                                                                    .topCenter,
-                                                                end: Alignment
-                                                                    .bottomCenter,
-                                                                stops: const [
-                                                                  0,
-                                                                  0.2,
-                                                                  0.8,
-                                                                  1
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  Colors.grey,
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          10.r)),
-                                                              // image: const DecorationImage(
-                                                              //     image: AssetImage(
-                                                              //         'assets/images/real-estate-01.png'),
-                                                              //     fit: BoxFit.cover)
-                                                            ),
-                                                            child: ClipRRect(
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        _blogsLogic.updateSelectedBlogForView(
+                                                            _blogsLogic
+                                                                .getAllBlogModel
+                                                                .data!
+                                                                .featuredBlogs![index],
+                                                            'Anonymous');
+                                                        Get.toNamed(PageRoutes
+                                                            .blogDetail);
+                                                      },
+                                                      child: Stack(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          children: [
+                                                            Container(
+                                                              height: 207.h,
+                                                              width: 183.w,
+                                                              foregroundDecoration:
+                                                                  BoxDecoration(
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
-                                                                            14),
-                                                                child: _blogsLogic
-                                                                            .getAllBlogModel
-                                                                            .data!
-                                                                            .featuredBlogs![
-                                                                                index]
-                                                                            .imagePath
-                                                                            .toString() !=
-                                                                        'null'
-                                                                    ? Image
-                                                                        .network(
-                                                                        '$mediaUrl${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath}',
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                      )
-                                                                    : Image
-                                                                        .asset(
-                                                                        'assets/images/real-estate-01.png',
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                      )),
-                                                          ),
-                                                          Positioned(
-                                                            bottom: 20,
-                                                            child: Text(
-                                                              '${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].title}',
-                                                              style: state
-                                                                  .categoryTextStyle,
+                                                                            14.r),
+                                                                gradient:
+                                                                    LinearGradient(
+                                                                  colors: [
+                                                                    customThemeColor
+                                                                        .withOpacity(
+                                                                            0.1),
+                                                                    customThemeColor
+                                                                        .withOpacity(
+                                                                            0.2),
+                                                                    customThemeColor
+                                                                        .withOpacity(
+                                                                            0.5),
+                                                                    customThemeColor
+                                                                        .withOpacity(
+                                                                            0.7),
+                                                                  ],
+                                                                  begin: Alignment
+                                                                      .topCenter,
+                                                                  end: Alignment
+                                                                      .bottomCenter,
+                                                                  stops: const [
+                                                                    0,
+                                                                    0.2,
+                                                                    0.8,
+                                                                    1
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color:
+                                                                    Colors.grey,
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.r)),
+                                                              ),
+                                                              child: ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              14),
+                                                                  child: _blogsLogic
+                                                                              .getAllBlogModel
+                                                                              .data!
+                                                                              .featuredBlogs![
+                                                                                  index]
+                                                                              .imagePath
+                                                                              .toString() !=
+                                                                          'null'
+                                                                      ? Image
+                                                                          .network(
+                                                                          _blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath!.contains('assets')
+                                                                              ? '$mediaUrl${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath}'
+                                                                              : '${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath}',
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        )
+                                                                      : Image
+                                                                          .asset(
+                                                                          'assets/images/real-estate-01.png',
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        )),
                                                             ),
-                                                          )
-                                                          // Positioned(
-                                                          //   bottom: 20,
-                                                          //   child: Text(
-                                                          //     'REAL ESTATE',
-                                                          //     style:
-                                                          //         state.categoryTextStyle,
-                                                          //   ),
-                                                          // )
-                                                        ]),
+                                                            Positioned(
+                                                              bottom: 20,
+                                                              child: Text(
+                                                                '${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].title}',
+                                                                style: state
+                                                                    .categoryTextStyle,
+                                                              ),
+                                                            )
+                                                          ]),
+                                                    ),
                                                   ),
                                                 )),
                                           ),
@@ -338,24 +295,24 @@ class _BlogsPageState extends State<BlogsPage> {
                                         isScrollable: true,
                                         controller: blogsTabController,
                                         indicatorColor: customThemeColor,
-                                        indicator: const UnderlineTabIndicator(
+                                        indicator: UnderlineTabIndicator(
                                             insets: EdgeInsetsDirectional.only(
-                                                end: 20),
+                                                end: 20.w),
                                             borderSide: BorderSide(
-                                              width: 2.0,
+                                              width: 2.w,
                                               color: customThemeColor,
                                             )),
-                                        labelStyle: const TextStyle(
-                                            fontSize: 12,
+                                        labelStyle: TextStyle(
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w600,
                                             color: customThemeColor),
                                         labelColor: customThemeColor,
                                         unselectedLabelColor:
                                             const Color(0xff727377),
-                                        unselectedLabelStyle: const TextStyle(
-                                          fontSize: 12,
+                                        unselectedLabelStyle: TextStyle(
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.w600,
-                                          color: Color(0xff727377),
+                                          color: const Color(0xff727377),
                                         ),
                                         labelPadding:
                                             const EdgeInsetsDirectional.all(1),
@@ -366,8 +323,8 @@ class _BlogsPageState extends State<BlogsPage> {
                                                 .categoryBlogs!
                                                 .length, (tabIndex) {
                                           return Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .only(bottom: 5, end: 20),
+                                            padding: EdgeInsetsDirectional.only(
+                                                bottom: 5.h, end: 20.w),
                                             child: Text(
                                               '${_blogsLogic.getAllBlogModel.data!.categoryBlogs![tabIndex].category!.name}',
                                             ),
@@ -405,238 +362,211 @@ class _BlogsPageState extends State<BlogsPage> {
                                                                 .circular(10),
                                                       ),
                                                     )))))
-                                    // : Builder(builder: (_) {
-                                    //     return _blogsLogic
-                                    //             .getAllBlogModel
-                                    //             .data!
-                                    //             .categoryBlogs![_blogsLogic
-                                    //                 .selectedBlogCategoryIndex!]
-                                    //             .blogs!
-                                    //             .isEmpty
-                                    //         ? Center(
-                                    //             child: Text(
-                                    //                 '${'no_record_found'.tr}!',
-                                    //                 style:
-                                    //                     // GoogleFonts.poppins(
-                                    //                     //     fontWeight:
-                                    //                     //         FontWeight
-                                    //                     //             .w600,
-                                    //                     //     fontSize: 14,
-                                    //                     //     color:
-                                    //                     //         Colors.black),
-                                    //                     TextStyle(
-                                    //                         fontSize: 14.sp,
-                                    //                         fontFamily:
-                                    //                             SarabunFontFamily
-                                    //                                 .light,
-                                    //                         color:
-                                    //                             customTextBlackColor)),
-                                    //           )
                                     : SizedBox(
-                                        child: _blogsLogic.getAllBlogModel.data!
-                                                .categoryBlogs!.isEmpty
-                                            ? Center(
-                                                child: Text(
-                                                    '${'no_record_found'.tr}!',
-                                                    style: TextStyle(
-                                                        fontSize: 14.sp,
-                                                        fontFamily:
-                                                            SarabunFontFamily
-                                                                .light,
-                                                        color:
-                                                            customTextBlackColor)),
-                                              )
-                                            : Column(
-                                                //   scrollDirection: Axis.vertical,
-                                                children: List.generate(
-                                                _blogsLogic
-                                                    .getAllBlogModel
-                                                    .data!
-                                                    .categoryBlogs!
-                                                    .length,
-                                                (index) => Column(
-                                                    //  color: Colors.grey,
-                                                    children: [
-                                                      InkWell(
-                                                        onTap: () {
-                                                          _blogsLogic.updateSelectedBlogForView(_blogsLogic
-                                                              .getAllBlogModel
-                                                              .data!
-                                                              .categoryBlogs![
-                                                                  _blogsLogic
-                                                                      .selectedBlogCategoryIndex!]
-                                                              .blogs![index]);
-                                                          Get.toNamed(PageRoutes
-                                                              .blogDetail);
-                                                        },
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
+                                        child:
+                                            _blogsLogic.getAllBlogModel.data!
+                                                    .categoryBlogs!.isEmpty
+                                                ? Center(
+                                                    child: Text(
+                                                        '${'no_record_found'.tr}!',
+                                                        style: TextStyle(
+                                                            fontSize: 14.sp,
+                                                            fontFamily:
+                                                                SarabunFontFamily
+                                                                    .light,
+                                                            color:
+                                                                customTextBlackColor)),
+                                                  )
+                                                : Builder(builder: (_) {
+                                                    return _blogsLogic
+                                                            .getAllBlogModel
+                                                            .data!
+                                                            .categoryBlogs![
+                                                                _blogsLogic
+                                                                    .selectedBlogCategoryIndex!]
+                                                            .blogs!
+                                                            .isEmpty
+                                                        ? Center(
+                                                            child: Text(
+                                                                '${'no_record_found'.tr}!',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        14.sp,
+                                                                    fontFamily:
+                                                                        SarabunFontFamily
+                                                                            .light,
+                                                                    color:
+                                                                        customTextBlackColor)),
+                                                          )
+                                                        : Wrap(
+                                                            children:
+                                                                List.generate(
+                                                            _blogsLogic
+                                                                .getAllBlogModel
+                                                                .data!
+                                                                .categoryBlogs![
+                                                                    _blogsLogic
+                                                                        .selectedBlogCategoryIndex!]
+                                                                .blogs!
+                                                                .length,
+                                                            (index) => Column(
                                                                 children: [
-                                                                  Container(
-                                                                    height:
-                                                                        25.h,
-                                                                    width:
-                                                                        108.w,
-                                                                    decoration: BoxDecoration(
-                                                                        color:
-                                                                            customLightOrangeColor,
-                                                                        borderRadius:
-                                                                            BorderRadius.all(Radius.circular(6.r))),
-                                                                    child:
-                                                                        Center(
-                                                                      child:
-                                                                          Text(
-                                                                        '${_blogsLogic.getAllBlogModel.data!.categoryBlogs![index].category!.name}',
-                                                                        style: state
-                                                                            .blogCategoryTextStyle,
-                                                                      ),
+                                                                  InkWell(
+                                                                    onTap: () {
+                                                                      _blogsLogic.updateSelectedBlogForView(
+                                                                          _blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![
+                                                                              index],
+                                                                          _blogsLogic
+                                                                              .getAllBlogModel
+                                                                              .data!
+                                                                              .categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!]
+                                                                              .category!
+                                                                              .name);
+                                                                      Get.toNamed(
+                                                                          PageRoutes
+                                                                              .blogDetail);
+                                                                    },
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceEvenly,
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child:
+                                                                              Column(
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              Container(
+                                                                                height: 25.h,
+                                                                                width: 108.w,
+                                                                                decoration: BoxDecoration(color: customLightOrangeColor, borderRadius: BorderRadius.all(Radius.circular(6.r))),
+                                                                                child: Center(
+                                                                                  child: Text(
+                                                                                    '${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].category!.name}',
+                                                                                    style: state.blogCategoryTextStyle,
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              SizedBox(height: 15.h),
+
+                                                                              /// Time
+                                                                              Row(
+                                                                                children: [
+                                                                                  SvgPicture.asset('assets/Icons/blogTimeIcon.svg'),
+                                                                                  SizedBox(width: 4.w),
+                                                                                  Text(
+                                                                                    DateFormat('dd-MM-yyyy').format(DateTime.parse(_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].createdAt!)),
+                                                                                    style: state.blogCategoryTextStyle?.copyWith(color: customTextBlackColor),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                              SizedBox(height: 10.h),
+
+                                                                              /// Blog name
+                                                                              Text(
+                                                                                '${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].title}',
+                                                                                softWrap: true,
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                maxLines: 2,
+                                                                                style: state.blogNameTextStyle,
+                                                                              ),
+                                                                              SizedBox(height: 20.h),
+
+                                                                              /// Author name
+                                                                              // Row(
+                                                                              //   children: [
+                                                                              //     Container(
+                                                                              //       height: 50.h,
+                                                                              //       width: 50.w,
+                                                                              //       child: ClipRRect(
+                                                                              //         borderRadius: BorderRadius.circular(25),
+                                                                              //         child: _blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath.toString() != 'null'
+                                                                              //             ? Image.network(
+                                                                              //                 '$mediaUrl${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath}',
+                                                                              //                 fit: BoxFit.cover,
+                                                                              //                 height: 60,
+                                                                              //                 width: 60,
+                                                                              //               )
+                                                                              //             : Container(
+                                                                              //                 height: 50.h,
+                                                                              //                 width: 50.w,
+                                                                              //                 decoration: const BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
+                                                                              //               ),
+                                                                              //       ),
+                                                                              //     ),
+                                                                              //     SizedBox(width: 8.w),
+                                                                              //     Text(
+                                                                              //       'John Doe',
+                                                                              //       softWrap: true,
+                                                                              //       overflow: TextOverflow.ellipsis,
+                                                                              //       maxLines: 1,
+                                                                              //       style: state.blogNameTextStyle,
+                                                                              //     ),
+                                                                              //   ],
+                                                                              // )
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0,
+                                                                              0,
+                                                                              16.w,
+                                                                              0),
+                                                                          child:
+                                                                              Container(
+                                                                            height:
+                                                                                153.h,
+                                                                            width:
+                                                                                128.w,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: Colors.grey,
+                                                                              borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                                                                            ),
+                                                                            child: ClipRRect(
+                                                                                borderRadius: BorderRadius.circular(14),
+                                                                                child: _blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath.toString() != 'null'
+                                                                                    ? Image.network(
+                                                                                        _blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath!.contains('assets') ? '$mediaUrl${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath}' : '${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath}',
+                                                                                        fit: BoxFit.cover,
+                                                                                      )
+                                                                                    : Image.asset(
+                                                                                        'assets/images/blogImage1.png',
+                                                                                        fit: BoxFit.cover,
+                                                                                      )),
+                                                                          ),
+                                                                        ),
+                                                                      ],
                                                                     ),
                                                                   ),
                                                                   SizedBox(
                                                                       height:
                                                                           15.h),
-
-                                                                  /// Time
-                                                                  Row(
-                                                                    children: [
-                                                                      SvgPicture
-                                                                          .asset(
-                                                                              'assets/Icons/blogTimeIcon.svg'),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              4.w),
-                                                                      Text(
-                                                                        //   ' ${_blogsLogic.getAllBlogModel.data!.categoryBlogs![index].category!.createdAt!.substring(0, 10)}',
-                                                                        DateFormat('dd-MM-yyyy')
-                                                                            .format(DateTime.parse(_blogsLogic.getAllBlogModel.data!.categoryBlogs![index].category!.createdAt!)),
-                                                                        style: state
-                                                                            .blogCategoryTextStyle
-                                                                            ?.copyWith(color: customTextBlackColor),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  SizedBox(
-                                                                      height:
-                                                                          10.h),
-
-                                                                  /// Blog name
-                                                                  Text(
-                                                                    '${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].title}',
-                                                                    softWrap:
-                                                                        true,
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                    maxLines: 2,
-                                                                    style: state
-                                                                        .blogNameTextStyle,
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            16.w,
+                                                                            0),
+                                                                    child:
+                                                                        const Divider(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                    ),
                                                                   ),
                                                                   SizedBox(
                                                                       height:
                                                                           20.h),
-
-                                                                  /// Author name
-                                                                  // Row(
-                                                                  //   children: [
-                                                                  //     Container(
-                                                                  //       height: 50.h,
-                                                                  //       width: 50.w,
-                                                                  //       child: ClipRRect(
-                                                                  //         borderRadius: BorderRadius.circular(25),
-                                                                  //         child: _blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath.toString() != 'null'
-                                                                  //             ? Image.network(
-                                                                  //                 '$mediaUrl${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath}',
-                                                                  //                 fit: BoxFit.cover,
-                                                                  //                 height: 60,
-                                                                  //                 width: 60,
-                                                                  //               )
-                                                                  //             : Container(
-                                                                  //                 height: 50.h,
-                                                                  //                 width: 50.w,
-                                                                  //                 decoration: const BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
-                                                                  //               ),
-                                                                  //       ),
-                                                                  //     ),
-                                                                  //     SizedBox(width: 8.w),
-                                                                  //     Text(
-                                                                  //       'John Doe',
-                                                                  //       softWrap: true,
-                                                                  //       overflow: TextOverflow.ellipsis,
-                                                                  //       maxLines: 1,
-                                                                  //       style: state.blogNameTextStyle,
-                                                                  //     ),
-                                                                  //   ],
-                                                                  // )
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          16.w,
-                                                                          0),
-                                                              child: Container(
-                                                                height: 153.h,
-                                                                width: 128.w,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              10.r)),
-                                                                  // image: const DecorationImage(
-                                                                  //     image: AssetImage(
-                                                                  //         'assets/images/blogImage1.png'),
-                                                                  //     fit: BoxFit.cover)
-                                                                ),
-                                                                child: ClipRRect(
-                                                                    borderRadius: BorderRadius.circular(14),
-                                                                    child: _blogsLogic.getAllBlogModel.data!.categoryBlogs![index].category!.imagePath.toString() != 'null'
-                                                                        ? Image.network(
-                                                                            '$mediaUrl${_blogsLogic.getAllBlogModel.data!.categoryBlogs![index].category!.imagePath}',
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          )
-                                                                        : Image.asset(
-                                                                            'assets/images/blogImage1.png',
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          )),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 15.h),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(0, 0,
-                                                                    16.w, 0),
-                                                        child: const Divider(
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 20.h),
-                                                    ]),
-                                              )),
+                                                                ]),
+                                                          ));
+                                                  }),
                                       )
                                 // }),
                                 ),
-                          )
+                          ),
 
                           /// ========///
                         ],

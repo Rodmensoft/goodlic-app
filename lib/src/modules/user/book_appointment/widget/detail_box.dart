@@ -21,12 +21,13 @@ class BookAppointmentDetailBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.r)
       ),
       child: Padding(
-        padding:  EdgeInsets.symmetric(vertical: 0.h,horizontal: 21.w),
+        padding:  EdgeInsets.symmetric(vertical: 0.h,horizontal: 20.w),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset('$image',color: customLightThemeColor,),
+            SizedBox(width: 10.w,),
             Text(
               '$title',
               style: const TextStyle(

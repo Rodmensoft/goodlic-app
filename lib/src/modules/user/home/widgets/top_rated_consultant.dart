@@ -117,6 +117,8 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                               onTap: (){
                                 _userHomeLogic.selectedConsultantID =
                                     _userHomeLogic.topRatedConsultantList[index].id;
+                                _userHomeLogic.selectedConsultantName =
+                                '${_userHomeLogic.topRatedConsultantList[index].title}';
                                 _userHomeLogic.update();
                                 Get.toNamed(
                                     PageRoutes.consultantProfileForUser);

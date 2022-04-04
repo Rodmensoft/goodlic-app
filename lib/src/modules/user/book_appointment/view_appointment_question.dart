@@ -78,9 +78,12 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                         trailing: 'Step 2 Of 3',
                         isShrink: _bookAppointmentLogic.isShrink2,
                         fee:
-                            '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
+                            '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes
+                            [_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
                         feeImage:
-                            '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes[_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].appointmentTypeId! - 1]}',
+                            '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes
+                            [_bookAppointmentLogic.consultantProfileLogic.appointmentTypes
+                            [_bookAppointmentLogic.selectedAppointmentTypeIndex!].appointmentTypeId! - 1]}',
                       ),
                     ];
                   },
@@ -401,11 +404,10 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                   8.w, 0.h, 0.w, 18.h),
                                           child: InkWell(
                                             onTap: () {
-                                              _bookAppointmentLogic
-                                                  .paymentMethodList
-                                                  .forEach((element) {
+                                              for (var element in _bookAppointmentLogic
+                                                  .paymentMethodList) {
                                                 element.isSelected = false;
-                                              });
+                                              }
                                               _bookAppointmentLogic
                                                   .paymentMethodList[index]
                                                   .isSelected = true;
@@ -492,7 +494,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                 _generalController
                                     .updateFormLoaderController(true);
                                 if(_bookAppointmentLogic.selectMentorAppointmentType!
-                                    .appointmentType!.isScheduleRequired == 1){
+                                    .appointmentType!.isScheduleRequired == 1) {
                                   postMethod(
                                       context,
                                       bookAppointmentUrl,

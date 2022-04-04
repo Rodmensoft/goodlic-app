@@ -16,9 +16,11 @@ class BlogsLogic extends GetxController {
     update();
   }
 
+  String? selectedBlogCategory;
   BlogModel selectedBlogForView = BlogModel();
-  updateSelectedBlogForView(BlogModel newValue) {
+  updateSelectedBlogForView(BlogModel newValue,String? newSelectedBlogCategory) {
     selectedBlogForView = newValue;
+    selectedBlogCategory = newSelectedBlogCategory;
     update();
   }
 

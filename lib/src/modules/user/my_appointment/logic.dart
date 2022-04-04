@@ -2,6 +2,7 @@ import 'package:consultant_product/src/modules/user/my_appointment/model_get_use
 import 'package:consultant_product/src/modules/user/my_appointment/model_get_user_appointment_more.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:resize/resize.dart';
 
 import 'state.dart';
@@ -26,7 +27,13 @@ class MyAppointmentLogic extends GetxController {
     getUserAppointmentMoreLoader = newValue;
     update();
   }
+  final RefreshController refreshAppointmentsController =
+  RefreshController(initialRefresh: false);
 
+  updateRefreshController() {
+    refreshAppointmentsController.refreshCompleted();
+    update();
+  }
 
   ///----app-bar-settings-----start
   ScrollController? scrollController;

@@ -88,28 +88,7 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                               : Image.asset(
                                   'assets/images/real-estate-01.png',
                                   fit: BoxFit.cover,
-                                )
-                          // SafeArea(
-                          //   child: Stack(
-                          //     children: [
-                          //       Positioned(
-                          //         top: 0,
-                          //         child: Container(
-                          //           color: customLightThemeColor,
-                          //           width: MediaQuery.of(context).size.width,
-                          //           child: Center(
-                          //               child: Image.asset(
-                          //             'assets/images/stackImage.png',
-                          //             width: MediaQuery.of(context).size.width *
-                          //                 .5,
-                          //             fit: BoxFit.cover,
-                          //           )),
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // )
-                          ),
+                                )),
                     ),
                   ];
                 },
@@ -131,14 +110,13 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                                   height: 25.h,
                                   width: 108.w,
                                   decoration: BoxDecoration(
-                                      color: customLightGreenColor,
+                                      color: customLightOrangeColor,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(6.r))),
                                   child: Center(
                                     child: Text(
-                                      'REAL ESTATE',
-                                      style: state.blogCategoryTextStyle
-                                          ?.copyWith(color: customGreenColor),
+                                      '${_blogsLogic.selectedBlogCategory}',
+                                      style: state.blogCategoryTextStyle,
                                     ),
                                   ),
                                 ),
@@ -231,17 +209,6 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                             SizedBox(height: 18.h),
                             Text(
                               '${_blogsLogic.selectedBlogForView.description}',
-                              // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                              // ' Vivamus sagittis, quam id hendrerit tempus, elit mi fringilla nunc, '
-                              // 'et imperdiet mauris erat semper libero. Aenean efficitur, est in efficitur '
-                              // 'maximus, lacus eros sodales metus,'
-                              // ' Vivamus sagittis, quam id hendrerit tempus, elit mi fringilla nunc, '
-                              // 'et imperdiet mauris erat semper libero. Aenean efficitur, est in efficitur '
-                              // 'maximus, lacus eros sodales metus, Vivamus sagittis, quam id hendrerit tempus, elit mi fringilla nunc, '
-                              // 'et imperdiet mauris erat semper libero. Aenean efficitur, est in efficitur '
-                              // 'maximus, lacus eros sodales metus, Vivamus sagittis, quam id hendrerit tempus, elit mi fringilla nunc, '
-                              // 'et imperdiet mauris erat semper libero. Aenean efficitur, est in efficitur '
-                              // 'maximus, lacus eros sodales metus,',
                               style: state.blogDescTextStyle,
                               textAlign: TextAlign.justify,
                             )

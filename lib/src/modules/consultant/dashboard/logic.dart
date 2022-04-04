@@ -6,6 +6,7 @@ import 'package:consultant_product/src/modules/consultant/dashboard/model_get_ap
 import 'package:consultant_product/src/modules/consultant/dashboard/model_get_today_appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:resize/resize.dart';
 
 import 'state.dart';
@@ -43,6 +44,13 @@ class DashboardLogic extends GetxController {
     update();
   }
 
+  final RefreshController refreshAppointmentsController =
+  RefreshController(initialRefresh: false);
+
+  updateRefreshController() {
+    refreshAppointmentsController.refreshCompleted();
+    update();
+  }
   /// rating loader
 
   bool ratingLoader = true;

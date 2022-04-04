@@ -18,13 +18,16 @@ getUserAllAppointmentsRepo(
             .status
             .toString() ==
         'true') {
+      Get.find<MyAppointmentLogic>().updateRefreshController();
       Get.find<MyAppointmentLogic>().updateGetUserAppointmentLoader(false);
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
+      Get.find<MyAppointmentLogic>().updateRefreshController();
       Get.find<MyAppointmentLogic>().updateGetUserAppointmentLoader(false);
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
+    Get.find<MyAppointmentLogic>().updateRefreshController();
     Get.find<MyAppointmentLogic>().updateGetUserAppointmentLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
 
@@ -210,13 +213,16 @@ getUserAllAppointmentsMoreRepo(
 
       Get.find<MyAppointmentLogic>().update();
 
+      Get.find<MyAppointmentLogic>().updateRefreshController();
       Get.find<MyAppointmentLogic>().updateGetUserAppointmentMoreLoader(false);
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
+      Get.find<MyAppointmentLogic>().updateRefreshController();
       Get.find<MyAppointmentLogic>().updateGetUserAppointmentMoreLoader(false);
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
+    Get.find<MyAppointmentLogic>().updateRefreshController();
     Get.find<MyAppointmentLogic>().updateGetUserAppointmentMoreLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
 

@@ -1,5 +1,7 @@
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/widget/detail_box.dart';
+import 'package:consultant_product/src/modules/user/consultant_profile/logic.dart';
+import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
 
@@ -8,7 +10,8 @@ import 'package:consultant_product/src/modules/user/book_appointment/logic.dart'
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
-import 'package:flutter/services.dart';
+
+import 'package:intl/intl.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -123,7 +126,7 @@ class _AppointmentConfirmationViewState
 
                                       ///---consultant-name
                                       Text(
-                                        'William Smith',
+                                        '${Get.find<UserHomeLogic>().selectedConsultantName }',
                                         style: TextStyle(
                                             fontFamily: SarabunFontFamily.regular,
                                             fontSize: 14.sp,
@@ -144,10 +147,13 @@ class _AppointmentConfirmationViewState
                                       Expanded(
                                         child: Padding(
                                           padding: EdgeInsets.only(right: 8.w),
-                                          child: const BookAppointmentDetailBox(
-                                            title: 'Video Call',
+                                          child:  BookAppointmentDetailBox(
+                                            title: '${_bookAppointmentLogic.selectMentorAppointmentType!
+                                                .appointmentType!.name}'.capitalize,
                                             image:
-                                                'assets/Icons/videoCallIcon.svg',
+                                                '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes
+                                                [_bookAppointmentLogic.consultantProfileLogic.appointmentTypes
+                                                [_bookAppointmentLogic.selectedAppointmentTypeIndex!].appointmentTypeId! - 1]}',
                                           ),
                                         ),
                                       ),
@@ -155,8 +161,9 @@ class _AppointmentConfirmationViewState
                                       Expanded(
                                         child: Padding(
                                           padding: EdgeInsets.only(left: 8.w),
-                                          child: const BookAppointmentDetailBox(
-                                            title: '\$25 Fees',
+                                          child:  BookAppointmentDetailBox(
+                                            title: '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes
+                                            [_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee} Fees',
                                             image: 'assets/Icons/feeIcon.svg',
                                           ),
                                         ),
@@ -168,16 +175,20 @@ class _AppointmentConfirmationViewState
                                   ),
 
                                   ///---date-time-boxes
-                                  Row(
+                                  _bookAppointmentLogic.selectMentorAppointmentType!
+                                      .appointmentType!.isScheduleRequired == 1
+                                      ? Row(
                                     children: [
                                       ///---date-box
                                       Expanded(
                                         child: Padding(
                                           padding: EdgeInsets.only(right: 8.w),
-                                          child: const BookAppointmentDetailBox(
-                                            title: '17/02/22',
+                                          child:  BookAppointmentDetailBox(
+                                            title: DateFormat('dd/MM/yy').format(
+                                                DateTime.parse(
+                                                    _bookAppointmentLogic.selectedDateForAppointment)),
                                             image:
-                                                'assets/Icons/calenderIcon.svg',
+                                            'assets/Icons/calenderIcon.svg',
                                           ),
                                         ),
                                       ),
@@ -185,14 +196,15 @@ class _AppointmentConfirmationViewState
                                       Expanded(
                                         child: Padding(
                                           padding: EdgeInsets.only(left: 8.w),
-                                          child: const BookAppointmentDetailBox(
-                                            title: '9:10 AM',
+                                          child:  BookAppointmentDetailBox(
+                                            title: _bookAppointmentLogic.selectedTimeForAppointment,
                                             image: 'assets/Icons/timeIcon.svg',
                                           ),
                                         ),
                                       ),
                                     ],
-                                  ),
+                                  )
+                                      : const SizedBox(),
 
                                 ],
                               ),

@@ -65,6 +65,9 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                                       .data![index]
                                       .user!
                                       .id;
+                              Get.find<UserHomeLogic>().selectedConsultantName =
+                                  '${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].user!.firstName} '
+                                  '${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].user!.lastName}';
                               Get.find<UserHomeLogic>().update();
                               Get.toNamed(PageRoutes.consultantProfileForUser);
                             },
@@ -102,13 +105,16 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                                               null
                                           ? const SizedBox()
                                           : Image.network(
-                                        _allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!
-                                            .data![index].user!.imagePath!
-                                            .contains('assets')
-                                            ? '$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex!]
-                                            .mentors!.data![index].user!.imagePath}'
-                                            :'${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!
-                                            .data![index].user!.imagePath}',
+                                              _allConsultantsLogic
+                                                      .allConsultantList[
+                                                          widget.parentIndex!]
+                                                      .mentors!
+                                                      .data![index]
+                                                      .user!
+                                                      .imagePath!
+                                                      .contains('assets')
+                                                  ? '$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].user!.imagePath}'
+                                                  : '${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].user!.imagePath}',
                                               fit: BoxFit.cover,
                                             ),
                                     ),
