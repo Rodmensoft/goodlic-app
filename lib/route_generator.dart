@@ -1,4 +1,4 @@
-
+import 'package:consultant_product/src/modules/about_us/view.dart';
 import 'package:consultant_product/src/modules/agora_call/join_channel_audio.dart';
 import 'package:consultant_product/src/modules/agora_call/join_channel_video.dart';
 import 'package:consultant_product/src/modules/blogs/view.dart';
@@ -12,7 +12,7 @@ import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/view.dart';
 import 'package:consultant_product/src/modules/consultant/my_profile/view.dart';
 import 'package:consultant_product/src/modules/consultant/schedule/view.dart';
-import 'package:consultant_product/src/modules/consultant/schedule_info/view.dart';
+import 'package:consultant_product/src/modules/contact_us/view.dart';
 import 'package:consultant_product/src/modules/created_password/view.dart';
 import 'package:consultant_product/src/modules/login/view.dart';
 import 'package:consultant_product/src/modules/new_password/view.dart';
@@ -103,13 +103,12 @@ routes() => [
           name: "/consultantDashboard",
           page: () => const ConsultantDashboardPage()),
       GetPage(
-          name: "/consultantDrawer",
-          page: () => const ConsultantDrawerPage(),
+        name: "/consultantDrawer",
+        page: () => const ConsultantDrawerPage(),
         transition: Transition.leftToRight,
-        transitionDuration: const Duration(milliseconds: 500),),
-      GetPage(
-          name: "/scheduleCreate",
-          page: () => const ScheduleCreatePage()),
+        transitionDuration: const Duration(milliseconds: 500),
+      ),
+      GetPage(name: "/scheduleCreate", page: () => const ScheduleCreatePage()),
       GetPage(
           name: "/consultantAllAppointment",
           page: () => const ConsultantAppointmentPage()),
@@ -122,20 +121,17 @@ routes() => [
       GetPage(
           name: "/editConsultantProfile",
           page: () => const EditConsultantProfilePage()),
+      GetPage(name: "/blogs", page: () => const BlogsPage()),
+      GetPage(name: "/blogDetail", page: () => const BlogDetailPage()),
       GetPage(
-          name: "/blogs",
-          page: () => const BlogsPage()),
+          name: '/depositJazzcash', page: () => const DepositJazzCashView()),
       GetPage(
-          name: "/blogDetail",
-          page: () => const BlogDetailPage()),
-  GetPage(
-      name: '/depositJazzcash', page: () => const DepositJazzCashView()),
-  GetPage(
-      name: '/depositEasypaisa', page: () => const DepositEasypaisaView()),
-
-  GetPage(name: '/videoCall', page: () => const JoinChannelVideo()),
-  GetPage(name: '/audioCall', page: () => const JoinChannelAudio()),
-  GetPage(name: '/videoCallWaiting', page: () => const CallWaitingView()),
+          name: '/depositEasypaisa', page: () => const DepositEasypaisaView()),
+      GetPage(name: '/videoCall', page: () => const JoinChannelVideo()),
+      GetPage(name: '/audioCall', page: () => const JoinChannelAudio()),
+      GetPage(name: '/videoCallWaiting', page: () => const CallWaitingView()),
+      GetPage(name: '/aboutUs', page: () => const AboutUsPage()),
+      GetPage(name: '/contactUs', page: () => const ContactUsPage()),
     ];
 
 class PageRoutes {
@@ -167,7 +163,8 @@ class PageRoutes {
   static const String consultantDrawer = '/consultantDrawer';
   static const String scheduleCreate = '/scheduleCreate';
   static const String consultantAllAppointment = '/consultantAllAppointment';
-  static const String consultantAppointmentDetail = '/consultantAppointmentDetail';
+  static const String consultantAppointmentDetail =
+      '/consultantAppointmentDetail';
   static const String consultantMyProfile = '/consultantMyProfile';
   static const String editConsultantProfile = '/editConsultantProfile';
   static const String blogs = '/blogs';
@@ -177,6 +174,8 @@ class PageRoutes {
   static const String videoCall = '/videoCall';
   static const String audioCall = '/audioCall';
   static const String videoCallWaiting = '/videoCallWaiting';
+  static const String aboutUs = '/aboutUs';
+  static const String contactUs = '/contactUs';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -208,7 +207,8 @@ class PageRoutes {
       consultantDrawer: (context) => const ConsultantDrawerPage(),
       scheduleCreate: (context) => const ScheduleCreatePage(),
       consultantAllAppointment: (context) => const ConsultantAppointmentPage(),
-      consultantAppointmentDetail: (context) => const ConsultantAppointmentDetailPage(),
+      consultantAppointmentDetail: (context) =>
+          const ConsultantAppointmentDetailPage(),
       consultantMyProfile: (context) => const ConsultantMyProfilePage(),
       editConsultantProfile: (context) => const EditConsultantProfilePage(),
       blogs: (context) => const BlogsPage(),
@@ -218,6 +218,8 @@ class PageRoutes {
       videoCall: (context) => const JoinChannelVideo(),
       audioCall: (context) => const JoinChannelAudio(),
       videoCallWaiting: (context) => const CallWaitingView(),
+      aboutUs: (context) => const AboutUsPage(),
+      contactUs: (context) => const ContactUsPage(),
     };
   }
 }
