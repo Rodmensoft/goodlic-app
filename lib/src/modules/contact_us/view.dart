@@ -77,8 +77,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                             children: [
                               SizedBox(height: 20.h),
                               Container(
-                                height:
-                                    MediaQuery.of(context).size.height * .65,
+                                height: MediaQuery.of(context).size.height * .7,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                     // color: Colors.grey,
@@ -99,14 +98,19 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             color: customThemeColor,
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(8.r))),
-                                        height: 65.h,
                                         child: ListTile(
                                           minLeadingWidth: 20.w,
-                                          minVerticalPadding: 8.h,
+                                          // minVerticalPadding: 8.h,
                                           // horizontalTitleGap: 6.w,
-                                          leading: SvgPicture.asset(
-                                            'assets/Icons/location.svg',
+                                          leading: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SvgPicture.asset(
+                                                  'assets/Icons/location.svg'),
+                                            ],
                                           ),
+
                                           title: Text(
                                             'Address',
                                             style: state.titleTextStyle,
@@ -125,13 +129,17 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             color: customThemeColor,
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(8.r))),
-                                        height: 65.h,
                                         child: ListTile(
                                           minLeadingWidth: 20.w,
-                                          minVerticalPadding: 8.h,
+                                          // minVerticalPadding: 2.h,
                                           // horizontalTitleGap: 6.w,
-                                          leading: SvgPicture.asset(
-                                            'assets/Icons/drawerContactUsIcon.svg',
+                                          leading: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SvgPicture.asset(
+                                                  'assets/Icons/drawerContactUsIcon.svg'),
+                                            ],
                                           ),
                                           title: Text(
                                             'Call Us',
@@ -151,13 +159,17 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             color: customThemeColor,
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(8.r))),
-                                        height: 65.h,
                                         child: ListTile(
                                           minLeadingWidth: 20.w,
-                                          minVerticalPadding: 8.h,
+                                          //  minVerticalPadding: 8.h,
                                           // horizontalTitleGap: 6.w,
-                                          leading: SvgPicture.asset(
-                                            'assets/Icons/message.svg',
+                                          leading: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SvgPicture.asset(
+                                                  'assets/Icons/message.svg'),
+                                            ],
                                           ),
                                           title: Text(
                                             'Email Us',
