@@ -400,10 +400,17 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                     horizontal: 70.w, vertical: 15.h),
                                 child: ListTile(
                                   onTap: () {
-                                    Get
-                                        .find<GeneralController>()
-                                        .storageBox
-                                        .erase();
+
+                                    Get.find<GeneralController>()
+                                        .storageBox.remove('userID');
+                                    Get.find<GeneralController>()
+                                        .storageBox.remove('authToken');
+                                    Get.find<GeneralController>()
+                                        .storageBox.remove('onlineStatus');
+                                    Get.find<GeneralController>()
+                                        .storageBox.remove('userRole');
+                                    Get.find<GeneralController>()
+                                        .storageBox.remove('fcmToken');
                                     Get.offAllNamed(PageRoutes.userHome);
                                   },
                                   leading: Column(

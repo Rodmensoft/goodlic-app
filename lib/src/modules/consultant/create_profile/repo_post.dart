@@ -32,7 +32,7 @@ mentorGeneralInfo2Repo(
       Get.find<CreateProfileLogic>().updateStepperIndex(1);
       Get.snackbar('${'profile_updated_successfully'.tr}!', '',
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('mentorGeneralInfoRepo ------>> ${Get.find<CreateProfileLogic>().generalInfoPostModel.success}');
     } else {
@@ -92,7 +92,7 @@ mentorSkillInfoRepo(
       // Get.find<MentorProfileLogic>().updateStepperIndex(4);
       Get.snackbar('${'skill_added_successfully'.tr}!', '',
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('mentorSkillInfoRepo ------>> ${Get.find<CreateProfileLogic>().skillInfoPostModel.success}');
     } else {

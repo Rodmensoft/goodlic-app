@@ -31,7 +31,7 @@ mentorGeneralInfo2Repo(
       Get.find<EditConsultantProfileLogic>().updateStepperIndex(1);
       Get.snackbar('${'profile_updated_successfully'.tr}!', '',
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('mentorGeneralInfoRepo ------>> ${Get.find<EditConsultantProfileLogic>().generalInfoPostModel.success}');
     } else {
@@ -91,7 +91,7 @@ mentorSkillInfoRepo(
       // Get.find<MentorProfileLogic>().updateStepperIndex(4);
       Get.snackbar('${'skill_added_successfully'.tr}!', '',
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('mentorSkillInfoRepo ------>> ${Get.find<EditConsultantProfileLogic>().skillInfoPostModel.success}');
     } else {

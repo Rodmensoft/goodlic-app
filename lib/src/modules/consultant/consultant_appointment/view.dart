@@ -61,6 +61,7 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
         .removeListener(Get.find<ConsultantAppointmentLogic>().scrollListener);
     Get.find<ConsultantAppointmentLogic>().scrollController!.dispose();
     Get.find<ConsultantAppointmentLogic>().tabController.dispose();
+    Get.find<ConsultantAppointmentLogic>().refreshAppointmentsController.dispose();
     super.dispose();
   }
 

@@ -1,6 +1,7 @@
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/consultant/consultant_appointment/logic.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
@@ -561,6 +562,8 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                             GeneralController>()
                                                         .updateFormLoaderController(
                                                             true);
+                                                    Get.find<
+                                                        ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
                                                     Get.back();
                                                     Get.back();
                                                     postMethod(
@@ -628,6 +631,8 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                             GeneralController>()
                                                         .updateFormLoaderController(
                                                             true);
+                                                    Get.find<
+                                                        ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
                                                     Get.back();
                                                     Get.back();
                                                     postMethod(
@@ -707,6 +712,8 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                 .menteeId);
                                     Get.find<GeneralController>()
                                         .updateFormLoaderController(true);
+                                    Get.find<
+                                        ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
                                     Get.back();
                                     Get.back();
                                     postMethod(
