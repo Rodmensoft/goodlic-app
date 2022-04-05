@@ -61,7 +61,7 @@ saveSchedulePostRepo(
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar('${'added_successfully'.tr}!', '',
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       log('saveSchedulePostRepo ------>> ${response['Status']}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);

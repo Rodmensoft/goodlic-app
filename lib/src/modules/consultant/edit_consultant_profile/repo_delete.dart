@@ -14,7 +14,7 @@ deleteEducationRepo(
 
       Get.snackbar('${'delete_successfully'.tr}!', '',
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       log('deleteEducationRepo ------>> ${Get.find<EditConsultantProfileLogic>().citiesByIdModel.success}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);

@@ -4,6 +4,10 @@ import 'package:global_configuration/global_configuration.dart';
 // const String baseUrl = 'https://consultation.softwaresbranding.com/';
 // const String mediaUrl = 'https://consultation.softwaresbranding.com';
 
+// const String apiBaseUrl = 'http://192.168.88.67:8001/api/';
+// const String baseUrl = 'http://192.168.88.67:8001/';
+// const String mediaUrl = 'http://192.168.88.67:8001';
+
 final String baseUrl = GlobalConfiguration().get('base_url');
 final String apiBaseUrl = GlobalConfiguration().get('api_base_url');
 final String mediaUrl = GlobalConfiguration().get('media_url');

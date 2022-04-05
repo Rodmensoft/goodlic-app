@@ -366,8 +366,15 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                               child: ListTile(
                                 onTap: () {
                                   Get.find<GeneralController>()
-                                      .storageBox
-                                      .erase();
+                                      .storageBox.remove('userID');
+                                  Get.find<GeneralController>()
+                                      .storageBox.remove('authToken');
+                                  Get.find<GeneralController>()
+                                      .storageBox.remove('onlineStatus');
+                                  Get.find<GeneralController>()
+                                      .storageBox.remove('userRole');
+                                  Get.find<GeneralController>()
+                                      .storageBox.remove('fcmToken');
                                   Get.offAllNamed(PageRoutes.userHome);
                                 },
                                 leading: Column(

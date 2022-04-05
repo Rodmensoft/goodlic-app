@@ -24,7 +24,7 @@ deleteMentorScheduleRepo(
           getMentorScheduleRepo);
       Get.snackbar('${'delete_successfully'.tr}!', '',
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       log('deleteMentorScheduleRepo ------>> ${response['Status']}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);

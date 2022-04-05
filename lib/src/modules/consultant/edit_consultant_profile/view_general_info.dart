@@ -1399,7 +1399,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
           Get.find<EditConsultantProfileLogic>().updateStepperIndex(1);
           Get.snackbar('${'profile_updated_successfully'.tr}!', '',
               colorText: Colors.black,
-              backgroundColor: customThemeColor.withOpacity(0.5));
+              backgroundColor: Colors.white);
           Get.find<GeneralController>().updateFormLoaderController(false);
           log('mentorGeneralInfoRepo ------>> ${Get.find<EditConsultantProfileLogic>().generalInfoPostModel.success}');
         } else {

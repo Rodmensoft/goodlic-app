@@ -50,7 +50,7 @@ mentorCompleteAppointmentRepo(
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar('appointment_completed_successfully'.tr, '',
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       log('mentorChangeAppointmentStatusRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
@@ -99,7 +99,7 @@ mentorAcceptAppointmentRepo(
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar('appointment_accepted_successfully'.tr, '',
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       log('mentorChangeAppointmentStatusRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
@@ -146,7 +146,7 @@ mentorRejectAppointmentRepo(
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar('appointment_rejected_successfully'.tr, '',
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       log('mentorChangeAppointmentStatusRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);

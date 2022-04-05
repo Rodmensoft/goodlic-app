@@ -677,7 +677,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                   .experience);
           Get.snackbar('${'added_successfully'.tr}!', '',
               colorText: Colors.black,
-              backgroundColor: customThemeColor.withOpacity(0.5));
+              backgroundColor: Colors.white);
           Get.find<GeneralController>().updateFormLoaderController(false);
           setState(() {
             _companyNameController.clear();

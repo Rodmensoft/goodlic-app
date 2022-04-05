@@ -114,19 +114,19 @@ withdrawTransactionRepo(
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar('success!'.tr, response['msg'].toString(),
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
       log('depositTransactionJazzcashRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar('failed!'.tr, response['msg'].toString(),
           colorText: Colors.black,
-          backgroundColor: customThemeColor.withOpacity(0.5));
+          backgroundColor: Colors.white);
     }
   } else {
     Get.find<GeneralController>().updateFormLoaderController(false);
     Get.snackbar('failed!'.tr, 'try_again!'.tr,
         colorText: Colors.black,
-        backgroundColor: customThemeColor.withOpacity(0.5));
+        backgroundColor: Colors.white);
 
   }
 }
