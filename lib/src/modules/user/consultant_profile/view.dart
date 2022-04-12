@@ -37,6 +37,15 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
     super.initState();
     getMethod(
         context,
+        getMentorProfileForMenteeUrl,
+        {
+          'token': '123',
+          'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID
+        },
+        true,
+        getMentorProfileForMenteeRepo);
+    getMethod(
+        context,
         getUserProfileUrl,
         {
           'token': '123',
@@ -116,6 +125,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                               : SafeArea(
                                   child: Stack(
                                     children: [
+                                      ///---profile-image
                                       Positioned(
                                         top: 0,
                                         child: Container(
@@ -139,9 +149,14 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                     fit: BoxFit.cover,
                                                   )
                                                 : Image.network(
-                                              _consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath.contains('assets')
-                                                  ?'$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
-                                                  :'${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
+                                                    _consultantProfileLogic
+                                                            .consultantProfileModel
+                                                            .data!
+                                                            .userDetail!
+                                                            .imagePath
+                                                            .contains('assets')
+                                                        ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
+                                                        : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
                                                     width:
                                                         MediaQuery.of(context)
                                                             .size
@@ -151,6 +166,61 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                           ),
                                         ),
                                       ),
+
+                                      ///---offline/online-status
+
+                                      !_consultantProfileLogic.loader!
+                                          ? _consultantProfileLogic
+                                                      .getMentorProfileForMenteeModel
+                                                      .data!
+                                                      .userDetail!
+                                                      .onlineStatus ==
+                                                  'online'
+                                              ? Positioned(
+                                                  top: 60.h,
+                                                  left: 0,
+                                                  child: Container(
+                                                    height: 30.h,
+                                                    width: 80.w,
+                                                    decoration:  BoxDecoration(
+                                                        color: customThemeColor,
+                                                        borderRadius: BorderRadius
+                                                            .horizontal(
+                                                                right: Radius
+                                                                    .circular(
+                                                                        10.r))),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Online',
+                                                        style:
+                                                            state.tagTextStyle,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : Positioned(
+                                                  top: 60.h,
+                                                  left: 0,
+                                                  child: Container(
+                                                    height: 30.h,
+                                                    width: 80.w,
+                                                    decoration:  BoxDecoration(
+                                                        color: Colors.grey,
+                                                        borderRadius: BorderRadius
+                                                            .horizontal(
+                                                                right: Radius
+                                                                    .circular(
+                                                                        10.r))),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Offline',
+                                                        style:
+                                                            state.tagTextStyle,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                          : const SizedBox()
                                     ],
                                   ),
                                 )),
@@ -244,9 +314,16 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                   children: [
                                     ///---category
                                     Text(
-                                      _consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories![0].category == null
-                                          ?'...'
-                                          :'${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories![0].category!.name}',
+                                      _consultantProfileLogic
+                                                  .consultantProfileModel
+                                                  .data!
+                                                  .userDetail!
+                                                  .mentor!
+                                                  .categories![0]
+                                                  .category ==
+                                              null
+                                          ? '...'
+                                          : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories![0].category!.name}',
                                       style: state.categoryTextStyle,
                                     ),
 
@@ -515,10 +592,10 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   SvgPicture.asset(
-                                                      '${_consultantProfileLogic.imagesForAppointmentTypes[_consultantProfileLogic.appointmentTypes[index].appointmentTypeId! - 1]}',
-                                                  height: 12.h,width: 19.w,
+                                                    '${_consultantProfileLogic.imagesForAppointmentTypes[_consultantProfileLogic.appointmentTypes[index].appointmentTypeId! - 1]}',
+                                                    height: 12.h,
+                                                    width: 19.w,
                                                   ),
-
                                                   SizedBox(
                                                     width: 8.w,
                                                   ),
@@ -545,35 +622,37 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
 
                     _consultantProfileLogic.consultantProfileLoader!
                         ? const SizedBox()
-                        : Get.find<GeneralController>().storageBox.hasData('authToken')
-                        ?Positioned(
-                      bottom: 0.h,
-                      left: 15.w,
-                      right: 15.w,
-                      child: InkWell(
-                        onTap: () {
-                          Get.toNamed(PageRoutes.slotSelection);
-                        },
-                        child: const MyCustomBottomBar(
-                          title: 'Book Appointment',
-                          disable: false,
-                        ),
-                      ),
-                    )
-                        :Positioned(
-                            bottom: 0.h,
-                            left: 15.w,
-                            right: 15.w,
-                            child: InkWell(
-                              onTap: () {
-                                Get.toNamed(PageRoutes.login);
-                              },
-                              child: const MyCustomBottomBar(
-                                title: 'Login',
-                                disable: false,
-                              ),
-                            ),
-                          )
+                        : Get.find<GeneralController>()
+                                .storageBox
+                                .hasData('authToken')
+                            ? Positioned(
+                                bottom: 0.h,
+                                left: 15.w,
+                                right: 15.w,
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.toNamed(PageRoutes.slotSelection);
+                                  },
+                                  child: const MyCustomBottomBar(
+                                    title: 'Book Appointment',
+                                    disable: false,
+                                  ),
+                                ),
+                              )
+                            : Positioned(
+                                bottom: 0.h,
+                                left: 15.w,
+                                right: 15.w,
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.toNamed(PageRoutes.login);
+                                  },
+                                  child: const MyCustomBottomBar(
+                                    title: 'Login',
+                                    disable: false,
+                                  ),
+                                ),
+                              )
                   ],
                 )),
           ),

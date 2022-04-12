@@ -8,6 +8,7 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/logic.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/model_post_experience_info.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/repo_delete.dart';
+import 'package:consultant_product/src/modules/image_full_view/view.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
@@ -503,6 +504,54 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                                     ],
                                                   ),
                                                 ),
+                                                _createProfileLogic
+                                                    .forDisplayExperienceList![
+                                                index]
+                                                    .imagePath !=
+                                                    null
+                                                    ? Padding(
+                                                  padding:
+                                                  EdgeInsetsDirectional
+                                                      .only(end: 8.w),
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      Get.to(ImageViewScreen(
+                                                        networkImage: _createProfileLogic
+                                                            .forDisplayExperienceList![
+                                                        index]
+                                                            .imagePath!
+                                                            .contains(
+                                                            'assets')
+                                                            ? '$mediaUrl${_createProfileLogic.forDisplayExperienceList![index].imagePath}'
+                                                            : _createProfileLogic
+                                                            .forDisplayExperienceList![
+                                                        index]
+                                                            .imagePath!,
+                                                      ));
+                                                    },
+                                                    child: SizedBox(
+                                                        height: 30.h,
+                                                        width: 30.w,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              4.r),
+                                                          child: Image.network(_createProfileLogic
+                                                              .forDisplayExperienceList![
+                                                          index]
+                                                              .imagePath!
+                                                              .contains(
+                                                              'assets')
+                                                              ? '$mediaUrl${_createProfileLogic.forDisplayExperienceList![index].imagePath}'
+                                                              : _createProfileLogic
+                                                              .forDisplayExperienceList![
+                                                          index]
+                                                              .imagePath!),
+                                                        )),
+                                                  ),
+                                                )
+                                                    : const SizedBox(),
                                               ],
                                             ),
                                           ],
@@ -734,7 +783,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
               img: 'assets/dialog_error.svg',
             );
           });
-      log('ResponseError $mentorExperienceInfoUrl-->> ${e}');
+      log('ResponseError $mentorExperienceInfoUrl-->> $e');
     }
   }
 }

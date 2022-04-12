@@ -79,7 +79,7 @@ class ConsultantAppointmentDetailLogic extends GetxController {
         DateTime.parse('${selectedAppointmentData.date} $time3');
 
     log('a $a');
-    log('b $a');
+    log('b $b');
     log('EndDateTime $endDateTime');
     log('Comparison ${DateTime.now().isBefore(endDateTime)}');
 

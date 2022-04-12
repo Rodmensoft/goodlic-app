@@ -38,6 +38,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
 
     Get.find<BookAppointmentLogic>().scrollController2 = ScrollController()
       ..addListener(Get.find<BookAppointmentLogic>().scrollListener2);
+    Get.find<BookAppointmentLogic>().selectedPaymentType = null;
+    Get.find<BookAppointmentLogic>().questionController.clear();
   }
 
   @override
@@ -158,7 +160,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'Field is required';
+                                            return 'field_required'.tr;
                                           } else {
                                             return null;
                                           }
@@ -411,6 +413,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                               _bookAppointmentLogic
                                                   .paymentMethodList[index]
                                                   .isSelected = true;
+                                              _bookAppointmentLogic
+                                                  .selectedPaymentType = index;
                                               _bookAppointmentLogic.update();
                                               setState(() {
                                                 disableButton = false;
@@ -508,8 +512,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                             .selectedConsultantID,
                                         'payment': _bookAppointmentLogic
                                             .selectMentorAppointmentType!.fee,
-                                        'payment_id':
-                                        1,
+                                        'payment_id': _bookAppointmentLogic.selectedPaymentType,
                                         'questions':
                                         _bookAppointmentLogic
                                             .questionController.text,
@@ -534,8 +537,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                             .selectedConsultantID,
                                         'payment': _bookAppointmentLogic
                                             .selectMentorAppointmentType!.fee,
-                                        'payment_id':
-                                        1,
+                                        'payment_id': _bookAppointmentLogic.selectedPaymentType,
                                         'questions':
                                         _bookAppointmentLogic
                                             .questionController.text,

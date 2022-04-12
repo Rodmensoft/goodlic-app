@@ -220,16 +220,12 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                             flex: 2,
                                             child: InkWell(
                                               onTap: () {
-                                                launch(
-                                                    _consultantAppointmentDetailLogic
+                                                launch(_consultantAppointmentDetailLogic
                                                         .selectedAppointmentData
-                                                        .file!.contains('assets')?
-                                                    '$mediaUrl/${_consultantAppointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .file}'
-                                                        :'${_consultantAppointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .file}');
+                                                        .file!
+                                                        .contains('assets')
+                                                    ? '$mediaUrl/${_consultantAppointmentDetailLogic.selectedAppointmentData.file}'
+                                                    : '${_consultantAppointmentDetailLogic.selectedAppointmentData.file}');
                                               },
                                               child: Column(
                                                 crossAxisAlignment:
@@ -254,7 +250,13 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                         TextOverflow.ellipsis,
                                                     maxLines: 1,
                                                     style: state
-                                                        .sectionDataTextStyle!.copyWith(color: customLightThemeColor,decoration: TextDecoration.underline),
+                                                        .sectionDataTextStyle!
+                                                        .copyWith(
+                                                            color:
+                                                                customLightThemeColor,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline),
                                                   ),
                                                 ],
                                               ),
@@ -268,38 +270,38 @@ class ModalInsideModalForConsultant extends StatelessWidget {
 
                                 ///---question.
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    ///---question
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Question ',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            _consultantAppointmentDetailLogic
-                                                .selectedAppointmentData
-                                                .questions!,
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      ///---question
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Question ',
+                                              style:
+                                                  state.sectionLabelTextStyle,
+                                            ),
+                                            SizedBox(
+                                              height: 8.h,
+                                            ),
+                                            Text(
+                                              _consultantAppointmentDetailLogic
+                                                  .selectedAppointmentData
+                                                  .questions!,
+                                              softWrap: true,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: state.sectionDataTextStyle,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-]
-                                ),
+                                    ]),
                               ],
                             ),
                           ),
@@ -309,211 +311,243 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                         ),
 
                         ///---user-info
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
-                              color: Colors.white),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 20.h, horizontal: 15.w),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'User Info',
-                                  style: state.sectionHeadingTextStyle,
-                                ),
-                                SizedBox(
-                                  height: 20.h,
-                                ),
+                        _consultantAppointmentDetailLogic
+                                    .selectedAppointmentData
+                                    .mentee!
+                                    .mentee!
+                                    .identityHidden ==
+                                1
+                            ? Text(
+                                'User Profile is Hidden',
+                                style: TextStyle(
+                                    fontFamily: SarabunFontFamily.extraBold,
+                                    fontSize: 18.sp,
+                                    color: customThemeColor),
+                              )
+                            : Container(
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    color: Colors.white),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 20.h, horizontal: 15.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'User Info',
+                                        style: state.sectionHeadingTextStyle,
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
 
-                                ///---name-gender-status.
-                                Row(
-                                  children: [
-                                    ///---first-name
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                      ///---name-gender-status.
+                                      Row(
                                         children: [
-                                          Text(
-                                            'First Name',
-                                            style: state.sectionLabelTextStyle,
+                                          ///---first-name
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'First Name',
+                                                  style: state
+                                                      .sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  _consultantAppointmentDetailLogic
+                                                              .selectedAppointmentData
+                                                              .mentee!
+                                                              .firstName ==
+                                                          null
+                                                      ? '...'
+                                                      : _consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .mentee!
+                                                          .firstName!,
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: state
+                                                      .sectionDataTextStyle,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          SizedBox(
-                                            height: 8.h,
+
+                                          ///---last-name
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Last Name',
+                                                  style: state
+                                                      .sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  _consultantAppointmentDetailLogic
+                                                              .selectedAppointmentData
+                                                              .mentee!
+                                                              .lastName ==
+                                                          null
+                                                      ? '...'
+                                                      : _consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .mentee!
+                                                          .lastName!,
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: state
+                                                      .sectionDataTextStyle,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          Text(
-                                            _consultantAppointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentee!
-                                                        .firstName ==
-                                                    null
-                                                ? '...'
-                                                : _consultantAppointmentDetailLogic
-                                                    .selectedAppointmentData
-                                                    .mentee!
-                                                    .firstName!,
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
+
+                                          ///---gender
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Gender',
+                                                  style: state
+                                                      .sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  _consultantAppointmentDetailLogic
+                                                              .selectedAppointmentData
+                                                              .mentee!
+                                                              .gender ==
+                                                          null
+                                                      ? '...'
+                                                      : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.gender!}',
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: state
+                                                      .sectionDataTextStyle,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
-                                    ),
+                                      SizedBox(
+                                        height: 18.h,
+                                      ),
 
-                                    ///---last-name
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      ///---city-cnic
+                                      Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                            MainAxisAlignment.spaceAround,
                                         children: [
-                                          Text(
-                                            'Last Name',
-                                            style: state.sectionLabelTextStyle,
+                                          ///---city
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'City',
+                                                  style: state
+                                                      .sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  _consultantAppointmentDetailLogic
+                                                              .selectedAppointmentData
+                                                              .mentee!
+                                                              .city ==
+                                                          null
+                                                      ? '...'
+                                                      : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.city!}',
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: state
+                                                      .sectionDataTextStyle,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          SizedBox(
-                                            height: 8.h,
+
+                                          ///---country
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Country',
+                                                  style: state
+                                                      .sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  _consultantAppointmentDetailLogic
+                                                              .selectedAppointmentData
+                                                              .mentee!
+                                                              .userCountry ==
+                                                          null
+                                                      ? '...'
+                                                      : _consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .mentee!
+                                                          .userCountry!
+                                                          .name!,
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: state
+                                                      .sectionDataTextStyle,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          Text(
-                                            _consultantAppointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentee!
-                                                        .lastName ==
-                                                    null
-                                                ? '...'
-                                                : _consultantAppointmentDetailLogic
-                                                    .selectedAppointmentData
-                                                    .mentee!
-                                                    .lastName!,
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
+                                          const Spacer()
                                         ],
                                       ),
-                                    ),
-
-                                    ///---gender
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Gender',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            _consultantAppointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentee!
-                                                        .gender ==
-                                                    null
-                                                ? '...'
-                                                : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.gender!}',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 18.h,
-                                ),
-
-                                ///---city-cnic
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    ///---city
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'City',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            _consultantAppointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentee!
-                                                        .city ==
-                                                    null
-                                                ? '...'
-                                                : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.city!}',
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-
-                                    ///---country
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Country',
-                                            style: state.sectionLabelTextStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            _consultantAppointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentee!
-                                                        .userCountry ==
-                                                    null
-                                                ? '...'
-                                                : _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!
-                                                .userCountry!.name!,
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: state.sectionDataTextStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const Spacer()
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                              ),
                         SizedBox(
                           height: 20.h,
                         ),
@@ -563,7 +597,9 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                         .updateFormLoaderController(
                                                             true);
                                                     Get.find<
-                                                        ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
+                                                            ConsultantAppointmentLogic>()
+                                                        .updateGetUserAppointmentLoader(
+                                                            true);
                                                     Get.back();
                                                     Get.back();
                                                     postMethod(
@@ -632,7 +668,9 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                         .updateFormLoaderController(
                                                             true);
                                                     Get.find<
-                                                        ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
+                                                            ConsultantAppointmentLogic>()
+                                                        .updateGetUserAppointmentLoader(
+                                                            true);
                                                     Get.back();
                                                     Get.back();
                                                     postMethod(
@@ -693,8 +731,8 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                     .appointmentStatus ==
                                 1
                             ? Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0, 30, 0, 10),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0, 30.h, 0, 10.h),
                                 child: InkWell(
                                   onTap: () {
                                     ///---make-notification
@@ -712,8 +750,8 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                 .menteeId);
                                     Get.find<GeneralController>()
                                         .updateFormLoaderController(true);
-                                    Get.find<
-                                        ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
+                                    Get.find<ConsultantAppointmentLogic>()
+                                        .updateGetUserAppointmentLoader(true);
                                     Get.back();
                                     Get.back();
                                     postMethod(

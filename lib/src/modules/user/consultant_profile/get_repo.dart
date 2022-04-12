@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/user/consultant_profile/get_mentor_profile_for_mentee_model.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/logic.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/model_consultant_profile.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,26 @@ getConsultantProfileRepo(
   } else if (!responseCheck) {
     Get.find<ConsultantProfileLogic>().updateConsultantProfileLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
+
+    log('Exception........................');
+  }
+}
+
+getMentorProfileForMenteeRepo(
+    BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    Get.find<ConsultantProfileLogic>().getMentorProfileForMenteeModel =
+        GetMentorProfileForMenteeModel.fromJson(response);
+    if (Get.find<ConsultantProfileLogic>().getMentorProfileForMenteeModel.status ==
+        true) {
+
+      Get.find<ConsultantProfileLogic>().updateLoaderForViewProfile(false);
+      log('getMentorProfileForMenteeRepo ------>> ${Get.find<ConsultantProfileLogic>().getMentorProfileForMenteeModel.success}');
+    } else {
+      Get.find<ConsultantProfileLogic>().updateLoaderForViewProfile(false);
+    }
+  } else if (!responseCheck) {
+    Get.find<ConsultantProfileLogic>().updateLoaderForViewProfile(false);
 
     log('Exception........................');
   }

@@ -53,7 +53,7 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
       leading: InkWell(
         onTap: () {
            log('PREVIOUS--->>${Get.previousRoute}');
-           if(Get.previousRoute.contains('appointmentConfirmation')){
+           if(Get.previousRoute.contains('appointmentConfirmation') ||Get.previousRoute.contains('myAppointment')){
              Get.offAllNamed(PageRoutes.userHome);
            }else{
              Get.back();

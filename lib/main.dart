@@ -116,7 +116,9 @@ class InitClass extends StatefulWidget {
 }
 
 class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
+
   @override
+
   void initState() {
     // TODO: implement initState
     // Add the observer.

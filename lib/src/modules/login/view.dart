@@ -184,7 +184,7 @@ class _LoginPageState extends State<LoginPage>
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'Field is required';
+                                          return 'field_required'.tr;
                                         } else if (!GetUtils.isEmail(value)) {
                                           return 'Enter Valid Email';
                                         } else {
@@ -245,7 +245,7 @@ class _LoginPageState extends State<LoginPage>
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'Field is required';
+                                          return 'field_required'.tr;
                                         } else {
                                           return null;
                                         }
@@ -282,6 +282,7 @@ class _LoginPageState extends State<LoginPage>
                                           onTap: () {
                                             if (_loginFormKey.currentState!
                                                 .validate()) {
+                                              _generalController.focusOut(context);
                                               _generalController
                                                   .updateFormLoaderController(
                                                       true);

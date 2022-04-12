@@ -85,23 +85,31 @@ class _AboutUsPageState extends State<AboutUsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
-                                child: Text(
-                                  'fgdf fihf ff fffef fefuf sffufe hgfhgf f dfh  high hgih ghghi ghig dghfg dgfg ugug gu gug dkgjg gigj 4766 76 jhj yjdtyt ut iti i i',
-                                  softWrap: true,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 5,
-                                  textAlign: TextAlign.justify,
-                                  style: state.descTextStyle,
+                                child: Padding(
+                                  padding:  EdgeInsetsDirectional.only(end: 14.w),
+                                  child: Text(
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                                        'Pellentesque sem elit, tempus ac justo eu, pellentesque laoreet velit. '
+                                        'Suspendisse lobortis a lacus quis pretium. Aliquam posuere auctor fermentum.',
+                                    // softWrap: true,
+                                    // overflow: TextOverflow.ellipsis,
+                                    // maxLines: 5,
+                                    // textAlign: TextAlign.justify,
+                                    style: state.descTextStyle,
+                                  ),
                                 ),
                               ),
-                              SizedBox(width: 15.w),
-                              Container(
-                                height: 149.h,
-                                width: 136.w,
-                                child: ClipRRect(
-                                  child: Image.asset(
-                                    'assets/images/vision.png',
-                                    fit: BoxFit.fill,
+                              // SizedBox(width: 28.w),
+                              Expanded(
+                                child: Padding(
+                                  padding:  EdgeInsetsDirectional.only(start: 14.w),
+                                  child: SizedBox(
+                                    // height: 149.h,
+                                    width: 136.w,
+                                    child: Image.asset(
+                                      'assets/images/vision.png',
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
                               )
@@ -113,7 +121,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(58.w, 0, 0, 0),
+                                  EdgeInsetsDirectional.fromSTEB((MediaQuery.of(context).size.width*.5/2)+15, 0, 0, 0),
                               child: Text(
                                 'Our Mission',
                                 style: state.headingTextStyle,
@@ -128,24 +136,29 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    height: 149.h,
-                                    width: 136.w,
-                                    child: ClipRRect(
-                                      child: Image.asset(
-                                        'assets/images/mission.png',
-                                        fit: BoxFit.fill,
+                                  Expanded(
+                                    child: Padding(
+                                      padding:  EdgeInsetsDirectional.only(end: 28.w),
+                                      child: SizedBox(
+                                        // height: 149.h,
+                                        width: 136.w,
+                                        child: Image.asset(
+                                          'assets/images/mission.png',
+                                          fit: BoxFit.fill,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 15.w),
+                                  // SizedBox(width: 15.w),
                                   Expanded(
                                     child: Text(
-                                      'fgdf fihf ff fffef fefuf sffufe hgfhgf f dfh  high hgih ghghi ghig dghfg dgfg ugug gu gug dkgjg gigj 4766 76 jhj yjdtyt ut iti i i',
-                                      softWrap: true,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 5,
-                                      textAlign: TextAlign.justify,
+                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                                          'Pellentesque sem elit, tempus ac justo eu, pellentesque laoreet velit. '
+                                          'Suspendisse lobortis a lacus quis pretium. Aliquam posuere auctor fermentum.',
+                                      // softWrap: true,
+                                      // overflow: TextOverflow.ellipsis,
+                                      // maxLines: 5,
+                                      // textAlign: TextAlign.justify,
                                       style: state.descTextStyle,
                                     ),
                                   ),
@@ -166,76 +179,128 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           ),
                         ),
                         SizedBox(height: 23.h),
-
-                        Container(
-                          height: 230.h,
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 74.w,
-                                color: customThemeColor,
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: 18.h),
-                                    SvgPicture.asset(
-                                        'assets/Icons/check-circle.svg'),
-                                    //  SizedBox(height: 188.h),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              .09,
+                        Column(
+                          children: [
+                            Container(
+                              color: customThemeColor,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:  EdgeInsetsDirectional.only(top: 16.h),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                            width: 74,
+                                            color: customThemeColor,
+                                            child: SvgPicture.asset(
+                                                'assets/Icons/check-circle.svg')),
+                                      ],
                                     ),
-                                    SvgPicture.asset(
-                                        'assets/Icons/user-badged.svg'),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: 300.w,
-                                color: customLightThemeColor,
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20.w, 16.h, 0, 0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Easy Sign Up',
-                                        style: state.subHeadingTextStyle,
-                                      ),
-                                      SizedBox(height: 10.h),
-                                      Text(
-                                        'dhfdf dsfhf dshfdfhdf fdfudf ufif fdf shg sgf ghg gfuyttr tuu tyt',
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 3,
-                                        style: state.descTextStyle
-                                            ?.copyWith(color: Colors.white),
-                                      ),
-                                      SizedBox(height: 35.h),
-                                      Text(
-                                        'Professional Mentors',
-                                        style: state.subHeadingTextStyle,
-                                      ),
-                                      SizedBox(height: 10.h),
-                                      Text(
-                                        'dhfdf dsfhf dshfdfhdf fdfudf ufif fdf shg sgf ghg gfuyttr tuu tyt',
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 3,
-                                        style: state.descTextStyle
-                                            ?.copyWith(color: Colors.white),
-                                      )
-                                    ],
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
+                                  Expanded(
+                                    child: Container(
+                                      color: customLightThemeColor,
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.all(15),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            ///---heading
+                                            Text(
+                                              'easy_sign_up'.tr,
+                                              style: state.subHeadingTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+
+                                            ///---detail
+                                            Text(
+                                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sem elit, '
+                                                  'tempus ac justo eu, pellentesque laoreet'.tr,
+                                              style: state.descTextStyle
+                                                  ?.copyWith(color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 1,
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.grey,
+                            ),
+                            Container(
+                              color: customThemeColor,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:  EdgeInsetsDirectional.only(top: 16.h),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                            width: 74,
+                                            color: customThemeColor,
+                                            child: SvgPicture.asset(
+                                                'assets/Icons/user-badged.svg')),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      color: customLightThemeColor,
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.all(15),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            ///---heading
+                                            Text(
+                                              'professional_mentors'.tr,
+                                              style: state.subHeadingTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+
+                                            ///---detail
+                                            Text(
+                                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sem elit, '
+                                                  'tempus ac justo eu, pellentesque laoreet'.tr,
+                                              style: state.descTextStyle
+                                                  ?.copyWith(color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+
+
                       ],
                     ),
                   ),
-                )),
+                )
+            ),
           ),
         );
       });

@@ -1,8 +1,10 @@
 import 'package:consultant_product/src/modules/wallet/model_deposit_wallet.dart';
 import 'package:consultant_product/src/modules/wallet/model_get_all_transaction.dart';
 import 'package:consultant_product/src/modules/wallet/model_get_wallet_balance.dart';
+import 'package:consultant_product/src/modules/wallet/payment_stripe/model_stripe_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:resize/resize.dart';
 
@@ -26,6 +28,23 @@ class WalletLogic extends GetxController {
       update();
     }
   }
+
+  ScrollController? scrollControllerStripe;
+  bool lastStatusStripe = true;
+  double heightStripe = 100.h;
+
+  bool get isShrinkStripe {
+    return scrollControllerStripe!.hasClients &&
+        scrollControllerStripe!.offset > (heightStripe - kToolbarHeight);
+  }
+
+  void scrollListenerStripe() {
+    if (isShrinkStripe != lastStatusStripe) {
+      lastStatusStripe = isShrinkStripe;
+      update();
+    }
+  }
+
   ScrollController? scrollController2;
   bool lastStatus2 = true;
   double height2 = 100.h;
@@ -50,6 +69,7 @@ class WalletLogic extends GetxController {
   DepositWalletModel depositWalletModel = DepositWalletModel();
 
   TextEditingController amountController = TextEditingController();
+  TextEditingController stripeAmountController = TextEditingController();
   TextEditingController easypaisaAmountController = TextEditingController();
   TextEditingController withdrawAmountController = TextEditingController();
   TextEditingController jazzCashCnicTextController = TextEditingController();
@@ -97,4 +117,17 @@ class WalletLogic extends GetxController {
     getAllTransactionList = [];
     update();
   }
+
+
+  ModelStripePayment modelStripePayment = ModelStripePayment();
+
+  double myWidth = 0;
+  TextEditingController accountCardNumberController = TextEditingController();
+  TextEditingController accountCardHolderNameController = TextEditingController();
+  TextEditingController accountCardExpiresController = TextEditingController();
+  TextEditingController accountCardCvcController = TextEditingController();
+
+  var cardNumberMask = MaskTextInputFormatter(mask: '#### #### #### ####');
+  var cardExpiryMask = MaskTextInputFormatter(mask: '##/##');
+
 }

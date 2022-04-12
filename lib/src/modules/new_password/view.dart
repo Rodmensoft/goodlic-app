@@ -132,7 +132,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                 ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'Field is required';
+                                    return 'field_required'.tr;
                                   } else {
                                     return null;
                                   }
@@ -187,7 +187,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                 ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'Field is required';
+                                    return 'field_required'.tr;
                                   } else {
                                     return null;
                                   }

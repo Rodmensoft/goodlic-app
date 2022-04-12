@@ -206,7 +206,7 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'Field is required';
+                                            return 'field_required'.tr;
                                           } else {
                                             return null;
                                           }
@@ -255,7 +255,7 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'Field is required';
+                                            return 'field_required'.tr;
                                           } else {
                                             return null;
                                           }
@@ -301,7 +301,7 @@ class _SignUpPageState extends State<SignUpPage>
                                         },
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'Field is required';
+                                            return 'field_required'.tr;
                                           } else if (!GetUtils.isEmail(value)) {
                                             return 'Enter Valid Email';
                                           } else {
@@ -363,7 +363,7 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'Field is required';
+                                            return 'field_required'.tr;
                                           } else {
                                             return null;
                                           }
@@ -425,7 +425,7 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'Field is required';
+                                            return 'field_required'.tr;
                                           } else {
                                             return null;
                                           }

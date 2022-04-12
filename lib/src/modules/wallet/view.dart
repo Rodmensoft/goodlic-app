@@ -56,7 +56,6 @@ class _WalletPageState extends State<WalletPage> {
         {
           'token': '123',
           'user_id': Get.find<GeneralController>().storageBox.read('userID'),
-          // 'user_id': 9,
         },
         true,
         getWalletBalanceRepo);
@@ -66,7 +65,6 @@ class _WalletPageState extends State<WalletPage> {
         {
           'token': '123',
           'user_id': Get.find<GeneralController>().storageBox.read('userID'),
-          // 'user_id': 9,
         },
         true,
         getWalletTransactionRepo);
@@ -206,8 +204,9 @@ class _WalletPageState extends State<WalletPage> {
                                                         _walletLogic
                                                             .amountController
                                                             .clear();
-                                                        paymentTypeDialog(
-                                                            context);
+                                                        // paymentTypeDialog(
+                                                        //     context);
+                                                        Get.toNamed(PageRoutes.stripePaymentForWallet);
                                                       },
                                                       child: CircleAvatar(
                                                         radius: 20.r,

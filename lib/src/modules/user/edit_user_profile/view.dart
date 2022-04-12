@@ -290,7 +290,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                 ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'Field is required';
+                                    return 'field_required'.tr;
                                   } else {
                                     return null;
                                   }
@@ -341,7 +341,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                 ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'Field is required';
+                                    return 'field_required'.tr;
                                   } else {
                                     return null;
                                   }

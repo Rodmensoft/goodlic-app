@@ -1,6 +1,7 @@
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/get_date_schedule.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/get_schedule_available_days.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/payment_stripe/model_stripe_payment.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/logic.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/model_consultant_profile.dart';
 import 'package:file_picker/file_picker.dart';
@@ -138,6 +139,7 @@ class BookAppointmentLogic extends GetxController {
         isSelected: false),
   ];
 
+  int? selectedPaymentType;
   List<ShiftType> paymentMethodList = [
     ShiftType(
         image: 'assets/Icons/jazzcashIcon.png',
@@ -178,6 +180,15 @@ class BookAppointmentLogic extends GetxController {
     selectMentorAppointmentType = newValue;
     update();
   }
+
+  ModelStripePayment modelStripePayment = ModelStripePayment();
+
+  double myWidth = 0;
+  TextEditingController accountCardNumberController = TextEditingController();
+  TextEditingController accountCardHolderNameController = TextEditingController();
+  TextEditingController accountCardExpiresController = TextEditingController();
+  TextEditingController accountCardCvcController = TextEditingController();
+
 }
 
 class ShiftType {

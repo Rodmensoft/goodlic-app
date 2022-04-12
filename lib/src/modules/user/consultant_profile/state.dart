@@ -9,6 +9,7 @@ class ConsultantProfileState {
   TextStyle? headingTextStyle;
   TextStyle? dataTextStyle;
   TextStyle? typesTextStyle;
+  TextStyle? tagTextStyle;
 
   ConsultantProfileState() {
     ///Initialize variables
@@ -32,5 +33,7 @@ class ConsultantProfileState {
         fontFamily: SarabunFontFamily.medium,
         fontSize: 14.sp,
         color: customTextBlackColor);
+    tagTextStyle = TextStyle(
+        fontSize: 12.sp, fontFamily: SarabunFontFamily.regular, color: Colors.white);
   }
 }

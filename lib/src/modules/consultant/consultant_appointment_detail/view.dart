@@ -1,18 +1,11 @@
 import 'dart:async';
-import 'dart:developer';
-
-import 'package:consultant_product/route_generator.dart';
-import 'package:consultant_product/src/api_services/get_service.dart';
-import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
-import 'package:consultant_product/src/modules/agora_call/repo.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/logic.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/widget/appontment_detail_box.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/widget/bottom_sheet.dart';
 import 'package:consultant_product/src/modules/sms/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
-import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
 import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -64,7 +57,6 @@ class _ConsultantAppointmentDetailPageState
               .mentee!
               .phone);
     });
-    // getDifference();
     if (Get.find<ConsultantAppointmentDetailLogic>()
                 .selectedAppointmentData
                 .date !=
@@ -319,112 +311,7 @@ class _ConsultantAppointmentDetailPageState
                                                     )
                                                   : const SizedBox()
                                               : const SizedBox(),
-                                          // ///---LIVE
-                                          // (_consultantAppointmentDetailLogic
-                                          //     .selectedAppointmentData.appointmentStatus! ==
-                                          //     1) &&
-                                          //     (_consultantAppointmentDetailLogic
-                                          //         .selectedAppointmentData
-                                          //         .appointmentTypeString!
-                                          //         .toUpperCase() ==
-                                          //         'LIVE')
-                                          //     ? Row(
-                                          //   children: [
-                                          //     InkWell(
-                                          //       onTap: () {
-                                          //         Get.find<PusherChatLogic>()
-                                          //             .updateGetMessagesLoader(true);
-                                          //         Get.find<PusherChatLogic>()
-                                          //             .updateSenderMessageGetId(
-                                          //             Get.find<GeneralController>()
-                                          //                 .storageBox
-                                          //                 .read('userId'));
-                                          //         Get.find<PusherChatLogic>()
-                                          //             .updateReceiverMessageGetId(widget
-                                          //             .singleAppointmentModel!.menteeId);
-                                          //         Get.to(const ChatView());
-                                          //       },
-                                          //       child: Padding(
-                                          //         padding: const EdgeInsetsDirectional.all(8.0),
-                                          //         child: Text(
-                                          //           'chat_box'.tr,
-                                          //           style: state.chatBoxTextStyle,
-                                          //         ),
-                                          //       ),
-                                          //     ),
-                                          //     InkWell(
-                                          //       onTap: () {
-                                          //         Get.find<GeneralController>()
-                                          //             .updateSelectedChannel(
-                                          //             Get.find<GeneralController>()
-                                          //                 .getRandomString(10));
-                                          //         Get.find<GeneralController>()
-                                          //             .updateChannelForCall(
-                                          //             Get.find<GeneralController>()
-                                          //                 .selectedChannel);
-                                          //         log('----------->>> ${Get.find<GeneralController>().selectedChannel}');
-                                          //         getMethod(
-                                          //             context,
-                                          //             agoraTokenUrl,
-                                          //             {
-                                          //               'token': '123',
-                                          //               'channel': Get.find<GeneralController>()
-                                          //                   .selectedChannel
-                                          //             },
-                                          //             true,
-                                          //             getAgoraTokenRepo);
-                                          //         Get.find<GeneralController>()
-                                          //             .updateGoForCall(true);
-                                          //         Get.toNamed(PageRoutes.videoCallWaiting);
-                                          //       },
-                                          //       child: const Padding(
-                                          //         padding:
-                                          //         EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-                                          //         child: Icon(
-                                          //           Icons.video_call,
-                                          //           color: customThemeColor,
-                                          //           size: 25,
-                                          //         ),
-                                          //       ),
-                                          //     ),
-                                          //     InkWell(
-                                          //       onTap: () {
-                                          //         Get.find<GeneralController>()
-                                          //             .updateSelectedChannel(
-                                          //             Get.find<GeneralController>()
-                                          //                 .getRandomString(10));
-                                          //         Get.find<GeneralController>()
-                                          //             .updateChannelForCall(
-                                          //             Get.find<GeneralController>()
-                                          //                 .selectedChannel);
-                                          //         log('----------->>> ${Get.find<GeneralController>().selectedChannel}');
-                                          //         getMethod(
-                                          //             context,
-                                          //             agoraTokenUrl,
-                                          //             {
-                                          //               'token': '123',
-                                          //               'channel': Get.find<GeneralController>()
-                                          //                   .selectedChannel
-                                          //             },
-                                          //             true,
-                                          //             getAgoraTokenForAudioRepo);
-                                          //         Get.find<GeneralController>()
-                                          //             .updateGoForCall(true);
-                                          //         Get.toNamed(PageRoutes.videoCallWaiting);
-                                          //       },
-                                          //       child: const Padding(
-                                          //         padding: EdgeInsetsDirectional.fromSTEB(
-                                          //             5, 5, 5, 5),
-                                          //         child: Icon(
-                                          //           Icons.call,
-                                          //           color: customThemeColor,
-                                          //           size: 25,
-                                          //         ),
-                                          //       ),
-                                          //     )
-                                          //   ],
-                                          // )
-                                          //     :const SizedBox(),
+
                                         ],
                                       ),
                                     ),

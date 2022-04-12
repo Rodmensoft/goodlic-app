@@ -14,6 +14,7 @@ class WalletState {
   TextStyle? dateTextStyle;
   TextStyle? typeTextStyle;
   TextStyle? textFieldTextStyle;
+  TextStyle? hintTextStyle;
 
   WalletState() {
     ///Initialize variables
@@ -57,5 +58,9 @@ class WalletState {
     );
     textFieldTextStyle = TextStyle(
         fontFamily: SarabunFontFamily.regular, fontSize: 15.sp, color: Colors.black);
+    hintTextStyle = TextStyle(
+        fontFamily: SarabunFontFamily.regular,
+        fontSize: 16.sp,
+        color: customTextGreyColor);
   }
 }

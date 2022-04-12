@@ -29,7 +29,7 @@ class UserDrawerLogic extends GetxController {
         title: 'Contact US', icon: 'assets/Icons/drawerContactUsIcon.svg'),
     DrawerTile(title: 'Blogs', icon: 'assets/Icons/drawerBlogIcon.svg'),
     DrawerTile(
-        title: 'Privacy Policy', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
+        title: 'About Us', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
   ];
 
   userLoginDrawerNavigation(
@@ -107,7 +107,7 @@ class UserDrawerLogic extends GetxController {
       case 2:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.contactUs);
         }
       case 3:
         {
@@ -117,7 +117,7 @@ class UserDrawerLogic extends GetxController {
       case 4:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.aboutUs);
         }
       default:
         {

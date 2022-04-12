@@ -1,3 +1,4 @@
+import 'package:consultant_product/src/modules/user/consultant_profile/get_mentor_profile_for_mentee_model.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/model_consultant_profile.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +14,13 @@ class ConsultantProfileLogic extends GetxController {
     consultantProfileLoader = newValue;
     update();
   }
+  GetMentorProfileForMenteeModel getMentorProfileForMenteeModel = GetMentorProfileForMenteeModel();
 
+  bool? loader = true;
+  updateLoaderForViewProfile(bool? newValue){
+    loader = newValue;
+    update();
+  }
   List<ScheduleTypes> appointmentTypes = [];
   List imagesForAppointmentTypes = [
     ///---audio

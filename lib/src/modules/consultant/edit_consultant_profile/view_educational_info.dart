@@ -8,6 +8,7 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/logic.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_education_info.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_delete.dart';
+import 'package:consultant_product/src/modules/image_full_view/view.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
@@ -47,7 +48,8 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
     // TODO: implement initState
     super.initState();
     Get.find<EditConsultantProfileLogic>().scrollController!.animateTo(
-        Get.find<EditConsultantProfileLogic>().scrollController!
+        Get.find<EditConsultantProfileLogic>()
+            .scrollController!
             .position
             .minScrollExtent,
         curve: Curves.easeOut,
@@ -67,586 +69,616 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
               backgroundColor: customTextFieldColor,
               body: SingleChildScrollView(
                   child: Form(
-                    key: _educationalInfoFormKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                key: _educationalInfoFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ///---institution-field
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          15.w, 25.h, 15.w, 16.h),
+                      child: TextFormField(
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp("[a-z A-Z ]"))
+                        ],
+                        style: state.textFieldTextStyle,
+                        controller: _institutionController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                              25.w, 15.h, 25.w, 15.h),
+                          hintText: 'Institute',
+                          hintStyle: state.hintTextStyle,
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent)),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: const BorderSide(
+                                  color: customLightThemeColor)),
+                          errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: const BorderSide(color: Colors.red)),
+                        ),
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
+                            return 'field_required'.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                    ),
+
+                    ///---degree-subject
+                    Row(
                       children: [
-                        ///---institution-field
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              15.w, 25.h, 15.w, 16.h),
-                          child: TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[a-z A-Z ]"))
-                            ],
-                            style: state.textFieldTextStyle,
-                            controller: _institutionController,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  25.w, 15.h, 25.w, 15.h),
-                              hintText: 'Institute',
-                              hintStyle: state.hintTextStyle,
-                              fillColor: Colors.white,
-                              filled: true,
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent)),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: customLightThemeColor)),
-                              errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide:
-                                      const BorderSide(color: Colors.red)),
+                        ///---degree
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                15.w, 0, 8.w, 16.h),
+                            child: ButtonTheme(
+                              alignedDropdown: true,
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButtonFormField<String>(
+                                  onTap: () {
+                                    FocusScopeNode currentFocus =
+                                        FocusScope.of(context);
+                                    if (!currentFocus.hasPrimaryFocus) {
+                                      currentFocus.unfocus();
+                                    }
+                                  },
+                                  hint: Text(
+                                    'Degree',
+                                    style: state.hintTextStyle,
+                                  ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        EdgeInsetsDirectional.fromSTEB(
+                                            15.w, 14.h, 15.w, 14.h),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        borderSide: const BorderSide(
+                                            color: customLightThemeColor)),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        borderSide: const BorderSide(
+                                            color: Colors.red)),
+                                  ),
+                                  isExpanded: true,
+                                  focusColor: Colors.white,
+                                  style: state.textFieldTextStyle,
+                                  iconEnabledColor: customThemeColor,
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 25,
+                                  value: _editConsultantProfileLogic
+                                      .selectedDegree,
+                                  items: _editConsultantProfileLogic
+                                      .degreeDropDownList
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: state.textFieldTextStyle,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    log(value.toString());
+                                    setState(() {
+                                      _editConsultantProfileLogic
+                                          .selectedDegree = value;
+                                    });
+                                  },
+                                  validator: (String? value) {
+                                    if (value == null) {
+                                      return 'field_required'.tr;
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                ),
+                              ),
                             ),
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'field_required'.tr;
-                              } else {
-                                return null;
-                              }
-                            },
                           ),
                         ),
 
-                        ///---degree-subject
-                        Row(
-                          children: [
-                            ///---degree
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    15.w, 0, 8.w, 16.h),
-                                child: ButtonTheme(
-                                  alignedDropdown: true,
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButtonFormField<String>(
-                                      onTap: () {
-                                        FocusScopeNode currentFocus =
-                                            FocusScope.of(context);
-                                        if (!currentFocus.hasPrimaryFocus) {
-                                          currentFocus.unfocus();
-                                        }
-                                      },
-                                      hint: Text(
-                                        'Degree',
-                                        style: state.hintTextStyle,
-                                      ),
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                15.w, 14.h, 15.w, 14.h),
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: customLightThemeColor)),
-                                        errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.red)),
-                                      ),
-                                      isExpanded: true,
-                                      focusColor: Colors.white,
-                                      style: state.textFieldTextStyle,
-                                      iconEnabledColor: customThemeColor,
-                                      icon:
-                                          const Icon(Icons.keyboard_arrow_down),
-                                      iconSize: 25,
-                                      value: _editConsultantProfileLogic.selectedDegree,
-                                      items: _editConsultantProfileLogic
-                                          .degreeDropDownList
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(
-                                            value,
-                                            style: state.textFieldTextStyle,
-                                          ),
-                                        );
-                                      }).toList(),
-                                      onChanged: (String? value) {
-                                        log(value.toString());
-                                        setState(() {
-                                          _editConsultantProfileLogic.selectedDegree =
-                                              value;
-                                        });
-                                      },
-                                      validator: (String? value) {
-                                        if (value == null) {
-                                          return 'field_required'.tr;
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ),
+                        ///---subject
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                8.w, 0, 15.w, 16.h),
+                            child: TextFormField(
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp("[a-z A-Z ]"))
+                              ],
+                              style: state.textFieldTextStyle,
+                              controller: _subjectController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    25.w, 15.h, 25.w, 15.h),
+                                hintText: 'Subject',
+                                hintStyle: state.hintTextStyle,
+                                fillColor: Colors.white,
+                                filled: true,
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: const BorderSide(
+                                        color: Colors.transparent)),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: const BorderSide(
+                                        color: Colors.transparent)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: const BorderSide(
+                                        color: customLightThemeColor)),
+                                errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide:
+                                        const BorderSide(color: Colors.red)),
                               ),
-                            ),
-
-                            ///---subject
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    8.w, 0, 15.w, 16.h),
-                                child: TextFormField(
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp("[a-z A-Z ]"))
-                                  ],
-                                  style: state.textFieldTextStyle,
-                                  controller: _subjectController,
-                                  keyboardType: TextInputType.text,
-                                  decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            25.w, 15.h, 25.w, 15.h),
-                                    hintText: 'Subject',
-                                    hintStyle: state.hintTextStyle,
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: Colors.transparent)),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: Colors.transparent)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: customLightThemeColor)),
-                                    errorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: Colors.red)),
-                                  ),
-                                  validator: (String? value) {
-                                    if (value!.isEmpty) {
-                                      return 'field_required'.tr;
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        ///---year
-                        Row(
-                          children: [
-                            ///---year
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    15.w, 0, 15.w, 16.h),
-                                child: TextFormField(
-                                  onTap: () async {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          content: SizedBox(
-                                            // Need to use container to add size constraint.
-                                            width: 300,
-                                            height: 300,
-                                            child: Theme(
-                                              data: ThemeData(
-                                                  colorScheme: ColorScheme
-                                                      .fromSwatch()
-                                                      .copyWith(
-                                                      primary:
-                                                      customThemeColor)),
-                                              child: YearPicker(
-                                                firstDate: DateTime(
-                                                    DateTime.now().year - 50,
-                                                    1),
-                                                lastDate: DateTime(
-                                                    DateTime.now().year, 1),
-
-                                                // save the selected date to _selectedDate DateTime variable.
-                                                // It's used to set the previous selected date when
-                                                // re-showing the dialog.
-
-                                                selectedDate: DateTime.now(),
-                                                onChanged: (DateTime dateTime) {
-                                                  setState(() {
-                                                    _editConsultantProfileLogic
-                                                        .selectedYear =
-                                                        DateFormat('yyyy')
-                                                            .format(dateTime);
-                                                    log('YEAR--->>${_editConsultantProfileLogic.selectedYear}');
-                                                    _yearController =
-                                                        TextEditingController(
-                                                            text: _editConsultantProfileLogic
-                                                                .selectedYear);
-                                                    log('YEAR--->>${_yearController.text}');
-                                                  });
-                                                  // close the dialog when year is selected.
-                                                  Navigator.pop(context);
-                                                  // Do something with the dateTime selected.
-                                                  // Remember that you need to use dateTime.year to get the year
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  readOnly: true,
-                                  controller: _yearController,
-                                  style: state.textFieldTextStyle,
-                                  decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            25.w, 15.h, 25.w, 15.h),
-                                    hintText: 'Year',
-                                    hintStyle: state.hintTextStyle,
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    suffixIcon: Padding(
-                                      padding:
-                                          const EdgeInsetsDirectional.all(
-                                              15.0),
-                                      child: SvgPicture.asset(
-                                          'assets/Icons/calendarIcon.svg'),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: Colors.transparent)),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: Colors.transparent)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: customLightThemeColor)),
-                                    errorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: Colors.red)),
-                                  ),
-                                  validator: (String? value) {
-                                    if (value!.isEmpty) {
-                                      return 'field_required'.tr;
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                ),
-                              ),
-                            ),
-
-                            const Spacer()
-                          ],
-                        ),
-
-                        ///---picture
-                        degreeImage == null
-                            ? InkWell(
-                                onTap: () {
-                                  imagePickerDialog(context);
-                                },
-                                child: const UploadImageButton())
-                            : Center(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 25.h),
-                                  child: SizedBox(
-                                    height: 103.h,
-                                    width: 190.w,
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(5),
-                                        child: Image.file(
-                                          degreeImage!,
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                ),
-                              ),
-
-                        ///---add-button
-                        Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
-                          child: Center(
-                            child: InkWell(
-                              onTap: () {
-                                FocusScopeNode currentFocus =
-                                    FocusScope.of(context);
-                                if (!currentFocus.hasPrimaryFocus) {
-                                  currentFocus.unfocus();
-                                }
-                                if (_educationalInfoFormKey.currentState!
-                                    .validate()) {
-                                  if (degreeImage != null) {
-                                    Get.find<GeneralController>()
-                                        .updateFormLoaderController(true);
-                                    mentorEducationInfoRepo(degreeImage);
-                                  } else {
-                                    showDialog(
-                                        context: context,
-                                        barrierDismissible: false,
-                                        builder: (BuildContext context) {
-                                          return CustomDialogBox(
-                                            title: 'sorry!'.tr,
-                                            titleColor: customDialogErrorColor,
-                                            descriptions:
-                                                'upload_your_degree_picture'.tr,
-                                            text: 'ok'.tr,
-                                            functionCall: () {
-                                              Navigator.pop(context);
-                                            },
-                                            img: 'assets/Icons/dialog_error.svg',
-                                          );
-                                        });
-                                  }
+                              validator: (String? value) {
+                                if (value!.isEmpty) {
+                                  return 'field_required'.tr;
+                                } else {
+                                  return null;
                                 }
                               },
-                              child: Container(
-                                height: 40,
-                                width: MediaQuery.of(context).size.width * .45,
-                                decoration: BoxDecoration(
-                                    color: customLightThemeColor,
-                                    borderRadius: BorderRadius.circular(8)),
-                                child: Center(
-                                  child: Text(
-                                    '+${'add_education'.tr}',
-                                    style: state.addButtonTextStyle,
-                                  ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    ///---year
+                    Row(
+                      children: [
+                        ///---year
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                15.w, 0, 15.w, 16.h),
+                            child: TextFormField(
+                              onTap: () async {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content: SizedBox(
+                                        // Need to use container to add size constraint.
+                                        width: 300,
+                                        height: 300,
+                                        child: Theme(
+                                          data: ThemeData(
+                                              colorScheme: ColorScheme
+                                                      .fromSwatch()
+                                                  .copyWith(
+                                                      primary:
+                                                          customThemeColor)),
+                                          child: YearPicker(
+                                            firstDate: DateTime(
+                                                DateTime.now().year - 50, 1),
+                                            lastDate: DateTime(
+                                                DateTime.now().year, 1),
+
+                                            // save the selected date to _selectedDate DateTime variable.
+                                            // It's used to set the previous selected date when
+                                            // re-showing the dialog.
+
+                                            selectedDate: DateTime.now(),
+                                            onChanged: (DateTime dateTime) {
+                                              setState(() {
+                                                _editConsultantProfileLogic
+                                                        .selectedYear =
+                                                    DateFormat('yyyy')
+                                                        .format(dateTime);
+                                                log('YEAR--->>${_editConsultantProfileLogic.selectedYear}');
+                                                _yearController =
+                                                    TextEditingController(
+                                                        text:
+                                                            _editConsultantProfileLogic
+                                                                .selectedYear);
+                                                log('YEAR--->>${_yearController.text}');
+                                              });
+                                              // close the dialog when year is selected.
+                                              Navigator.pop(context);
+                                              // Do something with the dateTime selected.
+                                              // Remember that you need to use dateTime.year to get the year
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              readOnly: true,
+                              controller: _yearController,
+                              style: state.textFieldTextStyle,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    25.w, 15.h, 25.w, 15.h),
+                                hintText: 'Year',
+                                hintStyle: state.hintTextStyle,
+                                fillColor: Colors.white,
+                                filled: true,
+                                suffixIcon: Padding(
+                                  padding:
+                                      const EdgeInsetsDirectional.all(15.0),
+                                  child: SvgPicture.asset(
+                                      'assets/Icons/calendarIcon.svg'),
                                 ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: const BorderSide(
+                                        color: Colors.transparent)),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: const BorderSide(
+                                        color: Colors.transparent)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: const BorderSide(
+                                        color: customLightThemeColor)),
+                                errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide:
+                                        const BorderSide(color: Colors.red)),
                               ),
+                              validator: (String? value) {
+                                if (value!.isEmpty) {
+                                  return 'field_required'.tr;
+                                } else {
+                                  return null;
+                                }
+                              },
                             ),
                           ),
                         ),
 
-                        ///---added-record-preview
-                        Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                15, 15, 15, 20),
-                            child: Wrap(
-                              children: List.generate(
-                                  _editConsultantProfileLogic.forDisplayEducationList!
-                                      .length, (index) {
-                                return Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0, 15, 0, 0),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(14),
-                                          color: Colors.white),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(15, 15, 7, 15),
-                                        child: Column(
+                        const Spacer()
+                      ],
+                    ),
+
+                    ///---picture
+                    degreeImage == null
+                        ? InkWell(
+                            onTap: () {
+                              imagePickerDialog(context);
+                            },
+                            child: const UploadImageButton())
+                        : Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 25.h),
+                              child: SizedBox(
+                                height: 103.h,
+                                width: 190.w,
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Image.file(
+                                      degreeImage!,
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                            ),
+                          ),
+
+                    ///---add-button
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
+                      child: Center(
+                        child: InkWell(
+                          onTap: () {
+                            FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                            if (!currentFocus.hasPrimaryFocus) {
+                              currentFocus.unfocus();
+                            }
+                            if (_educationalInfoFormKey.currentState!
+                                .validate()) {
+                              if (degreeImage != null) {
+                                Get.find<GeneralController>()
+                                    .updateFormLoaderController(true);
+                                mentorEducationInfoRepo(degreeImage);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (BuildContext context) {
+                                      return CustomDialogBox(
+                                        title: 'sorry!'.tr,
+                                        titleColor: customDialogErrorColor,
+                                        descriptions:
+                                            'upload_your_degree_picture'.tr,
+                                        text: 'ok'.tr,
+                                        functionCall: () {
+                                          Navigator.pop(context);
+                                        },
+                                        img: 'assets/Icons/dialog_error.svg',
+                                      );
+                                    });
+                              }
+                            }
+                          },
+                          child: Container(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width * .45,
+                            decoration: BoxDecoration(
+                                color: customLightThemeColor,
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Center(
+                              child: Text(
+                                '+${'add_education'.tr}',
+                                style: state.addButtonTextStyle,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    ///---added-record-preview
+                    Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            15, 15, 15, 20),
+                        child: Wrap(
+                          children: List.generate(
+                              _editConsultantProfileLogic
+                                  .forDisplayEducationList!.length, (index) {
+                            return Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 15, 0, 0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(14),
+                                      color: Colors.white),
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            15, 15, 7, 15),
+                                    child: Column(
+                                      children: [
+                                        ///---institution
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            ///---institution
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'institute'.tr,
-                                                        style: state
-                                                            .previewLabelTextStyle,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 4,
-                                                      ),
-                                                      Text(
-                                                        '${_editConsultantProfileLogic.forDisplayEducationList![index].institute}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 2,
-                                                        style: state
-                                                            .previewValueTextStyle,
-                                                      ),
-                                                    ],
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'institute'.tr,
+                                                    style: state
+                                                        .previewLabelTextStyle,
                                                   ),
-                                                ),
-                                                InkWell(
-                                                    onTap: () {
-                                                      _generalController
-                                                          .updateFormLoaderController(
-                                                              true);
-                                                      postMethod(
-                                                          context,
-                                                          mentorEducationalInfoDeleteUrl,
-                                                          {
-                                                            'token': '123',
-                                                            'id': _editConsultantProfileLogic
-                                                                .forDisplayEducationList![
-                                                                    index]
-                                                                .id
-                                                          },
-                                                          true,
-                                                          deleteEducationRepo);
-                                                      _editConsultantProfileLogic
-                                                          .forDisplayEducationList!
-                                                          .removeAt(index);
-                                                      setState(() {});
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .all(8.0),
-                                                      child: SvgPicture.asset(
-                                                          'assets/Icons/deleteIcon.svg'),
-                                                    ))
-                                              ],
+                                                  const SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                    '${_editConsultantProfileLogic.forDisplayEducationList![index].institute}',
+                                                    softWrap: true,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 2,
+                                                    style: state
+                                                        .previewValueTextStyle,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
+                                            InkWell(
+                                                onTap: () {
+                                                  _generalController
+                                                      .updateFormLoaderController(
+                                                          true);
+                                                  postMethod(
+                                                      context,
+                                                      mentorEducationalInfoDeleteUrl,
+                                                      {
+                                                        'token': '123',
+                                                        'id': _editConsultantProfileLogic
+                                                            .forDisplayEducationList![
+                                                                index]
+                                                            .id
+                                                      },
+                                                      true,
+                                                      deleteEducationRepo);
+                                                  _editConsultantProfileLogic
+                                                      .forDisplayEducationList!
+                                                      .removeAt(index);
+                                                  setState(() {});
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .all(8.0),
+                                                  child: SvgPicture.asset(
+                                                      'assets/Icons/deleteIcon.svg'),
+                                                ))
+                                          ],
+                                        ),
 
-                                            const SizedBox(
-                                              height: 14,
-                                            ),
+                                        const SizedBox(
+                                          height: 14,
+                                        ),
 
-                                            ///---degree-subject
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'degree'.tr,
-                                                        style: state
-                                                            .previewLabelTextStyle,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 4,
-                                                      ),
-                                                      Text(
-                                                        '${_editConsultantProfileLogic.forDisplayEducationList![index].degree}',
-                                                        style: state
-                                                            .previewValueTextStyle,
-                                                      ),
-                                                    ],
+                                        ///---degree-subject
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'degree'.tr,
+                                                    style: state
+                                                        .previewLabelTextStyle,
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'subject'.tr,
-                                                        style: state
-                                                            .previewLabelTextStyle,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 4,
-                                                      ),
-                                                      Text(
-                                                        '${_editConsultantProfileLogic.forDisplayEducationList![index].subject}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .previewValueTextStyle,
-                                                      ),
-                                                    ],
+                                                  const SizedBox(
+                                                    height: 4,
                                                   ),
-                                                ),
-                                              ],
+                                                  Text(
+                                                    '${_editConsultantProfileLogic.forDisplayEducationList![index].degree}',
+                                                    style: state
+                                                        .previewValueTextStyle,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                            const SizedBox(
-                                              height: 14,
-                                            ),
-
-                                            ///---degree-subject
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'year'.tr,
-                                                        style: state
-                                                            .previewLabelTextStyle,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 4,
-                                                      ),
-                                                      Text(
-                                                        '${_editConsultantProfileLogic.forDisplayEducationList![index].period}',
-                                                        style: state
-                                                            .previewValueTextStyle,
-                                                      ),
-                                                    ],
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'subject'.tr,
+                                                    style: state
+                                                        .previewLabelTextStyle,
                                                   ),
-                                                ),
-                                                const Spacer()
-                                              ],
+                                                  const SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                    '${_editConsultantProfileLogic.forDisplayEducationList![index].subject}',
+                                                    softWrap: true,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    style: state
+                                                        .previewValueTextStyle,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
-                                      )),
-                                );
-                              }),
-                            )),
-                      ],
-                    ),
-                  )),
+                                        const SizedBox(
+                                          height: 14,
+                                        ),
+
+                                        ///---year-image
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'year'.tr,
+                                                    style: state
+                                                        .previewLabelTextStyle,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                    '${_editConsultantProfileLogic.forDisplayEducationList![index].period}',
+                                                    style: state
+                                                        .previewValueTextStyle,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            _editConsultantProfileLogic
+                                                        .forDisplayEducationList![
+                                                            index]
+                                                        .imagePath !=
+                                                    null
+                                                ? Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .only(end: 8.w),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        Get.to(ImageViewScreen(
+                                                          networkImage: _editConsultantProfileLogic
+                                                                  .forDisplayEducationList![
+                                                                      index]
+                                                                  .imagePath!
+                                                                  .contains(
+                                                                      'assets')
+                                                              ? '$mediaUrl${_editConsultantProfileLogic.forDisplayEducationList![index].imagePath}'
+                                                              : _editConsultantProfileLogic
+                                                                  .forDisplayEducationList![
+                                                                      index]
+                                                                  .imagePath!,
+                                                        ));
+                                                      },
+                                                      child: SizedBox(
+                                                          height: 30.h,
+                                                          width: 30.w,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4.r),
+                                                            child: Image.network(_editConsultantProfileLogic
+                                                                    .forDisplayEducationList![
+                                                                        index]
+                                                                    .imagePath!
+                                                                    .contains(
+                                                                        'assets')
+                                                                ? '$mediaUrl${_editConsultantProfileLogic.forDisplayEducationList![index].imagePath}'
+                                                                : _editConsultantProfileLogic
+                                                                    .forDisplayEducationList![
+                                                                        index]
+                                                                    .imagePath!),
+                                                          )),
+                                                    ),
+                                                  )
+                                                : const Spacer(),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                            );
+                          }),
+                        )),
+                  ],
+                ),
+              )),
               bottomNavigationBar: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 0),
                 child: InkWell(
@@ -655,10 +687,12 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                           .forDisplayEducationList!.isNotEmpty) {
                         setState(() {
                           _editConsultantProfileLogic
-                              .stepperList[_editConsultantProfileLogic.stepperIndex!]
+                              .stepperList[
+                                  _editConsultantProfileLogic.stepperIndex!]
                               .isSelected = false;
                           _editConsultantProfileLogic
-                              .stepperList[_editConsultantProfileLogic.stepperIndex!]
+                              .stepperList[
+                                  _editConsultantProfileLogic.stepperIndex!]
                               .isCompleted = true;
                           _editConsultantProfileLogic
                               .stepperList[
@@ -788,7 +822,9 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
       if (response.statusCode == 200) {
         Get.find<EditConsultantProfileLogic>().educationInfoPostModel =
             EducationInfoPostModel.fromJson(response.data);
-        if (Get.find<EditConsultantProfileLogic>().educationInfoPostModel.status ==
+        if (Get.find<EditConsultantProfileLogic>()
+                .educationInfoPostModel
+                .status ==
             true) {
           Get.find<EditConsultantProfileLogic>().updateForDisplayEducationList(
               Get.find<EditConsultantProfileLogic>()
@@ -796,8 +832,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                   .data!
                   .education);
           Get.snackbar('${'added_successfully'.tr}!', '',
-              colorText: Colors.black,
-              backgroundColor: Colors.white);
+              colorText: Colors.black, backgroundColor: Colors.white);
 
           Get.find<GeneralController>().updateFormLoaderController(false);
           setState(() {

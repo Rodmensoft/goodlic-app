@@ -8,6 +8,7 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/logic.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_experience_info.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_delete.dart';
+import 'package:consultant_product/src/modules/image_full_view/view.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
@@ -48,7 +49,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
     // TODO: implement initState
     super.initState();
     Get.find<EditConsultantProfileLogic>().scrollController!.animateTo(
-        Get.find<EditConsultantProfileLogic>().scrollController!
+        Get.find<EditConsultantProfileLogic>()
+            .scrollController!
             .position
             .minScrollExtent,
         curve: Curves.easeOut,
@@ -68,503 +70,547 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
               backgroundColor: customTextFieldColor,
               body: SingleChildScrollView(
                   child: Form(
-                    key: _experienceInfoFormKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                key: _experienceInfoFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ///---company-field
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          15.w, 25.h, 15.w, 16.h),
+                      child: TextFormField(
+                        style: state.textFieldTextStyle,
+                        controller: _companyNameController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                              25.w, 15.h, 25.w, 15.h),
+                          hintText: 'company_name'.tr.capitalizeFirst,
+                          hintStyle: state.hintTextStyle,
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent)),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: const BorderSide(
+                                  color: customLightThemeColor)),
+                          errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: const BorderSide(color: Colors.red)),
+                        ),
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
+                            return 'field_required'.tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                    ),
+
+                    ///---from-to
+                    Row(
                       children: [
-                        ///---company-field
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              15.w, 25.h, 15.w, 16.h),
-                          child: TextFormField(
-                            style: state.textFieldTextStyle,
-                            controller: _companyNameController,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  25.w, 15.h, 25.w, 15.h),
-                              hintText: 'company_name'.tr.capitalizeFirst,
-                              hintStyle: state.hintTextStyle,
-                              fillColor: Colors.white,
-                              filled: true,
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent)),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: customLightThemeColor)),
-                              errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide:
-                                  const BorderSide(color: Colors.red)),
+                        ///---from
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                15.w, 0, 8.w, 16.h),
+                            child: Theme(
+                              data: ThemeData(
+                                  colorScheme: ColorScheme.fromSwatch()
+                                      .copyWith(primary: customThemeColor)),
+                              child: DateTimeField(
+                                controller: _companyFromController,
+                                style: state.textFieldTextStyle,
+                                decoration: InputDecoration(
+                                    hintText: 'from'.tr.capitalizeFirst,
+                                    hintStyle: state.hintTextStyle,
+                                    contentPadding:
+                                        EdgeInsetsDirectional.fromSTEB(
+                                            25.w, 15.h, 15.w, 15.h),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        borderSide: const BorderSide(
+                                            color: customLightThemeColor)),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        borderSide: const BorderSide(
+                                            color: Colors.red)),
+                                    suffixIcon: Padding(
+                                      padding:
+                                          const EdgeInsetsDirectional.all(15.0),
+                                      child: SvgPicture.asset(
+                                        'assets/Icons/calendarIcon.svg',
+                                      ),
+                                    )),
+                                initialValue: _editConsultantProfileLogic
+                                    .selectedCompanyFromDate,
+                                format: DateFormat('dd-MM-yyyy'),
+                                onShowPicker: (context, currentValue) async {
+                                  final date = await showDatePicker(
+                                      context: context,
+                                      firstDate: DateTime(1900),
+                                      initialDate:
+                                          currentValue ?? DateTime.now(),
+                                      lastDate: DateTime.now());
+                                  if (date != null) {
+                                    return date;
+                                  } else {
+                                    return currentValue;
+                                  }
+                                },
+                                validator: (value) {
+                                  if (value == null) {
+                                    return 'field_required'.tr;
+                                  }
+                                  return null;
+                                },
+                                onChanged: (value) {
+                                  setState(() {
+                                    _editConsultantProfileLogic
+                                        .selectedCompanyFromDate = value;
+                                  });
+                                  log(value.toString());
+                                },
+                              ),
                             ),
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'field_required'.tr;
-                              } else {
-                                return null;
-                              }
-                            },
                           ),
                         ),
 
-                        ///---from-to
-                        Row(
-                          children: [
-                            ///---from
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    15.w, 0, 8.w, 16.h),
-                                child: Theme(
-                                  data: ThemeData(
-                                      colorScheme: ColorScheme.fromSwatch()
-                                          .copyWith(
-                                          primary: customThemeColor)),
-                                  child: DateTimeField(
-                                    controller: _companyFromController,
-                                    style: state.textFieldTextStyle,
-                                    decoration: InputDecoration(
-                                        hintText: 'from'.tr.capitalizeFirst,
-                                        hintStyle: state.hintTextStyle,
-                                        contentPadding:
+                        ///---to
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                8.w, 0, 15.w, 16.h),
+                            child: Theme(
+                              data: ThemeData(
+                                  colorScheme: ColorScheme.fromSwatch()
+                                      .copyWith(primary: customThemeColor)),
+                              child: DateTimeField(
+                                controller: _companyToController,
+                                style: state.textFieldTextStyle,
+                                decoration: InputDecoration(
+                                    hintText: 'To'.tr.capitalizeFirst,
+                                    hintStyle: state.hintTextStyle,
+                                    contentPadding:
                                         EdgeInsetsDirectional.fromSTEB(
                                             25.w, 15.h, 15.w, 15.h),
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                            borderRadius:
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius:
                                             BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
                                             BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius:
                                             BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color:
-                                                customLightThemeColor)),
-                                        errorBorder: OutlineInputBorder(
-                                            borderRadius:
+                                        borderSide: const BorderSide(
+                                            color: customLightThemeColor)),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius:
                                             BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(color: Colors.red)),
-                                        suffixIcon: Padding(
-                                          padding:
-                                          const EdgeInsetsDirectional
-                                              .all(15.0),
-                                          child: SvgPicture.asset(
-                                            'assets/Icons/calendarIcon.svg',
-                                          ),
-                                        )),
-                                    initialValue: _editConsultantProfileLogic
-                                        .selectedCompanyFromDate,
-                                    format: DateFormat('dd-MM-yyyy'),
-                                    onShowPicker:
-                                        (context, currentValue) async {
-                                      final date = await showDatePicker(
-                                          context: context,
-                                          firstDate: DateTime(1900),
-                                          initialDate: currentValue ??
-                                              DateTime.now(),
-                                          lastDate: DateTime.now());
-                                      if (date != null) {
-                                        return date;
-                                      } else {
-                                        return currentValue;
-                                      }
-                                    },
-                                    validator: (value) {
-                                      if (value == null) {
-                                        return 'field_required'.tr;
-                                      }
-                                      return null;
-                                    },
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _editConsultantProfileLogic
-                                                .selectedCompanyFromDate =
-                                            value;
-                                      });
-                                      log(value.toString());
-                                    },
-                                  ),
-                                ),
+                                        borderSide: const BorderSide(
+                                            color: Colors.red)),
+                                    suffixIcon: Padding(
+                                      padding:
+                                          const EdgeInsetsDirectional.all(15.0),
+                                      child: SvgPicture.asset(
+                                        'assets/Icons/calendarIcon.svg',
+                                      ),
+                                    )),
+                                initialValue: _editConsultantProfileLogic
+                                    .selectedCompanyToDate,
+                                format: DateFormat('dd-MM-yyyy'),
+                                onShowPicker: (context, currentValue) async {
+                                  final date = await showDatePicker(
+                                      context: context,
+                                      firstDate: DateTime(1900),
+                                      initialDate:
+                                          currentValue ?? DateTime.now(),
+                                      lastDate: DateTime.now());
+                                  if (date != null) {
+                                    return date;
+                                  } else {
+                                    return currentValue;
+                                  }
+                                },
+                                validator: (value) {
+                                  if (value == null) {
+                                    return 'field_required'.tr;
+                                  }
+                                  return null;
+                                },
+                                onChanged: (value) {
+                                  setState(() {
+                                    _editConsultantProfileLogic
+                                        .selectedCompanyToDate = value;
+                                  });
+                                  log(value.toString());
+                                },
                               ),
                             ),
-
-                            ///---to
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    8.w, 0, 15.w, 16.h),
-                                child: Theme(
-                                  data: ThemeData(
-                                      colorScheme: ColorScheme.fromSwatch()
-                                          .copyWith(
-                                          primary: customThemeColor)),
-                                  child: DateTimeField(
-                                    controller: _companyToController,
-                                    style: state.textFieldTextStyle,
-                                    decoration: InputDecoration(
-                                        hintText: 'To'.tr.capitalizeFirst,
-                                        hintStyle: state.hintTextStyle,
-                                        contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            25.w, 15.h, 15.w, 15.h),
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color:
-                                                customLightThemeColor)),
-                                        errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(color: Colors.red)),
-                                        suffixIcon: Padding(
-                                          padding:
-                                          const EdgeInsetsDirectional
-                                              .all(15.0),
-                                          child: SvgPicture.asset(
-                                            'assets/Icons/calendarIcon.svg',
-                                          ),
-                                        )),
-                                    initialValue: _editConsultantProfileLogic
-                                        .selectedCompanyToDate,
-                                    format: DateFormat('dd-MM-yyyy'),
-                                    onShowPicker:
-                                        (context, currentValue) async {
-                                      final date = await showDatePicker(
-                                          context: context,
-                                          firstDate: DateTime(1900),
-                                          initialDate: currentValue ??
-                                              DateTime.now(),
-                                          lastDate: DateTime.now());
-                                      if (date != null) {
-                                        return date;
-                                      } else {
-                                        return currentValue;
-                                      }
-                                    },
-                                    validator: (value) {
-                                      if (value == null) {
-                                        return 'field_required'.tr;
-                                      }
-                                      return null;
-                                    },
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _editConsultantProfileLogic
-                                            .selectedCompanyToDate = value;
-                                      });
-                                      log(value.toString());
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                        ///---picture
-                        experienceImage == null
-                            ? InkWell(
+                      ],
+                    ),
+
+                    ///---picture
+                    experienceImage == null
+                        ? InkWell(
                             onTap: () {
                               imagePickerDialog(context);
                             },
                             child: const UploadImageButton())
-                            : Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 25.h),
-                            child: SizedBox(
-                              height: 103.h,
-                              width: 190.w,
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Image.file(
-                                    experienceImage!,
-                                    fit: BoxFit.cover,
-                                  )),
+                        : Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 25.h),
+                              child: SizedBox(
+                                height: 103.h,
+                                width: 190.w,
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Image.file(
+                                      experienceImage!,
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
                             ),
                           ),
-                        ),
 
-                        ///---add-button
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
-                          child: Center(
-                            child: InkWell(
-                              onTap: () {
-                                FocusScopeNode currentFocus =
-                                    FocusScope.of(context);
-                                if (!currentFocus.hasPrimaryFocus) {
-                                  currentFocus.unfocus();
-                                }
-                                if (_experienceInfoFormKey.currentState!
-                                    .validate()) {
-                                  if (experienceImage != null) {
-                                    Get.find<GeneralController>()
-                                        .updateFormLoaderController(true);
-                                    _mentorExperienceInfoRepo(experienceImage);
-                                  } else {
-                                    showDialog(
-                                        context: context,
-                                        barrierDismissible: false,
-                                        builder: (BuildContext context) {
-                                          return CustomDialogBox(
-                                            title: 'sorry!'.tr,
-                                            titleColor: customDialogErrorColor,
-                                            descriptions:
-                                                'upload_your_experience_certificate'.tr,
-                                            text: 'ok'.tr,
-                                            functionCall: () {
-                                              Navigator.pop(context);
-                                            },
-                                            img: 'assets/dialog_error.svg',
-                                          );
-                                        });
-                                  }
-                                }
-                              },
-                              child: Container(
-                                height: 40,
-                                width: MediaQuery.of(context).size.width * .45,
-                                decoration: BoxDecoration(
-                                    color: customLightThemeColor,
-                                    borderRadius: BorderRadius.circular(8)),
-                                child: Center(
-                                  child: Text(
-                                    '+${'add_experience'.tr}',
-                                    style: state.addButtonTextStyle,
-                                  ),
-                                ),
+                    ///---add-button
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
+                      child: Center(
+                        child: InkWell(
+                          onTap: () {
+                            FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                            if (!currentFocus.hasPrimaryFocus) {
+                              currentFocus.unfocus();
+                            }
+                            if (_experienceInfoFormKey.currentState!
+                                .validate()) {
+                              if (experienceImage != null) {
+                                Get.find<GeneralController>()
+                                    .updateFormLoaderController(true);
+                                _mentorExperienceInfoRepo(experienceImage);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (BuildContext context) {
+                                      return CustomDialogBox(
+                                        title: 'sorry!'.tr,
+                                        titleColor: customDialogErrorColor,
+                                        descriptions:
+                                            'upload_your_experience_certificate'
+                                                .tr,
+                                        text: 'ok'.tr,
+                                        functionCall: () {
+                                          Navigator.pop(context);
+                                        },
+                                        img: 'assets/dialog_error.svg',
+                                      );
+                                    });
+                              }
+                            }
+                          },
+                          child: Container(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width * .45,
+                            decoration: BoxDecoration(
+                                color: customLightThemeColor,
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Center(
+                              child: Text(
+                                '+${'add_experience'.tr}',
+                                style: state.addButtonTextStyle,
                               ),
                             ),
                           ),
                         ),
+                      ),
+                    ),
 
-                        ///---added-record-preview
-                        Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(15, 28, 15, 20),
-                            child: Wrap(
-                              children: List.generate(
-                                  _editConsultantProfileLogic.forDisplayExperienceList!
-                                      .length, (index) {
-                                return Padding(
-                                  padding:
-                                      const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(14),
-                                          color: Colors.white),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                    ///---added-record-preview
+                    Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            15, 28, 15, 20),
+                        child: Wrap(
+                          children: List.generate(
+                              _editConsultantProfileLogic
+                                  .forDisplayExperienceList!.length, (index) {
+                            return Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 15, 0, 0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(14),
+                                      color: Colors.white),
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
                                             15, 15, 7, 15),
-                                        child: Column(
+                                    child: Column(
+                                      children: [
+                                        ///---company-name
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            ///---company-name
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'company'.tr,
-                                                        style: state
-                                                            .previewLabelTextStyle,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 4,
-                                                      ),
-                                                      Text(
-                                                        '${_editConsultantProfileLogic.forDisplayExperienceList![index].company}',
-                                                        softWrap: true,
-                                                        overflow:
-                                                            TextOverflow.ellipsis,
-                                                        maxLines: 2,
-                                                        style: state
-                                                            .previewValueTextStyle,
-                                                      ),
-                                                    ],
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'company'.tr,
+                                                    style: state
+                                                        .previewLabelTextStyle,
                                                   ),
-                                                ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    _generalController
-                                                        .updateFormLoaderController(
-                                                            true);
-                                                    postMethod(
-                                                        context,
-                                                        mentorExperienceInfoDeleteUrl,
-                                                        {
-                                                          'token': '123',
-                                                          'id': _editConsultantProfileLogic
-                                                              .forDisplayExperienceList![
-                                                                  index]
-                                                              .id
-                                                        },
-                                                        true,
-                                                        deleteEducationRepo);
-                                                    _editConsultantProfileLogic
-                                                        .forDisplayExperienceList!
-                                                        .removeAt(index);
-                                                    setState(() {});
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional.all(
-                                                            8.0),
-                                                    child: SvgPicture.asset(
-                                                        'assets/Icons/deleteIcon.svg'),
+                                                  const SizedBox(
+                                                    height: 4,
                                                   ),
-                                                )
-                                              ],
+                                                  Text(
+                                                    '${_editConsultantProfileLogic.forDisplayExperienceList![index].company}',
+                                                    softWrap: true,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 2,
+                                                    style: state
+                                                        .previewValueTextStyle,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-
-                                            const SizedBox(
-                                              height: 14,
-                                            ),
-
-                                            ///---from-to
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'from'.tr,
-                                                        style: state
-                                                            .previewLabelTextStyle,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 4,
-                                                      ),
-                                                      Text(
-                                                        '${_editConsultantProfileLogic.forDisplayExperienceList![index].from}',
-                                                        style: state
-                                                            .previewValueTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'To'.tr,
-                                                        style: state
-                                                            .previewLabelTextStyle,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 4,
-                                                      ),
-                                                      Text(
-                                                        '${_editConsultantProfileLogic.forDisplayExperienceList![index].to}',
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .previewValueTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
+                                            InkWell(
+                                              onTap: () {
+                                                _generalController
+                                                    .updateFormLoaderController(
+                                                        true);
+                                                postMethod(
+                                                    context,
+                                                    mentorExperienceInfoDeleteUrl,
+                                                    {
+                                                      'token': '123',
+                                                      'id': _editConsultantProfileLogic
+                                                          .forDisplayExperienceList![
+                                                              index]
+                                                          .id
+                                                    },
+                                                    true,
+                                                    deleteEducationRepo);
+                                                _editConsultantProfileLogic
+                                                    .forDisplayExperienceList!
+                                                    .removeAt(index);
+                                                setState(() {});
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .all(8.0),
+                                                child: SvgPicture.asset(
+                                                    'assets/Icons/deleteIcon.svg'),
+                                              ),
                                             ),
                                           ],
                                         ),
-                                      )),
-                                );
-                              }),
-                            )),
-                      ],
-                    ),
-                  )),
-              bottomNavigationBar: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 15.w),
-                child: InkWell(
-                  onTap: () {
-                    if (_editConsultantProfileLogic
-                        .forDisplayExperienceList!.isNotEmpty) {
-                      setState(() {
-                        _editConsultantProfileLogic.stepperScrollController.animateTo(
-                          _editConsultantProfileLogic
-                              .stepperScrollController.position.maxScrollExtent,
-                          curve: Curves.easeOut,
-                          duration: const Duration(milliseconds: 500),
-                        );
-                        _editConsultantProfileLogic
-                            .stepperList[_editConsultantProfileLogic.stepperIndex!]
-                            .isSelected = false;
-                        _editConsultantProfileLogic
-                            .stepperList[_editConsultantProfileLogic.stepperIndex!]
-                            .isCompleted = true;
-                        _editConsultantProfileLogic
-                            .stepperList[_editConsultantProfileLogic.stepperIndex! + 1]
-                            .isSelected = true;
-                        _editConsultantProfileLogic.updateStepperIndex(3);
-                      });
-                    } else {
-                      showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) {
-                            return CustomDialogBox(
-                              title: 'failed!'.tr,
-                              titleColor: customDialogErrorColor,
-                              descriptions: 'add_work_experience_please'.tr,
-                              text: 'ok'.tr,
-                              functionCall: () {
-                                Navigator.pop(context);
-                              },
-                              img: 'assets/dialog_error.svg',
+
+                                        const SizedBox(
+                                          height: 14,
+                                        ),
+
+                                        ///---from-to
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'from'.tr,
+                                                    style: state
+                                                        .previewLabelTextStyle,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                    '${_editConsultantProfileLogic.forDisplayExperienceList![index].from}',
+                                                    style: state
+                                                        .previewValueTextStyle,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'To'.tr,
+                                                    style: state
+                                                        .previewLabelTextStyle,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                    '${_editConsultantProfileLogic.forDisplayExperienceList![index].to}',
+                                                    softWrap: true,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    style: state
+                                                        .previewValueTextStyle,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            _editConsultantProfileLogic
+                                                .forDisplayExperienceList![
+                                            index]
+                                                .imagePath !=
+                                                null
+                                                ? Padding(
+                                              padding:
+                                              EdgeInsetsDirectional
+                                                  .only(end: 8.w),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  Get.to(ImageViewScreen(
+                                                    networkImage: _editConsultantProfileLogic
+                                                        .forDisplayExperienceList![
+                                                    index]
+                                                        .imagePath!
+                                                        .contains(
+                                                        'assets')
+                                                        ? '$mediaUrl${_editConsultantProfileLogic.forDisplayExperienceList![index].imagePath}'
+                                                        : _editConsultantProfileLogic
+                                                        .forDisplayExperienceList![
+                                                    index]
+                                                        .imagePath!,
+                                                  ));
+                                                },
+                                                child: SizedBox(
+                                                    height: 30.h,
+                                                    width: 30.w,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                      BorderRadius
+                                                          .circular(
+                                                          4.r),
+                                                      child: Image.network(_editConsultantProfileLogic
+                                                          .forDisplayExperienceList![
+                                                      index]
+                                                          .imagePath!
+                                                          .contains(
+                                                          'assets')
+                                                          ? '$mediaUrl${_editConsultantProfileLogic.forDisplayExperienceList![index].imagePath}'
+                                                          : _editConsultantProfileLogic
+                                                          .forDisplayExperienceList![
+                                                      index]
+                                                          .imagePath!),
+                                                    )),
+                                              ),
+                                            )
+                                                : const SizedBox(),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )),
                             );
-                          });
-                    }
-                  },
-                    child: const MyCustomBottomBar(
-                        title: 'Next Step', disable: false)
+                          }),
+                        )),
+                  ],
                 ),
+              )),
+              bottomNavigationBar: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: InkWell(
+                    onTap: () {
+                      if (_editConsultantProfileLogic
+                          .forDisplayExperienceList!.isNotEmpty) {
+                        setState(() {
+                          _editConsultantProfileLogic.stepperScrollController
+                              .animateTo(
+                            _editConsultantProfileLogic.stepperScrollController
+                                .position.maxScrollExtent,
+                            curve: Curves.easeOut,
+                            duration: const Duration(milliseconds: 500),
+                          );
+                          _editConsultantProfileLogic
+                              .stepperList[
+                                  _editConsultantProfileLogic.stepperIndex!]
+                              .isSelected = false;
+                          _editConsultantProfileLogic
+                              .stepperList[
+                                  _editConsultantProfileLogic.stepperIndex!]
+                              .isCompleted = true;
+                          _editConsultantProfileLogic
+                              .stepperList[
+                                  _editConsultantProfileLogic.stepperIndex! + 1]
+                              .isSelected = true;
+                          _editConsultantProfileLogic.updateStepperIndex(3);
+                        });
+                      } else {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return CustomDialogBox(
+                                title: 'failed!'.tr,
+                                titleColor: customDialogErrorColor,
+                                descriptions: 'add_work_experience_please'.tr,
+                                text: 'ok'.tr,
+                                functionCall: () {
+                                  Navigator.pop(context);
+                                },
+                                img: 'assets/dialog_error.svg',
+                              );
+                            });
+                      }
+                    },
+                    child: const MyCustomBottomBar(
+                        title: 'Next Step', disable: false)),
               )),
         ),
       ),
@@ -590,7 +636,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                         source: ImgSource.Camera,
                         barrierDismissible: true,
                         imageQuality: 10,
-                        maxWidth: 400,maxHeight: 600));
+                        maxWidth: 400,
+                        maxHeight: 600));
                     if (experienceImagesList != null) {
                       setState(() {
                         experienceImage = File(experienceImagesList[0].path);
@@ -618,7 +665,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                         source: ImgSource.Gallery,
                         barrierDismissible: true,
                         imageQuality: 10,
-                        maxWidth: 400,maxHeight: 600));
+                        maxWidth: 400,
+                        maxHeight: 600));
                     if (experienceImagesList != null) {
                       setState(() {
                         experienceImage = File(experienceImagesList[0].path);
@@ -645,7 +693,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
       'mentor_id': Get.find<GeneralController>().storageBox.read('userID'),
       'company': _companyNameController.text,
       'from': DateFormat('yyyy-MM-dd')
-          .format(Get.find<EditConsultantProfileLogic>().selectedCompanyFromDate!)
+          .format(
+              Get.find<EditConsultantProfileLogic>().selectedCompanyFromDate!)
           .toString(),
       'to': DateFormat('yyyy-MM-dd')
           .format(Get.find<EditConsultantProfileLogic>().selectedCompanyToDate!)
@@ -668,7 +717,9 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
       if (response.statusCode == 200) {
         Get.find<EditConsultantProfileLogic>().experienceInfoPostModel =
             ExperienceInfoPostModel.fromJson(response.data);
-        if (Get.find<EditConsultantProfileLogic>().experienceInfoPostModel.status ==
+        if (Get.find<EditConsultantProfileLogic>()
+                .experienceInfoPostModel
+                .status ==
             true) {
           Get.find<EditConsultantProfileLogic>().updateForDisplayExperienceList(
               Get.find<EditConsultantProfileLogic>()
@@ -676,8 +727,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                   .data!
                   .experience);
           Get.snackbar('${'added_successfully'.tr}!', '',
-              colorText: Colors.black,
-              backgroundColor: Colors.white);
+              colorText: Colors.black, backgroundColor: Colors.white);
           Get.find<GeneralController>().updateFormLoaderController(false);
           setState(() {
             _companyNameController.clear();

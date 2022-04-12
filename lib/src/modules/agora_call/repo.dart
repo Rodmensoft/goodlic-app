@@ -137,8 +137,6 @@ getFcmTokenRepo(
                 'channel_token': Get.find<GeneralController>().tokenForCall,
               },
               'to': element.deviceKey
-              // 'to': 'dE6d0GSgSo2a0Xzrit9Y2L:APA91bH0AkbyEduFL2VK_SPFakObDXzIiGnne0Q9cs0ZgeSCTdbhszMYa9or6o-yx0Xw_D7bEtInDqs95x7_'
-              //     '_kNL-IMWetZqAyNT_INvTMoNFp6_5qLlkACduyxzjCQxZui16IN47Y8M',
             },
             false,
             method1);

@@ -195,7 +195,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'Field is required';
+                                          return 'field_required'.tr;
                                         } else if (!GetUtils.isEmail(value)) {
                                           return 'Enter Valid Email';
                                         } else {

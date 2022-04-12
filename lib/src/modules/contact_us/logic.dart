@@ -1,6 +1,8 @@
+import 'package:consultant_product/src/modules/contact_us/model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'state.dart';
 
@@ -23,4 +25,27 @@ class ContactUsLogic extends GetxController {
       update();
     }
   }
+
+  ContactUsModel contactUsModel = ContactUsModel();
+
+  Future<void> makePhoneCall(String? phoneNumber) async {
+
+    final uri =
+        'tel:$phoneNumber';
+    if (await canLaunch(uri)) {
+      await launch(uri);
+    } else {
+      throw 'Could not launch $uri';
+    }
+  }
+  sendMail(String? emailId) async {
+    final uri =
+        'mailto:$emailId?subject=Help&body=Hello';
+    if (await canLaunch(uri)) {
+      await launch(uri);
+    } else {
+      throw 'Could not launch $uri';
+    }
+  }
+
 }

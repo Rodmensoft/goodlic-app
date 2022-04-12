@@ -4,9 +4,9 @@ import 'package:global_configuration/global_configuration.dart';
 // const String baseUrl = 'https://consultation.softwaresbranding.com/';
 // const String mediaUrl = 'https://consultation.softwaresbranding.com';
 
-// const String apiBaseUrl = 'http://192.168.88.67:8001/api/';
-// const String baseUrl = 'http://192.168.88.67:8001/';
-// const String mediaUrl = 'http://192.168.88.67:8001';
+// const String apiBaseUrl = 'http://192.168.88.123:8001/api/';
+// const String baseUrl = 'http://192.168.88.123:8001/';
+// const String mediaUrl = 'http://192.168.88.123:8001';
 
 final String baseUrl = GlobalConfiguration().get('base_url');
 final String apiBaseUrl = GlobalConfiguration().get('api_base_url');
@@ -21,6 +21,13 @@ String loginWithEmailURL = apiBaseUrl + 'login-email';
 
 String mentorApprovalStatusUrl = apiBaseUrl + 'mentorStatus';
 
+
+ String contactUsUrl = apiBaseUrl + 'contactus';
+
+
+///---payment-method
+String paymentMethodUrl = apiBaseUrl + 'execute-payment';
+
 ///---user
 String getMenteeProfileUrl = apiBaseUrl + 'get-mentee-profile';
 
@@ -28,6 +35,7 @@ String updateMenteeProfileUrl = apiBaseUrl + 'update-mentee-profile';
 
 ///---consultant-profile-by-id
 String getUserProfileUrl = apiBaseUrl + 'getUserById';
+ String getMentorProfileForMenteeUrl = apiBaseUrl + 'get-mentor-details';
 
 ///---consultant-profile-section
 String mentorProfileGenericDataUrl = apiBaseUrl + 'generic_mentor';

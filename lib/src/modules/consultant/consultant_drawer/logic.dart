@@ -21,7 +21,7 @@ class ConsultantDrawerLogic extends GetxController {
         title: 'Contact US', icon: 'assets/Icons/drawerContactUsIcon.svg'),
     DrawerTile(title: 'Blogs', icon: 'assets/Icons/drawerBlogIcon.svg'),
     DrawerTile(
-        title: 'Privacy Policy', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
+        title: 'About Us', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
   ];
 
 
@@ -58,7 +58,7 @@ class ConsultantDrawerLogic extends GetxController {
       case 5:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.contactUs);
         }
       case 6:
         {
@@ -68,7 +68,7 @@ class ConsultantDrawerLogic extends GetxController {
       case 7:
         {
           Get.back();
-          return null;
+          return Get.toNamed(PageRoutes.aboutUs);
         }
       default:
         {

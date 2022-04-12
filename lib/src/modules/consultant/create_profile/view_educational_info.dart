@@ -8,6 +8,7 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/logic.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/model_post_education_info.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/repo_delete.dart';
+import 'package:consultant_product/src/modules/image_full_view/view.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
@@ -628,7 +629,54 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                     ],
                                                   ),
                                                 ),
-                                                const Spacer()
+                                                _createProfileLogic
+                                                    .forDisplayEducationList![
+                                                index]
+                                                    .imagePath !=
+                                                    null
+                                                    ? Padding(
+                                                  padding:
+                                                  EdgeInsetsDirectional
+                                                      .only(end: 8.w),
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      Get.to(ImageViewScreen(
+                                                        networkImage: _createProfileLogic
+                                                            .forDisplayEducationList![
+                                                        index]
+                                                            .imagePath!
+                                                            .contains(
+                                                            'assets')
+                                                            ? '$mediaUrl${_createProfileLogic.forDisplayEducationList![index].imagePath}'
+                                                            : _createProfileLogic
+                                                            .forDisplayEducationList![
+                                                        index]
+                                                            .imagePath!,
+                                                      ));
+                                                    },
+                                                    child: SizedBox(
+                                                        height: 30.h,
+                                                        width: 30.w,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              4.r),
+                                                          child: Image.network(_createProfileLogic
+                                                              .forDisplayEducationList![
+                                                          index]
+                                                              .imagePath!
+                                                              .contains(
+                                                              'assets')
+                                                              ? '$mediaUrl${_createProfileLogic.forDisplayEducationList![index].imagePath}'
+                                                              : _createProfileLogic
+                                                              .forDisplayEducationList![
+                                                          index]
+                                                              .imagePath!),
+                                                        )),
+                                                  ),
+                                                )
+                                                    : const Spacer(),
                                               ],
                                             ),
                                           ],
