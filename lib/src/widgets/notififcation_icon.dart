@@ -9,6 +9,7 @@ class CustomNotificationIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      splashColor: Colors.transparent,
       onTap: (){
 
       },

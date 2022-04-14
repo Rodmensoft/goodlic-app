@@ -160,6 +160,14 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                       ],
                                                       decoration:
                                                           InputDecoration(
+                                                            hintText: 'xxxx xxxx xxxx xxxx',
+                                                        hintStyle: TextStyle(
+                                                            fontFamily:
+                                                            SarabunFontFamily
+                                                                .semiBold,
+                                                            fontSize: 16.sp,
+                                                            color:
+                                                            Colors.white24),
                                                         contentPadding:
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
@@ -276,6 +284,14 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                           ],
                                                           decoration:
                                                               InputDecoration(
+                                                                hintText: 'xyz',
+                                                                hintStyle: TextStyle(
+                                                                    fontFamily:
+                                                                    SarabunFontFamily
+                                                                        .semiBold,
+                                                                    fontSize: 16.sp,
+                                                                    color:
+                                                                    Colors.white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -384,6 +400,14 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                           ],
                                                           decoration:
                                                               InputDecoration(
+                                                                hintText: 'MM/YY',
+                                                                hintStyle: TextStyle(
+                                                                    fontFamily:
+                                                                    SarabunFontFamily
+                                                                        .semiBold,
+                                                                    fontSize: 16.sp,
+                                                                    color:
+                                                                    Colors.white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -494,6 +518,14 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                           ],
                                                           decoration:
                                                               InputDecoration(
+                                                                hintText: 'xxx',
+                                                                hintStyle: TextStyle(
+                                                                    fontFamily:
+                                                                    SarabunFontFamily
+                                                                        .semiBold,
+                                                                    fontSize: 16.sp,
+                                                                    color:
+                                                                    Colors.white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -679,7 +711,7 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                           "shipping_id": 1,
                                           "plateForm": "mobile",
                                           "paytm_mode": "",
-                                          "bookAppointmentId":1
+                                          "wallat_desposit":true
                                         },
                                         true,
                                         stripePaymentRepo);

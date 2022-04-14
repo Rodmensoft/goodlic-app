@@ -231,32 +231,48 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                         ? const SizedBox()
                                         : Expanded(
                                             flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  'Document',
-                                                  style: state
-                                                      .sectionLabelTextStyle,
-                                                ),
-                                                SizedBox(
-                                                  height: 8.h,
-                                                ),
-                                                Text(
-                                                  _appointmentDetailLogic
-                                                      .selectedAppointmentData
-                                                      .fileType!,
-                                                  softWrap: true,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 1,
-                                                  style: state
-                                                      .sectionDataTextStyle,
-                                                ),
-                                              ],
+                                            child: InkWell(
+                                              onTap: () {
+                                                launch(_appointmentDetailLogic
+                                                    .selectedAppointmentData
+                                                    .file!
+                                                    .contains('assets')
+                                                    ? '$mediaUrl/${_appointmentDetailLogic.selectedAppointmentData.file}'
+                                                    : '${_appointmentDetailLogic.selectedAppointmentData.file}');
+                                              },
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'Document',
+                                                    style: state
+                                                        .sectionLabelTextStyle,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 8.h,
+                                                  ),
+                                                  Text(
+                                                    _appointmentDetailLogic
+                                                        .selectedAppointmentData
+                                                        .fileType!,
+                                                    softWrap: true,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    style: state
+                                                        .sectionDataTextStyle!
+                                                        .copyWith(
+                                                        color:
+                                                        customLightThemeColor,
+                                                        decoration:
+                                                        TextDecoration
+                                                            .underline),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                   ],

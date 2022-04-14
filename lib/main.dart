@@ -47,7 +47,7 @@ _initEngine(String? route) async {
 Future<void> backgroundHandler(RemoteMessage message) async {
   Get.put(GeneralController());
 
-  LocalNotificationService.display(message);
+  // LocalNotificationService.display(message);
   // String route;
   //
   // if (message.data['channel'] != null) {

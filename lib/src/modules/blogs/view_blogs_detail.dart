@@ -82,7 +82,9 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                                       .toString() !=
                                   'null'
                               ? Image.network(
-                                  '$mediaUrl${_blogsLogic.selectedBlogForView.imagePath}',
+                            _blogsLogic.selectedBlogForView.imagePath!.contains('assets')
+                          ?'$mediaUrl${_blogsLogic.selectedBlogForView.imagePath}'
+                              :'${_blogsLogic.selectedBlogForView.imagePath}',
                                   fit: BoxFit.cover,
                                 )
                               : Image.asset(

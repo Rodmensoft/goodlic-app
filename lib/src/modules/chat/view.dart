@@ -241,10 +241,10 @@ class _ChatPageState extends State<ChatPage> {
                                 direction: SkeletonDirection.ltr,
                                 builder: Padding(
                                   padding: index % 2 == 0
-                                      ? const EdgeInsetsDirectional.fromSTEB(
-                                          80, 7, 15, 7)
-                                      : const EdgeInsetsDirectional.fromSTEB(
-                                          15, 7, 80, 7),
+                                      ?  EdgeInsetsDirectional.fromSTEB(
+                                          80.w, 7.h, 15.w, 7.h)
+                                      :  EdgeInsetsDirectional.fromSTEB(
+                                          15.w, 7.h, 80.w, 7.h),
                                   child: Container(
                                     height: 50,
                                     width: 100,
@@ -342,9 +342,16 @@ class _ChatPageState extends State<ChatPage> {
                                                                         'userID')
                                                             ? customTextFieldColor
                                                             : customLightThemeColor,
-                                                        borderRadius: index %
-                                                                    2 ==
-                                                                0
+                                                        borderRadius: _chatLogic
+                                                            .messageList[
+                                                        index]
+                                                            .senderId ==
+                                                            Get.find<
+                                                                GeneralController>()
+                                                                .storageBox
+                                                                .read(
+                                                                'userID')
+                                                            
                                                             ? BorderRadius.only(
                                                                 bottomLeft: Radius
                                                                     .circular(
@@ -405,8 +412,8 @@ class _ChatPageState extends State<ChatPage> {
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  15, 0, 15, 15),
+                              padding:  EdgeInsetsDirectional.fromSTEB(
+                                  15.w, 0, 15.w, 15.h),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -450,8 +457,8 @@ class _ChatPageState extends State<ChatPage> {
                                           : TextDirection.ltr,
                                       decoration: InputDecoration(
                                         contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 10, horizontal: 20),
+                                             EdgeInsets.symmetric(
+                                                vertical: 10.h, horizontal: 20.w),
                                         filled: true,
                                         fillColor: customThemeColor,
                                         hintText: '${'your_text_here'.tr}.....',

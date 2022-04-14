@@ -163,6 +163,14 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                       ],
                                                       decoration:
                                                           InputDecoration(
+                                                            hintText: 'xxxx xxxx xxxx xxxx',
+                                                            hintStyle: TextStyle(
+                                                                fontFamily:
+                                                                SarabunFontFamily
+                                                                    .semiBold,
+                                                                fontSize: 16.sp,
+                                                                color:
+                                                                Colors.white24),
                                                         contentPadding:
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
@@ -279,6 +287,14 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                           ],
                                                           decoration:
                                                               InputDecoration(
+                                                                hintText: 'xyz',
+                                                                hintStyle: TextStyle(
+                                                                    fontFamily:
+                                                                    SarabunFontFamily
+                                                                        .semiBold,
+                                                                    fontSize: 16.sp,
+                                                                    color:
+                                                                    Colors.white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -384,6 +400,14 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                           ],
                                                           decoration:
                                                               InputDecoration(
+                                                                hintText: 'MM/YY',
+                                                                hintStyle: TextStyle(
+                                                                    fontFamily:
+                                                                    SarabunFontFamily
+                                                                        .semiBold,
+                                                                    fontSize: 16.sp,
+                                                                    color:
+                                                                    Colors.white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -491,6 +515,14 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                           ],
                                                           decoration:
                                                               InputDecoration(
+                                                                hintText: 'xxx',
+                                                                hintStyle: TextStyle(
+                                                                    fontFamily:
+                                                                    SarabunFontFamily
+                                                                        .semiBold,
+                                                                    fontSize: 16.sp,
+                                                                    color:
+                                                                    Colors.white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(

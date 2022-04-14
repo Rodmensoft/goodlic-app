@@ -1,4 +1,5 @@
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
@@ -133,7 +134,11 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                             shape: BoxShape.circle),
                                         child: Center(
                                             child: Image.network(
-                                          _userHomeLogic
+                                              _userHomeLogic
+                                                  .categoriesList[index].image!.contains('assets')
+                                                  ?'$mediaUrl${_userHomeLogic
+                                                  .categoriesList[index].image}'
+                                                  :_userHomeLogic
                                               .categoriesList[index].image!,
                                           height: 20.h,
                                           width: 23.w,
