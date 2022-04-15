@@ -1,15 +1,12 @@
 import 'dart:developer';
 
-import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/payment_stripe/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
-import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
-import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -163,13 +160,14 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                       ],
                                                       decoration:
                                                           InputDecoration(
-                                                            hintText: 'xxxx xxxx xxxx xxxx',
-                                                            hintStyle: TextStyle(
-                                                                fontFamily:
+                                                        hintText:
+                                                            'xxxx xxxx xxxx xxxx',
+                                                        hintStyle: TextStyle(
+                                                            fontFamily:
                                                                 SarabunFontFamily
                                                                     .semiBold,
-                                                                fontSize: 16.sp,
-                                                                color:
+                                                            fontSize: 16.sp,
+                                                            color:
                                                                 Colors.white24),
                                                         contentPadding:
                                                             EdgeInsetsDirectional
@@ -287,14 +285,14 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                           ],
                                                           decoration:
                                                               InputDecoration(
-                                                                hintText: 'xyz',
-                                                                hintStyle: TextStyle(
-                                                                    fontFamily:
+                                                            hintText: 'xyz',
+                                                            hintStyle: TextStyle(
+                                                                fontFamily:
                                                                     SarabunFontFamily
                                                                         .semiBold,
-                                                                    fontSize: 16.sp,
-                                                                    color:
-                                                                    Colors.white24),
+                                                                fontSize: 16.sp,
+                                                                color: Colors
+                                                                    .white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -400,14 +398,14 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                           ],
                                                           decoration:
                                                               InputDecoration(
-                                                                hintText: 'MM/YY',
-                                                                hintStyle: TextStyle(
-                                                                    fontFamily:
+                                                            hintText: 'MM/YY',
+                                                            hintStyle: TextStyle(
+                                                                fontFamily:
                                                                     SarabunFontFamily
                                                                         .semiBold,
-                                                                    fontSize: 16.sp,
-                                                                    color:
-                                                                    Colors.white24),
+                                                                fontSize: 16.sp,
+                                                                color: Colors
+                                                                    .white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -515,14 +513,14 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                           ],
                                                           decoration:
                                                               InputDecoration(
-                                                                hintText: 'xxx',
-                                                                hintStyle: TextStyle(
-                                                                    fontFamily:
+                                                            hintText: 'xxx',
+                                                            hintStyle: TextStyle(
+                                                                fontFamily:
                                                                     SarabunFontFamily
                                                                         .semiBold,
-                                                                    fontSize: 16.sp,
-                                                                    color:
-                                                                    Colors.white24),
+                                                                fontSize: 16.sp,
+                                                                color: Colors
+                                                                    .white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -650,7 +648,10 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                         context,
                                         paymentMethodUrl,
                                         {
-                                          "mentee_id": "132",
+                                          "mentee_id":
+                                              Get.find<GeneralController>()
+                                                  .storageBox
+                                                  .read('userID'),
                                           "total": _bookAppointmentLogic
                                               .selectMentorAppointmentType!.fee,
                                           "payment_method_code": "stripe",
