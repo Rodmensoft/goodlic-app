@@ -7,6 +7,7 @@ class ResetPasswordState {
   TextStyle? headingTextStyle;
   TextStyle? descTextStyle;
   TextStyle? subHeadingTextStyle;
+  TextStyle? hintTextStyle;
 
   ResetPasswordState() {
     ///Initialize variables
@@ -23,5 +24,9 @@ class ResetPasswordState {
         fontSize: 18.sp,
         fontFamily: SarabunFontFamily.extraBold,
         color: customTextBlackColor);
+    hintTextStyle = TextStyle(
+        fontFamily: SarabunFontFamily.regular,
+        fontSize: 16.sp,
+        color: customTextGreyColor);
   }
 }

@@ -29,6 +29,7 @@ import 'package:consultant_product/src/modules/user/book_appointment/payment_str
 import 'package:consultant_product/src/modules/user/book_appointment/view_appointment_question.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_confirmation.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_slot_selection.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/wallet_payment/view.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/view.dart';
 import 'package:consultant_product/src/modules/user/edit_user_profile/view.dart';
 import 'package:consultant_product/src/modules/user/home/view.dart';
@@ -133,7 +134,11 @@ routes() => [
       GetPage(name: '/videoCallWaiting', page: () => const CallWaitingView()),
       GetPage(name: '/aboutUs', page: () => const AboutUsPage()),
       GetPage(name: '/contactUs', page: () => const ContactUsPage()),
-      GetPage(name: '/stripePaymentForWallet', page: () => const StripePaymentForWalletView()),
+      GetPage(
+          name: '/stripePaymentForWallet',
+          page: () => const StripePaymentForWalletView()),
+      GetPage(
+          name: '/walletPaymentScreen', page: () => const WalletPaymentView()),
     ];
 
 class PageRoutes {
@@ -179,6 +184,7 @@ class PageRoutes {
   static const String aboutUs = '/aboutUs';
   static const String contactUs = '/contactUs';
   static const String stripePaymentForWallet = '/stripePaymentForWallet';
+  static const String walletPaymentScreen = '/walletPaymentScreen';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -224,6 +230,7 @@ class PageRoutes {
       aboutUs: (context) => const AboutUsPage(),
       contactUs: (context) => const ContactUsPage(),
       stripePaymentForWallet: (context) => const StripePaymentForWalletView(),
+      walletPaymentScreen: (context) => const WalletPaymentView(),
     };
   }
 }

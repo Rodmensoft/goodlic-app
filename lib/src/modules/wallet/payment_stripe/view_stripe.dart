@@ -15,15 +15,16 @@ import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
 
-
 class StripePaymentForWalletView extends StatefulWidget {
   const StripePaymentForWalletView({Key? key}) : super(key: key);
 
   @override
-  _StripePaymentForWalletViewState createState() => _StripePaymentForWalletViewState();
+  _StripePaymentForWalletViewState createState() =>
+      _StripePaymentForWalletViewState();
 }
 
-class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView> {
+class _StripePaymentForWalletViewState
+    extends State<StripePaymentForWalletView> {
   final state = Get.find<WalletLogic>().state;
 
   @override
@@ -122,8 +123,7 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                               Expanded(
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
+                                                      CrossAxisAlignment.start,
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   children: [
@@ -134,25 +134,20 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                               SarabunFontFamily
                                                                   .regular,
                                                           fontSize: 14.sp,
-                                                          color:
-                                                              Colors.white),
+                                                          color: Colors.white),
                                                     ),
                                                     TextFormField(
-                                                      controller:
-                                                          _walletLogic
-                                                              .accountCardNumberController,
+                                                      controller: _walletLogic
+                                                          .accountCardNumberController,
                                                       style: TextStyle(
                                                           fontFamily:
                                                               SarabunFontFamily
                                                                   .semiBold,
                                                           fontSize: 16.sp,
-                                                          color:
-                                                              Colors.white),
-                                                      cursorColor:
-                                                          Colors.white,
+                                                          color: Colors.white),
+                                                      cursorColor: Colors.white,
                                                       keyboardType:
-                                                          TextInputType
-                                                              .number,
+                                                          TextInputType.number,
                                                       maxLines: 1,
                                                       inputFormatters: [
                                                         _walletLogic
@@ -160,14 +155,15 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                       ],
                                                       decoration:
                                                           InputDecoration(
-                                                            hintText: 'xxxx xxxx xxxx xxxx',
+                                                        hintText:
+                                                            'xxxx xxxx xxxx xxxx',
                                                         hintStyle: TextStyle(
                                                             fontFamily:
-                                                            SarabunFontFamily
-                                                                .semiBold,
+                                                                SarabunFontFamily
+                                                                    .semiBold,
                                                             fontSize: 16.sp,
                                                             color:
-                                                            Colors.white24),
+                                                                Colors.white24),
                                                         contentPadding:
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
@@ -214,7 +210,8 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                       ),
                                                       validator: (value) {
                                                         if (value!.isEmpty) {
-                                                          return 'field_required'.tr;
+                                                          return 'field_required'
+                                                              .tr;
                                                         } else {
                                                           return null;
                                                         }
@@ -240,8 +237,7 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                 ///---card-holder-name
                                                 Expanded(
                                                   child: Align(
-                                                    alignment:
-                                                        Alignment.center,
+                                                    alignment: Alignment.center,
                                                     child: Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -257,20 +253,19 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                                   SarabunFontFamily
                                                                       .regular,
                                                               fontSize: 12.sp,
-                                                              color: Colors
-                                                                  .white),
+                                                              color:
+                                                                  Colors.white),
                                                         ),
                                                         TextFormField(
-                                                          controller:
-                                                              _walletLogic
-                                                                  .accountCardHolderNameController,
+                                                          controller: _walletLogic
+                                                              .accountCardHolderNameController,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
                                                                       .semiBold,
                                                               fontSize: 14.sp,
-                                                              color: Colors
-                                                                  .white),
+                                                              color:
+                                                                  Colors.white),
                                                           cursorColor:
                                                               Colors.white,
                                                           keyboardType:
@@ -284,14 +279,14 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                           ],
                                                           decoration:
                                                               InputDecoration(
-                                                                hintText: 'xyz',
-                                                                hintStyle: TextStyle(
-                                                                    fontFamily:
+                                                            hintText: 'xyz',
+                                                            hintStyle: TextStyle(
+                                                                fontFamily:
                                                                     SarabunFontFamily
                                                                         .semiBold,
-                                                                    fontSize: 16.sp,
-                                                                    color:
-                                                                    Colors.white24),
+                                                                fontSize: 16.sp,
+                                                                color: Colors
+                                                                    .white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -304,28 +299,25 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                                     BorderRadius
                                                                         .circular(8
                                                                             .r),
-                                                                borderSide:
-                                                                    const BorderSide(
-                                                                        color:
-                                                                            Colors.transparent)),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .transparent)),
                                                             border: UnderlineInputBorder(
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(8
                                                                             .r),
-                                                                borderSide:
-                                                                    const BorderSide(
-                                                                        color:
-                                                                            Colors.transparent)),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .transparent)),
                                                             focusedBorder: UnderlineInputBorder(
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(8
                                                                             .r),
-                                                                borderSide:
-                                                                    const BorderSide(
-                                                                        color:
-                                                                            Colors.white)),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
                                                             errorBorder: UnderlineInputBorder(
                                                                 borderRadius:
                                                                     BorderRadius
@@ -333,13 +325,14 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                                             .r),
                                                                 borderSide:
                                                                     const BorderSide(
-                                                                        color:
-                                                                            Colors.red)),
+                                                                        color: Colors
+                                                                            .red)),
                                                           ),
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'.tr;
+                                                              return 'field_required'
+                                                                  .tr;
                                                             } else {
                                                               return null;
                                                             }
@@ -353,8 +346,7 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                 ///---card-expiry
                                                 Expanded(
                                                   child: Align(
-                                                    alignment:
-                                                        Alignment.center,
+                                                    alignment: Alignment.center,
                                                     child: Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -370,22 +362,21 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                                   SarabunFontFamily
                                                                       .regular,
                                                               fontSize: 12.sp,
-                                                              color: Colors
-                                                                  .white),
+                                                              color:
+                                                                  Colors.white),
                                                         ),
                                                         TextFormField(
-                                                          controller:
-                                                              _walletLogic
-                                                                  .accountCardExpiresController,
-                                                          textAlign: TextAlign
-                                                              .center,
+                                                          controller: _walletLogic
+                                                              .accountCardExpiresController,
+                                                          textAlign:
+                                                              TextAlign.center,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
                                                                       .semiBold,
                                                               fontSize: 14.sp,
-                                                              color: Colors
-                                                                  .white),
+                                                              color:
+                                                                  Colors.white),
                                                           cursorColor:
                                                               Colors.white,
                                                           keyboardType:
@@ -400,14 +391,14 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                           ],
                                                           decoration:
                                                               InputDecoration(
-                                                                hintText: 'MM/YY',
-                                                                hintStyle: TextStyle(
-                                                                    fontFamily:
+                                                            hintText: 'MM/YY',
+                                                            hintStyle: TextStyle(
+                                                                fontFamily:
                                                                     SarabunFontFamily
                                                                         .semiBold,
-                                                                    fontSize: 16.sp,
-                                                                    color:
-                                                                    Colors.white24),
+                                                                fontSize: 16.sp,
+                                                                color: Colors
+                                                                    .white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -420,28 +411,25 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                                     BorderRadius
                                                                         .circular(8
                                                                             .r),
-                                                                borderSide:
-                                                                    const BorderSide(
-                                                                        color:
-                                                                            Colors.transparent)),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .transparent)),
                                                             border: UnderlineInputBorder(
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(8
                                                                             .r),
-                                                                borderSide:
-                                                                    const BorderSide(
-                                                                        color:
-                                                                            Colors.transparent)),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .transparent)),
                                                             focusedBorder: UnderlineInputBorder(
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(8
                                                                             .r),
-                                                                borderSide:
-                                                                    const BorderSide(
-                                                                        color:
-                                                                            Colors.white)),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
                                                             errorBorder: UnderlineInputBorder(
                                                                 borderRadius:
                                                                     BorderRadius
@@ -449,13 +437,14 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                                             .r),
                                                                 borderSide:
                                                                     const BorderSide(
-                                                                        color:
-                                                                            Colors.red)),
+                                                                        color: Colors
+                                                                            .red)),
                                                           ),
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'.tr;
+                                                              return 'field_required'
+                                                                  .tr;
                                                             } else {
                                                               return null;
                                                             }
@@ -469,8 +458,7 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                 ///---card-cvv
                                                 Expanded(
                                                   child: Align(
-                                                    alignment:
-                                                        Alignment.center,
+                                                    alignment: Alignment.center,
                                                     child: Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -486,22 +474,21 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                                   SarabunFontFamily
                                                                       .regular,
                                                               fontSize: 12.sp,
-                                                              color: Colors
-                                                                  .white),
+                                                              color:
+                                                                  Colors.white),
                                                         ),
                                                         TextFormField(
-                                                          controller:
-                                                              _walletLogic
-                                                                  .accountCardCvcController,
-                                                          textAlign: TextAlign
-                                                              .center,
+                                                          controller: _walletLogic
+                                                              .accountCardCvcController,
+                                                          textAlign:
+                                                              TextAlign.center,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
                                                                       .semiBold,
                                                               fontSize: 14.sp,
-                                                              color: Colors
-                                                                  .white),
+                                                              color:
+                                                                  Colors.white),
                                                           cursorColor:
                                                               Colors.white,
                                                           keyboardType:
@@ -518,14 +505,14 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                           ],
                                                           decoration:
                                                               InputDecoration(
-                                                                hintText: 'xxx',
-                                                                hintStyle: TextStyle(
-                                                                    fontFamily:
+                                                            hintText: 'xxx',
+                                                            hintStyle: TextStyle(
+                                                                fontFamily:
                                                                     SarabunFontFamily
                                                                         .semiBold,
-                                                                    fontSize: 16.sp,
-                                                                    color:
-                                                                    Colors.white24),
+                                                                fontSize: 16.sp,
+                                                                color: Colors
+                                                                    .white24),
                                                             contentPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -538,28 +525,25 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                                     BorderRadius
                                                                         .circular(8
                                                                             .r),
-                                                                borderSide:
-                                                                    const BorderSide(
-                                                                        color:
-                                                                            Colors.transparent)),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .transparent)),
                                                             border: UnderlineInputBorder(
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(8
                                                                             .r),
-                                                                borderSide:
-                                                                    const BorderSide(
-                                                                        color:
-                                                                            Colors.transparent)),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .transparent)),
                                                             focusedBorder: UnderlineInputBorder(
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(8
                                                                             .r),
-                                                                borderSide:
-                                                                    const BorderSide(
-                                                                        color:
-                                                                            Colors.white)),
+                                                                borderSide: const BorderSide(
+                                                                    color: Colors
+                                                                        .white)),
                                                             errorBorder: UnderlineInputBorder(
                                                                 borderRadius:
                                                                     BorderRadius
@@ -567,13 +551,14 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                                                             .r),
                                                                 borderSide:
                                                                     const BorderSide(
-                                                                        color:
-                                                                            Colors.red)),
+                                                                        color: Colors
+                                                                            .red)),
                                                           ),
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'.tr;
+                                                              return 'field_required'
+                                                                  .tr;
                                                             } else {
                                                               return null;
                                                             }
@@ -591,38 +576,34 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                     )
                                   ],
                                 )),
+
                             ///---amount-field
                             TextFormField(
                               controller: _walletLogic.stripeAmountController,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
-                                contentPadding:
-                                EdgeInsetsDirectional.fromSTEB(
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     25.w, 15.h, 25.w, 15.h),
                                 hintText: 'Enter Amount',
                                 hintStyle: state.hintTextStyle,
                                 fillColor: customTextFieldColor,
                                 filled: true,
                                 enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(8.r),
+                                    borderRadius: BorderRadius.circular(8.r),
                                     borderSide: const BorderSide(
                                         color: Colors.transparent)),
                                 border: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(8.r),
+                                    borderRadius: BorderRadius.circular(8.r),
                                     borderSide: const BorderSide(
                                         color: Colors.transparent)),
                                 focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(8.r),
+                                    borderRadius: BorderRadius.circular(8.r),
                                     borderSide: const BorderSide(
                                         color: customLightThemeColor)),
                                 errorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.red)),
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide:
+                                        const BorderSide(color: Colors.red)),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -649,11 +630,18 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                               padding: EdgeInsets.only(bottom: 25.h),
                               child: GestureDetector(
                                 onHorizontalDragUpdate: (event) async {
-                                  if(_walletLogic.accountCardNumberController.text.isNotEmpty &&
-                                      _walletLogic.accountCardHolderNameController.text.isNotEmpty &&
-                                      _walletLogic.accountCardExpiresController.text.isNotEmpty &&
-                                      _walletLogic.accountCardCvcController.text.isNotEmpty &&
-                                      _walletLogic.stripeAmountController.text.isNotEmpty){
+                                  if (_walletLogic.accountCardNumberController
+                                          .text.isNotEmpty &&
+                                      _walletLogic
+                                          .accountCardHolderNameController
+                                          .text
+                                          .isNotEmpty &&
+                                      _walletLogic.accountCardExpiresController
+                                          .text.isNotEmpty &&
+                                      _walletLogic.accountCardCvcController.text
+                                          .isNotEmpty &&
+                                      _walletLogic.stripeAmountController.text
+                                          .isNotEmpty) {
                                     if (event.primaryDelta! > 10) {
                                       _incTansXVal();
                                     }
@@ -662,11 +650,18 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                 onHorizontalDragEnd: (event) {
                                   log('END---->>>');
                                   // Get.toNamed(PageRoutes.appointmentConfirmation);
-                                  if (_walletLogic.accountCardNumberController.text.isNotEmpty &&
-                                      _walletLogic.accountCardHolderNameController.text.isNotEmpty &&
-                                      _walletLogic.accountCardExpiresController.text.isNotEmpty &&
-                                      _walletLogic.accountCardCvcController.text.isNotEmpty &&
-                                      _walletLogic.stripeAmountController.text.isNotEmpty) {
+                                  if (_walletLogic.accountCardNumberController
+                                          .text.isNotEmpty &&
+                                      _walletLogic
+                                          .accountCardHolderNameController
+                                          .text
+                                          .isNotEmpty &&
+                                      _walletLogic.accountCardExpiresController
+                                          .text.isNotEmpty &&
+                                      _walletLogic.accountCardCvcController.text
+                                          .isNotEmpty &&
+                                      _walletLogic.stripeAmountController.text
+                                          .isNotEmpty) {
                                     _generalController.focusOut(context);
                                     _generalController
                                         .updateFormLoaderController(true);
@@ -674,14 +669,18 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                         context,
                                         paymentMethodUrl,
                                         {
-                                          "mentee_id": "132",
+                                          "mentee_id":
+                                              Get.find<GeneralController>()
+                                                  .storageBox
+                                                  .read('userID'),
                                           "total": _walletLogic
                                               .stripeAmountController.text,
                                           "payment_method_code": "stripe",
                                           "cardInfo": {
                                             "number": _walletLogic
                                                 .accountCardNumberController
-                                                .text.replaceAll(' ', ''),
+                                                .text
+                                                .replaceAll(' ', ''),
                                             "exp_month": _walletLogic
                                                 .accountCardExpiresController
                                                 .text
@@ -711,11 +710,11 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                           "shipping_id": 1,
                                           "plateForm": "mobile",
                                           "paytm_mode": "",
-                                          "wallat_desposit":true
+                                          "wallat_desposit": true
                                         },
                                         true,
                                         stripePaymentRepo);
-                                  }else{
+                                  } else {
                                     _walletLogic.myWidth = 0;
                                     _walletLogic.update();
                                     Get.snackbar('Fill Complete Form', '',
@@ -813,9 +812,12 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
       await Future.delayed(const Duration(milliseconds: 1), () {
         setState(() {
           if (translateX + 1 <
-              MediaQuery.of(context).size.width - (200 + Get.find<WalletLogic>().myWidth)) {
+              MediaQuery.of(context).size.width -
+                  (200 + Get.find<WalletLogic>().myWidth)) {
             translateX += 1;
-            Get.find<WalletLogic>().myWidth = MediaQuery.of(context).size.width - (200 + Get.find<WalletLogic>().myWidth);
+            Get.find<WalletLogic>().myWidth =
+                MediaQuery.of(context).size.width -
+                    (200 + Get.find<WalletLogic>().myWidth);
           } else {
             canLoop = 1;
           }

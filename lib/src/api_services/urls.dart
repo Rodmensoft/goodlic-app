@@ -4,7 +4,7 @@ import 'package:global_configuration/global_configuration.dart';
 // const String baseUrl = 'https://consultation.softwaresbranding.com/';
 // const String mediaUrl = 'https://consultation.softwaresbranding.com';
 
-// const String apiBaseUrl = 'http://192.168.88.123:8001/api/';
+// const String apiUrl = 'http://192.168.88.123:8001/api/';
 // const String baseUrl = 'http://192.168.88.123:8001/';
 // const String mediaUrl = 'http://192.168.88.123:8001';
 
@@ -21,9 +21,7 @@ String loginWithEmailURL = apiBaseUrl + 'login-email';
 
 String mentorApprovalStatusUrl = apiBaseUrl + 'mentorStatus';
 
-
- String contactUsUrl = apiBaseUrl + 'contactus';
-
+String contactUsUrl = apiBaseUrl + 'contactus';
 
 ///---payment-method
 String paymentMethodUrl = apiBaseUrl + 'execute-payment';
@@ -35,7 +33,7 @@ String updateMenteeProfileUrl = apiBaseUrl + 'update-mentee-profile';
 
 ///---consultant-profile-by-id
 String getUserProfileUrl = apiBaseUrl + 'getUserById';
- String getMentorProfileForMenteeUrl = apiBaseUrl + 'get-mentor-details';
+String getMentorProfileForMenteeUrl = apiBaseUrl + 'get-mentor-details';
 
 ///---consultant-profile-section
 String mentorProfileGenericDataUrl = apiBaseUrl + 'generic_mentor';
@@ -69,9 +67,9 @@ String changeMentorOnlineStatusUrl = apiBaseUrl + 'changeOnlineStatus';
 String goLiveForMentorUrl = apiBaseUrl + 'turn-live-mentor';
 String inActiveLiveForMentorUrl = apiBaseUrl + 'turn-inactive-mentor';
 
+String mentorChangeAppointmentStatusUrl =
+    apiBaseUrl + 'changeAppointmentStatus';
 
- String mentorChangeAppointmentStatusUrl =
-     apiBaseUrl + 'changeAppointmentStatus';
 ///---get-appointment-counts
 String getAppointmentCountUrl = apiBaseUrl + 'mentorAppointmentCount';
 String getAppointmentCountForMentorUrl = apiBaseUrl + 'appointment-count';
@@ -101,7 +99,8 @@ String bookAppointmentUrl = apiBaseUrl + 'bookAppointment';
 
 ///---appointment-log-user
 String getUserAllAppointmentsURL = apiBaseUrl + 'all-status-menteeAppointments';
-String getConsultantAllAppointmentsURL = apiBaseUrl + 'all-status-mentorAppointments';
+String getConsultantAllAppointmentsURL =
+    apiBaseUrl + 'all-status-mentorAppointments';
 
 ///---appointment-log-user
 String getAppointmentsDetailURL = apiBaseUrl + 'appointmentDetails';
@@ -115,13 +114,14 @@ String getWalletTransactionUrl = apiBaseUrl + 'wallet-history';
 String walletDepositUrl = apiBaseUrl + 'deposit-wallet';
 String walletDepositJazzcashUrl = apiBaseUrl + 'deposit-wallet-jazzcash';
 String walletWithdrawUrl = apiBaseUrl + 'withdraw-request';
+String walletPaymentUrl = apiBaseUrl + 'wallet-credit-transfer';
 
 /// rating
 String createRatingUrl = apiBaseUrl + 'create-rating';
 String getExistRatingUrl = apiBaseUrl + 'rating-exist-appointment';
 
 ///---agora
- String agoraTokenUrl = apiBaseUrl + 'agoraToken';
+String agoraTokenUrl = apiBaseUrl + 'agoraToken';
 
 ///---send-message
 String sendSMSUrl = apiBaseUrl + 'send-sms';
@@ -135,4 +135,9 @@ String fetchMessagesUrl = apiBaseUrl + 'fetch-messages';
 String sendMessageUrl = apiBaseUrl + 'send-message';
 
 ///---download-invoice
-String downloadAppointmentInvoiceForMenteeUrl = apiBaseUrl + 'completed-appointment-invoice';
+String downloadAppointmentInvoiceForMenteeUrl =
+    apiBaseUrl + 'completed-appointment-invoice';
+
+///---reset-password
+String forgotPasswordUrl = apiBaseUrl + 'forget-password';
+String newPasswordUrl = apiBaseUrl + 'reset-password';
