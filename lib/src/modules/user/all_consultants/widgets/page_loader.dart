@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/user/all_consultants/logic.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +19,12 @@ class _PageLoaderState extends State<PageLoader> {
     return GetBuilder<AllConsultantsLogic>(builder: (_allConsultantsLogic) {
       return NestedScrollView(
           controller: _allConsultantsLogic.scrollController,
-          headerSliverBuilder:
-              (BuildContext context, bool innerBoxIsScrolled) {
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-
               ///---header
               MyCustomSliverAppBar(
-                heading: 'Consultants',
-                subHeading: 'Best consultants just one click away',
+                heading: LanguageConstant.consultant.tr,
+                subHeading: LanguageConstant.bestConsultantsJustOneClickAway.tr,
                 isShrink: _allConsultantsLogic.isShrink,
                 searchIconShow: true,
               ),
@@ -42,10 +41,7 @@ class _PageLoaderState extends State<PageLoader> {
                     children: [
                       Container(
                         height: 60,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
+                        width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8.r)),
@@ -60,19 +56,18 @@ class _PageLoaderState extends State<PageLoader> {
                             alignment: WrapAlignment.start,
                             children: List.generate(
                               4,
-                                  (index) =>
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 0.h),
-                                    child: Container(
-                                      height: 217.h,
-                                      width: 164.w,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8.r)),
-                                      ),
-                                    ),
+                              (index) => Padding(
+                                padding: EdgeInsets.only(top: 0.h),
+                                child: Container(
+                                  height: 217.h,
+                                  width: 164.w,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.r)),
                                   ),
+                                ),
+                              ),
                             )),
                       ),
                     ],

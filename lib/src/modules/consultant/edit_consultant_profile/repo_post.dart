@@ -1,6 +1,6 @@
-
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -18,7 +18,8 @@ mentorGeneralInfo2Repo(
   if (responseCheck) {
     Get.find<EditConsultantProfileLogic>().generalInfoPostModel =
         GeneralInfoPostModel.fromJson(response);
-    if (Get.find<EditConsultantProfileLogic>().generalInfoPostModel.status == true) {
+    if (Get.find<EditConsultantProfileLogic>().generalInfoPostModel.status ==
+        true) {
       Get.find<EditConsultantProfileLogic>()
           .stepperList[Get.find<EditConsultantProfileLogic>().stepperIndex!]
           .isSelected = false;
@@ -30,8 +31,7 @@ mentorGeneralInfo2Repo(
           .isSelected = true;
       Get.find<EditConsultantProfileLogic>().updateStepperIndex(1);
       Get.snackbar('${'profile_updated_successfully'.tr}!', '',
-          colorText: Colors.black,
-          backgroundColor: Colors.white);
+          colorText: Colors.black, backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('mentorGeneralInfoRepo ------>> ${Get.find<EditConsultantProfileLogic>().generalInfoPostModel.success}');
     } else {
@@ -41,10 +41,10 @@ mentorGeneralInfo2Repo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'failed!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
               descriptions: 'try_again!'.tr,
-              text: 'ok'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },
@@ -59,10 +59,10 @@ mentorGeneralInfo2Repo(
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'failed!'.tr,
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
             descriptions: 'try_again!'.tr,
-            text: 'ok'.tr,
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },
@@ -72,13 +72,13 @@ mentorGeneralInfo2Repo(
   }
 }
 
-
 mentorSkillInfoRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<EditConsultantProfileLogic>().skillInfoPostModel =
         SkillInfoPostModel.fromJson(response);
-    if (Get.find<EditConsultantProfileLogic>().skillInfoPostModel.status == true) {
+    if (Get.find<EditConsultantProfileLogic>().skillInfoPostModel.status ==
+        true) {
       // Get.find<MentorProfileLogic>()
       //     .stepperList[Get.find<MentorProfileLogic>().stepperIndex!]
       //     .isSelected = false;
@@ -90,8 +90,7 @@ mentorSkillInfoRepo(
       //     .isSelected = true;
       // Get.find<MentorProfileLogic>().updateStepperIndex(4);
       Get.snackbar('${'skill_added_successfully'.tr}!', '',
-          colorText: Colors.black,
-          backgroundColor: Colors.white);
+          colorText: Colors.black, backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('mentorSkillInfoRepo ------>> ${Get.find<EditConsultantProfileLogic>().skillInfoPostModel.success}');
     } else {
@@ -109,7 +108,8 @@ mentorAccountInfoRepo(
   if (responseCheck) {
     Get.find<EditConsultantProfileLogic>().accountInfoPostModel =
         AccountInfoPostModel.fromJson(response);
-    if (Get.find<EditConsultantProfileLogic>().accountInfoPostModel.status == true) {
+    if (Get.find<EditConsultantProfileLogic>().accountInfoPostModel.status ==
+        true) {
       Get.find<EditConsultantProfileLogic>()
           .stepperList[Get.find<EditConsultantProfileLogic>().stepperIndex!]
           .isSelected = false;

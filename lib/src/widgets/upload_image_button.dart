@@ -1,7 +1,9 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
 class UploadImageButton extends StatelessWidget {
@@ -16,26 +18,29 @@ class UploadImageButton extends StatelessWidget {
           height: 103.h,
           width: 190.w,
           decoration: BoxDecoration(
-            // color: const Color(0xffE5ECF7),
+              // color: const Color(0xffE5ECF7),
               borderRadius: BorderRadius.circular(8.r),
               image: const DecorationImage(
                   image: AssetImage('assets/images/uploadPicRect.png'),
-                  fit: BoxFit.fill
-              )
-          ),
+                  fit: BoxFit.fill)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset('assets/images/cloud-upload-fill.svg',height: 22.h,width: 23.w,),
-              SizedBox(height: 17.h,),
+              SvgPicture.asset(
+                'assets/images/cloud-upload-fill.svg',
+                height: 22.h,
+                width: 23.w,
+              ),
+              SizedBox(
+                height: 17.h,
+              ),
               Text(
-                'Upload Profile Photo',
+                LanguageConstant.uploadProfilePhoto.tr,
                 style: TextStyle(
                     fontFamily: SarabunFontFamily.regular,
                     fontSize: 16.sp,
-                    color: customThemeColor
-                ),
+                    color: customThemeColor),
               )
             ],
           ),

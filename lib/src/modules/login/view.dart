@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -91,12 +92,13 @@ class _LoginPageState extends State<LoginPage>
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Login',
+                                      LanguageConstant.login.tr,
                                       style: state.headingTextStyle,
                                     ),
                                     SizedBox(height: 6.h),
                                     Text(
-                                      'Welcome Back To Your Account',
+                                      LanguageConstant
+                                          .welcomeBackToYourAccount.tr,
                                       style: state.captionTextStyle,
                                     ),
                                     SizedBox(height: 25.h),
@@ -114,12 +116,13 @@ class _LoginPageState extends State<LoginPage>
                                             color: customTextFieldColor),
                                         child: TabBar(
                                             onTap: (index) {
-                                              if(index == 0){
-                                                _loginLogic.selectedRole = 'Mentee';
+                                              if (index == 0) {
+                                                _loginLogic.selectedRole =
+                                                    'Mentee';
                                                 _loginLogic.update();
-                                              }else{
-
-                                                _loginLogic.selectedRole = 'Mentor';
+                                              } else {
+                                                _loginLogic.selectedRole =
+                                                    'Mentor';
                                                 _loginLogic.update();
                                               }
                                             },
@@ -144,7 +147,7 @@ class _LoginPageState extends State<LoginPage>
 
                                     SizedBox(height: 40.h),
                                     Text(
-                                      'Enter Login Details',
+                                      LanguageConstant.enterLoginDetails.tr,
                                       style: state.subHeadingTextStyle,
                                     ),
                                     SizedBox(height: 25.h),
@@ -157,7 +160,8 @@ class _LoginPageState extends State<LoginPage>
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 25.w, 15.h, 25.w, 15.h),
-                                        hintText: 'Email Address',
+                                        hintText:
+                                            LanguageConstant.emailAddress.tr,
                                         hintStyle: state.hintTextStyle,
                                         fillColor: customTextFieldColor,
                                         filled: true,
@@ -218,7 +222,7 @@ class _LoginPageState extends State<LoginPage>
                                               size: 20,
                                               color: const Color(0xff8085BA)),
                                         ),
-                                        hintText: 'Password',
+                                        hintText: LanguageConstant.password.tr,
                                         hintStyle: state.hintTextStyle,
                                         fillColor: customTextFieldColor,
                                         filled: true,
@@ -282,7 +286,8 @@ class _LoginPageState extends State<LoginPage>
                                           onTap: () {
                                             if (_loginFormKey.currentState!
                                                 .validate()) {
-                                              _generalController.focusOut(context);
+                                              _generalController
+                                                  .focusOut(context);
                                               _generalController
                                                   .updateFormLoaderController(
                                                       true);
@@ -295,14 +300,16 @@ class _LoginPageState extends State<LoginPage>
                                                     'password': _loginLogic
                                                         .passwordController
                                                         .text,
-                                                    'role':_loginLogic.selectedRole
+                                                    'role':
+                                                        _loginLogic.selectedRole
                                                   },
                                                   false,
                                                   loginWithEmailRepo);
                                             }
                                           },
-                                          child: const MyCustomBottomBar(
-                                              title: 'Login', disable: false)),
+                                          child: MyCustomBottomBar(
+                                              title: LanguageConstant.login.tr,
+                                              disable: false)),
                                     ),
                                     SizedBox(
                                         height:
@@ -313,7 +320,7 @@ class _LoginPageState extends State<LoginPage>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'or login with',
+                                          LanguageConstant.orLoginWith.tr,
                                           style: state.orTextStyle,
                                         ),
                                       ],

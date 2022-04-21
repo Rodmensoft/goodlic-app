@@ -4,19 +4,21 @@ import 'dart:developer';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as rtc_local_view;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as rtc_remote_view;
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:resize/resize.dart';
-import 'agora.config.dart' as config;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:resize/resize.dart';
+
+import 'agora.config.dart' as config;
 
 /// MultiChannel Example
 class JoinChannelVideo extends StatefulWidget {
@@ -173,7 +175,6 @@ class _State extends State<JoinChannelVideo> {
   }
 
   Widget _toolbar() {
-
     return Container(
       alignment: Alignment.bottomCenter,
       padding: const EdgeInsets.symmetric(vertical: 48),
@@ -279,48 +280,47 @@ class _State extends State<JoinChannelVideo> {
               ),
               Get.find<AgoraLogic>().userImage == null
                   ? Container(
-                height: 130.h,
-                width: 130.w,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-              )
+                      height: 130.h,
+                      width: 130.w,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                    )
                   : Container(
-                height: 130.h,
-                width: 130.w,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: NetworkImage(Get.find<AgoraLogic>()
-                            .userImage!
-                            .contains('assets')
-                            ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
-                            : Get.find<AgoraLogic>().userImage!))),
-              ),
+                      height: 130.h,
+                      width: 130.w,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(Get.find<AgoraLogic>()
+                                      .userImage!
+                                      .contains('assets')
+                                  ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
+                                  : Get.find<AgoraLogic>().userImage!))),
+                    ),
               isJoined
                   ? Padding(
-                padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
-                child: Text(
-                  'Ringing To',
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontFamily: SarabunFontFamily.extraBold,
-                      color: Colors.white),
-                ),
-              )
+                      padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
+                      child: Text(
+                        'Ringing To',
+                        style: TextStyle(
+                            fontSize: 20.sp,
+                            fontFamily: SarabunFontFamily.extraBold,
+                            color: Colors.white),
+                      ),
+                    )
                   : Padding(
-                padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
-                child: Text(
-                  'Calling To',
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontFamily: SarabunFontFamily.extraBold,
-                      color: Colors.white),
-                ),
-              ),
-
+                      padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
+                      child: Text(
+                        'Calling To',
+                        style: TextStyle(
+                            fontSize: 20.sp,
+                            fontFamily: SarabunFontFamily.extraBold,
+                            color: Colors.white),
+                      ),
+                    ),
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 14.h, 0, 0),
                 child: Text(
@@ -383,9 +383,9 @@ class _State extends State<JoinChannelVideo> {
             children: [
               Expanded(
                   child: SvgPicture.asset(
-                    'assets/images/callAlert.svg',
-                    width: MediaQuery.of(context).size.width * .6,
-                  )),
+                'assets/images/callAlert.svg',
+                width: MediaQuery.of(context).size.width * .6,
+              )),
               Text(
                 'Call Alert',
                 style: TextStyle(
@@ -397,10 +397,8 @@ class _State extends State<JoinChannelVideo> {
                 height: 10,
               ),
               Text(
-                'you are receiving a call from '
-                    '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE'
-                    ? 'MENTOR'
-                    : 'MENTEE'}',
+                '${LanguageConstant.youAreReceivingCallFrom.tr}'
+                '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE' ? 'MENTOR' : 'MENTEE'}',
                 style: TextStyle(
                     fontSize: 15.sp,
                     fontFamily: SarabunFontFamily.regular,
@@ -442,7 +440,8 @@ class _State extends State<JoinChannelVideo> {
                                 color: Colors.white,
                                 size: 35.0,
                               ),
-                            ),),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -489,26 +488,26 @@ class _CallWaitingViewState extends State<CallWaitingView> {
               ),
               Get.find<AgoraLogic>().userImage == null
                   ? Container(
-                height: 130.h,
-                width: 130.w,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-              )
+                      height: 130.h,
+                      width: 130.w,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                    )
                   : Container(
-                height: 130.h,
-                width: 130.w,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: NetworkImage(Get.find<AgoraLogic>()
-                            .userImage!
-                            .contains('assets')
-                            ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
-                            : Get.find<AgoraLogic>().userImage!))),
-              ),
+                      height: 130.h,
+                      width: 130.w,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(Get.find<AgoraLogic>()
+                                      .userImage!
+                                      .contains('assets')
+                                  ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
+                                  : Get.find<AgoraLogic>().userImage!))),
+                    ),
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
                 child: Text(

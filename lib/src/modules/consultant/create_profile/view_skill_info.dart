@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -11,7 +14,6 @@ import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -68,7 +70,7 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                               }
                             },
                             hint: Text(
-                              'department'.tr.capitalizeFirst!,
+                              LanguageConstant.department.tr.capitalizeFirst!,
                               style: state.hintTextStyle,
                             ),
                             decoration: InputDecoration(
@@ -366,11 +368,11 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                   barrierDismissible: false,
                                   builder: (BuildContext context) {
                                     return CustomDialogBox(
-                                      title: 'failed!'.tr,
+                                      title: LanguageConstant.failed.tr,
                                       titleColor: customDialogErrorColor,
                                       descriptions:
                                           '${'Select Category Please'.tr}!',
-                                      text: 'ok'.tr,
+                                      text: LanguageConstant.ok.tr,
                                       functionCall: () {
                                         Navigator.pop(context);
                                       },
@@ -390,7 +392,7 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                 _createProfileLogic.skillInfoPostModel.data ==
                                         null
                                     ? 'add_skill'.tr
-                                    : 'update'.tr,
+                                    : LanguageConstant.update.tr,
                                 style: state.addButtonTextStyle,
                               ),
                             ),
@@ -511,10 +513,10 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             barrierDismissible: false,
                             builder: (BuildContext context) {
                               return CustomDialogBox(
-                                title: 'failed!'.tr,
+                                title: LanguageConstant.failed.tr,
                                 titleColor: customDialogErrorColor,
                                 descriptions: 'add_skill_please'.tr,
-                                text: 'ok'.tr,
+                                text: LanguageConstant.ok.tr,
                                 functionCall: () {
                                   Navigator.pop(context);
                                 },
@@ -523,8 +525,8 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             });
                       }
                     },
-                    child: const MyCustomBottomBar(
-                        title: 'Next Step', disable: false)),
+                    child: MyCustomBottomBar(
+                        title: LanguageConstant.nextStep.tr, disable: false)),
               )),
         ),
       ),
@@ -568,7 +570,7 @@ class _SubCategoryDropDownState extends State<SubCategoryDropDown> {
               }
             },
             hint: Text(
-              'category'.tr.capitalizeFirst!,
+              LanguageConstant.category.tr.capitalizeFirst!,
               style: state.hintTextStyle,
             ),
             decoration: InputDecoration(

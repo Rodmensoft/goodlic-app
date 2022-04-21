@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
@@ -17,7 +18,7 @@ class MyCustomSliverAppBar extends StatefulWidget {
       this.trailing,
       this.trailingIcon,
       this.fee,
-        this.feeImage,
+      this.feeImage,
       this.isShrink,
       this.searchIconShow,
       this.onTapTrailing})
@@ -52,12 +53,13 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
       backgroundColor: widget.isShrink! ? customThemeColor : Colors.transparent,
       leading: InkWell(
         onTap: () {
-           log('PREVIOUS--->>${Get.previousRoute}');
-           if(Get.previousRoute.contains('appointmentConfirmation') ||Get.previousRoute.contains('myAppointment')){
-             Get.offAllNamed(PageRoutes.userHome);
-           }else{
-             Get.back();
-           }
+          log('PREVIOUS--->>${Get.previousRoute}');
+          if (Get.previousRoute.contains('appointmentConfirmation') ||
+              Get.previousRoute.contains('myAppointment')) {
+            Get.offAllNamed(PageRoutes.userHome);
+          } else {
+            Get.back();
+          }
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -189,7 +191,7 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                          'You Will Pay',
+                          LanguageConstant.youWillPay.tr,
                           style: TextStyle(
                               fontFamily: SarabunFontFamily.medium,
                               fontSize: 12.sp,

@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -405,7 +405,7 @@ class _DepositJazzCashViewState extends State<DepositJazzCashView>
                     }
                   },
                   child: MyCustomBottomBar(
-                    title: 'continue'.tr,
+                    title: LanguageConstant.Continue.tr,
                     disable: false,
                   ),
                 ),

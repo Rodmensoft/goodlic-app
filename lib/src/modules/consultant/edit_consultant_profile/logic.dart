@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_generic_data.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_get_categories.dart';
@@ -18,6 +19,7 @@ import 'package:consultant_product/src/modules/consultant/edit_consultant_profil
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
+
 import '../../user_profile/get_user_profile_model.dart';
 import 'state.dart';
 
@@ -51,27 +53,28 @@ class EditConsultantProfileLogic extends GetxController {
 
   List<Stepper> stepperList = [
     Stepper(
-        title: '${'General'.tr}\n${'Info'.tr}',
+        title: '${LanguageConstant.general.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '01',
         isSelected: true,
         isCompleted: true),
     Stepper(
-        title: '${'Educational'.tr}\n${'Info'.tr}',
+        title:
+            '${LanguageConstant.educational.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '02',
         isSelected: false,
         isCompleted: true),
     Stepper(
-        title: '${'Experience'.tr}\n${'Info'.tr}',
+        title: '${LanguageConstant.experince.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '03',
         isSelected: false,
         isCompleted: true),
     Stepper(
-        title: 'Skill Info'.tr,
+        title: LanguageConstant.skillInfo.tr,
         stepperLabel: '04',
         isSelected: false,
         isCompleted: true),
     Stepper(
-        title: '${'Account'.tr}\n${'Info'.tr}',
+        title: '${LanguageConstant.account.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '05',
         isSelected: false,
         isCompleted: true),
@@ -349,6 +352,7 @@ class EditConsultantProfileLogic extends GetxController {
     forDisplaySkillList = [];
     update();
   }
+
   ///-------------------------------account-tab
   AccountInfoPostModel accountInfoPostModel = AccountInfoPostModel();
   String? selectedBank;
@@ -363,9 +367,9 @@ class EditConsultantProfileLogic extends GetxController {
     bankDropDownList = [];
     update();
   }
+
   final TextEditingController accountTitleController = TextEditingController();
-  final TextEditingController accountNumberController =
-  TextEditingController();
+  final TextEditingController accountNumberController = TextEditingController();
 }
 
 class Stepper {

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
@@ -9,9 +10,7 @@ import 'package:get/get.dart';
 createRatingRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-
     if (response['Status'].toString() == 'true') {
-
       Get.find<GeneralController>().updateFormLoaderController(false);
       // Get.offAllNamed(PageRoutes.bookingConfirmation);
       log('easyPaisaPaymentRepo ------>> ${response['Status'].toString()}');
@@ -20,10 +19,10 @@ createRatingRepo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'SUCCESS',
+              title: LanguageConstant.success.tr,
               titleColor: customDialogSuccessColor,
               descriptions: '${response['msg']}',
-              text: 'ok'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Get.back();
                 Get.back();
@@ -32,8 +31,6 @@ createRatingRepo(
               img: 'assets/Icons/dialog_success.svg',
             );
           });
-
-
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
 
@@ -42,10 +39,10 @@ createRatingRepo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'failed!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
               descriptions: '${response['msg']}',
-              text: 'ok'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },
@@ -61,10 +58,10 @@ createRatingRepo(
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'failed!'.tr,
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
             descriptions: 'try_again!'.tr,
-            text: 'ok'.tr,
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },

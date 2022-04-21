@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -137,8 +138,9 @@ class _WalletPageState extends State<WalletPage> {
                                     SvgPicture.asset(
                                       'assets/images/bookAppointmentAppBar.svg',
                                       width: MediaQuery.of(context).size.width,
-                                      height: MediaQuery.of(context).size.height *
-                                          .27,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              .27,
                                       fit: BoxFit.fill,
                                     ),
                                     SafeArea(
@@ -155,7 +157,9 @@ class _WalletPageState extends State<WalletPage> {
                                               SizedBox(
                                                 height: 25.h,
                                               ),
-                                              Text('Amount In Wallet',
+                                              Text(
+                                                  LanguageConstant
+                                                      .amountInWallet.tr,
                                                   style: state.descTextStyle),
                                               SizedBox(
                                                 height: 10.h,
@@ -173,20 +177,21 @@ class _WalletPageState extends State<WalletPage> {
                                                           child: SkeletonLoader(
                                                               period:
                                                                   const Duration(
-                                                                      seconds: 2),
+                                                                      seconds:
+                                                                          2),
                                                               highlightColor:
                                                                   Colors.grey,
                                                               direction:
                                                                   SkeletonDirection
                                                                       .ltr,
-                                                              builder: Container(
+                                                              builder:
+                                                                  Container(
                                                                 height: 20.h,
                                                                 width: 100.w,
                                                                 decoration: BoxDecoration(
                                                                     borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(10
-                                                                                .r),
+                                                                        BorderRadius.circular(10
+                                                                            .r),
                                                                     color: Colors
                                                                         .white),
                                                               )),
@@ -206,15 +211,16 @@ class _WalletPageState extends State<WalletPage> {
                                                             .clear();
                                                         // paymentTypeDialog(
                                                         //     context);
-                                                        Get.toNamed(PageRoutes.stripePaymentForWallet);
+                                                        Get.toNamed(PageRoutes
+                                                            .stripePaymentForWallet);
                                                       },
                                                       child: CircleAvatar(
                                                         radius: 20.r,
                                                         backgroundColor:
                                                             Colors.white,
                                                         child: Center(
-                                                            child:
-                                                                SvgPicture.asset(
+                                                            child: SvgPicture
+                                                                .asset(
                                                           'assets/Icons/add.svg',
                                                           height: 20.h,
                                                           width: 20.w,
@@ -278,8 +284,9 @@ class _WalletPageState extends State<WalletPage> {
                                               .fromSTEB(0, 10, 0, 0),
                                           child: Container(
                                             height: 70,
-                                            width:
-                                                MediaQuery.of(context).size.width,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
                                             color: Colors.white,
                                           ),
                                         );
@@ -292,20 +299,24 @@ class _WalletPageState extends State<WalletPage> {
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 25.sp,
-                                              fontFamily: SarabunFontFamily.bold,
+                                              fontFamily:
+                                                  SarabunFontFamily.bold,
                                               color: Colors.black),
                                         ),
                                       )
                                     : Wrap(
                                         children: List.generate(
-                                        _walletLogic.getAllTransactionList.length,
+                                        _walletLogic
+                                            .getAllTransactionList.length,
                                         (index) => Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              16.w, 0, 16.w, 15.h),
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.w, 0, 16.w, 15.h),
                                           child: Container(
                                             // height: 90.h,
-                                            width:
-                                                MediaQuery.of(context).size.width,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(8.r),
@@ -325,7 +336,8 @@ class _WalletPageState extends State<WalletPage> {
                                                                     index]
                                                                 .type
                                                                 .toString() ==
-                                                            'deposit'
+                                                            LanguageConstant
+                                                                .deposit.tr
                                                         ? Column(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -338,7 +350,8 @@ class _WalletPageState extends State<WalletPage> {
                                                                 radius: 12.r,
                                                                 backgroundColor:
                                                                     customLightThemeColor,
-                                                                child: const Icon(
+                                                                child:
+                                                                    const Icon(
                                                                   Icons
                                                                       .arrow_downward,
                                                                   color: Colors
@@ -373,7 +386,8 @@ class _WalletPageState extends State<WalletPage> {
                                                                 radius: 12.r,
                                                                 backgroundColor:
                                                                     customLightThemeColor,
-                                                                child: const Icon(
+                                                                child:
+                                                                    const Icon(
                                                                   Icons
                                                                       .arrow_upward,
                                                                   color: Colors
@@ -400,14 +414,15 @@ class _WalletPageState extends State<WalletPage> {
                                                   Expanded(
                                                     child: Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment.start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                       children: [
                                                         SvgPicture.asset(
                                                             'assets/Icons/feeIcon.svg'),
                                                         Text(
                                                           '  \$${_walletLogic.getAllTransactionList[index].amount.toString()}',
-                                                          style:
-                                                              state.feeTextStyle,
+                                                          style: state
+                                                              .feeTextStyle,
                                                         )
                                                       ],
                                                     ),
@@ -420,7 +435,8 @@ class _WalletPageState extends State<WalletPage> {
                                                           .createdAt
                                                           .toString()
                                                           .substring(0, 10),
-                                                      style: state.dateTextStyle,
+                                                      style:
+                                                          state.dateTextStyle,
                                                     ),
                                                   ),
                                                 ],
@@ -567,7 +583,7 @@ class _WalletPageState extends State<WalletPage> {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 25.w, 15.h, 25.w, 15.h),
-                            hintText: 'amount'.tr,
+                            hintText: LanguageConstant.amount.tr,
                             hintStyle: TextStyle(
                                 fontFamily: SarabunFontFamily.regular,
                                 fontSize: 16.sp,
@@ -589,7 +605,7 @@ class _WalletPageState extends State<WalletPage> {
                             errorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
                                 borderSide:
-                                const BorderSide(color: Colors.red)),
+                                    const BorderSide(color: Colors.red)),
                           ),
                           validator: (String? value) {
                             if (value!.isEmpty) {
@@ -610,7 +626,7 @@ class _WalletPageState extends State<WalletPage> {
                                 Navigator.pop(context);
                               },
                               child: Text(
-                                'cancel'.tr,
+                                LanguageConstant.cancel.tr,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16.sp,
@@ -628,7 +644,7 @@ class _WalletPageState extends State<WalletPage> {
                                 }
                               },
                               child: Text(
-                                'add'.tr,
+                                LanguageConstant.add.tr,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16.sp,
@@ -763,7 +779,7 @@ class _WalletPageState extends State<WalletPage> {
                                 Navigator.pop(context);
                               },
                               child: Text(
-                                'cancel'.tr,
+                                LanguageConstant.cancel.tr,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16.sp,
@@ -797,7 +813,7 @@ class _WalletPageState extends State<WalletPage> {
                                 }
                               },
                               child: Text(
-                                'submit'.tr,
+                                LanguageConstant.submit.tr,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16.sp,

@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -29,15 +30,15 @@ class ScheduleInfoLogic extends GetxController {
 
   List<ShiftType> shiftList = [
     ShiftType(
-        title: 'Morning',
+        title: LanguageConstant.morning.tr,
         image: 'assets/Icons/morningShiftIcon.svg',
         isSelected: true),
     ShiftType(
-        title: 'Afternoon',
+        title: LanguageConstant.afternoon.tr,
         image: 'assets/Icons/afterNoonShiftIcon.svg',
         isSelected: false),
     ShiftType(
-        title: 'Evening',
+        title: LanguageConstant.evening.tr,
         image: 'assets/Icons/nightShiftIcon.svg',
         isSelected: false),
   ];

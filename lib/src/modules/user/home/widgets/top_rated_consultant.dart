@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -8,10 +9,10 @@ import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
 class TopRatedConsultants extends StatefulWidget {
@@ -95,7 +96,7 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                           InkWell(
                             onTap: () {},
                             child: Text(
-                              'View All',
+                              LanguageConstant.viewAll.tr,
                               style: state.viewAllTextStyle,
                             ),
                           ),
@@ -114,11 +115,12 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 15.w, 0.h, 15.w, 15.h),
                             child: InkWell(
-                              onTap: (){
+                              onTap: () {
                                 _userHomeLogic.selectedConsultantID =
-                                    _userHomeLogic.topRatedConsultantList[index].id;
+                                    _userHomeLogic
+                                        .topRatedConsultantList[index].id;
                                 _userHomeLogic.selectedConsultantName =
-                                '${_userHomeLogic.topRatedConsultantList[index].title}';
+                                    '${_userHomeLogic.topRatedConsultantList[index].title}';
                                 _userHomeLogic.update();
                                 Get.toNamed(
                                     PageRoutes.consultantProfileForUser);
@@ -141,14 +143,17 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       18.w, 12.h, 18.w, 12.h),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       ///---profile-image
                                       Material(
                                         color: customLightThemeColor,
-                                        borderRadius: BorderRadius.circular(8.r),
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
                                         child: _userHomeLogic
-                                                    .topRatedConsultantList[index]
+                                                    .topRatedConsultantList[
+                                                        index]
                                                     .image ==
                                                 null
                                             ? SizedBox(
@@ -159,8 +164,11 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                                 borderRadius:
                                                     BorderRadius.circular(8.r),
                                                 child: Image.network(
-                                                  _userHomeLogic.topRatedConsultantList[index].image!
-                                                    .contains('assets')
+                                                  _userHomeLogic
+                                                          .topRatedConsultantList[
+                                                              index]
+                                                          .image!
+                                                          .contains('assets')
                                                       ? '$mediaUrl${_userHomeLogic.topRatedConsultantList[index].image}'
                                                       : '${_userHomeLogic.topRatedConsultantList[index].image}',
                                                   width: 76.w,
@@ -189,7 +197,8 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                             overflow: TextOverflow.ellipsis,
                                             style: state.topTitleTextStyle!
                                                 .copyWith(
-                                                    color: customTextBlackColor),
+                                                    color:
+                                                        customTextBlackColor),
                                           ),
                                           SizedBox(
                                             height: 5.h,
@@ -202,7 +211,8 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                             overflow: TextOverflow.ellipsis,
                                             style: state.topSubTitleTextStyle!
                                                 .copyWith(
-                                                    color: customTextBlackColor),
+                                                    color:
+                                                        customTextBlackColor),
                                           ),
                                           const Spacer(),
 
@@ -211,7 +221,8 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                             ignoreGestures: true,
                                             initialRating: double.parse(
                                                 _userHomeLogic
-                                                    .topRatedConsultantList[index]
+                                                    .topRatedConsultantList[
+                                                        index]
                                                     .rating
                                                     .toString()),
                                             minRating: 1,
@@ -271,8 +282,19 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                           .updateTopRatedLoaderMore(true);
 
                                       ///---top-rated-API-call
-                                      getMethod(context, getTopRatedConsultantURL, {'token': '123','page':_userHomeLogic.topRatedModel.data!.topRatedMentors!
-                                          .currentPage!+1}, false,
+                                      getMethod(
+                                          context,
+                                          getTopRatedConsultantURL,
+                                          {
+                                            'token': '123',
+                                            'page': _userHomeLogic
+                                                    .topRatedModel
+                                                    .data!
+                                                    .topRatedMentors!
+                                                    .currentPage! +
+                                                1
+                                          },
+                                          false,
                                           getTopRatedConsultantMoreRepo);
                                     },
                                     child: Container(
@@ -286,7 +308,7 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                               BorderRadius.circular(18.r)),
                                       child: Center(
                                         child: Text(
-                                          'Load More',
+                                          LanguageConstant.loadMore.tr,
                                           style: TextStyle(
                                               fontFamily:
                                                   SarabunFontFamily.medium,

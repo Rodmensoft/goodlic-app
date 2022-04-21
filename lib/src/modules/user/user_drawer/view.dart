@@ -1,4 +1,5 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -69,8 +70,7 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                     child: _userHomeLogic
                                                 .getUserProfileModel.data ==
                                             null
-                                        ?
-                                    SkeletonLoader(
+                                        ? SkeletonLoader(
                                             period: const Duration(seconds: 2),
                                             highlightColor: Colors.grey,
                                             direction: SkeletonDirection.ltr,
@@ -133,64 +133,82 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                             ),
                                           )
                                         : Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            ///---image
-                                            Container(
-                                              height: 49.h,
-                                              width: 49.w,
-                                              decoration:
-                                                  const BoxDecoration(
-                                                      color: Colors.grey,
-                                                      shape:
-                                                          BoxShape.circle),
-                                              child: _userHomeLogic.getUserProfileModel.data!.user!.imagePath == null
-                                                  ? const SizedBox()
-                                                  : ClipRRect(
-                                                borderRadius: BorderRadius.circular(30),
-                                                    child: Image.network(
-                                                    _userHomeLogic.getUserProfileModel.data!.user!.imagePath!
-                                                        .contains('assets')
-                                                        ? '$mediaUrl${_userHomeLogic.getUserProfileModel.data!.user!.imagePath}'
-                                                        : '${_userHomeLogic.getUserProfileModel.data!.user!.imagePath}',
-                                                      fit: BoxFit.cover,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              ///---image
+                                              Container(
+                                                height: 49.h,
+                                                width: 49.w,
+                                                decoration: const BoxDecoration(
+                                                    color: Colors.grey,
+                                                    shape: BoxShape.circle),
+                                                child: _userHomeLogic
+                                                            .getUserProfileModel
+                                                            .data!
+                                                            .user!
+                                                            .imagePath ==
+                                                        null
+                                                    ? const SizedBox()
+                                                    : ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30),
+                                                        child: Image.network(
+                                                          _userHomeLogic
+                                                                  .getUserProfileModel
+                                                                  .data!
+                                                                  .user!
+                                                                  .imagePath!
+                                                                  .contains(
+                                                                      'assets')
+                                                              ? '$mediaUrl${_userHomeLogic.getUserProfileModel.data!.user!.imagePath}'
+                                                              : '${_userHomeLogic.getUserProfileModel.data!.user!.imagePath}',
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
                                               ),
+                                              SizedBox(
+                                                width: 15.w,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  ///---name
+                                                  Text(
+                                                    _userHomeLogic
+                                                            .getUserProfileModel
+                                                            .data!
+                                                            .user!
+                                                            .firstName ??
+                                                        '',
+                                                    style: state.nameTextStyle,
                                                   ),
-                                            ),
-                                            SizedBox(
-                                              width: 15.w,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                ///---name
-                                                Text(
-                                                  _userHomeLogic.getUserProfileModel.data!.user!.firstName ?? '',
-                                                  style:
-                                                      state.nameTextStyle,
-                                                ),
 
-                                                SizedBox(
-                                                  height: 5.h,
-                                                ),
+                                                  SizedBox(
+                                                    height: 5.h,
+                                                  ),
 
-                                                ///---email
-                                                Text(
-                                                  _userHomeLogic.getUserProfileModel.data!.user!.email ?? '',
-                                                  style:
-                                                      state.emailTextStyle,
-                                                ),
-                                              ],
-                                            ),
-                                            const Spacer()
-                                          ],
-                                        ),
+                                                  ///---email
+                                                  Text(
+                                                    _userHomeLogic
+                                                            .getUserProfileModel
+                                                            .data!
+                                                            .user!
+                                                            .email ??
+                                                        '',
+                                                    style: state.emailTextStyle,
+                                                  ),
+                                                ],
+                                              ),
+                                              const Spacer()
+                                            ],
+                                          ),
                                   ),
                                   InkWell(
                                       onTap: () {
@@ -247,7 +265,7 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                             width: 15.w,
                                           ),
                                           Text(
-                                            'Lets Login',
+                                            LanguageConstant.letsLogin.tr,
                                             style: state.nameTextStyle,
                                           ),
                                           const Spacer()
@@ -366,15 +384,20 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                               child: ListTile(
                                 onTap: () {
                                   Get.find<GeneralController>()
-                                      .storageBox.remove('userID');
+                                      .storageBox
+                                      .remove('userID');
                                   Get.find<GeneralController>()
-                                      .storageBox.remove('authToken');
+                                      .storageBox
+                                      .remove('authToken');
                                   Get.find<GeneralController>()
-                                      .storageBox.remove('onlineStatus');
+                                      .storageBox
+                                      .remove('onlineStatus');
                                   Get.find<GeneralController>()
-                                      .storageBox.remove('userRole');
+                                      .storageBox
+                                      .remove('userRole');
                                   Get.find<GeneralController>()
-                                      .storageBox.remove('fcmToken');
+                                      .storageBox
+                                      .remove('fcmToken');
                                   Get.offAllNamed(PageRoutes.userHome);
                                 },
                                 leading: Column(
@@ -389,7 +412,7 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                   ],
                                 ),
                                 title: Text(
-                                  'Logout',
+                                  LanguageConstant.logout.tr,
                                   style: state.titleTextStyle,
                                 ),
                               ),

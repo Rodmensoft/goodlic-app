@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/contact_us/repo.dart';
@@ -71,7 +72,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                     return <Widget>[
                       ///---header
                       MyCustomSliverAppBar(
-                        heading: 'Contact Us',
+                        heading: LanguageConstant.contactUs.tr,
                         subHeading: "We are just one step away. reach out ",
                         isShrink: _contactUsLogic.isShrink,
                       ),
@@ -85,15 +86,14 @@ class _ContactUsPageState extends State<ContactUsPage> {
                         SingleChildScrollView(
                           child: Padding(
                             padding: EdgeInsetsDirectional.only(
-                                bottom: MediaQuery
-                                    .of(context)
-                                    .viewInsets
-                                    .bottom),
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom),
                             child: Column(
                               children: [
                                 SizedBox(height: 20.h),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 19.w),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 19.w),
                                   child: Container(
                                     // height: MediaQuery.of(context).size.height * .7,
                                     width: double.infinity,
@@ -123,30 +123,36 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             InkWell(
                                               onTap: () {
                                                 MapsLauncher.launchCoordinates(
-                                                    31.399903, 73.104372, 'Here');
+                                                    31.399903,
+                                                    73.104372,
+                                                    'Here');
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                     color: customThemeColor,
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(8.r))),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                8.r))),
                                                 child: ListTile(
                                                   minLeadingWidth: 20.w,
                                                   leading: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       SvgPicture.asset(
                                                           'assets/Icons/location.svg'),
                                                     ],
                                                   ),
                                                   title: Text(
-                                                    'Address',
+                                                    LanguageConstant.address.tr,
                                                     style: state.titleTextStyle,
                                                   ),
                                                   subtitle: Text(
                                                     '102-c, Peoples Colony, Faisalabad',
-                                                    style: state.subTitleTextStyle,
+                                                    style:
+                                                        state.subTitleTextStyle,
                                                   ),
                                                 ),
                                               ),
@@ -156,31 +162,35 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             /// Call
                                             InkWell(
                                               onTap: () {
-                                                _contactUsLogic
-                                                    .makePhoneCall('+923112255486');
+                                                _contactUsLogic.makePhoneCall(
+                                                    '+923112255486');
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                     color: customThemeColor,
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(8.r))),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                8.r))),
                                                 child: ListTile(
                                                   minLeadingWidth: 20.w,
                                                   leading: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       SvgPicture.asset(
                                                           'assets/Icons/drawerContactUsIcon.svg'),
                                                     ],
                                                   ),
                                                   title: Text(
-                                                    'Call Us',
+                                                    LanguageConstant.callUs.tr,
                                                     style: state.titleTextStyle,
                                                   ),
                                                   subtitle: Text(
                                                     '+92-100235555',
-                                                    style: state.subTitleTextStyle,
+                                                    style:
+                                                        state.subTitleTextStyle,
                                                   ),
                                                 ),
                                               ),
@@ -196,25 +206,29 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                     color: customThemeColor,
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(8.r))),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                8.r))),
                                                 child: ListTile(
                                                   minLeadingWidth: 20.w,
                                                   leading: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       SvgPicture.asset(
                                                           'assets/Icons/message.svg'),
                                                     ],
                                                   ),
                                                   title: Text(
-                                                    'Email Us',
+                                                    LanguageConstant.emailUs.tr,
                                                     style: state.titleTextStyle,
                                                   ),
                                                   subtitle: Text(
                                                     'info@consultant.com',
-                                                    style: state.subTitleTextStyle,
+                                                    style:
+                                                        state.subTitleTextStyle,
                                                   ),
                                                 ),
                                               ),
@@ -226,7 +240,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'name'.tr,
+                                                  LanguageConstant.name.tr,
                                                   style: state.subTitleTextStyle
                                                       ?.copyWith(
                                                           color:
@@ -238,10 +252,13 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                   controller: _nameController,
                                                   inputFormatters: [
                                                     FilteringTextInputFormatter
-                                                        .allow(RegExp("[a-z A-Z ]"))
+                                                        .allow(RegExp(
+                                                            "[a-z A-Z ]"))
                                                   ],
-                                                  keyboardType: TextInputType.name,
-                                                  decoration: const InputDecoration(
+                                                  keyboardType:
+                                                      TextInputType.name,
+                                                  decoration:
+                                                      const InputDecoration(
                                                     isDense: true,
                                                     filled: true,
                                                     fillColor: Colors.white,
@@ -256,8 +273,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                                     customThemeColor)),
                                                     errorBorder:
                                                         UnderlineInputBorder(
-                                                            borderSide: BorderSide(
-                                                                color: Colors.red)),
+                                                            borderSide:
+                                                                BorderSide(
+                                                                    color: Colors
+                                                                        .red)),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                             borderSide: BorderSide(
@@ -270,7 +289,8 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                   ),
                                                   validator: (String? value) {
                                                     if (value!.isEmpty) {
-                                                      return 'field_required'.tr;
+                                                      return 'field_required'
+                                                          .tr;
                                                     } else {
                                                       return null;
                                                     }
@@ -278,7 +298,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                 ),
                                                 SizedBox(height: 20.h),
                                                 Text(
-                                                  'email'.tr,
+                                                  LanguageConstant.email.tr,
                                                   style: state.subTitleTextStyle
                                                       ?.copyWith(
                                                           color:
@@ -288,9 +308,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                 /// email form field
                                                 TextFormField(
                                                   controller: _emailController,
-                                                  keyboardType:
-                                                      TextInputType.emailAddress,
-                                                  decoration: const InputDecoration(
+                                                  keyboardType: TextInputType
+                                                      .emailAddress,
+                                                  decoration:
+                                                      const InputDecoration(
                                                     isDense: true,
                                                     filled: true,
                                                     fillColor: Colors.white,
@@ -305,8 +326,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                                     customThemeColor)),
                                                     errorBorder:
                                                         UnderlineInputBorder(
-                                                            borderSide: BorderSide(
-                                                                color: Colors.red)),
+                                                            borderSide:
+                                                                BorderSide(
+                                                                    color: Colors
+                                                                        .red)),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                             borderSide: BorderSide(
@@ -319,9 +342,12 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                   ),
                                                   validator: (String? value) {
                                                     if (value!.isEmpty) {
-                                                      return 'field_required'.tr;
-                                                    } else if (!GetUtils.isEmail(
-                                                        _emailController!.text)) {
+                                                      return 'field_required'
+                                                          .tr;
+                                                    } else if (!GetUtils
+                                                        .isEmail(
+                                                            _emailController!
+                                                                .text)) {
                                                       return 'Enter Valid Email';
                                                     } else {
                                                       return null;
@@ -332,15 +358,17 @@ class _ContactUsPageState extends State<ContactUsPage> {
 
                                                 ///---subject
                                                 Text(
-                                                  'subject'.tr,
+                                                  LanguageConstant.subject.tr,
                                                   style: state.subTitleTextStyle
                                                       ?.copyWith(
                                                           color:
                                                               customTextGreyColor),
                                                 ),
                                                 TextFormField(
-                                                  controller: _subjectController,
-                                                  decoration: const InputDecoration(
+                                                  controller:
+                                                      _subjectController,
+                                                  decoration:
+                                                      const InputDecoration(
                                                     isDense: true,
                                                     filled: true,
                                                     fillColor: Colors.white,
@@ -355,8 +383,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                                     customThemeColor)),
                                                     errorBorder:
                                                         UnderlineInputBorder(
-                                                            borderSide: BorderSide(
-                                                                color: Colors.red)),
+                                                            borderSide:
+                                                                BorderSide(
+                                                                    color: Colors
+                                                                        .red)),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                             borderSide: BorderSide(
@@ -369,7 +399,8 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                   ),
                                                   validator: (String? value) {
                                                     if (value!.isEmpty) {
-                                                      return 'field_required'.tr;
+                                                      return 'field_required'
+                                                          .tr;
                                                     } else {
                                                       return null;
                                                     }
@@ -379,7 +410,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                 SizedBox(height: 20.h),
 
                                                 Text(
-                                                  'message'.tr,
+                                                  LanguageConstant.message.tr,
                                                   style: state.subTitleTextStyle
                                                       ?.copyWith(
                                                           color:
@@ -388,11 +419,14 @@ class _ContactUsPageState extends State<ContactUsPage> {
 
                                                 /// message form field
                                                 TextFormField(
-                                                  controller: _messageController,
-                                                  keyboardType: TextInputType.multiline,
+                                                  controller:
+                                                      _messageController,
+                                                  keyboardType:
+                                                      TextInputType.multiline,
                                                   maxLines: 3,
                                                   minLines: 1,
-                                                  decoration: const InputDecoration(
+                                                  decoration:
+                                                      const InputDecoration(
                                                     isDense: true,
                                                     filled: true,
                                                     fillColor: Colors.white,
@@ -407,8 +441,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                                     customThemeColor)),
                                                     errorBorder:
                                                         UnderlineInputBorder(
-                                                            borderSide: BorderSide(
-                                                                color: Colors.red)),
+                                                            borderSide:
+                                                                BorderSide(
+                                                                    color: Colors
+                                                                        .red)),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                             borderSide: BorderSide(
@@ -421,7 +457,8 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                   ),
                                                   validator: (String? value) {
                                                     if (value!.isEmpty) {
-                                                      return 'field_required'.tr;
+                                                      return 'field_required'
+                                                          .tr;
                                                     } else {
                                                       return null;
                                                     }
@@ -436,8 +473,9 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                     ),
                                   ),
                                 ),
-
-                                SizedBox(height: MediaQuery.of(context).size.height*.15),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        .15),
                               ],
                             ),
                           ),
@@ -471,8 +509,9 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                       contactUsRepo);
                                 }
                               },
-                              child: const MyCustomBottomBar(
-                                  title: 'Submit', disable: false)),
+                              child: MyCustomBottomBar(
+                                  title: LanguageConstant.submit.tr,
+                                  disable: false)),
                         ),
                       ]))),
             ),

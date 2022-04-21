@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
@@ -74,8 +75,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                     return <Widget>[
                       ///---header
                       MyCustomSliverAppBar(
-                        heading: 'Book Appointment',
-                        subHeading: 'By just few easy steps',
+                        heading: LanguageConstant.bookAppointment.tr,
+                        subHeading: LanguageConstant.byJustFewEasySteps.tr,
                         trailing: 'Step 3 Of 3',
                         fee:
                             '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
@@ -93,7 +94,7 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                           children: [
                             ///---card-heading
                             Text(
-                              'Card Details',
+                              LanguageConstant.cardDetails.tr,
                               style: state.headingTextStyle,
                             ),
                             SizedBox(
@@ -132,7 +133,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                       MainAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Enter Card Number',
+                                                      LanguageConstant
+                                                          .enterCardNumber.tr,
                                                       style: TextStyle(
                                                           fontFamily:
                                                               SarabunFontFamily
@@ -252,7 +254,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'CARD HOLDER',
+                                                          LanguageConstant
+                                                              .cardHolder.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -362,7 +365,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'EXPIRES',
+                                                          LanguageConstant
+                                                              .expires.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -475,7 +479,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'CVV',
+                                                          LanguageConstant
+                                                              .cvv.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -731,7 +736,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                               : const SizedBox(),
                                           _bookAppointmentLogic.myWidth == 0.0
                                               ? Text(
-                                                  'Slide To Pay',
+                                                  LanguageConstant
+                                                      .slideToPay.tr,
                                                   style: TextStyle(
                                                       fontFamily:
                                                           SarabunFontFamily

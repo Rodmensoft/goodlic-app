@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -32,9 +33,11 @@ class _AccountInfoViewState extends State<AccountInfoView> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(
-      builder:(_generalController)=> GetBuilder<CreateProfileLogic>(
+      builder: (_generalController) => GetBuilder<CreateProfileLogic>(
         builder: (_createProfileLogic) => ModalProgressHUD(
-          progressIndicator: const CircularProgressIndicator(color: customThemeColor,),
+          progressIndicator: const CircularProgressIndicator(
+            color: customThemeColor,
+          ),
           inAsyncCall: _generalController.formLoaderController!,
           child: Scaffold(
               backgroundColor: customTextFieldColor,
@@ -44,7 +47,6 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     ///---bank
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -55,13 +57,13 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                           child: DropdownButtonFormField<String>(
                             onTap: () {
                               FocusScopeNode currentFocus =
-                              FocusScope.of(context);
+                                  FocusScope.of(context);
                               if (!currentFocus.hasPrimaryFocus) {
                                 currentFocus.unfocus();
                               }
                             },
                             hint: Text(
-                              'bank'.tr.capitalizeFirst!,
+                              LanguageConstant.bank.tr.capitalizeFirst!,
                               style: state.hintTextStyle,
                             ),
                             decoration: InputDecoration(
@@ -84,7 +86,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                               errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.r),
                                   borderSide:
-                                  const BorderSide(color: Colors.red)),
+                                      const BorderSide(color: Colors.red)),
                             ),
                             isExpanded: true,
                             focusColor: Colors.white,
@@ -92,25 +94,21 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                             iconEnabledColor: customThemeColor,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             iconSize: 25,
-                            value:
-                            _createProfileLogic.selectedBank,
-                            items: _createProfileLogic
-                                .bankDropDownList
-                                .map<DropdownMenuItem<String>>(
-                                    (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      value,
-                                      style: state.textFieldTextStyle,
-                                    ),
-                                  );
-                                }).toList(),
+                            value: _createProfileLogic.selectedBank,
+                            items: _createProfileLogic.bankDropDownList
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: state.textFieldTextStyle,
+                                ),
+                              );
+                            }).toList(),
                             onChanged: (String? value) {
                               log(value.toString());
                               setState(() {
-                                _createProfileLogic
-                                    .selectedBank = value;
+                                _createProfileLogic.selectedBank = value;
                               });
                             },
                             validator: (String? value) {
@@ -127,8 +125,8 @@ class _AccountInfoViewState extends State<AccountInfoView> {
 
                     ///---account-title-field
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          15.w, 0, 15.w, 16.h),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
                       child: TextFormField(
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
@@ -146,20 +144,19 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                           filled: true,
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent)),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent)),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent)),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
                               borderSide: const BorderSide(
                                   color: customLightThemeColor)),
                           errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                              const BorderSide(color: Colors.red)),
+                              borderSide: const BorderSide(color: Colors.red)),
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
@@ -173,12 +170,11 @@ class _AccountInfoViewState extends State<AccountInfoView> {
 
                     ///---account-number-field
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          15.w, 0, 15.w, 16.h),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
                       child: TextFormField(
                         inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp("[0-9]"))
+                          FilteringTextInputFormatter.allow(RegExp("[0-9]"))
                         ],
                         style: state.textFieldTextStyle,
                         controller: _accountNumberController,
@@ -192,20 +188,19 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                           filled: true,
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent)),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent)),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent)),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
                               borderSide: const BorderSide(
                                   color: customLightThemeColor)),
                           errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                              const BorderSide(color: Colors.red)),
+                              borderSide: const BorderSide(color: Colors.red)),
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
@@ -216,48 +211,47 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                         },
                       ),
                     ),
-
                   ],
                 ),
               )),
               bottomNavigationBar: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 0),
                 child: InkWell(
-                  onTap: () {
-                    FocusScopeNode currentFocus = FocusScope.of(context);
-                    if (!currentFocus.hasPrimaryFocus) {
-                      currentFocus.unfocus();
-                    }
-                    if (_accountInfoFormKey.currentState!.validate()) {
-                      Get.find<GeneralController>().updateFormLoaderController(true);
+                    onTap: () {
+                      FocusScopeNode currentFocus = FocusScope.of(context);
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
+                      if (_accountInfoFormKey.currentState!.validate()) {
+                        Get.find<GeneralController>()
+                            .updateFormLoaderController(true);
 
-                      setState(() {
-                        _createProfileLogic
-                            .stepperList[_createProfileLogic.stepperIndex!]
-                            .isSelected = false;
-                        _createProfileLogic
-                            .stepperList[_createProfileLogic.stepperIndex!]
-                            .isCompleted = true;
-                      });
-                      postMethod(
-                          context,
-                          mentorAccountInfoUrl,
-                          {
-                            'token': '123',
-                            'mentor_id': Get.find<GeneralController>()
-                                .storageBox
-                                .read('userID'),
-                            'account_title': _accountTitleController.text,
-                            'account_number': _accountNumberController.text,
-                            'bank': _createProfileLogic.selectedBank,
-                          },
-                          true,
-                          mentorAccountInfoRepo);
-                    }
-                  },
+                        setState(() {
+                          _createProfileLogic
+                              .stepperList[_createProfileLogic.stepperIndex!]
+                              .isSelected = false;
+                          _createProfileLogic
+                              .stepperList[_createProfileLogic.stepperIndex!]
+                              .isCompleted = true;
+                        });
+                        postMethod(
+                            context,
+                            mentorAccountInfoUrl,
+                            {
+                              'token': '123',
+                              'mentor_id': Get.find<GeneralController>()
+                                  .storageBox
+                                  .read('userID'),
+                              'account_title': _accountTitleController.text,
+                              'account_number': _accountNumberController.text,
+                              'bank': _createProfileLogic.selectedBank,
+                            },
+                            true,
+                            mentorAccountInfoRepo);
+                      }
+                    },
                     child: const MyCustomBottomBar(
-                        title: 'Save & Continue', disable: false)
-                ),
+                        title: 'Save & Continue', disable: false)),
               )),
         ),
       ),

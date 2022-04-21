@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -68,8 +69,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                   return <Widget>[
                     ///---header
                     MyCustomSliverAppBar(
-                      heading: 'Book Appointment',
-                      subHeading: 'By just few easy steps',
+                      heading: LanguageConstant.bookAppointment.tr,
+                      subHeading: LanguageConstant.byJustFewEasySteps.tr,
                       trailing: 'Step 1 Of 3',
                       isShrink: _bookAppointmentLogic.isShrink,
                     ),
@@ -407,7 +408,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Select Shift',
+                                          LanguageConstant.selectShift.tr,
                                           style: state.headingTextStyle,
                                         ),
                                         SizedBox(
@@ -863,7 +864,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                           }
                         },
                         child: MyCustomBottomBar(
-                          title: 'Continue',
+                          title: LanguageConstant.Continue.tr,
                           disable: disableButton!,
                         ),
                       ),

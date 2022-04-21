@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/blogs/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class _BlogsPageState extends State<BlogsPage> {
                   return <Widget>[
                     ///---header
                     MyCustomSliverAppBar(
-                      heading: 'Blog',
+                      heading: LanguageConstant.blog.tr,
                       subHeading: "Explore Today's Trending Articles",
                       isShrink: _blogsLogic.isShrink,
                     ),
@@ -247,7 +248,7 @@ class _BlogsPageState extends State<BlogsPage> {
 
                           /// Text
                           Text(
-                            'For You',
+                            LanguageConstant.forYou.tr,
                             style: state.headingTextStyle,
                           ),
                           SizedBox(height: 30.h),

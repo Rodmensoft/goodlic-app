@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,8 @@ class _OtpPageState extends State<OtpPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('Enter OTP', style: state.headingTextStyle),
+                              Text(LanguageConstant.enterOTP.tr,
+                                  style: state.headingTextStyle),
                               SizedBox(height: 18.h),
                               Text(
                                   'An OTP Code Has Been Sent To Your Given\n Phone Number',
@@ -151,8 +153,8 @@ class _OtpPageState extends State<OtpPage> {
                       onTap: () {
                         Get.toNamed(PageRoutes.newPassword);
                       },
-                      child: const MyCustomBottomBar(
-                          title: 'Confirm', disable: false)),
+                      child: MyCustomBottomBar(
+                          title: LanguageConstant.confirm.tr, disable: false)),
                 ),
               ),
             ]),

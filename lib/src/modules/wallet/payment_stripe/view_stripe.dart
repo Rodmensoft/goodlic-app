@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -75,8 +76,8 @@ class _StripePaymentForWalletViewState
                     return <Widget>[
                       ///---header
                       MyCustomSliverAppBar(
-                        heading: 'Add Amount',
-                        subHeading: 'Add Amount To Your Wallet',
+                        heading: LanguageConstant.addAmount.tr,
+                        subHeading: LanguageConstant.addAmountToYourWallet.tr,
                         isShrink: _walletLogic.isShrinkStripe,
                       ),
                     ];
@@ -89,7 +90,7 @@ class _StripePaymentForWalletViewState
                           children: [
                             ///---card-heading
                             Text(
-                              'Card Details',
+                              LanguageConstant.cardDetails.tr,
                               style: state.headingTextStyle,
                             ),
                             SizedBox(
@@ -128,7 +129,8 @@ class _StripePaymentForWalletViewState
                                                       MainAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Enter Card Number',
+                                                      LanguageConstant
+                                                          .enterCardNumber.tr,
                                                       style: TextStyle(
                                                           fontFamily:
                                                               SarabunFontFamily
@@ -247,7 +249,8 @@ class _StripePaymentForWalletViewState
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'CARD HOLDER',
+                                                          LanguageConstant
+                                                              .cardHolder.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -356,7 +359,8 @@ class _StripePaymentForWalletViewState
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'EXPIRES',
+                                                          LanguageConstant
+                                                              .expires.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -468,7 +472,8 @@ class _StripePaymentForWalletViewState
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'CVV',
+                                                          LanguageConstant
+                                                              .cvv.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -717,7 +722,9 @@ class _StripePaymentForWalletViewState
                                   } else {
                                     _walletLogic.myWidth = 0;
                                     _walletLogic.update();
-                                    Get.snackbar('Fill Complete Form', '',
+                                    Get.snackbar(
+                                        LanguageConstant.fillCompleteForm.tr,
+                                        '',
                                         colorText: Colors.black,
                                         backgroundColor: Colors.white);
                                   }
@@ -754,7 +761,8 @@ class _StripePaymentForWalletViewState
                                               : const SizedBox(),
                                           _walletLogic.myWidth == 0.0
                                               ? Text(
-                                                  'Slide To Pay',
+                                                  LanguageConstant
+                                                      .slideToPay.tr,
                                                   style: TextStyle(
                                                       fontFamily:
                                                           SarabunFontFamily

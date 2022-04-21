@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/sign_up/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -19,8 +20,8 @@ signUpWithEmailRepo(
             return CustomDialogBox(
               title: 'SUCCESS!',
               titleColor: customDialogSuccessColor,
-              descriptions: 'Lets Login',
-              text: 'OK'.tr,
+              descriptions: LanguageConstant.letsLogin.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
                 Get.back();
@@ -40,10 +41,10 @@ signUpWithEmailRepo(
         context: context,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'FAILED!',
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
             descriptions: 'Try Again!',
-            text: 'OK'.tr,
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },

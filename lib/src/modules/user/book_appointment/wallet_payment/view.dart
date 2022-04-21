@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -70,8 +71,8 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
                     return <Widget>[
                       ///---header
                       MyCustomSliverAppBar(
-                        heading: 'Book Appointment',
-                        subHeading: 'By just few easy steps',
+                        heading: LanguageConstant.bookAppointment.tr,
+                        subHeading: LanguageConstant.byJustFewEasySteps.tr,
                         trailing: 'Step 3 Of 3',
                         isShrink: _bookAppointmentLogic.isShrink3,
                         fee:
@@ -547,7 +548,8 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
                                               : const SizedBox(),
                                           _bookAppointmentLogic.myWidth == 0.0
                                               ? Text(
-                                                  'Slide To Pay',
+                                                  LanguageConstant
+                                                      .slideToPay.tr,
                                                   style: TextStyle(
                                                       fontFamily:
                                                           SarabunFontFamily

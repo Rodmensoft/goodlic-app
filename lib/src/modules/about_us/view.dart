@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -55,7 +56,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   return <Widget>[
                     ///---header
                     MyCustomSliverAppBar(
-                      heading: 'About Us',
+                      heading: LanguageConstant.aboutUs.tr,
                       subHeading: "Get know about our vision and mission",
                       isShrink: _aboutUsLogic.isShrink,
                     ),
@@ -72,7 +73,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
                           child: Text(
-                            'Our Vision',
+                            LanguageConstant.ourVision.tr,
                             style: state.headingTextStyle,
                           ),
                         ),
@@ -86,11 +87,12 @@ class _AboutUsPageState extends State<AboutUsPage> {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding:  EdgeInsetsDirectional.only(end: 14.w),
+                                  padding:
+                                      EdgeInsetsDirectional.only(end: 14.w),
                                   child: Text(
                                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                                        'Pellentesque sem elit, tempus ac justo eu, pellentesque laoreet velit. '
-                                        'Suspendisse lobortis a lacus quis pretium. Aliquam posuere auctor fermentum.',
+                                    'Pellentesque sem elit, tempus ac justo eu, pellentesque laoreet velit. '
+                                    'Suspendisse lobortis a lacus quis pretium. Aliquam posuere auctor fermentum.',
                                     // softWrap: true,
                                     // overflow: TextOverflow.ellipsis,
                                     // maxLines: 5,
@@ -102,7 +104,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                               // SizedBox(width: 28.w),
                               Expanded(
                                 child: Padding(
-                                  padding:  EdgeInsetsDirectional.only(start: 14.w),
+                                  padding:
+                                      EdgeInsetsDirectional.only(start: 14.w),
                                   child: SizedBox(
                                     // height: 149.h,
                                     width: 136.w,
@@ -120,10 +123,14 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         Column(
                           children: [
                             Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB((MediaQuery.of(context).size.width*.5/2)+15, 0, 0, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  (MediaQuery.of(context).size.width * .5 / 2) +
+                                      15,
+                                  0,
+                                  0,
+                                  0),
                               child: Text(
-                                'Our Mission',
+                                LanguageConstant.ourMission.tr,
                                 style: state.headingTextStyle,
                               ),
                             ),
@@ -138,7 +145,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                 children: [
                                   Expanded(
                                     child: Padding(
-                                      padding:  EdgeInsetsDirectional.only(end: 28.w),
+                                      padding:
+                                          EdgeInsetsDirectional.only(end: 28.w),
                                       child: SizedBox(
                                         // height: 149.h,
                                         width: 136.w,
@@ -153,8 +161,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                   Expanded(
                                     child: Text(
                                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                                          'Pellentesque sem elit, tempus ac justo eu, pellentesque laoreet velit. '
-                                          'Suspendisse lobortis a lacus quis pretium. Aliquam posuere auctor fermentum.',
+                                      'Pellentesque sem elit, tempus ac justo eu, pellentesque laoreet velit. '
+                                      'Suspendisse lobortis a lacus quis pretium. Aliquam posuere auctor fermentum.',
                                       // softWrap: true,
                                       // overflow: TextOverflow.ellipsis,
                                       // maxLines: 5,
@@ -174,7 +182,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
                           child: Text(
-                            'Why Choose Us',
+                            LanguageConstant.whyChooseUs.tr,
                             style: state.headingTextStyle,
                           ),
                         ),
@@ -187,10 +195,13 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding:  EdgeInsetsDirectional.only(top: 16.h),
+                                    padding:
+                                        EdgeInsetsDirectional.only(top: 16.h),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Container(
                                             width: 74,
@@ -204,11 +215,13 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                     child: Container(
                                       color: customLightThemeColor,
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.all(15),
+                                        padding:
+                                            const EdgeInsetsDirectional.all(15),
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             ///---heading
                                             Text(
@@ -222,9 +235,11 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                             ///---detail
                                             Text(
                                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sem elit, '
-                                                  'tempus ac justo eu, pellentesque laoreet'.tr,
+                                                      'tempus ac justo eu, pellentesque laoreet'
+                                                  .tr,
                                               style: state.descTextStyle
-                                                  ?.copyWith(color: Colors.white),
+                                                  ?.copyWith(
+                                                      color: Colors.white),
                                             ),
                                           ],
                                         ),
@@ -245,10 +260,13 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding:  EdgeInsetsDirectional.only(top: 16.h),
+                                    padding:
+                                        EdgeInsetsDirectional.only(top: 16.h),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Container(
                                             width: 74,
@@ -262,11 +280,13 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                     child: Container(
                                       color: customLightThemeColor,
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.all(15),
+                                        padding:
+                                            const EdgeInsetsDirectional.all(15),
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             ///---heading
                                             Text(
@@ -280,9 +300,11 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                             ///---detail
                                             Text(
                                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sem elit, '
-                                                  'tempus ac justo eu, pellentesque laoreet'.tr,
+                                                      'tempus ac justo eu, pellentesque laoreet'
+                                                  .tr,
                                               style: state.descTextStyle
-                                                  ?.copyWith(color: Colors.white),
+                                                  ?.copyWith(
+                                                      color: Colors.white),
                                             ),
                                           ],
                                         ),
@@ -294,13 +316,10 @@ class _AboutUsPageState extends State<AboutUsPage> {
                             ),
                           ],
                         ),
-
-
                       ],
                     ),
                   ),
-                )
-            ),
+                )),
           ),
         );
       });

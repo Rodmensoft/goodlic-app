@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -38,7 +39,7 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
               child: _allConsultantsLogic.allConsultantList[widget.parentIndex!]
                       .mentors!.data!.isEmpty
                   ? Text(
-                      'No Record Found',
+                      LanguageConstant.noRecordFound.tr,
                       style: TextStyle(
                           fontFamily: SarabunFontFamily.regular,
                           fontSize: 16.sp,
@@ -234,7 +235,7 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                                   borderRadius: BorderRadius.circular(18.r)),
                               child: Center(
                                 child: Text(
-                                  'Load More',
+                                  LanguageConstant.loadMore.tr,
                                   style: TextStyle(
                                       fontFamily: SarabunFontFamily.medium,
                                       fontSize: 12.sp,

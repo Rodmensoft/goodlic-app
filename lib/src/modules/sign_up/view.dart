@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -178,7 +178,8 @@ class _SignUpPageState extends State<SignUpPage>
                                           contentPadding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   25.w, 15.h, 25.w, 15.h),
-                                          hintText: 'First Name',
+                                          hintText:
+                                              LanguageConstant.firstName.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
@@ -227,7 +228,8 @@ class _SignUpPageState extends State<SignUpPage>
                                           contentPadding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   25.w, 15.h, 25.w, 15.h),
-                                          hintText: 'Last Name',
+                                          hintText:
+                                              LanguageConstant.lastName.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
@@ -273,7 +275,8 @@ class _SignUpPageState extends State<SignUpPage>
                                             contentPadding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     25.w, 15.h, 25.w, 15.h),
-                                            hintText: 'Email Address',
+                                            hintText: LanguageConstant
+                                                .emailAddress.tr,
                                             hintStyle: state.hintTextStyle,
                                             fillColor: customTextFieldColor,
                                             filled: true,
@@ -290,9 +293,7 @@ class _SignUpPageState extends State<SignUpPage>
                                             focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(8.r),
-                                                borderSide: const BorderSide(
-                                                    color:
-                                                        customLightThemeColor)),
+                                                borderSide: const BorderSide(color: customLightThemeColor)),
                                             errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                                             errorText: _signUpLogic.emailValidator),
                                         onChanged: (value) {
@@ -335,7 +336,8 @@ class _SignUpPageState extends State<SignUpPage>
                                                 size: 20,
                                                 color: const Color(0xff8085BA)),
                                           ),
-                                          hintText: 'Password',
+                                          hintText:
+                                              LanguageConstant.password.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
@@ -397,7 +399,8 @@ class _SignUpPageState extends State<SignUpPage>
                                                 size: 20,
                                                 color: const Color(0xff8085BA)),
                                           ),
-                                          hintText: 'Confirm Password',
+                                          hintText: LanguageConstant
+                                              .confirmPassword.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
@@ -467,7 +470,8 @@ class _SignUpPageState extends State<SignUpPage>
                                                           _signUpLogic
                                                               .confirmPasswordController
                                                               .text,
-                                                      'role':_signUpLogic.selectedRole
+                                                      'role': _signUpLogic
+                                                          .selectedRole
                                                     },
                                                     false,
                                                     signUpWithEmailRepo);
@@ -585,7 +589,7 @@ class _SignUpPageState extends State<SignUpPage>
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0, 5.h, 0, 5.h),
                                               child: Text(
-                                                'Lets Login',
+                                                LanguageConstant.letsLogin.tr,
                                                 style: state.descTextStyle!
                                                     .copyWith(
                                                         color: customThemeColor,

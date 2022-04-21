@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/contact_us/logic.dart';
 import 'package:consultant_product/src/modules/contact_us/model.dart';
@@ -17,7 +18,6 @@ contactUsRepo(
     Get.find<GeneralController>().updateFormLoaderController(false);
 
     if (Get.find<ContactUsLogic>().contactUsModel.status == true) {
-
       showDialog(
           context: context,
           barrierDismissible: false,
@@ -26,7 +26,7 @@ contactUsRepo(
               title: 'success!'.tr,
               titleColor: customDialogSuccessColor,
               descriptions: 'mail_sent_successfully'.tr,
-              text: 'ok'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
                 Get.back();
@@ -40,10 +40,10 @@ contactUsRepo(
           context: context,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'failed!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
               descriptions: 'try_again!'.tr,
-              text: 'ok'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },
@@ -58,10 +58,10 @@ contactUsRepo(
         context: context,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'failed!'.tr,
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
             descriptions: 'try_again!'.tr,
-            text: 'ok'.tr,
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },

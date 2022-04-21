@@ -1,7 +1,6 @@
-
 import 'dart:developer';
 
-import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -31,8 +30,7 @@ mentorGeneralInfo2Repo(
           .isSelected = true;
       Get.find<CreateProfileLogic>().updateStepperIndex(1);
       Get.snackbar('${'profile_updated_successfully'.tr}!', '',
-          colorText: Colors.black,
-          backgroundColor: Colors.white);
+          colorText: Colors.black, backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('mentorGeneralInfoRepo ------>> ${Get.find<CreateProfileLogic>().generalInfoPostModel.success}');
     } else {
@@ -42,10 +40,10 @@ mentorGeneralInfo2Repo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'failed!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
               descriptions: 'try_again!'.tr,
-              text: 'ok'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },
@@ -60,10 +58,10 @@ mentorGeneralInfo2Repo(
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'failed!'.tr,
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
             descriptions: 'try_again!'.tr,
-            text: 'ok'.tr,
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },
@@ -72,7 +70,6 @@ mentorGeneralInfo2Repo(
         });
   }
 }
-
 
 mentorSkillInfoRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
@@ -91,8 +88,7 @@ mentorSkillInfoRepo(
       //     .isSelected = true;
       // Get.find<MentorProfileLogic>().updateStepperIndex(4);
       Get.snackbar('${'skill_added_successfully'.tr}!', '',
-          colorText: Colors.black,
-          backgroundColor: Colors.white);
+          colorText: Colors.black, backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('mentorSkillInfoRepo ------>> ${Get.find<CreateProfileLogic>().skillInfoPostModel.success}');
     } else {

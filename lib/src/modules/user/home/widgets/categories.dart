@@ -1,10 +1,10 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
@@ -77,7 +77,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Categories',
+                              LanguageConstant.categories.tr,
                               style: state.subHeadingTextStyle,
                             ),
                             InkWell(
@@ -87,7 +87,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                 Get.toNamed(PageRoutes.allConsultants);
                               },
                               child: Text(
-                                'View All',
+                                LanguageConstant.viewAll.tr,
                                 style: state.viewAllTextStyle,
                               ),
                             ),
@@ -107,8 +107,9 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                             return Padding(
                               padding: EdgeInsets.fromLTRB(0, 0, 11.w, 12.h),
                               child: InkWell(
-                                onTap: (){
-                                  _userHomeLogic.selectedCategoryId = _userHomeLogic.categoriesList[index].id;
+                                onTap: () {
+                                  _userHomeLogic.selectedCategoryId =
+                                      _userHomeLogic.categoriesList[index].id;
                                   _userHomeLogic.update();
                                   Get.toNamed(PageRoutes.allConsultants);
                                 },
@@ -119,7 +120,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                       color: customTextFieldColor,
                                       borderRadius: BorderRadius.circular(8)),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       SizedBox(
@@ -134,12 +136,12 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                             shape: BoxShape.circle),
                                         child: Center(
                                             child: Image.network(
-                                              _userHomeLogic
-                                                  .categoriesList[index].image!.contains('assets')
-                                                  ?'$mediaUrl${_userHomeLogic
-                                                  .categoriesList[index].image}'
-                                                  :_userHomeLogic
-                                              .categoriesList[index].image!,
+                                          _userHomeLogic
+                                                  .categoriesList[index].image!
+                                                  .contains('assets')
+                                              ? '$mediaUrl${_userHomeLogic.categoriesList[index].image}'
+                                              : _userHomeLogic
+                                                  .categoriesList[index].image!,
                                           height: 20.h,
                                           width: 23.w,
                                           color: Colors.white,
@@ -159,7 +161,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                       ),
                                       Text(
                                         '(${_userHomeLogic.categoriesList[index].subTitle} Consultants)',
-                                        style:  TextStyle(
+                                        style: TextStyle(
                                             fontFamily: SarabunFontFamily.light,
                                             fontSize: 10.sp,
                                             color: customTextGreyColor),

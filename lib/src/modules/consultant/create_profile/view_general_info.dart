@@ -31,6 +31,8 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../multi_language/language_constants.dart';
+
 class GeneralInfoView extends StatefulWidget {
   const GeneralInfoView({Key? key}) : super(key: key);
 
@@ -144,7 +146,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           25.w, 15.h, 25.w, 15.h),
-                                  hintText: 'First Name',
+                                  hintText: LanguageConstant.firstName.tr,
                                   hintStyle: state.hintTextStyle,
                                   fillColor: Colors.white,
                                   filled: true,
@@ -167,7 +169,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                 ),
                                 validator: (String? value) {
                                   if (value!.isEmpty) {
-                                    return 'Field Required'.tr;
+                                    return LanguageConstant.fieldRequired.tr;
                                   } else {
                                     return null;
                                   }
@@ -192,7 +194,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           25.w, 15.h, 25.w, 15.h),
-                                  hintText: 'Last Name',
+                                  hintText: LanguageConstant.lastName.tr,
                                   hintStyle: state.hintTextStyle,
                                   fillColor: Colors.white,
                                   filled: true,
@@ -215,7 +217,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                 ),
                                 validator: (String? value) {
                                   if (value!.isEmpty) {
-                                    return 'Field Required'.tr;
+                                    return LanguageConstant.fieldRequired.tr;
                                   } else {
                                     return null;
                                   }
@@ -240,7 +242,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           25.w, 15.h, 25.w, 15.h),
-                                  hintText: 'Father Name',
+                                  hintText: LanguageConstant.fatherName.tr,
                                   hintStyle: state.hintTextStyle,
                                   fillColor: Colors.white,
                                   filled: true,
@@ -263,7 +265,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                 ),
                                 validator: (String? value) {
                                   if (value!.isEmpty) {
-                                    return 'Field Required'.tr;
+                                    return LanguageConstant.fieldRequired.tr;
                                   } else {
                                     return null;
                                   }
@@ -354,7 +356,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                 ),
                                 validator: (String? value) {
                                   if (value!.isEmpty) {
-                                    return 'Field Required'.tr;
+                                    return LanguageConstant.fieldRequired.tr;
                                   } else {
                                     return null;
                                   }
@@ -423,7 +425,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                 ),
                                 validator: (String? value) {
                                   if (value!.isEmpty) {
-                                    return 'Field Required'.tr;
+                                    return LanguageConstant.fieldRequired.tr;
                                   } else {
                                     return null;
                                   }
@@ -451,7 +453,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             }
                                           },
                                           hint: Text(
-                                            'Gender',
+                                            LanguageConstant.gender.tr,
                                             style: state.hintTextStyle,
                                           ),
                                           decoration: InputDecoration(
@@ -512,7 +514,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                           },
                                           validator: (String? value) {
                                             if (value == null) {
-                                              return 'Field Required'.tr;
+                                              return LanguageConstant
+                                                  .fieldRequired.tr;
                                             } else {
                                               return null;
                                             }
@@ -540,7 +543,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             }
                                           },
                                           hint: Text(
-                                            'Religion',
+                                            LanguageConstant.religion.tr,
                                             style: state.hintTextStyle,
                                           ),
                                           decoration: InputDecoration(
@@ -601,7 +604,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                           },
                                           validator: (String? value) {
                                             if (value == null) {
-                                              return 'Field Required'.tr;
+                                              return LanguageConstant
+                                                  .fieldRequired.tr;
                                             } else {
                                               return null;
                                             }
@@ -684,7 +688,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                         },
                                         validator: (value) {
                                           if (value == null) {
-                                            return 'Field Required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           }
                                           return null;
                                         },
@@ -719,7 +724,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             }
                                           },
                                           hint: Text(
-                                            'Occupation',
+                                            LanguageConstant.occupation.tr,
                                             style: state.hintTextStyle,
                                           ),
                                           decoration: InputDecoration(
@@ -783,7 +788,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                           },
                                           validator: (String? value) {
                                             if (value == null) {
-                                              return 'Field Required'.tr;
+                                              return LanguageConstant
+                                                  .fieldRequired.tr;
                                             } else {
                                               return null;
                                             }
@@ -816,7 +822,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             }
                                           },
                                           hint: Text(
-                                            'Country',
+                                            LanguageConstant.country.tr,
                                             style: state.hintTextStyle,
                                           ),
                                           decoration: InputDecoration(
@@ -897,7 +903,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                           },
                                           validator: (String? value) {
                                             if (value == null) {
-                                              return 'Field Required'.tr;
+                                              return LanguageConstant
+                                                  .fieldRequired.tr;
                                             } else {
                                               return null;
                                             }
@@ -925,7 +932,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             }
                                           },
                                           hint: Text(
-                                            'City',
+                                            LanguageConstant.city.tr,
                                             style: state.hintTextStyle,
                                           ),
                                           decoration: InputDecoration(
@@ -986,7 +993,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                           },
                                           validator: (String? value) {
                                             if (value == null) {
-                                              return 'Field Required'.tr;
+                                              return LanguageConstant
+                                                  .fieldRequired.tr;
                                             } else {
                                               return null;
                                             }
@@ -1076,11 +1084,11 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                   barrierDismissible: false,
                                   builder: (BuildContext context) {
                                     return CustomDialogBox(
-                                      title: 'sorry!'.tr,
+                                      title: LanguageConstant.sorry.tr,
                                       titleColor: customDialogErrorColor,
                                       descriptions:
                                           'upload_your_profile_picture'.tr,
-                                      text: 'ok'.tr,
+                                      text: LanguageConstant.ok.tr,
                                       functionCall: () {
                                         Navigator.pop(context);
                                       },
@@ -1090,8 +1098,9 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                             }
                           }
                         },
-                        child: const MyCustomBottomBar(
-                            title: 'Next Step', disable: false)),
+                        child: MyCustomBottomBar(
+                            title: LanguageConstant.nextStep.tr,
+                            disable: false)),
                   ),
                 ),
               ),
@@ -1239,11 +1248,11 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return CustomDialogBox(
-                  title: 'failed!'.tr,
+                  title: LanguageConstant.failed.tr,
                   titleColor: customDialogErrorColor,
                   descriptions:
                       '${Get.find<CreateProfileLogic>().generalInfoPostModel.msg}',
-                  text: 'ok'.tr,
+                  text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
                   },
@@ -1258,10 +1267,10 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'failed!'.tr,
+                title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
                 descriptions: 'try_again!'.tr,
-                text: 'ok'.tr,
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                 },
@@ -1276,10 +1285,10 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'failed!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
               descriptions: 'try_again!'.tr,
-              text: 'ok'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },

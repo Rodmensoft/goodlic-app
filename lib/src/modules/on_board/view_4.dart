@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +80,7 @@ class _OnBoard4PageState extends State<OnBoard4Page> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     40.w, 0, 29.w, 0),
                                 child: Text(
-                                  'Questions',
+                                  LanguageConstant.question.tr,
                                   style: state.firstTitle,
                                 ),
                               ),
@@ -109,7 +110,9 @@ class _OnBoard4PageState extends State<OnBoard4Page> {
                     ///---skip
                     InkWell(
                       onTap: () {
-                        Get.find<GeneralController>().storageBox.write('onBoard', 'true');
+                        Get.find<GeneralController>()
+                            .storageBox
+                            .write('onBoard', 'true');
                         Get.offAllNamed(PageRoutes.userHome);
                       },
                       child: Text('Skip',
@@ -124,7 +127,9 @@ class _OnBoard4PageState extends State<OnBoard4Page> {
                     ///---next
                     InkWell(
                         onTap: () {
-                          Get.find<GeneralController>().storageBox.write('onBoard', 'true');
+                          Get.find<GeneralController>()
+                              .storageBox
+                              .write('onBoard', 'true');
                           Get.offAllNamed(PageRoutes.userHome);
                         },
                         child: SvgPicture.asset(

@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/reset_password/repo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -81,12 +82,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Reset Password',
+                                      LanguageConstant.resetPassword.tr,
                                       style: state.headingTextStyle,
                                     ),
                                     SizedBox(height: 9.h),
                                     Text(
-                                      'A Reset Link Will Be Share Via Email',
+                                      LanguageConstant
+                                          .aResetLinkWillBeShareViaEmail.tr,
                                       style: state.descTextStyle,
                                     ),
                                     SizedBox(
@@ -94,7 +96,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                             MediaQuery.of(context).size.height *
                                                 .075),
                                     Text(
-                                      'Enter Phone',
+                                      LanguageConstant.enterPhone.tr,
                                       style: state.subHeadingTextStyle,
                                     ),
                                     SizedBox(height: 25.h),
@@ -194,7 +196,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 25.w, 15.h, 25.w, 15.h),
-                                        hintText: 'Email Address',
+                                        hintText:
+                                            LanguageConstant.emailAddress.tr,
                                         hintStyle: state.hintTextStyle,
                                         fillColor: customTextFieldColor,
                                         filled: true,
@@ -266,8 +269,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                   forgetPasswordRepo);
                             }
                           },
-                          child: const MyCustomBottomBar(
-                              title: 'Confirm', disable: false)),
+                          child: MyCustomBottomBar(
+                              title: LanguageConstant.confirm.tr,
+                              disable: false)),
                     ),
                   ),
                 ]),

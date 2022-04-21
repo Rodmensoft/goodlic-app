@@ -2,19 +2,20 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:resize/resize.dart';
 
 import 'agora.config.dart' as config;
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 /// JoinChannelAudio Example
 
@@ -181,26 +182,27 @@ class _State extends State<JoinChannelAudio> {
                       ),
                       Get.find<AgoraLogic>().userImage == null
                           ? Container(
-                        height: 130.h,
-                        width: 130.w,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                      )
+                              height: 130.h,
+                              width: 130.w,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                            )
                           : Container(
-                        height: 130.h,
-                        width: 130.w,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: NetworkImage(Get.find<AgoraLogic>()
-                                    .userImage!
-                                    .contains('assets')
-                                    ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
-                                    : Get.find<AgoraLogic>().userImage!))),
-                      ),
+                              height: 130.h,
+                              width: 130.w,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      image: NetworkImage(Get.find<AgoraLogic>()
+                                              .userImage!
+                                              .contains('assets')
+                                          ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
+                                          : Get.find<AgoraLogic>()
+                                              .userImage!))),
+                            ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 14.h, 0, 0),
                         child: Text(
@@ -211,7 +213,6 @@ class _State extends State<JoinChannelAudio> {
                               color: Colors.white),
                         ),
                       ),
-
                       SizedBox(
                         height: MediaQuery.of(context).size.height * .2,
                       ),
@@ -220,8 +221,7 @@ class _State extends State<JoinChannelAudio> {
                           width: MediaQuery.of(context).size.width,
                           height: double.infinity,
                           child: Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Row(
@@ -296,7 +296,6 @@ class _State extends State<JoinChannelAudio> {
                   ),
                 ),
               ),
-
             ),
     );
   }
@@ -371,7 +370,6 @@ class _State extends State<JoinChannelAudio> {
                             color: Colors.white),
                       ),
                     ),
-
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 14.h, 0, 0),
                 child: Text(
@@ -448,10 +446,8 @@ class _State extends State<JoinChannelAudio> {
                 height: 10,
               ),
               Text(
-                'you are receiving a call from '
-                    '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE'
-                    ? 'MENTOR'
-                    : 'MENTEE'}',
+                '${LanguageConstant.youAreReceivingCallFrom.tr}'
+                '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE' ? 'MENTOR' : 'MENTEE'}',
                 style: TextStyle(
                     fontSize: 15.sp,
                     fontFamily: SarabunFontFamily.regular,
@@ -482,18 +478,19 @@ class _State extends State<JoinChannelAudio> {
                         ),
                         Expanded(
                           child: InkWell(
-                              onTap: () {
-                                _joinChannel();
-                              },
-                              child: CircleAvatar(
-                                backgroundColor: customGreenColor,
-                                radius: 35.r,
-                                child: const Icon(
-                                  Icons.call,
-                                  color: Colors.white,
-                                  size: 35.0,
-                                ),
-                              ),),
+                            onTap: () {
+                              _joinChannel();
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: customGreenColor,
+                              radius: 35.r,
+                              child: const Icon(
+                                Icons.call,
+                                color: Colors.white,
+                                size: 35.0,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

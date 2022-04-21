@@ -1,6 +1,6 @@
-
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -20,11 +20,15 @@ import 'package:get/get.dart';
 stripePaymentRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    if(response.containsKey('original')){
+    if (response.containsKey('original')) {
       Get.find<BookAppointmentLogic>().modelStripePayment =
           ModelStripePayment.fromJson(response);
       Get.find<GeneralController>().updateFormLoaderController(false);
-      if (Get.find<BookAppointmentLogic>().modelStripePayment.original!.status == true) {
+      if (Get.find<BookAppointmentLogic>()
+              .modelStripePayment
+              .original!
+              .status ==
+          true) {
         ///----send-sms
         postMethod(
             context,
@@ -36,21 +40,20 @@ stripePaymentRepo(
             },
             true,
             sendSMSRepo);
+
         ///----fcm-send-start
         getMethod(
             context,
             fcmGetUrl,
             {
               'token': '123',
-              'user_id': Get.find<UserHomeLogic>()
-                  .selectedConsultantID
+              'user_id': Get.find<UserHomeLogic>().selectedConsultantID
             },
             true,
             getFcmTokenRepo);
         Get.find<BookAppointmentLogic>().myWidth = 0;
         Get.find<BookAppointmentLogic>().update();
         Get.offAllNamed(PageRoutes.appointmentConfirmation);
-
 
         log('bookAppointmentRepo ------>> ${Get.find<BookAppointmentLogic>().modelStripePayment.original!.success}');
       } else {
@@ -62,10 +65,10 @@ stripePaymentRepo(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'failed!'.tr,
+                title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
                 descriptions: 'try_again!'.tr,
-                text: 'ok'.tr,
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                 },
@@ -73,8 +76,7 @@ stripePaymentRepo(
               );
             });
       }
-    }else{
-
+    } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
 
       Get.find<BookAppointmentLogic>().myWidth = 0;
@@ -84,10 +86,10 @@ stripePaymentRepo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'failed!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
               descriptions: '${response['data']['message']}',
-              text: 'ok'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },
@@ -103,10 +105,10 @@ stripePaymentRepo(
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'failed!'.tr,
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
             descriptions: 'try_again!'.tr,
-            text: 'ok'.tr,
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },

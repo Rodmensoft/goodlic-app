@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/get_date_schedule.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/get_schedule_available_days.dart';
@@ -7,15 +8,14 @@ import 'package:consultant_product/src/modules/user/consultant_profile/model_con
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resize/resize.dart';
-import 'package:intl/intl.dart' show DateFormat;
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:resize/resize.dart';
+
 import 'state.dart';
 
 class BookAppointmentLogic extends GetxController {
   final BookAppointmentState state = BookAppointmentState();
   final consultantProfileLogic = Get.find<ConsultantProfileLogic>();
-
 
   var cardNumberMask = MaskTextInputFormatter(mask: '#### #### #### ####');
   var cardExpiryMask = MaskTextInputFormatter(mask: '##/##');
@@ -40,6 +40,7 @@ class BookAppointmentLogic extends GetxController {
       update();
     }
   }
+
   bool get isShrink2 {
     return scrollController2!.hasClients &&
         scrollController2!.offset > (height - kToolbarHeight);
@@ -51,6 +52,7 @@ class BookAppointmentLogic extends GetxController {
       update();
     }
   }
+
   bool get isShrink3 {
     return scrollController3!.hasClients &&
         scrollController3!.offset > (height - kToolbarHeight);
@@ -68,7 +70,8 @@ class BookAppointmentLogic extends GetxController {
   int? selectedAppointmentTypeID;
   int? selectedAppointmentTypeIndex;
 
-  GetScheduleAvailableDays getScheduleAvailableDays = GetScheduleAvailableDays();
+  GetScheduleAvailableDays getScheduleAvailableDays =
+      GetScheduleAvailableDays();
   List<DateTime>? availableScheduleDaysList = <DateTime>[];
 
   bool? calenderLoader = false;
@@ -78,7 +81,8 @@ class BookAppointmentLogic extends GetxController {
     update();
   }
 
-  GetScheduleSlotsForUserModel getScheduleSlotsForUserModel = GetScheduleSlotsForUserModel();
+  GetScheduleSlotsForUserModel getScheduleSlotsForUserModel =
+      GetScheduleSlotsForUserModel();
   String selectedDateForAppointment = '';
   String selectedTimeForAppointment = '';
   Schedule_slots selectedScheduleSlots = Schedule_slots();
@@ -95,11 +99,13 @@ class BookAppointmentLogic extends GetxController {
     appointmentShiftType = newValue;
     update();
   }
+
   List<Schedule_slots> morningSlots = [];
   updateMorningSlots(Schedule_slots newValue) {
     morningSlots.add(newValue);
     update();
   }
+
   emptyMorningSlots() {
     morningSlots = [];
     update();
@@ -110,6 +116,7 @@ class BookAppointmentLogic extends GetxController {
     afterNoonSlots.add(newValue);
     update();
   }
+
   emptyAfterNoonSlots() {
     afterNoonSlots = [];
     update();
@@ -120,48 +127,36 @@ class BookAppointmentLogic extends GetxController {
     eveningSlots.add(newValue);
     update();
   }
+
   emptyEveningSlots() {
     eveningSlots = [];
     update();
   }
+
   List<ShiftType> shiftList = [
     ShiftType(
-        title: 'Morning',
+        title: LanguageConstant.morning.tr,
         image: 'assets/Icons/morningShiftIcon.svg',
         isSelected: true),
     ShiftType(
-        title: 'Afternoon',
+        title: LanguageConstant.afternoon.tr,
         image: 'assets/Icons/afterNoonShiftIcon.svg',
         isSelected: false),
     ShiftType(
-        title: 'Evening',
+        title: LanguageConstant.evening.tr,
         image: 'assets/Icons/nightShiftIcon.svg',
         isSelected: false),
   ];
 
   int? selectedPaymentType;
   List<ShiftType> paymentMethodList = [
-    ShiftType(
-        image: 'assets/Icons/jazzcashIcon.png',
-        isSelected: false),
-    ShiftType(
-        image: 'assets/Icons/easyPaisaIcon.png',
-        isSelected: false),
-    ShiftType(
-        image: 'assets/Icons/visaCardIcon.png',
-        isSelected: false),
-    ShiftType(
-        image: 'assets/Icons/UBLIcon.png',
-        isSelected: false),
-    ShiftType(
-        image: 'assets/Icons/konnectIcon.png',
-        isSelected: false),
-    ShiftType(
-        image: 'assets/Icons/jazzcashIcon.png',
-        isSelected: false),
+    ShiftType(image: 'assets/Icons/jazzcashIcon.png', isSelected: false),
+    ShiftType(image: 'assets/Icons/easyPaisaIcon.png', isSelected: false),
+    ShiftType(image: 'assets/Icons/visaCardIcon.png', isSelected: false),
+    ShiftType(image: 'assets/Icons/UBLIcon.png', isSelected: false),
+    ShiftType(image: 'assets/Icons/konnectIcon.png', isSelected: false),
+    ShiftType(image: 'assets/Icons/jazzcashIcon.png', isSelected: false),
   ];
-
-
 
   String? selectedFileName;
   FilePickerResult? filePickerResult;
@@ -174,9 +169,8 @@ class BookAppointmentLogic extends GetxController {
   BookAppointmentModel bookAppointmentModel = BookAppointmentModel();
   TextEditingController questionController = TextEditingController();
 
-
   ScheduleTypes? selectMentorAppointmentType;
-  updateSelectMentorAppointmentType(ScheduleTypes? newValue){
+  updateSelectMentorAppointmentType(ScheduleTypes? newValue) {
     selectMentorAppointmentType = newValue;
     update();
   }
@@ -185,16 +179,16 @@ class BookAppointmentLogic extends GetxController {
 
   double myWidth = 0;
   TextEditingController accountCardNumberController = TextEditingController();
-  TextEditingController accountCardHolderNameController = TextEditingController();
+  TextEditingController accountCardHolderNameController =
+      TextEditingController();
   TextEditingController accountCardExpiresController = TextEditingController();
   TextEditingController accountCardCvcController = TextEditingController();
-
 }
 
 class ShiftType {
   ShiftType({this.title, this.image, this.isSelected});
 
-   String? title;
-   String? image;
-   bool? isSelected;
+  String? title;
+  String? image;
+  bool? isSelected;
 }

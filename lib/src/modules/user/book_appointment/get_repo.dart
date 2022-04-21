@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/get_date_schedule.dart';
@@ -126,8 +127,8 @@ getScheduleSlotsRepo(
                 return CustomDialogBox(
                   title: 'INFO!'.tr,
                   titleColor: customDialogInfoColor,
-                  descriptions: 'Record Not Found',
-                  text: 'ok'.tr,
+                  descriptions: LanguageConstant.recordNotFound.tr,
+                  text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
                   },
@@ -143,8 +144,8 @@ getScheduleSlotsRepo(
               return CustomDialogBox(
                 title: 'INFO!'.tr,
                 titleColor: customDialogInfoColor,
-                descriptions: 'Record Not Found',
-                text: 'ok'.tr,
+                descriptions: LanguageConstant.recordNotFound.tr,
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                 },

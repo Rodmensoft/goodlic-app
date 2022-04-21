@@ -1,7 +1,7 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
-import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -78,7 +78,7 @@ class _TopConsultantsState extends State<TopConsultants> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(15.w, 10.h, 15.w, 0.h),
                       child: Text(
-                        'Featured Consultants',
+                        LanguageConstant.featuredConsultants.tr,
                         style: state.subHeadingTextStyle,
                       ),
                     ),
@@ -100,7 +100,7 @@ class _TopConsultantsState extends State<TopConsultants> {
                                     _userHomeLogic.selectedConsultantID =
                                         _userHomeLogic.topConsultants[index].id;
                                     _userHomeLogic.selectedConsultantName =
-                                    '${_userHomeLogic.topConsultants[index].title}';
+                                        '${_userHomeLogic.topConsultants[index].title}';
 
                                     _userHomeLogic.update();
                                     Get.toNamed(

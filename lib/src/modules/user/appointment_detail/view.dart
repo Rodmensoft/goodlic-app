@@ -11,10 +11,11 @@ import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:resize/resize.dart';
+
 import 'logic.dart';
-import 'package:intl/intl.dart';
 
 class AppointmentDetailPage extends StatefulWidget {
   const AppointmentDetailPage({Key? key}) : super(key: key);
@@ -38,14 +39,18 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
         getExistRatingUrl,
         {
           'token': '123',
-          'mentor_id': Get.find<AppointmentDetailLogic>().selectedAppointmentData.mentorId,
-          'appointment_id': Get.find<AppointmentDetailLogic>().selectedAppointmentData.id
+          'mentor_id': Get.find<AppointmentDetailLogic>()
+              .selectedAppointmentData
+              .mentorId,
+          'appointment_id':
+              Get.find<AppointmentDetailLogic>().selectedAppointmentData.id
         },
         true,
         ratingExistRepo);
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       Get.find<GeneralController>().updateUserIdForSendNotification(
-          Get.find<AppointmentDetailLogic>().selectedAppointmentData.mentorId);});
+          Get.find<AppointmentDetailLogic>().selectedAppointmentData.mentorId);
+    });
 
     Get.find<AppointmentDetailLogic>().scrollController = ScrollController()
       ..addListener(Get.find<AppointmentDetailLogic>().scrollListener);

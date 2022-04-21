@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/user/all_consultants/get_repo.dart';
@@ -9,7 +10,7 @@ import 'package:consultant_product/src/widgets/sliver_delegate_tab_fix.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
-import 'package:skeleton_loader/skeleton_loader.dart';
+
 import '../../../controller/general_controller.dart';
 import 'logic.dart';
 
@@ -63,51 +64,51 @@ class _AllConsultantsPageState extends State<AllConsultantsPage>
             body: _allConsultantsLogic.allConsultantLoader!
                 ? const PageLoader()
                 : NestedScrollView(
-                controller: _allConsultantsLogic.scrollController,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  return <Widget>[
-                    ///---header
-                    MyCustomSliverAppBar(
-                      heading: 'Consultants',
-                      subHeading: 'Best consultants just one click away',
-                      isShrink: _allConsultantsLogic.isShrink,
-                      searchIconShow: true,
-                    ),
-                    SliverPersistentHeader(
-                            delegate: SliverAppBarDelegate(
-                              TabBar(
-                                  indicator: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          6), // Creates border
-                                      color: customLightThemeColor),
-                                  labelPadding:
-                                      EdgeInsets.symmetric(horizontal: 25.w),
-                                  indicatorSize: TabBarIndicatorSize.tab,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.w, 5.h, 10.w, 5.h),
-                                  automaticIndicatorColorAdjustment: true,
-                                  isScrollable: true,
-                                  controller:
-                                      _allConsultantsLogic.tabController,
-                                  labelColor: Colors.white,
-                                  unselectedLabelColor: customLightThemeColor,
-                                  indicatorColor: Colors.transparent,
-                                  tabs: _allConsultantsLogic.allCategoriesList),
-                            ),
-                            pinned: true,
+                    controller: _allConsultantsLogic.scrollController,
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxIsScrolled) {
+                      return <Widget>[
+                        ///---header
+                        MyCustomSliverAppBar(
+                          heading: LanguageConstant.consultant.tr,
+                          subHeading: LanguageConstant
+                              .bestConsultantsJustOneClickAway.tr,
+                          isShrink: _allConsultantsLogic.isShrink,
+                          searchIconShow: true,
+                        ),
+                        SliverPersistentHeader(
+                          delegate: SliverAppBarDelegate(
+                            TabBar(
+                                indicator: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        6), // Creates border
+                                    color: customLightThemeColor),
+                                labelPadding:
+                                    EdgeInsets.symmetric(horizontal: 25.w),
+                                indicatorSize: TabBarIndicatorSize.tab,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.w, 5.h, 10.w, 5.h),
+                                automaticIndicatorColorAdjustment: true,
+                                isScrollable: true,
+                                controller: _allConsultantsLogic.tabController,
+                                labelColor: Colors.white,
+                                unselectedLabelColor: customLightThemeColor,
+                                indicatorColor: Colors.transparent,
+                                tabs: _allConsultantsLogic.allCategoriesList),
                           ),
-                  ];
-                },
-                body: TabBarView(
-                  physics: const BouncingScrollPhysics(),
-                  controller: _allConsultantsLogic.tabController,
-                  children: List.generate(
-                      _allConsultantsLogic.allConsultantList.length,
-                      (index) => ConsultantGridView(
-                            parentIndex: index,
-                          )),
-                )),
+                          pinned: true,
+                        ),
+                      ];
+                    },
+                    body: TabBarView(
+                      physics: const BouncingScrollPhysics(),
+                      controller: _allConsultantsLogic.tabController,
+                      children: List.generate(
+                          _allConsultantsLogic.allConsultantList.length,
+                          (index) => ConsultantGridView(
+                                parentIndex: index,
+                              )),
+                    )),
           ),
         );
       });

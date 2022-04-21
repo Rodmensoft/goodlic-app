@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/new_password/repo.dart';
 import 'package:consultant_product/src/modules/reset_password/logic.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
@@ -84,12 +85,12 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'New Password',
+                                      LanguageConstant.newPassword.tr,
                                       style: state.headingTextStyle,
                                     ),
                                     SizedBox(height: 9.h),
                                     Text(
-                                      'Create New Password',
+                                      LanguageConstant.createNewPassword.tr,
                                       style: state.descTextStyle,
                                     ),
                                     SizedBox(
@@ -97,7 +98,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                             MediaQuery.of(context).size.height *
                                                 .075),
                                     Text(
-                                      'Enter Password',
+                                      LanguageConstant.enterPassword.tr,
                                       style: state.subHeadingTextStyle,
                                     ),
                                     SizedBox(height: 25.h),
@@ -125,7 +126,8 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                               size: 20,
                                               color: const Color(0xff8085BA)),
                                         ),
-                                        hintText: 'New Password',
+                                        hintText:
+                                            LanguageConstant.newPassword.tr,
                                         hintStyle: state.hintTextStyle,
                                         fillColor: customTextFieldColor,
                                         filled: true,
@@ -185,7 +187,8 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                               size: 20,
                                               color: const Color(0xff8085BA)),
                                         ),
-                                        hintText: 'Confirm Password',
+                                        hintText:
+                                            LanguageConstant.confirmPassword.tr,
                                         hintStyle: state.hintTextStyle,
                                         fillColor: customTextFieldColor,
                                         filled: true,
@@ -267,8 +270,9 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                   newPasswordRepo);
                             }
                           },
-                          child: const MyCustomBottomBar(
-                              title: 'Reset Password', disable: false)),
+                          child: MyCustomBottomBar(
+                              title: LanguageConstant.resetPassword.tr,
+                              disable: false)),
                     ),
                   ),
                 ]),

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/login/logic.dart';
@@ -44,10 +45,10 @@ loginWithEmailRepo(
           context: context,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'FAILED!',
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
               descriptions: '${Get.find<LoginLogic>().loginModel.msg}',
-              text: 'OK'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },
@@ -61,10 +62,10 @@ loginWithEmailRepo(
         context: context,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'FAILED!',
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
             descriptions: 'Try Again!',
-            text: 'OK'.tr,
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },
