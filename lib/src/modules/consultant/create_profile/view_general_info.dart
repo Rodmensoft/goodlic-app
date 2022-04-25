@@ -14,6 +14,7 @@ import 'package:consultant_product/src/modules/consultant/create_profile/model_p
 import 'package:consultant_product/src/modules/consultant/create_profile/place_service.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/repo_post.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/view_location_picker.dart';
+import 'package:consultant_product/src/modules/image_full_view/view.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
@@ -109,23 +110,29 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                           ),
                                         ),
                                       )
-                                : Center(
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 25.h),
-                                      child: SizedBox(
-                                        height: 103.h,
-                                        width: 190.w,
-                                        child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            child: Image.file(
-                                              profileImage!,
-                                              fit: BoxFit.cover,
-                                            )),
+                                : InkWell(
+                              onTap: (){
+                                changeImagePickerDialog(context, null,
+                                    false, profileImage);
+                              },
+                                  child: Center(
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 25.h),
+                                        child: SizedBox(
+                                          height: 103.h,
+                                          width: 190.w,
+                                          child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              child: Image.file(
+                                                profileImage!,
+                                                fit: BoxFit.cover,
+                                              )),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                ),
 
                             ///---first-name-field
                             Padding(
@@ -401,6 +408,53 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                       EdgeInsetsDirectional.fromSTEB(
                                           25.w, 15.h, 25.w, 15.h),
                                   hintText: 'Enter Address',
+                                  hintStyle: state.hintTextStyle,
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: customLightThemeColor)),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide:
+                                          const BorderSide(color: Colors.red)),
+                                ),
+                                validator: (String? value) {
+                                  if (value!.isEmpty) {
+                                    return 'Field Required'.tr;
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                              ),
+                            ),
+
+                            ///---about-field
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  15.w, 0, 15.w, 16.h),
+                              child: TextFormField(
+                                inputFormatters: [],
+                                style: state.textFieldTextStyle,
+                                controller:
+                                    _createProfileLogic.aboutController,
+                                keyboardType: TextInputType.multiline,
+                                minLines: 1,
+                                maxLines: 4,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          25.w, 15.h, 25.w, 15.h),
+                                  hintText: 'About Your Self',
                                   hintStyle: state.hintTextStyle,
                                   fillColor: Colors.white,
                                   filled: true,
@@ -1042,6 +1096,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                     //     .emailController.text,
                                     'address': _createProfileLogic
                                         .addressController.text,
+                                    'about': _createProfileLogic
+                                        .aboutController.text,
                                     'gender':
                                         _createProfileLogic.selectedGender,
                                     'religion':
@@ -1167,6 +1223,51 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
         });
   }
 
+  void changeImagePickerDialog(
+      BuildContext context, String? image, bool? isNetwork, File? fileImage) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            actions: <Widget>[
+              CupertinoDialogAction(
+                  isDefaultAction: true,
+                  onPressed: () {
+                    Navigator.pop(context);
+                    if (isNetwork!) {
+                      Get.to(ImageViewScreen(
+                        networkImage: image,
+                      ));
+                    } else {
+                      Get.to(ImageViewScreen(
+                        fileImage: fileImage,
+                      ));
+                    }
+                  },
+                  child: Text(
+                    "View",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(fontSize: 18),
+                  )),
+              CupertinoDialogAction(
+                  isDefaultAction: true,
+                  onPressed: () async {
+                    Navigator.pop(context);
+                    imagePickerDialog(context);
+                  },
+                  child: Text(
+                    "Change",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(fontSize: 18),
+                  )),
+            ],
+          );
+        });
+  }
   mentorGeneralInfoRepo(File? file1) async {
     dio_instance.FormData formData =
         dio_instance.FormData.fromMap(<String, dynamic>{
@@ -1178,6 +1279,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
       'cnic': Get.find<CreateProfileLogic>().cnicController.text,
       // 'email': Get.find<CreateProfileLogic>().emailController.text,
       'address': Get.find<CreateProfileLogic>().addressController.text,
+      'about': Get.find<CreateProfileLogic>().aboutController.text,
       'gender': Get.find<CreateProfileLogic>().selectedGender,
       'religion': Get.find<CreateProfileLogic>().selectedReligion,
       'dob': DateFormat('yyyy-MM-dd')

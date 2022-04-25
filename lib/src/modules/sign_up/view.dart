@@ -364,6 +364,8 @@ class _SignUpPageState extends State<SignUpPage>
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return 'field_required'.tr;
+                                          } else if(value.length < 8 ){
+                                            return 'Password Length Must be 8 Character';
                                           } else {
                                             return null;
                                           }
@@ -426,6 +428,9 @@ class _SignUpPageState extends State<SignUpPage>
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return 'field_required'.tr;
+                                          } else if(_signUpLogic.passwordController.text !=
+                                              _signUpLogic.confirmPasswordController.text){
+                                            return 'Password Not Match';
                                           } else {
                                             return null;
                                           }

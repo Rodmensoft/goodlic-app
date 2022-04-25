@@ -91,7 +91,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                                   .userDetail!
                                                   .imagePath!
                                                   .contains('assets')
-                                              ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                              ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!
+                                              .imagePath}'
                                               : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                           true,
                                           null);

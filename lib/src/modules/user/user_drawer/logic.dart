@@ -14,7 +14,7 @@ class UserDrawerLogic extends GetxController {
     DrawerTile(
         title: 'Appointments Log',
         icon: 'assets/Icons/drawerAppointmentIcon.svg'),
-    DrawerTile(title: 'Edit Profile', icon: 'assets/Icons/feeIcon.svg'),
+    DrawerTile(title: 'Edit Profile', icon: 'assets/Icons/editProfile.svg'),
     DrawerTile(title: 'My Wallet', icon: 'assets/Icons/feeIcon.svg'),
     DrawerTile(
         title: 'Contact US', icon: 'assets/Icons/drawerContactUsIcon.svg'),

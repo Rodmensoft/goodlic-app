@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/image_full_view/view.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/get_repo.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -129,9 +130,12 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                       Positioned(
                                         top: 0,
                                         child: Container(
+                                          alignment: Alignment.center,
                                           color: customLightThemeColor,
                                           width:
                                               MediaQuery.of(context).size.width,
+                                          height:
+                                              MediaQuery.of(context).size.height* .4,
                                           child: Center(
                                             child: _consultantProfileLogic
                                                         .consultantProfileModel
@@ -148,21 +152,38 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                             .5,
                                                     fit: BoxFit.cover,
                                                   )
-                                                : Image.network(
-                                                    _consultantProfileLogic
-                                                            .consultantProfileModel
-                                                            .data!
-                                                            .userDetail!
-                                                            .imagePath
-                                                            .contains('assets')
-                                                        ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
-                                                        : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                                : InkWell(
+                                              onTap: (){
+                                                Get.to(
+                                                    ImageViewScreen(
+                                                      networkImage: _consultantProfileLogic
+                                                          .consultantProfileModel
+                                                          .data!
+                                                          .userDetail!
+                                                          .imagePath
+                                                          .contains('assets')
+                                                          ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
+                                                          : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
+
+                                                    )
+                                                );
+                                              },
+                                              child: Image.network(
+                                                _consultantProfileLogic
+                                                    .consultantProfileModel
+                                                    .data!
+                                                    .userDetail!
+                                                    .imagePath
+                                                    .contains('assets')
+                                                    ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
+                                                    : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
+                                                width:
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),

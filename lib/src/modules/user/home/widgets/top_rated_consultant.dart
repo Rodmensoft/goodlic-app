@@ -92,13 +92,13 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                             'Top Rated Consultants',
                             style: state.subHeadingTextStyle,
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Text(
-                              'View All',
-                              style: state.viewAllTextStyle,
-                            ),
-                          ),
+                          // InkWell(
+                          //   onTap: () {},
+                          //   child: Text(
+                          //     'View All',
+                          //     style: state.viewAllTextStyle,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

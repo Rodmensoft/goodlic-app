@@ -142,23 +142,23 @@ class BookAppointmentLogic extends GetxController {
   int? selectedPaymentType;
   List<ShiftType> paymentMethodList = [
     ShiftType(
-        image: 'assets/Icons/jazzcashIcon.png',
+        image: 'assets/Icons/stripe.svg',
         isSelected: false),
     ShiftType(
-        image: 'assets/Icons/easyPaisaIcon.png',
+        image: 'assets/Icons/braintreePayment.svg',
         isSelected: false),
     ShiftType(
-        image: 'assets/Icons/visaCardIcon.png',
+        image: 'assets/Icons/walletPayment.svg',
         isSelected: false),
-    ShiftType(
-        image: 'assets/Icons/UBLIcon.png',
-        isSelected: false),
-    ShiftType(
-        image: 'assets/Icons/konnectIcon.png',
-        isSelected: false),
-    ShiftType(
-        image: 'assets/Icons/jazzcashIcon.png',
-        isSelected: false),
+    // ShiftType(
+    //     image: 'assets/Icons/UBLIcon.png',
+    //     isSelected: false),
+    // ShiftType(
+    //     image: 'assets/Icons/konnectIcon.png',
+    //     isSelected: false),
+    // ShiftType(
+    //     image: 'assets/Icons/jazzcashIcon.png',
+    //     isSelected: false),
   ];
 
 

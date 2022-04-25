@@ -17,24 +17,24 @@ getGenericDataRepo(
         true) {
       ///---occupation
       Get.find<CreateProfileLogic>().emptyOccupationDropDownList();
-      Get.find<CreateProfileLogic>().mentorProfileGenericDataModel.data!.occupations!.forEach((element) {
+      for (var element in Get.find<CreateProfileLogic>().mentorProfileGenericDataModel.data!.occupations!) {
         Get.find<CreateProfileLogic>().updateOccupationDropDownList(element.name!);
-      });
+      }
       ///---countries
       Get.find<CreateProfileLogic>().emptyCountryDropDownList();
-      Get.find<CreateProfileLogic>().mentorProfileGenericDataModel.data!.countries!.forEach((element) {
+      for (var element in Get.find<CreateProfileLogic>().mentorProfileGenericDataModel.data!.countries!) {
         Get.find<CreateProfileLogic>().updateCountryDropDownList(element.name!);
-      });
+      }
       ///---degrees
       Get.find<CreateProfileLogic>().emptyDegreeDropDownList();
-      Get.find<CreateProfileLogic>().mentorProfileGenericDataModel.data!.degrees!.forEach((element) {
+      for (var element in Get.find<CreateProfileLogic>().mentorProfileGenericDataModel.data!.degrees!) {
         Get.find<CreateProfileLogic>().updateDegreeDropDownList(element.name!);
-      });
+      }
       ///---banks
       Get.find<CreateProfileLogic>().emptyBankDropDownList();
-      Get.find<CreateProfileLogic>().mentorProfileGenericDataModel.data!.banks!.forEach((element) {
+      for (var element in Get.find<CreateProfileLogic>().mentorProfileGenericDataModel.data!.banks!) {
         Get.find<CreateProfileLogic>().updateBankDropDownList(element.name!);
-      });
+      }
 
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('getGenericDataRepo ------>> ${Get.find<CreateProfileLogic>().mentorProfileGenericDataModel.success}');
@@ -56,9 +56,9 @@ getCitiesRepo(
         true) {
       ///---cities
       Get.find<CreateProfileLogic>().emptyCityDropDownList();
-      Get.find<CreateProfileLogic>().citiesByIdModel.data!.cities!.forEach((element) {
+      for (var element in Get.find<CreateProfileLogic>().citiesByIdModel.data!.cities!) {
         Get.find<CreateProfileLogic>().updateCityDropDownList(element.name!);
-      });
+      }
 
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('getCitiesRepo ------>> ${Get.find<CreateProfileLogic>().citiesByIdModel.success}');
@@ -80,9 +80,9 @@ getParentCategoryRepo(
         true) {
       ///---parent-category
       Get.find<CreateProfileLogic>().emptyCategoryDropDownList();
-      Get.find<CreateProfileLogic>().getParentCategoriesModel.data!.mentorCategories!.forEach((element) {
+      for (var element in Get.find<CreateProfileLogic>().getParentCategoriesModel.data!.mentorCategories!) {
         Get.find<CreateProfileLogic>().updateCategoryDropDownList(element.name!);
-      });
+      }
 
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('getParentCategoryRepo ------>> ${Get.find<CreateProfileLogic>().getParentCategoriesModel.success}');
@@ -98,6 +98,7 @@ getParentCategoryRepo(
 getChildCategoryRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
+
     Get.find<CreateProfileLogic>().getChildCategoriesModel =
         GetCategoriesModel.fromJson(response);
     if (Get.find<CreateProfileLogic>().getChildCategoriesModel.status ==
@@ -110,9 +111,9 @@ getChildCategoryRepo(
 
       if(Get.find<CreateProfileLogic>().getChildCategoriesModel.data!.mentorCategories!.isNotEmpty){
         List<String> tempList = [];
-        Get.find<CreateProfileLogic>().getChildCategoriesModel.data!.mentorCategories!.forEach((element) {
+        for (var element in Get.find<CreateProfileLogic>().getChildCategoriesModel.data!.mentorCategories!) {
           tempList.add(element.name!);
-        });
+        }
         ///---get-all-child-category
         Get.find<CreateProfileLogic>().updateAllSubCategoriesList(Get.find<CreateProfileLogic>().getChildCategoriesModel);
         Get.find<CreateProfileLogic>().updateAllSubCategoriesForDropDownList(tempList);

@@ -53,47 +53,10 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
       Get.find<GeneralController>().updateFormLoaderController(false);
       if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status ==
           true) {
-        // ///----send-sms
-        // postMethod(
-        //     context,
-        //     sendSMSUrl,
-        //     {
-        //       'token': '123',
-        //       'phone': Get.find<SmsLogic>().phoneNumber,
-        //       'message': Get.find<GeneralController>().notificationTitle,
-        //     },
-        //     true,
-        //     sendSMSRepo);
-        // ///----fcm-send-start
-        // getMethod(
-        //     context,
-        //     fcmGetUrl,
-        //     {
-        //       'token': '123',
-        //       'user_id': Get.find<GeneralController>().userIdForSendNotification
-        //     },
-        //     true,
-        //     getFcmTokenRepo);
-        // Get.offAllNamed(PageRoutes.appointmentConfirmation);
+
         if (Get.find<BookAppointmentLogic>().selectedPaymentType == 0) {
-          // Get.find<GeneralController>().updateFormLoaderController(false);
-          // Get.toNamed(PageRoutes.jazzCashPayment);
-          showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (BuildContext context) {
-                return CustomDialogBox(
-                  title: 'info!'.tr,
-                  titleColor: customDialogInfoColor,
-                  descriptions:
-                      '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
-                  text: 'ok'.tr,
-                  functionCall: () {
-                    Navigator.pop(context);
-                  },
-                  img: 'assets/Icons/dialog_Info.svg',
-                );
-              });
+          Get.find<GeneralController>().updateFormLoaderController(false);
+          Get.toNamed(PageRoutes.paymentStripeView);
         } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 1) {
           showDialog(
               context: context,
@@ -113,28 +76,24 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
               });
         } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 2) {
           Get.find<GeneralController>().updateFormLoaderController(false);
-          Get.toNamed(PageRoutes.paymentStripeView);
-        } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 3) {
-          log('my type is 333');
-          Get.find<GeneralController>().updateFormLoaderController(false);
           Get.toNamed(PageRoutes.walletPaymentScreen);
-          // showDialog(
-          //     context: context,
-          //     barrierDismissible: false,
-          //     builder: (BuildContext context) {
-          //       return CustomDialogBox(
-          //         title: 'info!'.tr,
-          //         titleColor: customDialogInfoColor,
-          //         descriptions:
-          //         '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
-          //         text: 'ok'.tr,
-          //         functionCall: () {
-          //           Navigator.pop(context);
-          //         },
-          //         img: 'assets/Icons/dialog_Info.svg',
-          //       );
-          //     });
-
+        } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 3) {
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return CustomDialogBox(
+                  title: 'info!'.tr,
+                  titleColor: customDialogInfoColor,
+                  descriptions:
+                  '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
+                  text: 'ok'.tr,
+                  functionCall: () {
+                    Navigator.pop(context);
+                  },
+                  img: 'assets/Icons/dialog_Info.svg',
+                );
+              });
         } else {
           showDialog(
               context: context,
@@ -203,47 +162,11 @@ bookAppointmentWithoutFileRepo(
         BookAppointmentModel.fromJson(response);
     Get.find<GeneralController>().updateFormLoaderController(false);
     if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
-      // ///----send-sms
-      // postMethod(
-      //     context,
-      //     sendSMSUrl,
-      //     {
-      //       'token': '123',
-      //       'phone': Get.find<SmsLogic>().phoneNumber,
-      //       'message': Get.find<GeneralController>().notificationTitle,
-      //     },
-      //     true,
-      //     sendSMSRepo);
-      // ///----fcm-send-start
-      // getMethod(
-      //     context,
-      //     fcmGetUrl,
-      //     {
-      //       'token': '123',
-      //       'user_id': Get.find<GeneralController>().userIdForSendNotification
-      //     },
-      //     true,
-      //     getFcmTokenRepo);
-      // Get.offAllNamed(PageRoutes.appointmentConfirmation);
+
       if (Get.find<BookAppointmentLogic>().selectedPaymentType == 0) {
-        // Get.find<GeneralController>().updateFormLoaderController(false);
-        // Get.toNamed(PageRoutes.jazzCashPayment);
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return CustomDialogBox(
-                title: 'info!'.tr,
-                titleColor: customDialogInfoColor,
-                descriptions:
-                    '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
-                text: 'ok'.tr,
-                functionCall: () {
-                  Navigator.pop(context);
-                },
-                img: 'assets/Icons/dialog_Info.svg',
-              );
-            });
+        Get.find<GeneralController>().updateFormLoaderController(false);
+        Get.toNamed(PageRoutes.paymentStripeView);
+
       } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 1) {
         showDialog(
             context: context,
@@ -263,26 +186,25 @@ bookAppointmentWithoutFileRepo(
             });
       } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 2) {
         Get.find<GeneralController>().updateFormLoaderController(false);
-        Get.toNamed(PageRoutes.paymentStripeView);
-      } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 3) {
-        Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.walletPaymentScreen);
-        // showDialog(
-        //     context: context,
-        //     barrierDismissible: false,
-        //     builder: (BuildContext context) {
-        //       return CustomDialogBox(
-        //         title: 'info!'.tr,
-        //         titleColor: customDialogInfoColor,
-        //         descriptions:
-        //             '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
-        //         text: 'ok'.tr,
-        //         functionCall: () {
-        //           Navigator.pop(context);
-        //         },
-        //         img: 'assets/Icons/dialog_Info.svg',
-        //       );
-        //     });
+      } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 3) {
+
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return CustomDialogBox(
+                title: 'info!'.tr,
+                titleColor: customDialogInfoColor,
+                descriptions:
+                    '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
+                text: 'ok'.tr,
+                functionCall: () {
+                  Navigator.pop(context);
+                },
+                img: 'assets/Icons/dialog_Info.svg',
+              );
+            });
       } else {
         showDialog(
             context: context,

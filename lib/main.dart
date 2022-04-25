@@ -12,6 +12,7 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/modules/agora_call/init_video_call_view.dart';
 import 'package:consultant_product/src/modules/chat/logic.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/view.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/repo_post.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
 import 'package:consultant_product/src/modules/on_board/view_1.dart';
@@ -311,6 +312,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
                 '${Get.find<GeneralController>().storageBox.read('countryCode')}'),
 
             home: const ScreenController(),
+            // home: const CreateProfilePage(),
             // initialRoute: PageRoutes.createConsultantProfile,
             // initialRoute: PageRoutes.userHome,
             // initialRoute: PageRoutes.onBoard1Screen,

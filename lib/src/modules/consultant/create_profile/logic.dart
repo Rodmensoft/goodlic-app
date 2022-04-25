@@ -145,6 +145,7 @@ class CreateProfileLogic extends GetxController {
   final TextEditingController cnicController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
+  final TextEditingController aboutController = TextEditingController();
   String? selectedGender;
   List<String> genderDropDownList = ['Male', 'Female', 'Other'];
   String? selectedReligion;

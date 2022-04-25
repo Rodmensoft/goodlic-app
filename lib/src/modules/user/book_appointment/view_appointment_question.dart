@@ -65,7 +65,9 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
           },
           child: ModalProgressHUD(
             inAsyncCall: _generalController.formLoaderController!,
-            progressIndicator: const CircularProgressIndicator(color: customThemeColor,),
+            progressIndicator: const CircularProgressIndicator(
+              color: customThemeColor,
+            ),
             child: Scaffold(
               resizeToAvoidBottomInset: false,
               body: NestedScrollView(
@@ -80,20 +82,17 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                         trailing: 'Step 2 Of 3',
                         isShrink: _bookAppointmentLogic.isShrink2,
                         fee:
-                            '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes
-                            [_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
+                            '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
                         feeImage:
-                            '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes
-                            [_bookAppointmentLogic.consultantProfileLogic.appointmentTypes
-                            [_bookAppointmentLogic.selectedAppointmentTypeIndex!].appointmentTypeId! - 1]}',
+                            '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes[_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].appointmentTypeId! - 1]}',
                       ),
                     ];
                   },
                   body: Stack(
                     children: [
                       ListView(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(15.w, 20.h, 15.w, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              15.w, 20.h, 15.w, 0),
                           children: [
                             ///---question-area
                             Container(
@@ -114,7 +113,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                 child: Form(
                                   key: _formKey,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
@@ -128,7 +128,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                       ///---question-field
 
                                       TextFormField(
-                                        controller: _bookAppointmentLogic.questionController,
+                                        controller: _bookAppointmentLogic
+                                            .questionController,
                                         keyboardType: TextInputType.text,
                                         maxLines: 3,
                                         decoration: InputDecoration(
@@ -151,20 +152,21 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                               borderRadius:
                                                   BorderRadius.circular(8.r),
                                               borderSide: const BorderSide(
-                                                  color: customLightThemeColor)),
+                                                  color:
+                                                      customLightThemeColor)),
                                           errorBorder: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(8.r),
                                               borderSide: const BorderSide(
                                                   color: Colors.red)),
                                         ),
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return 'field_required'.tr;
-                                          } else {
-                                            return null;
-                                          }
-                                        },
+                                        // validator: (value) {
+                                        //   if (value!.isEmpty) {
+                                        //     return 'field_required'.tr;
+                                        //   } else {
+                                        //     return null;
+                                        //   }
+                                        // },
                                       ),
                                     ],
                                   ),
@@ -197,8 +199,10 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Text(
                                           'Upload File',
@@ -222,8 +226,10 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                         if (_bookAppointmentLogic
                                                 .selectedFileName ==
                                             null) {
-                                          _bookAppointmentLogic.filePickerResult =
-                                              await FilePicker.platform.pickFiles(
+                                          _bookAppointmentLogic
+                                                  .filePickerResult =
+                                              await FilePicker.platform
+                                                  .pickFiles(
                                             type: FileType.any,
                                             // allowedExtensions: ["jpg", "png", "pdf", "doc"],
                                           );
@@ -283,7 +289,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                         child: Stack(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: SvgPicture.asset(
                                                 'assets/Icons/dottedBorder.svg',
                                                 width: MediaQuery.of(context)
@@ -297,41 +304,49 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                           .selectedFileName !=
                                                       null
                                                   ? Padding(
-                                                    padding: const EdgeInsets.all(15.0),
-                                                    child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        Expanded(
-                                                          child: Text(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              15.0),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Text(
                                                               _bookAppointmentLogic
                                                                   .selectedFileName!,
                                                               softWrap: true,
                                                               maxLines: 1,
                                                               overflow:
-                                                                  TextOverflow.ellipsis,
-                                                              style:  TextStyle(
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              style: TextStyle(
                                                                   fontFamily:
                                                                       SarabunFontFamily
                                                                           .medium,
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   color:
                                                                       customOrangeColor),
                                                             ),
-                                                        ),
-                                                        InkWell(
-                                                          onTap: (){
-                                                            _bookAppointmentLogic
-                                                                .updateSelectedFileName(null);
-                                                          },
-                                                          child: const Icon(
-                                                            Icons.cancel,
-                                                            color: customOrangeColor,
-                                                            size: 25,
                                                           ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
+                                                          InkWell(
+                                                            onTap: () {
+                                                              _bookAppointmentLogic
+                                                                  .updateSelectedFileName(
+                                                                      null);
+                                                            },
+                                                            child: const Icon(
+                                                              Icons.cancel,
+                                                              color:
+                                                                  customOrangeColor,
+                                                              size: 25,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
                                                   : Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -348,7 +363,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                         SizedBox(
                                                           width: 10.w,
                                                         ),
-                                                         Text(
+                                                        Text(
                                                           'Upload Here',
                                                           style: TextStyle(
                                                               fontFamily:
@@ -397,7 +412,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                     Wrap(
                                       children: List.generate(
                                           _bookAppointmentLogic
-                                              .paymentMethodList.length, (index) {
+                                              .paymentMethodList
+                                              .length, (index) {
                                         return Padding(
                                           padding: index % 2 == 0
                                               ? EdgeInsetsDirectional.fromSTEB(
@@ -406,8 +422,9 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                   8.w, 0.h, 0.w, 18.h),
                                           child: InkWell(
                                             onTap: () {
-                                              for (var element in _bookAppointmentLogic
-                                                  .paymentMethodList) {
+                                              for (var element
+                                                  in _bookAppointmentLogic
+                                                      .paymentMethodList) {
                                                 element.isSelected = false;
                                               }
                                               _bookAppointmentLogic
@@ -437,7 +454,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                           : Colors.white,
                                                       width: 2),
                                                   borderRadius:
-                                                      BorderRadius.circular(8.r),
+                                                      BorderRadius.circular(
+                                                          8.r),
                                                   boxShadow: [
                                                     BoxShadow(
                                                       color: _bookAppointmentLogic
@@ -453,21 +471,39 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                       // offset: Offset(1,5)
                                                     )
                                                   ]),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Image.asset(
-                                                    '${_bookAppointmentLogic.paymentMethodList[index].image}',
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .15,
-                                                  ),
-                                                ],
-                                              ),
+                                              child: _bookAppointmentLogic
+                                                      .paymentMethodList[index]
+                                                      .image!
+                                                      .contains(
+                                                          'braintreePayment')
+                                                  ? ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.r),
+                                                      child: SvgPicture.asset(
+                                                        '${_bookAppointmentLogic.paymentMethodList[index].image}',
+                                                        width: double.infinity,
+                                                        height: double.infinity,
+                                                      ),
+                                                    )
+                                                  : Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        SvgPicture.asset(
+                                                          '${_bookAppointmentLogic.paymentMethodList[index].image}',
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .15,
+                                                        ),
+                                                      ],
+                                                    ),
                                             ),
                                           ),
                                         );
@@ -490,70 +526,91 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                         right: 15.w,
                         child: InkWell(
                           onTap: () {
-                            if (!disableButton! && _formKey.currentState!.validate()) {
-
-                              if (_bookAppointmentLogic
-                                  .selectedFileName ==
+                            if (!disableButton! &&
+                                _formKey.currentState!.validate()) {
+                              if (_bookAppointmentLogic.selectedFileName ==
                                   null) {
                                 _generalController
                                     .updateFormLoaderController(true);
-                                if(_bookAppointmentLogic.selectMentorAppointmentType!
-                                    .appointmentType!.isScheduleRequired == 1) {
+                                if (_bookAppointmentLogic
+                                        .selectMentorAppointmentType!
+                                        .appointmentType!
+                                        .isScheduleRequired ==
+                                    1) {
                                   postMethod(
                                       context,
                                       bookAppointmentUrl,
                                       {
                                         'token': '123',
                                         'mentee_id':
-                                        Get.find<GeneralController>()
-                                            .storageBox
-                                            .read('userID'),
+                                            Get.find<GeneralController>()
+                                                .storageBox
+                                                .read('userID'),
                                         'mentor_id': Get.find<UserHomeLogic>()
                                             .selectedConsultantID,
                                         'payment': _bookAppointmentLogic
                                             .selectMentorAppointmentType!.fee,
-                                        'payment_id': _bookAppointmentLogic.selectedPaymentType,
-                                        'questions':
-                                        _bookAppointmentLogic
+                                        'payment_id': _bookAppointmentLogic
+                                            .selectedPaymentType,
+                                        'questions': _bookAppointmentLogic
                                             .questionController.text,
-                                        'appointment_type_string': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name,
-                                        'appointment_type_id': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id,
-                                        'date': _bookAppointmentLogic.selectedDateForAppointment.substring(0,11),
-                                        'time': _bookAppointmentLogic.selectedTimeForAppointment,
+                                        'appointment_type_string':
+                                            _bookAppointmentLogic
+                                                .selectMentorAppointmentType!
+                                                .appointmentType!
+                                                .name,
+                                        'appointment_type_id':
+                                            _bookAppointmentLogic
+                                                .selectMentorAppointmentType!
+                                                .appointmentType!
+                                                .id,
+                                        'date': _bookAppointmentLogic
+                                            .selectedDateForAppointment
+                                            .substring(0, 11),
+                                        'time': _bookAppointmentLogic
+                                            .selectedTimeForAppointment,
                                       },
                                       true,
                                       bookAppointmentWithoutFileRepo);
-                                } else{
+                                } else {
                                   postMethod(
                                       context,
                                       bookAppointmentUrl,
                                       {
                                         'token': '123',
                                         'mentee_id':
-                                        Get.find<GeneralController>()
-                                            .storageBox
-                                            .read('userID'),
+                                            Get.find<GeneralController>()
+                                                .storageBox
+                                                .read('userID'),
                                         'mentor_id': Get.find<UserHomeLogic>()
                                             .selectedConsultantID,
                                         'payment': _bookAppointmentLogic
                                             .selectMentorAppointmentType!.fee,
-                                        'payment_id': _bookAppointmentLogic.selectedPaymentType,
-                                        'questions':
-                                        _bookAppointmentLogic
+                                        'payment_id': _bookAppointmentLogic
+                                            .selectedPaymentType,
+                                        'questions': _bookAppointmentLogic
                                             .questionController.text,
-                                        'appointment_type_string': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name,
-                                        'appointment_type_id': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id,
+                                        'appointment_type_string':
+                                            _bookAppointmentLogic
+                                                .selectMentorAppointmentType!
+                                                .appointmentType!
+                                                .name,
+                                        'appointment_type_id':
+                                            _bookAppointmentLogic
+                                                .selectMentorAppointmentType!
+                                                .appointmentType!
+                                                .id,
                                       },
                                       true,
                                       bookAppointmentWithoutFileRepo);
                                 }
-
                               } else {
                                 _generalController
                                     .updateFormLoaderController(true);
-                                bookAppointmentFileRepo(File(
-                                    _bookAppointmentLogic
-                                        .filePickerResult!.files[0].path!),context);
+                                bookAppointmentFileRepo(
+                                    File(_bookAppointmentLogic
+                                        .filePickerResult!.files[0].path!),
+                                    context);
                               }
                               // Get.toNamed(PageRoutes.paymentView);
                             }
