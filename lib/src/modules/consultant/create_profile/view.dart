@@ -1,10 +1,10 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/get_repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
-import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -134,7 +134,9 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 16.w),
-                                                child: Text('Create Profile',
+                                                child: Text(
+                                                    LanguageConstant
+                                                        .createProfile.tr,
                                                     style:
                                                         state.headingTextStyle),
                                               ),
@@ -144,7 +146,9 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 16.w),
-                                                child: Text('Create Your Profile',
+                                                child: Text(
+                                                    LanguageConstant
+                                                        .createYourProfile.tr,
                                                     style: state
                                                         .subHeadingTextStyle),
                                               ),

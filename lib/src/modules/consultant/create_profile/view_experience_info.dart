@@ -79,7 +79,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                         decoration: InputDecoration(
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               25.w, 15.h, 25.w, 15.h),
-                          hintText: 'company_name'.tr.capitalizeFirst,
+                          hintText:
+                              LanguageConstant.companyName.tr.capitalizeFirst,
                           hintStyle: state.hintTextStyle,
                           fillColor: Colors.white,
                           filled: true,
@@ -101,7 +102,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
-                            return 'field_required'.tr;
+                            return LanguageConstant.fieldRequired.tr;
                           } else {
                             return null;
                           }
@@ -178,7 +179,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                 },
                                 validator: (value) {
                                   if (value == null) {
-                                    return 'field_required'.tr;
+                                    return LanguageConstant.fieldRequired.tr;
                                   }
                                   return null;
                                 },
@@ -260,7 +261,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                 },
                                 validator: (value) {
                                   if (value == null) {
-                                    return 'field_required'.tr;
+                                    return LanguageConstant.fieldRequired.tr;
                                   }
                                   return null;
                                 },
@@ -327,9 +328,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                       return CustomDialogBox(
                                         title: LanguageConstant.sorry.tr,
                                         titleColor: customDialogErrorColor,
-                                        descriptions:
-                                            'upload_your_experience_certificate'
-                                                .tr,
+                                        descriptions: LanguageConstant
+                                            .uploadYourExperienceCertificate.tr,
                                         text: LanguageConstant.ok.tr,
                                         functionCall: () {
                                           Navigator.pop(context);
@@ -348,7 +348,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                 borderRadius: BorderRadius.circular(8)),
                             child: Center(
                               child: Text(
-                                '+${'add_experience'.tr}',
+                                '+${LanguageConstant.addExperience.tr}',
                                 style: state.addButtonTextStyle,
                               ),
                             ),
@@ -592,7 +592,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                               return CustomDialogBox(
                                 title: LanguageConstant.failed.tr,
                                 titleColor: customDialogErrorColor,
-                                descriptions: 'add_work_experience_please'.tr,
+                                descriptions:
+                                    LanguageConstant.addWorkExperiencePlease.tr,
                                 text: LanguageConstant.ok.tr,
                                 functionCall: () {
                                   Navigator.pop(context);
@@ -639,7 +640,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                     }
                   },
                   child: Text(
-                    "Camera",
+                    LanguageConstant.camera.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -668,7 +669,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                     }
                   },
                   child: Text(
-                    "Gallery",
+                    LanguageConstant.gallery.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -716,7 +717,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                   .experienceInfoPostModel
                   .data!
                   .experience);
-          Get.snackbar('${'added_successfully'.tr}!', '',
+          Get.snackbar('${LanguageConstant.addedSuccessfully.tr}!', '',
               colorText: Colors.black, backgroundColor: Colors.white);
           Get.find<GeneralController>().updateFormLoaderController(false);
           setState(() {
@@ -736,7 +737,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                 return CustomDialogBox(
                   title: LanguageConstant.failed.tr,
                   titleColor: customDialogErrorColor,
-                  descriptions: 'try_again!'.tr,
+                  descriptions: LanguageConstant.tryAgain.tr,
                   text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
@@ -754,7 +755,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
               return CustomDialogBox(
                 title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
-                descriptions: 'try_again!'.tr,
+                descriptions: LanguageConstant.tryAgain.tr,
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
@@ -772,7 +773,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
             return CustomDialogBox(
               title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'try_again!'.tr,
+              descriptions: LanguageConstant.tryAgain.tr,
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);

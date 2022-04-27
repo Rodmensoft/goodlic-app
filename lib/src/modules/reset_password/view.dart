@@ -96,7 +96,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                             MediaQuery.of(context).size.height *
                                                 .075),
                                     Text(
-                                      LanguageConstant.enterPhone.tr,
+                                      LanguageConstant.enterEmail.tr,
                                       style: state.subHeadingTextStyle,
                                     ),
                                     SizedBox(height: 25.h),
@@ -224,9 +224,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'field_required'.tr;
+                                          return LanguageConstant
+                                              .fieldRequired.tr;
                                         } else if (!GetUtils.isEmail(value)) {
-                                          return 'Enter Valid Email';
+                                          return LanguageConstant
+                                              .enterValidEmail.tr;
                                         } else {
                                           return null;
                                         }

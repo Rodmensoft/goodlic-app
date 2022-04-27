@@ -188,9 +188,11 @@ class _LoginPageState extends State<LoginPage>
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'field_required'.tr;
+                                          return LanguageConstant
+                                              .fieldRequired.tr;
                                         } else if (!GetUtils.isEmail(value)) {
-                                          return 'Enter Valid Email';
+                                          return LanguageConstant
+                                              .enterValidEmail.tr;
                                         } else {
                                           return null;
                                         }
@@ -249,7 +251,8 @@ class _LoginPageState extends State<LoginPage>
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'field_required'.tr;
+                                          return LanguageConstant
+                                              .fieldRequired.tr;
                                         } else {
                                           return null;
                                         }
@@ -267,7 +270,7 @@ class _LoginPageState extends State<LoginPage>
                                                 PageRoutes.resetPassword);
                                           },
                                           child: Text(
-                                            'Forgot Password?',
+                                            '${LanguageConstant.forgotPassword.tr}?',
                                             style: state.forgotTextStyle,
                                           ),
                                         ),
@@ -401,7 +404,7 @@ class _LoginPageState extends State<LoginPage>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Don’t have an account? ',
+                                          '${LanguageConstant.doNotHaveAccount.tr}? ',
                                           style: state.descTextStyle,
                                         ),
                                         InkWell(
@@ -413,7 +416,7 @@ class _LoginPageState extends State<LoginPage>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0, 5.h, 0, 5.h),
                                             child: Text(
-                                              'Register now',
+                                              LanguageConstant.registerNow.tr,
                                               style: state.descTextStyle!
                                                   .copyWith(
                                                       color: customThemeColor,
@@ -432,11 +435,12 @@ class _LoginPageState extends State<LoginPage>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'By login, you are agree with our ',
+                                          '${LanguageConstant.byLoginYouAreAgreeWithOur.tr} ',
                                           style: state.descTextStyle,
                                         ),
                                         Text(
-                                          'Terms & Conditions',
+                                          LanguageConstant
+                                              .termsAndConditions.tr,
                                           style: state.descTextStyle!.copyWith(
                                               color: customLightThemeColor,
                                               decoration:

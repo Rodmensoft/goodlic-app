@@ -160,7 +160,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                                 .categoriesColor[index]),
                                       ),
                                       Text(
-                                        '(${_userHomeLogic.categoriesList[index].subTitle} Consultants)',
+                                        '(${_userHomeLogic.categoriesList[index].subTitle} ${LanguageConstant.consultants.tr})',
                                         style: TextStyle(
                                             fontFamily: SarabunFontFamily.light,
                                             fontSize: 10.sp,

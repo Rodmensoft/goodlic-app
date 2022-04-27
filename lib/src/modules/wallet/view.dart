@@ -266,7 +266,7 @@ class _WalletPageState extends State<WalletPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text('transaction_log'.tr,
+                                  Text(LanguageConstant.transactionLog.tr,
                                       style: state.recordTextStyle),
                                 ],
                               ),
@@ -295,7 +295,7 @@ class _WalletPageState extends State<WalletPage> {
                                 : _walletLogic.getAllTransactionList.isEmpty
                                     ? Center(
                                         child: Text(
-                                          'not_available_yet!'.tr,
+                                          LanguageConstant.notAvailableYet.tr,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 25.sp,
@@ -559,7 +559,7 @@ class _WalletPageState extends State<WalletPage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'add_amount'.tr,
+                                LanguageConstant.addAmount.tr,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
@@ -702,7 +702,7 @@ class _WalletPageState extends State<WalletPage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'withdraw_request'.tr,
+                                LanguageConstant.withdrawRequest.tr,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,

@@ -465,7 +465,9 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                               )
                                             ],
                                           ),
-                                          Text('Years Of Exp',
+                                          Text(
+                                              LanguageConstant
+                                                  .yearsOfExperience.tr,
                                               style: state.ratingTextStyle)
                                         ],
                                       ),
@@ -505,7 +507,8 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'general_info'.tr.capitalize!,
+                                            LanguageConstant
+                                                .generalInfo.tr.capitalize!,
                                             style:
                                                 state.sectionHeadingTextStyle,
                                           ),
@@ -531,7 +534,7 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'first_name'.tr,
+                                                  LanguageConstant.firstName.tr,
                                                   style: state
                                                       .previewLabelTextStyle,
                                                 ),
@@ -558,7 +561,7 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'last_name'.tr,
+                                                  LanguageConstant.lastName.tr,
                                                   style: state
                                                       .previewLabelTextStyle,
                                                 ),
@@ -585,7 +588,8 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'father_name'.tr,
+                                                  LanguageConstant
+                                                      .fatherName.tr,
                                                   style: state
                                                       .previewLabelTextStyle,
                                                 ),
@@ -716,7 +720,8 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'dat_of_birth'.tr,
+                                                  LanguageConstant
+                                                      .dateOfBirth.tr,
                                                   style: state
                                                       .previewLabelTextStyle,
                                                 ),
@@ -887,7 +892,7 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'address'.tr,
+                                                  LanguageConstant.address.tr,
                                                   style: state
                                                       .previewLabelTextStyle,
                                                 ),
@@ -1161,7 +1166,8 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'experince'.tr.capitalize!,
+                                          LanguageConstant
+                                              .experince.tr.capitalize!,
                                           style: state.sectionHeadingTextStyle,
                                         ),
                                         SizedBox(
@@ -1488,7 +1494,8 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'account_info'.tr.capitalize!,
+                                          LanguageConstant
+                                              .accountInfo.tr.capitalize!,
                                           style: state.sectionHeadingTextStyle,
                                         ),
                                         SizedBox(
@@ -1553,7 +1560,8 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        'account_title'.tr,
+                                                        LanguageConstant
+                                                            .accountTitle.tr,
                                                         style: state
                                                             .previewLabelTextStyle,
                                                       ),
@@ -1593,7 +1601,8 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        'account_number'.tr,
+                                                        LanguageConstant
+                                                            .accountNumber.tr,
                                                         style: state
                                                             .previewLabelTextStyle,
                                                       ),

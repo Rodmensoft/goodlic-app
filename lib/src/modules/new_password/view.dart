@@ -154,7 +154,8 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'field_required'.tr;
+                                          return LanguageConstant
+                                              .fieldRequired.tr;
                                         } else {
                                           return null;
                                         }
@@ -215,10 +216,12 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'field_required'.tr;
+                                          return LanguageConstant
+                                              .fieldRequired.tr;
                                         } else if (_passwordController!.text !=
                                             _confirmPasswordController!.text) {
-                                          return 'Password Not Match';
+                                          return LanguageConstant
+                                              .passwordNotMatch.tr;
                                         } else {
                                           return null;
                                         }

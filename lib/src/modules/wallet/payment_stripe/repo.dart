@@ -48,9 +48,9 @@ stripePaymentRepo(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'success!'.tr,
+                title: '${LanguageConstant.success.tr}!',
                 titleColor: customDialogSuccessColor,
-                descriptions: '${'amount_added_successfully'.tr}!',
+                descriptions: '${LanguageConstant.amountAddedSuccessfully.tr}!',
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Get.back();
@@ -71,7 +71,7 @@ stripePaymentRepo(
               return CustomDialogBox(
                 title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
-                descriptions: 'try_again!'.tr,
+                descriptions: '${LanguageConstant.tryAgain.tr}!',
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
@@ -111,7 +111,7 @@ stripePaymentRepo(
           return CustomDialogBox(
             title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'try_again!'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
             text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);

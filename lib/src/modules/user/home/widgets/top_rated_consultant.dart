@@ -90,7 +90,7 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Top Rated Consultants',
+                            LanguageConstant.topRatedConsultant.tr,
                             style: state.subHeadingTextStyle,
                           ),
                           InkWell(

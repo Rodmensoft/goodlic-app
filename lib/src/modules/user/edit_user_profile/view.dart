@@ -815,7 +815,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                         .path);
                   },
                   child: Text(
-                    "Camera",
+                    LanguageConstant.camera.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -848,7 +848,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                         .path);
                   },
                   child: Text(
-                    "Gallery",
+                    LanguageConstant.gallery.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!

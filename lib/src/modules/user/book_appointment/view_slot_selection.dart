@@ -84,7 +84,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                         children: [
                           ///---type-heading
                           Text(
-                            'Select Option',
+                            LanguageConstant.selectOptions.tr,
                             style: state.headingTextStyle,
                           ),
                           SizedBox(
@@ -539,7 +539,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             ? _bookAppointmentLogic
                                                     .morningSlots.isEmpty
                                                 ? Text(
-                                                    'no_slots_available'.tr,
+                                                    LanguageConstant
+                                                        .noSlotsAvailable.tr,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             SarabunFontFamily
@@ -631,7 +632,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             ? _bookAppointmentLogic
                                                     .afterNoonSlots.isEmpty
                                                 ? Text(
-                                                    'no_slots_available'.tr,
+                                                    LanguageConstant
+                                                        .noSlotsAvailable.tr,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             SarabunFontFamily
@@ -723,7 +725,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             ? _bookAppointmentLogic
                                                     .eveningSlots.isEmpty
                                                 ? Text(
-                                                    'no_slots_available'.tr,
+                                                    LanguageConstant
+                                                        .noSlotsAvailable.tr,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             SarabunFontFamily

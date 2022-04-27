@@ -192,7 +192,8 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                                         10.r))),
                                                     child: Center(
                                                       child: Text(
-                                                        'Online',
+                                                        LanguageConstant
+                                                            .Online.tr,
                                                         style:
                                                             state.tagTextStyle,
                                                       ),
@@ -405,7 +406,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                             Text(
                                               LanguageConstant
                                                   .positiveRating.tr,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontFamily:
                                                       SarabunFontFamily.medium,
                                                   fontSize: 12,
@@ -510,9 +511,10 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                 )
                                               ],
                                             ),
-                                            const Text(
-                                              'Years Of Exp',
-                                              style: TextStyle(
+                                            Text(
+                                              LanguageConstant
+                                                  .yearsOfExperience.tr,
+                                              style: const TextStyle(
                                                   fontFamily:
                                                       SarabunFontFamily.medium,
                                                   fontSize: 12,

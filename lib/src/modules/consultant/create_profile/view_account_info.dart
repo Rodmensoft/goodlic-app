@@ -113,7 +113,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                             },
                             validator: (String? value) {
                               if (value == null) {
-                                return 'field_required'.tr;
+                                return LanguageConstant.fieldRequired.tr;
                               } else {
                                 return null;
                               }
@@ -138,7 +138,8 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                         decoration: InputDecoration(
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               25.w, 15.h, 25.w, 15.h),
-                          hintText: 'account_title'.tr.capitalizeFirst,
+                          hintText: LanguageConstant
+                              .accountTitle.tr.tr.capitalizeFirst,
                           hintStyle: state.hintTextStyle,
                           fillColor: Colors.white,
                           filled: true,
@@ -160,7 +161,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
-                            return 'field_required'.tr;
+                            return LanguageConstant.fieldRequired.tr;
                           } else {
                             return null;
                           }
@@ -182,7 +183,8 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                         decoration: InputDecoration(
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               25.w, 15.h, 25.w, 15.h),
-                          hintText: 'account_number'.tr.capitalizeFirst,
+                          hintText:
+                              LanguageConstant.accountNumber.tr.capitalizeFirst,
                           hintStyle: state.hintTextStyle,
                           fillColor: Colors.white,
                           filled: true,
@@ -204,7 +206,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
-                            return 'field_required'.tr;
+                            return LanguageConstant.fieldRequired.tr;
                           } else {
                             return null;
                           }
@@ -250,8 +252,8 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                             mentorAccountInfoRepo);
                       }
                     },
-                    child: const MyCustomBottomBar(
-                        title: 'Save & Continue', disable: false)),
+                    child: MyCustomBottomBar(
+                        title: LanguageConstant.saveNext.tr, disable: false)),
               )),
         ),
       ),

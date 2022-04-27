@@ -157,7 +157,7 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             },
                             validator: (String? value) {
                               if (value == null) {
-                                return 'field_required'.tr;
+                                return LanguageConstant.fieldRequired.tr;
                               } else {
                                 return null;
                               }
@@ -371,7 +371,7 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                       title: LanguageConstant.failed.tr,
                                       titleColor: customDialogErrorColor,
                                       descriptions:
-                                          '${'Select Category Please'.tr}!',
+                                          '${LanguageConstant.selectCategoryPlease.tr}!',
                                       text: LanguageConstant.ok.tr,
                                       functionCall: () {
                                         Navigator.pop(context);
@@ -391,7 +391,7 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                               child: Text(
                                 _createProfileLogic.skillInfoPostModel.data ==
                                         null
-                                    ? 'add_skill'.tr
+                                    ? LanguageConstant.addSkill.tr
                                     : LanguageConstant.update.tr,
                                 style: state.addButtonTextStyle,
                               ),
@@ -515,7 +515,8 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                               return CustomDialogBox(
                                 title: LanguageConstant.failed.tr,
                                 titleColor: customDialogErrorColor,
-                                descriptions: 'add_skill_please'.tr,
+                                descriptions:
+                                    LanguageConstant.addSkillPlease.tr,
                                 text: LanguageConstant.ok.tr,
                                 functionCall: () {
                                   Navigator.pop(context);
@@ -615,7 +616,7 @@ class _SubCategoryDropDownState extends State<SubCategoryDropDown> {
             },
             validator: (String? value) {
               if (value == null) {
-                return 'field_required'.tr;
+                return LanguageConstant.fieldRequired.tr;
               } else {
                 return null;
               }

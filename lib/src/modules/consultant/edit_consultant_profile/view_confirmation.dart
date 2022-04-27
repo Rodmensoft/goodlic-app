@@ -46,7 +46,7 @@ class _ConfirmationViewState extends State<ConfirmationView> {
                       height: 30.h,
                     ),
                     Text(
-                      'Profile Updated',
+                      LanguageConstant.profileUpdated.tr,
                       style: TextStyle(
                           fontFamily: SarabunFontFamily.bold,
                           fontSize: 28.sp,
@@ -68,8 +68,9 @@ class _ConfirmationViewState extends State<ConfirmationView> {
                     onTap: () {
                       Get.offAllNamed(PageRoutes.consultantDashboard);
                     },
-                    child: const MyCustomBottomBar(
-                        title: 'Go To Dashboard', disable: false)),
+                    child: MyCustomBottomBar(
+                        title: LanguageConstant.goToDashboard.tr,
+                        disable: false)),
               )),
         ),
       ),

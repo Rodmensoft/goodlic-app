@@ -39,9 +39,9 @@ depositTransactionJazzcashRepo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'success!'.tr,
+              title: '${LanguageConstant.success.tr}!',
               titleColor: customDialogSuccessColor,
-              descriptions: '${'amount_added_successfully'.tr}!',
+              descriptions: '${LanguageConstant.amountAddedSuccessfully.tr}!',
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
@@ -79,7 +79,7 @@ depositTransactionJazzcashRepo(
           return CustomDialogBox(
             title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'try_again!'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
             text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
@@ -113,7 +113,8 @@ withdrawTransactionRepo(
           true,
           getWalletTransactionRepo);
       Get.find<GeneralController>().updateFormLoaderController(false);
-      Get.snackbar('success!'.tr, response['msg'].toString(),
+      Get.snackbar(
+          '${LanguageConstant.success.tr}!', response['msg'].toString(),
           colorText: Colors.black, backgroundColor: Colors.white);
       log('depositTransactionJazzcashRepo ------>> ${response['Status'].toString()}');
     } else {

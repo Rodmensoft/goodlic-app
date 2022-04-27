@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/chat/fetch_messages_model.dart';
 import 'package:consultant_product/src/modules/chat/get_repo.dart';
 import 'package:consultant_product/src/modules/chat/post_repo.dart';
-import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/notififcation_icon.dart';
@@ -185,16 +185,22 @@ class _ChatPageState extends State<ChatPage> {
                                                 decoration: const BoxDecoration(
                                                     color: Colors.grey,
                                                     shape: BoxShape.circle),
-                                                child: _chatLogic.userImage == null
-                                                    ?const SizedBox()
-                                                    :ClipRRect(
-                                                  borderRadius: BorderRadius.circular(30.r),
-                                                  child: Image.network(
-                                                    _chatLogic.userImage!.contains('assets')
-                                                        ?'$mediaUrl${_chatLogic.userImage}'
-                                                        :_chatLogic.userImage!
-                                                  ),
-                                                ),
+                                                child: _chatLogic.userImage ==
+                                                        null
+                                                    ? const SizedBox()
+                                                    : ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30.r),
+                                                        child: Image.network(
+                                                            _chatLogic
+                                                                    .userImage!
+                                                                    .contains(
+                                                                        'assets')
+                                                                ? '$mediaUrl${_chatLogic.userImage}'
+                                                                : _chatLogic
+                                                                    .userImage!),
+                                                      ),
                                               ),
 
                                               ///---name
@@ -241,9 +247,9 @@ class _ChatPageState extends State<ChatPage> {
                                 direction: SkeletonDirection.ltr,
                                 builder: Padding(
                                   padding: index % 2 == 0
-                                      ?  EdgeInsetsDirectional.fromSTEB(
+                                      ? EdgeInsetsDirectional.fromSTEB(
                                           80.w, 7.h, 15.w, 7.h)
-                                      :  EdgeInsetsDirectional.fromSTEB(
+                                      : EdgeInsetsDirectional.fromSTEB(
                                           15.w, 7.h, 80.w, 7.h),
                                   child: Container(
                                     height: 50,
@@ -289,7 +295,7 @@ class _ChatPageState extends State<ChatPage> {
                                 _chatLogic.fetchMessagesModel.data == null
                                     ? Center(
                                         child: Text(
-                                          'not_available_yet!'.tr,
+                                          LanguageConstant.notAvailableYet.tr,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 25.sp,
@@ -343,15 +349,14 @@ class _ChatPageState extends State<ChatPage> {
                                                             ? customTextFieldColor
                                                             : customLightThemeColor,
                                                         borderRadius: _chatLogic
-                                                            .messageList[
-                                                        index]
-                                                            .senderId ==
-                                                            Get.find<
-                                                                GeneralController>()
-                                                                .storageBox
-                                                                .read(
-                                                                'userID')
-                                                            
+                                                                    .messageList[
+                                                                        index]
+                                                                    .senderId ==
+                                                                Get.find<
+                                                                        GeneralController>()
+                                                                    .storageBox
+                                                                    .read(
+                                                                        'userID')
                                                             ? BorderRadius.only(
                                                                 bottomLeft: Radius
                                                                     .circular(
@@ -412,7 +417,7 @@ class _ChatPageState extends State<ChatPage> {
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Padding(
-                              padding:  EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   15.w, 0, 15.w, 15.h),
                               child: Row(
                                 children: [
@@ -456,12 +461,12 @@ class _ChatPageState extends State<ChatPage> {
                                           ? TextDirection.rtl
                                           : TextDirection.ltr,
                                       decoration: InputDecoration(
-                                        contentPadding:
-                                             EdgeInsets.symmetric(
-                                                vertical: 10.h, horizontal: 20.w),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 10.h, horizontal: 20.w),
                                         filled: true,
                                         fillColor: customThemeColor,
-                                        hintText: '${'your_text_here'.tr}.....',
+                                        hintText:
+                                            '${LanguageConstant.yourTextHere.tr}.....',
                                         hintStyle: state.textFieldTextStyle,
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius:
@@ -488,18 +493,15 @@ class _ChatPageState extends State<ChatPage> {
                                   ),
                                   _chatLogic.showSendIcon!
                                       ? Padding(
-                                          padding:  EdgeInsetsDirectional
-                                              .fromSTEB(10.w, 0, 0, 0),
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10.w, 0, 0, 0),
                                           child: InkWell(
                                             onTap: () {
                                               Get.find<GeneralController>()
                                                   .notificationRouteApp = null;
-                                              log('SENDER-->${Get.find<
-                                                  ChatLogic>()
-                                                  .senderMessageGetId}');
-                                              log('RECIEVER-->${Get.find<
-                                                  ChatLogic>()
-                                                  .receiverMessageGetId}');
+                                              log('SENDER-->${Get.find<ChatLogic>().senderMessageGetId}');
+                                              log('RECIEVER-->${Get.find<ChatLogic>().receiverMessageGetId}');
                                               postMethod(
                                                   context,
                                                   sendMessageUrl,
@@ -508,15 +510,15 @@ class _ChatPageState extends State<ChatPage> {
                                                     'receiver_id': Get.find<
                                                             ChatLogic>()
                                                         .receiverMessageGetId,
-                                                    'sender_id': Get.find<
-                                                            ChatLogic>()
-                                                        .senderMessageGetId,
+                                                    'sender_id':
+                                                        Get.find<ChatLogic>()
+                                                            .senderMessageGetId,
                                                     'message': _chatLogic
                                                         .messageController.text
                                                   },
                                                   true,
                                                   sendMessagesRepo);
-                                             },
+                                            },
                                             child: const CircleAvatar(
                                               radius: 20,
                                               child: Icon(

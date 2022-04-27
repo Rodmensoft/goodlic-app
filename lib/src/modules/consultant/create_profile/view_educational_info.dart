@@ -105,7 +105,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
-                            return 'field_required'.tr;
+                            return LanguageConstant.fieldRequired.tr;
                           } else {
                             return null;
                           }
@@ -190,7 +190,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                   },
                                   validator: (String? value) {
                                     if (value == null) {
-                                      return 'field_required'.tr;
+                                      return LanguageConstant.fieldRequired.tr;
                                     } else {
                                       return null;
                                     }
@@ -240,7 +240,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                               ),
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return 'field_required'.tr;
+                                  return LanguageConstant.fieldRequired.tr;
                                 } else {
                                   return null;
                                 }
@@ -347,7 +347,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                               ),
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return 'field_required'.tr;
+                                  return LanguageConstant.fieldRequired.tr;
                                 } else {
                                   return null;
                                 }
@@ -409,8 +409,8 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                       return CustomDialogBox(
                                         title: LanguageConstant.sorry.tr,
                                         titleColor: customDialogErrorColor,
-                                        descriptions:
-                                            'upload_your_degree_picture'.tr,
+                                        descriptions: LanguageConstant
+                                            .uploadYourProfilePicture.tr,
                                         text: LanguageConstant.ok.tr,
                                         functionCall: () {
                                           Navigator.pop(context);
@@ -429,7 +429,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                 borderRadius: BorderRadius.circular(8)),
                             child: Center(
                               child: Text(
-                                '+${'add_education'.tr}',
+                                '+${LanguageConstant.addEducation.tr}',
                                 style: state.addButtonTextStyle,
                               ),
                             ),
@@ -699,7 +699,8 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                               return CustomDialogBox(
                                 title: LanguageConstant.failed.tr,
                                 titleColor: customDialogErrorColor,
-                                descriptions: 'add_education_please'.tr,
+                                descriptions:
+                                    LanguageConstant.addEducationPlease.tr,
                                 text: LanguageConstant.ok.tr,
                                 functionCall: () {
                                   Navigator.pop(context);
@@ -746,7 +747,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                     }
                   },
                   child: Text(
-                    "Camera",
+                    LanguageConstant.camera.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -775,7 +776,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                     }
                   },
                   child: Text(
-                    "Gallery",
+                    LanguageConstant.gallery.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -820,7 +821,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                   .educationInfoPostModel
                   .data!
                   .education);
-          Get.snackbar('${'added_successfully'.tr}!', '',
+          Get.snackbar('${LanguageConstant.addedSuccessfully.tr}!', '',
               colorText: Colors.black, backgroundColor: Colors.white);
 
           Get.find<GeneralController>().updateFormLoaderController(false);
@@ -841,7 +842,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                 return CustomDialogBox(
                   title: LanguageConstant.failed.tr,
                   titleColor: customDialogErrorColor,
-                  descriptions: 'try_again!'.tr,
+                  descriptions: LanguageConstant.tryAgain.tr,
                   text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
@@ -859,7 +860,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
               return CustomDialogBox(
                 title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
-                descriptions: 'try_again!'.tr,
+                descriptions: LanguageConstant.tryAgain.tr,
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
@@ -877,7 +878,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
             return CustomDialogBox(
               title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'try_again!'.tr,
+              descriptions: LanguageConstant.tryAgain.tr,
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);

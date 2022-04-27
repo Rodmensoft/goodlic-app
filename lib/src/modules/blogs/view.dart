@@ -68,7 +68,8 @@ class _BlogsPageState extends State<BlogsPage> {
                     ///---header
                     MyCustomSliverAppBar(
                       heading: LanguageConstant.blog.tr,
-                      subHeading: "Explore Today's Trending Articles",
+                      subHeading:
+                          LanguageConstant.exploreTodayTrendingArticles.tr,
                       isShrink: _blogsLogic.isShrink,
                     ),
                   ];
@@ -118,7 +119,8 @@ class _BlogsPageState extends State<BlogsPage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                           Text(
-                                            'recommended_blogs'.tr,
+                                            LanguageConstant
+                                                .recommendedBlogs.tr,
                                             style: state.headingTextStyle,
                                           ),
                                           SizedBox(height: 16.h),
@@ -369,7 +371,7 @@ class _BlogsPageState extends State<BlogsPage> {
                                                     .categoryBlogs!.isEmpty
                                                 ? Center(
                                                     child: Text(
-                                                        '${'no_record_found'.tr}!',
+                                                        '${LanguageConstant.noRecordFound.tr}!',
                                                         style: TextStyle(
                                                             fontSize: 14.sp,
                                                             fontFamily:
@@ -389,7 +391,7 @@ class _BlogsPageState extends State<BlogsPage> {
                                                             .isEmpty
                                                         ? Center(
                                                             child: Text(
-                                                                '${'no_record_found'.tr}!',
+                                                                '${LanguageConstant.noRecordFound.tr}!',
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         14.sp,

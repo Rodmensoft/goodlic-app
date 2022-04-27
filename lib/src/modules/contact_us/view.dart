@@ -73,7 +73,8 @@ class _ContactUsPageState extends State<ContactUsPage> {
                       ///---header
                       MyCustomSliverAppBar(
                         heading: LanguageConstant.contactUs.tr,
-                        subHeading: "We are just one step away. reach out ",
+                        subHeading:
+                            LanguageConstant.weAreJustOneStepAwayReachOut.tr,
                         isShrink: _contactUsLogic.isShrink,
                       ),
                     ];
@@ -289,8 +290,8 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                   ),
                                                   validator: (String? value) {
                                                     if (value!.isEmpty) {
-                                                      return 'field_required'
-                                                          .tr;
+                                                      return LanguageConstant
+                                                          .fieldRequired.tr;
                                                     } else {
                                                       return null;
                                                     }
@@ -342,13 +343,14 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                   ),
                                                   validator: (String? value) {
                                                     if (value!.isEmpty) {
-                                                      return 'field_required'
-                                                          .tr;
+                                                      return LanguageConstant
+                                                          .fieldRequired.tr;
                                                     } else if (!GetUtils
                                                         .isEmail(
                                                             _emailController!
                                                                 .text)) {
-                                                      return 'Enter Valid Email';
+                                                      return LanguageConstant
+                                                          .enterValidEmail.tr;
                                                     } else {
                                                       return null;
                                                     }
@@ -399,8 +401,8 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                   ),
                                                   validator: (String? value) {
                                                     if (value!.isEmpty) {
-                                                      return 'field_required'
-                                                          .tr;
+                                                      return LanguageConstant
+                                                          .fieldRequired.tr;
                                                     } else {
                                                       return null;
                                                     }
@@ -457,8 +459,8 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                   ),
                                                   validator: (String? value) {
                                                     if (value!.isEmpty) {
-                                                      return 'field_required'
-                                                          .tr;
+                                                      return LanguageConstant
+                                                          .fieldRequired.tr;
                                                     } else {
                                                       return null;
                                                     }

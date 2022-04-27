@@ -33,7 +33,7 @@ menteeUpdateProfileRepo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'SUCCESS!'.tr,
+              title: '${LanguageConstant.success.tr}!',
               titleColor: customDialogSuccessColor,
               descriptions: LanguageConstant.profileUpdatedSuccessfully.tr,
               text: LanguageConstant.ok.tr,
@@ -54,7 +54,7 @@ menteeUpdateProfileRepo(
             return CustomDialogBox(
               title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'Try Again!'.tr,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
@@ -72,7 +72,7 @@ menteeUpdateProfileRepo(
           return CustomDialogBox(
             title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'Try Again!'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
             text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
@@ -133,7 +133,7 @@ menteeUpdateProfileImageRepo(File? file1) async {
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'SUCCESS!'.tr,
+                title: '${LanguageConstant.success.tr}!',
                 titleColor: customDialogSuccessColor,
                 descriptions: LanguageConstant.profileUpdatedSuccessfully.tr,
                 text: LanguageConstant.ok.tr,
@@ -154,7 +154,7 @@ menteeUpdateProfileImageRepo(File? file1) async {
               return CustomDialogBox(
                 title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
-                descriptions: 'Try Again!'.tr,
+                descriptions: '${LanguageConstant.tryAgain.tr}!',
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
@@ -174,7 +174,7 @@ menteeUpdateProfileImageRepo(File? file1) async {
             return CustomDialogBox(
               title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'Try Again!'.tr,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
@@ -192,7 +192,7 @@ menteeUpdateProfileImageRepo(File? file1) async {
           return CustomDialogBox(
             title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'Try Again!'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
             text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);

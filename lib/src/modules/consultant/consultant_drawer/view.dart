@@ -248,7 +248,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                           ),
 
                           ListTile(
-                            title: Text('online_status'.tr,
+                            title: Text(LanguageConstant.onlineStatus.tr,
                                 style: TextStyle(
                                     fontSize: 14.sp,
                                     fontFamily: SarabunFontFamily.regular,

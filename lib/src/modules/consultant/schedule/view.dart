@@ -229,7 +229,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                           }
                                         },
                                         hint: Text(
-                                          'select_type'.tr.capitalizeFirst!,
+                                          LanguageConstant
+                                              .selectType.tr.capitalizeFirst!,
                                           style: state.hintTextStyle,
                                         ),
                                         decoration: InputDecoration(
@@ -322,7 +323,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                         },
                                         validator: (String? value) {
                                           if (value == null) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -352,8 +354,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               25.w, 15.h, 25.w, 15.h),
-                                      hintText:
-                                          'enter_charges'.tr.capitalizeFirst,
+                                      hintText: LanguageConstant
+                                          .enterCharges.tr.capitalizeFirst,
                                       hintStyle: state.hintTextStyle,
                                       fillColor: Colors.white,
                                       filled: true,
@@ -380,10 +382,12 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                     ),
                                     validator: (String? value) {
                                       if (value!.isEmpty) {
-                                        return 'field_required'.tr;
+                                        return LanguageConstant
+                                            .fieldRequired.tr;
                                       } else if (int.parse(value.toString()) <
                                           100) {
-                                        return 'Min Charges is\nRs. 100'.tr;
+                                        return '${LanguageConstant.minChargesIs.tr}\n${LanguageConstant.rs.tr}. 100'
+                                            .tr;
                                       } else {
                                         return null;
                                       }
@@ -417,7 +421,7 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'select_holiday'.tr,
+                                            LanguageConstant.selectHoliday.tr,
                                             style: state.headingTextStyle,
                                           ),
                                           SizedBox(
@@ -642,7 +646,9 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'generate_slots_automatically'.tr,
+                                              LanguageConstant
+                                                  .generateSlotsAutomatically
+                                                  .tr,
                                               style: state.headingTextStyle,
                                             ),
                                             SizedBox(
@@ -772,7 +778,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                           validator:
                                                               (String? value) {
                                                             if (value == null) {
-                                                              return 'field_required'
+                                                              return LanguageConstant
+                                                                  .fieldRequired
                                                                   .tr;
                                                             } else {
                                                               return null;
@@ -789,7 +796,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                           EdgeInsetsDirectional
                                                               .only(start: 5.w),
                                                       child: Text(
-                                                        'select_day'.tr,
+                                                        LanguageConstant
+                                                            .selectDay.tr,
                                                         softWrap: true,
                                                         overflow: TextOverflow
                                                             .ellipsis,
@@ -841,7 +849,9 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                           mainAxisSize:
                                                               MainAxisSize.min,
                                                           children: [
-                                                            Text('min',
+                                                            Text(
+                                                                LanguageConstant
+                                                                    .minute.tr,
                                                                 style: state
                                                                     .scheduleDayTextStyle),
                                                           ],
@@ -900,14 +910,16 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                       validator:
                                                           (String? value) {
                                                         if (value!.isEmpty) {
-                                                          return 'field_required'
-                                                              .tr;
+                                                          return LanguageConstant
+                                                              .fieldRequired.tr;
                                                         } else if (int.parse(
                                                                 _mentorScheduleLogic
                                                                     .durationController
                                                                     .text) <
                                                             5) {
-                                                          return 'Slot must be greater than 5 min';
+                                                          return LanguageConstant
+                                                              .slotMustBeGreaterThan5Minutes
+                                                              .tr;
                                                         } else {
                                                           return null;
                                                         }
@@ -921,7 +933,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                           EdgeInsetsDirectional
                                                               .only(start: 5.w),
                                                       child: Text(
-                                                        'slot_duration'.tr,
+                                                        LanguageConstant
+                                                            .slotDuration.tr,
                                                         softWrap: true,
                                                         overflow: TextOverflow
                                                             .ellipsis,
@@ -1059,7 +1072,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                                       .start,
                                                               children: [
                                                                 Text(
-                                                                  'field_required'
+                                                                  LanguageConstant
+                                                                      .fieldRequired
                                                                       .tr,
                                                                   style: TextStyle(
                                                                       fontFamily:
@@ -1082,7 +1096,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                           EdgeInsetsDirectional
                                                               .only(start: 5.w),
                                                       child: Text(
-                                                        'start_time'.tr,
+                                                        LanguageConstant
+                                                            .startTime.tr,
                                                         style: state
                                                             .subHeadingTextStyle,
                                                       ),
@@ -1211,7 +1226,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                                       .start,
                                                               children: [
                                                                 Text(
-                                                                  'field_required'
+                                                                  LanguageConstant
+                                                                      .fieldRequired
                                                                       .tr,
                                                                   style: TextStyle(
                                                                       fontFamily:
@@ -1234,7 +1250,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                           EdgeInsetsDirectional
                                                               .only(start: 5.w),
                                                       child: Text(
-                                                        'end_time'.tr,
+                                                        LanguageConstant
+                                                            .endTime.tr,
                                                         style: state
                                                             .subHeadingTextStyle,
                                                       ),
@@ -1377,7 +1394,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                         MainAxisAlignment.start,
                                                     children: [
                                                       Text(
-                                                        'slots_created'.tr,
+                                                        LanguageConstant
+                                                            .slotsCreated.tr,
                                                         style: state
                                                             .headingTextStyle,
                                                       ),

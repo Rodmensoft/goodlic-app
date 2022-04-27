@@ -76,7 +76,9 @@ class _OtpPageState extends State<OtpPage> {
                                   style: state.headingTextStyle),
                               SizedBox(height: 18.h),
                               Text(
-                                  'An OTP Code Has Been Sent To Your Given\n Phone Number',
+                                  LanguageConstant
+                                      .anOTPCodeHasBeenSentToYourGivenToYourPhoneNumber
+                                      .tr,
                                   style: state.descTextStyle,
                                   textAlign: TextAlign.center),
                               SizedBox(height: 12.h),
@@ -125,7 +127,7 @@ class _OtpPageState extends State<OtpPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'You Will Receive Code in ',
+                                    LanguageConstant.youWillReceiveCodeIn.tr,
                                     style: state.descTextStyle,
                                   ),
                                   Text(

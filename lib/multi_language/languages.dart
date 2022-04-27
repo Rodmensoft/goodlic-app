@@ -11,6 +11,32 @@ class LanguagesChang extends Translations {
           'enter_login_details': 'Enter Login Detail',
           'email_address': 'Email Address',
           'password': 'Password',
+          'user_info': 'User Info',
+          'create_profile': 'Create Profile',
+          'create_your_profile': 'Create Your Profile',
+          'profile_created': 'Profile Created',
+          'go_to_dashboard': 'Go To Dashboard',
+          'camera': 'Camera',
+          'gallery': 'Gallery',
+          'enter_cnic': 'Enter CNIC',
+          'enter_address': 'Enter Address',
+          'dob': 'DOB',
+          'select_category_please': 'Select Category Please',
+          'profile_updated': 'Profile Updated',
+          'view': 'View',
+          'min_charges_is': 'Min Charges is',
+          'minute': 'min',
+          'slot_must_be_greater_than_5_minute':
+              'Slot must be greater than 5 min',
+          'enter_valid_email': 'Enter Valid Email',
+          'don’t_have_an_account': 'Don’t have an account',
+          'register_now': 'Register now',
+          'terms_and_conditions': 'Terms & Conditions',
+          'password_not_match': 'Password Not Match',
+          'enter_email': 'Enter Email',
+          'sign_up': 'Sign Up',
+          'welcome_to_create_your_account': 'Welcome To Create Your Account',
+          'enter_details': 'Enter Details',
 
           'dashboard': 'Dashboard',
           'manage_all_of_your_appointment': 'Manage All Of Your Appointment',
@@ -23,6 +49,7 @@ class LanguagesChang extends Translations {
           'next_step': 'Next Step',
           'upload profile_photo': 'Upload Profile Photo',
           'manage_your_schedule': 'Manage Your Schedule',
+          'fees': 'Fees',
 
           'betrayal': 'Betrayal',
           'religious': 'Religious',
@@ -76,7 +103,8 @@ class LanguagesChang extends Translations {
           'call_us': 'Call Us',
           'email_us': 'Email Us',
           'blog': 'Blog',
-          'explore_today_trending_articles': 'Explore Today Trending Articles',
+          'explore_today_trending_articles':
+              'Explore Today\'s Trending Articles',
           'recommended_blogs': 'Recommended Blogs',
           'for_you': 'For You',
           'get_know_about_our_Vision_and_mission':
@@ -131,8 +159,7 @@ class LanguagesChang extends Translations {
           'or_login_with': 'Or Login With',
           'do_not_have_an_account?register_now':
               'Do Not Have an account? Register Now',
-          'by_login_you_are_agree_with_our terms_and_conditions':
-              'By Login You Are Agree With Our Terms And Conditions',
+          'by_login_you_are_agree_with_our': 'By Login You Are Agree With Our',
           'login': 'LogIn',
           'welcome_back_to_your_account': 'Welcome Back To Your Account',
           'audio': 'Audio',
@@ -168,6 +195,10 @@ class LanguagesChang extends Translations {
           'phone_number': 'Phone Number',
           'login': 'Login',
           'you_are_receiving_call_from': 'you are receiving a call from ',
+          'or_sign_up_with': 'or sign up with',
+          'have_an_account? ': 'Have an account? ',
+          'by_sign_up_you_are_agree': 'By Sign Up, you are agree with our ',
+          "your_appointment_detail_with": 'Your Appointment Detail With',
 
           //After Login Mentee screen
 
@@ -331,7 +362,7 @@ class LanguagesChang extends Translations {
           'occupation': 'Occupation',
           'profile_picture': 'Profile Picture',
           'upload': 'Upload',
-          'save_&_Next': 'Save & Next',
+          'save_&_Next': 'Save & Continue',
           'educational': 'Educational',
           'image_here': 'image here',
           'add_education': 'Add Education',
@@ -479,6 +510,34 @@ class LanguagesChang extends Translations {
           'audio': 'آڈیو',
           'video': 'ویڈیو',
           'dashboard': 'ڈیش بورڈ',
+          'fees': 'فیس',
+          'user_info': 'صارف کی معلومات',
+          'create_profile': 'پروفائل بنائیں',
+          'create_your_profile': 'اپنا پروفائل بنائیں',
+          'profile_created': 'پروفائل بنایا',
+          'go_to_dashboard': 'ڈیش بورڈ پر جائیں',
+          'camera': 'کیمرہ',
+          'gallery': 'گیلری',
+          'enter_cnic': 'CNIC داخل کریں۔',
+          'enter_address': 'ایڈریس درج کریں۔',
+          'dob': 'ڈی او بی',
+          'select_category_please': 'براہ کرم زمرہ منتخب کریں۔',
+          'profile_updated': 'پروفائل اپ ڈیٹ کر دیا گیا۔',
+          'view': 'دیکھیں',
+          'min_charges_is': 'کم از کم چارجز ہیں۔',
+          'minute': 'منٹ',
+          'slot_must_be_greater_than_5_minute':
+              'سلاٹ 5 منٹ سے زیادہ ہونا چاہیے۔',
+          'enter_valid_email': 'درست ای میل درج کریں۔',
+          'don’t_have_an_account': 'اکاؤنٹ نہیں ہے۔',
+          'register_now': 'ابھی رجسٹر کریں',
+          'terms_and_conditions': 'شرائط و ضوابط',
+          'password_not_match': 'پاس ورڈ مماثل نہیں ہے۔',
+          'enter_email': 'ای میل درج کریں۔',
+          'sign_up': 'سائن اپ',
+          'welcome_to_create_your_account': 'اپنا اکاؤنٹ بنانے میں خوش آمدید',
+          'enter_details': 'تفصیلات درج کریں۔',
+
           'manage_all_of_your_appointment': 'اپنی تمام ملاقات کا انتظام کریں۔',
           'today_appointment': 'آج کی ملاقات',
           'no_appointment_for_today': 'آج کے لیے کوئی ملاقات نہیں۔',
@@ -516,8 +575,8 @@ class LanguagesChang extends Translations {
           'or_login_with': 'یا لاگ ان کریں۔',
           'do_not_have_an_account?register_now':
               'کیا_اکاؤنٹ_نہیں_ہے؟ ابھی رجسٹر کریں۔',
-          'by_login_you_are_agree_with_our terms_and_conditions':
-              'لاگ ان کے ذریعے_آپ_ہماری_شرائط_اور_شرائط سے_اتفاق_ہیں۔',
+          'by_login_you_are_agree_with_our':
+              'لاگ ان کرکے آپ ہماری بات سے متفق ہیں۔',
           'welcome_back_to_your_account': 'آپ کے اکاؤنٹ میں واپس خوش آمدید',
           'login': 'لاگ ان کریں',
           'available_options': 'دستیاب اختیارات',
@@ -638,6 +697,11 @@ class LanguagesChang extends Translations {
           'phone_number': 'فون نمبر',
           'login': 'لاگ ان ',
           'you_are_receiving_call_from': 'آپ کو کال موصول ہو رہی ',
+          'or_sign_up_with': 'یا اس کے ساتھ سائن اپ کریں۔',
+          'have_an_account': 'یا آپ کا اکاؤنٹ ہے؟',
+          'by_sign_up_you_are_agree':
+              'سائن اپ کرکے، آپ ہماری بات سے اتفاق کرتے ہیں۔',
+          "your_appointment_detail_with": 'سے آپ کی ملاقات کی تفصیلات',
 
 //After Login Mentee screen
 
@@ -949,6 +1013,35 @@ class LanguagesChang extends Translations {
           'find_your': 'আপনার খুঁজুন',
           'best_consultants_just_one_click_away': 'শীর্ষ রেট কনসালটেন্ট',
           'consultant': 'পরামর্শদাতা',
+          'fees': 'ফি',
+          'user_info': 'ব্যবহারকারীর তথ্য',
+          'create_profile': 'প্রোফাইল তৈরি কর',
+          'create_your_profile': 'আপনার প্রোফাইল তৈরি করুন',
+          'profile_created': 'প্রোফাইল তৈরি করা হয়েছে',
+          'go_to_dashboard': 'ড্যাশবোর্ড এ যান',
+          'camera': 'ক্যামেরা',
+          'gallery': 'গ্যালারি',
+          'enter_cnic': 'CNIC লিখুন',
+          'enter_address': 'ঠিকানা লিখুন',
+          'dob': 'ডিওবি',
+          'select_category_please': 'অনুগ্রহ করে বিভাগ নির্বাচন করুন',
+          'profile_updated': 'প্রোফাইল আপডেট',
+          'view': 'দেখুন',
+          'min_charges_is': 'ন্যূনতম চার্জ হল',
+          'minute': 'মিনিট',
+          'slot_must_be_greater_than_5_minute':
+              'স্লট অবশ্যই 5 মিনিটের বেশি হতে হবে',
+          'enter_valid_email': 'সঠিক ইমেইল এড্রেস প্রদান করুন',
+          'don’t_have_an_account': 'একটি অ্যাকাউন্ট নেই',
+          'register_now': 'এখন নিবন্ধন করুন',
+          'terms_and_conditions': 'শর্তাবলী',
+          'password_not_match': 'পাসওয়ার্ড মেলে না',
+          'enter_email': 'ইমেইল প্রদান করুন',
+          'sign_up': 'নিবন্ধন করুন',
+          'welcome_to_create_your_account':
+              'আপনার অ্যাকাউন্ট তৈরি করতে স্বাগতম',
+          'enter_details': 'বিস্তারিত লিখুন',
+
           'enter_login_details': 'লগইন বিবরণ লিখুন',
           'email_address': 'ইমেল ঠিকানা',
           'password': 'পাসওয়ার্ড',
@@ -989,8 +1082,7 @@ class LanguagesChang extends Translations {
           'or_login_with': 'অথবা লগইন করুন',
           'do_not_have_an_account?register_now':
               'একটি অ্যাকাউন্ট নেই? এখন নিবন্ধন',
-          'by_login_you_are_agree_with_our terms_and_conditions':
-              'লগইন করে আপনি আমাদের শর্তাবলীর সাথে একমত',
+          'by_login_you_are_agree_with_our': 'লগইন করে আপনি আমাদের সাথে একমত',
           'audio': 'শ্রুতি',
           'video': 'ভিডিও',
           'welcome_back_to_your_account': 'আপনার অ্যাকাউন্টে আবার স্বাগতম',
@@ -1108,6 +1200,10 @@ class LanguagesChang extends Translations {
           'phone_number': 'ফোন নম্বর',
           'login': 'প্রবেশ করুন',
           'you_are_receiving_call_from': ' আপনি একটি কল গ্রহণ করছেন',
+          'or_sign_up_with': 'অথবা এটি দিয়ে সাইন আপ করুন',
+          'have_an_account': 'অথবা আপনার একটি অ্যাকাউন্ট আছে?',
+          'by_sign_up_you_are_agree': 'সাইন আপ করে, আপনি আমাদের সাথে একমত',
+          "your_appointment_detail_with": 'আপনার সাথে সাক্ষাতের বিশদ বিবরণ',
 
 //After Login Mentee screen
 
@@ -1414,6 +1510,35 @@ class LanguagesChang extends Translations {
           'find_your': 'अपना ढूँढो',
           'consultant': 'सलाहकार',
           'offline': 'ऑफ़लाइन',
+          'fees': 'फीस',
+          'user_info': 'उपयोगकर्ता जानकारी',
+          'create_profile': 'प्रोफ़ाइल बनाने',
+          'create_your_profile': 'अपना प्रोफ़ाइल बनाए',
+          'profile_created': 'प्रोफ़ाइल बनाई गई',
+          'go_to_dashboard': 'डैशबोर्ड पर जाएं',
+          'camera': 'कैमरा',
+          'gallery': 'गेलरी',
+          'enter_cnic': 'सीएनआईसी दर्ज करें',
+          'enter_address': 'पता दर्ज करें',
+          'dob': 'जन्म तिथि',
+          'select_category_please': 'कृपया श्रेणी का चयन करें',
+          'profile_updated': 'प्रोफाइल अद्यतन किया गया',
+          'view': 'दृश्य',
+          'min_charges_is': 'न्यूनतम शुल्क है',
+          'minute': 'मिनट',
+          'slot_must_be_greater_than_5_minute':
+              'स्लॉट 5 मिनट से बड़ा होना चाहिए',
+          'enter_valid_email': 'मान्य ईमेल दर्ज करें',
+          'don’t_have_an_account': 'खाता नहीं है',
+          'register_now': 'अभी पंजीकरण करें',
+          'terms_and_conditions': 'नियम एवं शर्तें',
+          'password_not_match': 'पासवर्ड मेल नहीं खाता',
+          'enter_email': 'ईमेल दर्ज करें',
+          'sign_up': 'साइन अप करें',
+          'welcome_to_create_your_account':
+              'अपना खाता बनाने के लिए आपका स्वागत है',
+          'enter_details': 'विवरण दर्ज करें',
+
           'enter_login_details': 'लॉगिन विवरण दर्ज करें',
           'email_address': 'ईमेल पता',
           'password': 'पासवर्ड',
@@ -1452,8 +1577,8 @@ class LanguagesChang extends Translations {
           'or_login-with': 'या लॉगिन करें',
           'do_not_have_an_account?register_now':
               'क्या आपका कोई खाता नहीं है? अभी पंजीकरण करें',
-          'by_login,you_are_agree_with_our-terms-and-conditions':
-              'लॉगिन करके आप हमारे नियमों और शर्तों से सहमत हैं',
+          'by_login_you_are_agree_with_our':
+              'लॉग इन करके आप हमारी बात से सहमत हैं',
           'audio': 'ऑडियो',
           'video': 'वीडियो',
           'login': 'लॉग इन करें',
@@ -1574,6 +1699,10 @@ class LanguagesChang extends Translations {
           'phone_number': 'फ़ोन नंबर',
           'login': 'लॉग इन करें',
           'you_are_receiving_call_from': ' आप एक कॉल प्राप्त कर रहे हैं',
+          'or_sign_up_with': 'या इसके साथ साइन अप करें',
+          'have_an_account': 'या आपके पास खाता है?',
+          'by_sign_up_you_are_agree': 'साइन अप करके, आप हमारी बात से सहमत हैं',
+          "your_appointment_detail_with": 'के साथ आपकी बैठक का विवरण',
 
 //After Login Mentee screen
 

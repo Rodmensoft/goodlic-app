@@ -18,7 +18,7 @@ signUpWithEmailRepo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'SUCCESS!',
+              title: '${LanguageConstant.success.tr}!',
               titleColor: customDialogSuccessColor,
               descriptions: LanguageConstant.letsLogin.tr,
               text: LanguageConstant.ok.tr,
@@ -43,7 +43,7 @@ signUpWithEmailRepo(
           return CustomDialogBox(
             title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'Try Again!',
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
             text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);

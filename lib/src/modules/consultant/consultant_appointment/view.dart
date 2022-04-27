@@ -218,7 +218,7 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                                 category:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].mentee!.email}',
                                                 fee:
-                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].payment!} Fees',
+                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
@@ -455,7 +455,7 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                                 category:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].mentee!.email}',
                                                 fee:
-                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].payment!} Fees',
+                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
@@ -599,7 +599,7 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                                 category:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].mentee!.email}',
                                                 fee:
-                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].payment!} Fees',
+                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
@@ -743,7 +743,7 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                                 category:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].mentee!.email}',
                                                 fee:
-                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].payment!} Fees',
+                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,

@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -143,7 +144,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                                 height: 25.h,
                                               ),
                                               Text(
-                                                'Appt. Detail',
+                                                LanguageConstant.apptDetail.tr,
                                                 style: TextStyle(
                                                     fontFamily:
                                                         SarabunFontFamily.bold,
@@ -160,7 +161,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    'Your Appointment Detail With ${_appointmentDetailLogic.selectedAppointmentData.mentor!.firstName}',
+                                                    '${LanguageConstant.yourAppointmentDetailWith.tr} ${_appointmentDetailLogic.selectedAppointmentData.mentor!.firstName}',
                                                     style: TextStyle(
                                                         fontFamily:
                                                             SarabunFontFamily

@@ -149,7 +149,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Reg No.',
+                                            LanguageConstant.regNo.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -284,7 +284,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'Question ',
+                                              LanguageConstant.question.tr,
                                               style:
                                                   state.sectionLabelTextStyle,
                                             ),
@@ -339,7 +339,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'User Info',
+                                        LanguageConstant.userInfo.tr,
                                         style: state.sectionHeadingTextStyle,
                                       ),
                                       SizedBox(
@@ -788,7 +788,8 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              'mark_as_complete'.tr,
+                                              LanguageConstant
+                                                  .markAsComplete.tr,
                                               style: TextStyle(
                                                   fontFamily:
                                                       SarabunFontFamily.bold,

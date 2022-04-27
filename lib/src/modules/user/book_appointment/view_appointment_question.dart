@@ -208,7 +208,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                           style: state.headingTextStyle,
                                         ),
                                         Text(
-                                          '  (If Any)',
+                                          '  (${LanguageConstant.ifAny.tr})',
                                           style: TextStyle(
                                               fontFamily:
                                                   SarabunFontFamily.medium,

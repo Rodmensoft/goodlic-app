@@ -2,6 +2,36 @@ class LanguageConstant {
   static const String findYour = 'find_your';
   static const String consultant = 'consultant';
   static const String unAssign = 'unassign';
+  static const String fees = 'fees';
+  static const String userInfo = 'user_info';
+  static const String createProfile = 'create_profile';
+  static const String createYourProfile = 'create_your_profile';
+  static const String profileCreated = 'profile_created';
+  static const String goToDashboard = 'go_to_dashboard';
+  static const String camera = 'camera';
+  static const String gallery = 'gallery';
+  static const String enterCNIC = 'enter_cnic';
+  static const String enterAddress = 'enter_address';
+  static const String dob = 'dob';
+  static const String view = 'view';
+  static const String minute = 'minute';
+  static const String enterDetails = 'enter_details';
+  static const String welcomToCreateYourAccount =
+      'welcome_to_create_your_account';
+  static const String signUp = 'sign_up';
+  static const String haveAnAccount = 'have_an_account';
+  static const String bySignUpYouAreAgreeWith = 'by_sign_up_you_are_agree';
+  static const String enterEmail = 'enter_email';
+  static const String passwordNotMatch = 'password_not_match';
+  static const String termsAndConditions = 'terms_and_conditions';
+  static const String registerNow = 'register_now';
+  static const String doNotHaveAccount = 'don’t_have_an_account';
+  static const String enterValidEmail = 'enter_valid_email';
+  static const String slotMustBeGreaterThan5Minutes =
+      'slot_must_be_greater_than_5_minute';
+  static const String minChargesIs = 'min_charges_is';
+  static const String profileUpdated = 'profile_updated';
+  static const String selectCategoryPlease = 'select_category_please';
   static const String enterLoginDetails = 'enter_login_details';
   static const String emailAddress = 'email_address';
   static const String password = 'password';
@@ -100,6 +130,8 @@ class LanguageConstant {
   static const String addAmountToYourWallet = 'add_amount_to_your_wallet';
   static const String cardDetails = 'card_details';
   static const String enterCardNumber = 'enter_card_number';
+  static const String yourAppointmentDetailWith =
+      'your_appointment_detail_with';
   static const String cardHolder = 'card_holder';
   static const String expires = 'expires';
   static const String cvv = 'cvv';
@@ -122,9 +154,8 @@ class LanguageConstant {
   static const String goToHome = 'go_to_home';
   static const String forgotPassword = 'forgot_password';
   static const String orLoginWith = 'or_login_with';
-  static const String
-      doNotHaveAnAccountRegisterNowByLoginYouAreAgreeWithOurTermsAndConditions =
-      'do_not_have_an_account_register_now_Register_Now_by_login_you_are_agree_with_our_terms_and_conditions';
+  static const String byLoginYouAreAgreeWithOur =
+      'by_login_you_are_agree_with_our';
   static const String login = 'login';
   static const String welcomeBackToYourAccount = 'welcome_back_to_your_account';
   static const String audio = 'audio';
@@ -384,7 +415,8 @@ class LanguageConstant {
   static const String payNow = 'pay_now';
   static const String onlineStatus = 'online_status';
   static const String offlineStatus = 'offline_status';
-  static const String termsAndConditions = 'terms_and_conditions';
+  static const String orSignUpWith = 'or_sign_up_with';
+
   static const String enterLast6DigitsOfYourCNIC =
       'enter_last_6_digits_of_your_cnic';
   static const String enterAmount = 'enter_amount';

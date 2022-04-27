@@ -106,7 +106,8 @@ class _AppointmentConfirmationViewState
 
                                   ///---message-text
                                   Text(
-                                    'Your Appointment Has Been Booked',
+                                    LanguageConstant
+                                        .yourAppointmentHasBeenBookedWith.tr,
                                     style: TextStyle(
                                         fontFamily: SarabunFontFamily.regular,
                                         fontSize: 14.sp,
@@ -117,14 +118,14 @@ class _AppointmentConfirmationViewState
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        'with ',
-                                        style: TextStyle(
-                                            fontFamily:
-                                                SarabunFontFamily.regular,
-                                            fontSize: 14.sp,
-                                            color: const Color(0xff9D9D9D)),
-                                      ),
+                                      // Text(
+                                      //   'with ',
+                                      //   style: TextStyle(
+                                      //       fontFamily:
+                                      //           SarabunFontFamily.regular,
+                                      //       fontSize: 14.sp,
+                                      //       color: const Color(0xff9D9D9D)),
+                                      // ),
 
                                       ///---consultant-name
                                       Text(
@@ -270,7 +271,7 @@ class _AppointmentConfirmationViewState
                                       children: [
                                         Text(
                                           LanguageConstant.goToHome.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontFamily:
                                                   SarabunFontFamily.bold,
                                               fontSize: 16,

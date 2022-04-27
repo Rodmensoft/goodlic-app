@@ -100,12 +100,13 @@ class _SignUpPageState extends State<SignUpPage>
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Sign Up',
+                                        LanguageConstant.signUp.tr,
                                         style: state.headingTextStyle,
                                       ),
                                       SizedBox(height: 6.h),
                                       Text(
-                                        'Welcome To Create Your Account',
+                                        LanguageConstant
+                                            .welcomToCreateYourAccount.tr,
                                         style: state.captionTextStyle,
                                       ),
 
@@ -160,7 +161,7 @@ class _SignUpPageState extends State<SignUpPage>
 
                                       SizedBox(height: 40.h),
                                       Text(
-                                        'Enter Details',
+                                        LanguageConstant.enterDetails.tr,
                                         style: state.subHeadingTextStyle,
                                       ),
                                       SizedBox(height: 25.h),
@@ -207,7 +208,8 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -257,7 +259,8 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -302,9 +305,11 @@ class _SignUpPageState extends State<SignUpPage>
                                         },
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else if (!GetUtils.isEmail(value)) {
-                                            return 'Enter Valid Email';
+                                            return LanguageConstant
+                                                .enterValidEmail.tr;
                                           } else {
                                             return null;
                                           }
@@ -365,7 +370,8 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -428,7 +434,8 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr.tr;
                                           } else {
                                             return null;
                                           }
@@ -477,8 +484,9 @@ class _SignUpPageState extends State<SignUpPage>
                                                     signUpWithEmailRepo);
                                               }
                                             },
-                                            child: const MyCustomBottomBar(
-                                                title: 'Sign Up',
+                                            child: MyCustomBottomBar(
+                                                title:
+                                                    LanguageConstant.signUp.tr,
                                                 disable: false)),
                                       ),
                                       SizedBox(
@@ -491,7 +499,7 @@ class _SignUpPageState extends State<SignUpPage>
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'or sign up with',
+                                            LanguageConstant.orSignUpWith.tr,
                                             style: state.orTextStyle,
                                           ),
                                         ],
@@ -578,7 +586,7 @@ class _SignUpPageState extends State<SignUpPage>
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Have an account? ',
+                                            LanguageConstant.haveAnAccount.tr,
                                             style: state.descTextStyle,
                                           ),
                                           InkWell(
@@ -609,11 +617,13 @@ class _SignUpPageState extends State<SignUpPage>
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'By Sign Up, you are agree with our ',
+                                            LanguageConstant
+                                                .bySignUpYouAreAgreeWith.tr,
                                             style: state.descTextStyle,
                                           ),
                                           Text(
-                                            'Terms & Conditions',
+                                            LanguageConstant
+                                                .termsAndConditions.tr,
                                             style: state.descTextStyle!
                                                 .copyWith(
                                                     color:

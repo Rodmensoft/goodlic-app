@@ -47,13 +47,13 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
     var timeNow = DateTime.now().hour;
 
     if (timeNow <= 12) {
-      return 'good_morning'.tr;
+      return LanguageConstant.goodMorning.tr;
     } else if ((timeNow > 12) && (timeNow <= 16)) {
-      return 'good_afternoon'.tr;
+      return LanguageConstant.goodAfternoon.tr;
     } else if ((timeNow > 16) && (timeNow < 20)) {
-      return 'good_evening'.tr;
+      return LanguageConstant.goodEvening.tr;
     } else {
-      return 'good_night'.tr;
+      return LanguageConstant.goodNight.tr;
     }
   }
 
@@ -627,7 +627,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             0,
                                                                             0),
                                                                 child: Text(
-                                                                  'total_appointments'
+                                                                  LanguageConstant
+                                                                      .totalAppointments
                                                                       .tr,
                                                                   textDirection:
                                                                       TextDirection
@@ -720,7 +721,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                 child: Column(
                                                                   children: [
                                                                     Text(
-                                                                      'appointments_cancel'
+                                                                      LanguageConstant
+                                                                          .appointmentsCancel
                                                                           .tr,
                                                                       style: state
                                                                           .appointmentCountTitleTextStyle!
@@ -1183,7 +1185,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                         Center(
                                                                       child:
                                                                           Text(
-                                                                        '${'no_appointment'.tr}\n${'for_today'.tr}!',
+                                                                        '${LanguageConstant.noAppointment.tr}\n${LanguageConstant.forToday.tr}!',
                                                                         textAlign:
                                                                             TextAlign.center,
                                                                         style: const TextStyle(
@@ -1367,7 +1369,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                         children: [
                                                                                           Text(
-                                                                                            'p_status'.tr,
+                                                                                            LanguageConstant.pStatus.tr,
                                                                                             style: state.appointmentListLabelTextStyle,
                                                                                           ),
                                                                                           const SizedBox(
@@ -1385,7 +1387,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                                       width: 5,
                                                                                                     ),
                                                                                                     Text(
-                                                                                                      'Un_paid'.tr,
+                                                                                                      LanguageConstant.UnPaid.tr,
                                                                                                       style: state.appointmentListValueTextStyle,
                                                                                                     ),
                                                                                                   ],

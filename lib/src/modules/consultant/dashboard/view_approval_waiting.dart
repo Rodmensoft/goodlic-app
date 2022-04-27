@@ -75,7 +75,7 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'your_profile_is_under'.tr,
+                      LanguageConstant.yourProfileIsUnder.tr,
                       style: TextStyle(
                           fontSize: 14.sp,
                           fontFamily: SarabunFontFamily.regular,
@@ -110,7 +110,7 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                       height: 5,
                     ),
                     Text(
-                      'you_will_be_notified_once_it_get_approve'.tr,
+                      LanguageConstant.youWillBeNotifiedOnceItGetApprove.tr,
                       style: TextStyle(
                           fontSize: 14.sp,
                           fontFamily: SarabunFontFamily.regular,
