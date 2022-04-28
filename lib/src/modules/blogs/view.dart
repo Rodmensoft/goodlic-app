@@ -231,8 +231,13 @@ class _BlogsPageState extends State<BlogsPage> {
                                                             ),
                                                             Positioned(
                                                               bottom: 20,
+                                                              left: 15,
+                                                              right: 15,
                                                               child: Text(
                                                                 '${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].title}',
+                                                                maxLines: 3,
+                                                                softWrap: true,
+                                                                overflow: TextOverflow.ellipsis,
                                                                 style: state
                                                                     .categoryTextStyle,
                                                               ),

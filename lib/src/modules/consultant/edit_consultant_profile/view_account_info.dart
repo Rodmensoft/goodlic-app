@@ -25,21 +25,12 @@ class _AccountInfoViewState extends State<AccountInfoView> {
 
   final GlobalKey<FormState> _accountInfoFormKey = GlobalKey();
 
-  // final TextEditingController _accountTitleController = TextEditingController();
-  // final TextEditingController _accountNumberController =
-  //     TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    Get.find<EditConsultantProfileLogic>().scrollController!.animateTo(
-        Get.find<EditConsultantProfileLogic>().scrollController!
-            .position
-            .minScrollExtent,
-        curve: Curves.easeOut,
-        duration: const Duration(milliseconds: 500));
   }
   @override
   Widget build(BuildContext context) {

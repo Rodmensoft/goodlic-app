@@ -4,6 +4,7 @@ import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/logic.dart';
+import 'package:consultant_product/src/modules/user/appointment_detail/widget/payment_popup.dart';
 import 'package:consultant_product/src/modules/user/ratings/create_rating_repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
@@ -234,9 +235,9 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             child: InkWell(
                                               onTap: () {
                                                 launch(_appointmentDetailLogic
-                                                    .selectedAppointmentData
-                                                    .file!
-                                                    .contains('assets')
+                                                        .selectedAppointmentData
+                                                        .file!
+                                                        .contains('assets')
                                                     ? '$mediaUrl/${_appointmentDetailLogic.selectedAppointmentData.file}'
                                                     : '${_appointmentDetailLogic.selectedAppointmentData.file}');
                                               },
@@ -265,11 +266,11 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                     style: state
                                                         .sectionDataTextStyle!
                                                         .copyWith(
-                                                        color:
-                                                        customLightThemeColor,
-                                                        decoration:
-                                                        TextDecoration
-                                                            .underline),
+                                                            color:
+                                                                customLightThemeColor,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline),
                                                   ),
                                                 ],
                                               ),
@@ -492,9 +493,9 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             'Reg. Date',
@@ -515,6 +516,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                         ],
                                       ),
                                     ),
+
                                     ///---city
                                     Expanded(
                                       child: Column(
@@ -546,6 +548,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                         ],
                                       ),
                                     ),
+
                                     ///---country
                                     Expanded(
                                       child: Column(
@@ -568,7 +571,11 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                         .userCountry ==
                                                     null
                                                 ? '...'
-                                                : _appointmentDetailLogic.selectedAppointmentData.mentor!.userCountry!.name!,
+                                                : _appointmentDetailLogic
+                                                    .selectedAppointmentData
+                                                    .mentor!
+                                                    .userCountry!
+                                                    .name!,
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -620,7 +627,6 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-
                                     ///---address
                                     Expanded(
                                       flex: 2,
@@ -663,6 +669,65 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                           height: 20.h,
                         ),
 
+                        /// pay-now
+                        _appointmentDetailLogic
+                                    .selectedAppointmentData.isPaid ==
+                                1
+                            ? const SizedBox()
+                            : Center(
+                                child: InkWell(
+                                  onTap: () {
+                                    paymentBottomSheetForLater(context);
+                                  },
+                                  child: Container(
+                                    color: Colors.white,
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          40.w, 0, 40.w, 0),
+                                      child: Container(
+                                        height: 55.h,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border:
+                                              Border.all(color: customRedColor),
+                                          borderRadius:
+                                              BorderRadius.circular(5.r),
+                                        ),
+                                        child: Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 25.w),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'pay_now'.tr,
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          SarabunFontFamily
+                                                              .bold,
+                                                      fontSize: 16.sp,
+                                                      color: customRedColor),
+                                                ),
+                                                SvgPicture.asset(
+                                                  'assets/Icons/forwardArrowRedIcon.svg',
+                                                  height: 29.h,
+                                                  width: 29.w,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+
                         /// rating button
                         !_appointmentDetailLogic.isRated! &&
                                 _appointmentDetailLogic.selectedAppointmentData
@@ -698,7 +763,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                           fontSize: 22.sp,
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color: customThemeColor)),
+                                                          color:
+                                                              customThemeColor)),
                                                   TextSpan(
                                                       text: ' User',
                                                       style: TextStyle(
@@ -909,7 +975,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     Get.find<GeneralController>()
                                         .updateFormLoaderController(true);
                                     launch(
-                                        '$downloadAppointmentInvoiceForMenteeUrl?token=123&appointment_id='
+                                        '$downloadAppointmentInvoiceForMenteeUrl/'
                                         '${_appointmentDetailLogic.selectedAppointmentData.id}');
                                   },
                                   child: Container(

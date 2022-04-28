@@ -236,6 +236,7 @@ class MentorBasicModel {
     CategoryBasicModel? category,
     int? ratingCount,
     int? ratingAvg,
+    String? gender,
   }) {
     _firstName = firstName;
     _lastName = lastName;
@@ -245,6 +246,7 @@ class MentorBasicModel {
     _category = category;
     _ratingCount = ratingCount;
     _ratingAvg = ratingAvg;
+    _gender=gender;
   }
 
   MentorBasicModel.fromJson(dynamic json) {
@@ -258,6 +260,7 @@ class MentorBasicModel {
         : null;
     _ratingCount = json['ratingCount'];
     _ratingAvg = json['ratingAvg'];
+    _gender=json['gender'];
   }
 
   String? _firstName;
@@ -268,6 +271,7 @@ class MentorBasicModel {
   CategoryBasicModel? _category;
   int? _ratingCount;
   int? _ratingAvg;
+  String? _gender;
 
   String? get firstName => _firstName;
 
@@ -284,6 +288,7 @@ class MentorBasicModel {
   int? get ratingCount => _ratingCount;
 
   int? get ratingAvg => _ratingAvg;
+  String? get gender=> _gender;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -297,6 +302,7 @@ class MentorBasicModel {
     }
     map['ratingCount'] = _ratingCount;
     map['ratingAvg'] = _ratingAvg;
+    map['gender'] = _gender;
     return map;
   }
 }

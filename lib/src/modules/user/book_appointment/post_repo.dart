@@ -58,22 +58,8 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
           Get.find<GeneralController>().updateFormLoaderController(false);
           Get.toNamed(PageRoutes.paymentStripeView);
         } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 1) {
-          showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (BuildContext context) {
-                return CustomDialogBox(
-                  title: 'info!'.tr,
-                  titleColor: customDialogInfoColor,
-                  descriptions:
-                      '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
-                  text: 'ok'.tr,
-                  functionCall: () {
-                    Navigator.pop(context);
-                  },
-                  img: 'assets/Icons/dialog_Info.svg',
-                );
-              });
+          Get.find<GeneralController>().updateFormLoaderController(false);
+          Get.toNamed(PageRoutes.paymentStripeView);
         } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 2) {
           Get.find<GeneralController>().updateFormLoaderController(false);
           Get.toNamed(PageRoutes.walletPaymentScreen);
@@ -127,7 +113,7 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
                 functionCall: () {
                   Navigator.pop(context);
                 },
-                img: 'assets/Icons/dialog_Info.svg',
+                img: 'assets/Icons/dialog_error.svg',
               );
             });
       }
@@ -145,7 +131,7 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
               functionCall: () {
                 Navigator.pop(context);
               },
-              img: 'assets/Icons/dialog_Info.svg',
+              img: 'assets/Icons/dialog_error.svg',
             );
           });
     }
@@ -168,43 +154,14 @@ bookAppointmentWithoutFileRepo(
         Get.toNamed(PageRoutes.paymentStripeView);
 
       } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 1) {
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return CustomDialogBox(
-                title: 'info!'.tr,
-                titleColor: customDialogInfoColor,
-                descriptions:
-                    '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
-                text: 'ok'.tr,
-                functionCall: () {
-                  Navigator.pop(context);
-                },
-                img: 'assets/Icons/dialog_Info.svg',
-              );
-            });
+        Get.find<GeneralController>().updateFormLoaderController(false);
+        Get.toNamed(PageRoutes.paymentStripeView);
       } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 2) {
         Get.find<GeneralController>().updateFormLoaderController(false);
-        Get.toNamed(PageRoutes.walletPaymentScreen);
+        Get.toNamed(PageRoutes.paymentStripeView);
       } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 3) {
-
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return CustomDialogBox(
-                title: 'info!'.tr,
-                titleColor: customDialogInfoColor,
-                descriptions:
-                    '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
-                text: 'ok'.tr,
-                functionCall: () {
-                  Navigator.pop(context);
-                },
-                img: 'assets/Icons/dialog_Info.svg',
-              );
-            });
+        Get.find<GeneralController>().updateFormLoaderController(false);
+        Get.toNamed(PageRoutes.walletPaymentScreen);
       } else {
         showDialog(
             context: context,
@@ -239,7 +196,7 @@ bookAppointmentWithoutFileRepo(
               functionCall: () {
                 Navigator.pop(context);
               },
-              img: 'assets/Icons/dialog_Info.svg',
+              img: 'assets/Icons/dialog_error.svg',
             );
           });
     }
@@ -258,7 +215,7 @@ bookAppointmentWithoutFileRepo(
             functionCall: () {
               Navigator.pop(context);
             },
-            img: 'assets/Icons/dialog_Info.svg',
+            img: 'assets/Icons/dialog_error.svg',
           );
         });
   }

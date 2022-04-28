@@ -654,7 +654,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                   .read('userID'),
                                           "total": _bookAppointmentLogic
                                               .selectMentorAppointmentType!.fee,
-                                          "payment_method_code": "stripe",
+                                          "payment_method_code": _bookAppointmentLogic.paymentMethodList
+                                          [_bookAppointmentLogic.selectedPaymentType!].title,
                                           "cardInfo": {
                                             "number": _bookAppointmentLogic
                                                 .accountCardNumberController

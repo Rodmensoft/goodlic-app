@@ -76,7 +76,7 @@ class _ChatPageState extends State<ChatPage> {
       setState(() {
         responseData = event!.data.toString();
       });
-      log('EVENT DATA-->> ${event!.data}');
+      log('TEMP MAP-->> ${event!.data}');
       log('RESPONSE DATA ${responseData.toString()}');
       log('JSON DECODE-->> ${jsonDecode(responseData)}');
 
@@ -91,6 +91,13 @@ class _ChatPageState extends State<ChatPage> {
               Get.find<ChatLogic>().scrollController!.position.maxScrollExtent,
               curve: Curves.easeOut,
               duration: const Duration(milliseconds: 500)));
+        Future.delayed(const Duration(milliseconds: 1)).whenComplete(() =>
+          Get.find<ChatLogic>().chatScrollController!.animateTo(
+              Get.find<ChatLogic>().chatScrollController!.position.maxScrollExtent,
+              curve: Curves.easeOut,
+              duration: const Duration(milliseconds: 500)));
+
+
     });
   }
 
@@ -300,6 +307,7 @@ class _ChatPageState extends State<ChatPage> {
                                       )
                                     : Expanded(
                                         child: ListView(
+                                          controller: _chatLogic.chatScrollController,
                                         children: List.generate(
                                             _chatLogic.messageList.length,
                                             (index) {
@@ -418,21 +426,23 @@ class _ChatPageState extends State<ChatPage> {
                                 children: [
                                   Expanded(
                                     child: TextFormField(
+
                                       style: TextStyle(
                                         fontFamily: SarabunFontFamily.regular,
                                         fontSize: 14.sp,
                                         color: Colors.white,
                                       ),
                                       controller: _chatLogic.messageController,
+
                                       onTap: () {
                                         Future.delayed(
                                                 const Duration(seconds: 1))
                                             .whenComplete(() =>
                                                 Get.find<ChatLogic>()
-                                                    .scrollController!
+                                                    .chatScrollController!
                                                     .animateTo(
                                                         Get.find<ChatLogic>()
-                                                            .scrollController!
+                                                            .chatScrollController!
                                                             .position
                                                             .maxScrollExtent,
                                                         curve: Curves.easeOut,
@@ -441,6 +451,7 @@ class _ChatPageState extends State<ChatPage> {
                                                                 milliseconds:
                                                                     500)));
                                       },
+                                      textInputAction:TextInputAction.send ,
                                       keyboardType: TextInputType.multiline,
                                       maxLines: null,
                                       onChanged: (value) {
@@ -450,6 +461,33 @@ class _ChatPageState extends State<ChatPage> {
                                         } else {
                                           _chatLogic.updateShowSendIcon(true);
                                         }
+                                      },
+                                      onFieldSubmitted: (value){
+                                        Get.find<GeneralController>()
+                                            .notificationRouteApp = null;
+                                        log('SENDER-->${Get.find<
+                                            ChatLogic>()
+                                            .senderMessageGetId}');
+                                        log('RECIEVER-->${Get.find<
+                                            ChatLogic>()
+                                            .receiverMessageGetId}');
+                                        _generalController.focusOut(context);
+                                        postMethod(
+                                            context,
+                                            sendMessageUrl,
+                                            {
+                                              'token': '123',
+                                              'receiver_id': Get.find<
+                                                  ChatLogic>()
+                                                  .receiverMessageGetId,
+                                              'sender_id': Get.find<
+                                                  ChatLogic>()
+                                                  .senderMessageGetId,
+                                              'message': _chatLogic
+                                                  .messageController.text
+                                            },
+                                            true,
+                                            sendMessagesRepo);
                                       },
                                       textDirection: _generalController
                                               .isDirectionRTL(context)
@@ -500,6 +538,7 @@ class _ChatPageState extends State<ChatPage> {
                                               log('RECIEVER-->${Get.find<
                                                   ChatLogic>()
                                                   .receiverMessageGetId}');
+                                              _generalController.focusOut(context);
                                               postMethod(
                                                   context,
                                                   sendMessageUrl,

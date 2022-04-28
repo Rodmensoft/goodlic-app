@@ -14,6 +14,7 @@ import 'package:consultant_product/src/modules/consultant/my_profile/view.dart';
 import 'package:consultant_product/src/modules/consultant/schedule/view.dart';
 import 'package:consultant_product/src/modules/contact_us/view.dart';
 import 'package:consultant_product/src/modules/created_password/view.dart';
+import 'package:consultant_product/src/modules/inapp_web/view.dart';
 import 'package:consultant_product/src/modules/login/view.dart';
 import 'package:consultant_product/src/modules/new_password/view.dart';
 import 'package:consultant_product/src/modules/on_board/view_1.dart';
@@ -23,7 +24,9 @@ import 'package:consultant_product/src/modules/on_board/view_4.dart';
 import 'package:consultant_product/src/modules/otp/view.dart';
 import 'package:consultant_product/src/modules/reset_password/view.dart';
 import 'package:consultant_product/src/modules/sign_up/view.dart';
+import 'package:consultant_product/src/modules/splash/view.dart';
 import 'package:consultant_product/src/modules/user/all_consultants/view.dart';
+import 'package:consultant_product/src/modules/user/appointment_detail/payment/view_stripe.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/view.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/payment_stripe/view_stripe.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_appointment_question.dart';
@@ -37,8 +40,6 @@ import 'package:consultant_product/src/modules/user/my_appointment/view.dart';
 import 'package:consultant_product/src/modules/user/user_drawer/view.dart';
 import 'package:consultant_product/src/modules/wallet/payment_stripe/view_stripe.dart';
 import 'package:consultant_product/src/modules/wallet/view.dart';
-import 'package:consultant_product/src/modules/wallet/view_easypaisa.dart';
-import 'package:consultant_product/src/modules/wallet/view_jazzcash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -125,10 +126,6 @@ routes() => [
           page: () => const EditConsultantProfilePage()),
       GetPage(name: "/blogs", page: () => const BlogsPage()),
       GetPage(name: "/blogDetail", page: () => const BlogDetailPage()),
-      GetPage(
-          name: '/depositJazzcash', page: () => const DepositJazzCashView()),
-      GetPage(
-          name: '/depositEasypaisa', page: () => const DepositEasypaisaView()),
       GetPage(name: '/videoCall', page: () => const JoinChannelVideo()),
       GetPage(name: '/audioCall', page: () => const JoinChannelAudio()),
       GetPage(name: '/videoCallWaiting', page: () => const CallWaitingView()),
@@ -139,6 +136,13 @@ routes() => [
           page: () => const StripePaymentForWalletView()),
       GetPage(
           name: '/walletPaymentScreen', page: () => const WalletPaymentView()),
+      GetPage(
+          name: '/splash', page: () => const SplashPage()),
+  GetPage(
+      name: '/inAppWebPage', page: () => const InAppWebPage()),
+  GetPage(
+      name: '/stripePaymentForLater', page: () => const StripePaymentForLater()),
+
     ];
 
 class PageRoutes {
@@ -185,6 +189,9 @@ class PageRoutes {
   static const String contactUs = '/contactUs';
   static const String stripePaymentForWallet = '/stripePaymentForWallet';
   static const String walletPaymentScreen = '/walletPaymentScreen';
+  static const String splash = '/splash';
+  static const String inAppWebPage = '/inAppWebPage';
+  static const String stripePaymentForLater = '/stripePaymentForLater';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -222,8 +229,6 @@ class PageRoutes {
       editConsultantProfile: (context) => const EditConsultantProfilePage(),
       blogs: (context) => const BlogsPage(),
       blogDetail: (context) => const BlogDetailPage(),
-      depositJazzcash: (context) => const DepositJazzCashView(),
-      depositEasypaisa: (context) => const DepositEasypaisaView(),
       videoCall: (context) => const JoinChannelVideo(),
       audioCall: (context) => const JoinChannelAudio(),
       videoCallWaiting: (context) => const CallWaitingView(),
@@ -231,6 +236,10 @@ class PageRoutes {
       contactUs: (context) => const ContactUsPage(),
       stripePaymentForWallet: (context) => const StripePaymentForWalletView(),
       walletPaymentScreen: (context) => const WalletPaymentView(),
+      splash: (context) => const SplashPage(),
+      inAppWebPage: (context) => const InAppWebPage(),
+      stripePaymentForLater: (context) => const StripePaymentForLater(),
+
     };
   }
 }

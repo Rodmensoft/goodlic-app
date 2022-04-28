@@ -125,25 +125,24 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                       SizedBox(
                                         height: 14.h,
                                       ),
-                                      Container(
-                                        height: 40.h,
-                                        width: 40.w,
-                                        decoration: BoxDecoration(
-                                            color: _userHomeLogic
-                                                .categoriesColor[index],
-                                            shape: BoxShape.circle),
-                                        child: Center(
-                                            child: Image.network(
-                                              _userHomeLogic
-                                                  .categoriesList[index].image!.contains('assets')
-                                                  ?'$mediaUrl${_userHomeLogic
-                                                  .categoriesList[index].image}'
-                                                  :_userHomeLogic
-                                              .categoriesList[index].image!,
-                                          height: 20.h,
-                                          width: 23.w,
-                                          color: Colors.white,
-                                        )),
+                                      CircleAvatar(
+                                        radius: 20.r,
+                                        backgroundColor: _userHomeLogic
+                                            .categoriesColor[index],
+                                        child: CircleAvatar(
+
+                                          radius: 18.r,
+                                          backgroundImage:  NetworkImage(
+                                                  _userHomeLogic
+                                                      .categoriesList[index].image!.contains('assets')
+                                                      ?'$mediaUrl${_userHomeLogic
+                                                      .categoriesList[index].image!}'
+                                                      :_userHomeLogic
+                                    .categoriesList[index].image!,
+
+
+                                         ),
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 24.h,

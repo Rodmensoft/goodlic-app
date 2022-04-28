@@ -31,17 +31,17 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       Get.find<GeneralController>().updateFormLoaderController(true);
     });
-    logic.scrollController = ScrollController()
+    Get.find<EditConsultantProfileLogic>().scrollController = ScrollController()
       ..addListener(Get.find<EditConsultantProfileLogic>().scrollListener);
-    logic.stepperScrollController = ScrollController();
+    Get.find<EditConsultantProfileLogic>().stepperScrollController = ScrollController();
 
-    logic.emptyOccupationDropDownList();
-    logic.emptyCountryDropDownList();
-    logic.emptyCityDropDownList();
-    logic.emptyDegreeDropDownList();
-    logic.emptyForDisplayEducationList();
+    Get.find<EditConsultantProfileLogic>().emptyOccupationDropDownList();
+    Get.find<EditConsultantProfileLogic>().emptyCountryDropDownList();
+    Get.find<EditConsultantProfileLogic>().emptyCityDropDownList();
+    Get.find<EditConsultantProfileLogic>().emptyDegreeDropDownList();
+    Get.find<EditConsultantProfileLogic>().emptyForDisplayEducationList();
 
-    logic.getSetData(context);
+    Get.find<EditConsultantProfileLogic>().getSetData(context);
 
     getMethod(
         context,
@@ -61,8 +61,8 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
 
   @override
   void dispose() {
-    logic.scrollController!.removeListener(logic.scrollListener);
-    logic.scrollController!.dispose();
+    Get.find<EditConsultantProfileLogic>().scrollController!.removeListener(Get.find<EditConsultantProfileLogic>().scrollListener);
+    Get.find<EditConsultantProfileLogic>().scrollController!.dispose();
     super.dispose();
   }
 

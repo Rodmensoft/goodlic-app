@@ -160,13 +160,13 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                               borderSide: const BorderSide(
                                                   color: Colors.red)),
                                         ),
-                                        // validator: (value) {
-                                        //   if (value!.isEmpty) {
-                                        //     return 'field_required'.tr;
-                                        //   } else {
-                                        //     return null;
-                                        //   }
-                                        // },
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'field_required'.tr;
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                       ),
                                     ],
                                   ),

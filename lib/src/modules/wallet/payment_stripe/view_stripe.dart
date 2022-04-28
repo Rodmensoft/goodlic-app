@@ -675,7 +675,8 @@ class _StripePaymentForWalletViewState
                                                   .read('userID'),
                                           "total": _walletLogic
                                               .stripeAmountController.text,
-                                          "payment_method_code": "stripe",
+                                          "payment_method_code": _walletLogic.paymentMethodList
+                                        [_walletLogic.selectedPaymentType!].title,
                                           "cardInfo": {
                                             "number": _walletLogic
                                                 .accountCardNumberController

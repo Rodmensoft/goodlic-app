@@ -94,7 +94,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                             MediaQuery.of(context).size.height *
                                                 .075),
                                     Text(
-                                      'Enter Phone',
+                                      'Enter Email',
                                       style: state.subHeadingTextStyle,
                                     ),
                                     SizedBox(height: 25.h),

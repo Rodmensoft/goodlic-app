@@ -12,38 +12,6 @@
   },
   "currency": {
     "type": "PK"
-  },
-  "splashData": {
-    "title": "E commerce",
-    "subTitle": "Multi Vendor App",
-    "splashLogo": "assets/images/logoNictus.png",
-    "splashBackground": "assets/images/splashBackground.png",
-    "poweredByLogo": "assets/images/invictusLogo.png"
-  },
-  "onBoardData": {
-    "length": 4,
-    "data": [
-      {
-        "firstTitle": "Become",
-        "secondTitle": "A Consultant",
-        "subTitle": "In Few Easy Steps"
-      },
-      {
-        "firstTitle": "Become",
-        "secondTitle": "A Mentee ",
-        "subTitle": "Is Just One Step Away"
-      },
-      {
-        "firstTitle": "Top",
-        "secondTitle": "Consultants",
-        "subTitle": "Consult With Professional Consultants"
-
-      },
-      {
-        "firstTitle": "Ask Your",
-        "secondTitle": "Questions",
-        "subTitle": "And Quickly Pay The Fee"
-      }]
   }
 
 }

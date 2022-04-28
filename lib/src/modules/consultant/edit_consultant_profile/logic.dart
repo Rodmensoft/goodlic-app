@@ -146,6 +146,7 @@ class EditConsultantProfileLogic extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController dobController = TextEditingController();
+  final TextEditingController aboutController = TextEditingController();
   String? selectedGender;
   List<String> genderDropDownList = ['Male', 'Female', 'Other'];
   String? selectedReligion;

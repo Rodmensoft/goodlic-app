@@ -7,6 +7,7 @@ import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/agora_call/repo.dart';
+import 'package:consultant_product/src/modules/inapp_web/view.dart';
 import 'package:consultant_product/src/modules/sms/logic.dart';
 import 'package:consultant_product/src/modules/sms/repo.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
@@ -79,21 +80,28 @@ stripePaymentRepo(
 
       Get.find<BookAppointmentLogic>().myWidth = 0;
       Get.find<BookAppointmentLogic>().update();
-      showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return CustomDialogBox(
-              title: 'failed!'.tr,
-              titleColor: customDialogErrorColor,
-              descriptions: '${response['data']['message']}',
-              text: 'ok'.tr,
-              functionCall: () {
-                Navigator.pop(context);
-              },
-              img: 'assets/Icons/dialog_error.svg',
-            );
-          });
+      if(response['authorization_url']!=null){
+        Get.find<GeneralController>().inAppWebService=response['authorization_url'];
+        Get.off(const InAppWebPage());
+      }
+      else{
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return CustomDialogBox(
+                title: 'failed!'.tr,
+                titleColor: customDialogErrorColor,
+                descriptions: '${response['data']['message']}',
+                text: 'ok'.tr,
+                functionCall: () {
+                  Navigator.pop(context);
+                },
+                img: 'assets/Icons/dialog_error.svg',
+              );
+            });
+      }
+
     }
   } else {
     Get.find<GeneralController>().updateFormLoaderController(false);

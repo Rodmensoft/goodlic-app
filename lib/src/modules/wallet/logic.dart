@@ -8,6 +8,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:resize/resize.dart';
 
+import '../user/book_appointment/logic.dart';
 import 'state.dart';
 
 class WalletLogic extends GetxController {
@@ -129,5 +130,21 @@ class WalletLogic extends GetxController {
 
   var cardNumberMask = MaskTextInputFormatter(mask: '#### #### #### ####');
   var cardExpiryMask = MaskTextInputFormatter(mask: '##/##');
+
+  int? selectedPaymentType;
+  List<ShiftType> paymentMethodList = [
+    ShiftType(
+        title: 'stripe',
+        image: 'assets/Icons/stripe.svg',
+        isSelected: false),
+    ShiftType(
+        title: 'braintree',
+        image: 'assets/Icons/braintreePayment.svg',
+        isSelected: false),
+    ShiftType(
+        title: 'paypal',
+        image: 'assets/Icons/paypalPayment.svg',
+        isSelected: false),
+  ];
 
 }

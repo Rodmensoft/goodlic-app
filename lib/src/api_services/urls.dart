@@ -4,9 +4,9 @@ import 'package:global_configuration/global_configuration.dart';
 // const String baseUrl = 'https://consultation.softwaresbranding.com/';
 // const String mediaUrl = 'https://consultation.softwaresbranding.com';
 
-// const String apiUrl = 'http://192.168.88.123:8001/api/';
-// const String baseUrl = 'http://192.168.88.123:8001/';
-// const String mediaUrl = 'http://192.168.88.123:8001';
+// const String apiBaseUrl = 'http://192.168.88.87:8001/api/';
+// const String baseUrl = 'http://192.168.88.87:8001/';
+// const String mediaUrl = 'http://192.168.88.87:8001';
 
 final String baseUrl = GlobalConfiguration().get('base_url');
 final String apiBaseUrl = GlobalConfiguration().get('api_base_url');
@@ -136,7 +136,7 @@ String sendMessageUrl = apiBaseUrl + 'send-message';
 
 ///---download-invoice
 String downloadAppointmentInvoiceForMenteeUrl =
-    apiBaseUrl + 'completed-appointment-invoice';
+    baseUrl + 'completed-appointment-invoice';
 
 ///---reset-password
 String forgotPasswordUrl = apiBaseUrl + 'forget-password';

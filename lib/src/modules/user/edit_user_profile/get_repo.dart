@@ -17,6 +17,17 @@ getMenteeProfileRepo(
     if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.status == true) {
       getMethod(context, mentorProfileGenericDataUrl, {'token': '123'}, false,
           getGenericDataMenteeRepo);
+
+      Get.find<EditUserProfileLogic>().updateProfileHiddenSwitch(
+          Get.find<EditUserProfileLogic>()
+              .getMenteeProfileModel
+              .data!
+              .user!
+              .mentee!
+              .identityHidden ==
+              0
+              ? false
+              : true);
       if (Get.find<EditUserProfileLogic>()
           .getMenteeProfileModel
           .data!

@@ -205,3 +205,24 @@ menteeUpdateProfileImageRepo(File? file1) async {
 
   }
 }
+
+
+getProfileVisibilityRepo(
+    BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    if (response['Status'].toString() == 'true') {
+      Get.find<EditUserProfileLogic>().updateProfileHiddenSwitch(
+          Get.find<EditUserProfileLogic>().profileHiddenSwitch);
+      Get.find<GeneralController>().updateFormLoaderController(false);
+      log('getProfileVisibilityRepo------>> ${Get.find<EditUserProfileLogic>().citiesByIdModel.success}');
+    } else {
+      Get.find<EditUserProfileLogic>().updateProfileHiddenSwitch(
+          !Get.find<EditUserProfileLogic>().profileHiddenSwitch!);
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    }
+  } else if (!responseCheck) {
+    Get.find<GeneralController>().updateFormLoaderController(false);
+
+    log('Exception........................');
+  }
+}

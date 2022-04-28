@@ -8,6 +8,8 @@ class EditUserProfileState {
   TextStyle? subHeadingTextStyle;
   TextStyle? hintTextStyle;
   TextStyle? textFieldTextStyle;
+  TextStyle? hideTextStyle;
+
   EditUserProfileState() {
     ///Initialize variables
     headingTextStyle = TextStyle(
@@ -25,6 +27,10 @@ class EditUserProfileState {
     textFieldTextStyle = TextStyle(
         fontFamily: SarabunFontFamily.regular,
         fontSize: 16.sp,
+        color: Colors.black);
+    hideTextStyle = TextStyle(
+        fontFamily: SarabunFontFamily.semiBold,
+        fontSize: 19.sp,
         color: Colors.black);
   }
 }

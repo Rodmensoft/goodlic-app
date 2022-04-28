@@ -155,9 +155,9 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                   )
                                 : GestureDetector(
                                     onPanDown: (e) {
-                                      _consultantAppointmentLogic
-                                          .refreshAppointmentsController
-                                          .requestRefresh();
+                                      // _consultantAppointmentLogic
+                                      //     .refreshAppointmentsController
+                                      //     .requestRefresh();
                                     },
                                     child: ListView(
                                       padding:
@@ -393,9 +393,9 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                   )
                                 : GestureDetector(
                                     onPanDown: (e) {
-                                      _consultantAppointmentLogic
-                                          .refreshAppointmentsController
-                                          .requestRefresh();
+                                      // _consultantAppointmentLogic
+                                      //     .refreshAppointmentsController
+                                      //     .requestRefresh();
                                     },
                                     child: ListView(
                                       padding:
@@ -537,9 +537,9 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                   )
                                 : GestureDetector(
                                     onPanDown: (e) {
-                                      _consultantAppointmentLogic
-                                          .refreshAppointmentsController
-                                          .requestRefresh();
+                                      // _consultantAppointmentLogic
+                                      //     .refreshAppointmentsController
+                                      //     .requestRefresh();
                                     },
                                     child: ListView(
                                       padding:
@@ -681,9 +681,9 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                   )
                                 : GestureDetector(
                                     onPanDown: (e) {
-                                      _consultantAppointmentLogic
-                                          .refreshAppointmentsController
-                                          .requestRefresh();
+                                      // _consultantAppointmentLogic
+                                      //     .refreshAppointmentsController
+                                      //     .requestRefresh();
                                     },
                                     child: ListView(
                                       padding:

@@ -40,7 +40,7 @@ class CreateProfileLogic extends GetxController {
     }
   }
 
-  int? stepperIndex = 0;
+  int? stepperIndex = 1;
 
   updateStepperIndex(int? newValue) {
     stepperIndex = newValue;

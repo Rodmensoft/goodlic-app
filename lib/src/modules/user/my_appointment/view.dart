@@ -144,9 +144,9 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                 )
                               : GestureDetector(
                                   onPanDown: (e) {
-                                    _myAppointmentLogic
-                                        .refreshAppointmentsController
-                                        .requestRefresh();
+                                    // _myAppointmentLogic
+                                    //     .refreshAppointmentsController
+                                    //     .requestRefresh();
                                   },
                                   child: ListView(
                                     padding: const EdgeInsetsDirectional.all(0),
@@ -243,6 +243,12 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                   .data![index]
                                                   .rating!
                                                   .toDouble(),
+                                              isPaid: _myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .pendingAppointments!
+                                                  .data![index]
+                                                  .isPaid,
                                             ),
                                           ),
                                           index ==
@@ -370,12 +376,12 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                   ),
                                 )
                               : GestureDetector(
-                            onPanDown: (e) {
-                              _myAppointmentLogic
-                                  .refreshAppointmentsController
-                                  .requestRefresh();
-                            },
-                                child: ListView(
+                                  onPanDown: (e) {
+                                    // _myAppointmentLogic
+                                    //     .refreshAppointmentsController
+                                    //     .requestRefresh();
+                                  },
+                                  child: ListView(
                                     padding: const EdgeInsetsDirectional.all(0),
                                     children: List.generate(
                                         _myAppointmentLogic
@@ -447,13 +453,14 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                           .date ==
                                                       null
                                                   ? null
-                                                  : DateFormat('dd/MM/yy').format(
-                                                      DateTime.parse(_myAppointmentLogic
-                                                          .getUserAppointmentModel
-                                                          .data!
-                                                          .acceptedAppointments!
-                                                          .data![index]
-                                                          .date!)),
+                                                  : DateFormat('dd/MM/yy')
+                                                      .format(DateTime.parse(
+                                                          _myAppointmentLogic
+                                                              .getUserAppointmentModel
+                                                              .data!
+                                                              .acceptedAppointments!
+                                                              .data![index]
+                                                              .date!)),
                                               time: _myAppointmentLogic
                                                   .getUserAppointmentModel
                                                   .data!
@@ -468,6 +475,12 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                   .data![index]
                                                   .rating!
                                                   .toDouble(),
+                                              isPaid: _myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .acceptedAppointments!
+                                                  .data![index]
+                                                  .isPaid,
                                             ),
                                           ),
                                           index ==
@@ -489,7 +502,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                       );
                                     }),
                                   ),
-                              ),
+                                ),
 
                           ///---completed
                           _myAppointmentLogic.getUserAppointmentModel.data!
@@ -504,12 +517,12 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                   ),
                                 )
                               : GestureDetector(
-                            onPanDown: (e) {
-                              _myAppointmentLogic
-                                  .refreshAppointmentsController
-                                  .requestRefresh();
-                            },
-                                child: ListView(
+                                  onPanDown: (e) {
+                                    // _myAppointmentLogic
+                                    //     .refreshAppointmentsController
+                                    //     .requestRefresh();
+                                  },
+                                  child: ListView(
                                     padding: const EdgeInsetsDirectional.all(0),
                                     children: List.generate(
                                         _myAppointmentLogic
@@ -580,13 +593,14 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                           .date ==
                                                       null
                                                   ? null
-                                                  : DateFormat('dd/MM/yy').format(
-                                                      DateTime.parse(_myAppointmentLogic
-                                                          .getUserAppointmentModel
-                                                          .data!
-                                                          .completedAppointments!
-                                                          .data![index]
-                                                          .date!)),
+                                                  : DateFormat('dd/MM/yy')
+                                                      .format(DateTime.parse(
+                                                          _myAppointmentLogic
+                                                              .getUserAppointmentModel
+                                                              .data!
+                                                              .completedAppointments!
+                                                              .data![index]
+                                                              .date!)),
                                               time: _myAppointmentLogic
                                                   .getUserAppointmentModel
                                                   .data!
@@ -602,6 +616,12 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                   .toDouble(),
                                               status: 2,
                                               color: customGreenColor,
+                                              isPaid: _myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .completedAppointments!
+                                                  .data![index]
+                                                  .isPaid,
                                             ),
                                           ),
                                           index ==
@@ -623,7 +643,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                       );
                                     }),
                                   ),
-                              ),
+                                ),
 
                           ///---cancelled
                           _myAppointmentLogic.getUserAppointmentModel.data!
@@ -638,12 +658,12 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                   ),
                                 )
                               : GestureDetector(
-                            onPanDown: (e) {
-                              _myAppointmentLogic
-                                  .refreshAppointmentsController
-                                  .requestRefresh();
-                            },
-                                child: ListView(
+                                  onPanDown: (e) {
+                                    // _myAppointmentLogic
+                                    //     .refreshAppointmentsController
+                                    //     .requestRefresh();
+                                  },
+                                  child: ListView(
                                     padding: const EdgeInsetsDirectional.all(0),
                                     children: List.generate(
                                         _myAppointmentLogic
@@ -714,13 +734,14 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                           .date ==
                                                       null
                                                   ? null
-                                                  : DateFormat('dd/MM/yy').format(
-                                                      DateTime.parse(_myAppointmentLogic
-                                                          .getUserAppointmentModel
-                                                          .data!
-                                                          .cancelledAppointments!
-                                                          .data![index]
-                                                          .date!)),
+                                                  : DateFormat('dd/MM/yy')
+                                                      .format(DateTime.parse(
+                                                          _myAppointmentLogic
+                                                              .getUserAppointmentModel
+                                                              .data!
+                                                              .cancelledAppointments!
+                                                              .data![index]
+                                                              .date!)),
                                               time: _myAppointmentLogic
                                                   .getUserAppointmentModel
                                                   .data!
@@ -736,6 +757,12 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                   .toDouble(),
                                               status: 3,
                                               color: customRedColor,
+                                              isPaid: _myAppointmentLogic
+                                                  .getUserAppointmentModel
+                                                  .data!
+                                                  .cancelledAppointments!
+                                                  .data![index]
+                                                  .isPaid,
                                             ),
                                           ),
                                           index ==
@@ -757,7 +784,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                       );
                                     }),
                                   ),
-                              ),
+                                ),
                         ],
                       ),
                     )),

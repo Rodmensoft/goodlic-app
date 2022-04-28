@@ -136,6 +136,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
   @override
   void dispose() {
     Get.find<DashboardLogic>()
+        .refreshAppointmentsController.dispose();
+    Get.find<DashboardLogic>()
         .scrollController!
         .removeListener(Get.find<DashboardLogic>().scrollListener);
     Get.find<DashboardLogic>().scrollController!.dispose();

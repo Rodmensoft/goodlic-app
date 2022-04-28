@@ -50,6 +50,7 @@ class ChatLogic extends GetxController {
   FetchMessagesModel fetchMessagesModel = FetchMessagesModel();
 
   ScrollController? scrollController;
+  ScrollController? chatScrollController;
   bool lastStatus = true;
   double height = 100.h;
 

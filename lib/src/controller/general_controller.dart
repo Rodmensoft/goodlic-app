@@ -307,6 +307,8 @@ class GeneralController extends GetxController {
               ));
         });
   }
+
+  String? inAppWebService;
 }
 
 class Language {

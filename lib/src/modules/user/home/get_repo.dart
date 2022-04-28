@@ -46,6 +46,7 @@ getFeaturedConsultantRepo(
               title: '${element.firstName ?? ''} ${element.lastName ?? ''}',
               subTitle: element.category!.name,
               image: element.imagePath,
+          gender: element.gender
             ));
       }
       Get.find<UserHomeLogic>().updateFeaturedConsultantLoader(false);

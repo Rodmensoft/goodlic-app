@@ -24,6 +24,7 @@ class AppointmentDetailBox extends StatelessWidget {
     required this.time,
     required this.status,
     required this.color,
+    required this.isPaid,
   }) : super(key: key);
 
   final String? image;
@@ -37,6 +38,7 @@ class AppointmentDetailBox extends StatelessWidget {
   final String? time;
   final int? status;
   final Color? color;
+  final int? isPaid;
 
   @override
   Widget build(BuildContext context) {
@@ -75,13 +77,13 @@ class AppointmentDetailBox extends StatelessWidget {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.r),
                           child: image == null
-                              ?const SizedBox()
-                              :Image.network(
-                            image!.contains('assets')
-                                ? '$mediaUrl$image'
-                                : image!,
-                            fit: BoxFit.cover,
-                          )),
+                              ? const SizedBox()
+                              : Image.network(
+                                  image!.contains('assets')
+                                      ? '$mediaUrl$image'
+                                      : image!,
+                                  fit: BoxFit.cover,
+                                )),
                     ),
                     Expanded(
                       child: Padding(
@@ -138,7 +140,7 @@ class AppointmentDetailBox extends StatelessWidget {
                   height: 20.h,
                 ),
 
-                ///---type-fee
+                ///---type-fee-isPaid
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +150,7 @@ class AppointmentDetailBox extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Padding(
-                          padding: EdgeInsetsDirectional.only(end: 11.w),
+                          padding: EdgeInsetsDirectional.only(end: 0.w),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -174,12 +176,12 @@ class AppointmentDetailBox extends StatelessWidget {
                     ///---fee
                     Expanded(
                       child: Align(
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                         child: Padding(
-                          padding: EdgeInsetsDirectional.only(start: 11.w),
+                          padding: EdgeInsetsDirectional.only(start: 0.w),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
                                 typeIcon!,
@@ -192,6 +194,40 @@ class AppointmentDetailBox extends StatelessWidget {
                               ),
                               Text(
                                 type!,
+                                style: _myAppointmentLogic.state.feeTextStyle,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    ///---isPaid
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.only(end: 10.w),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              isPaid == 0
+                                  ? const Icon(
+                                      Icons.clear,
+                                      size: 15,
+                                      color: Colors.red,
+                                    )
+                                  : const Icon(
+                                      Icons.check,
+                                      size: 15,
+                                      color: customGreenColor,
+                                    ),
+                              SizedBox(
+                                width: 11.w,
+                              ),
+                              Text(
+                                isPaid == 0 ? 'Un-Paid' : 'Paid',
                                 style: _myAppointmentLogic.state.feeTextStyle,
                               )
                             ],
@@ -246,6 +282,7 @@ class AppointmentDetailBox extends StatelessWidget {
                         ),
                       )
                     : const SizedBox(),
+
                 ///---accepted-status-date-time
                 status == 1
                     ? Container(
@@ -258,41 +295,44 @@ class AppointmentDetailBox extends StatelessWidget {
                           children: [
                             ///---status
                             Container(
-                              height: 45.h,
-                              width: 87.w,
-                              decoration: BoxDecoration(
-                                color: color!,
-                                borderRadius: BorderRadius.circular(5.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: const Color(0xff707070)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 15,
-                                      offset: const Offset(0, 5))
-                                ],
-                              ),
-                              child: Padding(
-                                padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset('assets/Icons/completeAppointmentIcon.svg',
-                                      height: 12.h,
-                                      width: 12.w,
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Text(
-                                      'ACCEPTED',
-                                      style: _myAppointmentLogic.state.statusTextStyle,
-                                    )
+                                height: 45.h,
+                                width: 87.w,
+                                decoration: BoxDecoration(
+                                  color: color!,
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: const Color(0xff707070)
+                                            .withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 15,
+                                        offset: const Offset(0, 5))
                                   ],
                                 ),
-                              )
-                            ),
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/Icons/completeAppointmentIcon.svg',
+                                        height: 12.h,
+                                        width: 12.w,
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Text(
+                                        'ACCEPTED',
+                                        style: _myAppointmentLogic
+                                            .state.statusTextStyle,
+                                      )
+                                    ],
+                                  ),
+                                )),
 
                             ///---date-time
 
@@ -314,41 +354,44 @@ class AppointmentDetailBox extends StatelessWidget {
                           children: [
                             ///---status
                             Container(
-                              height: 45.h,
-                              width: 87.w,
-                              decoration: BoxDecoration(
-                                color: color!,
-                                borderRadius: BorderRadius.circular(5.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: const Color(0xff707070)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 15,
-                                      offset: const Offset(0, 5))
-                                ],
-                              ),
-                              child: Padding(
-                                padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset('assets/Icons/completeAppointmentIcon.svg',
-                                      height: 12.h,
-                                      width: 12.w,
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Text(
-                                      'COMPLETED',
-                                      style: _myAppointmentLogic.state.statusTextStyle,
-                                    )
+                                height: 45.h,
+                                width: 87.w,
+                                decoration: BoxDecoration(
+                                  color: color!,
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: const Color(0xff707070)
+                                            .withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 15,
+                                        offset: const Offset(0, 5))
                                   ],
                                 ),
-                              )
-                            ),
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/Icons/completeAppointmentIcon.svg',
+                                        height: 12.h,
+                                        width: 12.w,
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Text(
+                                        'COMPLETED',
+                                        style: _myAppointmentLogic
+                                            .state.statusTextStyle,
+                                      )
+                                    ],
+                                  ),
+                                )),
 
                             ///---date-time
                             dateTimeRow()
@@ -369,41 +412,44 @@ class AppointmentDetailBox extends StatelessWidget {
                           children: [
                             ///---status
                             Container(
-                              height: 45.h,
-                              width: 87.w,
-                              decoration: BoxDecoration(
-                                color: color!,
-                                borderRadius: BorderRadius.circular(5.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: const Color(0xff707070)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 15,
-                                      offset: const Offset(0, 5))
-                                ],
-                              ),
-                              child: Padding(
-                                padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset('assets/Icons/cancelAppointmentIcon.svg',
-                                      height: 12.h,
-                                      width: 12.w,
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Text(
-                                      'CANCELLED',
-                                      style: _myAppointmentLogic.state.statusTextStyle,
-                                    )
+                                height: 45.h,
+                                width: 87.w,
+                                decoration: BoxDecoration(
+                                  color: color!,
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: const Color(0xff707070)
+                                            .withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 15,
+                                        offset: const Offset(0, 5))
                                   ],
                                 ),
-                              )
-                            ),
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/Icons/cancelAppointmentIcon.svg',
+                                        height: 12.h,
+                                        width: 12.w,
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Text(
+                                        'CANCELLED',
+                                        style: _myAppointmentLogic
+                                            .state.statusTextStyle,
+                                      )
+                                    ],
+                                  ),
+                                )),
 
                             ///---date-time
                             dateTimeRow()
@@ -418,37 +464,38 @@ class AppointmentDetailBox extends StatelessWidget {
       );
     });
   }
-  Widget dateTimeRow(){
-    return date == null
-        ?const SizedBox()
-        :Expanded(
-      child: Align(
-        alignment: Alignment.center,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ///---date
-            Text(
-              date!,
-              style: Get.find<MyAppointmentLogic>()
-                  .state.dateTimeTextStyle,
-            ),
-            Text(
-              '  -  ',
-              style: Get.find<MyAppointmentLogic>()
-                  .state.dateTimeTextStyle,
-            ),
 
-            ///---time
-            Text(
-              time!,
-              style: Get.find<MyAppointmentLogic>()
-                  .state.dateTimeTextStyle,
+  Widget dateTimeRow() {
+    return date == null
+        ? const SizedBox()
+        : Expanded(
+            child: Align(
+              alignment: Alignment.center,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ///---date
+                  Text(
+                    date!,
+                    style:
+                        Get.find<MyAppointmentLogic>().state.dateTimeTextStyle,
+                  ),
+                  Text(
+                    '  -  ',
+                    style:
+                        Get.find<MyAppointmentLogic>().state.dateTimeTextStyle,
+                  ),
+
+                  ///---time
+                  Text(
+                    time!,
+                    style:
+                        Get.find<MyAppointmentLogic>().state.dateTimeTextStyle,
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }

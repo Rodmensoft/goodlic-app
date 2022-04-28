@@ -148,20 +148,28 @@ class _TopConsultantsState extends State<TopConsultants> {
                                                   ),
 
                                                   ///---sub-title
-                                                  Text(
-                                                    '${_userHomeLogic.topConsultants[index].subTitle}',
-                                                    style: state
-                                                        .topSubTitleTextStyle,
-                                                  ),
                                                   SizedBox(
-                                                    height: 21.h,
+                                                    width: 110.w,
+                                                    child: Text(
+                                                      '${_userHomeLogic.topConsultants[index].subTitle}',
+                                                      maxLines: 2,
+                                                      softWrap: true,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: state
+                                                          .topSubTitleTextStyle,
+                                                    ),
                                                   ),
 
+
+                                                  const Spacer(),
                                                   ///---arrow-icon
                                                   SvgPicture.asset(
                                                     'assets/Icons/whiteForwardIcon.svg',
                                                     width: 29.w,
                                                     height: 29.h,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10.h,
                                                   ),
                                                 ],
                                               ),
@@ -173,7 +181,8 @@ class _TopConsultantsState extends State<TopConsultants> {
                                           end: 12.w,
                                           top: -21.h,
                                           child: Image.asset(
-                                            'assets/images/stackImage.png',
+                                          _userHomeLogic.topConsultants[index].gender=='male'?
+                                          'assets/images/stackImage.png': 'assets/images/female.png',
                                             width: 100.w,
                                             height: 147.h,
                                           )),

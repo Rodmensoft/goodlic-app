@@ -9,7 +9,7 @@ class InitVideoCallView extends StatefulWidget {
   _InitVideoCallViewState createState() => _InitVideoCallViewState();
 }
 
-class _InitVideoCallViewState extends State<InitVideoCallView> {
+class _InitVideoCallViewState extends State< InitVideoCallView> {
   @override
   void initState() {
     // TODO: implement initState

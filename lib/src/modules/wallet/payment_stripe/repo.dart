@@ -1,8 +1,10 @@
 
 import 'dart:developer';
+import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/inapp_web/view.dart';
 import 'package:consultant_product/src/modules/wallet/logic.dart';
 import 'package:consultant_product/src/modules/wallet/payment_stripe/model_stripe_payment.dart';
 import 'package:consultant_product/src/modules/wallet/repo_get.dart';
@@ -85,21 +87,27 @@ stripePaymentRepo(
 
       Get.find<WalletLogic>().myWidth = 0;
       Get.find<WalletLogic>().update();
-      showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return CustomDialogBox(
-              title: 'failed!'.tr,
-              titleColor: customDialogErrorColor,
-              descriptions: '${response['data']['message']}',
-              text: 'ok'.tr,
-              functionCall: () {
-                Navigator.pop(context);
-              },
-              img: 'assets/Icons/dialog_error.svg',
-            );
-          });
+      if(response['authorization_url']!=null){
+        Get.find<GeneralController>().inAppWebService=response['authorization_url'];
+        Get.off(const InAppWebPage());
+      }else{
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return CustomDialogBox(
+                title: 'failed!'.tr,
+                titleColor: customDialogErrorColor,
+                descriptions: '${response['data']['message']}',
+                text: 'ok'.tr,
+                functionCall: () {
+                  Navigator.pop(context);
+                },
+                img: 'assets/Icons/dialog_error.svg',
+              );
+            });
+      }
+
     }
   } else {
     Get.find<GeneralController>().updateFormLoaderController(false);

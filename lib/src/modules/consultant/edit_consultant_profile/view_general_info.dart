@@ -486,6 +486,53 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                               ),
                             ),
 
+                            ///---about-field
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  15.w, 0, 15.w, 16.h),
+                              child: TextFormField(
+                                inputFormatters: [],
+                                style: state.textFieldTextStyle,
+                                controller:
+                                _editConsultantProfileLogic.aboutController,
+                                keyboardType: TextInputType.multiline,
+                                minLines: 1,
+                                maxLines: 4,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      25.w, 15.h, 25.w, 15.h),
+                                  hintText: 'About Your Self',
+                                  hintStyle: state.hintTextStyle,
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: customLightThemeColor)),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide:
+                                      const BorderSide(color: Colors.red)),
+                                ),
+                                validator: (String? value) {
+                                  if (value!.isEmpty) {
+                                    return 'Field Required'.tr;
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                              ),
+                            ),
+
                             ///---gender-religion
                             Row(
                               children: [
@@ -1100,6 +1147,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                     //     .emailController.text,
                                     'address': _editConsultantProfileLogic
                                         .addressController.text,
+                                    'about': _editConsultantProfileLogic
+                                        .aboutController.text,
                                     'gender': _editConsultantProfileLogic
                                         .selectedGender,
                                     'religion': _editConsultantProfileLogic
@@ -1345,6 +1394,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
       'cnic': Get.find<EditConsultantProfileLogic>().cnicController.text,
       // 'email': Get.find<EditConsultantProfileLogic>().emailController.text,
       'address': Get.find<EditConsultantProfileLogic>().addressController.text,
+          'about': Get.find<EditConsultantProfileLogic>().aboutController.text,
       'gender': Get.find<EditConsultantProfileLogic>().selectedGender,
       'religion': Get.find<EditConsultantProfileLogic>().selectedReligion,
       'dob': DateFormat('yyyy-MM-dd')

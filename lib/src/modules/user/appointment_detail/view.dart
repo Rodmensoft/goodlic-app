@@ -205,113 +205,6 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                                       ),
                                                     )
                                                   : const SizedBox(),
-
-                                          // ///---LIVE
-                                          // (_appointmentDetailLogic
-                                          //     .selectedAppointmentData.appointmentStatus! ==
-                                          //     1) &&
-                                          //     (_appointmentDetailLogic
-                                          //         .selectedAppointmentData
-                                          //         .appointmentTypeString!
-                                          //         .toUpperCase() ==
-                                          //         'LIVE')
-                                          //     ? Row(
-                                          //   children: [
-                                          //     InkWell(
-                                          //       onTap: () {
-                                          //         Get.find<PusherChatLogic>()
-                                          //             .updateGetMessagesLoader(true);
-                                          //         Get.find<PusherChatLogic>()
-                                          //             .updateSenderMessageGetId(
-                                          //             Get.find<GeneralController>()
-                                          //                 .storageBox
-                                          //                 .read('userId'));
-                                          //         Get.find<PusherChatLogic>()
-                                          //             .updateReceiverMessageGetId(widget
-                                          //             .singleAppointmentModel!.menteeId);
-                                          //         Get.to(const ChatView());
-                                          //       },
-                                          //       child: Padding(
-                                          //         padding: const EdgeInsetsDirectional.all(8.0),
-                                          //         child: Text(
-                                          //           'chat_box'.tr,
-                                          //           style: state.chatBoxTextStyle,
-                                          //         ),
-                                          //       ),
-                                          //     ),
-                                          //     InkWell(
-                                          //       onTap: () {
-                                          //         Get.find<GeneralController>()
-                                          //             .updateSelectedChannel(
-                                          //             Get.find<GeneralController>()
-                                          //                 .getRandomString(10));
-                                          //         Get.find<GeneralController>()
-                                          //             .updateChannelForCall(
-                                          //             Get.find<GeneralController>()
-                                          //                 .selectedChannel);
-                                          //         log('----------->>> ${Get.find<GeneralController>().selectedChannel}');
-                                          //         getMethod(
-                                          //             context,
-                                          //             agoraTokenUrl,
-                                          //             {
-                                          //               'token': '123',
-                                          //               'channel': Get.find<GeneralController>()
-                                          //                   .selectedChannel
-                                          //             },
-                                          //             true,
-                                          //             getAgoraTokenRepo);
-                                          //         Get.find<GeneralController>()
-                                          //             .updateGoForCall(true);
-                                          //         Get.toNamed(PageRoutes.videoCallWaiting);
-                                          //       },
-                                          //       child: const Padding(
-                                          //         padding:
-                                          //         EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-                                          //         child: Icon(
-                                          //           Icons.video_call,
-                                          //           color: customThemeColor,
-                                          //           size: 25,
-                                          //         ),
-                                          //       ),
-                                          //     ),
-                                          //     InkWell(
-                                          //       onTap: () {
-                                          //         Get.find<GeneralController>()
-                                          //             .updateSelectedChannel(
-                                          //             Get.find<GeneralController>()
-                                          //                 .getRandomString(10));
-                                          //         Get.find<GeneralController>()
-                                          //             .updateChannelForCall(
-                                          //             Get.find<GeneralController>()
-                                          //                 .selectedChannel);
-                                          //         log('----------->>> ${Get.find<GeneralController>().selectedChannel}');
-                                          //         getMethod(
-                                          //             context,
-                                          //             agoraTokenUrl,
-                                          //             {
-                                          //               'token': '123',
-                                          //               'channel': Get.find<GeneralController>()
-                                          //                   .selectedChannel
-                                          //             },
-                                          //             true,
-                                          //             getAgoraTokenForAudioRepo);
-                                          //         Get.find<GeneralController>()
-                                          //             .updateGoForCall(true);
-                                          //         Get.toNamed(PageRoutes.videoCallWaiting);
-                                          //       },
-                                          //       child: const Padding(
-                                          //         padding: EdgeInsetsDirectional.fromSTEB(
-                                          //             5, 5, 5, 5),
-                                          //         child: Icon(
-                                          //           Icons.call,
-                                          //           color: customThemeColor,
-                                          //           size: 25,
-                                          //         ),
-                                          //       ),
-                                          //     )
-                                          //   ],
-                                          // )
-                                          //     :const SizedBox(),
                                         ],
                                       ),
                                     ),
@@ -366,6 +259,8 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                       status: _appointmentDetailLogic.appointmentStatus,
                       color: _appointmentDetailLogic.colorForAppointmentTypes[
                           _appointmentDetailLogic.appointmentStatus!],
+                      isPaid: _appointmentDetailLogic
+                          .selectedAppointmentData.isPaid,
                     )
                   ],
                 )),
