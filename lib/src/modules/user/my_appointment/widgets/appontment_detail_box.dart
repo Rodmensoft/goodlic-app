@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -326,7 +327,7 @@ class AppointmentDetailBox extends StatelessWidget {
                                         height: 5.h,
                                       ),
                                       Text(
-                                        'ACCEPTED',
+                                        LanguageConstant.accepted.tr,
                                         style: _myAppointmentLogic
                                             .state.statusTextStyle,
                                       )
@@ -385,7 +386,7 @@ class AppointmentDetailBox extends StatelessWidget {
                                         height: 5.h,
                                       ),
                                       Text(
-                                        'COMPLETED',
+                                        LanguageConstant.completed.tr,
                                         style: _myAppointmentLogic
                                             .state.statusTextStyle,
                                       )
@@ -443,7 +444,7 @@ class AppointmentDetailBox extends StatelessWidget {
                                         height: 5.h,
                                       ),
                                       Text(
-                                        'CANCELLED',
+                                        LanguageConstant.cancelled.tr,
                                         style: _myAppointmentLogic
                                             .state.statusTextStyle,
                                       )

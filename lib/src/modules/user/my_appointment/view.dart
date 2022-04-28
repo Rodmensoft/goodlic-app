@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -11,9 +12,9 @@ import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
 import 'package:consultant_product/src/widgets/sliver_delegate_tab_fix.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:resize/resize.dart';
-import 'package:intl/intl.dart';
 
 import '../../../api_services/urls.dart';
 import 'logic.dart';
@@ -81,8 +82,9 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                       return <Widget>[
                         ///---header
                         MyCustomSliverAppBar(
-                          heading: 'My Appointments',
-                          subHeading: 'Manage and See Your Appointments Log',
+                          heading: LanguageConstant.myAppointments.tr,
+                          subHeading: LanguageConstant
+                              .manageAndSeeYourAppointmentsLog.tr,
                           isShrink: _myAppointmentLogic.isShrink,
                         ),
                         SliverPersistentHeader(
@@ -135,7 +137,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                   .pendingAppointments!.data!.isEmpty
                               ? Center(
                                   child: Text(
-                                    'No Record Found',
+                                    LanguageConstant.noRecordFound.tr,
                                     style: TextStyle(
                                         fontFamily: SarabunFontFamily.regular,
                                         fontSize: 16.sp,
@@ -199,7 +201,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               category:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].category}',
                                               fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].payment!} Fees',
+                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                               type:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeString}'
                                                       .capitalizeFirst,
@@ -334,7 +336,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                                                             Center(
                                                                           child:
                                                                               Text(
-                                                                            'Load More',
+                                                                            LanguageConstant.loadMore.tr,
                                                                             style: TextStyle(
                                                                                 fontFamily: SarabunFontFamily.medium,
                                                                                 fontSize: 12.sp,
@@ -368,7 +370,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                   .acceptedAppointments!.data!.isEmpty
                               ? Center(
                                   child: Text(
-                                    'No Record Found',
+                                    LanguageConstant.noRecordFound.tr,
                                     style: TextStyle(
                                         fontFamily: SarabunFontFamily.regular,
                                         fontSize: 16.sp,
@@ -431,7 +433,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               category:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].category}',
                                               fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].payment!} Fees',
+                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                               type:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeString}'
                                                       .capitalizeFirst,
@@ -509,7 +511,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                   .completedAppointments!.data!.isEmpty
                               ? Center(
                                   child: Text(
-                                    'No Record Found',
+                                    LanguageConstant.noRecordFound.tr,
                                     style: TextStyle(
                                         fontFamily: SarabunFontFamily.regular,
                                         fontSize: 16.sp,
@@ -572,7 +574,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               category:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].category}',
                                               fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].payment!} Fees',
+                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                               type:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeString}'
                                                       .capitalizeFirst,
@@ -650,7 +652,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                   .cancelledAppointments!.data!.isEmpty
                               ? Center(
                                   child: Text(
-                                    'No Record Found',
+                                    LanguageConstant.noRecordFound.tr,
                                     style: TextStyle(
                                         fontFamily: SarabunFontFamily.regular,
                                         fontSize: 16.sp,
@@ -713,7 +715,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               category:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].category}',
                                               fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].payment!} Fees',
+                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                               type:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeString}'
                                                       .capitalizeFirst,

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -100,12 +100,13 @@ class _SignUpPageState extends State<SignUpPage>
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Sign Up',
+                                        LanguageConstant.signUp.tr,
                                         style: state.headingTextStyle,
                                       ),
                                       SizedBox(height: 6.h),
                                       Text(
-                                        'Welcome To Create Your Account',
+                                        LanguageConstant
+                                            .welcomToCreateYourAccount.tr,
                                         style: state.captionTextStyle,
                                       ),
 
@@ -160,7 +161,7 @@ class _SignUpPageState extends State<SignUpPage>
 
                                       SizedBox(height: 40.h),
                                       Text(
-                                        'Enter Details',
+                                        LanguageConstant.enterDetails.tr,
                                         style: state.subHeadingTextStyle,
                                       ),
                                       SizedBox(height: 25.h),
@@ -178,7 +179,8 @@ class _SignUpPageState extends State<SignUpPage>
                                           contentPadding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   25.w, 15.h, 25.w, 15.h),
-                                          hintText: 'First Name',
+                                          hintText:
+                                              LanguageConstant.firstName.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
@@ -206,7 +208,8 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -227,7 +230,8 @@ class _SignUpPageState extends State<SignUpPage>
                                           contentPadding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   25.w, 15.h, 25.w, 15.h),
-                                          hintText: 'Last Name',
+                                          hintText:
+                                              LanguageConstant.lastName.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
@@ -255,7 +259,8 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -273,7 +278,8 @@ class _SignUpPageState extends State<SignUpPage>
                                             contentPadding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     25.w, 15.h, 25.w, 15.h),
-                                            hintText: 'Email Address',
+                                            hintText: LanguageConstant
+                                                .emailAddress.tr,
                                             hintStyle: state.hintTextStyle,
                                             fillColor: customTextFieldColor,
                                             filled: true,
@@ -290,9 +296,7 @@ class _SignUpPageState extends State<SignUpPage>
                                             focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(8.r),
-                                                borderSide: const BorderSide(
-                                                    color:
-                                                        customLightThemeColor)),
+                                                borderSide: const BorderSide(color: customLightThemeColor)),
                                             errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                                             errorText: _signUpLogic.emailValidator),
                                         onChanged: (value) {
@@ -301,9 +305,11 @@ class _SignUpPageState extends State<SignUpPage>
                                         },
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else if (!GetUtils.isEmail(value)) {
-                                            return 'Enter Valid Email';
+                                            return LanguageConstant
+                                                .enterValidEmail.tr;
                                           } else {
                                             return null;
                                           }
@@ -335,7 +341,8 @@ class _SignUpPageState extends State<SignUpPage>
                                                 size: 20,
                                                 color: const Color(0xff8085BA)),
                                           ),
-                                          hintText: 'Password',
+                                          hintText:
+                                              LanguageConstant.password.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
@@ -363,9 +370,8 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
-                                          } else if(value.length < 8 ){
-                                            return 'Password Length Must be 8 Character';
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -399,7 +405,8 @@ class _SignUpPageState extends State<SignUpPage>
                                                 size: 20,
                                                 color: const Color(0xff8085BA)),
                                           ),
-                                          hintText: 'Confirm Password',
+                                          hintText: LanguageConstant
+                                              .confirmPassword.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
@@ -427,10 +434,8 @@ class _SignUpPageState extends State<SignUpPage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
-                                          } else if(_signUpLogic.passwordController.text !=
-                                              _signUpLogic.confirmPasswordController.text){
-                                            return 'Password Not Match';
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -472,14 +477,16 @@ class _SignUpPageState extends State<SignUpPage>
                                                           _signUpLogic
                                                               .confirmPasswordController
                                                               .text,
-                                                      'role':_signUpLogic.selectedRole
+                                                      'role': _signUpLogic
+                                                          .selectedRole
                                                     },
                                                     false,
                                                     signUpWithEmailRepo);
                                               }
                                             },
-                                            child: const MyCustomBottomBar(
-                                                title: 'Sign Up',
+                                            child: MyCustomBottomBar(
+                                                title:
+                                                    LanguageConstant.signUp.tr,
                                                 disable: false)),
                                       ),
                                       SizedBox(
@@ -492,7 +499,7 @@ class _SignUpPageState extends State<SignUpPage>
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'or sign up with',
+                                            LanguageConstant.orSignUpWith.tr,
                                             style: state.orTextStyle,
                                           ),
                                         ],
@@ -579,7 +586,7 @@ class _SignUpPageState extends State<SignUpPage>
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Have an account? ',
+                                            LanguageConstant.haveAnAccount.tr,
                                             style: state.descTextStyle,
                                           ),
                                           InkWell(
@@ -590,7 +597,7 @@ class _SignUpPageState extends State<SignUpPage>
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0, 5.h, 0, 5.h),
                                               child: Text(
-                                                'Lets Login',
+                                                LanguageConstant.letsLogin.tr,
                                                 style: state.descTextStyle!
                                                     .copyWith(
                                                         color: customThemeColor,
@@ -610,11 +617,13 @@ class _SignUpPageState extends State<SignUpPage>
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'By Sign Up, you are agree with our ',
+                                            LanguageConstant
+                                                .bySignUpYouAreAgreeWith.tr,
                                             style: state.descTextStyle,
                                           ),
                                           Text(
-                                            'Terms & Conditions',
+                                            LanguageConstant
+                                                .termsAndConditions.tr,
                                             style: state.descTextStyle!
                                                 .copyWith(
                                                     color:

@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -13,7 +13,6 @@ import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
-import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -77,9 +76,9 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                     return <Widget>[
                       ///---header
                       MyCustomSliverAppBar(
-                        heading: 'Book Appointment',
-                        subHeading: 'By just few easy steps',
-                        trailing: 'Step 2 Of 3',
+                        heading: LanguageConstant.bookAppointment.tr,
+                        subHeading: LanguageConstant.byJustFewEasySteps.tr,
+                        trailing: LanguageConstant.step2Of3.tr,
                         isShrink: _bookAppointmentLogic.isShrink2,
                         fee:
                             '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
@@ -118,7 +117,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Type Your Question',
+                                        LanguageConstant.typeYourQuestion.tr,
                                         style: state.headingTextStyle,
                                       ),
                                       SizedBox(
@@ -162,7 +161,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -205,11 +205,11 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          'Upload File',
+                                          LanguageConstant.uploadFile.tr,
                                           style: state.headingTextStyle,
                                         ),
                                         Text(
-                                          '  (If Any)',
+                                          '  (${LanguageConstant.ifAny.tr})',
                                           style: TextStyle(
                                               fontFamily:
                                                   SarabunFontFamily.medium,
@@ -252,13 +252,15 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                   builder:
                                                       (BuildContext context) {
                                                     return CustomDialogBox(
-                                                      title: 'FAILED!'.tr,
+                                                      title: LanguageConstant
+                                                          .failed.tr,
                                                       titleColor:
                                                           customDialogErrorColor,
-                                                      descriptions:
-                                                          'File Is Greater Than 10MB'
-                                                              .tr,
-                                                      text: 'ok'.tr,
+                                                      descriptions: LanguageConstant
+                                                          .fileIsGreaterThan10mb
+                                                          .tr,
+                                                      text: LanguageConstant
+                                                          .ok.tr,
                                                       functionCall: () {
                                                         Navigator.pop(context);
                                                       },
@@ -364,7 +366,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                           width: 10.w,
                                                         ),
                                                         Text(
-                                                          'Upload Here',
+                                                          LanguageConstant
+                                                              .uploadHere.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -403,7 +406,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Payment Method',
+                                      LanguageConstant.paymentMethod.tr,
                                       style: state.headingTextStyle,
                                     ),
                                     SizedBox(
@@ -616,7 +619,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                             }
                           },
                           child: MyCustomBottomBar(
-                            title: 'Continue',
+                            title: LanguageConstant.Continue.tr,
                             disable: disableButton!,
                           ),
                         ),

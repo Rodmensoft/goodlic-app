@@ -1,4 +1,4 @@
-import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -16,7 +16,8 @@ class EditConsultantProfilePage extends StatefulWidget {
   const EditConsultantProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<EditConsultantProfilePage> createState() => _EditConsultantProfilePageState();
+  State<EditConsultantProfilePage> createState() =>
+      _EditConsultantProfilePageState();
 }
 
 class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
@@ -69,7 +70,8 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
-      return GetBuilder<EditConsultantProfileLogic>(builder: (_editConsultantProfileLogic) {
+      return GetBuilder<EditConsultantProfileLogic>(
+          builder: (_editConsultantProfileLogic) {
         return GestureDetector(
           onTap: () {
             _generalController.focusOut(context);
@@ -100,8 +102,7 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.asset(
-                                'assets/Icons/whiteBackArrow.svg'),
+                            SvgPicture.asset('assets/Icons/whiteBackArrow.svg'),
                           ],
                         ),
                       ),
@@ -141,7 +142,9 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 16.w),
-                                                child: Text('Edit Profile',
+                                                child: Text(
+                                                    LanguageConstant
+                                                        .editProfile.tr,
                                                     style:
                                                         state.headingTextStyle),
                                               ),
@@ -151,7 +154,9 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 16.w),
-                                                child: Text('Edit Your Profile',
+                                                child: Text(
+                                                    LanguageConstant
+                                                        .editYourProfile.tr,
                                                     style: state
                                                         .subHeadingTextStyle),
                                               ),
@@ -308,8 +313,10 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(25.r),
                           topRight: Radius.circular(25.r)),
-                      child: _editConsultantProfileLogic.consultantProfileNavigation(
-                          _editConsultantProfileLogic.stepperIndex, context),
+                      child: _editConsultantProfileLogic
+                          .consultantProfileNavigation(
+                              _editConsultantProfileLogic.stepperIndex,
+                              context),
                     ))),
           ),
         );

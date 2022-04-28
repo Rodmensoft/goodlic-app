@@ -133,7 +133,7 @@
 //                                                   height: 10.h,
 //                                                 ),
 //                                                 Text(
-//                                                   'Edit Your Profile',
+//                                                   LanguageConstant.editYourProfile.tr,
 //                                                   style: TextStyle(
 //                                                       fontFamily:
 //                                                       SarabunFontFamily

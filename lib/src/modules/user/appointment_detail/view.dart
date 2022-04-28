@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -11,10 +12,11 @@ import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:resize/resize.dart';
+
 import 'logic.dart';
-import 'package:intl/intl.dart';
 
 class AppointmentDetailPage extends StatefulWidget {
   const AppointmentDetailPage({Key? key}) : super(key: key);
@@ -38,14 +40,18 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
         getExistRatingUrl,
         {
           'token': '123',
-          'mentor_id': Get.find<AppointmentDetailLogic>().selectedAppointmentData.mentorId,
-          'appointment_id': Get.find<AppointmentDetailLogic>().selectedAppointmentData.id
+          'mentor_id': Get.find<AppointmentDetailLogic>()
+              .selectedAppointmentData
+              .mentorId,
+          'appointment_id':
+              Get.find<AppointmentDetailLogic>().selectedAppointmentData.id
         },
         true,
         ratingExistRepo);
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       Get.find<GeneralController>().updateUserIdForSendNotification(
-          Get.find<AppointmentDetailLogic>().selectedAppointmentData.mentorId);});
+          Get.find<AppointmentDetailLogic>().selectedAppointmentData.mentorId);
+    });
 
     Get.find<AppointmentDetailLogic>().scrollController = ScrollController()
       ..addListener(Get.find<AppointmentDetailLogic>().scrollListener);
@@ -138,7 +144,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                                 height: 25.h,
                                               ),
                                               Text(
-                                                'Appt. Detail',
+                                                LanguageConstant.apptDetail.tr,
                                                 style: TextStyle(
                                                     fontFamily:
                                                         SarabunFontFamily.bold,
@@ -155,7 +161,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    'Your Appointment Detail With ${_appointmentDetailLogic.selectedAppointmentData.mentor!.firstName}',
+                                                    '${LanguageConstant.yourAppointmentDetailWith.tr} ${_appointmentDetailLogic.selectedAppointmentData.mentor!.firstName}',
                                                     style: TextStyle(
                                                         fontFamily:
                                                             SarabunFontFamily
@@ -232,7 +238,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                       category:
                           '${_appointmentDetailLogic.selectedAppointmentData.category}',
                       fee:
-                          '\$${_appointmentDetailLogic.selectedAppointmentData.payment!} Fees',
+                          '\$${_appointmentDetailLogic.selectedAppointmentData.payment!} ${LanguageConstant.fees.tr}',
                       type:
                           '${_appointmentDetailLogic.selectedAppointmentData.appointmentTypeString}'
                               .capitalizeFirst,

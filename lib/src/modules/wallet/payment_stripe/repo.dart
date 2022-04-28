@@ -1,6 +1,7 @@
-
 import 'dart:developer';
 import 'package:consultant_product/route_generator.dart';
+
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -16,7 +17,7 @@ import 'package:get/get.dart';
 stripePaymentRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    if(response.containsKey('original')){
+    if (response.containsKey('original')) {
       Get.find<WalletLogic>().modelStripePayment =
           ModelStripePayment.fromJson(response);
 
@@ -49,10 +50,10 @@ stripePaymentRepo(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'success!'.tr,
+                title: '${LanguageConstant.success.tr}!',
                 titleColor: customDialogSuccessColor,
-                descriptions: '${'amount_added_successfully'.tr}!',
-                text: 'ok'.tr,
+                descriptions: '${LanguageConstant.amountAddedSuccessfully.tr}!',
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Get.back();
                   Navigator.pop(context);
@@ -70,10 +71,10 @@ stripePaymentRepo(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'failed!'.tr,
+                title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
-                descriptions: 'try_again!'.tr,
-                text: 'ok'.tr,
+                descriptions: '${LanguageConstant.tryAgain.tr}!',
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                 },
@@ -81,8 +82,7 @@ stripePaymentRepo(
               );
             });
       }
-    }else{
-
+    } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
 
       Get.find<WalletLogic>().myWidth = 0;
@@ -96,10 +96,10 @@ stripePaymentRepo(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'failed!'.tr,
+                title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
                 descriptions: '${response['data']['message']}',
-                text: 'ok'.tr,
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                 },
@@ -117,10 +117,10 @@ stripePaymentRepo(
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'failed!'.tr,
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'try_again!'.tr,
-            text: 'ok'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },

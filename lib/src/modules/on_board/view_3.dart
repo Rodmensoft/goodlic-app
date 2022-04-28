@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,7 @@ class _OnBoard3PageState extends State<OnBoard3Page> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   26.w, 0, 14.w, 0),
                               child: Text(
-                                'Consultants',
+                                LanguageConstant.consultant.tr,
                                 style: state.firstTitle,
                               ),
                             ),
@@ -104,7 +105,9 @@ class _OnBoard3PageState extends State<OnBoard3Page> {
                     ///---skip
                     InkWell(
                       onTap: () {
-                        Get.find<GeneralController>().storageBox.write('onBoard', 'true');
+                        Get.find<GeneralController>()
+                            .storageBox
+                            .write('onBoard', 'true');
                         Get.offAllNamed(PageRoutes.userHome);
                       },
                       child: Text('Skip',

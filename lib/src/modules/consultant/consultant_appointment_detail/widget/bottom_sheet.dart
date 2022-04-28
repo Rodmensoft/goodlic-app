@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -57,7 +58,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Appointment Info',
+                                  LanguageConstant.appointmentInfo.tr,
                                   style: state.sectionHeadingTextStyle,
                                 ),
                                 SizedBox(
@@ -80,7 +81,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  'Date',
+                                                  LanguageConstant.date.tr,
                                                   style: state
                                                       .sectionLabelTextStyle,
                                                 ),
@@ -117,7 +118,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  'Time',
+                                                  LanguageConstant.time.tr,
                                                   style: state
                                                       .sectionLabelTextStyle,
                                                 ),
@@ -148,7 +149,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Reg No.',
+                                            LanguageConstant.regNo.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -186,7 +187,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Appointment Type',
+                                            LanguageConstant.appointmentType.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -234,7 +235,8 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    'Document',
+                                                    LanguageConstant
+                                                        .document.tr,
                                                     style: state
                                                         .sectionLabelTextStyle,
                                                   ),
@@ -282,7 +284,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'Question ',
+                                              LanguageConstant.question.tr,
                                               style:
                                                   state.sectionLabelTextStyle,
                                             ),
@@ -318,7 +320,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                     .identityHidden ==
                                 1
                             ? Text(
-                                'User Profile is Hidden',
+                                LanguageConstant.userProfileIsHidden.tr,
                                 style: TextStyle(
                                     fontFamily: SarabunFontFamily.extraBold,
                                     fontSize: 18.sp,
@@ -337,7 +339,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'User Info',
+                                        LanguageConstant.userInfo.tr,
                                         style: state.sectionHeadingTextStyle,
                                       ),
                                       SizedBox(
@@ -356,7 +358,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  'First Name',
+                                                  LanguageConstant.firstName.tr,
                                                   style: state
                                                       .sectionLabelTextStyle,
                                                 ),
@@ -394,7 +396,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  'Last Name',
+                                                  LanguageConstant.lastName.tr,
                                                   style: state
                                                       .sectionLabelTextStyle,
                                                 ),
@@ -432,7 +434,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  'Gender',
+                                                  LanguageConstant.gender.tr,
                                                   style: state
                                                       .sectionLabelTextStyle,
                                                 ),
@@ -477,7 +479,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  'City',
+                                                  LanguageConstant.city.tr,
                                                   style: state
                                                       .sectionLabelTextStyle,
                                                 ),
@@ -512,7 +514,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  'Country',
+                                                  LanguageConstant.country.tr,
                                                   style: state
                                                       .sectionLabelTextStyle,
                                                 ),
@@ -628,7 +630,8 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                           10, 5, 10, 5),
                                                       child: Center(
                                                         child: Text(
-                                                          'accept'.tr,
+                                                          LanguageConstant
+                                                              .accept.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -699,7 +702,8 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                           10, 5, 10, 5),
                                                       child: Center(
                                                         child: Text(
-                                                          'reject'.tr,
+                                                          LanguageConstant
+                                                              .reject.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -784,7 +788,8 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              'mark_as_complete'.tr,
+                                              LanguageConstant
+                                                  .markAsComplete.tr,
                                               style: TextStyle(
                                                   fontFamily:
                                                       SarabunFontFamily.bold,

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -14,7 +15,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:resize/resize.dart';
-import 'package:skeleton_loader/skeleton_loader.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ModalInsideModal extends StatefulWidget {
@@ -71,7 +71,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Appointment Info',
+                                  LanguageConstant.appointmentInfo.tr,
                                   style: state.sectionHeadingTextStyle,
                                 ),
                                 SizedBox(
@@ -94,7 +94,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  'Date',
+                                                  LanguageConstant.date.tr,
                                                   style: state
                                                       .sectionLabelTextStyle,
                                                 ),
@@ -131,7 +131,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  'Time',
+                                                  LanguageConstant.time.tr,
                                                   style: state
                                                       .sectionLabelTextStyle,
                                                 ),
@@ -162,7 +162,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Reg No.',
+                                            LanguageConstant.regNo.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -200,7 +200,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Appointment Type',
+                                            LanguageConstant.appointmentType.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -248,7 +248,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    'Document',
+                                                    LanguageConstant
+                                                        .document.tr,
                                                     style: state
                                                         .sectionLabelTextStyle,
                                                   ),
@@ -296,7 +297,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'Question ',
+                                              '${LanguageConstant.question.tr} ',
                                               style:
                                                   state.sectionLabelTextStyle,
                                             ),
@@ -337,7 +338,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Consultant Info',
+                                  LanguageConstant.consultantInfo.tr,
                                   style: state.sectionHeadingTextStyle,
                                 ),
                                 SizedBox(
@@ -356,7 +357,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Name',
+                                            LanguageConstant.name.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -389,7 +390,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Gender',
+                                            LanguageConstant.gender.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -421,7 +422,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Religion',
+                                            LanguageConstant.religion.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -498,7 +499,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Reg. Date',
+                                            LanguageConstant.regDate.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -526,7 +527,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'City',
+                                            LanguageConstant.city.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -558,7 +559,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Country',
+                                            LanguageConstant.country.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -637,7 +638,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Address',
+                                            LanguageConstant.address.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -758,7 +759,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                 RichText(
                                                     text: TextSpan(children: [
                                                   TextSpan(
-                                                      text: 'Rate',
+                                                      text: LanguageConstant
+                                                          .rate.tr,
                                                       style: TextStyle(
                                                           fontSize: 22.sp,
                                                           fontWeight:
@@ -766,7 +768,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                           color:
                                                               customThemeColor)),
                                                   TextSpan(
-                                                      text: ' User',
+                                                      text:
+                                                          ' ${LanguageConstant.user.tr}',
                                                       style: TextStyle(
                                                           fontSize: 22.sp,
                                                           fontWeight:
@@ -804,8 +807,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                 TextFormField(
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
-                                                      return 'field_required'
-                                                          .tr;
+                                                      return LanguageConstant
+                                                          .fieldRequired.tr.tr;
                                                     }
                                                     return null;
                                                   },
@@ -817,33 +820,30 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                   controller:
                                                       _commentsController,
                                                   decoration: InputDecoration(
-                                                      contentPadding:
-                                                          const EdgeInsets.symmetric(
-                                                              vertical: 10,
-                                                              horizontal: 20),
+                                                      contentPadding: const EdgeInsets.symmetric(
+                                                          vertical: 10,
+                                                          horizontal: 20),
                                                       fillColor: Colors.grey
                                                           .withOpacity(0.1),
                                                       filled: true,
-                                                      hintText: 'Comments',
+                                                      hintText: LanguageConstant
+                                                          .comments.tr,
                                                       // hintStyle:
                                                       // state.hintTextStyle,
                                                       enabledBorder: OutlineInputBorder(
                                                           borderSide: const BorderSide(
                                                               color:
                                                                   Colors.white),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  5)),
+                                                          borderRadius: BorderRadius.circular(
+                                                              5)),
                                                       focusedBorder: OutlineInputBorder(
                                                           borderSide: const BorderSide(
                                                               color:
                                                                   Colors.white),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  5)),
+                                                          borderRadius: BorderRadius.circular(
+                                                              5)),
                                                       border: OutlineInputBorder(
-                                                          borderSide: const BorderSide(
-                                                              color: Colors.white),
+                                                          borderSide: const BorderSide(color: Colors.white),
                                                           borderRadius: BorderRadius.circular(5))),
                                                 ),
                                                 const SizedBox(
@@ -905,7 +905,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                                         10)),
                                                         child: Center(
                                                           child: Text(
-                                                            'submit'.tr,
+                                                            LanguageConstant
+                                                                .submit.tr,
                                                             style: TextStyle(
                                                               fontSize: 15.sp,
                                                               color:
@@ -941,7 +942,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              'Rate Now',
+                                              LanguageConstant.rateNow.tr,
                                               style: TextStyle(
                                                   fontFamily:
                                                       SarabunFontFamily.bold,
@@ -1004,7 +1005,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'Download Invoice',
+                                                  LanguageConstant
+                                                      .downloadInvoice.tr,
                                                   style: TextStyle(
                                                       fontFamily:
                                                           SarabunFontFamily

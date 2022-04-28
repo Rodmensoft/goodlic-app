@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/model_generic_data.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/model_get_categories.dart';
@@ -51,27 +52,28 @@ class CreateProfileLogic extends GetxController {
 
   List<Stepper> stepperList = [
     Stepper(
-        title: '${'General'.tr}\n${'Info'.tr}',
+        title: '${LanguageConstant.general.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '01',
         isSelected: true,
         isCompleted: false),
     Stepper(
-        title: '${'Educational'.tr}\n${'Info'.tr}',
+        title:
+            '${LanguageConstant.educational.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '02',
         isSelected: false,
         isCompleted: false),
     Stepper(
-        title: '${'Experience'.tr}\n${'Info'.tr}',
+        title: '${LanguageConstant.experince.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '03',
         isSelected: false,
         isCompleted: false),
     Stepper(
-        title: 'Skill Info'.tr,
+        title: LanguageConstant.skillInfo.tr,
         stepperLabel: '04',
         isSelected: false,
         isCompleted: false),
     Stepper(
-        title: '${'Account'.tr}\n${'Info'.tr}',
+        title: '${LanguageConstant.account.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '05',
         isSelected: false,
         isCompleted: false),

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
+import 'package:resize/resize.dart';
 
 import 'logic.dart';
 
@@ -138,7 +140,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                                 height: 25.h,
                                               ),
                                               Text(
-                                                'Edit Profile',
+                                                LanguageConstant.editProfile.tr,
                                                 style: TextStyle(
                                                     fontFamily:
                                                         SarabunFontFamily.bold,
@@ -150,7 +152,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                                 height: 10.h,
                                               ),
                                               Text(
-                                                'Edit Your Profile',
+                                                LanguageConstant
+                                                    .editYourProfile.tr,
                                                 style: TextStyle(
                                                     fontFamily:
                                                         SarabunFontFamily
@@ -300,7 +303,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 25.w, 15.h, 25.w, 15.h),
-                                        hintText: 'First Name',
+                                        hintText: LanguageConstant.firstName.tr,
                                         hintStyle: state.hintTextStyle,
                                         fillColor: Colors.white,
                                         filled: true,
@@ -327,7 +330,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'field_required'.tr;
+                                          return LanguageConstant
+                                              .fieldRequired.tr;
                                         } else {
                                           return null;
                                         }
@@ -351,7 +355,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 25.w, 15.h, 25.w, 15.h),
-                                        hintText: 'Last Name',
+                                        hintText: LanguageConstant.lastName.tr,
                                         hintStyle: state.hintTextStyle,
                                         fillColor: Colors.white,
                                         filled: true,
@@ -378,7 +382,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'field_required'.tr;
+                                          return LanguageConstant
+                                              .fieldRequired.tr;
                                         } else {
                                           return null;
                                         }
@@ -402,7 +407,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                             }
                                           },
                                           hint: Text(
-                                            'Gender',
+                                            LanguageConstant.gender.tr,
                                             style: state.hintTextStyle,
                                           ),
                                           decoration: InputDecoration(
@@ -469,7 +474,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                           },
                                           validator: (String? value) {
                                             if (value == null) {
-                                              return 'Field Required'.tr;
+                                              return LanguageConstant
+                                                  .fieldRequired.tr;
                                             } else {
                                               return null;
                                             }
@@ -502,7 +508,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                                   }
                                                 },
                                                 hint: Text(
-                                                  'Country',
+                                                  LanguageConstant.country.tr,
                                                   style: state.hintTextStyle,
                                                 ),
                                                 decoration: InputDecoration(
@@ -601,7 +607,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                                 },
                                                 validator: (String? value) {
                                                   if (value == null) {
-                                                    return 'Field Required'.tr;
+                                                    return LanguageConstant
+                                                        .fieldRequired.tr;
                                                   } else {
                                                     return null;
                                                   }
@@ -632,7 +639,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                                   }
                                                 },
                                                 hint: Text(
-                                                  'City',
+                                                  LanguageConstant.city.tr,
                                                   style: state.hintTextStyle,
                                                 ),
                                                 decoration: InputDecoration(
@@ -712,7 +719,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                                 },
                                                 validator: (String? value) {
                                                   if (value == null) {
-                                                    return 'Field Required'.tr;
+                                                    return LanguageConstant
+                                                        .fieldRequired.tr;
                                                   } else {
                                                     return null;
                                                   }
@@ -786,12 +794,11 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                         barrierDismissible: false,
                                         builder: (BuildContext context) {
                                           return CustomDialogBox(
-                                            title: 'SORRY!'.tr,
+                                            title: LanguageConstant.sorry.tr,
                                             titleColor: customDialogErrorColor,
-                                            descriptions:
-                                                'Upload Your Profile Picture'
-                                                    .tr,
-                                            text: 'ok'.tr,
+                                            descriptions: LanguageConstant
+                                                .uploadYourProfilePicture.tr.tr,
+                                            text: LanguageConstant.ok.tr,
                                             functionCall: () {
                                               Navigator.pop(context);
                                             },
@@ -802,8 +809,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                   }
                                 }
                               },
-                              child: const MyCustomBottomBar(
-                                title: 'Update',
+                              child: MyCustomBottomBar(
+                                title: LanguageConstant.update.tr,
                                 disable: false,
                               ),
                             ),
@@ -849,7 +856,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                         .path);
                   },
                   child: Text(
-                    "Camera",
+                    LanguageConstant.camera.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -882,7 +889,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                         .path);
                   },
                   child: Text(
-                    "Gallery",
+                    LanguageConstant.gallery.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!

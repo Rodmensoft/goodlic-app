@@ -27,6 +27,7 @@ import 'package:resize/resize.dart';
 import 'package:rounded_expansion_tile/rounded_expansion_tile.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
+import '../../../../multi_language/language_constants.dart';
 import 'logic.dart';
 
 class ConsultantDashboardPage extends StatefulWidget {
@@ -46,13 +47,13 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
     var timeNow = DateTime.now().hour;
 
     if (timeNow <= 12) {
-      return 'good_morning'.tr;
+      return LanguageConstant.goodMorning.tr;
     } else if ((timeNow > 12) && (timeNow <= 16)) {
-      return 'good_afternoon'.tr;
+      return LanguageConstant.goodAfternoon.tr;
     } else if ((timeNow > 16) && (timeNow < 20)) {
-      return 'good_evening'.tr;
+      return LanguageConstant.goodEvening.tr;
     } else {
-      return 'good_night'.tr;
+      return LanguageConstant.goodNight.tr;
     }
   }
 
@@ -264,7 +265,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                               height: 25.h,
                                                             ),
                                                             Text(
-                                                              'Dashboard',
+                                                              LanguageConstant
+                                                                  .dashboard.tr,
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       SarabunFontFamily
@@ -283,7 +285,9 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                       .spaceBetween,
                                                               children: [
                                                                 Text(
-                                                                  'Manage All Of Your Appointments',
+                                                                  LanguageConstant
+                                                                      .manageAllOfYourAppointment
+                                                                      .tr,
                                                                   style: TextStyle(
                                                                       fontFamily:
                                                                           SarabunFontFamily
@@ -317,7 +321,10 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                           getUserProfileUrl,
                                           {
                                             'token': '123',
-                                            'user_id': Get.find<GeneralController>().storageBox.read('userID')
+                                            'user_id':
+                                                Get.find<GeneralController>()
+                                                    .storageBox
+                                                    .read('userID')
                                           },
                                           true,
                                           getUserProfileRepo);
@@ -326,7 +333,10 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                           getAppointmentCountForMentorUrl,
                                           {
                                             'token': '123',
-                                            'user_id': Get.find<GeneralController>().storageBox.read('userID')
+                                            'user_id':
+                                                Get.find<GeneralController>()
+                                                    .storageBox
+                                                    .read('userID')
                                           },
                                           true,
                                           getAppointmentCountMentorRepo);
@@ -336,7 +346,10 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                           mentorTodayAppointmentUrl,
                                           {
                                             'token': '123',
-                                            'mentor_id': Get.find<GeneralController>().storageBox.read('userID'),
+                                            'mentor_id':
+                                                Get.find<GeneralController>()
+                                                    .storageBox
+                                                    .read('userID'),
                                           },
                                           true,
                                           getMentorTodayAppointmentRepo);
@@ -345,17 +358,25 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                           mentorRatingsUrl,
                                           {
                                             'token': '123',
-                                            'mentor_id': Get.find<GeneralController>().storageBox.read('userID'),
+                                            'mentor_id':
+                                                Get.find<GeneralController>()
+                                                    .storageBox
+                                                    .read('userID'),
                                           },
                                           true,
                                           getRatingMentorRepo);
-                                      if (!Get.find<GeneralController>().storageBox.hasData('onlineStatus')) {
+                                      if (!Get.find<GeneralController>()
+                                          .storageBox
+                                          .hasData('onlineStatus')) {
                                         postMethod(
                                             context,
                                             changeMentorOnlineStatusUrl,
                                             {
                                               'token': '123',
-                                              'user_id': Get.find<GeneralController>().storageBox.read('userID'),
+                                              'user_id':
+                                                  Get.find<GeneralController>()
+                                                      .storageBox
+                                                      .read('userID'),
                                               'status': 'online'
                                             },
                                             true,
@@ -363,7 +384,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                       }
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height,
+                                      height:
+                                          MediaQuery.of(context).size.height,
                                       width: MediaQuery.of(context).size.width,
                                       color: Colors.white,
                                       child: Padding(
@@ -399,7 +421,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                       0,
                                                                       10.h),
                                                           child: ListTile(
-                                                            leading: CircleAvatar(
+                                                            leading:
+                                                                CircleAvatar(
                                                               radius: 35.r,
                                                               backgroundColor:
                                                                   Colors
@@ -414,29 +437,22 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                   : Stack(
                                                                       children: [
                                                                         Hero(
-                                                                          tag:
-                                                                          _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
+                                                                          tag: _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
                                                                               ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
                                                                               : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                                           child:
                                                                               Material(
                                                                             child:
                                                                                 InkWell(
-                                                                              onTap:
-                                                                                  () {
+                                                                              onTap: () {
                                                                                 Get.to(ImageViewScreen(
-                                                                                  networkImage: _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
-                                                                                      ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
-                                                                                      : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
+                                                                                  networkImage: _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets') ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}' : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                                                 ));
                                                                               },
-                                                                              child:
-                                                                                  ClipRRect(
+                                                                              child: ClipRRect(
                                                                                 borderRadius: BorderRadius.circular(30.r),
                                                                                 child: Image.network(
-                                                                                  _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
-                                                                                      ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
-                                                                                      : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
+                                                                                  _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets') ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}' : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                                                   width: 60,
                                                                                   fit: BoxFit.cover,
                                                                                 ),
@@ -444,8 +460,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             ),
                                                                           ),
                                                                         ),
-                                                                        _generalController.getConsultantProfileModel.data!
-                                                                            .userDetail!.onlineStatus ==
+                                                                        _generalController.getConsultantProfileModel.data!.userDetail!.onlineStatus ==
                                                                                 'online'
                                                                             ? PositionedDirectional(
                                                                                 start: 3,
@@ -482,17 +497,16 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             .mentorDetailTileTitle2TextStyle),
                                                                     Expanded(
                                                                       child: Text(
-                                                                          '${_generalController.getConsultantProfileModel.data!
-                                                                              .userDetail!.firstName}'.capitalize!,
+                                                                          '${_generalController.getConsultantProfileModel.data!.userDetail!.firstName}'
+                                                                              .capitalize!,
                                                                           softWrap:
                                                                               true,
-                                                                          overflow:
-                                                                              TextOverflow
-                                                                                  .ellipsis,
+                                                                          overflow: TextOverflow
+                                                                              .ellipsis,
                                                                           maxLines:
                                                                               1,
-                                                                          style: state
-                                                                              .mentorDetailTileTitleTextStyle),
+                                                                          style:
+                                                                              state.mentorDetailTileTitleTextStyle),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -549,17 +563,19 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                             ),
                                                             trailing: InkWell(
                                                               onTap: () {
-                                                                Get.toNamed(PageRoutes.consultantMyProfile);
+                                                                Get.toNamed(
+                                                                    PageRoutes
+                                                                        .consultantMyProfile);
                                                               },
                                                               child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5.w,
-                                                                            15.h,
-                                                                            5.w,
-                                                                            15.h),
-                                                                child: const Icon(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        5.w,
+                                                                        15.h,
+                                                                        5.w,
+                                                                        15.h),
+                                                                child:
+                                                                    const Icon(
                                                                   Icons
                                                                       .arrow_forward_ios,
                                                                   color:
@@ -613,7 +629,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             0,
                                                                             0),
                                                                 child: Text(
-                                                                  'total_appointments'
+                                                                  LanguageConstant
+                                                                      .totalAppointments
                                                                       .tr,
                                                                   textDirection:
                                                                       TextDirection
@@ -629,13 +646,13 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                 child: Stack(
                                                                   children: [
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              14.w,
-                                                                              2.h,
-                                                                              0,
-                                                                              0),
-                                                                      child: Text(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          14.w,
+                                                                          2.h,
+                                                                          0,
+                                                                          0),
+                                                                      child:
+                                                                          Text(
                                                                         _dashboardLogic.getAppointmentCountMentorModel.data ==
                                                                                 null
                                                                             ? ''
@@ -653,11 +670,11 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                           angle: _generalController.isDirectionRTL(context)
                                                                               ? 170
                                                                               : 0,
-                                                                          child: SvgPicture
-                                                                              .asset(
+                                                                          child:
+                                                                              SvgPicture.asset(
                                                                             'assets/Icons/appointmentBar-1.svg',
-                                                                            fit: BoxFit
-                                                                                .fill,
+                                                                            fit:
+                                                                                BoxFit.fill,
                                                                           ),
                                                                         )),
                                                                   ],
@@ -677,13 +694,14 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                       child: Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .only(start: 7.w),
+                                                                .only(
+                                                                    start: 7.w),
                                                         child: Container(
                                                           height: 93.h,
                                                           decoration:
                                                               BoxDecoration(
-                                                            color:
-                                                                const Color(0xffFDDBE5),
+                                                            color: const Color(
+                                                                0xffFDDBE5),
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -705,13 +723,13 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                 child: Column(
                                                                   children: [
                                                                     Text(
-                                                                      'appointments_cancel'
+                                                                      LanguageConstant
+                                                                          .appointmentsCancel
                                                                           .tr,
                                                                       style: state
                                                                           .appointmentCountTitleTextStyle!
                                                                           .copyWith(
-                                                                              color:
-                                                                                  Colors.black),
+                                                                              color: Colors.black),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -734,8 +752,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                   style: state
                                                                       .appointmentCountValueTextStyle
                                                                       ?.copyWith(
-                                                                          color: const Color(
-                                                                              0xffE60047)),
+                                                                          color:
+                                                                              const Color(0xffE60047)),
                                                                 ),
                                                               ),
                                                               Expanded(
@@ -743,9 +761,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                     alignment:
                                                                         Alignment
                                                                             .bottomCenter,
-                                                                    child:
-                                                                        SvgPicture
-                                                                            .asset(
+                                                                    child: SvgPicture
+                                                                        .asset(
                                                                       'assets/Icons/appointmentBar-2.svg',
                                                                       fit: BoxFit
                                                                           .fill,
@@ -768,13 +785,16 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
 
                                               ///---rating
                                               Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(15.w, 0, 15.w, 0),
+                                                  padding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              15.w, 0, 15.w, 0),
                                                   child: _dashboardLogic
                                                           .ratingLoader
                                                       ? SkeletonLoader(
-                                                          period: const Duration(
-                                                              seconds: 2),
+                                                          period:
+                                                              const Duration(
+                                                                  seconds: 2),
                                                           highlightColor:
                                                               Colors.grey,
                                                           direction:
@@ -782,13 +802,15 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                   .ltr,
                                                           builder: Container(
                                                             height: 199.h,
-                                                            width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width,
+                                                            width:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
                                                             decoration:
                                                                 BoxDecoration(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
@@ -797,7 +819,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                           ))
                                                       : Container(
                                                           decoration: BoxDecoration(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
@@ -806,13 +829,16 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                 BoxShadow(
                                                                   offset:
                                                                       const Offset(
-                                                                          0, 10),
+                                                                          0,
+                                                                          10),
                                                                   color: Colors
                                                                       .grey
                                                                       .withOpacity(
                                                                           0.2),
-                                                                  blurRadius: 10,
-                                                                  spreadRadius: 3,
+                                                                  blurRadius:
+                                                                      10,
+                                                                  spreadRadius:
+                                                                      3,
                                                                 )
                                                               ]),
                                                           child: Padding(
@@ -837,24 +863,24 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                           .start,
                                                                   children: [
                                                                     Text(
-                                                                        'rating'
+                                                                        LanguageConstant
+                                                                            .rating
                                                                             .tr,
                                                                         style: state
                                                                             .headingTextStyle),
                                                                     SizedBox(
-                                                                      width: 7.w,
+                                                                      width:
+                                                                          7.w,
                                                                     ),
                                                                     Text(
-                                                                      '(${_dashboardLogic.getRatingsModel.data!
-                                                                          .totalRatings!} ${'total'.tr})',
+                                                                      '(${_dashboardLogic.getRatingsModel.data!.totalRatings!} ${LanguageConstant.total.tr})',
                                                                       style: TextStyle(
                                                                           fontSize: 10
                                                                               .sp,
-                                                                          fontFamily:
-                                                                              SarabunFontFamily
-                                                                                  .regular,
-                                                                          color: Colors
-                                                                              .black),
+                                                                          fontFamily: SarabunFontFamily
+                                                                              .regular,
+                                                                          color:
+                                                                              Colors.black),
                                                                     )
                                                                   ],
                                                                 ),
@@ -875,24 +901,21 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                           CircularProgress(
                                                                         //---must set the padding inside the package of 5.0
                                                                         percentage:
-                                                                            ((_dashboardLogic.getRatingsModel.data!
-                                                                                .avgRatings! * 100) /
+                                                                            ((_dashboardLogic.getRatingsModel.data!.avgRatings! * 100) /
                                                                                 5),
                                                                         color:
                                                                             customOrangeColor,
                                                                         backColor:
-                                                                            const Color(
-                                                                                0xffDBDBDB),
+                                                                            const Color(0xffDBDBDB),
                                                                         showPercentage:
                                                                             true,
                                                                         textStyle: TextStyle(
-                                                                            fontSize: 18
-                                                                                .sp,
-                                                                            fontFamily: SarabunFontFamily
-                                                                                .bold,
-                                                                            color:
-                                                                                customTextBlackColor),
-                                                                        stroke: 0,
+                                                                            fontSize:
+                                                                                18.sp,
+                                                                            fontFamily: SarabunFontFamily.bold,
+                                                                            color: customTextBlackColor),
+                                                                        stroke:
+                                                                            0,
                                                                         round:
                                                                             true,
                                                                       ),
@@ -901,17 +924,15 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                       flex: 2,
                                                                       child:
                                                                           Padding(
-                                                                        padding: EdgeInsetsDirectional.only(
-                                                                            start:
-                                                                                15.w),
+                                                                        padding:
+                                                                            EdgeInsetsDirectional.only(start: 15.w),
                                                                         child:
                                                                             Column(
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.center,
                                                                           children: [
                                                                             Row(
-                                                                              mainAxisAlignment:
-                                                                                  MainAxisAlignment.start,
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
                                                                               children: [
                                                                                 SizedBox(
                                                                                   width: 10.w,
@@ -941,12 +962,10 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                               ],
                                                                             ),
                                                                             SizedBox(
-                                                                              height:
-                                                                                  12.h,
+                                                                              height: 12.h,
                                                                             ),
                                                                             Row(
-                                                                              mainAxisAlignment:
-                                                                                  MainAxisAlignment.start,
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
                                                                               children: [
                                                                                 SizedBox(
                                                                                   width: 10.w,
@@ -976,12 +995,10 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                               ],
                                                                             ),
                                                                             SizedBox(
-                                                                              height:
-                                                                                  12.h,
+                                                                              height: 12.h,
                                                                             ),
                                                                             Row(
-                                                                              mainAxisAlignment:
-                                                                                  MainAxisAlignment.start,
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
                                                                               children: [
                                                                                 SizedBox(
                                                                                   width: 10.w,
@@ -1011,12 +1028,10 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                               ],
                                                                             ),
                                                                             SizedBox(
-                                                                              height:
-                                                                                  12.h,
+                                                                              height: 12.h,
                                                                             ),
                                                                             Row(
-                                                                              mainAxisAlignment:
-                                                                                  MainAxisAlignment.start,
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
                                                                               children: [
                                                                                 SizedBox(
                                                                                   width: 10.w,
@@ -1046,12 +1061,10 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                               ],
                                                                             ),
                                                                             SizedBox(
-                                                                              height:
-                                                                                  12.h,
+                                                                              height: 12.h,
                                                                             ),
                                                                             Row(
-                                                                              mainAxisAlignment:
-                                                                                  MainAxisAlignment.start,
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
                                                                               children: [
                                                                                 SizedBox(
                                                                                   width: 10.w,
@@ -1107,8 +1120,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                     ///---heading
                                                     Text(
                                                       'today_appointments'.tr,
-                                                      style:
-                                                          state.headingTextStyle,
+                                                      style: state
+                                                          .headingTextStyle,
                                                     ),
 
                                                     SizedBox(
@@ -1121,7 +1134,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment.start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                       children: [
                                                         ///---appointment-list
                                                         _dashboardLogic
@@ -1152,8 +1166,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                           Container(
                                                                         height:
                                                                             70,
-                                                                        width: MediaQuery.of(
-                                                                                context)
+                                                                        width: MediaQuery.of(context)
                                                                             .size
                                                                             .width,
                                                                         color:
@@ -1168,20 +1181,21 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                 ? Padding(
                                                                     padding: const EdgeInsetsDirectional
                                                                             .only(
-                                                                        top: 20),
-                                                                    child: Center(
-                                                                      child: Text(
-                                                                        '${'no_appointment'.tr}\n${'for_today'.tr}!',
+                                                                        top:
+                                                                            20),
+                                                                    child:
+                                                                        Center(
+                                                                      child:
+                                                                          Text(
+                                                                        '${LanguageConstant.noAppointment.tr}\n${LanguageConstant.forToday.tr}!',
                                                                         textAlign:
-                                                                            TextAlign
-                                                                                .center,
+                                                                            TextAlign.center,
                                                                         style: const TextStyle(
                                                                             fontSize:
                                                                                 25,
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            color:
-                                                                                Colors.black),
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: Colors.black),
                                                                       ),
                                                                     ),
                                                                   )
@@ -1192,28 +1206,23 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             .length,
                                                                         (index) {
                                                                       return Padding(
-                                                                        padding:  EdgeInsets.only(bottom: 15.h),
-                                                                        child: Container(
-                                                                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                                                                        padding:
+                                                                            EdgeInsets.only(bottom: 15.h),
+                                                                        child:
+                                                                            Container(
+                                                                          padding:
+                                                                              EdgeInsets.symmetric(horizontal: 15.w),
                                                                           decoration: BoxDecoration(
-                                                                            color:
-                                                                            Colors.white,
-
+                                                                              color: Colors.white,
                                                                               boxShadow: [
                                                                                 BoxShadow(
-                                                                                  offset:
-                                                                                  const Offset(
-                                                                                      0, 10),
-                                                                                  color: Colors
-                                                                                      .grey
-                                                                                      .withOpacity(
-                                                                                      0.2),
+                                                                                  offset: const Offset(0, 10),
+                                                                                  color: Colors.grey.withOpacity(0.2),
                                                                                   blurRadius: 10,
                                                                                   spreadRadius: 3,
                                                                                 )
                                                                               ],
-                                                                            borderRadius: BorderRadius.circular(8.r)
-                                                                          ),
+                                                                              borderRadius: BorderRadius.circular(8.r)),
                                                                           child:
                                                                               RoundedExpansionTile(
                                                                             contentPadding: const EdgeInsetsDirectional.fromSTEB(
@@ -1233,7 +1242,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                     children: [
                                                                                       Text(
-                                                                                        'type'.tr,
+                                                                                        LanguageConstant.type.tr,
                                                                                         style: state.appointmentListLabelTextStyle,
                                                                                       ),
                                                                                       const SizedBox(
@@ -1254,14 +1263,14 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                     children: [
                                                                                       Text(
-                                                                                        'amount'.tr,
+                                                                                        LanguageConstant.amount.tr,
                                                                                         style: state.appointmentListLabelTextStyle,
                                                                                       ),
                                                                                       const SizedBox(
                                                                                         height: 6,
                                                                                       ),
                                                                                       Text(
-                                                                                        '${'rs'.tr}.${_dashboardLogic.getTodayAppointmentList[index].payment}',
+                                                                                        '${LanguageConstant.rs.tr}.${_dashboardLogic.getTodayAppointmentList[index].payment}',
                                                                                         style: state.appointmentListValueTextStyle?.copyWith(color: customLightThemeColor),
                                                                                       ),
                                                                                     ],
@@ -1275,7 +1284,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                     children: [
                                                                                       Text(
-                                                                                        'status'.tr,
+                                                                                        LanguageConstant.status.tr,
                                                                                         style: state.appointmentListLabelTextStyle,
                                                                                       ),
                                                                                       const SizedBox(
@@ -1292,7 +1301,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                             width: 5,
                                                                                           ),
                                                                                           Text(
-                                                                                            'accepted'.tr,
+                                                                                            LanguageConstant.accepted.tr,
                                                                                             style: state.appointmentListValueTextStyle,
                                                                                           ),
                                                                                         ],
@@ -1305,8 +1314,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             trailing:
                                                                                 SvgPicture.asset(
                                                                               'assets/Icons/forwardBlueIcon.svg',
-                                                                                  width: 19.w,
-                                                                                  height: 19.h,
+                                                                              width: 19.w,
+                                                                              height: 19.h,
                                                                             ),
                                                                             children: [
                                                                               Padding(
@@ -1320,7 +1329,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                         children: [
                                                                                           Text(
-                                                                                            'date'.tr,
+                                                                                            LanguageConstant.date.tr,
                                                                                             style: state.appointmentListLabelTextStyle,
                                                                                           ),
                                                                                           const SizedBox(
@@ -1341,7 +1350,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                         children: [
                                                                                           Text(
-                                                                                            'time'.tr,
+                                                                                            LanguageConstant.time.tr,
                                                                                             style: state.appointmentListLabelTextStyle,
                                                                                           ),
                                                                                           const SizedBox(
@@ -1362,7 +1371,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                         children: [
                                                                                           Text(
-                                                                                            'p_status'.tr,
+                                                                                            LanguageConstant.pStatus.tr,
                                                                                             style: state.appointmentListLabelTextStyle,
                                                                                           ),
                                                                                           const SizedBox(
@@ -1380,7 +1389,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                                       width: 5,
                                                                                                     ),
                                                                                                     Text(
-                                                                                                      'Un_paid'.tr,
+                                                                                                      LanguageConstant.UnPaid.tr,
                                                                                                       style: state.appointmentListValueTextStyle,
                                                                                                     ),
                                                                                                   ],
@@ -1396,7 +1405,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                                       width: 5,
                                                                                                     ),
                                                                                                     Text(
-                                                                                                      'paid'.tr,
+                                                                                                      LanguageConstant.paid.tr,
                                                                                                       style: state.appointmentListValueTextStyle,
                                                                                                     ),
                                                                                                   ],
@@ -1411,7 +1420,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                 ),
                                                                               ),
                                                                               Padding(
-                                                                                padding:  EdgeInsetsDirectional.fromSTEB(0, 10.h, 0, 10.h),
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(0, 10.h, 0, 10.h),
                                                                                 child: Row(
                                                                                   children: [
                                                                                     ///---action
@@ -1422,7 +1431,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                         children: [
                                                                                           Text(
-                                                                                            'action'.tr,
+                                                                                            LanguageConstant.action.tr,
                                                                                             style: state.appointmentListLabelTextStyle,
                                                                                           ),
                                                                                           const SizedBox(
@@ -1433,24 +1442,14 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                             children: [
                                                                                               InkWell(
                                                                                                 onTap: () {
-
-                                                                                                  Get.put(
-                                                                                                      ConsultantAppointmentLogic());
-                                                                                                  Get.put(
-                                                                                                      ConsultantAppointmentDetailLogic());
-                                                                                                  Get.find<ConsultantAppointmentDetailLogic>()
-                                                                                                      .selectedAppointmentData =
-                                                                                                  _dashboardLogic.getTodayAppointmentList[index];
-                                                                                                  Get.find<
-                                                                                                      ConsultantAppointmentDetailLogic>()
-                                                                                                      .appointmentStatus = 1;
-                                                                                                  Get.find<
-                                                                                                      ConsultantAppointmentDetailLogic>()
-                                                                                                      .update();
-                                                                                                  Get.toNamed(PageRoutes
-                                                                                                      .consultantAppointmentDetail);
+                                                                                                  Get.put(ConsultantAppointmentLogic());
+                                                                                                  Get.put(ConsultantAppointmentDetailLogic());
+                                                                                                  Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData = _dashboardLogic.getTodayAppointmentList[index];
+                                                                                                  Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 1;
+                                                                                                  Get.find<ConsultantAppointmentDetailLogic>().update();
+                                                                                                  Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                                                                                 },
-                                                                                                child:  Padding(
+                                                                                                child: Padding(
                                                                                                   padding: EdgeInsets.fromLTRB(5.w, 0, 8, 0),
                                                                                                   child: const Icon(
                                                                                                     Icons.visibility,

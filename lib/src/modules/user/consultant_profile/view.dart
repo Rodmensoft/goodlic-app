@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -203,7 +204,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                   child: Container(
                                                     height: 30.h,
                                                     width: 80.w,
-                                                    decoration:  BoxDecoration(
+                                                    decoration: BoxDecoration(
                                                         color: customThemeColor,
                                                         borderRadius: BorderRadius
                                                             .horizontal(
@@ -212,7 +213,8 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                                         10.r))),
                                                     child: Center(
                                                       child: Text(
-                                                        'Online',
+                                                        LanguageConstant
+                                                            .Online.tr,
                                                         style:
                                                             state.tagTextStyle,
                                                       ),
@@ -225,7 +227,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                   child: Container(
                                                     height: 30.h,
                                                     width: 80.w,
-                                                    decoration:  BoxDecoration(
+                                                    decoration: BoxDecoration(
                                                         color: Colors.grey,
                                                         borderRadius: BorderRadius
                                                             .horizontal(
@@ -234,7 +236,8 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                                         10.r))),
                                                     child: Center(
                                                       child: Text(
-                                                        'Offline',
+                                                        LanguageConstant
+                                                            .offline.tr,
                                                         style:
                                                             state.tagTextStyle,
                                                       ),
@@ -421,9 +424,10 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                 )
                                               ],
                                             ),
-                                            const Text(
-                                              'Positive Rating',
-                                              style: TextStyle(
+                                            Text(
+                                              LanguageConstant
+                                                  .positiveRating.tr,
+                                              style: const TextStyle(
                                                   fontFamily:
                                                       SarabunFontFamily.medium,
                                                   fontSize: 12,
@@ -474,9 +478,9 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                 )
                                               ],
                                             ),
-                                            const Text(
-                                              'Consultancy',
-                                              style: TextStyle(
+                                            Text(
+                                              LanguageConstant.consultancy.tr,
+                                              style: const TextStyle(
                                                   fontFamily:
                                                       SarabunFontFamily.medium,
                                                   fontSize: 12,
@@ -528,9 +532,10 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                 )
                                               ],
                                             ),
-                                            const Text(
-                                              'Years Of Exp',
-                                              style: TextStyle(
+                                            Text(
+                                              LanguageConstant
+                                                  .yearsOfExperience.tr,
+                                              style: const TextStyle(
                                                   fontFamily:
                                                       SarabunFontFamily.medium,
                                                   fontSize: 12,
@@ -553,7 +558,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'About',
+                                      LanguageConstant.about.tr,
                                       style: state.headingTextStyle,
                                     ),
                                     SizedBox(
@@ -576,7 +581,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Available Options',
+                                      LanguageConstant.availableOptions.tr,
                                       style: state.headingTextStyle,
                                     ),
                                     SizedBox(
@@ -654,8 +659,8 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                   onTap: () {
                                     Get.toNamed(PageRoutes.slotSelection);
                                   },
-                                  child: const MyCustomBottomBar(
-                                    title: 'Book Appointment',
+                                  child: MyCustomBottomBar(
+                                    title: LanguageConstant.bookAppointment.tr,
                                     disable: false,
                                   ),
                                 ),
@@ -668,8 +673,8 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                   onTap: () {
                                     Get.toNamed(PageRoutes.login);
                                   },
-                                  child: const MyCustomBottomBar(
-                                    title: 'Login',
+                                  child: MyCustomBottomBar(
+                                    title: LanguageConstant.login.tr,
                                     disable: false,
                                   ),
                                 ),

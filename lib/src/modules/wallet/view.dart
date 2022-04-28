@@ -1,3 +1,5 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
+import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/wallet/repo_get.dart';
@@ -142,7 +144,9 @@ class _WalletPageState extends State<WalletPage> {
                                               SizedBox(
                                                 height: 25.h,
                                               ),
-                                              Text('Amount In Wallet',
+                                              Text(
+                                                  LanguageConstant
+                                                      .amountInWallet.tr,
                                                   style: state.descTextStyle),
                                               SizedBox(
                                                 height: 10.h,
@@ -230,7 +234,7 @@ class _WalletPageState extends State<WalletPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text('transaction_log'.tr,
+                                  Text(LanguageConstant.transactionLog.tr,
                                       style: state.recordTextStyle),
                                 ],
                               ),
@@ -259,7 +263,7 @@ class _WalletPageState extends State<WalletPage> {
                                 : _walletLogic.getAllTransactionList.isEmpty
                                     ? Center(
                                         child: Text(
-                                          'not_available_yet!'.tr,
+                                          LanguageConstant.notAvailableYet.tr,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 25.sp,
@@ -300,7 +304,8 @@ class _WalletPageState extends State<WalletPage> {
                                                                     index]
                                                                 .type
                                                                 .toString() ==
-                                                            'deposit'
+                                                            LanguageConstant
+                                                                .deposit.tr
                                                         ? Column(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -430,7 +435,7 @@ class _WalletPageState extends State<WalletPage> {
                                       customDialogForWithdrawAmount(context);
                                     },
                                     child: MyCustomBottomBar(
-                                      title: 'go_for_withdraw'.tr,
+                                      title: LanguageConstant.goForWithdraw.tr,
                                       disable: false,
                                     ),
                                   ),

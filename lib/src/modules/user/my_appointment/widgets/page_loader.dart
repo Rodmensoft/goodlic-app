@@ -1,4 +1,4 @@
-import 'package:consultant_product/src/modules/user/all_consultants/logic.dart';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/logic.dart';
 import 'package:consultant_product/src/widgets/custom_sliver_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,8 @@ class PageLoaderForAppointments extends StatefulWidget {
   const PageLoaderForAppointments({Key? key}) : super(key: key);
 
   @override
-  _PageLoaderForAppointmentsState createState() => _PageLoaderForAppointmentsState();
+  _PageLoaderForAppointmentsState createState() =>
+      _PageLoaderForAppointmentsState();
 }
 
 class _PageLoaderForAppointmentsState extends State<PageLoaderForAppointments> {
@@ -19,14 +20,12 @@ class _PageLoaderForAppointmentsState extends State<PageLoaderForAppointments> {
     return GetBuilder<MyAppointmentLogic>(builder: (_myAppointmentLogic) {
       return NestedScrollView(
           controller: _myAppointmentLogic.scrollController,
-          headerSliverBuilder:
-              (BuildContext context, bool innerBoxIsScrolled) {
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-
               ///---header
               MyCustomSliverAppBar(
-                heading: 'My Appointments',
-                subHeading: 'Manage and See Your Appointments Log',
+                heading: LanguageConstant.myAppointments.tr,
+                subHeading: LanguageConstant.manageAndSeeYourAppointmentsLog.tr,
                 isShrink: _myAppointmentLogic.isShrink,
               ),
             ];
@@ -42,10 +41,7 @@ class _PageLoaderForAppointmentsState extends State<PageLoaderForAppointments> {
                     children: [
                       Container(
                         height: 60,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
+                        width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8.r)),
@@ -60,19 +56,18 @@ class _PageLoaderForAppointmentsState extends State<PageLoaderForAppointments> {
                             alignment: WrapAlignment.start,
                             children: List.generate(
                               4,
-                                  (index) =>
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 0.h),
-                                    child: Container(
-                                      height: 234.h,
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8.r)),
-                                      ),
-                                    ),
+                              (index) => Padding(
+                                padding: EdgeInsets.only(top: 0.h),
+                                child: Container(
+                                  height: 234.h,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.r)),
                                   ),
+                                ),
+                              ),
                             )),
                       ),
                     ],

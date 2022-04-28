@@ -1,8 +1,10 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
+
 import '../../controller/general_controller.dart';
 import '../../widgets/custom_bottom_bar.dart';
 import 'logic.dart';
@@ -48,24 +50,22 @@ class _CreatedPasswordPageState extends State<CreatedPasswordPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(
-                        height: MediaQuery.of(context).size.height * .3),
+                    SizedBox(height: MediaQuery.of(context).size.height * .3),
                     SvgPicture.asset(
                       'assets/images/successfullImage.svg',
                       height: 120.h,
                       width: 177.w,
                     ),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.height * .03),
+                    SizedBox(height: MediaQuery.of(context).size.height * .03),
                     Center(
                       child: Text(
-                        'Password Created',
+                        LanguageConstant.passwordCreated.tr,
                         style: state.headingTextStyle,
                       ),
                     ),
                     SizedBox(height: 4.h),
                     Text(
-                      'Successfully',
+                      LanguageConstant.successfully.tr,
                       style: state.subheadingTextStyle,
                     ),
                   ],
@@ -81,8 +81,8 @@ class _CreatedPasswordPageState extends State<CreatedPasswordPage> {
                       onTap: () {
                         Get.offAllNamed(PageRoutes.login);
                       },
-                      child: const MyCustomBottomBar(
-                          title: 'Confirm', disable: false)),
+                      child: MyCustomBottomBar(
+                          title: LanguageConstant.confirm.tr, disable: false)),
                 ),
               ),
             ]),

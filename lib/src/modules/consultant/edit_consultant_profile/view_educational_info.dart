@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
+
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/header.dart';
 import 'package:consultant_product/src/api_services/logic.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -13,14 +15,14 @@ import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:consultant_product/src/widgets/upload_image_button.dart';
+import 'package:dio/dio.dart' as dio_instance;
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart' as dio_instance;
+import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
+import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
 
@@ -81,7 +83,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                         decoration: InputDecoration(
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               25.w, 15.h, 25.w, 15.h),
-                          hintText: 'Institute',
+                          hintText: LanguageConstant.institute.tr,
                           hintStyle: state.hintTextStyle,
                           fillColor: Colors.white,
                           filled: true,
@@ -103,7 +105,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
-                            return 'field_required'.tr;
+                            return LanguageConstant.fieldRequired.tr;
                           } else {
                             return null;
                           }
@@ -131,7 +133,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                     }
                                   },
                                   hint: Text(
-                                    'Degree',
+                                    LanguageConstant.degree.tr,
                                     style: state.hintTextStyle,
                                   ),
                                   decoration: InputDecoration(
@@ -190,7 +192,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                   },
                                   validator: (String? value) {
                                     if (value == null) {
-                                      return 'field_required'.tr;
+                                      return LanguageConstant.fieldRequired.tr;
                                     } else {
                                       return null;
                                     }
@@ -217,7 +219,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     25.w, 15.h, 25.w, 15.h),
-                                hintText: 'Subject',
+                                hintText: LanguageConstant.subject.tr,
                                 hintStyle: state.hintTextStyle,
                                 fillColor: Colors.white,
                                 filled: true,
@@ -240,7 +242,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                               ),
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return 'field_required'.tr;
+                                  return LanguageConstant.fieldRequired.tr;
                                 } else {
                                   return null;
                                 }
@@ -319,7 +321,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     25.w, 15.h, 25.w, 15.h),
-                                hintText: 'Year',
+                                hintText: LanguageConstant.year.tr,
                                 hintStyle: state.hintTextStyle,
                                 fillColor: Colors.white,
                                 filled: true,
@@ -348,7 +350,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                               ),
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return 'field_required'.tr;
+                                  return LanguageConstant.fieldRequired.tr;
                                 } else {
                                   return null;
                                 }
@@ -408,11 +410,11 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                     barrierDismissible: false,
                                     builder: (BuildContext context) {
                                       return CustomDialogBox(
-                                        title: 'sorry!'.tr,
+                                        title: LanguageConstant.sorry.tr,
                                         titleColor: customDialogErrorColor,
-                                        descriptions:
-                                            'upload_your_degree_picture'.tr,
-                                        text: 'ok'.tr,
+                                        descriptions: LanguageConstant
+                                            .uploadYourDegreePicture.tr,
+                                        text: LanguageConstant.ok.tr,
                                         functionCall: () {
                                           Navigator.pop(context);
                                         },
@@ -430,7 +432,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                 borderRadius: BorderRadius.circular(8)),
                             child: Center(
                               child: Text(
-                                '+${'add_education'.tr}',
+                                '+${LanguageConstant.addEducation.tr}',
                                 style: state.addButtonTextStyle,
                               ),
                             ),
@@ -473,7 +475,8 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'institute'.tr,
+                                                    LanguageConstant
+                                                        .institute.tr,
                                                     style: state
                                                         .previewLabelTextStyle,
                                                   ),
@@ -539,7 +542,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'degree'.tr,
+                                                    LanguageConstant.degree.tr,
                                                     style: state
                                                         .previewLabelTextStyle,
                                                   ),
@@ -562,7 +565,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'subject'.tr,
+                                                    LanguageConstant.subject.tr,
                                                     style: state
                                                         .previewLabelTextStyle,
                                                   ),
@@ -598,7 +601,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'year'.tr,
+                                                    LanguageConstant.year.tr,
                                                     style: state
                                                         .previewLabelTextStyle,
                                                   ),
@@ -699,10 +702,11 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                             barrierDismissible: false,
                             builder: (BuildContext context) {
                               return CustomDialogBox(
-                                title: 'failed!'.tr,
+                                title: LanguageConstant.failed.tr,
                                 titleColor: customDialogErrorColor,
-                                descriptions: 'add_education_please'.tr,
-                                text: 'ok'.tr,
+                                descriptions:
+                                    LanguageConstant.addEducationPlease.tr,
+                                text: LanguageConstant.ok.tr,
                                 functionCall: () {
                                   Navigator.pop(context);
                                 },
@@ -711,8 +715,8 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                             });
                       }
                     },
-                    child: const MyCustomBottomBar(
-                        title: 'Next Step', disable: false)),
+                    child: MyCustomBottomBar(
+                        title: LanguageConstant.nextStep.tr, disable: false)),
               )),
         ),
       ),
@@ -748,7 +752,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                     }
                   },
                   child: Text(
-                    "Camera",
+                    LanguageConstant.camera.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -777,7 +781,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                     }
                   },
                   child: Text(
-                    "Gallery",
+                    LanguageConstant.gallery.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -824,7 +828,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                   .educationInfoPostModel
                   .data!
                   .education);
-          Get.snackbar('${'added_successfully'.tr}!', '',
+          Get.snackbar('${LanguageConstant.addedSuccessfully.tr}!', '',
               colorText: Colors.black, backgroundColor: Colors.white);
 
           Get.find<GeneralController>().updateFormLoaderController(false);
@@ -843,10 +847,10 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return CustomDialogBox(
-                  title: 'failed!'.tr,
+                  title: LanguageConstant.failed.tr,
                   titleColor: customDialogErrorColor,
-                  descriptions: 'try_again!'.tr,
-                  text: 'ok'.tr,
+                  descriptions: LanguageConstant.tryAgain.tr,
+                  text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
                   },
@@ -861,10 +865,10 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'failed!'.tr,
+                title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
-                descriptions: 'try_again!'.tr,
-                text: 'ok'.tr,
+                descriptions: LanguageConstant.tryAgain.tr,
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                 },
@@ -879,10 +883,10 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'failed!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'try_again!'.tr,
-              text: 'ok'.tr,
+              descriptions: LanguageConstant.tryAgain.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },

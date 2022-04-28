@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -8,7 +9,6 @@ import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 depositTransactionJazzcashRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
@@ -39,10 +39,10 @@ depositTransactionJazzcashRepo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'success!'.tr,
+              title: '${LanguageConstant.success.tr}!',
               titleColor: customDialogSuccessColor,
-              descriptions: '${'amount_added_successfully'.tr}!',
-              text: 'ok'.tr,
+              descriptions: '${LanguageConstant.amountAddedSuccessfully.tr}!',
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },
@@ -58,10 +58,10 @@ depositTransactionJazzcashRepo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'failed!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
               descriptions: '${response['msg']}',
-              text: 'ok'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },
@@ -77,10 +77,10 @@ depositTransactionJazzcashRepo(
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'failed!'.tr,
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'try_again!'.tr,
-            text: 'ok'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },
@@ -89,6 +89,7 @@ depositTransactionJazzcashRepo(
         });
   }
 }
+
 withdrawTransactionRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
@@ -112,21 +113,18 @@ withdrawTransactionRepo(
           true,
           getWalletTransactionRepo);
       Get.find<GeneralController>().updateFormLoaderController(false);
-      Get.snackbar('success!'.tr, response['msg'].toString(),
-          colorText: Colors.black,
-          backgroundColor: Colors.white);
+      Get.snackbar(
+          '${LanguageConstant.success.tr}!', response['msg'].toString(),
+          colorText: Colors.black, backgroundColor: Colors.white);
       log('depositTransactionJazzcashRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
-      Get.snackbar('failed!'.tr, response['msg'].toString(),
-          colorText: Colors.black,
-          backgroundColor: Colors.white);
+      Get.snackbar(LanguageConstant.failed.tr, response['msg'].toString(),
+          colorText: Colors.black, backgroundColor: Colors.white);
     }
   } else {
     Get.find<GeneralController>().updateFormLoaderController(false);
-    Get.snackbar('failed!'.tr, 'try_again!'.tr,
-        colorText: Colors.black,
-        backgroundColor: Colors.white);
-
+    Get.snackbar(LanguageConstant.failed.tr, '${LanguageConstant.tryAgain.tr}!',
+        colorText: Colors.black, backgroundColor: Colors.white);
   }
 }

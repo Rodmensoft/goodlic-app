@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/header.dart';
 import 'package:consultant_product/src/api_services/logic.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -14,14 +16,13 @@ import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:consultant_product/src/widgets/upload_image_button.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:dio/dio.dart' as dio_instance;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
-import 'dart:developer';
-import 'package:intl/intl.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart' as dio_instance;
+import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
+import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
 
@@ -78,7 +79,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                         decoration: InputDecoration(
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               25.w, 15.h, 25.w, 15.h),
-                          hintText: 'company_name'.tr.capitalizeFirst,
+                          hintText:
+                              LanguageConstant.companyName.tr.capitalizeFirst,
                           hintStyle: state.hintTextStyle,
                           fillColor: Colors.white,
                           filled: true,
@@ -100,7 +102,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
-                            return 'field_required'.tr;
+                            return LanguageConstant.fieldRequired.tr;
                           } else {
                             return null;
                           }
@@ -124,7 +126,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                 controller: _companyFromController,
                                 style: state.textFieldTextStyle,
                                 decoration: InputDecoration(
-                                    hintText: 'from'.tr.capitalizeFirst,
+                                    hintText: LanguageConstant
+                                        .from.tr.capitalizeFirst,
                                     hintStyle: state.hintTextStyle,
                                     contentPadding:
                                         EdgeInsetsDirectional.fromSTEB(
@@ -176,7 +179,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                 },
                                 validator: (value) {
                                   if (value == null) {
-                                    return 'field_required'.tr;
+                                    return LanguageConstant.fieldRequired.tr;
                                   }
                                   return null;
                                 },
@@ -205,7 +208,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                 controller: _companyToController,
                                 style: state.textFieldTextStyle,
                                 decoration: InputDecoration(
-                                    hintText: 'To'.tr.capitalizeFirst,
+                                    hintText:
+                                        LanguageConstant.To.tr.capitalizeFirst,
                                     hintStyle: state.hintTextStyle,
                                     contentPadding:
                                         EdgeInsetsDirectional.fromSTEB(
@@ -257,7 +261,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                 },
                                 validator: (value) {
                                   if (value == null) {
-                                    return 'field_required'.tr;
+                                    return LanguageConstant.fieldRequired.tr;
                                   }
                                   return null;
                                 },
@@ -322,12 +326,11 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                     barrierDismissible: false,
                                     builder: (BuildContext context) {
                                       return CustomDialogBox(
-                                        title: 'sorry!'.tr,
+                                        title: LanguageConstant.sorry.tr,
                                         titleColor: customDialogErrorColor,
-                                        descriptions:
-                                            'upload_your_experience_certificate'
-                                                .tr,
-                                        text: 'ok'.tr,
+                                        descriptions: LanguageConstant
+                                            .uploadYourExperienceCertificate.tr,
+                                        text: LanguageConstant.ok.tr,
                                         functionCall: () {
                                           Navigator.pop(context);
                                         },
@@ -345,7 +348,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                 borderRadius: BorderRadius.circular(8)),
                             child: Center(
                               child: Text(
-                                '+${'add_experience'.tr}',
+                                '+${LanguageConstant.addExperience.tr}',
                                 style: state.addButtonTextStyle,
                               ),
                             ),
@@ -388,7 +391,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'company'.tr,
+                                                    LanguageConstant.company.tr,
                                                     style: state
                                                         .previewLabelTextStyle,
                                                   ),
@@ -455,7 +458,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'from'.tr,
+                                                    LanguageConstant.from.tr,
                                                     style: state
                                                         .previewLabelTextStyle,
                                                   ),
@@ -478,7 +481,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'To'.tr,
+                                                    LanguageConstant.To.tr,
                                                     style: state
                                                         .previewLabelTextStyle,
                                                   ),
@@ -498,52 +501,52 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                               ),
                                             ),
                                             _editConsultantProfileLogic
-                                                .forDisplayExperienceList![
-                                            index]
-                                                .imagePath !=
-                                                null
+                                                        .forDisplayExperienceList![
+                                                            index]
+                                                        .imagePath !=
+                                                    null
                                                 ? Padding(
-                                              padding:
-                                              EdgeInsetsDirectional
-                                                  .only(end: 8.w),
-                                              child: InkWell(
-                                                onTap: () {
-                                                  Get.to(ImageViewScreen(
-                                                    networkImage: _editConsultantProfileLogic
-                                                        .forDisplayExperienceList![
-                                                    index]
-                                                        .imagePath!
-                                                        .contains(
-                                                        'assets')
-                                                        ? '$mediaUrl${_editConsultantProfileLogic.forDisplayExperienceList![index].imagePath}'
-                                                        : _editConsultantProfileLogic
-                                                        .forDisplayExperienceList![
-                                                    index]
-                                                        .imagePath!,
-                                                  ));
-                                                },
-                                                child: SizedBox(
-                                                    height: 30.h,
-                                                    width: 30.w,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                      BorderRadius
-                                                          .circular(
-                                                          4.r),
-                                                      child: Image.network(_editConsultantProfileLogic
-                                                          .forDisplayExperienceList![
-                                                      index]
-                                                          .imagePath!
-                                                          .contains(
-                                                          'assets')
-                                                          ? '$mediaUrl${_editConsultantProfileLogic.forDisplayExperienceList![index].imagePath}'
-                                                          : _editConsultantProfileLogic
-                                                          .forDisplayExperienceList![
-                                                      index]
-                                                          .imagePath!),
-                                                    )),
-                                              ),
-                                            )
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .only(end: 8.w),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        Get.to(ImageViewScreen(
+                                                          networkImage: _editConsultantProfileLogic
+                                                                  .forDisplayExperienceList![
+                                                                      index]
+                                                                  .imagePath!
+                                                                  .contains(
+                                                                      'assets')
+                                                              ? '$mediaUrl${_editConsultantProfileLogic.forDisplayExperienceList![index].imagePath}'
+                                                              : _editConsultantProfileLogic
+                                                                  .forDisplayExperienceList![
+                                                                      index]
+                                                                  .imagePath!,
+                                                        ));
+                                                      },
+                                                      child: SizedBox(
+                                                          height: 30.h,
+                                                          width: 30.w,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4.r),
+                                                            child: Image.network(_editConsultantProfileLogic
+                                                                    .forDisplayExperienceList![
+                                                                        index]
+                                                                    .imagePath!
+                                                                    .contains(
+                                                                        'assets')
+                                                                ? '$mediaUrl${_editConsultantProfileLogic.forDisplayExperienceList![index].imagePath}'
+                                                                : _editConsultantProfileLogic
+                                                                    .forDisplayExperienceList![
+                                                                        index]
+                                                                    .imagePath!),
+                                                          )),
+                                                    ),
+                                                  )
                                                 : const SizedBox(),
                                           ],
                                         ),
@@ -590,10 +593,11 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                             barrierDismissible: false,
                             builder: (BuildContext context) {
                               return CustomDialogBox(
-                                title: 'failed!'.tr,
+                                title: LanguageConstant.failed.tr,
                                 titleColor: customDialogErrorColor,
-                                descriptions: 'add_work_experience_please'.tr,
-                                text: 'ok'.tr,
+                                descriptions:
+                                    LanguageConstant.addWorkExperiencePlease.tr,
+                                text: LanguageConstant.ok.tr,
                                 functionCall: () {
                                   Navigator.pop(context);
                                 },
@@ -602,8 +606,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                             });
                       }
                     },
-                    child: const MyCustomBottomBar(
-                        title: 'Next Step', disable: false)),
+                    child: MyCustomBottomBar(
+                        title: LanguageConstant.nextStep.tr, disable: false)),
               )),
         ),
       ),
@@ -639,7 +643,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                     }
                   },
                   child: Text(
-                    "Camera",
+                    LanguageConstant.camera.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -668,7 +672,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                     }
                   },
                   child: Text(
-                    "Gallery",
+                    LanguageConstant.gallery.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -719,7 +723,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                   .experienceInfoPostModel
                   .data!
                   .experience);
-          Get.snackbar('${'added_successfully'.tr}!', '',
+          Get.snackbar('${LanguageConstant.addedSuccessfully.tr}!', '',
               colorText: Colors.black, backgroundColor: Colors.white);
           Get.find<GeneralController>().updateFormLoaderController(false);
           setState(() {
@@ -737,10 +741,10 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return CustomDialogBox(
-                  title: 'failed!'.tr,
+                  title: LanguageConstant.failed.tr,
                   titleColor: customDialogErrorColor,
-                  descriptions: 'try_again!'.tr,
-                  text: 'ok'.tr,
+                  descriptions: LanguageConstant.tryAgain.tr,
+                  text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
                   },
@@ -755,10 +759,10 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'failed!'.tr,
+                title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
                 descriptions: 'try_again!'.tr,
-                text: 'ok'.tr,
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                 },
@@ -773,10 +777,10 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'failed!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
               descriptions: 'try_again!'.tr,
-              text: 'ok'.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },

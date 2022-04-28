@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/modules/user/user_drawer/logic.dart';
 import 'package:flutter/material.dart';
@@ -8,27 +9,35 @@ import 'state.dart';
 class ConsultantDrawerLogic extends GetxController {
   final ConsultantDrawerState state = ConsultantDrawerState();
 
-
   List<DrawerTile> drawerList = [
-    DrawerTile(title: 'Home', icon: 'assets/Icons/drawerHomeIcon.svg'),
     DrawerTile(
-        title: 'Appointments Log',
+        title: LanguageConstant.home.tr,
+        icon: 'assets/Icons/drawerHomeIcon.svg'),
+    DrawerTile(
+        title: LanguageConstant.appointmentLogs.tr,
         icon: 'assets/Icons/drawerAppointmentIcon.svg'),
-    DrawerTile(title: 'Edit Profile', icon: 'assets/Icons/editProfile.svg'),
-    DrawerTile(title: 'My Schedule', icon: 'assets/Icons/schedule.svg'),
+    DrawerTile(
+        title: LanguageConstant.editProfile.tr,
+        icon: 'assets/Icons/feeIcon.svg'),
+    DrawerTile(
+        title: LanguageConstant.mySchedule.tr,
+        icon: 'assets/Icons/feeIcon.svg'),
     DrawerTile(title: 'My Wallet', icon: 'assets/Icons/feeIcon.svg'),
     DrawerTile(
-        title: 'Contact US', icon: 'assets/Icons/drawerContactUsIcon.svg'),
-    DrawerTile(title: 'Blogs', icon: 'assets/Icons/drawerBlogIcon.svg'),
+        title: LanguageConstant.contactUs.tr,
+        icon: 'assets/Icons/drawerContactUsIcon.svg'),
     DrawerTile(
-        title: 'About Us', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
+        title: LanguageConstant.blogs.tr,
+        icon: 'assets/Icons/drawerBlogIcon.svg'),
+    DrawerTile(
+        title: LanguageConstant.aboutUs.tr,
+        icon: 'assets/Icons/drawerPrivacyIcon.svg'),
   ];
 
-
   consultantDrawerNavigation(
-      int? index,
-      BuildContext context,
-      ) {
+    int? index,
+    BuildContext context,
+  ) {
     switch (index) {
       case 0:
         {
@@ -81,6 +90,4 @@ class ConsultantDrawerLogic extends GetxController {
         }
     }
   }
-
-
 }

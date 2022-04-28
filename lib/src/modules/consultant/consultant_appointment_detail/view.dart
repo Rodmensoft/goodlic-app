@@ -1,4 +1,6 @@
 import 'dart:async';
+
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/logic.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/widget/appontment_detail_box.dart';
@@ -10,10 +12,10 @@ import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:resize/resize.dart';
 
-import 'package:intl/intl.dart';
 import 'logic.dart';
 
 class ConsultantAppointmentDetailPage extends StatefulWidget {
@@ -167,7 +169,7 @@ class _ConsultantAppointmentDetailPageState
                                                 height: 25.h,
                                               ),
                                               Text(
-                                                'Appt. Detail',
+                                                LanguageConstant.apptDetail.tr,
                                                 style: TextStyle(
                                                     fontFamily:
                                                         SarabunFontFamily.bold,
@@ -184,7 +186,7 @@ class _ConsultantAppointmentDetailPageState
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    'Your Appointment Detail With ${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName}',
+                                                    '${LanguageConstant.yourAppointmentDetailsWith.tr} ${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName}',
                                                     style: TextStyle(
                                                         fontFamily:
                                                             SarabunFontFamily
@@ -272,6 +274,7 @@ class _ConsultantAppointmentDetailPageState
                                                     )
                                                   : const SizedBox()
                                               : const SizedBox(),
+
                                           ///---AUDIO
                                           (_consultantAppointmentDetailLogic
                                                           .selectedAppointmentData
@@ -311,7 +314,6 @@ class _ConsultantAppointmentDetailPageState
                                                     )
                                                   : const SizedBox()
                                               : const SizedBox(),
-
                                         ],
                                       ),
                                     ),
@@ -339,7 +341,7 @@ class _ConsultantAppointmentDetailPageState
                       category:
                           '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.email}',
                       fee:
-                          '\$${_consultantAppointmentDetailLogic.selectedAppointmentData.payment!} Fees',
+                          '\$${_consultantAppointmentDetailLogic.selectedAppointmentData.payment!} ${LanguageConstant.fees.tr}',
                       type:
                           '${_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeString}'
                               .capitalizeFirst,

@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -32,8 +33,8 @@ class _UserHomePageState extends State<UserHomePage> {
   void initState() {
     super.initState();
     if (Get.find<GeneralController>().storageBox.hasData('userID')) {
-
       Get.find<GeneralController>().updateFcmToken(context);
+
       ///---get-user-API-call
       getMethod(
           context,
@@ -45,9 +46,11 @@ class _UserHomePageState extends State<UserHomePage> {
           true,
           getUserProfileRepo);
     }
+
     ///---featured-API-call
     getMethod(context, getFeaturedURL, {'token': '123'}, false,
         getFeaturedConsultantRepo);
+
     ///---categories-API-call
     getMethod(
         context, getCategoriesURL, {'token': '123'}, false, getCategoriesRepo);
@@ -131,8 +134,8 @@ class _UserHomePageState extends State<UserHomePage> {
                                     SizedBox(
                                       height: 50.h,
                                     ),
-                                     Text(
-                                      'Find Your',
+                                    Text(
+                                      LanguageConstant.findYour.tr,
                                       style: TextStyle(
                                           fontFamily: SarabunFontFamily.medium,
                                           fontSize: 17.sp,
@@ -141,7 +144,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                     SizedBox(
                                       height: 10.h,
                                     ),
-                                    Text('Consultant',
+                                    Text(LanguageConstant.mentor.tr,
                                         style: state.headingTextStyle),
                                     SizedBox(
                                       height: 20.h,
@@ -164,7 +167,8 @@ class _UserHomePageState extends State<UserHomePage> {
                                                 'assets/Icons/searchIcon.svg'),
                                           ],
                                         ),
-                                        hintText: 'Search Here',
+                                        hintText:
+                                            LanguageConstant.searchHere.tr,
                                         hintStyle: const TextStyle(
                                             fontFamily:
                                                 SarabunFontFamily.medium,
@@ -195,9 +199,11 @@ class _UserHomePageState extends State<UserHomePage> {
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'field_required'.tr;
+                                          return LanguageConstant
+                                              .fieldRequired.tr;
                                         } else if (!GetUtils.isEmail(value)) {
-                                          return 'Enter Valid Email';
+                                          return LanguageConstant
+                                              .enterValidEmail.tr;
                                         } else {
                                           return null;
                                         }

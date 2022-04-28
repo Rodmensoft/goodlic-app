@@ -1,17 +1,17 @@
-
 import 'dart:developer';
 import 'dart:io';
+
+import 'package:consultant_product/multi_language/language_constants.dart';
+import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/header.dart';
 import 'package:consultant_product/src/api_services/logic.dart';
-import 'package:consultant_product/src/modules/user/edit_user_profile/logic.dart';
-import 'package:dio/dio.dart' as dio_instance;
-
-import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/user/edit_user_profile/logic.dart';
 import 'package:consultant_product/src/modules/user/home/get_repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
+import 'package:dio/dio.dart' as dio_instance;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,10 +33,10 @@ menteeUpdateProfileRepo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'SUCCESS!'.tr,
+              title: '${LanguageConstant.success.tr}!',
               titleColor: customDialogSuccessColor,
-              descriptions: 'Profile Updated Successfully',
-              text: 'OK'.tr,
+              descriptions: LanguageConstant.profileUpdatedSuccessfully.tr,
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
                 Get.back();
@@ -52,10 +52,10 @@ menteeUpdateProfileRepo(
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'FAILED!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'Try Again!'.tr,
-              text: 'OK'.tr,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },
@@ -70,10 +70,10 @@ menteeUpdateProfileRepo(
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'FAILED!'.tr,
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'Try Again!'.tr,
-            text: 'OK'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },
@@ -88,7 +88,7 @@ menteeUpdateProfileRepo(
 
 menteeUpdateProfileImageRepo(File? file1) async {
   dio_instance.FormData formData =
-  dio_instance.FormData.fromMap(<String, dynamic>{
+      dio_instance.FormData.fromMap(<String, dynamic>{
     'token': '123',
     'user_id': Get.find<GeneralController>().storageBox.read('userID'),
     'first_name': Get.find<EditUserProfileLogic>().firstNameController.text,
@@ -98,8 +98,8 @@ menteeUpdateProfileImageRepo(File? file1) async {
         .menteeProfileGenericDataModel
         .data!
         .countries![Get.find<EditUserProfileLogic>()
-        .countryDropDownList
-        .indexOf(Get.find<EditUserProfileLogic>().selectedCountry!)]
+            .countryDropDownList
+            .indexOf(Get.find<EditUserProfileLogic>().selectedCountry!)]
         .id,
     'city': Get.find<EditUserProfileLogic>().selectedCity,
     'image': await dio_instance.MultipartFile.fromFile(
@@ -124,8 +124,7 @@ menteeUpdateProfileImageRepo(File? file1) async {
             getMenteeProfileUrl,
             {
               'token': '123',
-              'user_id':
-              Get.find<GeneralController>().storageBox.read('userID')
+              'user_id': Get.find<GeneralController>().storageBox.read('userID')
             },
             true,
             getUserProfileRepo);
@@ -134,10 +133,10 @@ menteeUpdateProfileImageRepo(File? file1) async {
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'SUCCESS!'.tr,
+                title: '${LanguageConstant.success.tr}!',
                 titleColor: customDialogSuccessColor,
-                descriptions: 'Profile Updated Successfully',
-                text: 'OK'.tr,
+                descriptions: LanguageConstant.profileUpdatedSuccessfully.tr,
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                   Get.back();
@@ -153,10 +152,10 @@ menteeUpdateProfileImageRepo(File? file1) async {
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'FAILED!'.tr,
+                title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
-                descriptions: 'Try Again!'.tr,
-                text: 'OK'.tr,
+                descriptions: '${LanguageConstant.tryAgain.tr}!',
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                 },
@@ -173,10 +172,10 @@ menteeUpdateProfileImageRepo(File? file1) async {
           barrierDismissible: false,
           builder: (BuildContext context) {
             return CustomDialogBox(
-              title: 'FAILED!'.tr,
+              title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'Try Again!'.tr,
-              text: 'OK'.tr,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
+              text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
               },
@@ -191,10 +190,10 @@ menteeUpdateProfileImageRepo(File? file1) async {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'FAILED!'.tr,
+            title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'Try Again!'.tr,
-            text: 'OK'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },
@@ -202,7 +201,6 @@ menteeUpdateProfileImageRepo(File? file1) async {
           );
         });
     log('Exception..${e.response}');
-
   }
 }
 

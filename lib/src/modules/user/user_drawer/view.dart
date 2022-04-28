@@ -1,4 +1,5 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -265,7 +266,7 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                             width: 15.w,
                                           ),
                                           Text(
-                                            'Lets Login',
+                                            LanguageConstant.letsLogin.tr,
                                             style: state.nameTextStyle,
                                           ),
                                           const Spacer()
@@ -412,7 +413,7 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                   ],
                                 ),
                                 title: Text(
-                                  'Logout',
+                                  LanguageConstant.logout.tr,
                                   style: state.titleTextStyle,
                                 ),
                               ),

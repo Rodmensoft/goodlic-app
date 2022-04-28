@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/logic.dart';
@@ -38,29 +39,26 @@ class _ConfirmationViewState extends State<ConfirmationView> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height*.1,
+                      height: MediaQuery.of(context).size.height * .1,
                     ),
                     SvgPicture.asset('assets/images/successfullImage.svg'),
                     SizedBox(
                       height: 30.h,
                     ),
                     Text(
-                      'Profile Created',
+                      LanguageConstant.profileCreated.tr,
                       style: TextStyle(
-                        fontFamily: SarabunFontFamily.bold,
-                        fontSize: 28.sp,
-                        color: Colors.black
-                      ),
+                          fontFamily: SarabunFontFamily.bold,
+                          fontSize: 28.sp,
+                          color: Colors.black),
                     ),
                     Text(
-                      'Successfully',
+                      LanguageConstant.successfully.tr,
                       style: TextStyle(
                           fontFamily: SarabunFontFamily.medium,
                           fontSize: 16.sp,
-                          color: customOrangeColor
-                      ),
+                          color: customOrangeColor),
                     ),
-
                   ],
                 ),
               ),
@@ -70,8 +68,9 @@ class _ConfirmationViewState extends State<ConfirmationView> {
                     onTap: () {
                       Get.offAllNamed(PageRoutes.consultantDashboard);
                     },
-                    child: const MyCustomBottomBar(
-                        title: 'Go To Dashboard', disable: false)),
+                    child: MyCustomBottomBar(
+                        title: LanguageConstant.goToDashboard.tr,
+                        disable: false)),
               )),
         ),
       ),

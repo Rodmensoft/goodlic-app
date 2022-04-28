@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -60,21 +61,21 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                 ],
               ),
               Expanded(
-                flex:2,
+                  flex: 2,
                   child: Align(
-                alignment: Alignment.center,
-                child: SvgPicture.asset(
-                  'assets/images/waitingImage.svg',
-                  width: MediaQuery.of(context).size.width * .5,
-                ),
-              )),
+                    alignment: Alignment.center,
+                    child: SvgPicture.asset(
+                      'assets/images/waitingImage.svg',
+                      width: MediaQuery.of(context).size.width * .5,
+                    ),
+                  )),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'your_profile_is_under'.tr,
+                      LanguageConstant.yourProfileIsUnder.tr,
                       style: TextStyle(
                           fontSize: 14.sp,
                           fontFamily: SarabunFontFamily.regular,
@@ -87,7 +88,7 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'under'.tr,
+                          LanguageConstant.under.tr,
                           style: TextStyle(
                               fontSize: 30.sp,
                               fontFamily: SarabunFontFamily.extraBold,
@@ -97,7 +98,7 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                           width: 7.w,
                         ),
                         Text(
-                          'review'.tr,
+                          LanguageConstant.review.tr,
                           style: TextStyle(
                               fontSize: 30.sp,
                               fontFamily: SarabunFontFamily.extraBold,
@@ -109,7 +110,7 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                       height: 5,
                     ),
                     Text(
-                      'you_will_be_notified_once_it_get_approve'.tr,
+                      LanguageConstant.youWillBeNotifiedOnceItGetApprove.tr,
                       style: TextStyle(
                           fontSize: 14.sp,
                           fontFamily: SarabunFontFamily.regular,

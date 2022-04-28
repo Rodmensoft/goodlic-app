@@ -1,10 +1,10 @@
 import 'package:animation_wrappers/animations/faded_slide_animation.dart';
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/logic.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/repo_post.dart';
-import 'package:consultant_product/src/modules/consultant/dashboard/view.dart';
 import 'package:consultant_product/src/modules/user/user_drawer/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
@@ -248,7 +248,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                           ),
 
                           ListTile(
-                            title: Text('online_status'.tr,
+                            title: Text(LanguageConstant.onlineStatus.tr,
                                 style: TextStyle(
                                     fontSize: 14.sp,
                                     fontFamily: SarabunFontFamily.regular,
@@ -393,7 +393,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                       ],
                                     ),
                                     title: Text(
-                                      'Logout',
+                                      LanguageConstant.logout.tr,
                                       style: state.titleTextStyle,
                                     ),
                                   ),

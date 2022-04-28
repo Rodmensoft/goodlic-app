@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/blogs/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -66,8 +67,9 @@ class _BlogsPageState extends State<BlogsPage> {
                   return <Widget>[
                     ///---header
                     MyCustomSliverAppBar(
-                      heading: 'Blog',
-                      subHeading: "Explore Today's Trending Articles",
+                      heading: LanguageConstant.blog.tr,
+                      subHeading:
+                          LanguageConstant.exploreTodayTrendingArticles.tr,
                       isShrink: _blogsLogic.isShrink,
                     ),
                   ];
@@ -117,7 +119,8 @@ class _BlogsPageState extends State<BlogsPage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                           Text(
-                                            'recommended_blogs'.tr,
+                                            LanguageConstant
+                                                .recommendedBlogs.tr,
                                             style: state.headingTextStyle,
                                           ),
                                           SizedBox(height: 16.h),
@@ -252,7 +255,7 @@ class _BlogsPageState extends State<BlogsPage> {
 
                           /// Text
                           Text(
-                            'For You',
+                            LanguageConstant.forYou.tr,
                             style: state.headingTextStyle,
                           ),
                           SizedBox(height: 30.h),
@@ -373,7 +376,7 @@ class _BlogsPageState extends State<BlogsPage> {
                                                     .categoryBlogs!.isEmpty
                                                 ? Center(
                                                     child: Text(
-                                                        '${'no_record_found'.tr}!',
+                                                        '${LanguageConstant.noRecordFound.tr}!',
                                                         style: TextStyle(
                                                             fontSize: 14.sp,
                                                             fontFamily:
@@ -393,7 +396,7 @@ class _BlogsPageState extends State<BlogsPage> {
                                                             .isEmpty
                                                         ? Center(
                                                             child: Text(
-                                                                '${'no_record_found'.tr}!',
+                                                                '${LanguageConstant.noRecordFound.tr}!',
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         14.sp,

@@ -1,17 +1,19 @@
+import 'dart:developer';
+
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
-import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_get.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/logic.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_skill_info.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_delete.dart';
+import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_get.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_post.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -33,6 +35,13 @@ class _SkillInfoViewState extends State<SkillInfoView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Get.find<EditConsultantProfileLogic>().scrollController!.animateTo(
+        Get.find<EditConsultantProfileLogic>()
+            .scrollController!
+            .position
+            .minScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 500));
   }
 
   @override
@@ -68,7 +77,7 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                               }
                             },
                             hint: Text(
-                              'department'.tr.capitalizeFirst!,
+                              LanguageConstant.department.tr.capitalizeFirst!,
                               style: state.hintTextStyle,
                             ),
                             decoration: InputDecoration(
@@ -100,7 +109,8 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             icon: const Icon(Icons.keyboard_arrow_down),
                             iconSize: 25,
                             value: _editConsultantProfileLogic.selectedCategory,
-                            items: _editConsultantProfileLogic.categoryDropDownList
+                            items: _editConsultantProfileLogic
+                                .categoryDropDownList
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -113,14 +123,16 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             onChanged: (String? value) {
                               _editConsultantProfileLogic
                                   .emptySelectedSubCategoriesIDList();
-                              _editConsultantProfileLogic.emptyAllSubCategoriesList();
+                              _editConsultantProfileLogic
+                                  .emptyAllSubCategoriesList();
                               _editConsultantProfileLogic
                                   .emptyAllSubCategoriesForDropDownList();
                               _editConsultantProfileLogic
                                   .emptySelectedSubCategoriesList();
                               log(value.toString());
                               setState(() {
-                                _editConsultantProfileLogic.selectedCategory = value;
+                                _editConsultantProfileLogic.selectedCategory =
+                                    value;
                                 _editConsultantProfileLogic
                                     .updateSelectedSubCategoriesList(value!);
                                 _editConsultantProfileLogic
@@ -144,10 +156,12 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                     'parent_id': _editConsultantProfileLogic
                                         .getParentCategoriesModel
                                         .data!
-                                        .mentorCategories![_editConsultantProfileLogic
-                                            .categoryDropDownList
-                                            .indexOf(_editConsultantProfileLogic
-                                                .selectedCategory!)]
+                                        .mentorCategories![
+                                            _editConsultantProfileLogic
+                                                .categoryDropDownList
+                                                .indexOf(
+                                                    _editConsultantProfileLogic
+                                                        .selectedCategory!)]
                                         .id
                                   },
                                   false,
@@ -155,7 +169,7 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             },
                             validator: (String? value) {
                               if (value == null) {
-                                return 'field_required'.tr;
+                                return LanguageConstant.fieldRequired.tr;
                               } else {
                                 return null;
                               }
@@ -206,7 +220,8 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                             1;
                                         i > index;
                                         i--) {
-                                      _editConsultantProfileLogic.allSubCategoriesList
+                                      _editConsultantProfileLogic
+                                          .allSubCategoriesList
                                           .removeAt(i);
                                       setState(() {});
                                     }
@@ -343,9 +358,13 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                               currentFocus.unfocus();
                             }
                             log('IDS-------->>${_editConsultantProfileLogic.selectedSubCategoriesIDList}');
-                            if (_editConsultantProfileLogic.getChildCategoriesModel
-                                .data!.mentorCategories!.isEmpty) {
-                              _editConsultantProfileLogic.forDisplaySkillList = [];
+                            if (_editConsultantProfileLogic
+                                .getChildCategoriesModel
+                                .data!
+                                .mentorCategories!
+                                .isEmpty) {
+                              _editConsultantProfileLogic.forDisplaySkillList =
+                                  [];
                               _editConsultantProfileLogic.update();
                               Get.find<GeneralController>()
                                   .updateFormLoaderController(true);
@@ -368,11 +387,11 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                   barrierDismissible: false,
                                   builder: (BuildContext context) {
                                     return CustomDialogBox(
-                                      title: 'failed!'.tr,
+                                      title: LanguageConstant.failed.tr,
                                       titleColor: customDialogErrorColor,
                                       descriptions:
-                                          '${'Select Category Please'.tr}!',
-                                      text: 'ok'.tr,
+                                          '${LanguageConstant.selectCategoryPlease.tr}!',
+                                      text: LanguageConstant.ok.tr,
                                       functionCall: () {
                                         Navigator.pop(context);
                                       },
@@ -389,10 +408,11 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                 borderRadius: BorderRadius.circular(8)),
                             child: Center(
                               child: Text(
-                                _editConsultantProfileLogic.skillInfoPostModel.data ==
+                                _editConsultantProfileLogic
+                                            .skillInfoPostModel.data ==
                                         null
-                                    ? 'add_skill'.tr
-                                    : 'update'.tr,
+                                    ? LanguageConstant.addSkill.tr
+                                    : LanguageConstant.update.tr,
                                 style: state.addButtonTextStyle,
                               ),
                             ),
@@ -489,51 +509,55 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                     _editConsultantProfileLogic.forDisplaySkillList!.isEmpty
                         ? const SizedBox()
                         : Padding(
-                        padding:
-                        const EdgeInsetsDirectional.fromSTEB(15, 28, 15, 20),
-                        child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                BorderRadius.circular(14),
-                                color: Colors.white),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  15, 15, 7, 15),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment
-                                        .spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                15, 28, 15, 20),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(14),
+                                    color: Colors.white),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      15, 15, 7, 15),
+                                  child: Column(
                                     children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .start,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .start,
-                                          children: List.generate(_editConsultantProfileLogic
-                                              .forDisplaySkillList!.length, (index) =>
-                                              Padding(
-                                                padding:  EdgeInsets.fromLTRB(0+(index.toDouble()*5), 6, 0, 0),
-                                                child: Text(
-                                                  '${index+1}-> ${_editConsultantProfileLogic
-                                                      .forDisplaySkillList![index].category!.name}',
-                                                  style: state
-                                                      .previewLabelTextStyle,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: List.generate(
+                                                _editConsultantProfileLogic
+                                                    .forDisplaySkillList!
+                                                    .length,
+                                                (index) => Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0 +
+                                                          (index.toDouble() *
+                                                              5),
+                                                      6,
+                                                      0,
+                                                      0),
+                                                  child: Text(
+                                                    '${index + 1}-> ${_editConsultantProfileLogic.forDisplaySkillList![index].category!.name}',
+                                                    style: state
+                                                        .previewLabelTextStyle,
+                                                  ),
                                                 ),
-                                              ),),
-                                        ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-
                                     ],
                                   ),
-                                ],
-                              ),
-                            ))),
+                                ))),
                   ],
                 ),
               )),
@@ -541,16 +565,24 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                 padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 0),
                 child: InkWell(
                     onTap: () {
-                      if ((_editConsultantProfileLogic.skillInfoPostModel.data != null &&
-                          _editConsultantProfileLogic.forDisplaySkillList!.isEmpty) ||
-                          (_editConsultantProfileLogic.skillInfoPostModel.data == null &&
-                              _editConsultantProfileLogic.forDisplaySkillList!.isNotEmpty)) {
+                      if ((_editConsultantProfileLogic
+                                      .skillInfoPostModel.data !=
+                                  null &&
+                              _editConsultantProfileLogic
+                                  .forDisplaySkillList!.isEmpty) ||
+                          (_editConsultantProfileLogic
+                                      .skillInfoPostModel.data ==
+                                  null &&
+                              _editConsultantProfileLogic
+                                  .forDisplaySkillList!.isNotEmpty)) {
                         setState(() {
                           _editConsultantProfileLogic
-                              .stepperList[_editConsultantProfileLogic.stepperIndex!]
+                              .stepperList[
+                                  _editConsultantProfileLogic.stepperIndex!]
                               .isSelected = false;
                           _editConsultantProfileLogic
-                              .stepperList[_editConsultantProfileLogic.stepperIndex!]
+                              .stepperList[
+                                  _editConsultantProfileLogic.stepperIndex!]
                               .isCompleted = true;
                           _editConsultantProfileLogic
                               .stepperList[
@@ -564,10 +596,11 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             barrierDismissible: false,
                             builder: (BuildContext context) {
                               return CustomDialogBox(
-                                title: 'failed!'.tr,
+                                title: LanguageConstant.failed.tr,
                                 titleColor: customDialogErrorColor,
-                                descriptions: 'add_skill_please'.tr,
-                                text: 'ok'.tr,
+                                descriptions:
+                                    LanguageConstant.addSkillPlease.tr,
+                                text: LanguageConstant.ok.tr,
                                 functionCall: () {
                                   Navigator.pop(context);
                                 },
@@ -576,8 +609,8 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             });
                       }
                     },
-                    child: const MyCustomBottomBar(
-                        title: 'Next Step', disable: false)),
+                    child: MyCustomBottomBar(
+                        title: LanguageConstant.nextStep.tr, disable: false)),
               )),
         ),
       ),
@@ -621,7 +654,7 @@ class _SubCategoryDropDownState extends State<SubCategoryDropDown> {
               }
             },
             hint: Text(
-              'category'.tr.capitalizeFirst!,
+              LanguageConstant.category.tr.capitalizeFirst!,
               style: state.hintTextStyle,
             ),
             decoration: InputDecoration(
@@ -666,7 +699,7 @@ class _SubCategoryDropDownState extends State<SubCategoryDropDown> {
             },
             validator: (String? value) {
               if (value == null) {
-                return 'field_required'.tr;
+                return LanguageConstant.fieldRequired.tr;
               } else {
                 return null;
               }

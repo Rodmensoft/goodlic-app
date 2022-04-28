@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,28 +9,45 @@ class UserDrawerLogic extends GetxController {
   final UserDrawerState state = UserDrawerState();
 
   List<DrawerTile> drawerLoginList = [
-    DrawerTile(title: 'Home', icon: 'assets/Icons/drawerHomeIcon.svg'),
     DrawerTile(
-        title: 'Categories', icon: 'assets/Icons/drawerCategoryIcon.svg'),
+        title: LanguageConstant.home.tr,
+        icon: 'assets/Icons/drawerHomeIcon.svg'),
     DrawerTile(
-        title: 'Appointments Log',
+        title: LanguageConstant.categories.tr,
+        icon: 'assets/Icons/drawerCategoryIcon.svg'),
+    DrawerTile(
+        title: LanguageConstant.appointmentLogs.tr,
         icon: 'assets/Icons/drawerAppointmentIcon.svg'),
-    DrawerTile(title: 'Edit Profile', icon: 'assets/Icons/editProfile.svg'),
+    DrawerTile(
+        title: LanguageConstant.editProfile.tr,
+        icon: 'assets/Icons/feeIcon.svg'),
     DrawerTile(title: 'My Wallet', icon: 'assets/Icons/feeIcon.svg'),
     DrawerTile(
-        title: 'Contact US', icon: 'assets/Icons/drawerContactUsIcon.svg'),
-    DrawerTile(title: 'Blogs', icon: 'assets/Icons/drawerBlogIcon.svg'),
-    DrawerTile(title: 'About Us', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
+        title: LanguageConstant.contactUs.tr,
+        icon: 'assets/Icons/drawerContactUsIcon.svg'),
+    DrawerTile(
+        title: LanguageConstant.blogs.tr,
+        icon: 'assets/Icons/drawerBlogIcon.svg'),
+    DrawerTile(
+        title: LanguageConstant.aboutUs.tr,
+        icon: 'assets/Icons/drawerPrivacyIcon.svg'),
   ];
   List<DrawerTile> drawerList = [
-    DrawerTile(title: 'Home', icon: 'assets/Icons/drawerHomeIcon.svg'),
     DrawerTile(
-        title: 'Categories', icon: 'assets/Icons/drawerCategoryIcon.svg'),
+        title: LanguageConstant.home.tr,
+        icon: 'assets/Icons/drawerHomeIcon.svg'),
     DrawerTile(
-        title: 'Contact US', icon: 'assets/Icons/drawerContactUsIcon.svg'),
-    DrawerTile(title: 'Blogs', icon: 'assets/Icons/drawerBlogIcon.svg'),
+        title: LanguageConstant.categories.tr,
+        icon: 'assets/Icons/drawerCategoryIcon.svg'),
     DrawerTile(
-        title: 'About Us', icon: 'assets/Icons/drawerPrivacyIcon.svg'),
+        title: LanguageConstant.contactUs.tr,
+        icon: 'assets/Icons/drawerContactUsIcon.svg'),
+    DrawerTile(
+        title: LanguageConstant.blogs.tr,
+        icon: 'assets/Icons/drawerBlogIcon.svg'),
+    DrawerTile(
+        title: LanguageConstant.aboutUs.tr,
+        icon: 'assets/Icons/drawerPrivacyIcon.svg'),
   ];
 
   userLoginDrawerNavigation(

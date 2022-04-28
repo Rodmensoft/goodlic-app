@@ -26,11 +26,10 @@ class EditUserProfileLogic extends GetxController {
     }
   }
 
-
-  MenteeProfileGenericDataModel menteeProfileGenericDataModel = MenteeProfileGenericDataModel();
+  MenteeProfileGenericDataModel menteeProfileGenericDataModel =
+      MenteeProfileGenericDataModel();
   CitiesByIdModel citiesByIdModel = CitiesByIdModel();
   GetMenteeProfileModel getMenteeProfileModel = GetMenteeProfileModel();
-
 
   File? profileImage;
   List profileImagesList = [];
@@ -49,7 +48,6 @@ class EditUserProfileLogic extends GetxController {
     update();
   }
 
-
   String? selectedCity;
   List<String> cityDropDownList = [];
 
@@ -57,7 +55,6 @@ class EditUserProfileLogic extends GetxController {
     cityDropDownList.add(newValue);
     update();
   }
-
 
   bool? profileHiddenSwitch = false;
   updateProfileHiddenSwitch(bool? newValue) {
