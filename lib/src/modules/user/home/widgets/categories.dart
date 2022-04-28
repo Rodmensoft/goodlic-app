@@ -147,7 +147,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 24.h,
+                                        height: 22.h,
                                       ),
                                       Text(
                                         '${_userHomeLogic.categoriesList[index].title}',

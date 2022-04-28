@@ -37,6 +37,7 @@ import 'package:consultant_product/src/modules/user/consultant_profile/view.dart
 import 'package:consultant_product/src/modules/user/edit_user_profile/view.dart';
 import 'package:consultant_product/src/modules/user/home/view.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/view.dart';
+import 'package:consultant_product/src/modules/user/search_consultant/view.dart';
 import 'package:consultant_product/src/modules/user/user_drawer/view.dart';
 import 'package:consultant_product/src/modules/wallet/payment_stripe/view_stripe.dart';
 import 'package:consultant_product/src/modules/wallet/view.dart';
@@ -142,6 +143,8 @@ routes() => [
       name: '/inAppWebPage', page: () => const InAppWebPage()),
   GetPage(
       name: '/stripePaymentForLater', page: () => const StripePaymentForLater()),
+  GetPage(
+      name: '/searchConsultant', page: () => const SearchConsultantPage()),
 
     ];
 
@@ -192,6 +195,7 @@ class PageRoutes {
   static const String splash = '/splash';
   static const String inAppWebPage = '/inAppWebPage';
   static const String stripePaymentForLater = '/stripePaymentForLater';
+  static const String searchConsultant = '/searchConsultant';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -239,6 +243,7 @@ class PageRoutes {
       splash: (context) => const SplashPage(),
       inAppWebPage: (context) => const InAppWebPage(),
       stripePaymentForLater: (context) => const StripePaymentForLater(),
+      searchConsultant: (context) => const SearchConsultantPage(),
 
     };
   }

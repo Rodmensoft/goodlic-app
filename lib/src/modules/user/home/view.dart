@@ -152,7 +152,10 @@ class _UserHomePageState extends State<UserHomePage> {
 
                                     ///---search-field
                                     TextFormField(
-                                      keyboardType: TextInputType.emailAddress,
+                                      onTap: (){
+                                        Get.toNamed(PageRoutes.searchConsultant);
+                                      },
+                                      readOnly: true,
                                       decoration: InputDecoration(
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(

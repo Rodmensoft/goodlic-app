@@ -351,54 +351,6 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                             }),
                           )),
 
-                          Get.find<GeneralController>()
-                                  .storageBox
-                                  .hasData('authToken')
-                              ?
-
-                              ///---logout
-                              Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 70.w, vertical: 15.h),
-                                  child: ListTile(
-                                    onTap: () {
-                                      Get.find<GeneralController>()
-                                          .storageBox
-                                          .remove('userID');
-                                      Get.find<GeneralController>()
-                                          .storageBox
-                                          .remove('authToken');
-                                      Get.find<GeneralController>()
-                                          .storageBox
-                                          .remove('onlineStatus');
-                                      Get.find<GeneralController>()
-                                          .storageBox
-                                          .remove('userRole');
-                                      Get.find<GeneralController>()
-                                          .storageBox
-                                          .remove('fcmToken');
-                                      Get.offAllNamed(PageRoutes.userHome);
-                                    },
-                                    leading: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/Icons/drawerLogoutIcon.svg',
-                                          height: 20.h,
-                                          width: 20.w,
-                                        ),
-                                      ],
-                                    ),
-                                    title: Text(
-                                      LanguageConstant.logout.tr,
-                                      style: state.titleTextStyle,
-                                    ),
-                                  ),
-                                )
-                              : const SizedBox(),
                         ],
                       ),
                     ),
