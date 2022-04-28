@@ -49,7 +49,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -761,7 +761,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
               return CustomDialogBox(
                 title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
-                descriptions: 'try_again!'.tr,
+                descriptions: '${LanguageConstant.tryAgain.tr}!',
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
@@ -779,7 +779,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
             return CustomDialogBox(
               title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'try_again!'.tr,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);

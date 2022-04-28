@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/modules/wallet/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -22,7 +23,7 @@ paymentBottomSheetForWallet(BuildContext context) async {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                'Payment Method',
+                LanguageConstant.paymentMethod.tr,
                 style: _walletLogic.state.headingTextStyle,
               ),
               SizedBox(

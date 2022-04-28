@@ -57,7 +57,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                     ///---header
                     MyCustomSliverAppBar(
                       heading: LanguageConstant.aboutUs.tr,
-                      subHeading: "Get know about our vision and mission",
+                      subHeading:
+                          LanguageConstant.getKnowAboutOurVisionAndMission,
                       isShrink: _aboutUsLogic.isShrink,
                     ),
                   ];
@@ -225,7 +226,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                           children: [
                                             ///---heading
                                             Text(
-                                              'easy_sign_up'.tr,
+                                              LanguageConstant.easySignUp.tr,
                                               style: state.subHeadingTextStyle,
                                             ),
                                             const SizedBox(
@@ -290,7 +291,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                           children: [
                                             ///---heading
                                             Text(
-                                              'professional_mentors'.tr,
+                                              LanguageConstant
+                                                  .professionalConsultants.tr,
                                               style: state.subHeadingTextStyle,
                                             ),
                                             const SizedBox(

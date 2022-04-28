@@ -63,7 +63,7 @@ newPasswordRepo(
             title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
             descriptions: '${LanguageConstant.tryAgain.tr}!',
-            text: 'ok'.tr,
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },

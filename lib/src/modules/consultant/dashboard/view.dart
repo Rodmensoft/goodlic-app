@@ -136,8 +136,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
 
   @override
   void dispose() {
-    Get.find<DashboardLogic>()
-        .refreshAppointmentsController.dispose();
+    Get.find<DashboardLogic>().refreshAppointmentsController.dispose();
     Get.find<DashboardLogic>()
         .scrollController!
         .removeListener(Get.find<DashboardLogic>().scrollListener);
@@ -1119,7 +1118,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                   children: [
                                                     ///---heading
                                                     Text(
-                                                      'today_appointments'.tr,
+                                                      LanguageConstant
+                                                          .todayAppointment.tr,
                                                       style: state
                                                           .headingTextStyle,
                                                     ),

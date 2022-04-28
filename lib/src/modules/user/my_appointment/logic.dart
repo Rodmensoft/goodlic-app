@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/model_get_user_appointment.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/model_get_user_appointment_more.dart';
 import 'package:flutter/material.dart';
@@ -10,25 +11,26 @@ import 'state.dart';
 class MyAppointmentLogic extends GetxController {
   final MyAppointmentState state = MyAppointmentState();
 
-
   late TabController tabController;
 
   GetUserAppointmentModel getUserAppointmentModel = GetUserAppointmentModel();
-  GetUserAppointmentModelMore getUserAppointmentModelMore = GetUserAppointmentModelMore();
-
+  GetUserAppointmentModelMore getUserAppointmentModelMore =
+      GetUserAppointmentModelMore();
 
   bool? getUserAppointmentLoader = true;
-  updateGetUserAppointmentLoader(bool? newValue){
+  updateGetUserAppointmentLoader(bool? newValue) {
     getUserAppointmentLoader = newValue;
     update();
   }
+
   bool? getUserAppointmentMoreLoader = false;
-  updateGetUserAppointmentMoreLoader(bool? newValue){
+  updateGetUserAppointmentMoreLoader(bool? newValue) {
     getUserAppointmentMoreLoader = newValue;
     update();
   }
+
   final RefreshController refreshAppointmentsController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   updateRefreshController() {
     refreshAppointmentsController.refreshCompleted();
@@ -52,11 +54,15 @@ class MyAppointmentLogic extends GetxController {
     }
   }
 
-  List<Tab> tabBarList = const [
-    Tab( text: "Pending",),
-    Tab( text: "Accepted",),
-    Tab( text: "Completed"),
-    Tab( text: "Cancelled"),
+  List<Tab> tabBarList = [
+    Tab(
+      text: LanguageConstant.pending.tr,
+    ),
+    Tab(
+      text: LanguageConstant.accepted.tr,
+    ),
+    Tab(text: LanguageConstant.completed.tr),
+    Tab(text: LanguageConstant.cancelled.tr),
   ];
 
   List imagesForAppointmentTypes = [

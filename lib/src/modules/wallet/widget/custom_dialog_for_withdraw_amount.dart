@@ -1,4 +1,4 @@
-
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -52,7 +52,7 @@ customDialogForWithdrawAmount(BuildContext context) {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              'withdraw_request'.tr,
+                              LanguageConstant.withdrawRequest.tr,
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   fontWeight: FontWeight.w600,
@@ -64,20 +64,20 @@ customDialogForWithdrawAmount(BuildContext context) {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          15, 15, 15, 15),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
                       child: TextFormField(
                         style: TextStyle(
                             fontFamily: SarabunFontFamily.regular,
                             fontSize: 16.sp,
                             color: Colors.black),
                         controller:
-                        Get.find<WalletLogic>().withdrawAmountController,
+                            Get.find<WalletLogic>().withdrawAmountController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               25.w, 15.h, 25.w, 15.h),
-                          hintText: 'add_amount'.tr,
+                          hintText: LanguageConstant.addAmount.tr,
                           hintStyle: TextStyle(
                               fontFamily: SarabunFontFamily.regular,
                               fontSize: 16.sp,
@@ -86,33 +86,33 @@ customDialogForWithdrawAmount(BuildContext context) {
                           filled: true,
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent)),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent)),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent)),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
                               borderSide: const BorderSide(
                                   color: customLightThemeColor)),
                           errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                              const BorderSide(color: Colors.red)),
+                              borderSide: const BorderSide(color: Colors.red)),
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
-                            return 'field_required'.tr;
+                            return LanguageConstant.fieldRequired.tr;
                           } else if (int.parse(Get.find<WalletLogic>()
-                              .withdrawAmountController
-                              .text
-                              .toString()) >
+                                  .withdrawAmountController
+                                  .text
+                                  .toString()) >
                               int.parse(Get.find<WalletLogic>()
                                   .getWalletBalanceModel
                                   .data!
                                   .userBalance!)) {
-                            return 'you_do_not_have_sufficient_balance'.tr;
+                            return LanguageConstant
+                                .youDoNotHaveSufficientBalance.tr;
                           } else {
                             return null;
                           }
@@ -129,7 +129,7 @@ customDialogForWithdrawAmount(BuildContext context) {
                               Navigator.pop(context);
                             },
                             child: Text(
-                              'cancel'.tr,
+                              LanguageConstant.cancel.tr,
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16.sp,
@@ -163,7 +163,7 @@ customDialogForWithdrawAmount(BuildContext context) {
                               }
                             },
                             child: Text(
-                              'submit'.tr,
+                              LanguageConstant.submit.tr,
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16.sp,

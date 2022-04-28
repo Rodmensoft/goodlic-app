@@ -77,7 +77,7 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                       MyCustomSliverAppBar(
                         heading: LanguageConstant.bookAppointment.tr,
                         subHeading: LanguageConstant.byJustFewEasySteps.tr,
-                        trailing: 'Step 3 Of 3',
+                        trailing: LanguageConstant.step3Of3.tr,
                         fee:
                             '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
                         feeImage:
@@ -662,8 +662,12 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                   .read('userID'),
                                           "total": _bookAppointmentLogic
                                               .selectMentorAppointmentType!.fee,
-                                          "payment_method_code": _bookAppointmentLogic.paymentMethodList
-                                          [_bookAppointmentLogic.selectedPaymentType!].title,
+                                          "payment_method_code":
+                                              _bookAppointmentLogic
+                                                  .paymentMethodList[
+                                                      _bookAppointmentLogic
+                                                          .selectedPaymentType!]
+                                                  .title,
                                           "cardInfo": {
                                             "number": _bookAppointmentLogic
                                                 .accountCardNumberController

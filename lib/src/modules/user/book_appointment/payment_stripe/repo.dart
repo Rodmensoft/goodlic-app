@@ -82,20 +82,20 @@ stripePaymentRepo(
 
       Get.find<BookAppointmentLogic>().myWidth = 0;
       Get.find<BookAppointmentLogic>().update();
-      if(response['authorization_url']!=null){
-        Get.find<GeneralController>().inAppWebService=response['authorization_url'];
+      if (response['authorization_url'] != null) {
+        Get.find<GeneralController>().inAppWebService =
+            response['authorization_url'];
         Get.off(const InAppWebPage());
-      }
-      else{
+      } else {
         showDialog(
             context: context,
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'failed!'.tr,
+                title: '${LanguageConstant.failed.tr}!',
                 titleColor: customDialogErrorColor,
                 descriptions: '${response['data']['message']}',
-                text: 'ok'.tr,
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                 },
@@ -103,7 +103,6 @@ stripePaymentRepo(
               );
             });
       }
-
     }
   } else {
     Get.find<GeneralController>().updateFormLoaderController(false);

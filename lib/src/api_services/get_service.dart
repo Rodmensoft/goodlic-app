@@ -67,7 +67,7 @@ getMethod(
           return CustomDialogBox(
             title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: '${'internet_not_connected'.tr}!',
+            descriptions: '${LanguageConstant.internetNotConnected.tr}!',
             text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);

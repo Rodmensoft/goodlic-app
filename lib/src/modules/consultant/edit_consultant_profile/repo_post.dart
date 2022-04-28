@@ -30,7 +30,7 @@ mentorGeneralInfo2Repo(
           .stepperList[Get.find<EditConsultantProfileLogic>().stepperIndex! + 1]
           .isSelected = true;
       Get.find<EditConsultantProfileLogic>().updateStepperIndex(1);
-      Get.snackbar('${'profile_updated_successfully'.tr}!', '',
+      Get.snackbar('${LanguageConstant.profileUpdatedSuccessfully.tr}!', '',
           colorText: Colors.black, backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('mentorGeneralInfoRepo ------>> ${Get.find<EditConsultantProfileLogic>().generalInfoPostModel.success}');
@@ -43,7 +43,7 @@ mentorGeneralInfo2Repo(
             return CustomDialogBox(
               title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'try_again!'.tr,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
@@ -61,7 +61,7 @@ mentorGeneralInfo2Repo(
           return CustomDialogBox(
             title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'try_again!'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
             text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
@@ -89,7 +89,7 @@ mentorSkillInfoRepo(
       //     .stepperList[Get.find<MentorProfileLogic>().stepperIndex! + 1]
       //     .isSelected = true;
       // Get.find<MentorProfileLogic>().updateStepperIndex(4);
-      Get.snackbar('${'skill_added_successfully'.tr}!', '',
+      Get.snackbar('${LanguageConstant.skillAddedSuccessfully.tr}!', '',
           colorText: Colors.black, backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
       log('mentorSkillInfoRepo ------>> ${Get.find<EditConsultantProfileLogic>().skillInfoPostModel.success}');

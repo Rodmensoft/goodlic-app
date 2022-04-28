@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:io';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -47,7 +48,7 @@ class _InAppWebPageState extends State<InAppWebPage> {
           ContextMenuItem(
               androidId: 1,
               iosId: "1",
-              title: "Special",
+              title: LanguageConstant.special.tr,
               action: () async {
                 print("Menu item Special clicked!");
                 print(await webViewController?.getSelectedText());

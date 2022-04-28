@@ -1,6 +1,6 @@
-
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -9,7 +9,6 @@ import 'package:consultant_product/src/modules/agora_call/repo.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/get_repo.dart';
 import 'package:consultant_product/src/modules/sms/logic.dart';
 import 'package:consultant_product/src/modules/sms/repo.dart';
-import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +25,7 @@ mentorCompleteAppointmentRepo(
           },
           true,
           getConsultantAllAppointmentsRepo);
+
       ///----send-sms
       postMethod(
           context,
@@ -37,6 +37,7 @@ mentorCompleteAppointmentRepo(
           },
           true,
           sendSMSRepo);
+
       ///----fcm-send-start
       getMethod(
           context,
@@ -48,9 +49,8 @@ mentorCompleteAppointmentRepo(
           true,
           getFcmTokenRepo);
       Get.find<GeneralController>().updateFormLoaderController(false);
-      Get.snackbar('appointment_completed_successfully'.tr, '',
-          colorText: Colors.black,
-          backgroundColor: Colors.white);
+      Get.snackbar(LanguageConstant.appointmentCompletedSuccessfully.tr, '',
+          colorText: Colors.black, backgroundColor: Colors.white);
       log('mentorChangeAppointmentStatusRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
@@ -60,11 +60,11 @@ mentorCompleteAppointmentRepo(
     log('Exception........................');
   }
 }
+
 mentorAcceptAppointmentRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['Status'].toString() == 'true') {
-
       getMethod(
           context,
           getConsultantAllAppointmentsURL,
@@ -74,6 +74,7 @@ mentorAcceptAppointmentRepo(
           },
           true,
           getConsultantAllAppointmentsRepo);
+
       ///----send-sms
       postMethod(
           context,
@@ -85,6 +86,7 @@ mentorAcceptAppointmentRepo(
           },
           true,
           sendSMSRepo);
+
       ///----fcm-send-start
       getMethod(
           context,
@@ -97,9 +99,8 @@ mentorAcceptAppointmentRepo(
           getFcmTokenRepo);
 
       Get.find<GeneralController>().updateFormLoaderController(false);
-      Get.snackbar('appointment_accepted_successfully'.tr, '',
-          colorText: Colors.black,
-          backgroundColor: Colors.white);
+      Get.snackbar(LanguageConstant.appointmentAcceptedSuccessfully.tr, '',
+          colorText: Colors.black, backgroundColor: Colors.white);
       log('mentorChangeAppointmentStatusRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
@@ -109,6 +110,7 @@ mentorAcceptAppointmentRepo(
     log('Exception........................');
   }
 }
+
 mentorRejectAppointmentRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
@@ -122,6 +124,7 @@ mentorRejectAppointmentRepo(
           },
           true,
           getConsultantAllAppointmentsRepo);
+
       ///----send-sms
       postMethod(
           context,
@@ -133,6 +136,7 @@ mentorRejectAppointmentRepo(
           },
           true,
           sendSMSRepo);
+
       ///----fcm-send-start
       getMethod(
           context,
@@ -144,9 +148,8 @@ mentorRejectAppointmentRepo(
           true,
           getFcmTokenRepo);
       Get.find<GeneralController>().updateFormLoaderController(false);
-      Get.snackbar('appointment_rejected_successfully'.tr, '',
-          colorText: Colors.black,
-          backgroundColor: Colors.white);
+      Get.snackbar(LanguageConstant.appointmentRejectedSuccessfully.tr, '',
+          colorText: Colors.black, backgroundColor: Colors.white);
       log('mentorChangeAppointmentStatusRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);

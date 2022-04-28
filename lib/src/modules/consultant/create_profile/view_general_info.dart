@@ -113,14 +113,14 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                         ),
                                       )
                                 : InkWell(
-                              onTap: (){
-                                changeImagePickerDialog(context, null,
-                                    false, profileImage);
-                              },
-                                  child: Center(
+                                    onTap: () {
+                                      changeImagePickerDialog(
+                                          context, null, false, profileImage);
+                                    },
+                                    child: Center(
                                       child: Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 25.h),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 25.h),
                                         child: SizedBox(
                                           height: 103.h,
                                           width: 190.w,
@@ -134,7 +134,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                         ),
                                       ),
                                     ),
-                                ),
+                                  ),
 
                             ///---first-name-field
                             Padding(
@@ -447,8 +447,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                               child: TextFormField(
                                 inputFormatters: [],
                                 style: state.textFieldTextStyle,
-                                controller:
-                                    _createProfileLogic.aboutController,
+                                controller: _createProfileLogic.aboutController,
                                 keyboardType: TextInputType.multiline,
                                 minLines: 1,
                                 maxLines: 4,
@@ -479,7 +478,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                 ),
                                 validator: (String? value) {
                                   if (value!.isEmpty) {
-                                    return 'Field Required'.tr;
+                                    return LanguageConstant.fieldRequired.tr;
                                   } else {
                                     return null;
                                   }
@@ -1254,7 +1253,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     }
                   },
                   child: Text(
-                    "View",
+                    LanguageConstant.view.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -1267,7 +1266,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                     imagePickerDialog(context);
                   },
                   child: Text(
-                    "Change",
+                    LanguageConstant.change.tr,
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -1277,6 +1276,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
           );
         });
   }
+
   mentorGeneralInfoRepo(File? file1) async {
     dio_instance.FormData formData =
         dio_instance.FormData.fromMap(<String, dynamic>{
