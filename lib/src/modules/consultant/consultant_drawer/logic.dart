@@ -19,7 +19,7 @@ class ConsultantDrawerLogic extends GetxController {
         icon: 'assets/Icons/drawerAppointmentIcon.svg'),
     DrawerTile(
         title: LanguageConstant.editProfile.tr,
-        icon: 'assets/Icons/feeIcon.svg'),
+        icon: 'assets/Icons/editProfile.svg'),
     DrawerTile(
         title: LanguageConstant.mySchedule.tr,
         icon: 'assets/Icons/feeIcon.svg'),
@@ -49,8 +49,7 @@ class ConsultantDrawerLogic extends GetxController {
     switch (index) {
       case 0:
         {
-          Get.back();
-          return Get.offAllNamed(PageRoutes.consultantDashboard);
+          return Get.back();
         }
       case 1:
         {

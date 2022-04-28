@@ -4,6 +4,7 @@ import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
+import 'package:consultant_product/src/modules/user/user_drawer/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,7 +12,6 @@ import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
-import 'logic.dart';
 
 class UserDrawerPage extends StatefulWidget {
   const UserDrawerPage({Key? key}) : super(key: key);

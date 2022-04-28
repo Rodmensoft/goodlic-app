@@ -6,6 +6,7 @@ class LanguagesChang extends Translations {
         'en_US': {
           //dashboard
           'find_your': 'Find Your',
+          'appointments_log':'Appointments Log',
           'consultant': 'Consultants',
           'unassign': 'UnAssign',
           'enter_login_details': 'Enter Login Detail',
@@ -513,6 +514,7 @@ class LanguagesChang extends Translations {
         'ur_PK': {
 //dashboard
           'Find_your': 'اپنا تلاش کرو',
+          'appointments_log':'Appointments Log',
           'consultant': 'کنسلٹنٹ',
           'audio': 'آڈیو',
           'video': 'ویڈیو',
@@ -1028,6 +1030,7 @@ class LanguagesChang extends Translations {
         'bn_BD': {
 //dashboard
           'find_your': 'আপনার খুঁজুন',
+          'appointments_log':'Appointments Log',
           'best_consultants_just_one_click_away': 'শীর্ষ রেট কনসালটেন্ট',
           'consultant': 'পরামর্শদাতা',
           'fees': 'ফি',
@@ -1536,6 +1539,7 @@ class LanguagesChang extends Translations {
         'hi_IN': {
 //dashboard
           'find_your': 'अपना ढूँढो',
+          'appointments_log':'Appointments Log',
           'consultant': 'सलाहकार',
           'offline': 'ऑफ़लाइन',
           'fees': 'फीस',
