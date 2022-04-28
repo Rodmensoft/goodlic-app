@@ -1369,7 +1369,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                                 .circular(8.r)),
                                                     child: Center(
                                                       child: Text(
-                                                        'generate_slot'.tr,
+                                                        LanguageConstant
+                                                            .generateSlot.tr,
                                                         style: state
                                                             .addButtonTextStyle,
                                                       ),

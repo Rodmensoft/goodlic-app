@@ -1,4 +1,6 @@
 import 'dart:developer';
+
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -31,6 +33,7 @@ stripePaymentRepoForLater(
           true) {
         Get.find<AppointmentDetailLogic>().myWidth = 0;
         Get.find<AppointmentDetailLogic>().update();
+
         ///----send-sms
         postMethod(
             context,
@@ -42,13 +45,17 @@ stripePaymentRepoForLater(
             },
             true,
             sendSMSRepo);
+
         ///----fcm-send-start
         getMethod(
             context,
             fcmGetUrl,
             {
               'token': '123',
-              'user_id': Get.find<AppointmentDetailLogic>().selectedAppointmentData.mentor!.id
+              'user_id': Get.find<AppointmentDetailLogic>()
+                  .selectedAppointmentData
+                  .mentor!
+                  .id
             },
             true,
             getFcmTokenRepo);
@@ -58,7 +65,8 @@ stripePaymentRepoForLater(
             getUserAllAppointmentsURL,
             {
               'token': '123',
-              'mentee_id': Get.find<GeneralController>().storageBox.read('userID')
+              'mentee_id':
+                  Get.find<GeneralController>().storageBox.read('userID')
             },
             true,
             getUserAllAppointmentsRepo);
@@ -74,10 +82,10 @@ stripePaymentRepoForLater(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'failed!'.tr,
+                title: '${LanguageConstant.failed.tr}!',
                 titleColor: customDialogErrorColor,
-                descriptions: 'try_again!'.tr,
-                text: 'ok'.tr,
+                descriptions: '${LanguageConstant.tryAgain.tr}!',
+                text: LanguageConstant.ok,
                 functionCall: () {
                   Navigator.pop(context);
                 },
@@ -100,10 +108,10 @@ stripePaymentRepoForLater(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'failed!'.tr,
+                title: '${LanguageConstant.failed.tr}!',
                 titleColor: customDialogErrorColor,
                 descriptions: '${response['data']['message']}',
-                text: 'ok'.tr,
+                text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
                 },
@@ -120,10 +128,10 @@ stripePaymentRepoForLater(
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: 'failed!'.tr,
+            title: '${LanguageConstant.failed.tr}!',
             titleColor: customDialogErrorColor,
-            descriptions: 'try_again!'.tr,
-            text: 'ok'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
+            text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);
             },

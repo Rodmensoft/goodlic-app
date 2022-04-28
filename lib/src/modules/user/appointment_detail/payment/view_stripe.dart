@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -77,8 +78,8 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                     return <Widget>[
                       ///---header
                       MyCustomSliverAppBar(
-                        heading: 'Pay Now',
-                        subHeading: 'Pay Amount For Appointment',
+                        heading: LanguageConstant.payNow.tr,
+                        subHeading: LanguageConstant.payAmountForAppointment.tr,
                         isShrink: _appointmentDetailLogic.isShrinkStripe,
                       ),
                     ];
@@ -91,7 +92,7 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                           children: [
                             ///---card-heading
                             Text(
-                              'Card Details',
+                              LanguageConstant.cardDetails.tr,
                               style: state.headingTextStyle,
                             ),
                             SizedBox(
@@ -130,7 +131,8 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                                                       MainAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Enter Card Number',
+                                                      LanguageConstant
+                                                          .enterCardNumber.tr,
                                                       style: TextStyle(
                                                           fontFamily:
                                                               SarabunFontFamily
@@ -213,8 +215,8 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                                                       ),
                                                       validator: (value) {
                                                         if (value!.isEmpty) {
-                                                          return 'field_required'
-                                                              .tr;
+                                                          return LanguageConstant
+                                                              .fieldRequired.tr;
                                                         } else {
                                                           return null;
                                                         }
@@ -250,7 +252,8 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'CARD HOLDER',
+                                                          LanguageConstant
+                                                              .cardHolder.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -335,7 +338,8 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'
+                                                              return LanguageConstant
+                                                                  .fieldRequired
                                                                   .tr;
                                                             } else {
                                                               return null;
@@ -360,7 +364,8 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'EXPIRES',
+                                                          LanguageConstant
+                                                              .expires.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -448,7 +453,8 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'
+                                                              return LanguageConstant
+                                                                  .fieldRequired
                                                                   .tr;
                                                             } else {
                                                               return null;
@@ -473,7 +479,8 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'CVV',
+                                                          LanguageConstant
+                                                              .cvv.tr,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   SarabunFontFamily
@@ -563,7 +570,8 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'
+                                                              return LanguageConstant
+                                                                  .fieldRequired
                                                                   .tr;
                                                             } else {
                                                               return null;
@@ -591,7 +599,7 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     25.w, 15.h, 25.w, 15.h),
-                                hintText: 'Enter Amount',
+                                hintText: LanguageConstant.enterAmount.tr,
                                 hintStyle: state.hintTextStyle,
                                 fillColor: customTextFieldColor,
                                 filled: true,
@@ -614,7 +622,7 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'field_required'.tr;
+                                  return LanguageConstant.fieldRequired.tr;
                                 } else {
                                   return null;
                                 }
@@ -783,7 +791,8 @@ class _StripePaymentForLaterState extends State<StripePaymentForLater> {
                                               : const SizedBox(),
                                           _appointmentDetailLogic.myWidth == 0.0
                                               ? Text(
-                                                  'Slide To Pay',
+                                                  LanguageConstant
+                                                      .slideToPay.tr,
                                                   style: TextStyle(
                                                       fontFamily:
                                                           SarabunFontFamily

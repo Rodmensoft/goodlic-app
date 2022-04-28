@@ -41,6 +41,9 @@ class LanguagesChang extends Translations {
           'step_2_of_3': 'Step 2 Of 3',
           'step_1_of_3': 'Step 1 Of 3',
           'special': 'Special',
+          'my_wallet': 'My Wallet',
+          'about_your_self': 'About Your Self',
+          'pay_amount_for_appointment': 'Pay Amount For Appointment',
 
           'dashboard': 'Dashboard',
           'manage_all_of_your_appointment': 'Manage All Of Your Appointment',
@@ -262,7 +265,7 @@ class LanguagesChang extends Translations {
           'year': 'Year',
           'degree': 'Degree',
           'subject': 'Subject',
-          'experince': 'Experience',
+          'experince': 'Exp',
           'company': 'Company',
           'from': 'From',
           'To': 'To',
@@ -546,6 +549,12 @@ class LanguagesChang extends Translations {
           'step_2_of_3': 'مرحلہ 3 میں سے 2',
           'step_1_of_3': 'مرحلہ 3 میں سے1',
           'special': 'خصوصی',
+          'my_wallet': 'میرا بٹوہ',
+          'about_your_self': 'اپنے بارے میں',
+          'pay_amount_for_appointment': 'تقرری کے لیے رقم ادا کریں۔',
+
+          'get_know_about_our_Vision_and_mission':
+              'ہمارے وژن اور مشن کے بارے میں جانیں۔',
 
           'manage_all_of_your_appointment': 'اپنی تمام ملاقات کا انتظام کریں۔',
           'today_appointment': 'آج کی ملاقات',
@@ -1054,6 +1063,13 @@ class LanguagesChang extends Translations {
           'step_2_of_3': '৩টির মধ্যে ২য় ধাপ',
           'step_1_of_3': '৩টির মধ্যে ১ম ধাপ',
           'special': 'বিশেষ',
+          'my_wallet': 'আমার মানিব্যাগ',
+          'about_your_self': 'নিজেকে সম্পর্কে',
+          'pay_amount_for_appointment':
+              'অ্যাপয়েন্টমেন্টের জন্য অর্থ প্রদান করুন',
+
+          'get_know_about_our_Vision_and_mission':
+              'আমাদের ভিশন এবং মিশন সম্পর্কে জানুন',
 
           'enter_login_details': 'লগইন বিবরণ লিখুন',
           'email_address': 'ইমেল ঠিকানা',
@@ -1555,6 +1571,12 @@ class LanguagesChang extends Translations {
           'step_2_of_3': 'चरण 2 का 3',
           'step_1_of_3': 'चरण 1 का 3',
           'special': 'विशेष',
+          'my_wallet': 'मेरा बटुआ',
+          'about_your_self': 'अपने बारे में',
+          'pay_amount_for_appointment': 'नियुक्ति के लिए भुगतान राशि',
+
+          'get_know_about_our_Vision_and_mission':
+              'हमारे विजन और मिशन के बारे में जानें',
 
           'enter_login_details': 'लॉगिन विवरण दर्ज करें',
           'email_address': 'ईमेल पता',

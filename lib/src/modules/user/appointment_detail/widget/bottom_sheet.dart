@@ -706,7 +706,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'pay_now'.tr,
+                                                  LanguageConstant.payNow.tr,
                                                   style: TextStyle(
                                                       fontFamily:
                                                           SarabunFontFamily

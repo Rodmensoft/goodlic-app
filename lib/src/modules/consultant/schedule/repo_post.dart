@@ -1,11 +1,11 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/schedule/logic.dart';
 import 'package:consultant_product/src/modules/consultant/schedule/repo_get.dart';
-import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,8 +18,10 @@ markHolidayPostRepo(
           getAvailableDaysUrl,
           {
             'token': '123',
-            'mentor_id': Get.find<GeneralController>().storageBox.read('userID'),
-            'appointment_type_id': Get.find<MentorScheduleLogic>().selectedScheduleTypeId,
+            'mentor_id':
+                Get.find<GeneralController>().storageBox.read('userID'),
+            'appointment_type_id':
+                Get.find<MentorScheduleLogic>().selectedScheduleTypeId,
           },
           false,
           getAvailableDaysRepo);
@@ -38,7 +40,6 @@ saveSchedulePostRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['Status'].toString() == 'true') {
-
       Get.find<MentorScheduleLogic>().selectedScheduleType = null;
       Get.find<MentorScheduleLogic>().selectedAvailableDay = null;
       Get.find<MentorScheduleLogic>().selectedTimeForStart = null;
@@ -54,14 +55,14 @@ saveSchedulePostRepo(
           getMentorSchedulesUrl,
           {
             'token': '123',
-            'mentor_id': Get.find<GeneralController>().storageBox.read('userID'),
+            'mentor_id':
+                Get.find<GeneralController>().storageBox.read('userID'),
           },
           false,
           getMentorScheduleRepo);
       Get.find<GeneralController>().updateFormLoaderController(false);
-      Get.snackbar('${'added_successfully'.tr}!', '',
-          colorText: Colors.black,
-          backgroundColor: Colors.white);
+      Get.snackbar('${LanguageConstant.addedSuccessfully.tr}!', '',
+          colorText: Colors.black, backgroundColor: Colors.white);
       log('saveSchedulePostRepo ------>> ${response['Status']}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);

@@ -92,8 +92,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                                   .userDetail!
                                                   .imagePath!
                                                   .contains('assets')
-                                              ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!
-                                              .imagePath}'
+                                              ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
                                               : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                           true,
                                           null);
@@ -495,15 +494,15 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                 inputFormatters: [],
                                 style: state.textFieldTextStyle,
                                 controller:
-                                _editConsultantProfileLogic.aboutController,
+                                    _editConsultantProfileLogic.aboutController,
                                 keyboardType: TextInputType.multiline,
                                 minLines: 1,
                                 maxLines: 4,
                                 decoration: InputDecoration(
                                   contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      25.w, 15.h, 25.w, 15.h),
-                                  hintText: 'About Your Self',
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          25.w, 15.h, 25.w, 15.h),
+                                  hintText: LanguageConstant.aboutYourSelf.tr,
                                   hintStyle: state.hintTextStyle,
                                   fillColor: Colors.white,
                                   filled: true,
@@ -522,7 +521,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                   errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8.r),
                                       borderSide:
-                                      const BorderSide(color: Colors.red)),
+                                          const BorderSide(color: Colors.red)),
                                 ),
                                 validator: (String? value) {
                                   if (value!.isEmpty) {
@@ -1402,7 +1401,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
       'cnic': Get.find<EditConsultantProfileLogic>().cnicController.text,
       // 'email': Get.find<EditConsultantProfileLogic>().emailController.text,
       'address': Get.find<EditConsultantProfileLogic>().addressController.text,
-          'about': Get.find<EditConsultantProfileLogic>().aboutController.text,
+      'about': Get.find<EditConsultantProfileLogic>().aboutController.text,
       'gender': Get.find<EditConsultantProfileLogic>().selectedGender,
       'religion': Get.find<EditConsultantProfileLogic>().selectedReligion,
       'dob': DateFormat('yyyy-MM-dd')

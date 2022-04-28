@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as math;
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/agora_call/get_agora_token_model.dart';
@@ -25,7 +26,8 @@ class GeneralController extends GetxController {
   }
 
   ///---get-user-profile
-  GetConsultantProfileModel getConsultantProfileModel = GetConsultantProfileModel();
+  GetConsultantProfileModel getConsultantProfileModel =
+      GetConsultantProfileModel();
 
   bool? formLoaderController = false;
 
@@ -117,7 +119,7 @@ class GeneralController extends GetxController {
   String? sound;
 
   updateNotificationBody(String? newTitle, String? newBody, String? newRouteApp,
-      String? newRouteWeb,String? newSound) {
+      String? newRouteWeb, String? newSound) {
     notificationTitle = newTitle;
     notificationBody = newBody;
     notificationRouteApp = newRouteApp;
@@ -241,9 +243,9 @@ class GeneralController extends GetxController {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              'select_language'.tr,
+                              LanguageConstant.selectLanguage.tr,
                               textAlign: TextAlign.start,
-                              style:  TextStyle(
+                              style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 24.sp,
                                   color: Colors.black),
@@ -283,14 +285,14 @@ class GeneralController extends GetxController {
                                   children: [
                                     Text(
                                       localeList[index].name,
-                                      style:  TextStyle(
+                                      style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 18.sp,
                                           color: Colors.black),
                                     ),
                                     Text(
                                       localeList[index].flag,
-                                      style:  TextStyle(
+                                      style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 20.sp,
                                           color: Colors.black),

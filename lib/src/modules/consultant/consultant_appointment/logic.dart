@@ -1,3 +1,4 @@
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/model_get_consultant_appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,32 +10,31 @@ import 'state.dart';
 class ConsultantAppointmentLogic extends GetxController {
   final ConsultantAppointmentState state = ConsultantAppointmentState();
 
-
-
   late TabController tabController;
 
-  GetConsultantAppointmentModel getConsultantAppointmentModel = GetConsultantAppointmentModel();
-
+  GetConsultantAppointmentModel getConsultantAppointmentModel =
+      GetConsultantAppointmentModel();
 
   bool? getUserAppointmentLoader = true;
-  updateGetUserAppointmentLoader(bool? newValue){
+  updateGetUserAppointmentLoader(bool? newValue) {
     getUserAppointmentLoader = newValue;
     update();
   }
+
   bool? getUserAppointmentMoreLoader = false;
-  updateGetUserAppointmentMoreLoader(bool? newValue){
+  updateGetUserAppointmentMoreLoader(bool? newValue) {
     getUserAppointmentMoreLoader = newValue;
     update();
   }
 
-
   final RefreshController refreshAppointmentsController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   updateRefreshController() {
     refreshAppointmentsController.refreshCompleted();
     update();
   }
+
   ///----app-bar-settings-----start
   ScrollController? scrollController;
   bool lastStatus = true;
@@ -52,11 +52,15 @@ class ConsultantAppointmentLogic extends GetxController {
     }
   }
 
-  List<Tab> tabBarList = const [
-    Tab( text: "Pending",),
-    Tab( text: "Accepted",),
-    Tab( text: "Completed"),
-    Tab( text: "Cancelled"),
+  List<Tab> tabBarList = [
+    Tab(
+      text: LanguageConstant.pending.tr,
+    ),
+    Tab(
+      text: LanguageConstant.accepted.tr,
+    ),
+    Tab(text: LanguageConstant.completed.tr),
+    Tab(text: LanguageConstant.cancelled.tr),
   ];
 
   List imagesForAppointmentTypes = [
@@ -75,5 +79,4 @@ class ConsultantAppointmentLogic extends GetxController {
     ///---home-visit
     'assets/Icons/house-fill.svg',
   ];
-
 }

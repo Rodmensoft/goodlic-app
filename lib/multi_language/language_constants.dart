@@ -20,6 +20,9 @@ class LanguageConstant {
   static const String step2Of3 = 'step_2_of_3';
   static const String step1Of3 = 'step_1_of_3';
   static const String enterDetails = 'enter_details';
+  static const String aboutYourSelf = 'about_your_self';
+  static const String myWallet = 'my_wallet';
+  static const String payAmountForAppointment = 'pay_amount_for_appointment';
   static const String welcomToCreateYourAccount =
       'welcome_to_create_your_account';
   static const String signUp = 'sign_up';
