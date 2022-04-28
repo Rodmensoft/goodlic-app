@@ -10,7 +10,6 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -278,33 +277,20 @@ class _State extends State<JoinChannelVideo> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * .1,
               ),
-              Get.find<AgoraLogic>().userImage == null
-                  ? Container(
-                      height: 130.h,
-                      width: 130.w,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                    )
-                  : Container(
-                      height: 130.h,
-                      width: 130.w,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: NetworkImage(Get.find<AgoraLogic>()
-                                      .userImage!
-                                      .contains('assets')
-                                  ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
-                                  : Get.find<AgoraLogic>().userImage!))),
-                    ),
+              Container(
+                height: 130.h,
+                width: 130.w,
+                decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                    image: DecorationImage(
+                        image: AssetImage(
+                            'assets/Icons/splash_logo.png'))),
+              ),
               isJoined
                   ? Padding(
                       padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
                       child: Text(
-                        'Ringing To',
+                        'Ringing',
                         style: TextStyle(
                             fontSize: 20.sp,
                             fontFamily: SarabunFontFamily.extraBold,
@@ -314,23 +300,13 @@ class _State extends State<JoinChannelVideo> {
                   : Padding(
                       padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),
                       child: Text(
-                        'Calling To',
+                        'Calling',
                         style: TextStyle(
                             fontSize: 20.sp,
                             fontFamily: SarabunFontFamily.extraBold,
                             color: Colors.white),
                       ),
                     ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 14.h, 0, 0),
-                child: Text(
-                  '${Get.find<AgoraLogic>().userName}',
-                  style: TextStyle(
-                      fontSize: 16.sp,
-                      fontFamily: SarabunFontFamily.regular,
-                      color: Colors.white),
-                ),
-              ),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -398,7 +374,8 @@ class _State extends State<JoinChannelVideo> {
               ),
               Text(
                 '${LanguageConstant.youAreReceivingCallFrom.tr}'
-                '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE' ? 'MENTOR' : 'MENTEE'}',
+                '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE'
+                    ? 'CONSULTANT' : 'USER'}',
                 style: TextStyle(
                     fontSize: 15.sp,
                     fontFamily: SarabunFontFamily.regular,

@@ -1,5 +1,6 @@
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/user_drawer/logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,6 +34,12 @@ class ConsultantDrawerLogic extends GetxController {
     DrawerTile(
         title: LanguageConstant.aboutUs.tr,
         icon: 'assets/Icons/drawerPrivacyIcon.svg'),
+    DrawerTile(
+        title: 'Languages',
+        icon: 'assets/Icons/language.svg'),
+    DrawerTile(
+        title: LanguageConstant.logout.tr,
+        icon: 'assets/Icons/drawerLogoutIcon.svg'),
   ];
 
   consultantDrawerNavigation(
@@ -79,6 +86,30 @@ class ConsultantDrawerLogic extends GetxController {
         {
           Get.back();
           return Get.toNamed(PageRoutes.aboutUs);
+        }
+      case 8:
+        {
+          return Get.find<GeneralController>().customDropDownDialogForLocale(context);
+        }
+      case 9:
+        {
+          Get.find<GeneralController>()
+              .storageBox
+              .remove('userID');
+          Get.find<GeneralController>()
+              .storageBox
+              .remove('authToken');
+          Get.find<GeneralController>()
+              .storageBox
+              .remove('onlineStatus');
+          Get.find<GeneralController>()
+              .storageBox
+              .remove('userRole');
+          Get.find<GeneralController>()
+              .storageBox
+              .remove('fcmToken');
+
+          return Get.offAllNamed(PageRoutes.userHome);
         }
       default:
         {
