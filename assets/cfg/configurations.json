@@ -1,17 +1,5 @@
 {
   "base_url": "https://consultation.softwaresbranding.com/",
   "api_base_url": "https://consultation.softwaresbranding.com/api/",
-  "media_url": "https://consultation.softwaresbranding.com",
-  "show_messages": "dialogueModel",
-  "theme": {
-    "screenBackgroundColor": "0xff5864FF",
-    "displayText": "Fahad",
-    "buttonColor": "0xff1DA1F2",
-    "primaryColor": "0xff1DA1F2",
-    "logo":"images/dummyLogo.png"
-  },
-  "currency": {
-    "type": "PK"
-  }
-
+  "media_url": "https://consultation.softwaresbranding.com"
 }

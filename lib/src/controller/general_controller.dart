@@ -272,6 +272,7 @@ class GeneralController extends GetxController {
                                 Get.updateLocale(locale);
                                 update();
                                 Navigator.pop(context);
+                                Navigator.pop(context);
                               },
                               child: Padding(
                                 padding:

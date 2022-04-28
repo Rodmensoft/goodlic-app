@@ -25,6 +25,8 @@ String contactUsUrl = apiBaseUrl + 'contactus';
 
 ///---payment-method
 String paymentMethodUrl = apiBaseUrl + 'execute-payment';
+///---search
+String searchConsultantUrl = apiBaseUrl + 'search-mentor-mobile';
 
 ///---user
 String getMenteeProfileUrl = apiBaseUrl + 'get-mentee-profile';
