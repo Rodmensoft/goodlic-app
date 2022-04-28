@@ -345,7 +345,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                       category:
                           '${_appointmentDetailLogic.selectedAppointmentData.category}',
                       fee:
-                          '\$${_appointmentDetailLogic.selectedAppointmentData.payment!} Fees',
+                          '\$${_appointmentDetailLogic.selectedAppointmentData.payment!} ${LanguageConstant.fees.tr}',
                       type:
                           '${_appointmentDetailLogic.selectedAppointmentData.appointmentTypeString}'
                               .capitalizeFirst,

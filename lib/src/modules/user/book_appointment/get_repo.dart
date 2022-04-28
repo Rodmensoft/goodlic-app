@@ -125,7 +125,7 @@ getScheduleSlotsRepo(
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return CustomDialogBox(
-                  title: 'INFO!'.tr,
+                  title: '${LanguageConstant.info.tr}!',
                   titleColor: customDialogInfoColor,
                   descriptions: LanguageConstant.recordNotFound.tr,
                   text: LanguageConstant.ok.tr,
@@ -142,7 +142,7 @@ getScheduleSlotsRepo(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'INFO!'.tr,
+                title: '${LanguageConstant.info.tr}!',
                 titleColor: customDialogInfoColor,
                 descriptions: LanguageConstant.recordNotFound.tr,
                 text: LanguageConstant.ok.tr,

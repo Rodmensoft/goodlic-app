@@ -78,7 +78,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                       MyCustomSliverAppBar(
                         heading: LanguageConstant.bookAppointment.tr,
                         subHeading: LanguageConstant.byJustFewEasySteps.tr,
-                        trailing: 'Step 2 Of 3',
+                        trailing: LanguageConstant.step2Of3.tr,
                         isShrink: _bookAppointmentLogic.isShrink2,
                         fee:
                             '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
@@ -161,7 +161,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'field_required'.tr;
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }

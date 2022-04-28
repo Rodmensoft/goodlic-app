@@ -124,7 +124,7 @@ withdrawTransactionRepo(
     }
   } else {
     Get.find<GeneralController>().updateFormLoaderController(false);
-    Get.snackbar(LanguageConstant.failed.tr, 'try_again!'.tr,
+    Get.snackbar(LanguageConstant.failed.tr, '${LanguageConstant.tryAgain.tr}!',
         colorText: Colors.black, backgroundColor: Colors.white);
   }
 }

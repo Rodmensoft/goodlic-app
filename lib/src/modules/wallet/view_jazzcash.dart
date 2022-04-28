@@ -191,7 +191,7 @@ class _DepositJazzCashViewState extends State<DepositJazzCashView>
                         children: [
                           ///---heading
                           Text(
-                            'enter_jazzCash_details'.tr,
+                            LanguageConstant.enterJazzCashDetails.tr,
                             style: state.subHeadingTextStyle,
                           ),
                           const SizedBox(
@@ -223,7 +223,8 @@ class _DepositJazzCashViewState extends State<DepositJazzCashView>
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               25.w, 15.h, 25.w, 15.h),
-                                      hintText: 'enter_last_6_digits'.tr,
+                                      hintText: LanguageConstant
+                                          .enterLast6DigitsOfYourCNIC.tr,
                                       hintStyle: TextStyle(
                                           fontFamily: SarabunFontFamily.regular,
                                           fontSize: 16.sp,
@@ -253,7 +254,8 @@ class _DepositJazzCashViewState extends State<DepositJazzCashView>
                                     ),
                                     validator: (String? value) {
                                       if (value!.isEmpty) {
-                                        return 'field_required'.tr;
+                                        return LanguageConstant
+                                            .fieldRequired.tr;
                                       } else {
                                         return null;
                                       }
@@ -278,7 +280,8 @@ class _DepositJazzCashViewState extends State<DepositJazzCashView>
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               25.w, 15.h, 25.w, 15.h),
-                                      hintText: 'jazzCash_number'.tr,
+                                      hintText:
+                                          LanguageConstant.jazzCashNumber.tr,
                                       hintStyle: TextStyle(
                                           fontFamily: SarabunFontFamily.regular,
                                           fontSize: 16.sp,
@@ -308,7 +311,8 @@ class _DepositJazzCashViewState extends State<DepositJazzCashView>
                                     ),
                                     validator: (String? value) {
                                       if (value!.isEmpty) {
-                                        return 'field_required'.tr;
+                                        return LanguageConstant
+                                            .fieldRequired.tr;
                                       } else {
                                         return null;
                                       }
@@ -332,7 +336,7 @@ class _DepositJazzCashViewState extends State<DepositJazzCashView>
                                       contentPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               25.w, 15.h, 25.w, 15.h),
-                                      hintText: 'enter_amount'.tr,
+                                      hintText: LanguageConstant.enterAmount.tr,
                                       hintStyle: TextStyle(
                                           fontFamily: SarabunFontFamily.regular,
                                           fontSize: 16.sp,
@@ -362,7 +366,8 @@ class _DepositJazzCashViewState extends State<DepositJazzCashView>
                                     ),
                                     validator: (String? value) {
                                       if (value!.isEmpty) {
-                                        return 'field_required'.tr;
+                                        return LanguageConstant
+                                            .fieldRequired.tr;
                                       } else {
                                         return null;
                                       }

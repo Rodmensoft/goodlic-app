@@ -87,7 +87,7 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
                   title: LanguageConstant.info.tr,
                   titleColor: customDialogInfoColor,
                   descriptions:
-                      '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
+                      '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
                   text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
@@ -101,10 +101,10 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return CustomDialogBox(
-                  title: 'info!'.tr,
+                  title: '${LanguageConstant.info.tr}!',
                   titleColor: customDialogInfoColor,
                   descriptions:
-                      '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
+                      '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
                   text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
@@ -142,10 +142,10 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return CustomDialogBox(
-                  title: 'info!'.tr,
+                  title: '${LanguageConstant.info.tr}!',
                   titleColor: customDialogInfoColor,
                   descriptions:
-                      '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
+                      '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
                   text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
@@ -164,7 +164,7 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
               return CustomDialogBox(
                 title: LanguageConstant.failed.tr,
                 titleColor: customDialogErrorColor,
-                descriptions: 'try_again!'.tr,
+                descriptions: '${LanguageConstant.tryAgain.tr}!',
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
@@ -182,7 +182,7 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
             return CustomDialogBox(
               title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'try_again!'.tr,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
@@ -234,10 +234,10 @@ bookAppointmentWithoutFileRepo(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'info!'.tr,
+                title: '${LanguageConstant.info.tr}!',
                 titleColor: customDialogInfoColor,
                 descriptions:
-                    '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
+                    '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
@@ -251,10 +251,10 @@ bookAppointmentWithoutFileRepo(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'info!'.tr,
+                title: '${LanguageConstant.info.tr}!',
                 titleColor: customDialogInfoColor,
                 descriptions:
-                    '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
+                    '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
@@ -290,10 +290,10 @@ bookAppointmentWithoutFileRepo(
             barrierDismissible: false,
             builder: (BuildContext context) {
               return CustomDialogBox(
-                title: 'info!'.tr,
+                title: '${LanguageConstant.info.tr}!',
                 titleColor: customDialogInfoColor,
                 descriptions:
-                    '${'this_payment_method_is'.tr}\n${'not_available_yet'.tr}',
+                    '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
@@ -313,7 +313,7 @@ bookAppointmentWithoutFileRepo(
             return CustomDialogBox(
               title: LanguageConstant.failed.tr,
               titleColor: customDialogErrorColor,
-              descriptions: 'try_again!'.tr,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
@@ -332,7 +332,7 @@ bookAppointmentWithoutFileRepo(
           return CustomDialogBox(
             title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'try_again!'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
             text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);

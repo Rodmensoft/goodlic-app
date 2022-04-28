@@ -45,7 +45,7 @@ walletPaymentRepo(
           return CustomDialogBox(
             title: LanguageConstant.failed.tr,
             titleColor: customDialogErrorColor,
-            descriptions: 'try_again!'.tr,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
             text: LanguageConstant.ok.tr,
             functionCall: () {
               Navigator.pop(context);

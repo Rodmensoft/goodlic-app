@@ -435,7 +435,7 @@ class _SignUpPageState extends State<SignUpPage>
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return LanguageConstant
-                                                .fieldRequired.tr.tr;
+                                                .fieldRequired.tr;
                                           } else {
                                             return null;
                                           }

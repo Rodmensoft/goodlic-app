@@ -161,7 +161,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Reg No.',
+                                            LanguageConstant.regNo.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -296,7 +296,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'Question ',
+                                              '${LanguageConstant.question.tr} ',
                                               style:
                                                   state.sectionLabelTextStyle,
                                             ),
@@ -498,7 +498,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Reg. Date',
+                                            LanguageConstant.regDate.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -637,7 +637,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Address',
+                                            LanguageConstant.address.tr,
                                             style: state.sectionLabelTextStyle,
                                           ),
                                           SizedBox(
@@ -708,7 +708,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                           color:
                                                               customThemeColor)),
                                                   TextSpan(
-                                                      text: ' User',
+                                                      text:
+                                                          ' ${LanguageConstant.user.tr}',
                                                       style: TextStyle(
                                                           fontSize: 22.sp,
                                                           fontWeight:
@@ -746,8 +747,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                 TextFormField(
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
-                                                      return 'field_required'
-                                                          .tr;
+                                                      return LanguageConstant
+                                                          .fieldRequired.tr.tr;
                                                     }
                                                     return null;
                                                   },
