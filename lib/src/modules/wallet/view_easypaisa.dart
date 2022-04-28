@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/wallet/logic.dart';
@@ -48,7 +49,7 @@ class _DepositEasypaisaViewState extends State<DepositEasypaisaView> {
           ContextMenuItem(
               androidId: 1,
               iosId: "1",
-              title: "Special",
+              title: LanguageConstant.special.tr,
               action: () async {
                 log("Menu item Special clicked!");
                 print(await webViewController?.getSelectedText());

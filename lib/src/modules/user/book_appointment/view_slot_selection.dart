@@ -71,7 +71,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                     MyCustomSliverAppBar(
                       heading: LanguageConstant.bookAppointment.tr,
                       subHeading: LanguageConstant.byJustFewEasySteps.tr,
-                      trailing: 'Step 1 Of 3',
+                      trailing: LanguageConstant.step1Of3.tr,
                       isShrink: _bookAppointmentLogic.isShrink,
                     ),
                   ];

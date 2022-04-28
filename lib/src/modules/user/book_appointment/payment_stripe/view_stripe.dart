@@ -217,8 +217,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                       ),
                                                       validator: (value) {
                                                         if (value!.isEmpty) {
-                                                          return 'field_required'
-                                                              .tr;
+                                                          return LanguageConstant
+                                                              .fieldRequired.tr;
                                                         } else {
                                                           return null;
                                                         }
@@ -340,7 +340,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'
+                                                              return LanguageConstant
+                                                                  .fieldRequired
                                                                   .tr;
                                                             } else {
                                                               return null;
@@ -454,7 +455,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'
+                                                              return LanguageConstant
+                                                                  .fieldRequired
                                                                   .tr;
                                                             } else {
                                                               return null;
@@ -570,7 +572,8 @@ class _StripePaymentViewState extends State<StripePaymentView> {
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'
+                                                              return LanguageConstant
+                                                                  .fieldRequired
                                                                   .tr;
                                                             } else {
                                                               return null;

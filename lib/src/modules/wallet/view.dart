@@ -467,7 +467,7 @@ class _WalletPageState extends State<WalletPage> {
                                       customDialogForWithdrawAmount(context);
                                     },
                                     child: MyCustomBottomBar(
-                                      title: 'go_for_withdraw'.tr,
+                                      title: LanguageConstant.goForWithdraw.tr,
                                       disable: false,
                                     ),
                                   ),
@@ -609,7 +609,7 @@ class _WalletPageState extends State<WalletPage> {
                           ),
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return 'field_required'.tr;
+                              return LanguageConstant.fieldRequired.tr;
                             } else {
                               return null;
                             }
@@ -727,7 +727,7 @@ class _WalletPageState extends State<WalletPage> {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 25.w, 15.h, 25.w, 15.h),
-                            hintText: 'add_amount'.tr,
+                            hintText: LanguageConstant.addAmount.tr,
                             hintStyle: TextStyle(
                                 fontFamily: SarabunFontFamily.regular,
                                 fontSize: 16.sp,
@@ -753,7 +753,7 @@ class _WalletPageState extends State<WalletPage> {
                           ),
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return 'field_required'.tr;
+                              return LanguageConstant.fieldRequired.tr;
                             } else if (int.parse(Get.find<WalletLogic>()
                                     .withdrawAmountController
                                     .text
@@ -762,7 +762,8 @@ class _WalletPageState extends State<WalletPage> {
                                     .getWalletBalanceModel
                                     .data!
                                     .userBalance!)) {
-                              return 'you_do_not_have_sufficient_balance'.tr;
+                              return LanguageConstant
+                                  .youDoNotHaveSufficientBalance.tr;
                             } else {
                               return null;
                             }

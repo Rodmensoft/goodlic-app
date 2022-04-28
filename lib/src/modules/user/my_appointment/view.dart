@@ -201,7 +201,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               category:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].category}',
                                               fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].payment!} Fees',
+                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                               type:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeString}'
                                                       .capitalizeFirst,
@@ -427,7 +427,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               category:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].category}',
                                               fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].payment!} Fees',
+                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                               type:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeString}'
                                                       .capitalizeFirst,
@@ -562,7 +562,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               category:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].category}',
                                               fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].payment!} Fees',
+                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                               type:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeString}'
                                                       .capitalizeFirst,
@@ -697,7 +697,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                               category:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].category}',
                                               fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].payment!} Fees',
+                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                               type:
                                                   '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeString}'
                                                       .capitalizeFirst,

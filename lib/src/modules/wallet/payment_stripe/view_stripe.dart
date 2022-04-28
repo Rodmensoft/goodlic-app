@@ -212,8 +212,8 @@ class _StripePaymentForWalletViewState
                                                       ),
                                                       validator: (value) {
                                                         if (value!.isEmpty) {
-                                                          return 'field_required'
-                                                              .tr;
+                                                          return LanguageConstant
+                                                              .fieldRequired.tr;
                                                         } else {
                                                           return null;
                                                         }
@@ -334,7 +334,8 @@ class _StripePaymentForWalletViewState
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'
+                                                              return LanguageConstant
+                                                                  .fieldRequired
                                                                   .tr;
                                                             } else {
                                                               return null;
@@ -447,7 +448,8 @@ class _StripePaymentForWalletViewState
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'
+                                                              return LanguageConstant
+                                                                  .fieldRequired
                                                                   .tr;
                                                             } else {
                                                               return null;
@@ -562,7 +564,8 @@ class _StripePaymentForWalletViewState
                                                           validator: (value) {
                                                             if (value!
                                                                 .isEmpty) {
-                                                              return 'field_required'
+                                                              return LanguageConstant
+                                                                  .fieldRequired
                                                                   .tr;
                                                             } else {
                                                               return null;
@@ -589,7 +592,7 @@ class _StripePaymentForWalletViewState
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     25.w, 15.h, 25.w, 15.h),
-                                hintText: 'Enter Amount',
+                                hintText: LanguageConstant.enterAmount.tr,
                                 hintStyle: state.hintTextStyle,
                                 fillColor: customTextFieldColor,
                                 filled: true,
@@ -612,7 +615,7 @@ class _StripePaymentForWalletViewState
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'field_required'.tr;
+                                  return LanguageConstant.fieldRequired.tr;
                                 } else {
                                   return null;
                                 }

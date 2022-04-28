@@ -166,7 +166,7 @@ class _AppointmentConfirmationViewState
                                           padding: EdgeInsets.only(left: 8.w),
                                           child: BookAppointmentDetailBox(
                                             title:
-                                                '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee} Fees',
+                                                '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee} ${LanguageConstant.fees.tr}',
                                             image: 'assets/Icons/feeIcon.svg',
                                           ),
                                         ),

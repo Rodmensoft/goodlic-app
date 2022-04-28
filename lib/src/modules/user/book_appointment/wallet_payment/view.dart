@@ -73,7 +73,7 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
                       MyCustomSliverAppBar(
                         heading: LanguageConstant.bookAppointment.tr,
                         subHeading: LanguageConstant.byJustFewEasySteps.tr,
-                        trailing: 'Step 3 Of 3',
+                        trailing: LanguageConstant.step3Of3.tr,
                         isShrink: _bookAppointmentLogic.isShrink3,
                         fee:
                             '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',

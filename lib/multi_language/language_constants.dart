@@ -15,6 +15,10 @@ class LanguageConstant {
   static const String dob = 'dob';
   static const String view = 'view';
   static const String minute = 'minute';
+  static const String special = 'special';
+  static const String step3Of3 = 'step_3_of_3';
+  static const String step2Of3 = 'step_2_of_3';
+  static const String step1Of3 = 'step_1_of_3';
   static const String enterDetails = 'enter_details';
   static const String welcomToCreateYourAccount =
       'welcome_to_create_your_account';

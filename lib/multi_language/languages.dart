@@ -37,6 +37,10 @@ class LanguagesChang extends Translations {
           'sign_up': 'Sign Up',
           'welcome_to_create_your_account': 'Welcome To Create Your Account',
           'enter_details': 'Enter Details',
+          'step_3_of_3': 'Step 3 Of 3',
+          'step_2_of_3': 'Step 2 Of 3',
+          'step_1_of_3': 'Step 1 Of 3',
+          'special': 'Special',
 
           'dashboard': 'Dashboard',
           'manage_all_of_your_appointment': 'Manage All Of Your Appointment',
@@ -120,10 +124,10 @@ class LanguagesChang extends Translations {
           'appt_detail': 'Appt Detail',
           'your_appointment_detail_with_null':
               'Your Appointment Detail With Null',
-          'reg_no': 'Reg No',
-          'question': 'Questions',
+          'reg_no': 'Reg No.',
+          'question': 'Question',
           'consultant_info': 'Consultant Info',
-          'reg_date': 'Reg Date',
+          'reg_date': 'Reg. Date',
           'download_invoice': 'Download Invoice',
           'document': 'Document',
           'edit_your_profile': 'Edit Your Profile',
@@ -537,6 +541,11 @@ class LanguagesChang extends Translations {
           'sign_up': 'سائن اپ',
           'welcome_to_create_your_account': 'اپنا اکاؤنٹ بنانے میں خوش آمدید',
           'enter_details': 'تفصیلات درج کریں۔',
+          'reg_no': 'رجسٹر نمبر',
+          'step_3_of_3': 'مرحلہ 3 میں سے 3',
+          'step_2_of_3': 'مرحلہ 3 میں سے 2',
+          'step_1_of_3': 'مرحلہ 3 میں سے1',
+          'special': 'خصوصی',
 
           'manage_all_of_your_appointment': 'اپنی تمام ملاقات کا انتظام کریں۔',
           'today_appointment': 'آج کی ملاقات',
@@ -644,7 +653,6 @@ class LanguagesChang extends Translations {
           'appt_detail': 'تقرری کی تفصیل',
           'your_appointment_detail_with_null':
               'آپ کی اپوائنٹمنٹ کی تفصیل Null کے ساتھ',
-          'reg_no': 'رجسٹر نمبر',
           'question': 'سوالات',
           'consultant_info': 'کنسلٹنٹ کی معلومات',
           'reg_date': 'رجسٹر کی تاریخ',
@@ -1041,6 +1049,11 @@ class LanguagesChang extends Translations {
           'welcome_to_create_your_account':
               'আপনার অ্যাকাউন্ট তৈরি করতে স্বাগতম',
           'enter_details': 'বিস্তারিত লিখুন',
+          'reg_no': 'রেজি নং',
+          'step_3_of_3': '৩টির মধ্যে ৩য় ধাপ',
+          'step_2_of_3': '৩টির মধ্যে ২য় ধাপ',
+          'step_1_of_3': '৩টির মধ্যে ১ম ধাপ',
+          'special': 'বিশেষ',
 
           'enter_login_details': 'লগইন বিবরণ লিখুন',
           'email_address': 'ইমেল ঠিকানা',
@@ -1148,7 +1161,6 @@ class LanguagesChang extends Translations {
           'appt_detail': 'অ্যাপয়েন্টমেন্টের বিবরণ',
           'your_appointment_detail_with_null':
               'শূন্য সহ আপনার অ্যাপয়েন্টমেন্টের বিবরণ',
-          'reg_no': 'রেজি নং',
           'question': 'প্রশ্ন',
           'consultant_info': 'পরামর্শদাতা তথ্য',
           'reg_date': 'রেজিঃ তারিখ',
@@ -1538,6 +1550,11 @@ class LanguagesChang extends Translations {
           'welcome_to_create_your_account':
               'अपना खाता बनाने के लिए आपका स्वागत है',
           'enter_details': 'विवरण दर्ज करें',
+          'reg_no': 'रेग नंबर',
+          'step_3_of_3': 'चरण 3 का 3',
+          'step_2_of_3': 'चरण 2 का 3',
+          'step_1_of_3': 'चरण 1 का 3',
+          'special': 'विशेष',
 
           'enter_login_details': 'लॉगिन विवरण दर्ज करें',
           'email_address': 'ईमेल पता',
@@ -1646,7 +1663,6 @@ class LanguagesChang extends Translations {
           'appt_detail': 'नियुक्ति विवरण',
           'your_appointment_detail_with_null':
               'आपका अपॉइंटमेंट विवरण शून्य के साथ',
-          'reg_no': 'रेग नंबर',
           'question': 'प्रशन',
           'consultant_info': 'सलाहकार जानकारी',
           'reg_date': 'रेग तिथि',
