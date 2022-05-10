@@ -11,6 +11,7 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/modules/agora_call/init_video_call_view.dart';
 import 'package:consultant_product/src/modules/chat/logic.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/view.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/repo_post.dart';
 import 'package:consultant_product/src/modules/sms/logic.dart';
 import 'package:consultant_product/src/utils/theme.dart';
@@ -149,7 +150,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
       if (message.data['routeApp'] != null) {
         route = message.data['routeApp'];
         // Get.toNamed(route);
-
         log('MessageData0---->>>${message.data.toString()}');
         log('MessageData1---->>>${message.notification!.title.toString()}');
         log('MessageData2---->>>${message.data['routeApp']}');
@@ -285,8 +285,8 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
                 '${Get.find<GeneralController>().storageBox.read('languageCode')}',
                 '${Get.find<GeneralController>().storageBox.read('countryCode')}'),
 
-            initialRoute: PageRoutes.splash,
-            // home: JoinChannelVideo(),
+            // initialRoute: PageRoutes.splash,
+            home: CreateProfilePage(),
 
             getPages: routes(),
             themeMode: ThemeMode.light,

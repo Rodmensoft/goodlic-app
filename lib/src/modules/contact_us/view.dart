@@ -124,8 +124,8 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             InkWell(
                                               onTap: () {
                                                 MapsLauncher.launchCoordinates(
-                                                    31.399903,
-                                                    73.104372,
+                                                    73.760747,
+                                                    163.305542,
                                                     'Here');
                                               },
                                               child: Container(
@@ -151,7 +151,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                     style: state.titleTextStyle,
                                                   ),
                                                   subtitle: Text(
-                                                    '102-c, Peoples Colony, Faisalabad',
+                                                    '234 Sample Ave. Sampling.FL USA 2345',
                                                     style:
                                                         state.subTitleTextStyle,
                                                   ),
@@ -164,7 +164,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             InkWell(
                                               onTap: () {
                                                 _contactUsLogic.makePhoneCall(
-                                                    '+923112255486');
+                                                    '(800) 123-6789');
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(
@@ -189,7 +189,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                     style: state.titleTextStyle,
                                                   ),
                                                   subtitle: Text(
-                                                    '+92-100235555',
+                                                    '(800) 123-6789',
                                                     style:
                                                         state.subTitleTextStyle,
                                                   ),
@@ -202,7 +202,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             InkWell(
                                               onTap: () {
                                                 _contactUsLogic.sendMail(
-                                                    'support@consultant.com');
+                                                    'example@gmail.com');
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(
@@ -227,7 +227,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                     style: state.titleTextStyle,
                                                   ),
                                                   subtitle: Text(
-                                                    'info@consultant.com',
+                                                    'example@gmail.com',
                                                     style:
                                                         state.subTitleTextStyle,
                                                   ),

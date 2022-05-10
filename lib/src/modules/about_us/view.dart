@@ -58,7 +58,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                     MyCustomSliverAppBar(
                       heading: LanguageConstant.aboutUs.tr,
                       subHeading:
-                          LanguageConstant.getKnowAboutOurVisionAndMission,
+                          LanguageConstant.getKnowAboutOurVisionAndMission.tr,
                       isShrink: _aboutUsLogic.isShrink,
                     ),
                   ];

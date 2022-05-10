@@ -16,7 +16,7 @@ getGenericDataForProfileViewRepo(
         true) {
       ///---occupation
       for (var element in Get.find<MyProfileLogic>().mentorProfileGenericDataModel.data!.occupations!) {
-        if(element.id == Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.occupation!){
+        if(element.id == Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.occupation){
           Get.find<MyProfileLogic>().updateOccupation(element.name);
         }
       }

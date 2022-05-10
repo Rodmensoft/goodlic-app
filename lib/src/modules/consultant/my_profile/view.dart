@@ -783,7 +783,9 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                                   height: 4,
                                                 ),
                                                 Text(
-                                                  '${_generalController.getConsultantProfileModel.data!.userDetail!.userCountry!.name}',
+                                                  _generalController.getConsultantProfileModel.data!.userDetail!.userCountry == null
+                                                      ?'..'
+                                                      :'${_generalController.getConsultantProfileModel.data!.userDetail!.userCountry!.name}',
                                                   softWrap: true,
                                                   overflow:
                                                       TextOverflow.ellipsis,
