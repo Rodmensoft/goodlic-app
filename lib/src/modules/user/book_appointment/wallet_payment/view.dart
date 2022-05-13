@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -46,8 +46,6 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
   double translateX = 0.0;
   double translateY = 0.0;
   bool? disableButton = true;
-
-  final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -489,8 +487,6 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
                               child: GestureDetector(
                                 onHorizontalDragUpdate: (event) async {},
                                 onHorizontalDragEnd: (event) {
-                                  log('END---->>>');
-                                  // Get.toNamed(PageRoutes.appointmentConfirmation);
                                   _generalController.focusOut(context);
                                   _generalController
                                       .updateFormLoaderController(true);
@@ -600,24 +596,4 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
                 ),
         ),
       );
-
-  _incTansXVal() async {
-    int canLoop = -1;
-    for (var i = 0; canLoop == -1; i++) {
-      await Future.delayed(const Duration(milliseconds: 1), () {
-        setState(() {
-          if (translateX + 1 <
-              MediaQuery.of(context).size.width -
-                  (200 + Get.find<BookAppointmentLogic>().myWidth)) {
-            translateX += 1;
-            Get.find<BookAppointmentLogic>().myWidth =
-                MediaQuery.of(context).size.width -
-                    (200 + Get.find<BookAppointmentLogic>().myWidth);
-          } else {
-            canLoop = 1;
-          }
-        });
-      });
-    }
-  }
 }

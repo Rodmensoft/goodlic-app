@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
+
 import 'dart:io';
 import 'package:http/http.dart';
 
@@ -41,8 +41,8 @@ class PlaceApiProvider {
 
   String? sessionToken;
 
-  static const String androidKey = 'AIzaSyCdCdcUtLMgTMNOc0c_KrXxVhWnVUAaJYw';
-  static const String iosKey = 'AIzaSyCdCdcUtLMgTMNOc0c_KrXxVhWnVUAaJYw';
+  static const String androidKey = 'Your Android API key';
+  static const String iosKey = 'Your iOS API key';
   final apiKey = Platform.isAndroid ? androidKey : iosKey;
 
   Future<List<Suggestion>> fetchSuggestions(String input, String lang) async {
@@ -53,12 +53,11 @@ class PlaceApiProvider {
 
     if (response.statusCode == 200) {
       final result = json.decode(response.body);
-      log("FetchResults--->>> $result");
 
       if (result['status'] == 'OK') {
         return List.generate(
             result['predictions'].length,
-                (index) => Suggestion(result['predictions'][index]['place_id'],
+            (index) => Suggestion(result['predictions'][index]['place_id'],
                 result['predictions'][index]['description']));
       }
       if (result['status'] == 'ZERO_RESULTS') {
@@ -71,26 +70,18 @@ class PlaceApiProvider {
   }
 
   Future<dynamic> getPlaceDetailFromId(String placeId) async {
-    try {
-      final request =
-          'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&'
-          'fields=geometry/location&key=$apiKey&sessiontoken=$sessionToken';
-      final response = await client.get(Uri.parse(request));
+    final request =
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&'
+        'fields=geometry/location&key=$apiKey&sessiontoken=$sessionToken';
+    final response = await client.get(Uri.parse(request));
 
-      log(request);
-
-      if (response.statusCode == 200) {
-        final result = json.decode(response.body);
-        log('Location Result--->> ${result['result']['geometry']['location']}');
-        if (result['status'] == 'OK') {
-          Map<String, dynamic> components =
-          result['result']['geometry']['location'];
-          log("the logn and lat is $components");
-          return components;
-        }
+    if (response.statusCode == 200) {
+      final result = json.decode(response.body);
+      if (result['status'] == 'OK') {
+        Map<String, dynamic> components =
+            result['result']['geometry']['location'];
+        return components;
       }
-    } catch (e) {
-      log(e.toString());
     }
   }
 }

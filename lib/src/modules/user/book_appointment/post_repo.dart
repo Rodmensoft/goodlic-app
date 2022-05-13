@@ -44,17 +44,13 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
       'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
   dio_instance.Response response;
   try {
-    log('postData--->> ${formData.fields}');
     response = await dio.post(bookAppointmentUrl, data: formData);
-    log('StatusCode------>> ${response.statusCode}');
-    log('Response $bookAppointmentUrl------>> ${response.data}');
     if (response.statusCode == 200) {
       Get.find<BookAppointmentLogic>().bookAppointmentModel =
           BookAppointmentModel.fromJson(response.data);
       Get.find<GeneralController>().updateFormLoaderController(false);
       if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status ==
           true) {
-
         if (Get.find<BookAppointmentLogic>().selectedPaymentType == 0) {
           Get.find<GeneralController>().updateFormLoaderController(false);
           Get.toNamed(PageRoutes.paymentStripeView);
@@ -99,7 +95,6 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
                 );
               });
         }
-        log('bookAppointmentRepo ------>> ${Get.find<BookAppointmentLogic>().bookAppointmentModel.success}');
       } else {
         Get.find<GeneralController>().updateFormLoaderController(false);
         showDialog(
@@ -138,7 +133,7 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
     }
   } on dio_instance.DioError catch (e) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-    log('putResponseError---->> ${e}');
+    log('putResponseError---->> $e');
   }
 }
 
@@ -149,11 +144,9 @@ bookAppointmentWithoutFileRepo(
         BookAppointmentModel.fromJson(response);
     Get.find<GeneralController>().updateFormLoaderController(false);
     if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
-
       if (Get.find<BookAppointmentLogic>().selectedPaymentType == 0) {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.paymentStripeView);
-
       } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 1) {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.paymentStripeView);
@@ -181,8 +174,6 @@ bookAppointmentWithoutFileRepo(
               );
             });
       }
-
-      log('bookAppointmentRepo ------>> ${Get.find<BookAppointmentLogic>().bookAppointmentModel.success}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
       showDialog(

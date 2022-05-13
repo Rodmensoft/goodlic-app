@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
@@ -55,7 +54,7 @@ class _ChatPageState extends State<ChatPage> {
         true,
         fetchMessagesRepo);
     pusher = PusherClient(
-      "fa6080bfea44424ad3c2",
+      "Your Pusher Key Here",
       PusherOptions(
         host: '',
         cluster: 'ap2',
@@ -63,12 +62,8 @@ class _ChatPageState extends State<ChatPage> {
       ),
     );
 
-    pusher!.onConnectionStateChange((state) {
-      log("previousState: ${state!.previousState}, currentState: ${state.currentState}");
-    });
-    pusher!.onConnectionError((error) {
-      log("error: ${error!.message}");
-    });
+    pusher!.onConnectionStateChange((state) {});
+    pusher!.onConnectionError((error) {});
 
     channel = pusher!.subscribe("chat");
 
@@ -76,28 +71,24 @@ class _ChatPageState extends State<ChatPage> {
       setState(() {
         responseData = event!.data.toString();
       });
-      log('TEMP MAP-->> ${event!.data}');
-      log('RESPONSE DATA ${responseData.toString()}');
-      log('JSON DECODE-->> ${jsonDecode(responseData)}');
 
       Map<String, dynamic> tempMap = jsonDecode(responseData);
-      log('TEMP MAP-->> ${jsonDecode(responseData)}');
 
       Messages tempChatData = Messages.fromJson(tempMap['message']);
-      log('AFTER CONVERT--->>${tempChatData.message}');
       Get.find<ChatLogic>().updateMessageList(tempChatData);
       Future.delayed(const Duration(seconds: 1)).whenComplete(() =>
           Get.find<ChatLogic>().scrollController!.animateTo(
               Get.find<ChatLogic>().scrollController!.position.maxScrollExtent,
               curve: Curves.easeOut,
               duration: const Duration(milliseconds: 500)));
-        Future.delayed(const Duration(milliseconds: 1)).whenComplete(() =>
+      Future.delayed(const Duration(milliseconds: 1)).whenComplete(() =>
           Get.find<ChatLogic>().chatScrollController!.animateTo(
-              Get.find<ChatLogic>().chatScrollController!.position.maxScrollExtent,
+              Get.find<ChatLogic>()
+                  .chatScrollController!
+                  .position
+                  .maxScrollExtent,
               curve: Curves.easeOut,
               duration: const Duration(milliseconds: 500)));
-
-
     });
   }
 
@@ -313,7 +304,8 @@ class _ChatPageState extends State<ChatPage> {
                                       )
                                     : Expanded(
                                         child: ListView(
-                                          controller: _chatLogic.chatScrollController,
+                                        controller:
+                                            _chatLogic.chatScrollController,
                                         children: List.generate(
                                             _chatLogic.messageList.length,
                                             (index) {
@@ -431,32 +423,28 @@ class _ChatPageState extends State<ChatPage> {
                                 children: [
                                   Expanded(
                                     child: TextFormField(
-
                                       style: TextStyle(
                                         fontFamily: SarabunFontFamily.regular,
                                         fontSize: 14.sp,
                                         color: Colors.white,
                                       ),
                                       controller: _chatLogic.messageController,
-
                                       onTap: () {
                                         Future.delayed(
                                                 const Duration(seconds: 1))
-                                            .whenComplete(() =>
-                                                Get.find<ChatLogic>()
-                                                    .chatScrollController!
-                                                    .animateTo(
-                                                        Get.find<ChatLogic>()
-                                                            .chatScrollController!
-                                                            .position
-                                                            .maxScrollExtent,
-                                                        curve: Curves.easeOut,
-                                                        duration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    500)));
+                                            .whenComplete(() => Get.find<
+                                                    ChatLogic>()
+                                                .chatScrollController!
+                                                .animateTo(
+                                                    Get.find<ChatLogic>()
+                                                        .chatScrollController!
+                                                        .position
+                                                        .maxScrollExtent,
+                                                    curve: Curves.easeOut,
+                                                    duration: const Duration(
+                                                        milliseconds: 500)));
                                       },
-                                      textInputAction:TextInputAction.send ,
+                                      textInputAction: TextInputAction.send,
                                       keyboardType: TextInputType.multiline,
                                       maxLines: null,
                                       onChanged: (value) {
@@ -467,26 +455,19 @@ class _ChatPageState extends State<ChatPage> {
                                           _chatLogic.updateShowSendIcon(true);
                                         }
                                       },
-                                      onFieldSubmitted: (value){
+                                      onFieldSubmitted: (value) {
                                         Get.find<GeneralController>()
                                             .notificationRouteApp = null;
-                                        log('SENDER-->${Get.find<
-                                            ChatLogic>()
-                                            .senderMessageGetId}');
-                                        log('RECIEVER-->${Get.find<
-                                            ChatLogic>()
-                                            .receiverMessageGetId}');
                                         _generalController.focusOut(context);
                                         postMethod(
                                             context,
                                             sendMessageUrl,
                                             {
                                               'token': '123',
-                                              'receiver_id': Get.find<
-                                                  ChatLogic>()
-                                                  .receiverMessageGetId,
-                                              'sender_id': Get.find<
-                                                  ChatLogic>()
+                                              'receiver_id':
+                                                  Get.find<ChatLogic>()
+                                                      .receiverMessageGetId,
+                                              'sender_id': Get.find<ChatLogic>()
                                                   .senderMessageGetId,
                                               'message': _chatLogic
                                                   .messageController.text
@@ -538,13 +519,8 @@ class _ChatPageState extends State<ChatPage> {
                                             onTap: () {
                                               Get.find<GeneralController>()
                                                   .notificationRouteApp = null;
-                                              log('SENDER-->${Get.find<
-                                                  ChatLogic>()
-                                                  .senderMessageGetId}');
-                                              log('RECIEVER-->${Get.find<
-                                                  ChatLogic>()
-                                                  .receiverMessageGetId}');
-                                              _generalController.focusOut(context);
+                                              _generalController
+                                                  .focusOut(context);
                                               postMethod(
                                                   context,
                                                   sendMessageUrl,

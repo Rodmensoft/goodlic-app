@@ -96,7 +96,6 @@ class CategoryPostModel {
     _description = json['description'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    // _parentCategory = json['parent_category'] != null ? Parent_category.fromJson(json['parent_category']) : null;
   }
   int? _id;
   int? _parentId;
@@ -105,7 +104,6 @@ class CategoryPostModel {
   dynamic _description;
   String? _createdAt;
   String? _updatedAt;
-  // Parent_category? _parentCategory;
 
   int? get id => _id;
   int? get parentId => _parentId;
@@ -114,7 +112,6 @@ class CategoryPostModel {
   dynamic get description => _description;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
-  // Parent_category? get parentCategory => _parentCategory;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -125,16 +122,13 @@ class CategoryPostModel {
     map['description'] = _description;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
-    // if (_parentCategory != null) {
-    //   map['parent_category'] = _parentCategory?.toJson();
-    // }
     return map;
   }
 
 }
 
-class Parent_category {
-  Parent_category({
+class ParentCategory {
+  ParentCategory({
       int? id, 
       int? parentId, 
       String? name, 
@@ -151,7 +145,7 @@ class Parent_category {
     _updatedAt = updatedAt;
 }
 
-  Parent_category.fromJson(dynamic json) {
+  ParentCategory.fromJson(dynamic json) {
     _id = json['id'];
     _parentId = json['parent_id'];
     _name = json['name'];

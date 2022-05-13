@@ -1,5 +1,4 @@
 import 'package:consultant_product/multi_language/language_constants.dart';
-import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/wallet/repo_get.dart';

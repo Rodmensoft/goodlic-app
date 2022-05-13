@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -130,12 +130,10 @@ class _SignUpPageState extends State<SignUpPage>
                                                   _signUpLogic.selectedRole =
                                                       'Mentee';
                                                   _signUpLogic.update();
-                                                  log('ROLE--->>>${_signUpLogic.selectedRole}');
                                                 } else {
                                                   _signUpLogic.selectedRole =
                                                       'Mentor';
                                                   _signUpLogic.update();
-                                                  log('ROLE--->>>${_signUpLogic.selectedRole}');
                                                 }
                                               },
                                               indicator: BoxDecoration(

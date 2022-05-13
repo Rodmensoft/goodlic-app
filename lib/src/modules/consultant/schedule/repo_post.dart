@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -25,14 +23,11 @@ markHolidayPostRepo(
           },
           false,
           getAvailableDaysRepo);
-      log('markHolidayPostRepo ------>> ${response['Status']}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -63,13 +58,10 @@ saveSchedulePostRepo(
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar('${LanguageConstant.addedSuccessfully.tr}!', '',
           colorText: Colors.black, backgroundColor: Colors.white);
-      log('saveSchedulePostRepo ------>> ${response['Status']}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }

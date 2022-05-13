@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
@@ -53,7 +53,6 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
       backgroundColor: widget.isShrink! ? customThemeColor : Colors.transparent,
       leading: InkWell(
         onTap: () {
-          log('PREVIOUS--->>${Get.previousRoute}');
           if (Get.previousRoute.contains('appointmentConfirmation') ||
               Get.previousRoute.contains('myAppointment')) {
             Get.offAllNamed(PageRoutes.userHome);

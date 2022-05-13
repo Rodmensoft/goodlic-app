@@ -134,11 +134,11 @@ class AppointmentsPageData {
       dynamic prevPageUrl, 
       dynamic to, 
       int? total,}){
-    _currentPage = currentPage;
-    _data = data;
+    currentPage = currentPage;
+    data = data;
     _firstPageUrl = firstPageUrl;
     _from = from;
-    _lastPage = lastPage;
+    lastPage = lastPage;
     _lastPageUrl = lastPageUrl;
     _links = links;
     _nextPageUrl = nextPageUrl;
@@ -150,16 +150,16 @@ class AppointmentsPageData {
 }
 
   AppointmentsPageData.fromJson(dynamic json) {
-    _currentPage = json['current_page'];
+    currentPage = json['current_page'];
     if (json['data'] != null) {
-      _data = [];
+      data = [];
       json['data'].forEach((v) {
-        _data?.add(UserAppointmentsData.fromJson(v));
+        data?.add(UserAppointmentsData.fromJson(v));
       });
     }
     _firstPageUrl = json['first_page_url'];
     _from = json['from'];
-    _lastPage = json['last_page'];
+    lastPage = json['last_page'];
     _lastPageUrl = json['last_page_url'];
     if (json['links'] != null) {
       _links = [];
@@ -174,11 +174,11 @@ class AppointmentsPageData {
     _to = json['to'];
     _total = json['total'];
   }
-  int? _currentPage;
-  List<UserAppointmentsData>? _data;
+  int? currentPage;
+  List<UserAppointmentsData>? data;
   String? _firstPageUrl;
   dynamic _from;
-  int? _lastPage;
+  int? lastPage;
   String? _lastPageUrl;
   List<Links>? _links;
   dynamic _nextPageUrl;
@@ -187,12 +187,8 @@ class AppointmentsPageData {
   dynamic _prevPageUrl;
   dynamic _to;
   int? _total;
-
-  int? get currentPage => _currentPage;
-  List<UserAppointmentsData>? get data => _data;
   String? get firstPageUrl => _firstPageUrl;
   dynamic get from => _from;
-  int? get lastPage => _lastPage;
   String? get lastPageUrl => _lastPageUrl;
   List<Links>? get links => _links;
   dynamic get nextPageUrl => _nextPageUrl;
@@ -202,26 +198,15 @@ class AppointmentsPageData {
   dynamic get to => _to;
   int? get total => _total;
 
-
-  set currentPage(int? value) {
-    _currentPage = value;
-  }
-  set lastPage(int? value) {
-    _lastPage = value;
-  }
-  set data(List<UserAppointmentsData>? value) {
-    _data = value;
-  }
-
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['current_page'] = _currentPage;
-    if (_data != null) {
-      map['data'] = _data?.map((v) => v.toJson()).toList();
+    map['current_page'] = currentPage;
+    if (data != null) {
+      map['data'] = data?.map((v) => v.toJson()).toList();
     }
     map['first_page_url'] = _firstPageUrl;
     map['from'] = _from;
-    map['last_page'] = _lastPage;
+    map['last_page'] = lastPage;
     map['last_page_url'] = _lastPageUrl;
     if (_links != null) {
       map['links'] = _links?.map((v) => v.toJson()).toList();
@@ -417,7 +402,7 @@ class UserAppointmentsDataMentor {
       dynamic googleId, 
       String? createdAt, 
       String? updatedAt,
-    User_country? userCountry,}){
+    UserCountry? userCountry,}){
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -468,7 +453,7 @@ class UserAppointmentsDataMentor {
     _googleId = json['google_id'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    _userCountry = json['user_country'] != null ? User_country.fromJson(json['user_country']) : null;
+    _userCountry = json['user_country'] != null ? UserCountry.fromJson(json['user_country']) : null;
   }
   int? _id;
   dynamic _firstName;
@@ -493,7 +478,7 @@ class UserAppointmentsDataMentor {
   dynamic _googleId;
   String? _createdAt;
   String? _updatedAt;
-  User_country? _userCountry;
+  UserCountry? _userCountry;
 
   int? get id => _id;
   dynamic get firstName => _firstName;
@@ -518,7 +503,7 @@ class UserAppointmentsDataMentor {
   dynamic get googleId => _googleId;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
-  User_country? get userCountry => _userCountry;
+  UserCountry? get userCountry => _userCountry;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -552,8 +537,8 @@ class UserAppointmentsDataMentor {
   }
 
 }
-class User_country {
-  User_country({
+class UserCountry {
+  UserCountry({
     int? id,
     String? name,
     String? isoCode3,
@@ -602,7 +587,7 @@ class User_country {
     _wikiDataId = wikiDataId;
   }
 
-  User_country.fromJson(dynamic json) {
+  UserCountry.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
     _isoCode3 = json['iso_code_3'];

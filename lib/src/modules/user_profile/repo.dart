@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -18,12 +17,9 @@ getUserProfileRepo(
     Get.find<GeneralController>().updateFormLoaderController(false);
     if (Get.find<GeneralController>().getConsultantProfileModel.status ==
         true) {
-      log('getUserProfileRepo ------>> ${Get.find<GeneralController>().getConsultantProfileModel.success}');
     } else {}
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -70,12 +66,6 @@ getUserProfileForEditRepo(
               .data!
               .userDetail!
               .fatherName!;
-      // Get.find<EditConsultantProfileLogic>().emailController.text =
-      //     Get.find<GeneralController>()
-      //         .getConsultantProfileModel
-      //         .data!
-      //         .userDetail!
-      //         .email!;
       Get.find<EditConsultantProfileLogic>().cnicController.text =
           Get.find<GeneralController>()
               .getConsultantProfileModel
@@ -144,7 +134,6 @@ getUserProfileForEditRepo(
               .userDetail!
               .mentor!
               .categories!;
-      // Get.find<EditConsultantProfileLogic>().selectedSubCategory = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.mentor!.category!.name!;
       Get.find<EditConsultantProfileLogic>().selectedBank =
           Get.find<GeneralController>()
               .getConsultantProfileModel
@@ -168,13 +157,10 @@ getUserProfileForEditRepo(
               .accountNumber!;
       Get.find<EditConsultantProfileLogic>().update();
       Get.find<GeneralController>().updateFormLoaderController(false);
-      log('getUserProfileRepo ------>> ${Get.find<GeneralController>().getConsultantProfileModel.success}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }

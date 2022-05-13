@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -54,8 +54,6 @@ class _StripePaymentForWalletViewState
 
   double translateX = 0.0;
   double translateY = 0.0;
-
-  final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -656,8 +654,6 @@ class _StripePaymentForWalletViewState
                                   }
                                 },
                                 onHorizontalDragEnd: (event) {
-                                  log('END---->>>');
-                                  // Get.toNamed(PageRoutes.appointmentConfirmation);
                                   if (_walletLogic.accountCardNumberController
                                           .text.isNotEmpty &&
                                       _walletLogic

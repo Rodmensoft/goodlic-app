@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -15,7 +15,6 @@ walletPaymentRepo(
     if (response['Status'].toString() == 'true') {
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.offAllNamed(PageRoutes.appointmentConfirmation);
-      log('walletPaymentRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
 

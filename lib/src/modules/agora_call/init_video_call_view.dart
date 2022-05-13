@@ -18,7 +18,7 @@ class _InitVideoCallViewState extends State< InitVideoCallView> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }
 class NotificationRoute extends StatefulWidget {
@@ -38,6 +38,6 @@ class _NotificationRouteState extends State<NotificationRoute> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

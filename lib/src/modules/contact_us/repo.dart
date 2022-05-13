@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/contact_us/logic.dart';
@@ -34,7 +32,6 @@ contactUsRepo(
               img: 'assets/Icons/dialog_success.svg',
             );
           });
-      log('contactUsRepo ------>> ${Get.find<ContactUsLogic>().contactUsModel.success}');
     } else {
       showDialog(
           context: context,
@@ -68,6 +65,5 @@ contactUsRepo(
             img: 'assets/Icons/dialog_error.svg',
           );
         });
-    log('Exception........................');
   }
 }

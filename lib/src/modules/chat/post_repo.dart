@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -13,7 +11,7 @@ sendMessagesRepo(
   if (responseCheck) {
     ///---make-notification
     Get.find<GeneralController>().updateNotificationBody('New Message',
-        Get.find<ChatLogic>().messageController.text, null, null,null);
+        Get.find<ChatLogic>().messageController.text, null, null, null);
     Get.find<ChatLogic>().messageController.clear();
     if (response['Status'].toString() == 'true') {
       Get.find<ChatLogic>().updateGetMessagesLoader(false);
@@ -28,13 +26,10 @@ sendMessagesRepo(
           },
           true,
           getFcmTokenRepo);
-      log('sendMessagesRepo ------>> ${Get.find<ChatLogic>().fetchMessagesModel.success}');
     } else {
       Get.find<ChatLogic>().updateGetMessagesLoader(false);
     }
   } else if (!responseCheck) {
     Get.find<ChatLogic>().updateGetMessagesLoader(false);
-
-    log('Exception........................');
   }
 }

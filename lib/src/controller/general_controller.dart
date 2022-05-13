@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as math;
 
@@ -137,18 +136,13 @@ class GeneralController extends GetxController {
       fcmToken = value;
       storageBox.write('fcmToken', fcmToken);
       getId(context);
-    }).catchError((onError) {
-      log('Error--->>$onError');
-    });
-    log('Token--->>$fcmToken');
+    }).catchError((onError) {});
   }
 
   Future<String?> getId(BuildContext context) async {
     var deviceInfo = DeviceInfoPlugin();
     if (Platform.isIOS) {
-      // import 'dart:io'
       var iosDeviceInfo = await deviceInfo.iosInfo;
-      log('--->>DeviceID-->> ${iosDeviceInfo.identifierForVendor}');
       postMethod(
           context,
           fcmUpdateUrl,
@@ -163,7 +157,6 @@ class GeneralController extends GetxController {
       return iosDeviceInfo.identifierForVendor; // unique ID on iOS
     } else {
       var androidDeviceInfo = await deviceInfo.androidInfo;
-      log('--->>DeviceID-->> ${androidDeviceInfo.androidId}');
       postMethod(
           context,
           fcmUpdateUrl,

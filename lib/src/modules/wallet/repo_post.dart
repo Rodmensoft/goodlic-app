@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
@@ -49,7 +49,6 @@ depositTransactionJazzcashRepo(
               img: 'assets/dialog_success.svg',
             );
           });
-      log('depositTransactionJazzcashRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
 
@@ -116,7 +115,6 @@ withdrawTransactionRepo(
       Get.snackbar(
           '${LanguageConstant.success.tr}!', response['msg'].toString(),
           colorText: Colors.black, backgroundColor: Colors.white);
-      log('depositTransactionJazzcashRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar(LanguageConstant.failed.tr, response['msg'].toString(),

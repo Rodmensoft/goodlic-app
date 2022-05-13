@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -283,7 +281,6 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                           );
                                         }).toList(),
                                         onChanged: (String? value) {
-                                          log(value.toString());
                                           setState(() {
                                             _mentorScheduleLogic
                                                 .chargesController
@@ -477,7 +474,6 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                                         : 0;
                                                               });
                                                             }
-                                                            log('TEMPLIST--->>$tempHolidayMap');
                                                             postMethod(
                                                                 context,
                                                                 markDayHolidayUrl,
@@ -767,8 +763,6 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                             _mentorScheduleLogic
                                                                 .slotsList
                                                                 .clear();
-                                                            log(value
-                                                                .toString());
                                                             setState(() {
                                                               _mentorScheduleLogic
                                                                       .selectedAvailableDay =
@@ -1004,13 +998,11 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                                     .toString()
                                                                     .substring(
                                                                         11);
-                                                            log('---START-TIME-PICKED->>${_mentorScheduleLogic.selectedTimeForStartForCalculate}');
 
                                                             _mentorScheduleLogic
                                                                     .selectedTimeForStart =
                                                                 picked.format(
                                                                     context);
-                                                            log('---START-TIME->>${_mentorScheduleLogic.selectedTimeForStart}');
                                                           });
                                                         }
                                                       },
@@ -1158,13 +1150,10 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                                     .toString()
                                                                     .substring(
                                                                         11);
-                                                            log('---END-TIME-PICKED->>${_mentorScheduleLogic.selectedTimeForEndForCalculate}');
-
                                                             _mentorScheduleLogic
                                                                     .selectedTimeForEnd =
                                                                 picked.format(
                                                                     context);
-                                                            log('---END-TIME->>${_mentorScheduleLogic.selectedTimeForEnd}');
                                                           });
                                                         }
                                                       },
@@ -1340,9 +1329,6 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                                     .length -
                                                                 1;
                                                       });
-                                                      log(_mentorScheduleLogic
-                                                          .slotsList
-                                                          .toString());
                                                     } else {
                                                       setState(() {
                                                         timeValidator = true;

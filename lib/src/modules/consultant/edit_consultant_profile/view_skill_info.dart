@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -129,7 +127,6 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                   .emptyAllSubCategoriesForDropDownList();
                               _editConsultantProfileLogic
                                   .emptySelectedSubCategoriesList();
-                              log(value.toString());
                               setState(() {
                                 _editConsultantProfileLogic.selectedCategory =
                                     value;
@@ -258,12 +255,6 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                                             .length -
                                                         1])]
                                             .id!);
-                                    log('----01-->>$index');
-                                    log('----02-->>${_editConsultantProfileLogic.allSubCategoriesList.length}');
-                                    log('----03-->>${_editConsultantProfileLogic.selectedSubCategoriesList}');
-                                    log('----04-->>${_editConsultantProfileLogic.selectedSubCategoriesList.indexOf(_editConsultantProfileLogic.selectedSubCategoriesList[_editConsultantProfileLogic.selectedSubCategoriesList.length - 1])}');
-                                    log('----child-ID-->>${_editConsultantProfileLogic.allSubCategoriesList[index].data!.mentorCategories![_editConsultantProfileLogic.allSubCategoriesForDropDownList[index].indexOf(_editConsultantProfileLogic.selectedSubCategoriesList[_editConsultantProfileLogic.selectedSubCategoriesList.length - 1])].id}');
-
                                     Get.find<GeneralController>()
                                         .updateFormLoaderController(true);
                                     getMethod(
@@ -311,12 +302,6 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                                             .length -
                                                         1])]
                                             .id!);
-                                    log('----01-->>$index');
-                                    log('----02-->>${_editConsultantProfileLogic.allSubCategoriesList.length}');
-                                    log('----03-->>${_editConsultantProfileLogic.selectedSubCategoriesList}');
-                                    log('----04-->>${_editConsultantProfileLogic.selectedSubCategoriesList.indexOf(_editConsultantProfileLogic.selectedSubCategoriesList[_editConsultantProfileLogic.selectedSubCategoriesList.length - 1])}');
-                                    log('----child-ID-->>${_editConsultantProfileLogic.allSubCategoriesList[index].data!.mentorCategories![_editConsultantProfileLogic.allSubCategoriesForDropDownList[index].indexOf(_editConsultantProfileLogic.selectedSubCategoriesList[_editConsultantProfileLogic.selectedSubCategoriesList.length - 1])].id}');
-
                                     Get.find<GeneralController>()
                                         .updateFormLoaderController(true);
                                     getMethod(
@@ -357,7 +342,6 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             if (!currentFocus.hasPrimaryFocus) {
                               currentFocus.unfocus();
                             }
-                            log('IDS-------->>${_editConsultantProfileLogic.selectedSubCategoriesIDList}');
                             if (_editConsultantProfileLogic
                                 .getChildCategoriesModel
                                 .data!
@@ -692,7 +676,6 @@ class _SubCategoryDropDownState extends State<SubCategoryDropDown> {
               );
             }).toList(),
             onChanged: (String? value) {
-              log(value.toString());
               setState(() {
                 widget.onSelectionTap!(value);
               });

@@ -1,6 +1,5 @@
 import 'package:animation_wrappers/animations/faded_slide_animation.dart';
 import 'package:consultant_product/multi_language/language_constants.dart';
-import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/logic.dart';

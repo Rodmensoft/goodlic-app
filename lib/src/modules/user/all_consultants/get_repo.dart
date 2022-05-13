@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/all_consultants/logic.dart';
 import 'package:consultant_product/src/modules/user/all_consultants/model_all_consultant.dart';
@@ -71,8 +69,6 @@ getCategoriesWithConsultantRepo(
   } else if (!responseCheck) {
     Get.find<AllConsultantsLogic>().updateAllConsultantLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -113,7 +109,5 @@ getCategoriesWithConsultantMoreRepo(
   } else if (!responseCheck) {
     Get.find<AllConsultantsLogic>().updateAllConsultantMoreLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }

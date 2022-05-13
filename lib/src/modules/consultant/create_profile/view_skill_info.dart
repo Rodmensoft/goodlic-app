@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -120,7 +118,6 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                   .emptyAllSubCategoriesForDropDownList();
                               _createProfileLogic
                                   .emptySelectedSubCategoriesList();
-                              log(value.toString());
                               setState(() {
                                 _createProfileLogic.selectedCategory = value;
                                 _createProfileLogic
@@ -245,12 +242,6 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                                             .length -
                                                         1])]
                                             .id!);
-                                    log('----01-->>$index');
-                                    log('----02-->>${_createProfileLogic.allSubCategoriesList.length}');
-                                    log('----03-->>${_createProfileLogic.selectedSubCategoriesList}');
-                                    log('----04-->>${_createProfileLogic.selectedSubCategoriesList.indexOf(_createProfileLogic.selectedSubCategoriesList[_createProfileLogic.selectedSubCategoriesList.length - 1])}');
-                                    log('----child-ID-->>${_createProfileLogic.allSubCategoriesList[index].data!.mentorCategories![_createProfileLogic.allSubCategoriesForDropDownList[index].indexOf(_createProfileLogic.selectedSubCategoriesList[_createProfileLogic.selectedSubCategoriesList.length - 1])].id}');
-
                                     Get.find<GeneralController>()
                                         .updateFormLoaderController(true);
                                     getMethod(
@@ -298,12 +289,6 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                                             .length -
                                                         1])]
                                             .id!);
-                                    log('----01-->>$index');
-                                    log('----02-->>${_createProfileLogic.allSubCategoriesList.length}');
-                                    log('----03-->>${_createProfileLogic.selectedSubCategoriesList}');
-                                    log('----04-->>${_createProfileLogic.selectedSubCategoriesList.indexOf(_createProfileLogic.selectedSubCategoriesList[_createProfileLogic.selectedSubCategoriesList.length - 1])}');
-                                    log('----child-ID-->>${_createProfileLogic.allSubCategoriesList[index].data!.mentorCategories![_createProfileLogic.allSubCategoriesForDropDownList[index].indexOf(_createProfileLogic.selectedSubCategoriesList[_createProfileLogic.selectedSubCategoriesList.length - 1])].id}');
-
                                     Get.find<GeneralController>()
                                         .updateFormLoaderController(true);
                                     getMethod(
@@ -344,7 +329,6 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             if (!currentFocus.hasPrimaryFocus) {
                               currentFocus.unfocus();
                             }
-                            log('IDS-------->>${_createProfileLogic.selectedSubCategoriesIDList}');
                             if (_createProfileLogic.getChildCategoriesModel
                                 .data!.mentorCategories!.isEmpty) {
                               Get.find<GeneralController>()
@@ -609,7 +593,6 @@ class _SubCategoryDropDownState extends State<SubCategoryDropDown> {
               );
             }).toList(),
             onChanged: (String? value) {
-              log(value.toString());
               setState(() {
                 widget.onSelectionTap!(value);
               });

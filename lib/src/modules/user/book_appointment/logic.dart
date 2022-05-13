@@ -85,7 +85,7 @@ class BookAppointmentLogic extends GetxController {
       GetScheduleSlotsForUserModel();
   String selectedDateForAppointment = '';
   String selectedTimeForAppointment = '';
-  Schedule_slots selectedScheduleSlots = Schedule_slots();
+  ScheduleSlots selectedScheduleSlots = ScheduleSlots();
 
   bool? getScheduleSlotsForMenteeLoader = false;
   updateGetScheduleSlotsForMenteeLoader(bool? newValue) {
@@ -100,8 +100,8 @@ class BookAppointmentLogic extends GetxController {
     update();
   }
 
-  List<Schedule_slots> morningSlots = [];
-  updateMorningSlots(Schedule_slots newValue) {
+  List<ScheduleSlots> morningSlots = [];
+  updateMorningSlots(ScheduleSlots newValue) {
     morningSlots.add(newValue);
     update();
   }
@@ -111,8 +111,8 @@ class BookAppointmentLogic extends GetxController {
     update();
   }
 
-  List<Schedule_slots> afterNoonSlots = [];
-  updateAfterNoonSlots(Schedule_slots newValue) {
+  List<ScheduleSlots> afterNoonSlots = [];
+  updateAfterNoonSlots(ScheduleSlots newValue) {
     afterNoonSlots.add(newValue);
     update();
   }
@@ -122,8 +122,8 @@ class BookAppointmentLogic extends GetxController {
     update();
   }
 
-  List<Schedule_slots> eveningSlots = [];
-  updateEveningSlots(Schedule_slots newValue) {
+  List<ScheduleSlots> eveningSlots = [];
+  updateEveningSlots(ScheduleSlots newValue) {
     eveningSlots.add(newValue);
     update();
   }

@@ -1,4 +1,3 @@
-import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:resize/resize.dart';
 

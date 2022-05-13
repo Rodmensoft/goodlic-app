@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
@@ -56,7 +56,6 @@ stripePaymentRepo(
         Get.find<BookAppointmentLogic>().update();
         Get.offAllNamed(PageRoutes.appointmentConfirmation);
 
-        log('bookAppointmentRepo ------>> ${Get.find<BookAppointmentLogic>().modelStripePayment.original!.success}');
       } else {
         Get.find<BookAppointmentLogic>().myWidth = 0;
         Get.find<BookAppointmentLogic>().update();

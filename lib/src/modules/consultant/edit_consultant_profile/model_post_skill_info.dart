@@ -76,7 +76,6 @@ class CategoryPostModel {
       dynamic description, 
       String? createdAt, 
       String? updatedAt, 
-      // Parent_category? parentCategory,
   }){
     _id = id;
     _parentId = parentId;
@@ -85,7 +84,6 @@ class CategoryPostModel {
     _description = description;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
-    // _parentCategory = parentCategory;
 }
 
   CategoryPostModel.fromJson(dynamic json) {
@@ -96,69 +94,6 @@ class CategoryPostModel {
     _description = json['description'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    // _parentCategory = json['parent_category'] != null ? Parent_category.fromJson(json['parent_category']) : null;
-  }
-  int? _id;
-  int? _parentId;
-  String? _name;
-  String? _imagePath;
-  dynamic _description;
-  String? _createdAt;
-  String? _updatedAt;
-  // Parent_category? _parentCategory;
-
-  int? get id => _id;
-  int? get parentId => _parentId;
-  String? get name => _name;
-  String? get imagePath => _imagePath;
-  dynamic get description => _description;
-  String? get createdAt => _createdAt;
-  String? get updatedAt => _updatedAt;
-  // Parent_category? get parentCategory => _parentCategory;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = _id;
-    map['parent_id'] = _parentId;
-    map['name'] = _name;
-    map['image_path'] = _imagePath;
-    map['description'] = _description;
-    map['created_at'] = _createdAt;
-    map['updated_at'] = _updatedAt;
-    // if (_parentCategory != null) {
-    //   map['parent_category'] = _parentCategory?.toJson();
-    // }
-    return map;
-  }
-
-}
-
-class Parent_category {
-  Parent_category({
-      int? id, 
-      int? parentId, 
-      String? name, 
-      String? imagePath, 
-      dynamic description, 
-      String? createdAt, 
-      String? updatedAt,}){
-    _id = id;
-    _parentId = parentId;
-    _name = name;
-    _imagePath = imagePath;
-    _description = description;
-    _createdAt = createdAt;
-    _updatedAt = updatedAt;
-}
-
-  Parent_category.fromJson(dynamic json) {
-    _id = json['id'];
-    _parentId = json['parent_id'];
-    _name = json['name'];
-    _imagePath = json['image_path'];
-    _description = json['description'];
-    _createdAt = json['created_at'];
-    _updatedAt = json['updated_at'];
   }
   int? _id;
   int? _parentId;
@@ -189,3 +124,4 @@ class Parent_category {
   }
 
 }
+

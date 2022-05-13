@@ -86,14 +86,14 @@ class ConsultantDetailFromGetProfile {
     String? onlineStatus,
     int? ratingsAvg,
     String? registerDate,
-    List<Schedule_types>? scheduleTypes,
-    List<Schedule_types>? withoutScheduleTypes,
+    List<ScheduleTypes>? scheduleTypes,
+    List<ScheduleTypes>? withoutScheduleTypes,
     int? appointmentCount,
     Mentor? mentor,
-    User_country? userCountry,
+    UserCountry? userCountry,
     List<Education>? educations,
     List<Experience>? experiences,
-    Card_detail? cardDetail,}){
+    CardDetail? cardDetail,}){
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -146,18 +146,18 @@ class ConsultantDetailFromGetProfile {
     if (json['schedule_types'] != null) {
       _scheduleTypes = [];
       json['schedule_types'].forEach((v) {
-        _scheduleTypes?.add(Schedule_types.fromJson(v));
+        _scheduleTypes?.add(ScheduleTypes.fromJson(v));
       });
     }
     if (json['without_schedule_types'] != null) {
       _withoutScheduleTypes = [];
       json['without_schedule_types'].forEach((v) {
-        _withoutScheduleTypes?.add(Schedule_types.fromJson(v));
+        _withoutScheduleTypes?.add(ScheduleTypes.fromJson(v));
       });
     }
     _appointmentCount = json['appointmentCount'];
     _mentor = json['mentor'] != null ? Mentor.fromJson(json['mentor']) : null;
-    _userCountry = json['user_country'] != null ? User_country.fromJson(json['user_country']) : null;
+    _userCountry = json['user_country'] != null ? UserCountry.fromJson(json['user_country']) : null;
     if (json['educations'] != null) {
       _educations = [];
       json['educations'].forEach((v) {
@@ -170,7 +170,7 @@ class ConsultantDetailFromGetProfile {
         _experiences?.add(Experience.fromJson(v));
       });
     }
-    _cardDetail = json['card_detail'] != null ? Card_detail.fromJson(json['card_detail']) : null;
+    _cardDetail = json['card_detail'] != null ? CardDetail.fromJson(json['card_detail']) : null;
   }
   int? _id;
   String? _firstName;
@@ -191,14 +191,14 @@ class ConsultantDetailFromGetProfile {
   String? _onlineStatus;
   int? _ratingsAvg;
   String? _registerDate;
-  List<Schedule_types>? _scheduleTypes;
-  List<Schedule_types>? _withoutScheduleTypes;
+  List<ScheduleTypes>? _scheduleTypes;
+  List<ScheduleTypes>? _withoutScheduleTypes;
   int? _appointmentCount;
   Mentor? _mentor;
-  User_country? _userCountry;
+  UserCountry? _userCountry;
   List<Education>? _educations;
   List<Experience>? _experiences;
-  Card_detail? _cardDetail;
+  CardDetail? _cardDetail;
 
   int? get id => _id;
   String? get firstName => _firstName;
@@ -219,14 +219,14 @@ class ConsultantDetailFromGetProfile {
   String? get onlineStatus => _onlineStatus;
   int? get ratingsAvg => _ratingsAvg;
   String? get registerDate => _registerDate;
-  List<Schedule_types>? get scheduleTypes => _scheduleTypes;
-  List<Schedule_types>? get withoutScheduleTypes => _withoutScheduleTypes;
+  List<ScheduleTypes>? get scheduleTypes => _scheduleTypes;
+  List<ScheduleTypes>? get withoutScheduleTypes => _withoutScheduleTypes;
   int? get appointmentCount => _appointmentCount;
   Mentor? get mentor => _mentor;
-  User_country? get userCountry => _userCountry;
+  UserCountry? get userCountry => _userCountry;
   List<Education>? get educations => _educations;
   List<Experience>? get experiences => _experiences;
-  Card_detail? get cardDetail => _cardDetail;
+  CardDetail? get cardDetail => _cardDetail;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -276,8 +276,8 @@ class ConsultantDetailFromGetProfile {
 
 }
 
-class Card_detail {
-  Card_detail({
+class CardDetail {
+  CardDetail({
     int? id,
     String? accountTitle,
     String? accountNumber,
@@ -290,7 +290,7 @@ class Card_detail {
     _mentorId = mentorId;
   }
 
-  Card_detail.fromJson(dynamic json) {
+  CardDetail.fromJson(dynamic json) {
     _id = json['id'];
     _accountTitle = json['account_title'];
     _accountNumber = json['account_number'];
@@ -321,8 +321,8 @@ class Card_detail {
 
 }
 
-class User_country {
-  User_country({
+class UserCountry {
+  UserCountry({
     int? id,
     String? name,
     String? isoCode3,
@@ -371,7 +371,7 @@ class User_country {
     _wikiDataId = wikiDataId;
   }
 
-  User_country.fromJson(dynamic json) {
+  UserCountry.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
     _isoCode3 = json['iso_code_3'];
@@ -690,28 +690,28 @@ class Category {
 
 }
 
-class Schedule_types {
-  Schedule_types({
+class ScheduleTypes {
+  ScheduleTypes({
     int? appointmentTypeId,
     int? fee,
-    Appointment_type? appointmentType,}){
+    AppointmentType? appointmentType,}){
     _appointmentTypeId = appointmentTypeId;
     _fee = fee;
     _appointmentType = appointmentType;
   }
 
-  Schedule_types.fromJson(dynamic json) {
+  ScheduleTypes.fromJson(dynamic json) {
     _appointmentTypeId = json['appointment_type_id'];
     _fee = json['fee'];
-    _appointmentType = json['appointment_type'] != null ? Appointment_type.fromJson(json['appointment_type']) : null;
+    _appointmentType = json['appointment_type'] != null ? AppointmentType.fromJson(json['appointment_type']) : null;
   }
   int? _appointmentTypeId;
   int? _fee;
-  Appointment_type? _appointmentType;
+  AppointmentType? _appointmentType;
 
   int? get appointmentTypeId => _appointmentTypeId;
   int? get fee => _fee;
-  Appointment_type? get appointmentType => _appointmentType;
+  AppointmentType? get appointmentType => _appointmentType;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -725,8 +725,8 @@ class Schedule_types {
 
 }
 
-class Appointment_type {
-  Appointment_type({
+class AppointmentType {
+  AppointmentType({
     int? id,
     String? name,
     int? isScheduleRequired,}){
@@ -735,7 +735,7 @@ class Appointment_type {
     _isScheduleRequired = isScheduleRequired;
   }
 
-  Appointment_type.fromJson(dynamic json) {
+  AppointmentType.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
     _isScheduleRequired = json['is_schedule_required'];

@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:consultant_product/multi_language/language_constants.dart';
-import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
-import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/foundation.dart';
@@ -36,7 +33,6 @@ class _State extends State<JoinChannelAudio> {
       playEffect = false;
 
   _callEndCheckMethod() {
-    log('----->>>CallEndCheck');
     if (callEnd == 2) {
       _leaveChannel();
       Get.back();
@@ -80,25 +76,21 @@ class _State extends State<JoinChannelAudio> {
   _addListeners() {
     _engine.setEventHandler(RtcEngineEventHandler(
       joinChannelSuccess: (channel, uid, elapsed) {
-        log('joinAudioChannelSuccess--------------->>> $channel $uid $elapsed');
         setState(() {
           isJoined = true;
         });
       },
       leaveChannel: (stats) async {
-        log('leaveChannel--------------->>> ${stats.toJson()}');
         setState(() {
           isJoined = false;
         });
       },
       userJoined: (uid, elapsed) {
-        log('userJoined--------------->>>  $uid $elapsed');
         setState(() {
           callEnd = 1;
         });
       },
       userOffline: (uid, reason) {
-        log('userOffline--------------->>>  $uid $reason');
         setState(() {
           if (callEnd == 1) {
             callEnd = 2;
@@ -119,9 +111,7 @@ class _State extends State<JoinChannelAudio> {
             Get.find<GeneralController>().channelForCall!,
             null,
             Get.find<GeneralController>().callerType)
-        .catchError((onError) {
-      log('error ${onError.toString()}');
-    });
+        .catchError((onError) {});
   }
 
   _leaveChannel() async {
@@ -133,9 +123,7 @@ class _State extends State<JoinChannelAudio> {
       setState(() {
         openMicrophone = !openMicrophone;
       });
-    }).catchError((err) {
-      log('enableLocalAudio $err');
-    });
+    }).catchError((err) {});
   }
 
   _switchSpeakerphone() {
@@ -143,9 +131,7 @@ class _State extends State<JoinChannelAudio> {
       setState(() {
         enableSpeakerphone = !enableSpeakerphone;
       });
-    }).catchError((err) {
-      log('setEnableSpeakerphone $err');
-    });
+    }).catchError((err) {});
   }
 
   @override
@@ -399,8 +385,7 @@ class _State extends State<JoinChannelAudio> {
               ),
               Text(
                 '${LanguageConstant.youAreReceivingCallFrom.tr}'
-                '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE'
-                    ? 'CONSULTANT' : 'USER'}',
+                '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE' ? 'CONSULTANT' : 'USER'}',
                 style: TextStyle(
                     fontSize: 15.sp,
                     fontFamily: SarabunFontFamily.regular,
@@ -452,206 +437,6 @@ class _State extends State<JoinChannelAudio> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class basicAudioClass extends StatefulWidget {
-  const basicAudioClass({Key? key}) : super(key: key);
-
-  @override
-  _basicAudioClassState createState() => _basicAudioClassState();
-}
-
-class _basicAudioClassState extends State<basicAudioClass> {
-  late final RtcEngine _engine;
-  bool isJoined = false,
-      openMicrophone = true,
-      enableSpeakerphone = false,
-      playEffect = false;
-  bool _enableInEarMonitoring = false;
-  double _recordingVolume = 0, _playbackVolume = 0, _inEarMonitoringVolume = 0;
-
-  _switchMicrophone() {
-    _engine.enableLocalAudio(!openMicrophone).then((value) {
-      setState(() {
-        openMicrophone = !openMicrophone;
-      });
-    }).catchError((err) {
-      log('enableLocalAudio $err');
-    });
-  }
-
-  _switchSpeakerphone() {
-    _engine.setEnableSpeakerphone(!enableSpeakerphone).then((value) {
-      setState(() {
-        enableSpeakerphone = !enableSpeakerphone;
-      });
-    }).catchError((err) {
-      log('setEnableSpeakerphone $err');
-    });
-  }
-
-  _switchEffect() async {
-    if (playEffect) {
-      _engine.stopEffect(1).then((value) {
-        setState(() {
-          playEffect = false;
-        });
-      }).catchError((err) {
-        log('stopEffect $err');
-      });
-    } else {
-      _engine
-          .playEffect(
-              1,
-              await (_engine.getAssetAbsolutePath("assets/Sound_Horizon.mp3")
-                  as FutureOr<String>),
-              -1,
-              1,
-              1,
-              100,
-              true)
-          .then((value) {
-        setState(() {
-          playEffect = true;
-        });
-      }).catchError((err) {
-        log('playEffect $err');
-      });
-    }
-  }
-
-  _onChangeInEarMonitoringVolume(double value) {
-    setState(() {
-      _inEarMonitoringVolume = value;
-    });
-    _engine.setInEarMonitoringVolume(value.toInt());
-  }
-
-  _toggleInEarMonitoring(value) {
-    setState(() {
-      _enableInEarMonitoring = value;
-    });
-    _engine.enableInEarMonitoring(value);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      ElevatedButton(
-                        onPressed: _switchMicrophone,
-                        child: Text(
-                          'Microphone ${openMicrophone ? 'on' : 'off'}',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: _switchSpeakerphone,
-                        child: Text(
-                          enableSpeakerphone ? 'Speakerphone' : 'Earpiece',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: _switchEffect,
-                        child: Text(
-                          '${playEffect ? 'Stop' : 'Play'} effect',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            'RecordingVolume:',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          Slider(
-                            value: _recordingVolume,
-                            min: 0,
-                            max: 400,
-                            divisions: 5,
-                            label: 'RecordingVolume',
-                            onChanged: (double value) {
-                              setState(() {
-                                _recordingVolume = value;
-                              });
-                              _engine
-                                  .adjustRecordingSignalVolume(value.toInt());
-                            },
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            'PlaybackVolume:',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          Slider(
-                            value: _playbackVolume,
-                            min: 0,
-                            max: 400,
-                            divisions: 5,
-                            label: 'PlaybackVolume',
-                            onChanged: (double value) {
-                              setState(() {
-                                _playbackVolume = value;
-                              });
-                              _engine.adjustPlaybackSignalVolume(value.toInt());
-                            },
-                          )
-                        ],
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Row(mainAxisSize: MainAxisSize.min, children: [
-                            Text(
-                              'InEar Monitoring Volume:',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            Switch(
-                              value: _enableInEarMonitoring,
-                              onChanged: _toggleInEarMonitoring,
-                              activeTrackColor: Colors.grey[350],
-                              activeColor: Colors.white,
-                            )
-                          ]),
-                          if (_enableInEarMonitoring)
-                            SizedBox(
-                                width: 300,
-                                child: Slider(
-                                  value: _inEarMonitoringVolume,
-                                  min: 0,
-                                  max: 100,
-                                  divisions: 5,
-                                  label: 'InEar Monitoring Volume',
-                                  onChanged: _onChangeInEarMonitoringVolume,
-                                ))
-                        ],
-                      ),
-                    ],
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
-                ))
-          ],
         ),
       ),
     );

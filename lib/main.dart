@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:consultant_product/multi_language/languages.dart';
@@ -11,7 +10,6 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/modules/agora_call/init_video_call_view.dart';
 import 'package:consultant_product/src/modules/chat/logic.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/view.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/repo_post.dart';
 import 'package:consultant_product/src/modules/sms/logic.dart';
 import 'package:consultant_product/src/utils/theme.dart';
@@ -32,7 +30,7 @@ final GlobalKey<NavigatorState> navigatorKey =
 RtcEngine? _engine;
 
 _initEngine(String? route) async {
-  _engine = await RtcEngine.createWithConfig(RtcEngineConfig(config.appId));
+  _engine = await RtcEngine.createWithContext(RtcEngineContext(config.appId));
 
   await _engine!.enableVideo();
   await _engine!.startPreview();
@@ -63,12 +61,11 @@ Future<void> main() async {
       AndroidServiceWorkerController serviceWorkerController =
           AndroidServiceWorkerController.instance();
 
-      serviceWorkerController.serviceWorkerClient = AndroidServiceWorkerClient(
+      serviceWorkerController.setServiceWorkerClient(AndroidServiceWorkerClient(
         shouldInterceptRequest: (request) async {
-          log(request.toString());
           return null;
         },
-      );
+      ));
     }
   }
   Get.put(GeneralController());
@@ -78,8 +75,6 @@ Future<void> main() async {
 
   //-----load-configurations-from-local-json
   await GlobalConfiguration().loadFromAsset("configurations");
-
-  log("---->> base_url: ${GlobalConfiguration().get('base_url')}");
 
   runApp(const InitClass());
 }
@@ -110,33 +105,19 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
               .updateChannelForCall(message.data['channel']);
           Get.find<GeneralController>()
               .updateTokenForCall(message.data['channel_token']);
-
-          log('NotificationChannel---->>>${message.data['channel']}');
-          log('NotificationChannelToken---->>>${message.data['channel_token']}');
         }
         if (message.data['routeApp'] != null) {
           route = message.data['routeApp'];
-          // Get.toNamed(route);
           Get.to(NotificationRoute(
             route: route,
           ));
-
-          log('MessageData0---->>>${message.data.toString()}');
-          log('MessageData1---->>>${message.notification!.title.toString()}');
-          log('MessageData2---->>>${message.data['routeApp']}');
         }
       }
     });
 
     ///forground messages
     FirebaseMessaging.onMessage.listen((message) {
-      log('foreground messages----->>');
-      log(message.notification.toString());
-
-      if (message.notification != null) {
-        log(message.notification!.body.toString());
-        log(message.notification!.title.toString());
-      }
+      if (message.notification != null) {}
       String route;
       if (message.data['channel'] != null) {
         Get.find<GeneralController>().updateCallerType(2);
@@ -144,15 +125,10 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
             .updateChannelForCall(message.data['channel']);
         Get.find<GeneralController>()
             .updateTokenForCall(message.data['channel_token']);
-        log('NotificationChannel---->>>${message.data['channel']}');
-        log('NotificationChannelToken---->>>${message.data['channel_token']}');
       }
       if (message.data['routeApp'] != null) {
         route = message.data['routeApp'];
-        // Get.toNamed(route);
-        log('MessageData0---->>>${message.data.toString()}');
-        log('MessageData1---->>>${message.notification!.title.toString()}');
-        log('MessageData2---->>>${message.data['routeApp']}');
+
         Get.to(NotificationRoute(
           route: route,
         ));
@@ -170,7 +146,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
             .updateTokenForCall(message.data['channel_token']);
         if (message.data['routeApp'] != null) {
           route = message.data['routeApp'];
-          // Get.toNamed(route);
           Get.to(NotificationRoute(
             route: route,
           ));
@@ -179,8 +154,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         _initEngine(message.data['routeApp']);
         route = message.data['routeApp'];
       }
-
-      // LocalNotificationService.display(message);
     });
     super.initState();
   }
@@ -202,7 +175,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         !Get.find<GeneralController>().storageBox.hasData('onlineStatus')) {
       switch (state) {
         case AppLifecycleState.resumed:
-          log('----->>> RESUMED <<-----');
           postMethod(
               context,
               changeMentorOnlineStatusUrl,
@@ -216,7 +188,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
               changeMentorOnlineStatusRepo);
           break;
         case AppLifecycleState.inactive:
-          log('----->>> INACTIVE <<-----');
           postMethod(
               context,
               changeMentorOnlineStatusUrl,
@@ -230,7 +201,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
               changeMentorOnlineStatusRepo);
           break;
         case AppLifecycleState.paused:
-          log('----->>> PAUSED <<-----');
           postMethod(
               context,
               changeMentorOnlineStatusUrl,
@@ -244,7 +214,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
               changeMentorOnlineStatusRepo);
           break;
         case AppLifecycleState.detached:
-          log('----->>> DETACHED <<-----');
           postMethod(
               context,
               changeMentorOnlineStatusUrl,
@@ -276,7 +245,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
           Get.put(ChatLogic());
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-
             translations: LanguagesChang(),
             locale: Locale(
                 '${Get.find<GeneralController>().storageBox.read('languageCode')}',
@@ -284,10 +252,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
             fallbackLocale: Locale(
                 '${Get.find<GeneralController>().storageBox.read('languageCode')}',
                 '${Get.find<GeneralController>().storageBox.read('countryCode')}'),
-
-            // initialRoute: PageRoutes.splash,
-            home: CreateProfilePage(),
-
+            initialRoute: PageRoutes.splash,
             getPages: routes(),
             themeMode: ThemeMode.light,
             theme: lightTheme(),

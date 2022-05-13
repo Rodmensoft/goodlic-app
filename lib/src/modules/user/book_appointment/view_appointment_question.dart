@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -276,7 +275,6 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                           .files[0]
                                                           .name);
                                               setState(() {});
-                                              log('PICKEDFILE--->>${_bookAppointmentLogic.filePickerResult!.files[0].name}');
                                             }
                                           }
                                         }
@@ -619,7 +617,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                             }
                           },
                           child: MyCustomBottomBar(
-                            title: LanguageConstant.Continue.tr,
+                            title: LanguageConstant.continueText.tr,
                             disable: disableButton!,
                           ),
                         ),

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -17,15 +16,10 @@ class LocalNotificationService {
             requestSoundPermission: true,
             requestBadgePermission: true,
             requestAlertPermission: true,
-            onDidReceiveLocalNotification:
-                (int? id, String? title, String? body, String? payload) async {
-              log('---->>>ALERT FOR IOS');
-            }));
+            onDidReceiveLocalNotification: (int? id, String? title,
+                String? body, String? payload) async {}));
     _flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (String? route) async {
-      log('---->>ROUTE FROM LOCAL NOTIFICATION $route');
-      // Get.toNamed(route!);
-    });
+        onSelectNotification: (String? route) async {});
   }
 
   static void display(RemoteMessage message) {

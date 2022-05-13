@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -795,7 +795,6 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                     color: Colors.amber,
                                                   ),
                                                   onRatingUpdate: (rating) {
-                                                    log(rating.toString());
                                                     setState(() {
                                                       ratingValue = rating;
                                                     });

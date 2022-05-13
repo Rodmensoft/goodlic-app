@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -22,9 +21,6 @@ postMethod(
   dio_instance.Response response;
   dio_instance.Dio dio = dio_instance.Dio();
 
-  // dio.options.connectTimeout = 10000;
-  // dio.options.receiveTimeout = 6000;
-
   setAcceptHeader(dio);
   setContentHeader(dio);
 
@@ -37,37 +33,26 @@ postMethod(
 
   if (apiUrl == fcmService) {
     setCustomHeader(dio, 'Content-Type', 'application/json');
-    setCustomHeader(dio, 'Authorization',
-        'key=AAAAzbp8oYc:APA91bFdJUSDhhvlyuryxb0Gg9wStY85gsqqQarJrR3Cx1bmL2mGewaR6TVcnlG_2IvK885eQF74ufNjVpR-pXMHjpZIWickj19CMTcit4pacdZ1MzVgbAWK_R6EmJTG4P4pMN8Dmwd7');
+    setCustomHeader(dio, 'Authorization', 'key={Your Firebase Server API key}');
   }
 
   try {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-      log('Internet Connected');
       Get.find<ApiLogic>().changeInternetCheckerState(true);
       try {
-        log('postData--->> $postData');
         response = await dio.post(apiUrl, data: postData);
 
         if (response.statusCode == 200) {
-          log('StatusCode------>> ${response.statusCode}');
-          log('Response $apiUrl------>> ${response.data}');
-
           executionMethod(context, true, response.data);
         } else {
           executionMethod(context, false, {'status': null});
-          log('StatusCode------>> ${response.statusCode}');
-          log('Response $apiUrl------>> $response');
         }
       } on dio_instance.DioError catch (e) {
         executionMethod(context, false, {'status': null});
 
         if (e.response != null) {
-          log('Dio Error From Get $apiUrl -->> ${e.response}');
-        } else {
-          log('Dio Error From Get $apiUrl -->> $e');
-        }
+        } else {}
       }
     }
   } on SocketException catch (_) {
@@ -88,6 +73,5 @@ postMethod(
           );
         });
     Get.find<ApiLogic>().changeInternetCheckerState(false);
-    log('Internet Not Connected');
   }
 }

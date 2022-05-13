@@ -40,11 +40,11 @@ class MentorScheduleState {
         fontFamily: SarabunFontFamily.regular,
         fontSize: 12.sp,
         color: Colors.black);
-    previewLabelTextStyle = TextStyle(
+    previewLabelTextStyle = const TextStyle(
         fontSize: 10,
         fontWeight: FontWeight.w400,
-        color: const Color(0xff727377));
-    previewValueTextStyle = TextStyle(
+        color: Color(0xff727377));
+    previewValueTextStyle = const TextStyle(
         fontSize: 12, fontWeight: FontWeight.normal, color: Colors.black);
     hintTextStyle = TextStyle(
         fontSize: 16.sp,

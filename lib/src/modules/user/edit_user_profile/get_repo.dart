@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -40,7 +40,6 @@ getMenteeProfileRepo(
             .data!
             .user!
             .firstName!;
-        log('NAME---->>>');
         Get.find<EditUserProfileLogic>().update();
       }
       if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.lastName !=
@@ -90,14 +89,12 @@ getMenteeProfileRepo(
         Get.find<GeneralController>().updateFormLoaderController(false);
       }
       Get.find<EditUserProfileLogic>().update();
-      log('getMenteeProfileRepo ------>> ${Get.find<EditUserProfileLogic>().getMenteeProfileModel.success}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
 
-    log('Exception........................');
   }
 }
 
@@ -134,14 +131,12 @@ getGenericDataMenteeRepo(
       }
       Get.find<GeneralController>().updateFormLoaderController(false);
 
-      log('getGenericDataMenteeRepo ------>> ${Get.find<EditUserProfileLogic>().menteeProfileGenericDataModel.success}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
 
-    log('Exception........................');
   }
 }
 
@@ -159,13 +154,11 @@ getCitiesRepo(
       }
 
       Get.find<GeneralController>().updateFormLoaderController(false);
-      log('getCitiesRepo ------>> ${Get.find<EditUserProfileLogic>().citiesByIdModel.success}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
 
-    log('Exception........................');
   }
 }

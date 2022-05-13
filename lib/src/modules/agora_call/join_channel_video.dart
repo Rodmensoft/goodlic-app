@@ -1,5 +1,4 @@
- import 'dart:async';
-import 'dart:developer';
+import 'dart:async';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as rtc_local_view;
@@ -34,7 +33,6 @@ class _State extends State<JoinChannelVideo> {
   List<int> remoteUid = [];
 
   _callEndCheckMethod() {
-    log('----->>>CallEndCheck');
     if (callEnd == 2) {
       _leaveChannel();
       Get.back();
@@ -69,7 +67,7 @@ class _State extends State<JoinChannelVideo> {
   int? callEnd = 0;
 
   _initEngine() async {
-    _engine = await RtcEngine.createWithConfig(RtcEngineConfig(config.appId));
+    _engine = await RtcEngine.createWithContext(RtcEngineContext(config.appId));
     _addListeners();
 
     await _engine.enableVideo();
@@ -81,20 +79,17 @@ class _State extends State<JoinChannelVideo> {
   _addListeners() {
     _engine.setEventHandler(RtcEngineEventHandler(
       joinChannelSuccess: (channel, uid, elapsed) {
-        log('joinChannelSuccess--------------->>> $channel $uid $elapsed');
         setState(() {
           isJoined = true;
         });
       },
       userJoined: (uid, elapsed) {
-        log('userJoined--------------->>>  $uid $elapsed');
         setState(() {
           remoteUid.add(uid);
           callEnd = 1;
         });
       },
       userOffline: (uid, reason) {
-        log('userOffline--------------->>>  $uid $reason');
         setState(() {
           remoteUid.removeWhere((element) => element == uid);
           if (callEnd == 1) {
@@ -104,7 +99,6 @@ class _State extends State<JoinChannelVideo> {
         if (remoteUid.isEmpty) {}
       },
       leaveChannel: (stats) {
-        log('leaveChannel--------------->>> ${stats.toJson()}');
         setState(() {
           isJoined = false;
           remoteUid.clear();
@@ -114,7 +108,6 @@ class _State extends State<JoinChannelVideo> {
   }
 
   Future<dynamic> _joinChannel() async {
-    log('---------->>> joined-start');
     if (defaultTargetPlatform == TargetPlatform.android) {
       await [Permission.microphone, Permission.camera].request();
     }
@@ -128,23 +121,6 @@ class _State extends State<JoinChannelVideo> {
 
   _leaveChannel() async {
     await _engine.leaveChannel();
-  }
-
-  _switchCamera() {
-    _engine.switchCamera().then((value) {
-      setState(() {
-        switchCamera = !switchCamera;
-      });
-    }).catchError((err) {
-      log('switchCamera--------------->>> $err');
-    });
-  }
-
-  _switchRender() {
-    setState(() {
-      switchRender = !switchRender;
-      remoteUid = List.of(remoteUid.reversed);
-    });
   }
 
   @override
@@ -283,8 +259,7 @@ class _State extends State<JoinChannelVideo> {
                 decoration: const BoxDecoration(
                     color: Colors.transparent,
                     image: DecorationImage(
-                        image: AssetImage(
-                            'assets/Icons/splash_logo.png'))),
+                        image: AssetImage('assets/Icons/splash_logo.png'))),
               ),
               isJoined
                   ? Padding(
@@ -374,8 +349,7 @@ class _State extends State<JoinChannelVideo> {
               ),
               Text(
                 '${LanguageConstant.youAreReceivingCallFrom.tr}'
-                '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE'
-                    ? 'CONSULTANT' : 'USER'}',
+                '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE' ? 'CONSULTANT' : 'USER'}',
                 style: TextStyle(
                     fontSize: 15.sp,
                     fontFamily: SarabunFontFamily.regular,

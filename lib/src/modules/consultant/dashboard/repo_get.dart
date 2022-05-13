@@ -1,5 +1,3 @@
-
-import 'dart:developer';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/get_ratings_model.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/logic.dart';
@@ -13,44 +11,33 @@ getMentorTodayAppointmentRepo(
   if (responseCheck) {
     Get.find<DashboardLogic>().getTodayAppointmentModel =
         GetTodayAppointmentModel.fromJson(response);
-    if (Get.find<DashboardLogic>()
-        .getTodayAppointmentModel
-        .status ==
-        true) {
+    if (Get.find<DashboardLogic>().getTodayAppointmentModel.status == true) {
       Get.find<DashboardLogic>().emptyGetTodayAppointmentList();
       if (Get.find<DashboardLogic>()
           .getTodayAppointmentModel
-          .data!.results!
+          .data!
+          .results!
           .isNotEmpty) {
-
         for (var element in Get.find<DashboardLogic>()
             .getTodayAppointmentModel
-            .data!.results!) {
-          Get.find<DashboardLogic>()
-              .updateGetTodayAppointmentList(element);
+            .data!
+            .results!) {
+          Get.find<DashboardLogic>().updateGetTodayAppointmentList(element);
         }
-        Get.find<DashboardLogic>()
-            .updateGetTodayAppointmentLoader(false);
+        Get.find<DashboardLogic>().updateGetTodayAppointmentLoader(false);
 
         Get.find<DashboardLogic>().updateRefreshController();
       } else {
-        Get.find<DashboardLogic>()
-            .updateGetTodayAppointmentLoader(false);
+        Get.find<DashboardLogic>().updateGetTodayAppointmentLoader(false);
         Get.find<DashboardLogic>().updateRefreshController();
       }
-
-      log('getMentorTodayAppointmentRepo ------>> ${Get.find<DashboardLogic>().getTodayAppointmentModel.success}');
     } else {
-      Get.find<DashboardLogic>()
-          .updateGetTodayAppointmentLoader(false);
+      Get.find<DashboardLogic>().updateGetTodayAppointmentLoader(false);
       Get.find<DashboardLogic>().updateRefreshController();
     }
   } else if (!responseCheck) {
-
-    Get.find<DashboardLogic>()
-        .updateGetTodayAppointmentLoader(false);
+    Get.find<DashboardLogic>().updateGetTodayAppointmentLoader(false);
     Get.find<DashboardLogic>().updateRefreshController();
-    log('Exception........................');
   }
 }
 
@@ -60,13 +47,11 @@ getAppointmentCountMentorRepo(
     Get.find<DashboardLogic>().getAppointmentCountMentorModel =
         GetAppointmentCountMentorModel.fromJson(response);
     Get.find<GeneralController>().updateFormLoaderController(false);
-    if (Get.find<DashboardLogic>().getAppointmentCountMentorModel.status == true) {
-      log('getAppointmentCountMentorRepo ------>> ${Get.find<DashboardLogic>().getAppointmentCountMentorModel.status}');
+    if (Get.find<DashboardLogic>().getAppointmentCountMentorModel.status ==
+        true) {
     } else {}
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -78,12 +63,9 @@ getRatingMentorRepo(
     Get.find<DashboardLogic>().updateRatingLoader(false);
     Get.find<DashboardLogic>().updateRefreshController();
     if (Get.find<DashboardLogic>().getRatingsModel.status == true) {
-      log('get rating------>> ${Get.find<DashboardLogic>().getRatingsModel.status}');
     } else {}
   } else if (!responseCheck) {
     Get.find<DashboardLogic>().updateRefreshController();
     Get.find<DashboardLogic>().updateRatingLoader(false);
-
-    log('Exception........................');
   }
 }

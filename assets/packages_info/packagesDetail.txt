@@ -121,7 +121,3 @@
 
 40--> device_info_plus: BSD-3-Clause (LICENSE) -
     Flutter plugin providing detailed information about the device (make, model, etc.), and Android or iOS version the app is running on.
-
-
-    syncfusion_flutter_calendar, syncfusion_flutter_charts, flutter_inappwebview, url_launcher, firebase_core, firebase_auth, firebase_messaging,
-     flutter_local_notifications, device_info_plus

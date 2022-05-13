@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'dart:io';
 
 import 'package:consultant_product/src/api_services/get_service.dart';
@@ -332,7 +333,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   15.w, 0, 15.w, 16.h),
                               child: TextFormField(
-                                inputFormatters: [],
+                                inputFormatters: const [],
                                 style: state.textFieldTextStyle,
                                 controller: _createProfileLogic.cnicController,
                                 keyboardType: TextInputType.number,
@@ -445,7 +446,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   15.w, 0, 15.w, 16.h),
                               child: TextFormField(
-                                inputFormatters: [],
+                                inputFormatters: const [],
                                 style: state.textFieldTextStyle,
                                 controller: _createProfileLogic.aboutController,
                                 keyboardType: TextInputType.multiline,
@@ -559,7 +560,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             setState(() {
                                               _createProfileLogic
                                                   .selectedGender = value;
@@ -649,7 +649,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             setState(() {
                                               _createProfileLogic
                                                   .selectedReligion = value;
@@ -751,9 +750,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             _createProfileLogic.selectedDob =
                                                 value;
                                           });
-                                          log(DateFormat('dd-MM-yyyy').format(
-                                              _createProfileLogic
-                                                  .selectedDob!));
                                         },
                                       ),
                                     ),
@@ -831,12 +827,9 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             setState(() {
                                               _createProfileLogic
                                                   .selectedOccupation = value;
-
-                                              log(value.toString());
                                             });
                                           },
                                           validator: (String? value) {
@@ -928,7 +921,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             setState(() {
                                               _createProfileLogic
                                                   .selectedCountry = value;
@@ -1038,7 +1030,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             setState(() {
                                               _createProfileLogic.selectedCity =
                                                   value;
@@ -1183,11 +1174,10 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                         imageQuality: 10,
                         maxWidth: 400,
                         maxHeight: 600));
-                    if (profileImagesList != null) {
+                    if (profileImagesList.isNotEmpty) {
                       setState(() {
                         profileImage = File(profileImagesList[0].path);
                       });
-                      log(profileImagesList[0].path);
                     }
                   },
                   child: Text(
@@ -1212,11 +1202,10 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                         imageQuality: 10,
                         maxWidth: 400,
                         maxHeight: 600));
-                    if (profileImagesList != null) {
+                    if (profileImagesList.isNotEmpty) {
                       setState(() {
                         profileImage = File(profileImagesList[0].path);
                       });
-                      log(profileImagesList[0].path);
                     }
                   },
                   child: Text(
@@ -1318,12 +1307,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
         'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
     dio_instance.Response response;
     try {
-      log('postData--->> ${formData.fields}');
-
       response = await dio.post(mentorGeneralInfoPostUrl, data: formData);
 
-      log('StatusCode------>> ${response.statusCode}');
-      log('Response $mentorGeneralInfoPostUrl------>> ${response.data}');
       if (response.statusCode == 200) {
         Get.find<CreateProfileLogic>().generalInfoPostModel =
             GeneralInfoPostModel.fromJson(response.data);
@@ -1342,7 +1327,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
           Get.snackbar('${LanguageConstant.profileUpdatedSuccessfully.tr}!', '',
               colorText: Colors.black, backgroundColor: Colors.white);
           Get.find<GeneralController>().updateFormLoaderController(false);
-          log('mentorGeneralInfoRepo ------>> ${Get.find<CreateProfileLogic>().generalInfoPostModel.success}');
         } else {
           Get.find<GeneralController>().updateFormLoaderController(false);
           showDialog(

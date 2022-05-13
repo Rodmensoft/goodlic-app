@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
@@ -33,14 +31,12 @@ getScheduleAvailableDaysRepo(
                   .format(DateTime.now().add(Duration(days: index)))
                   .toLowerCase() ==
               element.day) {
-            // log('test ${element.day}');
             current = DateTime.now().add(Duration(days: index));
             Get.find<BookAppointmentLogic>()
                 .availableScheduleDaysList!
                 .add(current);
           }
         }
-        // log('DAYS LIST ${Get.find<BookAppointmentLogic>().availableScheduleDaysList}');
       });
 
       Get.find<BookAppointmentLogic>().updateCalenderLoader(false);
@@ -52,8 +48,6 @@ getScheduleAvailableDaysRepo(
   } else if (!responseCheck) {
     Get.find<BookAppointmentLogic>().updateCalenderLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -91,23 +85,17 @@ getScheduleSlotsRepo(
 
               if (int.parse(dateFinal.substring(0, 2)) >= 01 &&
                   int.parse(dateFinal.substring(0, 2)) < 07) {
-                // log('Hour Evening---->>>${dateFinal.substring(0,2)}');
                 Get.find<BookAppointmentLogic>().updateEveningSlots(element);
               } else if (int.parse(dateFinal.substring(0, 2)) >= 07 &&
                   int.parse(dateFinal.substring(0, 2)) < 12) {
-                // log('Hour Morning---->>>${dateFinal.substring(0,2)}');
                 Get.find<BookAppointmentLogic>().updateMorningSlots(element);
               } else if (int.parse(dateFinal.substring(0, 2)) >= 12 &&
                   int.parse(dateFinal.substring(0, 2)) < 18) {
-                // log('Hour AfterNoon---->>>${dateFinal.substring(0,2)}');
                 Get.find<BookAppointmentLogic>().updateAfterNoonSlots(element);
               } else if (int.parse(dateFinal.substring(0, 2)) >= 18) {
-                // log('Hour Evening---->>>${dateFinal.substring(0,2)}');
                 Get.find<BookAppointmentLogic>().updateEveningSlots(element);
               }
-            } else {
-              log('BookedSlot--->>${element}');
-            }
+            } else {}
           }
 
           if (Get.find<BookAppointmentLogic>().morningSlots.isNotEmpty) {
@@ -153,8 +141,6 @@ getScheduleSlotsRepo(
               );
             });
       }
-
-      log('getScheduleSlotsRepo ------>> ${Get.find<BookAppointmentLogic>().getScheduleSlotsForUserModel.success}');
     } else {
       Get.find<BookAppointmentLogic>()
           .updateGetScheduleSlotsForMenteeLoader(false);
@@ -162,6 +148,5 @@ getScheduleSlotsRepo(
   } else {
     Get.find<BookAppointmentLogic>()
         .updateGetScheduleSlotsForMenteeLoader(false);
-    log('Exception........................');
   }
 }

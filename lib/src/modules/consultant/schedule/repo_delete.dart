@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -25,13 +23,10 @@ deleteMentorScheduleRepo(
           getMentorScheduleRepo);
       Get.snackbar('${LanguageConstant.deleteSuccessfully.tr}!', '',
           colorText: Colors.black, backgroundColor: Colors.white);
-      log('deleteMentorScheduleRepo ------>> ${response['Status']}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }

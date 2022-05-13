@@ -83,8 +83,8 @@ class GetMentorProfileForMenteeModelDataUserDetail {
       int? ratingCount, 
       Mentor? mentor, 
       List<Educations>? educations, 
-      List<Experiences>? experiences, 
-      User_country? userCountry,}){
+      List<Experiences>? experiences,
+    UserCountry? userCountry,}){
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -127,7 +127,7 @@ class GetMentorProfileForMenteeModelDataUserDetail {
         _experiences?.add(Experiences.fromJson(v));
       });
     }
-    _userCountry = json['user_country'] != null ? User_country.fromJson(json['user_country']) : null;
+    _userCountry = json['user_country'] != null ? UserCountry.fromJson(json['user_country']) : null;
   }
   int? _id;
   String? _firstName;
@@ -143,7 +143,7 @@ class GetMentorProfileForMenteeModelDataUserDetail {
   Mentor? _mentor;
   List<Educations>? _educations;
   List<Experiences>? _experiences;
-  User_country? _userCountry;
+  UserCountry? _userCountry;
 
   int? get id => _id;
   String? get firstName => _firstName;
@@ -159,7 +159,7 @@ class GetMentorProfileForMenteeModelDataUserDetail {
   Mentor? get mentor => _mentor;
   List<Educations>? get educations => _educations;
   List<Experiences>? get experiences => _experiences;
-  User_country? get userCountry => _userCountry;
+  UserCountry? get userCountry => _userCountry;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -191,15 +191,15 @@ class GetMentorProfileForMenteeModelDataUserDetail {
 
 }
 
-class User_country {
-  User_country({
+class UserCountry {
+  UserCountry({
       int? id, 
       String? name,}){
     _id = id;
     _name = name;
 }
 
-  User_country.fromJson(dynamic json) {
+  UserCountry.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
   }

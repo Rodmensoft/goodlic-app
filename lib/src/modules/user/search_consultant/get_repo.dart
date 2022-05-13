@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/src/modules/user/search_consultant/logic.dart';
 import 'package:consultant_product/src/modules/user/search_consultant/search_consultant_model.dart';
@@ -14,12 +14,10 @@ consultantSearchRepo(
         true) {
       Get.find<SearchConsultantLogic>().updateSearchLoader(false);
 
-      log('menteeSearchCategoriesRepo ------>> ${Get.find<SearchConsultantLogic>().searchConsultantModel.status}');
     } else {
       Get.find<SearchConsultantLogic>().updateSearchLoader(false);
     }
   } else if (!responseCheck) {
     Get.find<SearchConsultantLogic>().updateSearchLoader(false);
-    log('Exception........................');
   }
 }

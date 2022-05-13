@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -106,7 +104,6 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                               );
                             }).toList(),
                             onChanged: (String? value) {
-                              log(value.toString());
                               setState(() {
                                 _createProfileLogic.selectedBank = value;
                               });

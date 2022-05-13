@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -377,7 +378,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   15.w, 0, 15.w, 16.h),
                               child: TextFormField(
-                                inputFormatters: [],
+                                inputFormatters: const [],
                                 style: state.textFieldTextStyle,
                                 controller:
                                     _editConsultantProfileLogic.cnicController,
@@ -491,7 +492,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   15.w, 0, 15.w, 16.h),
                               child: TextFormField(
-                                inputFormatters: [],
+                                inputFormatters: const [],
                                 style: state.textFieldTextStyle,
                                 controller:
                                     _editConsultantProfileLogic.aboutController,
@@ -606,7 +607,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             setState(() {
                                               _editConsultantProfileLogic
                                                   .selectedGender = value;
@@ -696,7 +696,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             setState(() {
                                               _editConsultantProfileLogic
                                                   .selectedReligion = value;
@@ -801,9 +800,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             _editConsultantProfileLogic
                                                 .selectedDob = value;
                                           });
-                                          log(DateFormat('dd-MM-yyyy').format(
-                                              _editConsultantProfileLogic
-                                                  .selectedDob!));
                                         },
                                       ),
                                     ),
@@ -881,12 +877,9 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             setState(() {
                                               _editConsultantProfileLogic
                                                   .selectedOccupation = value;
-
-                                              log(value.toString());
                                             });
                                           },
                                           validator: (String? value) {
@@ -978,7 +971,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             setState(() {
                                               _editConsultantProfileLogic
                                                   .selectedCountry = value;
@@ -1088,7 +1080,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             setState(() {
                                               _editConsultantProfileLogic
                                                   .selectedCity = value;
@@ -1339,11 +1330,10 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                         imageQuality: 10,
                         maxWidth: 400,
                         maxHeight: 600));
-                    if (profileImagesList != null) {
+                    if (profileImagesList.isNotEmpty) {
                       setState(() {
                         profileImage = File(profileImagesList[0].path);
                       });
-                      log(profileImagesList[0].path);
                     }
                   },
                   child: Text(
@@ -1368,11 +1358,10 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                         imageQuality: 10,
                         maxWidth: 400,
                         maxHeight: 600));
-                    if (profileImagesList != null) {
+                    if (profileImagesList.isNotEmpty) {
                       setState(() {
                         profileImage = File(profileImagesList[0].path);
                       });
-                      log(profileImagesList[0].path);
                     }
                   },
                   child: Text(
@@ -1399,7 +1388,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
       'father_name':
           Get.find<EditConsultantProfileLogic>().fatherNameController.text,
       'cnic': Get.find<EditConsultantProfileLogic>().cnicController.text,
-      // 'email': Get.find<EditConsultantProfileLogic>().emailController.text,
       'address': Get.find<EditConsultantProfileLogic>().addressController.text,
       'about': Get.find<EditConsultantProfileLogic>().aboutController.text,
       'gender': Get.find<EditConsultantProfileLogic>().selectedGender,
@@ -1432,12 +1420,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
         'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
     dio_instance.Response response;
     try {
-      log('postData--->> ${formData.fields}');
-
       response = await dio.post(mentorGeneralInfoPostUrl, data: formData);
 
-      log('StatusCode------>> ${response.statusCode}');
-      log('Response $mentorGeneralInfoPostUrl------>> ${response.data}');
       if (response.statusCode == 200) {
         Get.find<EditConsultantProfileLogic>().generalInfoPostModel =
             GeneralInfoPostModel.fromJson(response.data);
@@ -1459,7 +1443,6 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
           Get.snackbar('${LanguageConstant.profileUpdatedSuccessfully.tr}!', '',
               colorText: Colors.black, backgroundColor: Colors.white);
           Get.find<GeneralController>().updateFormLoaderController(false);
-          log('mentorGeneralInfoRepo ------>> ${Get.find<EditConsultantProfileLogic>().generalInfoPostModel.success}');
         } else {
           Get.find<GeneralController>().updateFormLoaderController(false);
           showDialog(

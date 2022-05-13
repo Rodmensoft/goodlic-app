@@ -188,7 +188,6 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                     _createProfileLogic
                                         .selectedCompanyFromDate = value;
                                   });
-                                  log(value.toString());
                                 },
                               ),
                             ),
@@ -209,7 +208,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                 style: state.textFieldTextStyle,
                                 decoration: InputDecoration(
                                     hintText:
-                                        LanguageConstant.To.tr.capitalizeFirst,
+                                        LanguageConstant.to.tr.capitalizeFirst,
                                     hintStyle: state.hintTextStyle,
                                     contentPadding:
                                         EdgeInsetsDirectional.fromSTEB(
@@ -270,7 +269,6 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                     _createProfileLogic.selectedCompanyToDate =
                                         value;
                                   });
-                                  log(value.toString());
                                 },
                               ),
                             ),
@@ -481,7 +479,7 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    LanguageConstant.To.tr,
+                                                    LanguageConstant.to.tr,
                                                     style: state
                                                         .previewLabelTextStyle,
                                                   ),
@@ -632,11 +630,10 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                         imageQuality: 10,
                         maxWidth: 400,
                         maxHeight: 600));
-                    if (experienceImagesList != null) {
+                    if (experienceImagesList.isNotEmpty) {
                       setState(() {
                         experienceImage = File(experienceImagesList[0].path);
                       });
-                      log(experienceImagesList[0].path);
                     }
                   },
                   child: Text(
@@ -661,11 +658,10 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                         imageQuality: 10,
                         maxWidth: 400,
                         maxHeight: 600));
-                    if (experienceImagesList != null) {
+                    if (experienceImagesList.isNotEmpty) {
                       setState(() {
                         experienceImage = File(experienceImagesList[0].path);
                       });
-                      log(experienceImagesList[0].path);
                     }
                   },
                   child: Text(
@@ -701,12 +697,8 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
         'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
     dio_instance.Response response;
     try {
-      log('postData--->> ${formData.fields}');
-
       response = await dio.post(mentorExperienceInfoUrl, data: formData);
 
-      log('StatusCode------>> ${response.statusCode}');
-      log('Response $mentorExperienceInfoUrl------>> ${response.data}');
       if (response.statusCode == 200) {
         Get.find<CreateProfileLogic>().experienceInfoPostModel =
             ExperienceInfoPostModel.fromJson(response.data);
@@ -727,7 +719,6 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
             Get.find<CreateProfileLogic>().emptyDateFields();
             experienceImage = null;
           });
-          log('mentorExperienceInfoRepo ------>> ${Get.find<CreateProfileLogic>().experienceInfoPostModel.success}');
         } else {
           Get.find<GeneralController>().updateFormLoaderController(false);
           showDialog(

@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -64,7 +63,7 @@ class EditConsultantProfileLogic extends GetxController {
         isSelected: false,
         isCompleted: true),
     Stepper(
-        title: '${LanguageConstant.experince.tr}\n${LanguageConstant.info.tr}',
+        title: '${LanguageConstant.experience.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '03',
         isSelected: false,
         isCompleted: true),
@@ -204,11 +203,8 @@ class EditConsultantProfileLogic extends GetxController {
   }
 
   saveData({String? latLong, String? place}) async {
-    var data = await json.decode(latLong!);
     addressController.text = place!;
     update();
-    log("LatLong--->>> $data");
-    log("LatLong Place--->>> $place");
   }
 
   ///-------------------------------education-tab
@@ -280,17 +276,6 @@ class EditConsultantProfileLogic extends GetxController {
     update();
   }
 
-  // List<String> subCategoryDropDownList = [];
-  //
-  // updateSubCategoryDropDownList(String newValue) {
-  //   subCategoryDropDownList.add(newValue);
-  //   update();
-  // }
-  //
-  // emptySubCategoryDropDownList() {
-  //   subCategoryDropDownList = [];
-  //   update();
-  // }
 
   int? selectedSubCategoryID;
   List<int> selectedSubCategoriesIDList = [];

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/logic.dart';
@@ -124,9 +122,7 @@ class AppointmentDetailBox extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 0.0),
                               itemBuilder: (context, _) => SvgPicture.asset(
                                   'assets/Icons/ratingStarIcon.svg'),
-                              onRatingUpdate: (rating) {
-                                log('Rating--->>$rating');
-                              },
+                              onRatingUpdate: (rating) {},
                             ),
                           ],
                         ),

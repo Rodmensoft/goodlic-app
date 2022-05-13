@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
@@ -214,7 +214,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                     child: Center(
                                                       child: Text(
                                                         LanguageConstant
-                                                            .Online.tr,
+                                                            .online.tr,
                                                         style:
                                                             state.tagTextStyle,
                                                       ),
@@ -372,7 +372,6 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                           SvgPicture.asset(
                                               'assets/Icons/ratingStarIcon.svg'),
                                       onRatingUpdate: (rating) {
-                                        log('Rating--->>$rating');
                                       },
                                     ),
                                   ],

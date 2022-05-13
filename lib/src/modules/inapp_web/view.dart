@@ -14,7 +14,7 @@ class InAppWebPage extends StatefulWidget {
   const InAppWebPage({Key? key}) : super(key: key);
 
   @override
-  _InAppWebPageState createState() => new _InAppWebPageState();
+  _InAppWebPageState createState() => _InAppWebPageState();
 }
 
 class _InAppWebPageState extends State<InAppWebPage> {
@@ -50,29 +50,13 @@ class _InAppWebPageState extends State<InAppWebPage> {
               iosId: "1",
               title: LanguageConstant.special.tr,
               action: () async {
-                print("Menu item Special clicked!");
-                print(await webViewController?.getSelectedText());
                 await webViewController?.clearFocus();
               })
         ],
         options: ContextMenuOptions(hideDefaultSystemContextMenuItems: false),
-        onCreateContextMenu: (hitTestResult) async {
-          print("onCreateContextMenu");
-          print(hitTestResult.extra);
-          print(await webViewController?.getSelectedText());
-        },
-        onHideContextMenu: () {
-          print("onHideContextMenu");
-        },
-        onContextMenuActionItemClicked: (contextMenuItemClicked) async {
-          var id = (Platform.isAndroid)
-              ? contextMenuItemClicked.androidId
-              : contextMenuItemClicked.iosId;
-          print("onContextMenuActionItemClicked: " +
-              id.toString() +
-              " " +
-              contextMenuItemClicked.title);
-        });
+        onCreateContextMenu: (hitTestResult) async {},
+        onHideContextMenu: () {},
+        onContextMenuActionItemClicked: (contextMenuItemClicked) async {});
 
     pullToRefreshController = PullToRefreshController(
       options: PullToRefreshOptions(
@@ -107,12 +91,10 @@ class _InAppWebPageState extends State<InAppWebPage> {
                 children: [
                   InAppWebView(
                     key: webViewKey,
-                    // contextMenu: contextMenu,
                     initialUrlRequest: URLRequest(
                       url: Uri.parse(
                           "${Get.find<GeneralController>().inAppWebService}"),
                     ),
-                    // initialFile: "assets/index.html",
                     initialUserScripts: UnmodifiableListView<UserScript>([]),
                     initialOptions: options,
                     pullToRefreshController: pullToRefreshController,
@@ -166,26 +148,8 @@ class _InAppWebPageState extends State<InAppWebPage> {
                       debugPrint('URL--->>> ${url.toString()}');
                       if (url.toString().contains("processingPayment")) {
                         // get your token from url
-                        // Navigator.pop(scaffoldKey.currentContext); // No need of this
-                        // Navigator.pushReplacement(scaffoldKey.currentContext,
-                        //     MaterialPageRoute(builder: (context) => DD()));
                         Future.delayed(const Duration(seconds: 4))
                             .whenComplete(() {
-                          // getMethod(
-                          //     context,
-                          //     getAppointmentPaymentStatusUrl,
-                          //     {
-                          //       'token': '123',
-                          //       'bookAppointmentId': Get
-                          //           .find<BookAppointmentLogic>()
-                          //           .bookAppointmentModel
-                          //           .data!
-                          //           .appointmentNo
-                          //     },
-                          //     true,
-                          //     easyPaisaPaymentRepo);
-                          // Get.find<GeneralController>()
-                          //     .updateFormLoaderController(true);
                           Get.back();
                         });
                       }
@@ -199,7 +163,7 @@ class _InAppWebPageState extends State<InAppWebPage> {
                       }
                       setState(() {
                         this.progress = progress / 100;
-                        urlController.text = this.url;
+                        urlController.text = url;
                       });
                     },
                     onUpdateVisitedHistory: (controller, url, androidIsReload) {
@@ -208,9 +172,7 @@ class _InAppWebPageState extends State<InAppWebPage> {
                         urlController.text = this.url;
                       });
                     },
-                    onConsoleMessage: (controller, consoleMessage) {
-                      print(consoleMessage);
-                    },
+                    onConsoleMessage: (controller, consoleMessage) {},
                   ),
                   progress < 1.0
                       ? LinearProgressIndicator(value: progress)

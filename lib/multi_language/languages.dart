@@ -6,7 +6,7 @@ class LanguagesChang extends Translations {
         'en_US': {
           //dashboard
           'find_your': 'Find Your',
-          'appointments_log':'Appointments Log',
+          'appointments_log': 'Appointments Log',
           'consultant': 'Consultants',
           'unassign': 'UnAssign',
           'enter_login_details': 'Enter Login Detail',
@@ -92,9 +92,7 @@ class LanguagesChang extends Translations {
           'new_password': 'New Password',
           'create_new_password': 'Create New Password',
           'enter_password': 'Enter Password',
-          'new_password': 'New Password',
           'confirm_password': 'Confirm Password',
-          'reset_password': 'Reset Password',
           'password_created': 'Password Created',
           'successfully': 'Successfully',
           'chat': 'Chat',
@@ -104,7 +102,6 @@ class LanguagesChang extends Translations {
           'contact_us': 'Contact Us',
           'blogs': 'Blogs',
           'about_us': 'About Us',
-          'contact_us': 'Contact Us',
           'we_are_just_one_step_away_reach_out':
               'We Are Just One Step Away Reach Out',
           'address': 'Address',
@@ -168,7 +165,6 @@ class LanguagesChang extends Translations {
           'do_not_have_an_account?register_now':
               'Do Not Have an account? Register Now',
           'by_login_you_are_agree_with_our': 'By Login You Are Agree With Our',
-          'login': 'LogIn',
           'welcome_back_to_your_account': 'Welcome Back To Your Account',
           'audio': 'Audio',
           'available_options': 'Available options',
@@ -182,21 +178,8 @@ class LanguagesChang extends Translations {
           'top_rated_consultant': 'Top Rated Consultant',
           'view_all': 'View All',
           'featured_consultants': 'Featured Consultants',
-          'categories': 'Categories',
           'search_here': 'Search here',
-          'categories': 'Categories',
-          'view_all': 'VIEW ALL',
-          'home': 'Home',
-
-          //Before Login Side Menu Screen
-          'lets_login': 'Lets Login',
-
-          'contact_us': 'Contact Us',
-          'about_us': 'About Us',
-          'blogs': 'Blogs',
           'privacy_policy': 'Privacy Policy',
-
-          //Login screen
           'mentee': 'Mentee',
           'mentor': 'Consultant',
           'enter_your_phone': 'Enter Your Phone',
@@ -207,46 +190,23 @@ class LanguagesChang extends Translations {
           'have_an_account': 'Have an account? ',
           'by_sign_up_you_are_agree': 'By Sign Up, you are agree with our ',
           "your_appointment_detail_with": 'Your Appointment Detail With',
-
-          //After Login Mentee screen
-
           'total_appointments': 'Total Appointments',
           'pending_appointments': 'Pending Appointments',
           'bookings': 'Bookings',
-
-          //Mentee Side Menu
-          'logout': 'Logout',
-
-          //Mentee Side Menu >> Contact Us
-          'address': 'Address',
           '102-C_people_colony_faisalabad': '102-C People Colony Faisalabad',
-          'call_us': 'Call Us',
-          'email_us': 'email Us',
           'name': 'Name',
           'email': 'Email',
           'message': 'Message',
           'submit': 'Submit',
-
-          //Mentee Side Menu >> About Us
-          'about': 'About',
-          'why_choose_us': 'Why Choose Us',
           'easy_sign_up': 'Easy Sign Up',
           'professional_mentors': 'Professional Consultants',
-          'our_mission': 'Our Mission',
-
-          //When Mentee Select the slot
           'morning': 'Morning',
           'afternoon': 'Afternoon',
           'evening': 'Evening',
-
-          //When Mentee go to the Consultants
           'consultants': 'Consultants',
           'satisfied_customers': 'Satisfied Customers',
           'starting_from': 'Starting From',
-          'chat': 'CHAT',
           'video': 'VIDEO',
-          'audio': 'AUDIO',
-          //Mentee open the Mentor Profile
           'verified': 'Verified',
           'mentor_profile': 'Consultant Profile',
           'general_info': 'GENERAL INFO',
@@ -258,28 +218,24 @@ class LanguagesChang extends Translations {
           'gender': 'Gender',
           'male': 'Male',
           'female': 'Female',
-
           'city': 'City',
           'country': 'Country',
-          'education': 'EDUCATION',
           'institute': 'Institute',
           'year': 'Year',
           'degree': 'Degree',
           'subject': 'Subject',
-          'experince': 'Experience',
+          'experience': 'Experience',
           'company': 'Company',
           'from': 'From',
           'To': 'To',
           'speciality': 'SPECIALITY',
           'category': 'Category',
           'sub_category': 'Sub Category',
-          // Mentee go to Chat Module
           'ask_your_question_for': 'Ask Your Question For',
           'upload_your_file': 'Upload Your File',
           'if_any': 'If Any',
           'available_slots': 'Available Slots',
           'no_slots_available': 'No Slots Available',
-
           'pick_file': 'Pick File',
           'write_about_your_question': 'Write About Your Question',
           'your_question_here....': 'Your Question Here....',
@@ -287,24 +243,17 @@ class LanguagesChang extends Translations {
           'you_will_be_charge': 'You Will Be Charge',
           'select_payment_method': 'Select Payment Method',
           'Continue': 'Continue',
-          //After appointment select paymant method
           'enter_jazzCash_details': 'Enter JazzCash Details',
           'cnic': 'CNIC',
           'jazzCash_number': 'JazzCash Number',
           'slide_pay_later': 'Slide Pay Later',
           'slide_pay_now': 'Slide Pay Now',
-
-          // Appointment detail mentee side
           'appointment_detail': 'Appointment Detail',
           'mentee_info': 'Mentee Info',
           'file': 'File',
           'your_question': 'Your Question',
-
-          //Mentor Side side menu
           'my_schedule': 'My Schedule',
           'edit_profile': 'Edit Profile',
-
-          //Mentor dashboard
           'good_morning': 'Good Morning',
           'good_afternoon': 'Good Afternoon',
           'good_evening': 'Good Evening',
@@ -321,28 +270,18 @@ class LanguagesChang extends Translations {
           'action': 'Action',
           'Un_paid': 'Un-Paid',
           'paid': 'Paid',
-
-          //Mentor Booking
           'appointment_log': 'Appointment Log',
           'all': 'All',
           'pending': 'Pending',
           'load_more': 'Load More',
-
           'not_available_yet!': 'Not Available Yet!',
-
-          //Mentor appointment details
           'appointment_details': 'Appointment Details',
           'appointment_info': 'Appointment Info',
           'appointment_type': 'Appointment Type',
           'id': 'ID',
-
-          //Mentor Blogs
-          'recommended_blogs': 'Recommended Blogs',
           'this_is_title': 'this is title',
           'blog_details': 'Blog Details',
           'this is description': 'this is description',
-          //Mentor Schedule
-
           'select_type': 'Select Type',
           'enter_charges': 'Enter Charges',
           'select_holiday': 'Select Holiday',
@@ -363,7 +302,6 @@ class LanguagesChang extends Translations {
           'slots_created': 'Slots Created',
           'save': 'Save',
           'charges': 'Charges',
-          //Mentor Edit Profile
           'your_profile': 'Your Profile',
           'religion': 'Religion',
           'dat_of_birth': 'Date of Birth',
@@ -374,7 +312,7 @@ class LanguagesChang extends Translations {
           'educational': 'Educational',
           'image_here': 'image here',
           'add_education': 'Add Education',
-          'experince_info': 'Experience Info',
+          'experience_info': 'Experience Info',
           'skill_info': 'Skill Info',
           'account_info': 'Account Info',
           'department': 'DEPARTMENT',
@@ -383,7 +321,6 @@ class LanguagesChang extends Translations {
           'bank': 'Bank',
           'account_title': 'Account Title',
           'account_number': 'Account Number',
-          // General Modification
           'your_text_here': 'Your Text Here',
           'user': 'User',
           'rate_now': 'Rate Now',
@@ -416,22 +353,16 @@ class LanguagesChang extends Translations {
           'under': 'Under',
           'review': 'Review',
           'good_night': 'Good Night',
-
           'no_appointment': 'No Appointment',
-
           'for_today': 'For Today',
           'day': 'Day',
-
           'other': 'Other',
-          'change': 'Change',
           'change': 'Change',
           'company_name': 'COMPANY NAME',
           'add_experience': 'Add Experience',
-
           'accept': 'Accept',
           'reject': 'Reject',
           'chat_box': 'Chat Box',
-          'your_question': 'Your Question',
           'mark_as_complete': 'Mark As Complete',
           'complete_your_profile': 'Complete Your Profile',
           'add_skill': 'Add Skill',
@@ -444,7 +375,6 @@ class LanguagesChang extends Translations {
           'appointment_rejected_successfully':
               'Appointment Rejected Successfully',
           'delete_successfully': 'DELETED SUCCESSFULLY',
-          'profile_updated_successfully': 'PROFILE UPDATED SUCCESSFULLY',
           'skill_added_successfully': 'SKILL ADDED SUCCESSFULLY',
           'added_successfully': 'ADDED SUCCESSFULLY',
           'wallet': 'Wallet',
@@ -455,10 +385,8 @@ class LanguagesChang extends Translations {
           'file_is_greater_than_10mb': 'File is Greater Than 10mb',
           'this_payment_method_is': 'This Payment Method Is',
           'not_available_yet': 'Not Available Yet',
-          'select_payment_method': 'Select Payment Method',
           'no_record_found': 'No Record Found',
           'please_select_slot_first': 'Please Select Slot First',
-          'not_available_yet': 'Not Available Yet',
           'login_please': 'Login Please',
           'upload_your_degree_picture': 'Upload Your Degree Picture',
           'add_education_please': 'Add Education Please',
@@ -467,10 +395,7 @@ class LanguagesChang extends Translations {
           'add_work_experience_please': 'Add Work Experience Please',
           'upload_your_profile_picture': 'Upload Your Profile Picture',
           'add_skill_please': 'Add Skill Please',
-          'upload_your_degree_picture': 'Upload Your Degree Picture',
           'amount_added_successfully': 'Amount Added Successfully',
-          'available_slots': 'Available Slots',
-          'no_slots_available': 'No Slots Available',
           'enter_correct_pin': 'Enter Correct Pin',
           'book_appointment_for': 'Book Appointment for',
           'wallet_amount': 'Wallet Amount',
@@ -486,9 +411,6 @@ class LanguagesChang extends Translations {
           'location': 'LOCATION',
           'please_turn_on_your_location': 'Please turn on your location',
           'Online': 'Online',
-          'offline': 'Offline',
-          'subject': 'Subject',
-
           'about_us_1':
               ' Mashvra will connect you with the best certified specialist and get professional solutions according to your needs right-away, with the large network of Consultants across the world. ',
           'about_us_2':
@@ -499,10 +421,8 @@ class LanguagesChang extends Translations {
           'please_login_first': 'Please Login First',
           'go_to_login': 'Go For Login',
           'pay_now': 'Pay Now',
-
           'online_status': 'Online Status',
           'offline_status': 'Offline Status',
-          'terms_and_conditions': 'Terms & Condition',
           'enter_last_6_digits': 'Enter Last 6-Digits of Your CNIC',
           'enter_amount': 'Enter Amount',
           'sign_up_as_consultant': 'Sign Up as Consultant',
@@ -512,9 +432,8 @@ class LanguagesChang extends Translations {
               'Thank you for Using JazzCash.Your Transaction was successful',
         },
         'ur_PK': {
-//dashboard
           'Find_your': 'اپنا تلاش کرو',
-          'appointments_log':'Appointments Log',
+          'appointments_log': 'Appointments Log',
           'consultant': 'کنسلٹنٹ',
           'audio': 'آڈیو',
           'video': 'ویڈیو',
@@ -554,10 +473,8 @@ class LanguagesChang extends Translations {
           'my_wallet': 'میرا بٹوہ',
           'about_your_self': 'اپنے بارے میں',
           'pay_amount_for_appointment': 'تقرری کے لیے رقم ادا کریں۔',
-
           'get_know_about_our_Vision_and_mission':
               'ہمارے وژن اور مشن کے بارے میں جانیں۔',
-
           'manage_all_of_your_appointment': 'اپنی تمام ملاقات کا انتظام کریں۔',
           'today_appointment': 'آج کی ملاقات',
           'no_appointment_for_today': 'آج کے لیے کوئی ملاقات نہیں۔',
@@ -613,8 +530,6 @@ class LanguagesChang extends Translations {
           'featured_consultants': 'نمایاں کنسلٹنٹس',
           'categories': 'اقسام',
           'search_here': 'یہاں تلاش کریں۔',
-          'categories': 'اقسام',
-          'view_all': 'سب دیکھیں',
           'home': 'گھر',
           'reset_password': 'پاس ورڈ ری سیٹ',
           'a_reset_link_will_be_share_via_otp':
@@ -628,19 +543,14 @@ class LanguagesChang extends Translations {
           'new_password': 'New Password',
           'create_new_password': 'نیا پاس ورڈ بنائیں',
           'enter_password': 'پاس ورڈ درج کریں',
-          'new_password': 'نیا پاس ورڈ',
           'confirm_password': 'پاس ورڈ کی تصدیق کریں۔',
-          'reset_password': 'پاس ورڈ ری سیٹ',
           'password_created': 'پاس ورڈ بنایا گیا۔',
           'successfully': 'کامیابی سے',
           'chat': 'گپ شپ',
           'lets_login': 'آئیے لاگ ان کریں۔',
-          'home': 'گھر',
-          'categories': 'اقسام',
           'contact_us': 'ہم سے رابطہ کریں۔',
           'blogs': 'بلاگز',
           'about_us': 'ہمارے بارے میں',
-          'contact_us': 'ہم سے رابطہ کریں۔',
           'we_are_just_one_step_away_reach_out':
               'ہم صرف ایک قدم کے فاصلے پر پہنچ گئے ہیں۔',
           'address': 'پتہ',
@@ -651,8 +561,6 @@ class LanguagesChang extends Translations {
               'آج کے رجحان ساز مضامین کو دریافت کریں۔',
           'recommended_blogs': 'تجویز کردہ بلاگز',
           'for_you': 'آپ کے لیے',
-          'get_know_about_our_Vision_and_mission':
-              'ہمارے وژن اور مشن کے بارے میں جانیں۔',
           'our_vision': 'ہمارا وژن',
           'our_mission': 'ہمارا مقصد',
           'why_choose_us': 'ہمیں کیوں منتخب کریں۔',
@@ -699,96 +607,57 @@ class LanguagesChang extends Translations {
           'your_appointment_has_been_booked_with':
               'آپ کی اپوائنٹمنٹ بک کر دی گئی ہے۔',
           'go_to_home': 'گھر جاو',
-
-//Before Login Side Menu Screen
-          'lets_login': 'آئیے لاگ ان کریں۔',
-
-          'contact_us': 'ہم سے رابطہ کریں',
-          'about_us': 'ہمارے بارے میں',
-          'blogs': 'بلاگز',
           'privacy_policy': 'رازداری کی پالیسی',
-
-//Login screen
           'mentee': 'مینٹی',
           'mentor': 'کنسلٹنٹ',
           'enter_your_phone': 'اپنا فون نمبر درج کریں۔',
           'first_name': 'پہلا نام',
           'phone_number': 'فون نمبر',
-          'login': 'لاگ ان ',
           'you_are_receiving_call_from': 'آپ کو کال موصول ہو رہی ',
           'or_sign_up_with': 'یا اس کے ساتھ سائن اپ کریں۔',
           'have_an_account': 'یا آپ کا اکاؤنٹ ہے؟',
           'by_sign_up_you_are_agree':
               'سائن اپ کرکے، آپ ہماری بات سے اتفاق کرتے ہیں۔',
           "your_appointment_detail_with": 'سے آپ کی ملاقات کی تفصیلات',
-
-//After Login Mentee screen
-
           'total_appointments': 'کل تقرریاں',
           'pending_appointments': 'زیر غور تقرریاں',
           'bookings': 'بکنگ',
-
-//Mentee Side Menu
-
-          'logout': 'لاگ آوٹ',
-
-//Mentee Side Menu >> Contact Us
-          'address': 'پتہ',
           '102-C_people_colony_faisalabad': '102-C پیپلز کالونی فیصل آباد',
-          'call_us': 'فون کر',
-          'email_us': 'ہمیں ای میل کریں۔',
           'name': 'نام',
           'email': 'ای میل',
           'message': 'پیغام',
           'submit': 'جمع کرائیں',
-
-//Mentee Side Menu >> About Us
-          'about': 'ایپ کے بارے میں',
-          'why_choose_us': 'ہمیں کیوں چنیں۔',
           'easy_sign_up': 'آسانی سے سائن اپ کریں۔',
           'professional_mentors': 'پروفیشنل مینٹرز',
-          'our_mission': 'ہمارا مشن',
-
-//When Mentee Select the slot
           'morning': 'صبح',
           'afternoon': 'دوپہر',
           'evening': 'شام',
-
-//When Mentee go to the Consultants
           'consultants': 'کنسلٹنٹس',
           'satisfied_customers': 'مطمئن کسٹمرز',
           'starting_from': 'شروع ہو رہا ہے۔',
-          'chat': 'چیٹ',
-          'video': 'ویڈیو',
-          'audio': 'آڈیو',
-//Mentee open the Mentor Profile
           'verified': 'تصدیق شدہ',
           'mentor_profile': 'کنسلٹنٹ پروفائل',
           'general_info': 'عام معلومات',
           'general': 'عام',
           'info': 'معلومات',
-
           'last_name': 'آخری نام',
           'father_name': 'والد کا نام',
           'gender': 'جنس',
           'male': 'مرد',
           'female': 'عورت',
-
           'city': 'شہر',
           'country': 'ملک',
-          'education': 'تعلیم',
           'institute': 'انسٹی ٹیوٹ',
           'year': 'سال',
           'degree': 'ڈگری',
           'subject': 'مضمون',
-          'experince': 'تجربہ',
+          'experience': 'تجربہ',
           'company': 'کمپنی',
           'from': 'سے',
           'To': 'کو',
           'speciality': 'خاصیت',
           'category': 'قسم',
           'sub_category': 'ذیلی زمرہ',
-// Mentee go to Chat Module
           'ask_your_question_for': 'کے لیے اپنا سوال پوچھیں۔',
           'upload_your_file': 'اپنی فائل اپ لوڈ کریں',
           'if_any': 'اگر کوئی ہے',
@@ -801,25 +670,17 @@ class LanguagesChang extends Translations {
           'you_will_be_charge': 'آپ سے چارج کیا جائے گا',
           'select_payment_method': 'رقم کی ادائیگی کا طریقہ منتخب کریں۔',
           'continue': 'جاری رہے',
-//After appointment select paymant method
           'enter_jazzCash_details': 'JazzCash کی تفصیلات درج کریں۔',
           'cnic': 'CNIC',
           'jazzCash_number': 'JazzCash نمبر',
           'slide_pay_later': 'ادائیگی کے لیے سلائیڈ کریں۔',
           'slide_pay_now': 'ادائیگی کے لیے سلائیڈ کریں۔',
-
-// Appointment detail mentee side
           'appointment_detail': 'تقرریوں کی تفصیلات  ',
           'mentee_info': 'مینٹی کی معلومات',
           'file': 'فائل',
           'your_question': 'آپ کا سوال',
-
-//Mentor Side side menu
-
           'my_schedule': 'میرا شیڈول',
           'edit_profile': 'پروفائل میں ترمیم کریں',
-
-//Mentor dashboard
           'good_morning': 'صبح بخیر',
           'good_afternoon': 'دوپہر بخیر',
           'good_evening': 'شام بخیر',
@@ -836,27 +697,18 @@ class LanguagesChang extends Translations {
           'action': 'عمل',
           'Un_paid': 'غیر ادا شدہ',
           'paid': 'ادا شدہ',
-//Mentor Booking
           'appointment_log': ' تقرریوں کا اندراج',
           'all': 'تمام',
           'pending': 'زیر غور ',
           'not_available_yet!': 'ابھی تک دستیاب نہیں!',
           'load_more': 'مزید لوڈ کریں',
-
-//Mentor appointment details
           'appointment_details': 'تقرریوں کی تفصیلات  ',
           'appointment_info': ' تقرریوں کی معلومات',
           'appointment_type': 'تقرریوں کی قسم',
-
           'id': 'آئی ڈی',
-
-//Mentor Blogs
-          'recommended_blogs': 'تجویز کردہ بلاگز',
           'this_is_title': 'یہ عنوان ہے',
           'blog_details': 'بلاگ کی تفصیلات',
           'this is description': 'یہ تفصیل ہے',
-//Mentor Schedule
-
           'select_type': 'قسم منتخب کریں۔',
           'enter_charges': 'چارجز درج کریں۔',
           'select_holiday': 'چھٹی کا انتخاب کریں۔',
@@ -877,7 +729,6 @@ class LanguagesChang extends Translations {
           'slots_created': 'سلاٹس بنائیں۔',
           'save': 'محفوظ کریں',
           'charges': 'چارجز',
-//Mentor Edit Profile
           'your_profile': 'آپ کی پروفائل ',
           'religion': 'مذہب',
           'dat_of_birth': 'تاریخ پیدائش',
@@ -888,7 +739,7 @@ class LanguagesChang extends Translations {
           'educational': 'تعلیم',
           'image_here': 'تصویر ',
           'add_education': 'تعلیم شامل کریں۔',
-          'experince_info': 'تجربہ',
+          'experience_info': 'تجربہ',
           'skill_info': 'مہارت',
           'account_info': 'اکاونٹ کی معلومات',
           'department': 'شعبہ',
@@ -897,8 +748,6 @@ class LanguagesChang extends Translations {
           'bank': 'بینک',
           'account_title': 'اکاؤنٹ کا عنوان ',
           'account_number': 'اکاؤنٹ نمبر ',
-
-// General Modification
           'your_text_here': 'یہاں لکھو',
           'user': 'صارف',
           'rate_now': 'شرح اب',
@@ -925,34 +774,26 @@ class LanguagesChang extends Translations {
           ' or_login_with': 'لاگ ان کریں',
           ' resend_OTP_code': ' کوڈ دوبارہ بھیجیں۔',
           ' enter_OTP_code_below': ' نیچے  کوڈ درج کریں۔',
-
           'your_profile_is_under': 'آپ کا پروفائل زیر غور ہے۔',
           'you_will_be_notified_once_it_get_approve':
               'اس کی پروفائل منظوری کے بعد آپ کو مطلع کیا جائے گا',
           'under': 'زیر ',
           'review': 'جائزہ لینا',
           'good_night': 'شب بخیر',
-
           'no_appointment': 'کوئی ملاقات نہیں۔',
-
           'for_today': 'آج کے دن',
           'day': 'دن',
-
           'other': ' دوسرے',
-
           'change': 'تبدیل',
           'company_name': 'کمپنی کا نام',
           'add_experience': 'تجربہ شامل کریں۔',
-
           'accept': ' قبول کریں',
           'reject': ' مسترد',
           'chat_box': 'چیٹ باکس',
-          'your_question': 'آپ کا سوال',
           'mark_as_complete': 'مکمل کریں۔',
           'complete_your_profile': ' اپنا پروفائل مکمل کریں۔',
           'add_skill': 'مہارت شامل کریں',
           'sorry!': 'معذرت!',
-
           'select_language': 'زبان منتخب کریں',
           'appointment_completed_successfully':
               ' ملاقات کامیابی کے ساتھ مکمل ہو گئی ہے۔',
@@ -960,8 +801,6 @@ class LanguagesChang extends Translations {
               ' تقرری کامیابی کے ساتھ قبول کر لی گئی ہے۔ ',
           'appointment_rejected_successfully': 'تقرری مسترد کر دی گئی ',
           'delete_successfully': ' کامیابی سے ہٹا دیا گیا۔',
-          'profile_updated_successfully':
-              'پروفائل کامیابی کے ساتھ اپ ڈیٹ ہو گیا۔',
           'skill_added_successfully': 'مہارت کو شامل کیا گیا۔',
           'added_successfully': 'کامیابی سے شامل کیا گیا۔',
           'wallet': 'پرس',
@@ -972,10 +811,8 @@ class LanguagesChang extends Translations {
           'file_is_greater_than_10mb': 'فائل 10 ایم بی سے بڑی ہے۔',
           'this_payment_method_is': 'یہ ادائیگی کا طریقہ ہے۔',
           'not_available_yet': 'ابھی تک دستیاب نہیں ہے۔',
-          'select_payment_method': 'ادائیگی کا طریقہ منتخب کریں۔',
           'no_record_found': 'کوئی ریکارڈ نہیں',
           'please_select_slot_first': 'براہ کرم پہلے سلاٹ منتخب کریں۔',
-          'not_available_yet': 'ابھی تک دستیاب نہیں',
           'login_please': 'لاگ ان کریں',
           'upload_your_degree_picture': 'اپنی ڈگری کی تصویر اپ لوڈ کریں۔',
           'add_education_please': 'برائے مہربانی تعلیم شامل کریں۔',
@@ -984,12 +821,8 @@ class LanguagesChang extends Translations {
           'add_work_experience_please': 'براہ کرم کام کا تجربہ شامل کریں۔',
           'upload_your_profile_picture': 'اپنی پروفائل تصویر اپ لوڈ کریں۔',
           'add_skill_please': 'براہ کرم مہارت شامل کریں۔',
-          'upload_your_degree_picture': 'اپنی ڈگری کی تصویر اپ لوڈ کریں۔',
           'amount_added_successfully': 'رقم کامیابی کے ساتھ شامل کی گئی ہے۔',
-          'available_slots': 'دستیاب سلاٹ',
-          'no_slots_available': 'کوئی سلاٹ دستیاب نہیں ہے۔',
           'enter_correct_pin': 'درست پن درج کریں۔',
-          'book_appointment_for': 'کے لیے اپوائنٹمنٹ بک کریں۔',
           'wallet_amount': 'بٹوے کی رقم',
           'add_amount': 'رقم شامل کریں۔',
           'transaction_log': 'ٹرانزیکشن لاگ',
@@ -1002,8 +835,6 @@ class LanguagesChang extends Translations {
           'location': 'مقام',
           'please_turn_on_your_location': 'براہ کرم اپنا مقام آن کریں۔',
           'online': 'آن لائن',
-          'offline': 'آف لائن',
-          'subject': ' مضمون',
           ' update_your_profile': '  اپنے پروفائل کو اپ ڈیٹ کریں۔',
           'about_us_1':
               'مشورا آپ کو بہترین مصدقہ ماہر سے مربوط کرے گا اور آپ کی ضروریات کے مطابق پیشہ ورانہ حل فوراً حاصل کرے گا، دنیا بھر میں مینٹرز کے بڑے نیٹ ورک کے ساتھ۔',
@@ -1017,7 +848,6 @@ class LanguagesChang extends Translations {
           'pay_now': 'ابھی ادائیگی کریں۔',
           'online_status': 'آن لائن اسٹیٹس',
           'offline_status': 'آف لائناسٹیٹس',
-          'terms_and_conditions': 'شرائط و ضوابط',
           'enter_last_6_digits':
               'اپنے قومی شناختی کارڈ نمبر کے آخری 6 ہندسے درج کریں۔',
           'enter_amount': 'رقم درج کریں۔',
@@ -1028,9 +858,8 @@ class LanguagesChang extends Translations {
               'JazzCash استعمال کرنے کا شکریہ۔ آپ کا لین دین کامیاب رہا۔',
         },
         'bn_BD': {
-//dashboard
           'find_your': 'আপনার খুঁজুন',
-          'appointments_log':'Appointments Log',
+          'appointments_log': 'Appointments Log',
           'best_consultants_just_one_click_away': 'শীর্ষ রেট কনসালটেন্ট',
           'consultant': 'পরামর্শদাতা',
           'fees': 'ফি',
@@ -1070,10 +899,8 @@ class LanguagesChang extends Translations {
           'about_your_self': 'নিজেকে সম্পর্কে',
           'pay_amount_for_appointment':
               'অ্যাপয়েন্টমেন্টের জন্য অর্থ প্রদান করুন',
-
           'get_know_about_our_Vision_and_mission':
               'আমাদের ভিশন এবং মিশন সম্পর্কে জানুন',
-
           'enter_login_details': 'লগইন বিবরণ লিখুন',
           'email_address': 'ইমেল ঠিকানা',
           'password': 'পাসওয়ার্ড',
@@ -1131,8 +958,6 @@ class LanguagesChang extends Translations {
           'view_all': 'সব দেখ',
           'categories': 'বিভাগ',
           'search_here': 'এখানে অনুসন্ধান করুন',
-          'categories': 'ক্যাটাগরি',
-          'view_all': 'সব দেখ',
           'home': 'বাড়ি',
           'reset_password': 'পাসওয়ার্ড রিসেট করুন',
           'a_reset_link_will_be_share_via_otp':
@@ -1146,18 +971,14 @@ class LanguagesChang extends Translations {
           'new_password': 'নতুন পাসওয়ার্ড',
           'create_new_password': 'নতুন পাসওয়ার্ড তৈরি করুন',
           'enter_password': 'পাসওয়ার্ড লিখুন',
-          'new_password': 'নতুন পাসওয়ার্ড',
           'confirm_password': 'পাসওয়ার্ড নিশ্চিত করুন',
-          'reset_password': 'পাসওয়ার্ড রিসেট করুন',
           'password_created': 'পাসওয়ার্ড তৈরি করা হয়েছে',
           'successfully': 'সফলভাবে',
           'chat': 'চ্যাট',
           'lets_login': 'লগইন করতে দিন',
-          'categories': 'ক্যাটাগরি',
           'contact_us': 'যোগাযোগ করুন',
           'blogs': 'ব্লগ',
           'about_us': 'আমাদের সম্পর্কে',
-          'contact_us': 'যোগাযোগ করুন',
           'we_are_just_one_step_away_reach_out': 'আমরা শুধু এক ধাপ দূরে পৌঁছান',
           'address': 'ঠিকানা',
           'call_us': 'আমাদের কল করুন',
@@ -1167,8 +988,6 @@ class LanguagesChang extends Translations {
               'আজকের ট্রেন্ডিং নিবন্ধগুলি অন্বেষণ করুন৷',
           'recommended_blogs': 'প্রস্তাবিত ব্লগ',
           'for_you': 'তোমার জন্য',
-          'get_know_about_our_Vision_and_mission':
-              'আমাদের ভিশন এবং মিশন সম্পর্কে জানুন',
           'our_vision': 'আমাদের দৃষ্টি',
           'our_mission': 'আমাদের লক্ষ্য',
           'why_choose_us': 'কেন আমাদের নির্বাচন করেছে',
@@ -1214,67 +1033,33 @@ class LanguagesChang extends Translations {
           'your_appointment_has_been_booked_with':
               'আপনার অ্যাপয়েন্টমেন্ট বুক করা হয়েছে সঙ্গে',
           'go_to_home': 'বাড়িতে যেতে',
-
-//Before Login Side Menu Screen
-          'lets_login': 'লগইন করতে দিন',
-
-          'contact_us': 'যোগাযোগ করুন',
-          'about_us': 'আমাদের সম্পর্কে',
-          'blogs': 'ব্লগ',
           'privacy_policy': 'গোপনীয়তা নীতি',
-
-//Login screen
           'mentee': 'মেন্টি',
           'mentor': 'পরামর্শদাতা',
           'enter_your_phone': 'আপনার ফোন লিখুন',
           'first_name': 'নামের প্রথম অংশ',
           'phone_number': 'ফোন নম্বর',
-          'login': 'প্রবেশ করুন',
           'you_are_receiving_call_from': ' আপনি একটি কল গ্রহণ করছেন',
           'or_sign_up_with': 'অথবা এটি দিয়ে সাইন আপ করুন',
           'have_an_account': 'অথবা আপনার একটি অ্যাকাউন্ট আছে?',
           'by_sign_up_you_are_agree': 'সাইন আপ করে, আপনি আমাদের সাথে একমত',
           "your_appointment_detail_with": 'আপনার সাথে সাক্ষাতের বিশদ বিবরণ',
-
-//After Login Mentee screen
-
           'total_appointments': 'মোট নিয়োগ',
           'pending_appointments': 'মুলতুবি নিয়োগ',
           'bookings': 'সংরক্ষণ',
-
-//Mentee Side Menu
-          'logout': 'প্রস্থান',
-
-//Mentee Side Menu >> Contact Us
-          'address': 'ঠিকানা',
           '102-C_people_colony_faisalabad': '102-সি পিপল কলোনি ফয়সালাবাদ',
-          'call_us': 'আমাদের কল করুন',
-          'email_us': 'আমাদেরকে ইমেইল করুন',
           'name': 'নাম',
           'email': 'ইমেইল',
           'message': 'বার্তা',
           'submit': 'জমা দিন',
-
-//Mentee Side Menu >> About Us
-          'about': 'সম্পর্কিত',
-          'why_choose_us': 'কেন আমাদের নির্বাচন করেছে',
           'easy_sign_up': 'সহজ সাইন আপ',
           'professional_mentors': 'পেশাদার পরামর্শদাতা',
-          'our_mission': 'আমাদের লক্ষ্য',
-
-//When Mentee Select the slot
           'morning': 'সকাল',
           'afternoon': 'বিকেল',
           'evening': 'সন্ধ্যা',
-
-//When Mentee go to the Consultants
           'consultants': 'পরামর্শদাতা',
           'satisfied_customers': 'সন্তুষ্ট গ্রাহকদের',
           'starting_from': 'থেকে শুরু করে',
-          'chat': 'চ্যাট',
-          'video': 'ভিডিও',
-          'audio': 'শ্রুতি',
-//Mentee open the Mentor Profile
           'mentor_profile': 'পরামর্শদাতা পরামর্শদাতা',
           'general_info': 'সাধারণ তথ্য',
           'general': 'তথ্য',
@@ -1286,19 +1071,17 @@ class LanguagesChang extends Translations {
           'female': 'মহিলা',
           'city': 'লিঙ্গ',
           'country': 'দেশ',
-          'education': 'শিক্ষা',
           'institute': 'ইনস্টিটিউট',
           'year': 'বছর',
           'degree': 'ডিগ্রী',
           'subject': 'বিষয়',
-          'experince': 'অভিজ্ঞতা',
+          'experience': 'অভিজ্ঞতা',
           'company': 'প্রতিষ্ঠান',
           'from': 'থেকে',
           'To': 'প্রতি',
           'speciality': 'বিশেষত্ব',
           'category': 'শ্রেণী',
           'sub_category': 'সাব ক্যাটাগরি',
-// Mentee go to Chat Module
           'ask_your_question_for': 'আপনার_প্রশ্ন_করুন',
           'upload_your_file': 'আপনার ফাইল আপলোড করুন',
           'if_any': 'যদি থাকে ',
@@ -1311,24 +1094,17 @@ class LanguagesChang extends Translations {
           'you_will_be_charge': 'আপনি চার্জ করা হবে',
           'select_payment_method': 'পেমেন্ট পদ্ধতি নির্বাচন করুন',
           'continue': 'চালিয়ে যান',
-//After appointment select paymant method
           'enter_jazzCash_details': 'JazzCash বিবরণ লিখুন',
           'cnic': 'CNIC',
           'jazzCash_number': 'জ্যাজক্যাশ নম্বর',
           'slide_pay_later': 'পরে স্লাইড পে',
           'slide_pay_now': 'স্লাইড পে এখন',
-
-// Appointment detail mentee side
           'appointment_detail': 'অ্যাপয়েন্টমেন্টের বিস্তারিত  ',
           'mentee_info': 'মেন্টি তথ্য',
           'file': 'ফাইল',
           'your_question': 'তোমার প্রশ্ন',
-
-//Mentor Side side menu
           'my_schedule': 'আমার সময়সূচি',
           'edit_profile': 'জীবন বৃত্তান্ত সম্পাদনা',
-
-//Mentor dashboard
           'good_morning': 'সুপ্রভাত',
           'good_afternoon': 'শুভ অপরাহ্ন',
           'good_evening': 'শুভ সন্ধ্যা',
@@ -1345,28 +1121,18 @@ class LanguagesChang extends Translations {
           'action': 'কর্ম',
           'Un_paid': 'আন-পেইড',
           'paid': 'পরিশোধ করা',
-//Mentor Booking
           'appointment_log': 'অ্যাপয়েন্টমেন্ট লগ',
           'all': 'সব',
           'pending': 'বিচারাধীন',
           'load_more': 'আর ঢুকাও',
-
           'not_available_yet!': 'না পাওয়া এখনো!',
-
-//Mentor appointment details
           'appointment_details': 'অ্যাপয়েন্টমেন্টের বিবরণ ',
           'appointment_info': ' অ্যাপয়েন্টমেন্ট তথ্য',
           'appointment_type': 'অ্যাপয়েন্টমেন্টের ধরন',
-
           'id': 'আইডি',
-
-//Mentor Blogs
-          'recommended_blogs': 'প্রস্তাবিত ব্লগ',
           'this_is_title': 'এই শিরোনাম',
           'blog_details': 'ব্লগ বিস্তারিত',
           'this is description': 'এই বর্ণনা',
-//Mentor Schedule
-
           'select_type': 'টাইপ নির্বাচন করুন',
           'enter_charges': 'চার্জ লিখুন',
           'select_holiday': 'ছুটির দিন নির্বাচন করুন',
@@ -1387,7 +1153,6 @@ class LanguagesChang extends Translations {
           'slots_created': 'স্লট তৈরি করা হয়েছে',
           'save': 'সংরক্ষণ',
           'charges': 'চার্জ',
-//Mentor Edit Profile
           'your_profile': 'আপনার প্রোফাইল ',
           'religion': 'ধর্ম',
           'dat_of_birth': 'জন্ম তারিখ',
@@ -1398,7 +1163,7 @@ class LanguagesChang extends Translations {
           'educational': 'তথ্য',
           'image_here': 'ছবি এখানে',
           'add_education': 'শিক্ষা যোগ করুন',
-          'experince_info': 'অভিজ্ঞতার তথ্য',
+          'experience_info': 'অভিজ্ঞতার তথ্য',
           'skill_info': 'দক্ষতা তথ্য',
           'account_info': 'অ্যাকাউন্ট তথ্য',
           'department': 'বিভাগ',
@@ -1407,8 +1172,6 @@ class LanguagesChang extends Translations {
           'bank': 'ব্যাংক',
           'account_title': 'অ্যাকাউন্ট শিরোনাম ',
           'account_number': 'হিসাব নাম্বার ',
-
-// General Modification
           'your_text_here': 'এখানে লিখ',
           'user': 'ব্যবহারকারী',
           'rate_now': 'এখন হার',
@@ -1435,29 +1198,22 @@ class LanguagesChang extends Translations {
           ' or_login_with': 'দিয়ে লগইন করুন',
           ' resend_OTP_code': 'OTP কোড আবার পাঠান',
           ' enter_OTP_code_below': ' নিচে ওটিপি কোড লিখুন',
-
           'your_profile_is_under': 'আপনার প্রোফাইল অধীনে আছে',
           'you_will_be_notified_once_it_get_approve':
               'এটি অনুমোদন পেলে আপনাকে অবহিত করা হবে',
           'under': 'অধীন',
           'review': 'পুনঃমূল্যায়ন',
           'good_night': 'শুভ রাত্রি',
-
           'no_appointment': 'কোনো অ্যাপয়েন্টমেন্ট নেই',
-
           'for_today': 'আজকের জন্য',
           'day': 'দিন',
-
           'other': 'অন্যান্য',
           'change': 'পরিবর্তন',
-
           'company_name': 'কোম্পানির নাম',
           'add_experience': 'অভিজ্ঞতা যোগ করুন',
-
           'accept': 'গ্রহণ',
           'reject': 'প্রত্যাখ্যান',
           'chat_box': 'চ্যাট বক্স',
-          'your_question': 'তোমার প্রশ্ন',
           'mark_as_complete': 'সম্পূর্ণ হিসাবে মাস্ক',
           'complete_your_profile': 'আপনার তথ্য পুরো করুন',
           'add_skill': 'দক্ষতা যোগ করুন',
@@ -1470,7 +1226,6 @@ class LanguagesChang extends Translations {
           'appointment_rejected_successfully':
               'অ্যাপয়েন্টমেন্ট সফলভাবে প্রত্যাখ্যান করা হয়েছে',
           'delete_successfully': 'সফলভাবে মুছে ফেলা হয়েছে',
-          'profile_updated_successfully': 'প্রোফাইল সফলভাবে আপডেট করা হয়েছে',
           'skill_added_successfully': 'দক্ষতা সফলভাবে যোগ করা হয়েছে',
           'added_successfully': 'সফলভাবে যোগ করা হয়েছে',
           'wallet': 'মানিব্যাগ',
@@ -1481,10 +1236,8 @@ class LanguagesChang extends Translations {
           'file_is_greater_than_10mb': 'ফাইলটি 10MB এর চেয়ে বড়',
           'this_payment_method_is': 'এই পেমেন্ট পদ্ধতি হল',
           'not_available_yet': 'এখনও উপলব্ধ নয়',
-          'select_payment_method': 'পেমেন্ট পদ্ধতি নির্বাচন করুন',
           'no_record_found': 'পাওয়া কোন রেকর্ড',
           'please_select_slot_first': 'অনুগ্রহ করে প্রথমে স্লট নির্বাচন করুন',
-
           'login_please': 'লগইন করুন',
           'upload_your_degree_picture': 'আপনার ডিগ্রী ছবি আপলোড',
           'add_education_please': 'শিক্ষা যোগ করুন দয়া করে',
@@ -1493,12 +1246,8 @@ class LanguagesChang extends Translations {
           'add_work_experience_please': 'কাজের অভিজ্ঞতা যোগ করুন',
           'upload_your_profile_picture': 'আপনার প্রোফাইল ছবি আপলোড করুন',
           'add_skill_please': 'দয়া করে দক্ষতা যোগ করুন',
-          'upload_your_degree_picture': 'আপনার ডিগ্রী ছবি আপলোড',
           'amount_added_successfully': 'পরিমাণ সফলভাবে যোগ করা হয়েছে',
-          'available_slots': 'উপলব্ধ স্লট',
-          'no_slots_available': 'কোন স্লট উপলব্ধ',
           'enter_correct_pin': 'সঠিক পিন লিখুন',
-          'book_appointment_for': 'জন্য বুক অ্যাপয়েন্টমেন্ট',
           'wallet_amount': 'ওয়ালেট পরিমাণ',
           'add_amount': 'পরিমাণ যোগ করুন',
           'transaction_log': 'লেনদেন লগ',
@@ -1511,8 +1260,6 @@ class LanguagesChang extends Translations {
           'location': 'অবস্থান',
           'please_turn_on_your_location': 'আপনার অবস্থান চালু করুন',
           'Online': 'অনলাইন',
-          'offline': 'অফলাইন',
-          'subject': ' বিষয়',
           ' update_your_profile': ' আপনার প্রোফাইল আপডেট করুন ',
           'about_us_1':
               'Mashvra আপনাকে সর্বোত্তম প্রত্যয়িত বিশেষজ্ঞের সাথে সংযুক্ত করবে এবং বিশ্বজুড়ে পরামর্শদাতাদের বৃহৎ নেটওয়ার্কের সাথে সাথে সাথেই আপনার চাহিদা অনুযায়ী পেশাদার সমাধান পাবে।',
@@ -1526,7 +1273,6 @@ class LanguagesChang extends Translations {
           'pay_now': 'এখন পরিশোধ করুন',
           'online_status': 'অনলাইন স্ট্যাটাস',
           'offline_status': 'অফলাইন অবস্থা',
-          'terms_and_conditions': 'বিধি - নিষেধ এবং শর্তাবলী',
           'enter_last_6_digits':
               'আপনার জাতীয় পরিচয়পত্র নম্বরের শেষ 6-অঙ্ক লিখুন',
           'enter_amount': 'পরিমান লিখুন',
@@ -1537,9 +1283,8 @@ class LanguagesChang extends Translations {
               'JazzCash ব্যবহার করার জন্য আপনাকে ধন্যবাদ। আপনার লেনদেন সফল হয়েছে',
         },
         'hi_IN': {
-//dashboard
           'find_your': 'अपना ढूँढो',
-          'appointments_log':'Appointments Log',
+          'appointments_log': 'Appointments Log',
           'consultant': 'सलाहकार',
           'offline': 'ऑफ़लाइन',
           'fees': 'फीस',
@@ -1578,10 +1323,8 @@ class LanguagesChang extends Translations {
           'my_wallet': 'मेरा बटुआ',
           'about_your_self': 'अपने बारे में',
           'pay_amount_for_appointment': 'नियुक्ति के लिए भुगतान राशि',
-
           'get_know_about_our_Vision_and_mission':
               'हमारे विजन और मिशन के बारे में जानें',
-
           'enter_login_details': 'लॉगिन विवरण दर्ज करें',
           'email_address': 'ईमेल पता',
           'password': 'पासवर्ड',
@@ -1638,8 +1381,6 @@ class LanguagesChang extends Translations {
           'categories': 'श्रेणियाँ',
           'Featured Consultants': 'चुनिंदा सलाहकार',
           'search_here': 'यहाँ ढूँढे',
-          'categories': 'श्रेणियाँ',
-          'view_all': ' सभी देखें',
           'home': 'घर',
           'reset_password': 'पासवर्ड रीसेट',
           'a_reset_link_will_be_share_via_otp':
@@ -1653,19 +1394,14 @@ class LanguagesChang extends Translations {
           'new_password': 'नया पासवर्ड',
           'create_new_password': 'नया पासवर्ड बनाएं',
           'enter_password': 'पास वर्ड दर्ज करें',
-          'new_password': 'नया पासवर्ड',
           'confirm_password': 'पासवर्ड की पुष्टि कीजिये',
-          'reset_password': 'पासवर्ड रीसेट',
           'password_created': 'पासवर्ड बनाया गया',
           'successfully': 'सफलतापूर्वक',
           'chat': 'बात करना',
           'lets_login': 'लॉग इन करें',
-          'home': 'घर',
-          'categories': 'श्रेणियाँ',
           'contact_us': 'संपर्क करें',
           'blogs': 'ब्लॉग',
           'about_us': 'हमारे बारे में',
-          'contact_us': 'संपर्क करें',
           'we_are_just_one_step_away_reach_out':
               'हम बस एक कदम दूर पहुंच गए हैं',
           'address': 'पता',
@@ -1676,8 +1412,6 @@ class LanguagesChang extends Translations {
               'आज के रुझान वाले लेख एक्सप्लोर करें',
           'recommended_blogs': 'अनुशंसित ब्लॉग',
           'for_you': 'आपके लिए',
-          'get_know_about_our_Vision_and_mission':
-              'हमारे विजन और मिशन के बारे में जानें',
           'our_vision': 'हमारा नज़रिया',
           'our_mission': 'हमारा लक्ष्य',
           'why_choose_us': 'हमें क्यों चुनें',
@@ -1724,67 +1458,33 @@ class LanguagesChang extends Translations {
           'your_appointment_has_been_booked_with':
               'आपकी अपॉइंटमेंट बुक हो चुकी है',
           'go_to_home': 'घर जाओ',
-
-//Before Login Side Menu Screen
-          'lets_login': 'संपर्क करें',
-
-          'contact_us': 'संपर्क करें',
-          'about_us': 'हमारे बारे में',
-          'blogs': 'ब्लॉग',
           'privacy_policy': 'गोपनीयता नीति',
-
-//Login screen
           'mentee': 'मेंटी',
           'mentor': 'उपदेशक',
           'enter_your_phone': 'अपना फोन दर्ज करें',
           'first_name': 'पहला नाम',
           'phone_number': 'फ़ोन नंबर',
-          'login': 'लॉग इन करें',
           'you_are_receiving_call_from': ' आप एक कॉल प्राप्त कर रहे हैं',
           'or_sign_up_with': 'या इसके साथ साइन अप करें',
           'have_an_account': 'या आपके पास खाता है?',
           'by_sign_up_you_are_agree': 'साइन अप करके, आप हमारी बात से सहमत हैं',
           "your_appointment_detail_with": 'के साथ आपकी बैठक का विवरण',
-
-//After Login Mentee screen
-
           'total_appointments': 'कुल नियुक्तियां',
           'pending_appointments': 'लंबित नियुक्तियां',
           'bookings': 'बुकिंग',
-
-//Mentee Side Menu
-          'logout': 'लॉग आउट',
-
-//Mentee Side Menu >> Contact Us
-          'address': 'पता',
           '102-C_people_colony_faisalabad': '102-सी पीपल कॉलोनी फैसलाबाद',
-          'call_us': 'हमें कॉल करें',
-          'email_us': 'हमें ईमेल करें',
           'name': 'नाम',
           'email': 'ईमेल',
           'message': 'संदेश',
           'submit': 'प्रस्तुत करना',
-
-//Mentee Side Menu >> About Us
-          'about': 'के बारे में',
-          'why_choose_us': 'हमारा चयन क्यों',
           'easy_sign_up': 'आसान साइन अप',
           'professional_mentors': 'पेशेवर सलाहकार',
-          'our_mission': 'हमारा लक्ष्य',
-
-//When Mentee Select the slot
           'morning': 'सुबह',
           'afternoon': 'दोपहर बाद',
           'evening': 'शाम',
-
-//When Mentee go to the Consultants
           'consultants': 'सलाहकार',
           'satisfied_customers': 'संतुष्ट उपभोक्ता',
           'starting_from': 'से शुरू',
-          'chat': 'बातचीत',
-          'video': 'वीडियो',
-          'audio': 'ऑडियो',
-//Mentee open the Mentor Profile
           'mentor_profile': 'उपदेशक सलाहकार',
           'general_info': 'सामान्य जानकारी',
           'general': 'जानकारी',
@@ -1794,22 +1494,19 @@ class LanguagesChang extends Translations {
           'gender': 'लिंग',
           'male': 'नर',
           'female': 'महिला',
-
           'city': 'शहर',
           'country': 'देश',
-          'education': 'शिक्षा',
           'institute': 'संस्था',
           'year': 'वर्ष',
           'degree': 'डिग्री',
           'subject': 'विषय',
-          'experince': 'अनुभवों',
+          'experience': 'अनुभवों',
           'company': 'कंपनी',
           'from': 'से',
           'To': 'प्रति',
           'speciality': 'स्पेशलिटी',
           'category': 'वर्ग',
           'sub_category': 'उप श्रेणी',
-// Mentee go to Chat Module
           'ask_your_question_for': 'पूछो_तुम्हारा_प्रश्न_के लिए',
           'upload_your_file': 'अपनी फ़ाइल अपलोड करें',
           'if_any': 'यदि कोई हो',
@@ -1822,24 +1519,17 @@ class LanguagesChang extends Translations {
           'you_will_be_charge': 'यू विल बी चार्ज',
           'select_payment_method': 'भुगतान का तरीका चुनें',
           'continue': 'जारी रखें',
-//After appointment select paymant method
           'enter_jazzCash_details': 'जैज़कैश विवरण दर्ज करें',
           'cnic': 'CNIC',
           'jazzCash_number': 'जैज़कैश नंबर',
           'slide_pay_later': 'बाद में भुगतान करें',
           'slide_pay_now': 'अब भुगतान स्लाइड करें',
-
-// Appointment detail mentee side
           'appointment_detail': 'नियुक्ति विवरण  ',
           'mentee_info': 'सलाह जानकारी',
           'file': 'फ़ाइल',
           'your_question': 'आपका प्रश्न',
-
-//Mentor Side side menu
           'my_schedule': 'मेरे अनुसूची',
           'edit_profile': 'प्रोफ़ाइल संपादित करें',
-
-//Mentor dashboard
           'good_morning': 'शुभ प्रभात',
           'good_afternoon': 'नमस्कार',
           'good_evening': 'सुसंध्या',
@@ -1856,27 +1546,18 @@ class LanguagesChang extends Translations {
           'action': 'कार्य',
           'Un_paid': 'संयुक्त राष्ट्र-पेड',
           'paid': 'भुगतान किया है',
-//Mentor Booking
           'appointment_log': 'नियुक्ति लॉग',
           'all': 'सब',
           'pending': 'लंबित',
           'load_more': 'और लोड करें',
-
           'not_available_yet!': 'अभी उपलब्ध नहीं है!',
-//Mentor appointment details
           'appointment_details': 'नियुक्ति विवरण',
           'appointment_info': 'अपॉइंटमेंट की जानकारी',
           'appointment_type': 'नियुक्ति प्रकार',
-
           'id': 'पहचान',
-
-//Mentor Blogs
-          'recommended_blogs': 'अनुशंसित ब्लॉग',
           'this_is_title': 'यह शीर्षक है',
           'blog_details': 'ब्लॉग विवरण',
           'this is description': 'यह विवरण है',
-//Mentor Schedule
-
           'select_type': 'प्रकार चुनें',
           'enter_charges': 'शुल्क दर्ज करें',
           'select_holiday': 'छुट्टी का चयन करें',
@@ -1897,7 +1578,6 @@ class LanguagesChang extends Translations {
           'slots_created': 'स्लॉट बनाए गए',
           'save': 'सहेजें',
           'charges': 'प्रभार',
-//Mentor Edit Profile
           'your_profile': 'आपकी प्रोफ़ाइल',
           'religion': 'धर्म',
           'dat_of_birth': 'जन्म की तारीख',
@@ -1908,7 +1588,7 @@ class LanguagesChang extends Translations {
           'educational': 'जानकारी',
           'image_here': 'छवि यहाँ',
           'add_education': 'शिक्षा जोड़ें',
-          'experince_info': 'अनुभव जानकारी',
+          'experience_info': 'अनुभव जानकारी',
           'skill_info': 'कौशल जानकारी',
           'account_info': 'खाते की जानकारी',
           'department': 'विभाग',
@@ -1917,7 +1597,6 @@ class LanguagesChang extends Translations {
           'bank': 'बैंक',
           'account_title': 'खाते का शीर्षक ',
           'account_number': 'खाता संख्या ',
-// General Modification
           'your_text_here': 'इधर लिखो',
           'user': 'उपयोगकर्ता',
           'rate_now': 'এখন হার',
@@ -1944,28 +1623,21 @@ class LanguagesChang extends Translations {
           ' or_login_with': 'साथ प्रवेश करना',
           ' resend_OTP_code': 'ओटीपी कोड दोबारा भेजें',
           ' enter_OTP_code_below': 'नीचे ओटीपी कोड दर्ज करें',
-
           'you_will_be_notified_once_it_get_approve':
               'स्वीकृति मिलते ही आपको सूचित कर दिया जाएगा',
           'under': 'अंतर्गत',
           'review': 'समीक्षा',
           'good_night': 'शुभ रात्रि',
-
           'no_appointment': 'कोई नियुक्ति नहीं',
-
           'for_today': 'आज केलिए',
           'day': 'दिन',
-
           'other': 'अन्य',
           'change': 'परिवर्तन',
-
           'company_name': 'कंपनी का नाम',
           'add_experience': 'अनुभव जोड़ें',
-
           'accept': 'स्वीकार करना',
           'reject': 'अस्वीकार',
           'chat_box': 'चैट बॉक्स',
-          'your_question': 'आपका प्रश्न',
           'mark_as_complete': 'पूरा के रूप में मुखौटा',
           'complete_your_profile': 'अपनी प्रोफाइल पूरी कीजिए',
           'add_skill': 'कौशल जोड़ें',
@@ -1977,12 +1649,9 @@ class LanguagesChang extends Translations {
           'appointment_rejected_successfully':
               'अपॉइंटमेंट सफलतापूर्वक अस्वीकार कर दिया गया',
           'delete_successfully': 'सफलतापूर्वक हटा दिया गया',
-          'profile_updated_successfully':
-              'प्रोफाइल को सफलतापूर्वक अपडेट किया गया',
           'skill_added_successfully': 'দক্ষতা সফলভাবে যোগ করা হয়েছে',
           'added_successfully': 'सफलतापूर्वक जोड़ा गया',
           'wallet': 'बटुआ',
-
           'rs': 'RS',
           'internet_not_connected': 'इंटरनेट नहीं जुड़ा',
           'mail_sent_successfully': 'मेल सफलतापूर्वक भेजा गया',
@@ -1990,10 +1659,8 @@ class LanguagesChang extends Translations {
           'file_is_greater_than_10mb': 'फ़ाइल 10mb . से बड़ी है',
           'this_payment_method_is': 'यह भुगतान विधि है',
           'not_available_yet': 'अभी उपलब्ध नहीं है',
-          'select_payment_method': 'भुगतान का तरीका चुनें',
           'no_record_found': 'कोई रिकॉर्ड नहीं मिला',
           'please_select_slot_first': 'कृपया पहले स्लॉट का चयन करें',
-
           'login_please': 'कृपया लॉगिन करें',
           'upload_your_degree_picture': 'अपनी डिग्री तस्वीर अपलोड करें',
           'add_education_please': 'कृपया शिक्षा जोड़ें',
@@ -2002,12 +1669,8 @@ class LanguagesChang extends Translations {
           'add_work_experience_please': 'कृपया कार्य अनुभव जोड़ें',
           'upload_your_profile_picture': 'अपना प्रोफ़ाइल चित्र अपलोड करें',
           'add_skill_please': 'कृपया कौशल जोड़ें',
-          'upload_your_degree_picture': 'अपनी डिग्री तस्वीर अपलोड करें',
           'amount_added_successfully': 'राशि सफलतापूर्वक जोड़ी गई',
-          'available_slots': 'उपलब्ध स्लॉट',
-          'no_slots_available': 'कोई स्लॉट उपलब्ध नहीं',
           'enter_correct_pin': 'सही पिन दर्ज करें',
-          'book_appointment_for': 'के लिए बुक अपॉइंटमेंट',
           'wallet_amount': 'वॉलेट राशि',
           'add_amount': 'राशि जोड़ें',
           'transaction_log': 'हस्तांतरण लॉग',
@@ -2021,16 +1684,11 @@ class LanguagesChang extends Translations {
           'location': 'आपके पास पर्याप्त संतुलन नहीं है',
           'please_turn_on_your_location': 'आपके पास पर्याप्त संतुलन नहीं है',
           'Online': 'ऑनलाइन',
-          'offline': 'ऑफ़लाइन',
-          'subject': 'विषय',
           ' update_your_profile': ' अपने प्रालेख का अद्यतन करें',
-
           'about_us_1':
               'मशवरा आपको दुनिया भर में मेंटर्स के बड़े नेटवर्क के साथ सर्वश्रेष्ठ प्रमाणित विशेषज्ञ से जोड़ेगा और आपकी आवश्यकताओं के अनुसार तुरंत पेशेवर समाधान प्राप्त करेगा।',
-
           'about_us_2':
               ' अपने फ़ोन नंबर का उपयोग करके साइन अप करने का बहुत आसान तरीका, अपना फ़ोन नंबर डालने के बाद आपको 6 अंकों का ओटीपी प्राप्त होगा। साइन अप करने के बाद आप सिर्फ एक क्लिक पर अपना अपॉइंटमेंट बुक कर सकते हैं।',
-
           'about_us_3':
               'मशवरा एक मानव देखभाल, परामर्श मंच और एक समाधान केंद्र है जो मेंटी को चिकित्सा, आध्यात्मिक, धार्मिक, कॉर्पोरेट, वित्तीय, भौतिक, सामाजिक, शिक्षाविदों, करियर, कानूनी, सांस्कृतिक, यात्रा और किसी के बारे में जीवन के हर क्षेत्र के विशेषज्ञों को बुक करने की अनुमति देता है। समाधान प्रावधान के लिए पेशेवरों के साथ 24/7 विश्वसनीय और सुरक्षित वर्चुअल कनेक्टिविटी का उपयोग करते हुए, परामर्श आवश्यकता से संबंधित जानकारी प्रदान करते हुए सेकंड में दुनिया भर के अन्य विशेषज्ञ / सलाहकार / विशेषज्ञ / आका। आसान और उपयोगकर्ता के अनुकूल भुगतान विधियों का उपयोग किया जाता है।',
           'for_book_an_appointment': 'अपॉइंटमेंट बुक करने के लिए',
@@ -2039,7 +1697,6 @@ class LanguagesChang extends Translations {
           'pay_now': 'अब भुगतान करें',
           'online_status': 'ऑनलाइन स्थिति',
           'offline_status': 'ऑफलाइन स्थिति',
-          'terms_and_conditions': 'नियम व शर्त',
           'enter_last_6_digits': 'अपने सीएनआईसी के अंतिम 6-अंक दर्ज करें',
           'enter_amount': 'राशि डालें',
           'sign_up_as_consultant': 'सलाहकार के रूप में साइन अप करें',

@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
@@ -867,7 +867,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                           }
                         },
                         child: MyCustomBottomBar(
-                          title: LanguageConstant.Continue.tr,
+                          title: LanguageConstant.continueText.tr,
                           disable: disableButton!,
                         ),
                       ),
@@ -908,8 +908,6 @@ class _SlotSelectionState extends State<SlotSelection> {
             true,
             getScheduleSlotsRepo);
         Get.find<BookAppointmentLogic>().update();
-        // log('MentorID--->>${Get.find<GeneralController>().selectedMentor.userId}');
-        log('SelectedDate--->>${Get.find<BookAppointmentLogic>().selectedDateForAppointment.substring(0, 11)}');
       }
     });
   }

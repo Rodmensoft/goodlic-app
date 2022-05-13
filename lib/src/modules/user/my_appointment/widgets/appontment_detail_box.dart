@@ -1,11 +1,9 @@
-import 'dart:developer';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -127,7 +125,6 @@ class AppointmentDetailBox extends StatelessWidget {
                               itemBuilder: (context, _) => SvgPicture.asset(
                                   'assets/Icons/ratingStarIcon.svg'),
                               onRatingUpdate: (rating) {
-                                log('Rating--->>$rating');
                               },
                             ),
                           ],

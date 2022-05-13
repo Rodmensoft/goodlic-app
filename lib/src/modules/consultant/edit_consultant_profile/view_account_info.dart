@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -25,7 +23,6 @@ class _AccountInfoViewState extends State<AccountInfoView> {
   final state = Get.find<EditConsultantProfileLogic>().state;
 
   final GlobalKey<FormState> _accountInfoFormKey = GlobalKey();
-
 
   @override
   void initState() {
@@ -117,7 +114,6 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                               );
                             }).toList(),
                             onChanged: (String? value) {
-                              log(value.toString());
                               setState(() {
                                 _editConsultantProfileLogic.selectedBank =
                                     value;

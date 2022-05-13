@@ -1,5 +1,4 @@
 
-import 'dart:developer';
 
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -11,7 +10,6 @@ import 'package:get/get.dart';
 changeMentorOnlineStatusRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    // Get.find<GeneralController>().updateFormLoaderController(false);
     if (response['Status'].toString() == 'true') {
       getMethod(
           context,
@@ -22,19 +20,13 @@ changeMentorOnlineStatusRepo(
           },
           true,
           getUserProfileRepo);
-      log('changeMentorOnlineStatusRepo ------>> ${response['Status'].toString()}');
     } else {}
-  } else if (!responseCheck) {
-    // Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
-  }
+  } else if (!responseCheck) {}
 }
 
 goLiveRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    // Get.find<GeneralController>().updateFormLoaderController(false);
     if (response['Status'].toString() == 'true') {
       getMethod(
           context,
@@ -45,20 +37,17 @@ goLiveRepo(
           },
           true,
           getUserProfileRepo);
-      log('goLiveRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
+
 inActiveLiveRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    // Get.find<GeneralController>().updateFormLoaderController(false);
     if (response['Status'].toString() == 'true') {
       getMethod(
           context,
@@ -69,28 +58,18 @@ inActiveLiveRepo(
           },
           true,
           getUserProfileRepo);
-      log('logout ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
 logOutRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    // Get.find<GeneralController>().updateFormLoaderController(false);
     if (response['Status'].toString() == 'true') {
-
-
     } else {}
-  } else if (!responseCheck) {
-    // Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
-  }
+  } else if (!responseCheck) {}
 }

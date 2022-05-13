@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -12,8 +12,6 @@ createRatingRepo(
   if (responseCheck) {
     if (response['Status'].toString() == 'true') {
       Get.find<GeneralController>().updateFormLoaderController(false);
-      // Get.offAllNamed(PageRoutes.bookingConfirmation);
-      log('easyPaisaPaymentRepo ------>> ${response['Status'].toString()}');
       showDialog(
           context: context,
           barrierDismissible: false,

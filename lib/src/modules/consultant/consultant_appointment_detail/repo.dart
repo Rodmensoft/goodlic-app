@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -51,13 +49,11 @@ mentorCompleteAppointmentRepo(
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar(LanguageConstant.appointmentCompletedSuccessfully.tr, '',
           colorText: Colors.black, backgroundColor: Colors.white);
-      log('mentorChangeAppointmentStatusRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-    log('Exception........................');
   }
 }
 
@@ -101,13 +97,11 @@ mentorAcceptAppointmentRepo(
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar(LanguageConstant.appointmentAcceptedSuccessfully.tr, '',
           colorText: Colors.black, backgroundColor: Colors.white);
-      log('mentorChangeAppointmentStatusRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-    log('Exception........................');
   }
 }
 
@@ -150,12 +144,10 @@ mentorRejectAppointmentRepo(
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.snackbar(LanguageConstant.appointmentRejectedSuccessfully.tr, '',
           colorText: Colors.black, backgroundColor: Colors.white);
-      log('mentorChangeAppointmentStatusRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-    log('Exception........................');
   }
 }

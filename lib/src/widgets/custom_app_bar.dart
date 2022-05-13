@@ -50,7 +50,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ],
                 )),
-            actions: [],
+            actions: const [],
           )
         : AppBar(
             elevation: 0,
@@ -70,7 +70,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ],
                 )),
-            actions: [],
+            actions: const [],
           );
   }
 }

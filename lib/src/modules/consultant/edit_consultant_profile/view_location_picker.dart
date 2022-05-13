@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/place_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
-
 
 class PlacesAutoComplete extends StatefulWidget {
   const PlacesAutoComplete({Key? key, this.title}) : super(key: key);
@@ -19,10 +16,6 @@ class PlacesAutoComplete extends StatefulWidget {
 
 class _PlacesAutoCompleteState extends State<PlacesAutoComplete> {
   final _controller = TextEditingController();
-  String _streetNumber = '';
-  String _street = '';
-  String _city = '';
-  String _zipCode = '';
 
   @override
   void dispose() {
@@ -30,10 +23,7 @@ class _PlacesAutoCompleteState extends State<PlacesAutoComplete> {
     super.dispose();
   }
 
-  saveData({String? latLong, String? place}) async {
-    // var data = await json.decode(instance.getString('latlong'));
-    log("LatLong--->>> $latLong");
-  }
+  saveData({String? latLong, String? place}) async {}
 
   @override
   Widget build(BuildContext context) {
@@ -57,15 +47,11 @@ class _PlacesAutoCompleteState extends State<PlacesAutoComplete> {
               controller: _controller,
               readOnly: true,
               onTap: () async {
-                // generate a new token here
-                final sessionToken = Uuid().v4();
+                final sessionToken = const Uuid().v4();
                 final Suggestion? result = await showSearch(
                   context: context,
                   delegate: AddressSearch(sessionToken),
                 );
-
-                log('RESULT---->>>${result!.description.toString().split(', ')[2]}');
-                // This will change the text displayed in the TextField
                 if (result != null) {
                   final placeDetails = await PlaceApiProvider(sessionToken)
                       .getPlaceDetailFromId(result.placeId);
@@ -77,15 +63,7 @@ class _PlacesAutoCompleteState extends State<PlacesAutoComplete> {
                       }),
                       place: result.description);
 
-                  // latlong.value =
-                  //     await json.decode(await datastore.read("latlong"));
-                  // print("the lat long is ${latlong.value}");
-                  // print(latlong.value['lat']);
-
-                  setState(() {
-                    // datastore.write("placename", result.description);
-                    // datastore.write("latlong", json.encode(placeDetails));
-                  });
+                  setState(() {});
                 }
               },
               decoration: const InputDecoration(
@@ -102,11 +80,6 @@ class _PlacesAutoCompleteState extends State<PlacesAutoComplete> {
                 contentPadding: EdgeInsets.only(left: 8.0, top: 16.0),
               ),
             ),
-            // SizedBox(height: 20.0),
-            // Text('Street Number: $_streetNumber'),
-            // Text('Street: $_street'),
-            // Text('City: $_city'),
-            // Text('Postal Code: $_zipCode'),
           ],
         ),
       ),
@@ -142,7 +115,6 @@ class AddressSearch extends SearchDelegate<Suggestion> {
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
         Get.back();
-        // close(context, Suggestion());
       },
     );
   }
@@ -158,38 +130,38 @@ class AddressSearch extends SearchDelegate<Suggestion> {
       future: query == ""
           ? null
           : apiClient!.fetchSuggestions(
-          query, Localizations.localeOf(context).languageCode),
+              query, Localizations.localeOf(context).languageCode),
       builder: (context, AsyncSnapshot<List<Suggestion>> snapshot) =>
-      query == ''
-          ? Container(
-        padding: const EdgeInsets.all(16.0),
-        child: const Text('Enter your address'),
-      )
-          : snapshot.hasData
-          ? ListView.builder(
-        itemBuilder: (context, index) => Container(
-          margin: const EdgeInsets.symmetric(
-              vertical: 10, horizontal: 10),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    offset: const Offset(0, 10),
-                    blurRadius: 10,
-                    spreadRadius: 3),
-              ]),
-          child: ListTile(
-            title: Text(snapshot.data![index].description),
-            onTap: () {
-              close(context, snapshot.data![index]);
-            },
-          ),
-        ),
-        itemCount: snapshot.data!.length,
-      )
-          : const SizedBox(child: Text('Loading...')),
+          query == ''
+              ? Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: const Text('Enter your address'),
+                )
+              : snapshot.hasData
+                  ? ListView.builder(
+                      itemBuilder: (context, index) => Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  offset: const Offset(0, 10),
+                                  blurRadius: 10,
+                                  spreadRadius: 3),
+                            ]),
+                        child: ListTile(
+                          title: Text(snapshot.data![index].description),
+                          onTap: () {
+                            close(context, snapshot.data![index]);
+                          },
+                        ),
+                      ),
+                      itemCount: snapshot.data!.length,
+                    )
+                  : const SizedBox(child: Text('Loading...')),
     );
   }
 }

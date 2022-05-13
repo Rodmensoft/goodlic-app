@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';

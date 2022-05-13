@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/get_mentor_profile_for_mentee_model.dart';
@@ -43,7 +43,6 @@ getConsultantProfileRepo(
     Get.find<ConsultantProfileLogic>().updateConsultantProfileLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
 
-    log('Exception........................');
   }
 }
 
@@ -56,13 +55,11 @@ getMentorProfileForMenteeRepo(
         true) {
 
       Get.find<ConsultantProfileLogic>().updateLoaderForViewProfile(false);
-      log('getMentorProfileForMenteeRepo ------>> ${Get.find<ConsultantProfileLogic>().getMentorProfileForMenteeModel.success}');
     } else {
       Get.find<ConsultantProfileLogic>().updateLoaderForViewProfile(false);
     }
   } else if (!responseCheck) {
     Get.find<ConsultantProfileLogic>().updateLoaderForViewProfile(false);
 
-    log('Exception........................');
   }
 }

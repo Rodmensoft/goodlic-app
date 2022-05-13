@@ -92,7 +92,7 @@ class MentorSchedulesFullModel {
       int? isActive, 
       String? createdAt, 
       String? updatedAt, 
-      List<Schedule_slots>? scheduleSlots,}){
+      List<ScheduleSlots>? scheduleSlots,}){
     _id = id;
     _mentorId = mentorId;
     _appointmentTypeId = appointmentTypeId;
@@ -118,7 +118,7 @@ class MentorSchedulesFullModel {
     if (json['schedule_slots'] != null) {
       _scheduleSlots = [];
       json['schedule_slots'].forEach((v) {
-        _scheduleSlots?.add(Schedule_slots.fromJson(v));
+        _scheduleSlots?.add(ScheduleSlots.fromJson(v));
       });
     }
   }
@@ -131,7 +131,7 @@ class MentorSchedulesFullModel {
   int? _isActive;
   String? _createdAt;
   String? _updatedAt;
-  List<Schedule_slots>? _scheduleSlots;
+  List<ScheduleSlots>? _scheduleSlots;
 
   int? get id => _id;
   int? get mentorId => _mentorId;
@@ -142,7 +142,7 @@ class MentorSchedulesFullModel {
   int? get isActive => _isActive;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
-  List<Schedule_slots>? get scheduleSlots => _scheduleSlots;
+  List<ScheduleSlots>? get scheduleSlots => _scheduleSlots;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -163,8 +163,8 @@ class MentorSchedulesFullModel {
 
 }
 
-class Schedule_slots {
-  Schedule_slots({
+class ScheduleSlots {
+  ScheduleSlots({
       int? id, 
       int? scheduleId, 
       String? startTime, 
@@ -181,7 +181,7 @@ class Schedule_slots {
     _shiftId = shiftId;
 }
 
-  Schedule_slots.fromJson(dynamic json) {
+  ScheduleSlots.fromJson(dynamic json) {
     _id = json['id'];
     _scheduleId = json['schedule_id'];
     _startTime = json['start_time'];

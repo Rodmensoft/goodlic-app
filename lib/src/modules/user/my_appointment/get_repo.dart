@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/logic.dart';
@@ -31,7 +31,6 @@ getUserAllAppointmentsRepo(
     Get.find<MyAppointmentLogic>().updateGetUserAppointmentLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
 
-    log('Exception........................');
   }
 }
 
@@ -226,6 +225,5 @@ getUserAllAppointmentsMoreRepo(
     Get.find<MyAppointmentLogic>().updateGetUserAppointmentMoreLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
 
-    log('Exception........................');
   }
 }

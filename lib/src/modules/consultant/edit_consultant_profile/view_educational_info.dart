@@ -184,7 +184,6 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                     );
                                   }).toList(),
                                   onChanged: (String? value) {
-                                    log(value.toString());
                                     setState(() {
                                       _editConsultantProfileLogic
                                           .selectedDegree = value;
@@ -295,13 +294,11 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                         .selectedYear =
                                                     DateFormat('yyyy')
                                                         .format(dateTime);
-                                                log('YEAR--->>${_editConsultantProfileLogic.selectedYear}');
                                                 _yearController =
                                                     TextEditingController(
                                                         text:
                                                             _editConsultantProfileLogic
                                                                 .selectedYear);
-                                                log('YEAR--->>${_yearController.text}');
                                               });
                                               // close the dialog when year is selected.
                                               Navigator.pop(context);
@@ -744,11 +741,10 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                         imageQuality: 10,
                         maxWidth: 400,
                         maxHeight: 600));
-                    if (degreeImagesList != null) {
+                    if (degreeImagesList.isNotEmpty) {
                       setState(() {
                         degreeImage = File(degreeImagesList[0].path);
                       });
-                      log(degreeImagesList[0].path);
                     }
                   },
                   child: Text(
@@ -773,11 +769,10 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                         imageQuality: 10,
                         maxWidth: 400,
                         maxHeight: 600));
-                    if (degreeImagesList != null) {
+                    if (degreeImagesList.isNotEmpty) {
                       setState(() {
                         degreeImage = File(degreeImagesList[0].path);
                       });
-                      log(degreeImagesList[0].path);
                     }
                   },
                   child: Text(
@@ -810,12 +805,8 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
         'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
     dio_instance.Response response;
     try {
-      log('postData--->> ${formData.fields}');
-
       response = await dio.post(mentorEducationalInfoPostUrl, data: formData);
 
-      log('StatusCode------>> ${response.statusCode}');
-      log('Response $mentorEducationalInfoPostUrl------>> ${response.data}');
       if (response.statusCode == 200) {
         Get.find<EditConsultantProfileLogic>().educationInfoPostModel =
             EducationInfoPostModel.fromJson(response.data);
@@ -839,7 +830,6 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
             Get.find<EditConsultantProfileLogic>().selectedDegree = null;
             degreeImage = null;
           });
-          log('mentorEducationInfoRepo ------>> ${Get.find<EditConsultantProfileLogic>().educationInfoPostModel.success}');
         } else {
           Get.find<GeneralController>().updateFormLoaderController(false);
           showDialog(
@@ -893,7 +883,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
               img: 'assets/Icons/dialog_error.svg',
             );
           });
-      log('ResponseError $mentorEducationalInfoPostUrl-->> ${e}');
+      log('ResponseError $mentorEducationalInfoPostUrl-->> $e');
     }
   }
 }

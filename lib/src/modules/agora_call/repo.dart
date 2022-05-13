@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -18,7 +16,6 @@ getAgoraTokenRepo(
     if (Get.find<GeneralController>().getAgoraTokenModel.status == true) {
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.find<GeneralController>().updateCallerType(1);
-      log('getAgoraTokenRepo ------>> ${Get.find<GeneralController>().getAgoraTokenModel.success}');
       if (Get.find<GeneralController>().goForCall!) {
         Get.find<GeneralController>().updateTokenForCall(
             Get.find<GeneralController>().getAgoraTokenModel.data!.token);
@@ -30,7 +27,8 @@ getAgoraTokenRepo(
             '/videoCall',
             '/appointment-detail/${Get.find<GeneralController>().appointmentIdForSendNotification}'
                 '?auth_tocken=${Get.find<GeneralController>().getAgoraTokenModel.data!.token}'
-                '&channel_name=${Get.find<GeneralController>().channelForCall}','ring_ring');
+                '&channel_name=${Get.find<GeneralController>().channelForCall}',
+            'ring_ring');
         getMethod(
             context,
             fcmGetUrl,
@@ -48,10 +46,9 @@ getAgoraTokenRepo(
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
+
 getAgoraTokenForAudioRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
@@ -60,7 +57,6 @@ getAgoraTokenForAudioRepo(
     if (Get.find<GeneralController>().getAgoraTokenModel.status == true) {
       Get.find<GeneralController>().updateFormLoaderController(false);
       Get.find<GeneralController>().updateCallerType(1);
-      log('getAgoraTokenForAudioRepo ------>> ${Get.find<GeneralController>().getAgoraTokenModel.success}');
       if (Get.find<GeneralController>().goForCall!) {
         Get.find<GeneralController>().updateTokenForCall(
             Get.find<GeneralController>().getAgoraTokenModel.data!.token);
@@ -72,7 +68,8 @@ getAgoraTokenForAudioRepo(
             '/audioCall',
             '/appointment-detail/${Get.find<GeneralController>().appointmentIdForSendNotification}'
                 '?auth_tocken=${Get.find<GeneralController>().getAgoraTokenModel.data!.token}'
-                '&channel_name=${Get.find<GeneralController>().channelForCall}','ring_ring');
+                '&channel_name=${Get.find<GeneralController>().channelForCall}',
+            'ring_ring');
         getMethod(
             context,
             fcmGetUrl,
@@ -90,21 +87,15 @@ getAgoraTokenForAudioRepo(
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
 updateFcmTokenRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    if (response['Status'].toString() == 'true') {
-      log('<<----FCM UPDATED SUCCESSFULLY---->>');
-    }
+    if (response['Status'].toString() == 'true') {}
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -114,10 +105,8 @@ getFcmTokenRepo(
     Get.find<GeneralController>().getFcmTokenModel =
         GetFcmTokenModel.fromJson(response);
     if (Get.find<GeneralController>().getFcmTokenModel.status == true) {
-      for (var element in Get.find<GeneralController>()
-          .getFcmTokenModel
-          .data!
-          .tokens!) {
+      for (var element
+          in Get.find<GeneralController>().getFcmTokenModel.data!.tokens!) {
         postMethod(
             context,
             fcmService,
@@ -141,18 +130,13 @@ getFcmTokenRepo(
             false,
             method1);
       }
-    } else {
-      log('----->>else');
-    }
+    } else {}
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
 method1(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
-  log('---->>> NotificationResponse $response');
   if (response['success'].toString() == '1') {}
 }

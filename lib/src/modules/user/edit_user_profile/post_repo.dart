@@ -45,7 +45,6 @@ menteeUpdateProfileRepo(
             );
           });
       Get.find<GeneralController>().updateFormLoaderController(false);
-      log('menteeUpdateProfileRepo ------>> ${response['Status'].toString()}');
     } else {
       showDialog(
           context: Get.context!,
@@ -81,8 +80,6 @@ menteeUpdateProfileRepo(
           );
         });
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -111,12 +108,8 @@ menteeUpdateProfileImageRepo(File? file1) async {
       'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
   dio_instance.Response response;
   try {
-    log('postData--->> ${formData.fields}');
-
     response = await dio.post(updateMenteeProfileUrl, data: formData);
 
-    log('StatusCode------>> ${response.statusCode}');
-    log('Response $updateMenteeProfileUrl------>> ${response.data}');
     if (response.statusCode == 200) {
       if (response.data['Status'].toString() == 'true') {
         getMethod(
@@ -145,7 +138,6 @@ menteeUpdateProfileImageRepo(File? file1) async {
               );
             });
         Get.find<GeneralController>().updateFormLoaderController(false);
-        log('menteeUpdateProfileImageRepo ------>> ${response.statusCode}');
       } else {
         showDialog(
             context: Get.context!,
@@ -163,7 +155,6 @@ menteeUpdateProfileImageRepo(File? file1) async {
               );
             });
         Get.find<GeneralController>().updateFormLoaderController(false);
-        log('menteeUpdateProfileImageRepo ------>> ${response.statusCode}');
       }
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
@@ -204,7 +195,6 @@ menteeUpdateProfileImageRepo(File? file1) async {
   }
 }
 
-
 getProfileVisibilityRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
@@ -212,7 +202,6 @@ getProfileVisibilityRepo(
       Get.find<EditUserProfileLogic>().updateProfileHiddenSwitch(
           Get.find<EditUserProfileLogic>().profileHiddenSwitch);
       Get.find<GeneralController>().updateFormLoaderController(false);
-      log('getProfileVisibilityRepo------>> ${Get.find<EditUserProfileLogic>().citiesByIdModel.success}');
     } else {
       Get.find<EditUserProfileLogic>().updateProfileHiddenSwitch(
           !Get.find<EditUserProfileLogic>().profileHiddenSwitch!);
@@ -220,7 +209,5 @@ getProfileVisibilityRepo(
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }

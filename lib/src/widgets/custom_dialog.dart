@@ -6,7 +6,7 @@ class CustomDialogBox extends StatefulWidget {
   final String? title, descriptions, text;
   final String? img;
   final Color? titleColor;
-  final functionCall;
+  final Function? functionCall;
 
   const CustomDialogBox(
       {Key? key,
@@ -73,7 +73,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
               Text(
                 widget.descriptions!,
                 style:
-                TextStyle(fontSize: 14, color: const Color(0xff3E3E3E)),
+                const TextStyle(fontSize: 14, color: Color(0xff3E3E3E)),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -82,7 +82,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
               Align(
                   alignment: Alignment.bottomCenter,
                   child: InkWell(
-                    onTap: () => widget.functionCall(),
+                    onTap: () => widget.functionCall!(),
                     child: Container(
                       height: 47,
                       width: MediaQuery.of(context).size.width * .5,

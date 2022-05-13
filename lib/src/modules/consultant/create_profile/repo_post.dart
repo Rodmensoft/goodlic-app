@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -32,7 +30,6 @@ mentorGeneralInfo2Repo(
       Get.snackbar('${LanguageConstant.profileUpdatedSuccessfully.tr}!', '',
           colorText: Colors.black, backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
-      log('mentorGeneralInfoRepo ------>> ${Get.find<CreateProfileLogic>().generalInfoPostModel.success}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
       showDialog(
@@ -77,27 +74,14 @@ mentorSkillInfoRepo(
     Get.find<CreateProfileLogic>().skillInfoPostModel =
         SkillInfoPostModel.fromJson(response);
     if (Get.find<CreateProfileLogic>().skillInfoPostModel.status == true) {
-      // Get.find<MentorProfileLogic>()
-      //     .stepperList[Get.find<MentorProfileLogic>().stepperIndex!]
-      //     .isSelected = false;
-      // Get.find<MentorProfileLogic>()
-      //     .stepperList[Get.find<MentorProfileLogic>().stepperIndex!]
-      //     .isCompleted = true;
-      // Get.find<MentorProfileLogic>()
-      //     .stepperList[Get.find<MentorProfileLogic>().stepperIndex! + 1]
-      //     .isSelected = true;
-      // Get.find<MentorProfileLogic>().updateStepperIndex(4);
       Get.snackbar('${LanguageConstant.skillAddedSuccessfully.tr}!', '',
           colorText: Colors.black, backgroundColor: Colors.white);
       Get.find<GeneralController>().updateFormLoaderController(false);
-      log('mentorSkillInfoRepo ------>> ${Get.find<CreateProfileLogic>().skillInfoPostModel.success}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -122,14 +106,11 @@ mentorAccountInfoRepo(
           },
           true,
           mentorProfileStatusChangeRepo);
-      log('mentorAccountInfoRepo ------>> ${Get.find<CreateProfileLogic>().accountInfoPostModel.success}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -139,33 +120,11 @@ mentorProfileStatusChangeRepo(
     if (response['Status'].toString() == 'true') {
       Get.find<CreateProfileLogic>().showConfirmation = true;
       Get.find<CreateProfileLogic>().update();
-      // showDialog(
-      //     context: context,
-      //     barrierDismissible: false,
-      //     builder: (BuildContext context) {
-      //       return CustomDialogBox(
-      //         title: 'success!'.tr,
-      //         titleColor: customDialogSuccessColor,
-      //         descriptions: '${'profile_updated_successfully'.tr}',
-      //         text: 'ok'.tr,
-      //         functionCall: () {
-      //           Navigator.pop(context);
-      //           Get.find<GeneralController>()
-      //               .storageBox
-      //               .write('mentorProfile', 'completed');
-      //           Get.offAllNamed(PageRoutes.consultantDashboard);
-      //         },
-      //         img: 'assets/dialog_success.svg',
-      //       );
-      //     });
       Get.find<GeneralController>().updateFormLoaderController(false);
-      log('mentorProfileStatusChangeRepo ------>> ${response['Status'].toString()}');
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }

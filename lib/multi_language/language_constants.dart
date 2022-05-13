@@ -88,7 +88,6 @@ class LanguageConstant {
   static const String createNewPassword = 'create_new_password';
   static const String enterPassword = 'enter_password';
   static const String confirmPassword = 'confirm_password';
-  static const String ResetPassword = 'reset_password';
   static const String passwordCreated = 'password_created';
   static const String successfully = 'successfully';
   static const String chat = 'chat';
@@ -128,7 +127,6 @@ class LanguageConstant {
   static const String downloadInvoice = 'download_invoice';
   static const String document = 'document';
   static const String editYourProfile = 'edit_your_profile';
-  static const String success = 'success';
   static const String profileUpdatedSuccessfully =
       'profile_updated_successfully';
   static const String amountInWallet = 'amount_in_wallet';
@@ -177,12 +175,11 @@ class LanguageConstant {
   static const String topRatedConsultant = 'top_rated_consultant';
   static const String viewAll = 'view_all';
   static const String featuredConsultants = 'featured_consultants';
-  static const String Categories = 'categories';
   static const String searchHere = 'search_here';
   static const String privacyPolicy = 'privacy_policy';
   static const String youAreReceivingCallFrom =
       'you are receiving a call from ';
-  static const String Mentee = 'mentee';
+  static const String mentee = 'mentee';
   static const String mentor = 'mentor';
   static const String enterYourPhone = 'enter_your_phone';
   static const String phoneNumber = 'phone_number';
@@ -219,10 +216,10 @@ class LanguageConstant {
   static const String year = 'year';
   static const String degree = 'degree';
   static const String subject = 'subject';
-  static const String experince = 'experince';
+  static const String experience = 'experince';
   static const String company = 'company';
   static const String from = 'from';
-  static const String To = 'To';
+  static const String to = 'To';
   static const String speciality = 'speciality';
   static const String category = 'category';
   static const String subCategory = 'sub_category';
@@ -237,7 +234,7 @@ class LanguageConstant {
   static const String fieldRequired = 'field_required';
   static const String youWillBeCharge = 'you_will_be_charge';
   static const String selectPaymentMethod = 'select_payment_method';
-  static const String Continue = 'continue';
+  static const String continueText = 'continue';
   static const String enterJazzCashDetails = 'enter_jazzCash_details';
   static const String cnic = 'cnic';
   static const String jazzCashNumber = 'jazzCash_number';
@@ -246,7 +243,7 @@ class LanguageConstant {
   static const String appointmentDetail = 'appointment_detail';
   static const String menteeInfo = 'mentee_info';
   static const String file = 'file';
-  static const String femayourQuestionle = 'your_question';
+  static const String yourQuestion = 'your_question';
   static const String mySchedule = 'my_schedule';
   static const String editProfile = 'edit_profile';
   static const String goodMorning = 'good_morning';
@@ -263,7 +260,7 @@ class LanguageConstant {
   static const String time = 'time';
   static const String pStatus = 'p_status';
   static const String action = 'action';
-  static const String UnPaid = 'Un_paid';
+  static const String unPaid = 'Un_paid';
   static const String paid = 'paid';
   static const String appointmentLog = 'appointment_log';
   static const String all = 'all';
@@ -308,7 +305,7 @@ class LanguageConstant {
   static const String educational = 'educational';
   static const String imageHere = 'image_here';
   static const String addEducation = 'add_education';
-  static const String experinceInfo = 'experince_info';
+  static const String experienceInfo = 'experience_info';
   static const String skillInfo = 'skill_info';
   static const String accountInfo = 'account_info';
   static const String department = 'department';
@@ -326,7 +323,8 @@ class LanguageConstant {
   static const String uploadFile = 'upload_file';
   static const String thank = 'thank';
   static const String you = 'you';
-  static const String forSignUpWithMashvraAnd = 'for_sign_up_with_mashvra_and';
+
+  // static const String forSignUpWithMashvraAnd = 'for_sign_up_with_mashvra_and';
   static const String usingOurServices = 'using_our_services';
   static const String viewAppointments = 'view_appointments';
   static const String mentorInfo = 'mentor_info';
@@ -334,12 +332,11 @@ class LanguageConstant {
   static const String cancelled = 'cancelled';
   static const String completed = 'completed';
   static const String failed = 'failed';
-  static const String Success = 'success!';
+  static const String success = 'success!';
   static const String tryAgain = 'try_again';
   static const String answerQuestion = 'answer_question';
   static const String ok = 'ok';
   static const String remove = 'remove';
-  static const String OrLoginWith = 'or_login_with';
   static const String resendOTPCode = 'resend_OTP_code';
   static const String enterOTPCodeBelow = 'enter_OTP_code_below';
   static const String yourProfileIsUnder = 'your_profile_is_under';
@@ -357,7 +354,6 @@ class LanguageConstant {
   static const String addExperience = 'add_experience';
   static const String accept = 'accept';
   static const String reject = 'reject';
-  static const String yourQuestion = 'your_question';
   static const String markAsComplete = 'mark_as_complete';
   static const String completeYourProfile = 'complete_your_profile';
   static const String addSkill = 'add_skill';
@@ -397,23 +393,22 @@ class LanguageConstant {
   static const String transactionLog = 'transaction_log';
   static const String goForWithdraw = 'go_for_withdraw';
   static const String cancel = 'cancel';
-  static const String New = 'new';
+  static const String newText = 'new';
   static const String add = 'add';
   static const String withdrawRequest = 'withdraw_request';
   static const String youDoNotHaveSufficientBalance =
       'you_do_not_have_sufficient_balance';
   static const String location = 'location';
   static const String pleaseTurnOnYourLocation = 'please_turn_on_your_location';
-  static const String Online = 'Online';
-  static const String Subject = 'subject';
+  static const String online = 'Online';
   static const String
-      MashvraWillConnectYouWithTheBestCertifiedSpecialistAndGetProfessionaLSolutionsAccordingToYourNeedsRightAwayWithTheLargeNetworkOfConsultantsAcrossTheWorld =
+      mashvraWillConnectYouWithTheBestCertifiedSpecialistAndGetProfessionaLSolutionsAccordingToYourNeedsRightAwayWithTheLargeNetworkOfConsultantsAcrossTheWorld =
       'Mashvra will connect you with the best certified specialist and get professional solutions according to your needs right-away, with the large network of Consultants across the world. ';
   static const String
-      VeryEasyWayToSignUpByUsingYourPhoneNumberAfterPuttingYourPhoneNumberYouWillReceiveA6DigitOTPAfterSigningUpYouCanBookYourAppointmentOnJustASingleClick =
+      veryEasyWayToSignUpByUsingYourPhoneNumberAfterPuttingYourPhoneNumberYouWillReceiveA6DigitOTPAfterSigningUpYouCanBookYourAppointmentOnJustASingleClick =
       'Very easy way to sign up by using your phone number, after putting your phone number you will receive a 6-digit OTP. After signing up you can book your appointment on just a single click.';
   static const String
-      MashvraIsAHumanCareConsultingPlatformAndASolutionHubThatAllowsMenteeToBookTheExpertsOfEveryFieldOfLifeRegardingMedicalSpiritualReligiousCorporateFinancialPhycologicalSocialEducationistsCareerLegalCulturalTravelAndAnyOtherExpertsConsultantsSpecialistsConsultantsAroundTheWorldInSecondsWhileProvidingInformationRelatedToTheConsultancyRequirementUsingReliableAndSecureVirtualConnectivityWithTheProfessionalsForSolutionProvisionEasyAndUserFriendlyPaymentMethodsAreUsed =
+      mashvraIsAHumanCareConsultingPlatformAndASolutionHubThatAllowsMenteeToBookTheExpertsOfEveryFieldOfLifeRegardingMedicalSpiritualReligiousCorporateFinancialPhycologicalSocialEducationistsCareerLegalCulturalTravelAndAnyOtherExpertsConsultantsSpecialistsConsultantsAroundTheWorldInSecondsWhileProvidingInformationRelatedToTheConsultancyRequirementUsingReliableAndSecureVirtualConnectivityWithTheProfessionalsForSolutionProvisionEasyAndUserFriendlyPaymentMethodsAreUsed =
       'Mashvra is a human care, consulting platform and a solution hub that allows mentee to book the experts '
       'of every field of life regarding medical, spiritual, religious, corporate, financial, Phycological, social, educationists, career, legal, cultural, travel and any other experts/ consultants/specialists/Consultants around the world in seconds while providing information related to the consultancy requirement, using reliable and secure virtual connectivity 24/7 with the professionals for solution provision. Easy and user-friendly payment methods are used.';
   static const String forBookAnAppointment = 'for_book_an_appointment';

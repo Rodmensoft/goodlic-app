@@ -1,8 +1,6 @@
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/reset_password/repo.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';

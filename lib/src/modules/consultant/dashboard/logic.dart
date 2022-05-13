@@ -1,6 +1,5 @@
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/model_get_consultant_appointment.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/get_ratings_model.dart';
-import 'package:consultant_product/src/modules/consultant/dashboard/model_all_appointment.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/model_approval_check.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/model_get_appointment_count_mentor.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/model_get_today_appointment.dart';

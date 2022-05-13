@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -19,8 +19,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
-import 'package:resize/resize.dart';
-
 import 'logic.dart';
 
 class EditUserProfilePage extends StatefulWidget {
@@ -467,7 +465,6 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            log(value.toString());
                                             _editUserProfileLogic
                                                 .selectedGender = value;
                                             _editUserProfileLogic.update();
@@ -579,7 +576,6 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                                   );
                                                 }).toList(),
                                                 onChanged: (String? value) {
-                                                  log(value.toString());
                                                   _editUserProfileLogic
                                                       .selectedCountry = value;
                                                   _editUserProfileLogic
@@ -711,7 +707,6 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                                   );
                                                 }).toList(),
                                                 onChanged: (String? value) {
-                                                  log(value.toString());
                                                   _editUserProfileLogic
                                                       .selectedCity = value;
                                                   _editUserProfileLogic
@@ -851,9 +846,6 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                               .profileImagesList[0]
                               .path);
                     });
-                    log(Get.find<EditUserProfileLogic>()
-                        .profileImagesList[0]
-                        .path);
                   },
                   child: Text(
                     LanguageConstant.camera.tr,
@@ -884,9 +876,6 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                               .profileImagesList[0]
                               .path);
                     });
-                    log(Get.find<EditUserProfileLogic>()
-                        .profileImagesList[0]
-                        .path);
                   },
                   child: Text(
                     LanguageConstant.gallery.tr,

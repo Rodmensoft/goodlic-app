@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
@@ -237,7 +237,6 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                                 SvgPicture.asset(
                                                     'assets/Icons/ratingStarIcon.svg'),
                                             onRatingUpdate: (rating) {
-                                              log('Rating--->>$rating');
                                             },
                                           ),
                                           SizedBox(

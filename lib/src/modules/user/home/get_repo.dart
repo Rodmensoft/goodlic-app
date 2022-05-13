@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/modules/user/home/model_featured.dart';
@@ -7,7 +5,6 @@ import 'package:consultant_product/src/modules/user/home/model_get_categories.da
 import 'package:consultant_product/src/modules/user/home/model_top_rated.dart';
 import 'package:consultant_product/src/modules/user/home/model_user_profile.dart';
 import 'package:consultant_product/src/utils/colors.dart';
-import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,8 +22,6 @@ getUserProfileRepo(
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -42,12 +37,11 @@ getFeaturedConsultantRepo(
       for (var element
           in Get.find<UserHomeLogic>().featuredConsultantModel.data!.mentors!) {
         Get.find<UserHomeLogic>().topConsultants.add(HomeStyling(
-              id: element.userId,
-              title: '${element.firstName ?? ''} ${element.lastName ?? ''}',
-              subTitle: element.category!.name,
-              image: element.imagePath,
-          gender: element.gender
-            ));
+            id: element.userId,
+            title: '${element.firstName ?? ''} ${element.lastName ?? ''}',
+            subTitle: element.category!.name,
+            image: element.imagePath,
+            gender: element.gender));
       }
       Get.find<UserHomeLogic>().updateFeaturedConsultantLoader(false);
       Get.find<GeneralController>().updateFormLoaderController(false);
@@ -58,8 +52,6 @@ getFeaturedConsultantRepo(
   } else if (!responseCheck) {
     Get.find<UserHomeLogic>().updateFeaturedConsultantLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -92,8 +84,6 @@ getCategoriesRepo(
   } else if (!responseCheck) {
     Get.find<UserHomeLogic>().updateCategoriesLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -125,8 +115,6 @@ getTopRatedConsultantRepo(
   } else if (!responseCheck) {
     Get.find<UserHomeLogic>().updateTopRatedLoader(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }
 
@@ -157,7 +145,5 @@ getTopRatedConsultantMoreRepo(
   } else if (!responseCheck) {
     Get.find<UserHomeLogic>().updateTopRatedLoaderMore(false);
     Get.find<GeneralController>().updateFormLoaderController(false);
-
-    log('Exception........................');
   }
 }

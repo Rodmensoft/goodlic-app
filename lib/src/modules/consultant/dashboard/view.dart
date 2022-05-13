@@ -1389,7 +1389,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                                       width: 5,
                                                                                                     ),
                                                                                                     Text(
-                                                                                                      LanguageConstant.UnPaid.tr,
+                                                                                                      LanguageConstant.unPaid.tr,
                                                                                                       style: state.appointmentListValueTextStyle,
                                                                                                     ),
                                                                                                   ],

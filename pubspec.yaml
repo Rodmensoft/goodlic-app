@@ -73,7 +73,6 @@ dependencies:
 
   geolocator: ^8.0.1
   geocoding: ^2.0.1
-  system_settings: ^2.0.0
   app_settings: ^4.0.4
   uuid: ^3.0.5
 

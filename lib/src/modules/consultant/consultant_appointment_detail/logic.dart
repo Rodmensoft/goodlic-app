@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -51,12 +49,6 @@ class ConsultantAppointmentDetailLogic extends GetxController {
   bool? showCallButton = false;
 
   Future<int> getDifference() async {
-    log('---TIME-1-->>${DateTime.now().toString().substring(11, 19)}');
-    log('---TIME-2-->>${intl.DateFormat.Hms().format(intl.DateFormat('h:mm a').parse('${selectedAppointmentData.time.toString().substring(0, 5)}'
-        '${selectedAppointmentData.time.toString().substring(5, 8).toUpperCase()}'))}');
-    log('---TIME-3-->>${intl.DateFormat.Hms().format(intl.DateFormat('h:mm a').parse('${selectedAppointmentData.endTime.toString().substring(0, 5)}'
-        '${selectedAppointmentData.endTime.toString().substring(5, 8).toUpperCase()}'))}');
-
     String time1 = DateTime.now().toString().substring(11, 19);
     String time2 = intl.DateFormat.Hms().format(intl.DateFormat('h:mm a').parse(
         '${selectedAppointmentData.time.toString().substring(0, 5)}'
@@ -65,10 +57,6 @@ class ConsultantAppointmentDetailLogic extends GetxController {
         '${selectedAppointmentData.endTime.toString().substring(0, 5)}'
         '${selectedAppointmentData.endTime.toString().substring(5, 8).toUpperCase()}'));
 
-    // log('24-hrs--->>${intl.DateFormat.Hms().format(intl.DateFormat('h:mm a')
-    //     .parse(
-    //     '${selectedAppointmentData.endTime.toString().substring(0, 5)}'
-    //         '${selectedAppointmentData.endTime.toString().substring(5, 8).toUpperCase()}'))}');
     intl.DateFormat dateFormat = intl.DateFormat("yyyy-MM-dd");
 
     var _date = dateFormat.format(DateTime.now());
@@ -77,13 +65,6 @@ class ConsultantAppointmentDetailLogic extends GetxController {
     DateTime b = DateTime.parse('${selectedAppointmentData.date} $time2');
     DateTime endDateTime =
         DateTime.parse('${selectedAppointmentData.date} $time3');
-
-    log('a $a');
-    log('b $b');
-    log('EndDateTime $endDateTime');
-    log('Comparison ${DateTime.now().isBefore(endDateTime)}');
-
-    log("Min ${b.difference(a).inMinutes}");
 
     if ((b.difference(a).inMinutes <= 2) &&
         DateTime.now().isBefore(endDateTime)) {
@@ -98,7 +79,8 @@ class ConsultantAppointmentDetailLogic extends GetxController {
   }
 
   chatOnTap(BuildContext context) {
-    Get.find<ChatLogic>().userName = '${selectedAppointmentData.mentee!.firstName} '
+    Get.find<ChatLogic>().userName =
+        '${selectedAppointmentData.mentee!.firstName} '
         '${selectedAppointmentData.mentee!.lastName}';
     Get.find<ChatLogic>().userEmail = selectedAppointmentData.mentee!.email;
     Get.find<ChatLogic>().userImage = selectedAppointmentData.mentee!.imagePath;
@@ -110,17 +92,17 @@ class ConsultantAppointmentDetailLogic extends GetxController {
     Get.toNamed(PageRoutes.chatScreen);
   }
 
-
   videoOnTap(BuildContext context) {
-    Get.find<AgoraLogic>().userName = '${selectedAppointmentData.mentee!.firstName} '
+    Get.find<AgoraLogic>().userName =
+        '${selectedAppointmentData.mentee!.firstName} '
         '${selectedAppointmentData.mentee!.lastName}';
-    Get.find<AgoraLogic>().userImage = selectedAppointmentData.mentee!.imagePath;
+    Get.find<AgoraLogic>().userImage =
+        selectedAppointmentData.mentee!.imagePath;
     Get.find<AgoraLogic>().update();
     Get.find<GeneralController>().updateSelectedChannel(
         Get.find<GeneralController>().getRandomString(10));
     Get.find<GeneralController>()
         .updateChannelForCall(Get.find<GeneralController>().selectedChannel);
-    log('----------->>> ${Get.find<GeneralController>().selectedChannel}');
     getMethod(
         context,
         agoraTokenUrl,
@@ -135,16 +117,16 @@ class ConsultantAppointmentDetailLogic extends GetxController {
   }
 
   audioOnTap(BuildContext context) {
-
-    Get.find<AgoraLogic>().userName = '${selectedAppointmentData.mentee!.firstName} '
+    Get.find<AgoraLogic>().userName =
+        '${selectedAppointmentData.mentee!.firstName} '
         '${selectedAppointmentData.mentee!.lastName}';
-    Get.find<AgoraLogic>().userImage = selectedAppointmentData.mentee!.imagePath;
+    Get.find<AgoraLogic>().userImage =
+        selectedAppointmentData.mentee!.imagePath;
     Get.find<AgoraLogic>().update();
     Get.find<GeneralController>().updateSelectedChannel(
         Get.find<GeneralController>().getRandomString(10));
     Get.find<GeneralController>()
         .updateChannelForCall(Get.find<GeneralController>().selectedChannel);
-    log('----------->>> ${Get.find<GeneralController>().selectedChannel}');
     getMethod(
         context,
         agoraTokenUrl,

@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:consultant_product/route_generator.dart';import 'package:consultant_product/src/api_services/get_service.dart';import 'package:consultant_product/src/api_services/urls.dart';import 'package:consultant_product/src/modules/user/all_consultants/get_repo.dart';import 'package:consultant_product/src/modules/user/home/logic.dart';import 'package:consultant_product/src/utils/colors.dart';import 'package:consultant_product/src/utils/constants.dart';import 'package:flutter/material.dart';import 'package:flutter_rating_bar/flutter_rating_bar.dart';import 'package:flutter_svg/flutter_svg.dart';import 'package:get/get.dart';import 'package:resize/resize.dart';
 import '../logic.dart';
 class ConsultantGridView extends StatefulWidget {
@@ -157,7 +157,6 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
 																		SvgPicture.asset(
 																				'assets/Icons/ratingStarIcon.svg'),
 																onRatingUpdate: (rating) {
-																	log('Rating--->>$rating');
 																},
 															),
 															SizedBox(height: 16.h),

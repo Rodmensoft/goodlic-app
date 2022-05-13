@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -29,7 +27,6 @@ loginWithEmailRepo(
 
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.offAllNamed(PageRoutes.userHome);
-        log('loginRepoMentee ------>> ${Get.find<LoginLogic>().loginModel.data}');
       } else {
         Get.find<GeneralController>()
             .storageBox
@@ -37,7 +34,6 @@ loginWithEmailRepo(
 
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.offAllNamed(PageRoutes.consultantDashboard);
-        log('loginRepoMentor ------>> ${Get.find<LoginLogic>().loginModel.data}');
       }
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
@@ -72,6 +68,5 @@ loginWithEmailRepo(
             img: 'assets/Icons/dialog_error.svg',
           );
         });
-    log('Exception........................');
   }
 }

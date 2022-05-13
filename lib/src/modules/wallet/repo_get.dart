@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/src/modules/wallet/logic.dart';
 import 'package:consultant_product/src/modules/wallet/model_get_all_transaction.dart';
@@ -14,12 +14,9 @@ getWalletBalanceRepo(
     Get.find<WalletLogic>().updateGetWalletBalanceLoader(false);
 
     if (Get.find<WalletLogic>().getWalletBalanceModel.status == true) {
-      log('getWalletBalanceRepo ------>> ${Get.find<WalletLogic>().getWalletBalanceModel.success}');
     } else {}
   } else if (!responseCheck) {
     Get.find<WalletLogic>().updateGetWalletBalanceLoader(false);
-
-    log('Exception........................');
   }
 }
 getWalletTransactionRepo(
@@ -43,7 +40,6 @@ getWalletTransactionRepo(
       } else {
         Get.find<WalletLogic>().updateGetAllTransactionLoader(false);
       }
-      log('getWalletTransactionRepo ------>> ${Get.find<WalletLogic>().getAllTransactionModel.success}');
     } else {
       Get.find<WalletLogic>().updateGetAllTransactionLoader(false);
 
@@ -55,6 +51,5 @@ getWalletTransactionRepo(
 
     Get.find<WalletLogic>().updateGetAllTransactionLoader(false);
 
-    log('Exception........................');
   }
 }

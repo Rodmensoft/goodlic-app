@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -63,7 +61,7 @@ class CreateProfileLogic extends GetxController {
         isSelected: false,
         isCompleted: false),
     Stepper(
-        title: '${LanguageConstant.experince.tr}\n${LanguageConstant.info.tr}',
+        title: '${LanguageConstant.experience.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '03',
         isSelected: false,
         isCompleted: false),
@@ -202,11 +200,8 @@ class CreateProfileLogic extends GetxController {
   }
 
   saveData({String? latLong, String? place}) async {
-    var data = await json.decode(latLong!);
     addressController.text = place!;
     update();
-    log("LatLong--->>> $data");
-    log("LatLong Place--->>> $place");
   }
 
   ///-------------------------------education-tab

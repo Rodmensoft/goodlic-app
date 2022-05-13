@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
@@ -72,7 +72,6 @@ stripePaymentRepoForLater(
             getUserAllAppointmentsRepo);
         Get.back();
         Get.back();
-        log('bookAppointmentRepo ------>> ${Get.find<AppointmentDetailLogic>().modelStripePayment.original!.success}');
       } else {
         Get.find<AppointmentDetailLogic>().myWidth = 0;
         Get.find<AppointmentDetailLogic>().update();

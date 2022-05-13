@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'package:consultant_product/route_generator.dart';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
@@ -61,7 +59,6 @@ stripePaymentRepo(
                 img: 'assets/Icons/dialog_success.svg',
               );
             });
-        log('bookAppointmentRepo ------>> ${Get.find<WalletLogic>().modelStripePayment.original!.success}');
       } else {
         Get.find<WalletLogic>().myWidth = 0;
         Get.find<WalletLogic>().update();

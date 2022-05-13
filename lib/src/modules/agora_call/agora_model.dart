@@ -1,33 +1,21 @@
 class AgoraModel {
-  String? _channelName;
-  String? _token;
-
-  String? get channelName => _channelName;
-
-  String? get token => _token;
-
-  set channelName(String? name) {
-    _channelName = name;
-  }
-
-  set token(String? name) {
-    _token = name;
-  }
+  String? channelName;
+  String? token;
 
   AgoraModel({String? channelName, String? token}) {
-    _channelName = channelName;
-    _token = token;
+    channelName = channelName;
+    token = token;
   }
 
   AgoraModel.fromJson(dynamic json) {
-    _channelName = json["channel_name"];
-    _token = json["token"];
+    channelName = json["channel_name"];
+    token = json["token"];
   }
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
-    map["channel_name"] = _channelName;
-    map["token"] = _token;
+    map["channel_name"] = channelName;
+    map["token"] = token;
     return map;
   }
 }

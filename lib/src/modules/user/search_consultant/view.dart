@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
@@ -71,7 +71,6 @@ class _SearchConsultantPageState extends State<SearchConsultantPage> {
                     ),
                     onFieldSubmitted: (value) {
                       if (value.isNotEmpty) {
-                        log(value);
                         _searchConsultantLogic.updateSearchLoader(true);
                         getMethod(
                             context,
@@ -315,7 +314,6 @@ class _SearchConsultantPageState extends State<SearchConsultantPage> {
                                                                 'assets/Icons/ratingStarIcon.svg'),
                                                         onRatingUpdate:
                                                             (rating) {
-                                                          log('Rating--->>$rating');
                                                         },
                                                       ),
                                                       SizedBox(

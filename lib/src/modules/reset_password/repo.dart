@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
@@ -20,24 +20,6 @@ forgetPasswordRepo(
 
     if (Get.find<ResetPasswordLogic>().forgetPasswordModel.status == true) {
       Get.toNamed(PageRoutes.newPassword);
-      // showDialog(
-      //     context: context,
-      //     barrierDismissible: false,
-      //     builder: (BuildContext context) {
-      //       return CustomDialogBox(
-      //         title: 'success!'.tr,
-      //         titleColor: customDialogSuccessColor,
-      //         descriptions: 'mail_sent_successfully'.tr,
-      //         text: 'ok'.tr,
-      //         functionCall: () {
-      //           Navigator.pop(context);
-      //           Get.back();
-      //         },
-      //         img: 'assets/Icons/dialog_success.svg',
-      //       );
-      //     });
-      log('forgetPasswordRepo ------>> ${Get.find<ResetPasswordLogic>().forgetPasswordModel.msg}');
-      log('forgetPasswordRepo ------>> ${Get.find<ResetPasswordLogic>().forgetPasswordModel.success}');
     } else {
       showDialog(
           context: context,
@@ -71,6 +53,5 @@ forgetPasswordRepo(
             img: 'assets/Icons/dialog_error.svg',
           );
         });
-    log('Exception........................');
   }
 }

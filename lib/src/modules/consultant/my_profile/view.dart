@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -315,9 +313,7 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                     itemBuilder: (context, _) =>
                                         SvgPicture.asset(
                                             'assets/Icons/ratingStarIcon.svg'),
-                                    onRatingUpdate: (rating) {
-                                      log('Rating--->>$rating');
-                                    },
+                                    onRatingUpdate: (rating) {},
                                   ),
                                 ],
                               ),
@@ -783,9 +779,7 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                                   height: 4,
                                                 ),
                                                 Text(
-                                                  _generalController.getConsultantProfileModel.data!.userDetail!.userCountry == null
-                                                      ?'..'
-                                                      :'${_generalController.getConsultantProfileModel.data!.userDetail!.userCountry!.name}',
+                                                  '${_generalController.getConsultantProfileModel.data!.userDetail!.userCountry!.name}',
                                                   softWrap: true,
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -1169,7 +1163,7 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                       children: [
                                         Text(
                                           LanguageConstant
-                                              .experince.tr.capitalize!,
+                                              .experience.tr.capitalize!,
                                           style: state.sectionHeadingTextStyle,
                                         ),
                                         SizedBox(
@@ -1278,7 +1272,7 @@ class _ConsultantMyProfilePageState extends State<ConsultantMyProfilePage> {
                                                             children: [
                                                               Text(
                                                                 LanguageConstant
-                                                                    .To.tr,
+                                                                    .to.tr,
                                                                 style: state
                                                                     .previewLabelTextStyle,
                                                               ),

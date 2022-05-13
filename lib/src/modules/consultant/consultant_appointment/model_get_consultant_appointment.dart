@@ -413,7 +413,7 @@ class Mentee {
       String? createdAt, 
       String? updatedAt,
     MenteeInfo? mentee,
-    User_country? userCountry,}){
+    UserCountry? userCountry,}){
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -466,7 +466,7 @@ class Mentee {
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
     _mentee = json['mentee'] != null ? MenteeInfo.fromJson(json['mentee']) : null;
-    _userCountry = json['user_country'] != null ? User_country.fromJson(json['user_country']) : null;
+    _userCountry = json['user_country'] != null ? UserCountry.fromJson(json['user_country']) : null;
   }
   int? _id;
   String? _firstName;
@@ -492,7 +492,7 @@ class Mentee {
   String? _createdAt;
   String? _updatedAt;
   MenteeInfo? _mentee;
-  User_country? _userCountry;
+  UserCountry? _userCountry;
 
   int? get id => _id;
   String? get firstName => _firstName;
@@ -518,7 +518,7 @@ class Mentee {
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
   MenteeInfo? get mentee => _mentee;
-  User_country? get userCountry => _userCountry;
+  UserCountry? get userCountry => _userCountry;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -557,8 +557,8 @@ class Mentee {
 }
 
 
-class User_country {
-  User_country({
+class UserCountry {
+  UserCountry({
     int? id,
     String? name,
     String? isoCode3,
@@ -607,7 +607,7 @@ class User_country {
     _wikiDataId = wikiDataId;
   }
 
-  User_country.fromJson(dynamic json) {
+  UserCountry.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
     _isoCode3 = json['iso_code_3'];
