@@ -7,6 +7,8 @@ import 'package:consultant_product/src/api_services/header.dart';
 import 'package:consultant_product/src/api_services/logic.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/easy_paisa_payment/easy_paisa_payment_view.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/jazz_cash_payment/payment_jazzcash_view.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
@@ -156,6 +158,12 @@ bookAppointmentWithoutFileRepo(
       } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 3) {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.walletPaymentScreen);
+      } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 4) {
+        Get.find<GeneralController>().updateFormLoaderController(false);
+        Get.to(const PaymentJazzCashView());
+      } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 5) {
+        Get.find<GeneralController>().updateFormLoaderController(false);
+        Get.to(const PaymentEasyPaisaView());
       } else {
         showDialog(
             context: context,

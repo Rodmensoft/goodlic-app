@@ -1,6 +1,5 @@
 import 'package:global_configuration/global_configuration.dart';
 
-
 final String baseUrl = GlobalConfiguration().get('base_url');
 final String apiBaseUrl = GlobalConfiguration().get('api_base_url');
 final String mediaUrl = GlobalConfiguration().get('media_url');
@@ -18,6 +17,8 @@ String contactUsUrl = apiBaseUrl + 'contactus';
 
 ///---payment-method
 String paymentMethodUrl = apiBaseUrl + 'execute-payment';
+String jazzCashPaymentUrl = baseUrl + 'makeJazzcashPayment';
+
 ///---search
 String searchConsultantUrl = apiBaseUrl + 'search-mentor-mobile';
 
@@ -136,3 +137,7 @@ String downloadAppointmentInvoiceForMenteeUrl =
 ///---reset-password
 String forgotPasswordUrl = apiBaseUrl + 'forget-password';
 String newPasswordUrl = apiBaseUrl + 'reset-password';
+
+/// Flutter wave
+
+String flutterWaveUrl = apiBaseUrl + 'flutter-wave-after-payment';

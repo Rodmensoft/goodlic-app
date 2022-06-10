@@ -2,6 +2,7 @@ import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/get_date_schedule.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/get_schedule_available_days.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/model_flutter_wave.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/payment_stripe/model_stripe_payment.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/logic.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/model_consultant_profile.dart';
@@ -19,6 +20,12 @@ class BookAppointmentLogic extends GetxController {
 
   var cardNumberMask = MaskTextInputFormatter(mask: '#### #### #### ####');
   var cardExpiryMask = MaskTextInputFormatter(mask: '##/##');
+  final TextEditingController paymentAccountNumberTextController =
+      TextEditingController();
+  final TextEditingController jazzCashCnicTextController =
+      TextEditingController();
+
+  ModelFlutterWave modelFlutterWave = ModelFlutterWave();
 
   ///----app-bar-settings-----start
   ScrollController? scrollController;
@@ -151,9 +158,7 @@ class BookAppointmentLogic extends GetxController {
   int? selectedPaymentType;
   List<ShiftType> paymentMethodList = [
     ShiftType(
-      title: 'stripe',
-        image: 'assets/Icons/stripe.svg',
-        isSelected: false),
+        title: 'stripe', image: 'assets/Icons/stripe.svg', isSelected: false),
     ShiftType(
         title: 'braintree',
         image: 'assets/Icons/braintreePayment.svg',
@@ -167,9 +172,15 @@ class BookAppointmentLogic extends GetxController {
         image: 'assets/Icons/walletPayment.svg',
         isSelected: false),
 
+    // ShiftType(
+    //     title: 'jazz', image: 'assets/Icons/jazz-cash.svg', isSelected: false),
+    // ShiftType(
+    //     title: 'easy', image: 'assets/Icons/easyIcon.svg', isSelected: false),
 
-
-
+    ShiftType(
+        title: 'Wave',
+        image: 'assets/Icons/flutterwave.svg',
+        isSelected: false),
   ];
 
   String? selectedFileName;
