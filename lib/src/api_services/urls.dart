@@ -18,6 +18,7 @@ String contactUsUrl = apiBaseUrl + 'contactus';
 ///---payment-method
 String paymentMethodUrl = apiBaseUrl + 'execute-payment';
 String jazzCashPaymentUrl = baseUrl + 'makeJazzcashPayment';
+String getAppointmentPaymentStatusUrl = baseUrl + 'getAppointmentStatus';
 
 ///---search
 String searchConsultantUrl = apiBaseUrl + 'search-mentor-mobile';

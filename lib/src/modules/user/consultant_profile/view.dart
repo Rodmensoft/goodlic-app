@@ -1,5 +1,3 @@
-
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
@@ -135,8 +133,10 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                           color: customLightThemeColor,
                                           width:
                                               MediaQuery.of(context).size.width,
-                                          height:
-                                              MediaQuery.of(context).size.height* .4,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .45,
                                           child: Center(
                                             child: _consultantProfileLogic
                                                         .consultantProfileModel
@@ -154,37 +154,36 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                     fit: BoxFit.cover,
                                                   )
                                                 : InkWell(
-                                              onTap: (){
-                                                Get.to(
-                                                    ImageViewScreen(
-                                                      networkImage: _consultantProfileLogic
-                                                          .consultantProfileModel
-                                                          .data!
-                                                          .userDetail!
-                                                          .imagePath
-                                                          .contains('assets')
+                                                    onTap: () {
+                                                      Get.to(ImageViewScreen(
+                                                        networkImage: _consultantProfileLogic
+                                                                .consultantProfileModel
+                                                                .data!
+                                                                .userDetail!
+                                                                .imagePath
+                                                                .contains(
+                                                                    'assets')
+                                                            ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
+                                                            : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
+                                                      ));
+                                                    },
+                                                    child: Image.network(
+                                                      _consultantProfileLogic
+                                                              .consultantProfileModel
+                                                              .data!
+                                                              .userDetail!
+                                                              .imagePath
+                                                              .contains(
+                                                                  'assets')
                                                           ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
                                                           : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
-
-                                                    )
-                                                );
-                                              },
-                                              child: Image.network(
-                                                _consultantProfileLogic
-                                                    .consultantProfileModel
-                                                    .data!
-                                                    .userDetail!
-                                                    .imagePath
-                                                    .contains('assets')
-                                                    ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
-                                                    : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
-                                                width:
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                                  ),
                                           ),
                                         ),
                                       ),
@@ -371,8 +370,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                       itemBuilder: (context, _) =>
                                           SvgPicture.asset(
                                               'assets/Icons/ratingStarIcon.svg'),
-                                      onRatingUpdate: (rating) {
-                                      },
+                                      onRatingUpdate: (rating) {},
                                     ),
                                   ],
                                 ),

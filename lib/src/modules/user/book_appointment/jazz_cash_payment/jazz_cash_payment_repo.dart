@@ -30,6 +30,7 @@ jazzCashPaymentRepo(
           });
       log('jazzcashPaymentRepo ------>> ${response['Status'].toString()}');
     } else {
+      log('jazzcashPaymentRepo ------>> ${response.toString()}');
       Get.find<GeneralController>().updateFormLoaderController(false);
 
       showDialog(
@@ -44,13 +45,13 @@ jazzCashPaymentRepo(
               functionCall: () {
                 Navigator.pop(context);
               },
-              img: 'assets/dialog_error.svg',
+              img: 'assets/Icons/dialog_error.svg',
             );
           });
     }
   } else {
     Get.find<GeneralController>().updateFormLoaderController(false);
-
+    log('jazzcashPaymentRepo ------>> ${response.toString()}');
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -63,7 +64,7 @@ jazzCashPaymentRepo(
             functionCall: () {
               Navigator.pop(context);
             },
-            img: 'assets/dialog_error.svg',
+            img: 'assets/Icons/dialog_error.svg',
           );
         });
   }

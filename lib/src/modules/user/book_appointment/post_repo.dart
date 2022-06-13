@@ -164,6 +164,9 @@ bookAppointmentWithoutFileRepo(
       } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 5) {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.to(const PaymentEasyPaisaView());
+        // } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 6) {
+        //   Get.find<GeneralController>().updateFormLoaderController(false);
+        //   Get.to(const FlutterWave());
       } else {
         showDialog(
             context: context,

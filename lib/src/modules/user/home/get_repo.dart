@@ -132,7 +132,7 @@ getTopRatedConsultantMoreRepo(
         Get.find<UserHomeLogic>().topRatedConsultantList.add(TopRatedStyling(
             id: element.userId,
             title: '${element.firstName ?? ''} ${element.lastName ?? ''}',
-            subTitle: element.category!.name,
+            subTitle: element.category?.name ?? 'category',
             image: element.imagePath,
             rating: element.ratingAvg));
       }
