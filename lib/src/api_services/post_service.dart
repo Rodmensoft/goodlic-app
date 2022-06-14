@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -18,6 +19,7 @@ postMethod(
     bool addAuthHeader,
     Function executionMethod // for performing functionalities
     ) async {
+  log('testing it $postData');
   dio_instance.Response response;
   dio_instance.Dio dio = dio_instance.Dio();
 

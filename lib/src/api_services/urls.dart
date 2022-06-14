@@ -17,7 +17,7 @@ String contactUsUrl = apiBaseUrl + 'contactus';
 
 ///---payment-method
 String paymentMethodUrl = apiBaseUrl + 'execute-payment';
-String jazzCashPaymentUrl = baseUrl + 'makeJazzcashPayment';
+String jazzCashPaymentUrl = apiBaseUrl + 'makeJazzcashPayment';
 String getAppointmentPaymentStatusUrl = baseUrl + 'getAppointmentStatus';
 
 ///---search

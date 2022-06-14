@@ -4,13 +4,14 @@
 
 class ModelFlutterWave {
   ModelFlutterWave({
-      bool? status, 
-      int? success, 
-      String? msg,}){
+    bool? status,
+    int? success,
+    String? msg,
+  }) {
     _status = status;
     _success = success;
     _msg = msg;
-}
+  }
 
   ModelFlutterWave.fromJson(dynamic json) {
     _status = json['Status'];
@@ -32,5 +33,4 @@ class ModelFlutterWave {
     map['msg'] = _msg;
     return map;
   }
-
 }

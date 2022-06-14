@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -36,9 +37,11 @@ getMethod(
         if (response.statusCode == 200) {
           executionMethod(context, true, response.data);
         } else {
+          log('testing 1 ${response.data}');
           executionMethod(context, false, {'status': null});
         }
       } on dio_instance.DioError catch (e) {
+        log('testing 2 ${e.response!.data}');
         executionMethod(context, false, {'status': null});
 
         if (e.response != null) {

@@ -67,7 +67,6 @@ class AppointmentDetailLogic extends GetxController {
 
   bool? isRated = false;
 
-
   ScrollController? scrollControllerStripe;
   bool lastStatusStripe = true;
   double heightStripe = 100.h;
@@ -90,7 +89,8 @@ class AppointmentDetailLogic extends GetxController {
   double myWidth = 0;
   TextEditingController accountCardNumberController = TextEditingController();
   TextEditingController stripeAmountController = TextEditingController();
-  TextEditingController accountCardHolderNameController = TextEditingController();
+  TextEditingController accountCardHolderNameController =
+      TextEditingController();
   TextEditingController accountCardExpiresController = TextEditingController();
   TextEditingController accountCardCvcController = TextEditingController();
 
@@ -107,6 +107,18 @@ class AppointmentDetailLogic extends GetxController {
     ShiftType(
         title: 'paypal',
         image: 'assets/Icons/paypalPayment.svg',
+        isSelected: false),
+    ShiftType(
+        title: 'wallet',
+        image: 'assets/Icons/walletPayment.svg',
+        isSelected: false),
+    ShiftType(
+        title: 'jazz', image: 'assets/Icons/jazz-cash.svg', isSelected: false),
+    ShiftType(
+        title: 'easy', image: 'assets/Icons/easyIcon.svg', isSelected: false),
+    ShiftType(
+        title: 'Wave',
+        image: 'assets/Icons/flutterwave.svg',
         isSelected: false),
   ];
 }

@@ -1,8 +1,6 @@
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/get_date_schedule.dart';
-import 'package:consultant_product/src/modules/user/book_appointment/model/get_schedule_available_days.dart';
-import 'package:consultant_product/src/modules/user/book_appointment/model_flutter_wave.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/payment_stripe/model_stripe_payment.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/logic.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/model_consultant_profile.dart';
@@ -12,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:resize/resize.dart';
 
+import 'model/get_schedule_available_days.dart';
 import 'state.dart';
 
 class BookAppointmentLogic extends GetxController {
@@ -25,7 +24,7 @@ class BookAppointmentLogic extends GetxController {
   final TextEditingController jazzCashCnicTextController =
       TextEditingController();
 
-  ModelFlutterWave modelFlutterWave = ModelFlutterWave();
+  //ModelFlutterWave modelFlutterWave = ModelFlutterWave();
 
   ///----app-bar-settings-----start
   ScrollController? scrollController;

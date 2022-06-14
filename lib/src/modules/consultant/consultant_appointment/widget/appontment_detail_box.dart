@@ -451,14 +451,15 @@ class AppointmentDetailBox extends StatelessWidget {
                         .state
                         .dateTimeTextStyle,
                   ),
+                  if (time != null)
 
-                  ///---time
-                  Text(
-                    time!,
-                    style: Get.find<ConsultantAppointmentLogic>()
-                        .state
-                        .dateTimeTextStyle,
-                  ),
+                    ///---time
+                    Text(
+                      time!,
+                      style: Get.find<ConsultantAppointmentLogic>()
+                          .state
+                          .dateTimeTextStyle,
+                    ),
                 ],
               ),
             ),

@@ -542,7 +542,12 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                               right: 15.w,
                               child: InkWell(
                                 onTap: () {
-                                  Get.to(const FlutterWave());
+                                  if (_formKey.currentState!.validate()) {
+                                    Get.to(FlutterWave(
+                                        amount: _bookAppointmentLogic
+                                            .selectMentorAppointmentType!.fee
+                                            .toString()));
+                                  }
                                 },
                                 child: const MyCustomBottomBar(
                                   title: 'Flutter Wave',

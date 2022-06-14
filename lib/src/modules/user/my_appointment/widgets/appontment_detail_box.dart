@@ -1,4 +1,3 @@
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/logic.dart';
@@ -124,8 +123,7 @@ class AppointmentDetailBox extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 0.0),
                               itemBuilder: (context, _) => SvgPicture.asset(
                                   'assets/Icons/ratingStarIcon.svg'),
-                              onRatingUpdate: (rating) {
-                              },
+                              onRatingUpdate: (rating) {},
                             ),
                           ],
                         ),
@@ -484,13 +482,15 @@ class AppointmentDetailBox extends StatelessWidget {
                     style:
                         Get.find<MyAppointmentLogic>().state.dateTimeTextStyle,
                   ),
+                  if (time != null)
 
-                  ///---time
-                  Text(
-                    time!,
-                    style:
-                        Get.find<MyAppointmentLogic>().state.dateTimeTextStyle,
-                  ),
+                    ///---time
+                    Text(
+                      time!,
+                      style: Get.find<MyAppointmentLogic>()
+                          .state
+                          .dateTimeTextStyle,
+                    ),
                 ],
               ),
             ),
