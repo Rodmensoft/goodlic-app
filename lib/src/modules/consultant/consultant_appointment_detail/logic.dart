@@ -6,12 +6,13 @@ import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/modules/agora_call/repo.dart';
 import 'package:consultant_product/src/modules/chat/logic.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/model_get_consultant_appointment.dart';
+import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/model_mark_as_complete.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart' as intl;
 import 'package:resize/resize.dart';
 
-import 'package:intl/intl.dart' as intl;
 import 'state.dart';
 
 class ConsultantAppointmentDetailLogic extends GetxController {
@@ -20,6 +21,7 @@ class ConsultantAppointmentDetailLogic extends GetxController {
 
   ConsultantAppointmentsData selectedAppointmentData =
       ConsultantAppointmentsData();
+  ModelMarkAsComplete modelMarkAsComplete = ModelMarkAsComplete();
   int? appointmentStatus;
 
   List<Color> colorForAppointmentTypes = [

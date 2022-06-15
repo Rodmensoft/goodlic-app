@@ -112,6 +112,7 @@ String walletDepositUrl = apiBaseUrl + 'deposit-wallet';
 String walletDepositJazzcashUrl = apiBaseUrl + 'deposit-wallet-jazzcash';
 String walletWithdrawUrl = apiBaseUrl + 'withdraw-request';
 String walletPaymentUrl = apiBaseUrl + 'wallet-credit-transfer';
+String markAsCompleteAppointmentUrl = baseUrl + 'mark-appointment-as-complete';
 
 /// rating
 String createRatingUrl = apiBaseUrl + 'create-rating';

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -14,6 +16,7 @@ mentorCompleteAppointmentRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['Status'].toString() == 'true') {
+      log('testing response ${response}');
       getMethod(
           context,
           getConsultantAllAppointmentsURL,

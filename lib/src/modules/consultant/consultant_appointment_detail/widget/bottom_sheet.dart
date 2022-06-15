@@ -758,6 +758,18 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                         .updateGetUserAppointmentLoader(true);
                                     Get.back();
                                     Get.back();
+                                    // postMethod(
+                                    //     context,
+                                    //     markAsCompleteAppointmentUrl,
+                                    //     {
+                                    //       'token': '123',
+                                    //       'appointment_id': Get.find<
+                                    //               ConsultantAppointmentDetailLogic>()
+                                    //           .selectedAppointmentData
+                                    //           .id,
+                                    //     },
+                                    //     true,
+                                    //     mentorCompleteAppointmentRepo);
                                     postMethod(
                                         context,
                                         mentorChangeAppointmentStatusUrl,

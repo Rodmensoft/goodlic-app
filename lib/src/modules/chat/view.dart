@@ -54,7 +54,7 @@ class _ChatPageState extends State<ChatPage> {
         true,
         fetchMessagesRepo);
     pusher = PusherClient(
-      "Your Pusher Key Here",
+      "fa6080bfea44424ad3c2",
       PusherOptions(
         host: '',
         cluster: 'ap2',

@@ -112,13 +112,5 @@ class AppointmentDetailLogic extends GetxController {
         title: 'wallet',
         image: 'assets/Icons/walletPayment.svg',
         isSelected: false),
-    ShiftType(
-        title: 'jazz', image: 'assets/Icons/jazz-cash.svg', isSelected: false),
-    ShiftType(
-        title: 'easy', image: 'assets/Icons/easyIcon.svg', isSelected: false),
-    ShiftType(
-        title: 'Wave',
-        image: 'assets/Icons/flutterwave.svg',
-        isSelected: false),
   ];
 }

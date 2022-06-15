@@ -21,6 +21,7 @@ getConsultantAllAppointmentsRepo(
       Get.find<ConsultantAppointmentLogic>().updateRefreshController();
       Get.find<ConsultantAppointmentLogic>()
           .updateGetUserAppointmentLoader(false);
+
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
       Get.find<ConsultantAppointmentLogic>().updateRefreshController();

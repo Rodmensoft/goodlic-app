@@ -1,4 +1,6 @@
+import 'dart:developer';
 import 'dart:io';
+
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:consultant_product/multi_language/languages.dart';
 import 'package:consultant_product/route_generator.dart';
@@ -7,6 +9,8 @@ import 'package:consultant_product/src/api_services/logic.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/agora_call/agora.config.dart'
+    as config;
 import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/modules/agora_call/init_video_call_view.dart';
 import 'package:consultant_product/src/modules/chat/logic.dart';
@@ -22,8 +26,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:resize/resize.dart';
-import 'package:consultant_product/src/modules/agora_call/agora.config.dart'
-    as config;
 
 final GlobalKey<NavigatorState> navigatorKey =
     GlobalKey(debugLabel: "Main Navigator");
@@ -96,6 +98,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
     ///---for-language-check
     Get.find<GeneralController>().checkLanguage();
     FirebaseMessaging.instance.getInitialMessage().then((message) {
+      log('testing it notify');
       String route;
 
       if (message != null) {
@@ -117,6 +120,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
 
     ///forground messages
     FirebaseMessaging.onMessage.listen((message) {
+      log('testing 1');
       if (message.notification != null) {}
       String route;
       if (message.data['channel'] != null) {
@@ -137,6 +141,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      log('testing 2');
       String route;
       if (message.data['channel'] != null) {
         Get.find<GeneralController>().updateCallerType(2);

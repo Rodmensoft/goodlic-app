@@ -39,7 +39,7 @@ getFeaturedConsultantRepo(
         Get.find<UserHomeLogic>().topConsultants.add(HomeStyling(
             id: element.userId,
             title: '${element.firstName ?? ''} ${element.lastName ?? ''}',
-            subTitle: element.category!.name,
+            subTitle: element.category?.name ?? 'category',
             image: element.imagePath,
             gender: element.gender));
       }
@@ -91,6 +91,7 @@ getTopRatedConsultantRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<UserHomeLogic>().topRatedModel = TopRatedModel.fromJson(response);
+
     Get.find<UserHomeLogic>().update();
     if (Get.find<UserHomeLogic>().topRatedModel.status.toString() == 'true') {
       Get.find<UserHomeLogic>().topRatedConsultantList.clear();
@@ -102,7 +103,7 @@ getTopRatedConsultantRepo(
         Get.find<UserHomeLogic>().topRatedConsultantList.add(TopRatedStyling(
             id: element.userId,
             title: '${element.firstName ?? ''} ${element.lastName ?? ''}',
-            subTitle: element.category!.name,
+            subTitle: element.category?.name ?? 'category',
             image: element.imagePath,
             rating: element.ratingAvg));
       }
