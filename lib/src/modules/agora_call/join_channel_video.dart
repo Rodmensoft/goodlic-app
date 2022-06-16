@@ -67,7 +67,8 @@ class _State extends State<JoinChannelVideo> {
   int? callEnd = 0;
 
   _initEngine() async {
-    _engine = await RtcEngine.createWithContext(RtcEngineContext(config.appId));
+    _engine =
+        await RtcEngine.createWithContext(RtcEngineContext(config.agoraAppId));
     _addListeners();
 
     await _engine.enableVideo();

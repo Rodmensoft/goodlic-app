@@ -1,6 +1,12 @@
 {
-  "base_url": "https://consultation.softwaresbranding.com/",
-  "api_base_url": "https://consultation.softwaresbranding.com/api/",
-  "media_url": "https://consultation.softwaresbranding.com"
 
+  "base_url": "https://demo.consultant.nictusthemes.com/",
+  "api_base_url": "https://demo.consultant.nictusthemes.com/api/",
+  "media_url": "https://demo.consultant.nictusthemes.com",
+
+  "flutterWave_publicKey": "FLWPUBK_TEST-7f22a34d5ad0905cff21f0952ad61e7f-X",
+  "agora_appId": "6e8d86e69feb401a8eee0237e07a5b3d",
+  "pusher_appId": "fa6080bfea44424ad3c2",
+
+"fcm_key": "AAAAzbp8oYc:APA91bFdJUSDhhvlyuryxb0Gg9wStY85gsqqQarJrR3Cx1bmL2mGewaR6TVcnlG_2IvK885eQF74ufNjVpR-pXMHjpZIWickj19CMTcit4pacdZ1MzVgbAWK_R6EmJTG4P4pMN8Dmwd7"
 }

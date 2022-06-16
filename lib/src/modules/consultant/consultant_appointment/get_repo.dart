@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/logic.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/model_get_consultant_appointment.dart';
@@ -8,7 +6,6 @@ import 'package:get/get.dart';
 
 getConsultantAllAppointmentsRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
-  log('testing it please $response');
   if (responseCheck) {
     Get.find<ConsultantAppointmentLogic>().getConsultantAppointmentModel =
         GetConsultantAppointmentModel.fromJson(response);

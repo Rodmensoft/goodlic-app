@@ -108,9 +108,5 @@ class AppointmentDetailLogic extends GetxController {
         title: 'paypal',
         image: 'assets/Icons/paypalPayment.svg',
         isSelected: false),
-    ShiftType(
-        title: 'wallet',
-        image: 'assets/Icons/walletPayment.svg',
-        isSelected: false),
   ];
 }

@@ -13,6 +13,7 @@ import 'package:consultant_product/src/widgets/notififcation_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:pusher_client/pusher_client.dart';
 import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
@@ -54,7 +55,7 @@ class _ChatPageState extends State<ChatPage> {
         true,
         fetchMessagesRepo);
     pusher = PusherClient(
-      "fa6080bfea44424ad3c2",
+      '${GlobalConfiguration().get('pusher_appId')}',
       PusherOptions(
         host: '',
         cluster: 'ap2',

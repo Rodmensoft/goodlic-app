@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
+
 import '../../controller/general_controller.dart';
 import '../../utils/colors.dart';
 import 'logic.dart';
@@ -192,7 +193,8 @@ class _WalletPageState extends State<WalletPage> {
                                                       'Mentee')
                                                     InkWell(
                                                       onTap: () {
-                                                        paymentBottomSheetForWallet(context);
+                                                        paymentBottomSheetForWallet(
+                                                            context);
                                                       },
                                                       child: CircleAvatar(
                                                         radius: 20.r,
@@ -303,43 +305,51 @@ class _WalletPageState extends State<WalletPage> {
                                                                     index]
                                                                 .type
                                                                 .toString() ==
-                                                            LanguageConstant
-                                                                .deposit.tr
-                                                        ? Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              CircleAvatar(
-                                                                radius: 12.r,
-                                                                backgroundColor:
-                                                                    customLightThemeColor,
-                                                                child:
-                                                                    const Icon(
-                                                                  Icons
-                                                                      .arrow_downward,
-                                                                  color: Colors
-                                                                      .white,
-                                                                  size: 15,
+                                                            'deposit'
+                                                        ? Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        6.w,
+                                                                        0,
+                                                                        0,
+                                                                        0),
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                CircleAvatar(
+                                                                  radius: 12.r,
+                                                                  backgroundColor:
+                                                                      customLightThemeColor,
+                                                                  child:
+                                                                      const Icon(
+                                                                    Icons
+                                                                        .arrow_downward,
+                                                                    color: Colors
+                                                                        .white,
+                                                                    size: 15,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 6.h,
-                                                              ),
-                                                              Text(
-                                                                _walletLogic
-                                                                    .getAllTransactionList[
-                                                                        index]
-                                                                    .type
-                                                                    .toString()
-                                                                    .toUpperCase(),
-                                                                style: state
-                                                                    .typeTextStyle,
-                                                              ),
-                                                            ],
+                                                                SizedBox(
+                                                                  height: 6.h,
+                                                                ),
+                                                                Text(
+                                                                  _walletLogic
+                                                                      .getAllTransactionList[
+                                                                          index]
+                                                                      .type
+                                                                      .toString()
+                                                                      .toUpperCase(),
+                                                                  style: state
+                                                                      .typeTextStyle,
+                                                                ),
+                                                              ],
+                                                            ),
                                                           )
                                                         : Column(
                                                             mainAxisAlignment:
@@ -447,5 +457,4 @@ class _WalletPageState extends State<WalletPage> {
       });
     });
   }
-
 }

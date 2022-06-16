@@ -74,9 +74,9 @@ class _OnBoard2PageState extends State<OnBoard2Page> {
                             color: customOrangeColor,
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  40.w, 0, 40.w, 0),
+                                  25.w, 0, 25.w, 0),
                               child: Text(
-                                'A Mentee',
+                                'A User',
                                 style: state.firstTitle,
                               ),
                             ),
@@ -105,7 +105,9 @@ class _OnBoard2PageState extends State<OnBoard2Page> {
                     ///---skip
                     InkWell(
                       onTap: () {
-                        Get.find<GeneralController>().storageBox.write('onBoard', 'true');
+                        Get.find<GeneralController>()
+                            .storageBox
+                            .write('onBoard', 'true');
                         Get.offAllNamed(PageRoutes.userHome);
                       },
                       child: Text('Skip',

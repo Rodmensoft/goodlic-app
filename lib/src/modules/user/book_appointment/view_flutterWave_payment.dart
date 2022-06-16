@@ -17,6 +17,7 @@ import 'package:flutterwave_standard/view/flutterwave_style.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
 import 'package:uuid/uuid.dart';
@@ -421,14 +422,14 @@ class _FlutterWaveState extends State<FlutterWave> {
     final Flutterwave flutterwave = Flutterwave(
         context: context,
         style: style,
-        publicKey: 'FLWPUBK_TEST-7f22a34d5ad0905cff21f0952ad61e7f-X',
+        publicKey: '${GlobalConfiguration().get('flutterWave_publicKey')}',
         currency: selectedCurrency,
         txRef: const Uuid().v1(),
         amount: amountController.text.toString().trim(),
         customer: customer,
         subAccounts: subAccounts,
         paymentOptions: "card, payattitude",
-        customization: Customization(title: "Test Payment"),
+        customization: Customization(title: "Payment"),
         redirectUrl: "https://www.google.com",
         isTestMode: isTestMode);
     final ChargeResponse? response = await flutterwave.charge();
@@ -440,16 +441,11 @@ class _FlutterWaveState extends State<FlutterWave> {
     }
   }
 
-  // String getPublicKey() {
-  //   if (isTestMode) return "FLWPUBK_TEST--X";
-  //   return "FLWPUBK-X";
-  // }
-
   void _openBottomSheet() {
     showModalBottomSheet(
-        context: this.context,
+        context: context,
         builder: (context) {
-          return this._getCurrency();
+          return _getCurrency();
         });
   }
 
@@ -457,7 +453,7 @@ class _FlutterWaveState extends State<FlutterWave> {
     final currencies = ["USD"];
     return Container(
       height: 250,
-      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+      margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
       color: Colors.white,
       child: ListView(
         children: currencies

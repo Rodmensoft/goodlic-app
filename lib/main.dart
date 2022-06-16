@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
@@ -32,7 +31,8 @@ final GlobalKey<NavigatorState> navigatorKey =
 RtcEngine? _engine;
 
 _initEngine(String? route) async {
-  _engine = await RtcEngine.createWithContext(RtcEngineContext(config.appId));
+  _engine =
+      await RtcEngine.createWithContext(RtcEngineContext(config.agoraAppId));
 
   await _engine!.enableVideo();
   await _engine!.startPreview();
@@ -98,7 +98,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
     ///---for-language-check
     Get.find<GeneralController>().checkLanguage();
     FirebaseMessaging.instance.getInitialMessage().then((message) {
-      log('testing it notify');
       String route;
 
       if (message != null) {
@@ -120,7 +119,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
 
     ///forground messages
     FirebaseMessaging.onMessage.listen((message) {
-      log('testing 1');
       if (message.notification != null) {}
       String route;
       if (message.data['channel'] != null) {
@@ -141,7 +139,6 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      log('testing 2');
       String route;
       if (message.data['channel'] != null) {
         Get.find<GeneralController>().updateCallerType(2);

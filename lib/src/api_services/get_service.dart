@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -35,14 +34,11 @@ getMethod(
         response = await dio.get(apiUrl, queryParameters: queryData);
 
         if (response.statusCode == 200) {
-          log('testing 0 ${response.data}');
           executionMethod(context, true, response.data);
         } else {
-          log('testing 1 ${response.data}');
           executionMethod(context, false, {'status': null});
         }
       } on dio_instance.DioError catch (e) {
-        log('testing 2 ${apiUrl} ${e.response!.data}');
         executionMethod(context, false, {'status': null});
 
         if (e.response != null) {

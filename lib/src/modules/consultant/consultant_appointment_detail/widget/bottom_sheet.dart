@@ -758,30 +758,30 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                         .updateGetUserAppointmentLoader(true);
                                     Get.back();
                                     Get.back();
-                                    // postMethod(
-                                    //     context,
-                                    //     markAsCompleteAppointmentUrl,
-                                    //     {
-                                    //       'token': '123',
-                                    //       'appointment_id': Get.find<
-                                    //               ConsultantAppointmentDetailLogic>()
-                                    //           .selectedAppointmentData
-                                    //           .id,
-                                    //     },
-                                    //     true,
-                                    //     mentorCompleteAppointmentRepo);
                                     postMethod(
                                         context,
-                                        mentorChangeAppointmentStatusUrl,
+                                        markAsCompleteAppointmentUrl,
                                         {
                                           'token': '123',
-                                          'id':
-                                              _consultantAppointmentDetailLogic
-                                                  .selectedAppointmentData.id,
-                                          'status': 2
+                                          'appointment_id': Get.find<
+                                                  ConsultantAppointmentDetailLogic>()
+                                              .selectedAppointmentData
+                                              .id,
                                         },
                                         true,
                                         mentorCompleteAppointmentRepo);
+                                    // postMethod(
+                                    //     context,
+                                    //     mentorChangeAppointmentStatusUrl,
+                                    //     {
+                                    //       'token': '123',
+                                    //       'id':
+                                    //           _consultantAppointmentDetailLogic
+                                    //               .selectedAppointmentData.id,
+                                    //       'status': 2
+                                    //     },
+                                    //     true,
+                                    //     mentorCompleteAppointmentRepo);
                                   },
                                   child: Container(
                                     height: 55.h,

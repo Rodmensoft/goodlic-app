@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -21,8 +19,6 @@ flutterWaveRepo(
     Get.find<GeneralController>().updateFormLoaderController(false);
 
     if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
-      log('testing  wave $response');
-
       Get.find<BookAppointmentLogic>().bookAppointmentModel.data!.appointmentNo;
 
       postMethod(

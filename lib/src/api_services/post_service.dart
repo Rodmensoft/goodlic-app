@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -11,6 +10,7 @@ import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:dio/dio.dart' as dio_instance;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 postMethod(
     BuildContext context,
@@ -19,7 +19,6 @@ postMethod(
     bool addAuthHeader,
     Function executionMethod // for performing functionalities
     ) async {
-  log('testing it $postData');
   dio_instance.Response response;
   dio_instance.Dio dio = dio_instance.Dio();
 
@@ -35,8 +34,8 @@ postMethod(
 
   if (apiUrl == fcmService) {
     setCustomHeader(dio, 'Content-Type', 'application/json');
-    setCustomHeader(dio, 'Authorization',
-        'key=AAAAzbp8oYc:APA91bFdJUSDhhvlyuryxb0Gg9wStY85gsqqQarJrR3Cx1bmL2mGewaR6TVcnlG_2IvK885eQF74ufNjVpR-pXMHjpZIWickj19CMTcit4pacdZ1MzVgbAWK_R6EmJTG4P4pMN8Dmwd7');
+    setCustomHeader(
+        dio, 'Authorization', 'key=${GlobalConfiguration().get('fcm_key')}');
   }
 
   try {

@@ -1,8 +1,14 @@
 import 'package:consultant_product/multi_language/language_constants.dart';
-import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/get_service.dart';
+import 'package:consultant_product/src/api_services/post_service.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/agora_call/repo.dart';
+import 'package:consultant_product/src/modules/consultant/consultant_appointment/get_repo.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/logic.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/model_mark_as_complete.dart';
+import 'package:consultant_product/src/modules/sms/logic.dart';
+import 'package:consultant_product/src/modules/sms/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +26,41 @@ markAsCompleteRepo(
             .modelMarkAsComplete
             .status ==
         true) {
-      Get.toNamed(PageRoutes.walletScreen);
+      getMethod(
+          context,
+          getConsultantAllAppointmentsURL,
+          {
+            'token': '123',
+            'mentor_id': Get.find<GeneralController>().storageBox.read('userID')
+          },
+          true,
+          getConsultantAllAppointmentsRepo);
+
+      ///----send-sms
+      postMethod(
+          context,
+          sendSMSUrl,
+          {
+            'token': '123',
+            'phone': Get.find<SmsLogic>().phoneNumber,
+            'message': Get.find<GeneralController>().notificationTitle,
+          },
+          true,
+          sendSMSRepo);
+
+      ///----fcm-send-start
+      getMethod(
+          context,
+          fcmGetUrl,
+          {
+            'token': '123',
+            'user_id': Get.find<GeneralController>().userIdForSendNotification
+          },
+          true,
+          getFcmTokenRepo);
+      Get.find<GeneralController>().updateFormLoaderController(false);
+      Get.snackbar(LanguageConstant.appointmentCompletedSuccessfully.tr, '',
+          colorText: Colors.black, backgroundColor: Colors.white);
     } else {
       showDialog(
           context: context,
