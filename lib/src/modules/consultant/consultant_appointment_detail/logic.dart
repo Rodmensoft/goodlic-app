@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -48,16 +50,21 @@ class ConsultantAppointmentDetailLogic extends GetxController {
     }
   }
 
-  bool? showCallButton = false;
+  bool? showAudioCallButton = false;
+  bool? showVideoCallButton = false;
 
-  Future<int> getDifference() async {
+  Future<int> getAudioDifference() async {
     String time1 = DateTime.now().toString().substring(11, 19);
+    log('This is first.....$time1');
     String time2 = intl.DateFormat.Hms().format(intl.DateFormat('h:mm a').parse(
         '${selectedAppointmentData.time.toString().substring(0, 5)}'
         '${selectedAppointmentData.time.toString().substring(5, 8).toUpperCase()}'));
+    log('This is second.....$time2');
     String time3 = intl.DateFormat.Hms().format(intl.DateFormat('h:mm a').parse(
         '${selectedAppointmentData.endTime.toString().substring(0, 5)}'
         '${selectedAppointmentData.endTime.toString().substring(5, 8).toUpperCase()}'));
+    log('last time ${selectedAppointmentData.endTime}');
+    log('This is third.....$time3');
 
     intl.DateFormat dateFormat = intl.DateFormat("yyyy-MM-dd");
 
@@ -70,13 +77,49 @@ class ConsultantAppointmentDetailLogic extends GetxController {
 
     if ((b.difference(a).inMinutes <= 2) &&
         DateTime.now().isBefore(endDateTime)) {
-      showCallButton = true;
+      showAudioCallButton = true;
       update();
     } else {
-      showCallButton = false;
+      showAudioCallButton = false;
 
       update();
     }
+    log('difference.........${b.difference(a).inMinutes}');
+    return b.difference(a).inMinutes;
+  }
+
+  Future<int> getVideoDifference() async {
+    String time1 = DateTime.now().toString().substring(11, 19);
+    log('This is first.....$time1');
+    String time2 = intl.DateFormat.Hms().format(intl.DateFormat('h:mm a').parse(
+        '${selectedAppointmentData.time.toString().substring(0, 5)}'
+        '${selectedAppointmentData.time.toString().substring(5, 8).toUpperCase()}'));
+    log('This is second.....$time2');
+    String time3 = intl.DateFormat.Hms().format(intl.DateFormat('h:mm a').parse(
+        '${selectedAppointmentData.endTime.toString().substring(0, 5)}'
+        '${selectedAppointmentData.endTime.toString().substring(5, 8).toUpperCase()}'));
+    log('last time ${selectedAppointmentData.endTime}');
+    log('This is third.....$time3');
+
+    intl.DateFormat dateFormat = intl.DateFormat("yyyy-MM-dd");
+
+    var _date = dateFormat.format(DateTime.now());
+
+    DateTime a = DateTime.parse('$_date $time1');
+    DateTime b = DateTime.parse('${selectedAppointmentData.date} $time2');
+    DateTime endDateTime =
+        DateTime.parse('${selectedAppointmentData.date} $time3');
+
+    if ((b.difference(a).inMinutes <= 2) &&
+        DateTime.now().isBefore(endDateTime)) {
+      showVideoCallButton = true;
+      update();
+    } else {
+      showVideoCallButton = false;
+
+      update();
+    }
+    log('difference.........${b.difference(a).inMinutes}');
     return b.difference(a).inMinutes;
   }
 

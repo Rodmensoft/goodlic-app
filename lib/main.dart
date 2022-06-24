@@ -157,6 +157,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         route = message.data['routeApp'];
       }
     });
+
     super.initState();
   }
 
@@ -246,6 +247,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         builder: () {
           Get.put(ChatLogic());
           return GetMaterialApp(
+            navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
             translations: LanguagesChang(),
             locale: Locale(

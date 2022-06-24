@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -32,7 +33,7 @@ getMethod(
       Get.find<ApiLogic>().changeInternetCheckerState(true);
       try {
         response = await dio.get(apiUrl, queryParameters: queryData);
-
+        log('testing here $apiUrl$queryData ---->>>>${response.data}');
         if (response.statusCode == 200) {
           executionMethod(context, true, response.data);
         } else {
@@ -42,6 +43,7 @@ getMethod(
         executionMethod(context, false, {'status': null});
 
         if (e.response != null) {
+          log('testing here $apiUrl$queryData ---->>>>${e.response}');
         } else {}
       }
     }

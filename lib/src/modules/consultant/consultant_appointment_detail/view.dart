@@ -68,7 +68,8 @@ class _ConsultantAppointmentDetailPageState
                 .time !=
             null) {
       _timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
-        Get.find<ConsultantAppointmentDetailLogic>().getDifference();
+        Get.find<ConsultantAppointmentDetailLogic>().getAudioDifference();
+        Get.find<ConsultantAppointmentDetailLogic>().getVideoDifference();
       });
     }
   }
@@ -246,7 +247,7 @@ class _ConsultantAppointmentDetailPageState
                                                           .toUpperCase() ==
                                                       'VIDEO')
                                               ? _consultantAppointmentDetailLogic
-                                                      .showCallButton!
+                                                      .showVideoCallButton!
                                                   ? PositionedDirectional(
                                                       end: 0,
                                                       top: 45.h,
@@ -286,7 +287,7 @@ class _ConsultantAppointmentDetailPageState
                                                           .toUpperCase() ==
                                                       'AUDIO')
                                               ? _consultantAppointmentDetailLogic
-                                                      .showCallButton!
+                                                      .showAudioCallButton!
                                                   ? PositionedDirectional(
                                                       end: 0,
                                                       top: 45.h,

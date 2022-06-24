@@ -1,5 +1,3 @@
-
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
@@ -30,6 +28,15 @@ stripePaymentRepo(
               .original!
               .status ==
           true) {
+        /// Notification
+        ///---make-notification
+        Get.find<GeneralController>().updateNotificationBody(
+            'New Appointment For You',
+            '',
+            null,
+            'mentee/appointment/log',
+            null);
+
         ///----send-sms
         postMethod(
             context,
@@ -55,7 +62,6 @@ stripePaymentRepo(
         Get.find<BookAppointmentLogic>().myWidth = 0;
         Get.find<BookAppointmentLogic>().update();
         Get.offAllNamed(PageRoutes.appointmentConfirmation);
-
       } else {
         Get.find<BookAppointmentLogic>().myWidth = 0;
         Get.find<BookAppointmentLogic>().update();
