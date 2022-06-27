@@ -7,4 +7,5 @@ class AgoraLogic extends GetxController {
 
   String? userName;
   String? userImage;
+  final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 }

@@ -9,20 +9,24 @@ class InitVideoCallView extends StatefulWidget {
   _InitVideoCallViewState createState() => _InitVideoCallViewState();
 }
 
-class _InitVideoCallViewState extends State< InitVideoCallView> {
+class _InitVideoCallViewState extends State<InitVideoCallView> {
   @override
   void initState() {
     // TODO: implement initState
+
     super.initState();
-    Future.delayed(const Duration(seconds: 3)).whenComplete(() => Get.offNamed(PageRoutes.videoCall));
+    Future.delayed(const Duration(seconds: 3))
+        .whenComplete(() => Get.offNamed(PageRoutes.videoCall));
   }
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold();
   }
 }
+
 class NotificationRoute extends StatefulWidget {
-  const NotificationRoute({Key? key,this.route}) : super(key: key);
+  const NotificationRoute({Key? key, this.route}) : super(key: key);
 
   final String? route;
   @override
@@ -34,8 +38,10 @@ class _NotificationRouteState extends State<NotificationRoute> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(seconds: 2)).whenComplete(() => Get.offNamed(widget.route!));
+    Future.delayed(const Duration(seconds: 2))
+        .whenComplete(() => Get.offNamed(widget.route!));
   }
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold();

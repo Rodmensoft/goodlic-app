@@ -217,6 +217,8 @@ class _State extends State<JoinChannelVideo> {
                   remoteUid.isEmpty
                       ? const SizedBox()
                       : rtc_remote_view.SurfaceView(
+                          channelId:
+                              Get.find<GeneralController>().channelForCall!,
                           uid: remoteUid[0],
                         ),
                   SizedBox(

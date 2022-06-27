@@ -108,7 +108,7 @@ class _TopConsultantsState extends State<TopConsultants> {
                                   },
                                   child: Stack(
                                     // ignore: deprecated_member_use
-                                    overflow: Overflow.visible,
+
                                     children: [
                                       Container(
                                         height: 126.h,
@@ -154,14 +154,15 @@ class _TopConsultantsState extends State<TopConsultants> {
                                                       '${_userHomeLogic.topConsultants[index].subTitle}',
                                                       maxLines: 2,
                                                       softWrap: true,
-                                                      overflow: TextOverflow.ellipsis,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       style: state
                                                           .topSubTitleTextStyle,
                                                     ),
                                                   ),
 
-
                                                   const Spacer(),
+
                                                   ///---arrow-icon
                                                   SvgPicture.asset(
                                                     'assets/Icons/whiteForwardIcon.svg',
@@ -179,10 +180,13 @@ class _TopConsultantsState extends State<TopConsultants> {
                                       ),
                                       PositionedDirectional(
                                           end: 12.w,
-                                          top: -21.h,
+                                          top: 4.h,
                                           child: Image.asset(
-                                          _userHomeLogic.topConsultants[index].gender=='male'?
-                                          'assets/images/stackImage.png': 'assets/images/female.png',
+                                            _userHomeLogic.topConsultants[index]
+                                                        .gender ==
+                                                    'male'
+                                                ? 'assets/images/stackImage.png'
+                                                : 'assets/images/female.png',
                                             width: 100.w,
                                             height: 147.h,
                                           )),
