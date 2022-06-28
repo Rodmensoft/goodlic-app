@@ -50,6 +50,7 @@ class ConsultantAppointmentDetailLogic extends GetxController {
     }
   }
 
+  int showAppointment = 0;
   bool? showAudioCallButton = false;
   bool? showVideoCallButton = false;
 
@@ -78,6 +79,7 @@ class ConsultantAppointmentDetailLogic extends GetxController {
     if ((b.difference(a).inMinutes <= 2) &&
         DateTime.now().isBefore(endDateTime)) {
       showAudioCallButton = true;
+      showAppointment = selectedAppointmentData.id!;
       update();
     } else {
       showAudioCallButton = false;
@@ -112,6 +114,7 @@ class ConsultantAppointmentDetailLogic extends GetxController {
 
     if ((b.difference(a).inMinutes <= 2) &&
         DateTime.now().isBefore(endDateTime)) {
+      showAppointment = selectedAppointmentData.id!;
       showVideoCallButton = true;
       update();
     } else {

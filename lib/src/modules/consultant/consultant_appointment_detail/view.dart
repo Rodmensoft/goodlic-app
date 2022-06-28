@@ -67,7 +67,7 @@ class _ConsultantAppointmentDetailPageState
                 .selectedAppointmentData
                 .time !=
             null) {
-      _timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
+      _timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
         Get.find<ConsultantAppointmentDetailLogic>().getAudioDifference();
         Get.find<ConsultantAppointmentDetailLogic>().getVideoDifference();
       });
@@ -247,7 +247,12 @@ class _ConsultantAppointmentDetailPageState
                                                           .toUpperCase() ==
                                                       'VIDEO')
                                               ? _consultantAppointmentDetailLogic
-                                                      .showVideoCallButton!
+                                                          .showVideoCallButton! &&
+                                                      _consultantAppointmentDetailLogic
+                                                              .showAppointment ==
+                                                          _consultantAppointmentDetailLogic
+                                                              .selectedAppointmentData
+                                                              .id
                                                   ? PositionedDirectional(
                                                       end: 0,
                                                       top: 45.h,
@@ -287,7 +292,12 @@ class _ConsultantAppointmentDetailPageState
                                                           .toUpperCase() ==
                                                       'AUDIO')
                                               ? _consultantAppointmentDetailLogic
-                                                      .showAudioCallButton!
+                                                          .showAudioCallButton! &&
+                                                      _consultantAppointmentDetailLogic
+                                                              .showAppointment ==
+                                                          _consultantAppointmentDetailLogic
+                                                              .selectedAppointmentData
+                                                              .id
                                                   ? PositionedDirectional(
                                                       end: 0,
                                                       top: 45.h,
