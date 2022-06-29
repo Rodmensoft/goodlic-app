@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -47,10 +48,15 @@ postMethod(
 
         if (response.statusCode == 200) {
           executionMethod(context, true, response.data);
+          log('testing 2....{$apiUrl}');
+          log('testing 1....{$postData}');
+          log('testing 2....{$response}');
         } else {
+          log('testing 4....{$response}');
           executionMethod(context, false, {'status': null});
         }
       } on dio_instance.DioError catch (e) {
+        log('testing 5....${e.response}');
         executionMethod(context, false, {'status': null});
 
         if (e.response != null) {

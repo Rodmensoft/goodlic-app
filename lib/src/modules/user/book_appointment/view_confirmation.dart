@@ -94,7 +94,7 @@ class _AppointmentConfirmationViewState
 
                                   ///---success-text
                                   Text(
-                                    LanguageConstant.congratulations,
+                                    LanguageConstant.congratulations.tr,
                                     style: TextStyle(
                                         fontFamily: SarabunFontFamily.bold,
                                         fontSize: 28.sp,
