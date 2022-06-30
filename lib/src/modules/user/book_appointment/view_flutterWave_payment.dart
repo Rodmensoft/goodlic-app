@@ -111,6 +111,7 @@ class _FlutterWaveState extends State<FlutterWave> {
 
                             /// Amount
                             TextFormField(
+                          enabled: false,
                           controller: amountController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(

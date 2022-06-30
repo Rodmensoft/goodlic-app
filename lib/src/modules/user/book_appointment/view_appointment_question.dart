@@ -6,6 +6,7 @@ import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/post_repo.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/razorpay_payment/view_razorpay.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_flutterWave_payment.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -52,6 +53,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
 
   bool? disableButton = true;
   bool? wave = false;
+  bool? razorPay = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -439,6 +441,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                               setState(() {
                                                 disableButton = false;
                                               });
+
+                                              /// Show flutterwave payment button
                                               if (_bookAppointmentLogic
                                                   .paymentMethodList[index]
                                                   .image!
@@ -449,6 +453,20 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                               } else {
                                                 setState(() {
                                                   wave = false;
+                                                });
+                                              }
+
+                                              /// Show razorPay payment button
+                                              if (_bookAppointmentLogic
+                                                  .paymentMethodList[index]
+                                                  .image!
+                                                  .contains('razorpay')) {
+                                                setState(() {
+                                                  razorPay = true;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  razorPay = false;
                                                 });
                                               }
                                             },
@@ -535,7 +553,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                           ]),
 
                       ///---bottom-bar
-                      wave == true
+                      razorPay == true
                           ? Positioned(
                               bottom: 0.h,
                               left: 15.w,
@@ -543,128 +561,153 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                               child: InkWell(
                                 onTap: () {
                                   if (_formKey.currentState!.validate()) {
-                                    Get.to(FlutterWave(
+                                    Get.to(RazorPayView(
                                         amount: _bookAppointmentLogic
                                             .selectMentorAppointmentType!.fee
                                             .toString()));
                                   }
                                 },
                                 child: const MyCustomBottomBar(
-                                  title: 'Flutter Wave',
+                                  title: 'Razor Pay',
                                   disable: false,
                                 ),
                               ),
                             )
-                          : Positioned(
-                              bottom: 0.h,
-                              left: 15.w,
-                              right: 15.w,
-                              child: InkWell(
-                                onTap: () {
-                                  if (!disableButton! &&
-                                      _formKey.currentState!.validate()) {
-                                    if (_bookAppointmentLogic
-                                            .selectedFileName ==
-                                        null) {
-                                      _generalController
-                                          .updateFormLoaderController(true);
-                                      if (_bookAppointmentLogic
-                                              .selectMentorAppointmentType!
-                                              .appointmentType!
-                                              .isScheduleRequired ==
-                                          1) {
-                                        postMethod(
-                                            context,
-                                            bookAppointmentUrl,
-                                            {
-                                              'token': '123',
-                                              'mentee_id':
-                                                  Get.find<GeneralController>()
-                                                      .storageBox
-                                                      .read('userID'),
-                                              'mentor_id':
-                                                  Get.find<UserHomeLogic>()
-                                                      .selectedConsultantID,
-                                              'payment': _bookAppointmentLogic
-                                                  .selectMentorAppointmentType!
-                                                  .fee,
-                                              'payment_id':
-                                                  _bookAppointmentLogic
-                                                      .selectedPaymentType,
-                                              'questions': _bookAppointmentLogic
-                                                  .questionController.text,
-                                              'appointment_type_string':
-                                                  _bookAppointmentLogic
-                                                      .selectMentorAppointmentType!
-                                                      .appointmentType!
-                                                      .name,
-                                              'appointment_type_id':
-                                                  _bookAppointmentLogic
-                                                      .selectMentorAppointmentType!
-                                                      .appointmentType!
-                                                      .id,
-                                              'date': _bookAppointmentLogic
-                                                  .selectedDateForAppointment
-                                                  .substring(0, 11),
-                                              'time': _bookAppointmentLogic
-                                                  .selectedTimeForAppointment,
-                                            },
-                                            true,
-                                            bookAppointmentWithoutFileRepo);
-                                      } else {
-                                        postMethod(
-                                            context,
-                                            bookAppointmentUrl,
-                                            {
-                                              'token': '123',
-                                              'mentee_id':
-                                                  Get.find<GeneralController>()
-                                                      .storageBox
-                                                      .read('userID'),
-                                              'mentor_id':
-                                                  Get.find<UserHomeLogic>()
-                                                      .selectedConsultantID,
-                                              'payment': _bookAppointmentLogic
-                                                  .selectMentorAppointmentType!
-                                                  .fee,
-                                              'payment_id':
-                                                  _bookAppointmentLogic
-                                                      .selectedPaymentType,
-                                              'questions': _bookAppointmentLogic
-                                                  .questionController.text,
-                                              'appointment_type_string':
-                                                  _bookAppointmentLogic
-                                                      .selectMentorAppointmentType!
-                                                      .appointmentType!
-                                                      .name,
-                                              'appointment_type_id':
-                                                  _bookAppointmentLogic
-                                                      .selectMentorAppointmentType!
-                                                      .appointmentType!
-                                                      .id,
-                                            },
-                                            true,
-                                            bookAppointmentWithoutFileRepo);
+                          : wave == true
+                              ? Positioned(
+                                  bottom: 0.h,
+                                  left: 15.w,
+                                  right: 15.w,
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        Get.to(FlutterWave(
+                                            amount: _bookAppointmentLogic
+                                                .selectMentorAppointmentType!
+                                                .fee
+                                                .toString()));
                                       }
-                                    } else {
-                                      _generalController
-                                          .updateFormLoaderController(true);
-                                      bookAppointmentFileRepo(
-                                          File(_bookAppointmentLogic
-                                              .filePickerResult!
-                                              .files[0]
-                                              .path!),
-                                          context);
-                                    }
-                                    // Get.toNamed(PageRoutes.paymentView);
-                                  }
-                                },
-                                child: MyCustomBottomBar(
-                                  title: LanguageConstant.continueText.tr,
-                                  disable: disableButton!,
-                                ),
-                              ),
-                            )
+                                    },
+                                    child: const MyCustomBottomBar(
+                                      title: 'Flutter Wave',
+                                      disable: false,
+                                    ),
+                                  ),
+                                )
+                              : Positioned(
+                                  bottom: 0.h,
+                                  left: 15.w,
+                                  right: 15.w,
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (!disableButton! &&
+                                          _formKey.currentState!.validate()) {
+                                        if (_bookAppointmentLogic
+                                                .selectedFileName ==
+                                            null) {
+                                          _generalController
+                                              .updateFormLoaderController(true);
+                                          if (_bookAppointmentLogic
+                                                  .selectMentorAppointmentType!
+                                                  .appointmentType!
+                                                  .isScheduleRequired ==
+                                              1) {
+                                            postMethod(
+                                                context,
+                                                bookAppointmentUrl,
+                                                {
+                                                  'token': '123',
+                                                  'mentee_id': Get.find<
+                                                          GeneralController>()
+                                                      .storageBox
+                                                      .read('userID'),
+                                                  'mentor_id':
+                                                      Get.find<UserHomeLogic>()
+                                                          .selectedConsultantID,
+                                                  'payment': _bookAppointmentLogic
+                                                      .selectMentorAppointmentType!
+                                                      .fee,
+                                                  'payment_id':
+                                                      _bookAppointmentLogic
+                                                          .selectedPaymentType,
+                                                  'questions':
+                                                      _bookAppointmentLogic
+                                                          .questionController
+                                                          .text,
+                                                  'appointment_type_string':
+                                                      _bookAppointmentLogic
+                                                          .selectMentorAppointmentType!
+                                                          .appointmentType!
+                                                          .name,
+                                                  'appointment_type_id':
+                                                      _bookAppointmentLogic
+                                                          .selectMentorAppointmentType!
+                                                          .appointmentType!
+                                                          .id,
+                                                  'date': _bookAppointmentLogic
+                                                      .selectedDateForAppointment
+                                                      .substring(0, 11),
+                                                  'time': _bookAppointmentLogic
+                                                      .selectedTimeForAppointment,
+                                                },
+                                                true,
+                                                bookAppointmentWithoutFileRepo);
+                                          } else {
+                                            postMethod(
+                                                context,
+                                                bookAppointmentUrl,
+                                                {
+                                                  'token': '123',
+                                                  'mentee_id': Get.find<
+                                                          GeneralController>()
+                                                      .storageBox
+                                                      .read('userID'),
+                                                  'mentor_id':
+                                                      Get.find<UserHomeLogic>()
+                                                          .selectedConsultantID,
+                                                  'payment': _bookAppointmentLogic
+                                                      .selectMentorAppointmentType!
+                                                      .fee,
+                                                  'payment_id':
+                                                      _bookAppointmentLogic
+                                                          .selectedPaymentType,
+                                                  'questions':
+                                                      _bookAppointmentLogic
+                                                          .questionController
+                                                          .text,
+                                                  'appointment_type_string':
+                                                      _bookAppointmentLogic
+                                                          .selectMentorAppointmentType!
+                                                          .appointmentType!
+                                                          .name,
+                                                  'appointment_type_id':
+                                                      _bookAppointmentLogic
+                                                          .selectMentorAppointmentType!
+                                                          .appointmentType!
+                                                          .id,
+                                                },
+                                                true,
+                                                bookAppointmentWithoutFileRepo);
+                                          }
+                                        } else {
+                                          _generalController
+                                              .updateFormLoaderController(true);
+                                          bookAppointmentFileRepo(
+                                              File(_bookAppointmentLogic
+                                                  .filePickerResult!
+                                                  .files[0]
+                                                  .path!),
+                                              context);
+                                        }
+                                        // Get.toNamed(PageRoutes.paymentView);
+                                      }
+                                    },
+                                    child: MyCustomBottomBar(
+                                      title: LanguageConstant.continueText.tr,
+                                      disable: disableButton!,
+                                    ),
+                                  ),
+                                )
                     ],
                   )),
             ),
