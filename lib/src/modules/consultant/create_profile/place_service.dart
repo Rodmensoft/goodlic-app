@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'dart:io';
+
 import 'package:http/http.dart';
 
 class Place {
@@ -41,8 +41,8 @@ class PlaceApiProvider {
 
   String? sessionToken;
 
-  static const String androidKey = 'Your Android API key';
-  static const String iosKey = 'Your iOS API key';
+  static const String androidKey = 'AIzaSyCdCdcUtLMgTMNOc0c_KrXxVhWnVUAaJYw';
+  static const String iosKey = 'AIzaSyCdCdcUtLMgTMNOc0c_KrXxVhWnVUAaJYw';
   final apiKey = Platform.isAndroid ? androidKey : iosKey;
 
   Future<List<Suggestion>> fetchSuggestions(String input, String lang) async {

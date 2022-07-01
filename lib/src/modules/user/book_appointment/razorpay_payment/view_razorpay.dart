@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
@@ -9,6 +10,7 @@ import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
+import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -61,7 +63,7 @@ class _RazorPayViewState extends State<RazorPayView> {
     print('testing......');
     var option = {
       'key': 'rzp_test_hitm78nbin30uC',
-      'amount': amountController.text,
+      'amount': num.parse(amountController.text) * 100,
       'name': nameController.text,
     };
     try {
@@ -74,12 +76,77 @@ class _RazorPayViewState extends State<RazorPayView> {
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     log('payment Successful');
     log('${response.orderId} \n ${response.paymentId} \n ${response.signature}');
-    showLoading('Payment Successful');
+    // showLoading('Success');
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CustomDialogBox(
+            title: LanguageConstant.success.tr,
+            titleColor: customDialogSuccessColor,
+            descriptions: 'Your Payment Successfully Paid!',
+            text: LanguageConstant.ok.tr,
+            functionCall: () {
+              //Navigator.pop(context);
+              // Get.back();
+              Get.find<GeneralController>().updateFormLoaderController(true);
+
+              postMethod(
+                  context,
+                  bookAppointmentUrl,
+                  {
+                    'token': '123',
+                    'mentee_id':
+                        Get.find<GeneralController>().storageBox.read('userID'),
+                    'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
+                    'payment': Get.find<BookAppointmentLogic>()
+                        .selectMentorAppointmentType!
+                        .fee,
+                    'payment_id':
+                        Get.find<BookAppointmentLogic>().selectedPaymentType,
+                    'questions': Get.find<BookAppointmentLogic>()
+                        .questionController
+                        .text,
+                    'appointment_type_string': Get.find<BookAppointmentLogic>()
+                        .selectMentorAppointmentType!
+                        .appointmentType!
+                        .name,
+                    'appointment_type_id': Get.find<BookAppointmentLogic>()
+                        .selectMentorAppointmentType!
+                        .appointmentType!
+                        .id,
+                    'date': Get.find<BookAppointmentLogic>()
+                        .selectedDateForAppointment
+                        .substring(0, 11),
+                    'time': Get.find<BookAppointmentLogic>()
+                        .selectedTimeForAppointment,
+                  },
+                  true,
+                  flutterWaveRepo);
+            },
+            img: 'assets/Icons/dialog_success.svg',
+          );
+        });
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
     log('Payment Failed');
     log('${response.code} \n ${response.message}');
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CustomDialogBox(
+            title: LanguageConstant.failed.tr,
+            titleColor: customDialogErrorColor,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
+            text: LanguageConstant.ok.tr,
+            functionCall: () {
+              Navigator.pop(context);
+            },
+            img: 'assets/Icons/dialog_error.svg',
+          );
+        });
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -429,86 +496,86 @@ class _RazorPayViewState extends State<RazorPayView> {
     });
   }
 
-  Future<void> showLoading(String message) {
-    return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Container(
-            margin: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-            width: double.infinity,
-            height: 90.h,
-            child: Column(
-              children: [
-                Text(
-                  message,
-                  style: TextStyle(
-                    fontSize: 24.sp,
-                  ),
-                ),
-                InkWell(
-                    onTap: () {
-                      Get.find<GeneralController>()
-                          .updateFormLoaderController(true);
-                      postMethod(
-                          context,
-                          bookAppointmentUrl,
-                          {
-                            'token': '123',
-                            'mentee_id': Get.find<GeneralController>()
-                                .storageBox
-                                .read('userID'),
-                            'mentor_id':
-                                Get.find<UserHomeLogic>().selectedConsultantID,
-                            'payment': Get.find<BookAppointmentLogic>()
-                                .selectMentorAppointmentType!
-                                .fee,
-                            'payment_id': Get.find<BookAppointmentLogic>()
-                                .selectedPaymentType,
-                            'questions': Get.find<BookAppointmentLogic>()
-                                .questionController
-                                .text,
-                            'appointment_type_string':
-                                Get.find<BookAppointmentLogic>()
-                                    .selectMentorAppointmentType!
-                                    .appointmentType!
-                                    .name,
-                            'appointment_type_id':
-                                Get.find<BookAppointmentLogic>()
-                                    .selectMentorAppointmentType!
-                                    .appointmentType!
-                                    .id,
-                            'date': Get.find<BookAppointmentLogic>()
-                                .selectedDateForAppointment
-                                .substring(0, 11),
-                            'time': Get.find<BookAppointmentLogic>()
-                                .selectedTimeForAppointment,
-                          },
-                          true,
-                          flutterWaveRepo);
-                    },
-                    child: Padding(
-                        padding: EdgeInsets.only(top: 10.h),
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: customThemeColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12.r))),
-                            height: 45.h,
-                            width: 50.h,
-                            child: Center(
-                              child: Text(
-                                'ok',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18.sp),
-                              ),
-                            ))))
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+  // Future<void> showLoading(String message) {
+  //   return showDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         content: Container(
+  //           margin: const EdgeInsets.fromLTRB(30, 20, 30, 20),
+  //           width: double.infinity,
+  //           height: 90.h,
+  //           child: Column(
+  //             children: [
+  //               Text(
+  //                 message,
+  //                 style: TextStyle(
+  //                   fontSize: 24.sp,
+  //                 ),
+  //               ),
+  //               InkWell(
+  //                   onTap: () {
+  //                     Get.find<GeneralController>()
+  //                         .updateFormLoaderController(true);
+  //                     postMethod(
+  //                         context,
+  //                         bookAppointmentUrl,
+  //                         {
+  //                           'token': '123',
+  //                           'mentee_id': Get.find<GeneralController>()
+  //                               .storageBox
+  //                               .read('userID'),
+  //                           'mentor_id':
+  //                               Get.find<UserHomeLogic>().selectedConsultantID,
+  //                           'payment': Get.find<BookAppointmentLogic>()
+  //                               .selectMentorAppointmentType!
+  //                               .fee,
+  //                           'payment_id': Get.find<BookAppointmentLogic>()
+  //                               .selectedPaymentType,
+  //                           'questions': Get.find<BookAppointmentLogic>()
+  //                               .questionController
+  //                               .text,
+  //                           'appointment_type_string':
+  //                               Get.find<BookAppointmentLogic>()
+  //                                   .selectMentorAppointmentType!
+  //                                   .appointmentType!
+  //                                   .name,
+  //                           'appointment_type_id':
+  //                               Get.find<BookAppointmentLogic>()
+  //                                   .selectMentorAppointmentType!
+  //                                   .appointmentType!
+  //                                   .id,
+  //                           'date': Get.find<BookAppointmentLogic>()
+  //                               .selectedDateForAppointment
+  //                               .substring(0, 11),
+  //                           'time': Get.find<BookAppointmentLogic>()
+  //                               .selectedTimeForAppointment,
+  //                         },
+  //                         true,
+  //                         flutterWaveRepo);
+  //                   },
+  //                   child: Padding(
+  //                       padding: EdgeInsets.only(top: 10.h),
+  //                       child: Container(
+  //                           decoration: BoxDecoration(
+  //                               color: customThemeColor,
+  //                               borderRadius:
+  //                                   BorderRadius.all(Radius.circular(12.r))),
+  //                           height: 45.h,
+  //                           width: 50.h,
+  //                           child: Center(
+  //                             child: Text(
+  //                               'ok',
+  //                               style: TextStyle(
+  //                                   color: Colors.white, fontSize: 18.sp),
+  //                             ),
+  //                           ))))
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }
