@@ -62,9 +62,6 @@ class WalletLogic extends GetxController {
     }
   }
 
-
-
-
   GetWalletBalanceModel getWalletBalanceModel = GetWalletBalanceModel();
   GetAllTransactionModel getAllTransactionModel = GetAllTransactionModel();
   DepositWalletModel depositWalletModel = DepositWalletModel();
@@ -74,13 +71,13 @@ class WalletLogic extends GetxController {
   TextEditingController easypaisaAmountController = TextEditingController();
   TextEditingController withdrawAmountController = TextEditingController();
   TextEditingController jazzCashCnicTextController = TextEditingController();
-  TextEditingController paymentAccountNumberTextController = TextEditingController();
+  TextEditingController paymentAccountNumberTextController =
+      TextEditingController();
 
   final RefreshController refreshAppointmentsController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
-
-  updateRefreshController(){
+  updateRefreshController() {
     refreshAppointmentsController.refreshCompleted();
     update();
   }
@@ -108,8 +105,7 @@ class WalletLogic extends GetxController {
 
   List<TransactionsModel> getAllTransactionList = [];
 
-  updateGetAllTransactionList(
-      TransactionsModel transactionsModel) {
+  updateGetAllTransactionList(TransactionsModel transactionsModel) {
     getAllTransactionList.add(transactionsModel);
     update();
   }
@@ -119,12 +115,12 @@ class WalletLogic extends GetxController {
     update();
   }
 
-
   ModelStripePayment modelStripePayment = ModelStripePayment();
 
   double myWidth = 0;
   TextEditingController accountCardNumberController = TextEditingController();
-  TextEditingController accountCardHolderNameController = TextEditingController();
+  TextEditingController accountCardHolderNameController =
+      TextEditingController();
   TextEditingController accountCardExpiresController = TextEditingController();
   TextEditingController accountCardCvcController = TextEditingController();
 
@@ -134,9 +130,7 @@ class WalletLogic extends GetxController {
   int? selectedPaymentType;
   List<ShiftType> paymentMethodList = [
     ShiftType(
-        title: 'stripe',
-        image: 'assets/Icons/stripe.svg',
-        isSelected: false),
+        title: 'stripe', image: 'assets/Icons/stripe.svg', isSelected: false),
     ShiftType(
         title: 'braintree',
         image: 'assets/Icons/braintreePayment.svg',
@@ -146,5 +140,4 @@ class WalletLogic extends GetxController {
         image: 'assets/Icons/paypalPayment.svg',
         isSelected: false),
   ];
-
 }

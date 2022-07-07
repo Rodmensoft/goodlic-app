@@ -190,7 +190,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                 .24,
                                         floating: true,
                                         pinned: true,
-                                        snap: true,
+                                        snap: false,
                                         elevation: 0,
                                         backgroundColor:
                                             _dashboardLogic.isShrink

@@ -108,7 +108,7 @@ class _TopConsultantsState extends State<TopConsultants> {
                                   },
                                   child: Stack(
                                     // ignore: deprecated_member_use
-
+                                    clipBehavior: Clip.none,
                                     children: [
                                       Container(
                                         height: 126.h,
@@ -180,7 +180,7 @@ class _TopConsultantsState extends State<TopConsultants> {
                                       ),
                                       PositionedDirectional(
                                           end: 12.w,
-                                          top: 4.h,
+                                          top: -15.h,
                                           child: Image.asset(
                                             _userHomeLogic.topConsultants[index]
                                                         .gender ==

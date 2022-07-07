@@ -1,5 +1,3 @@
-
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -48,7 +46,7 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
           : MediaQuery.of(context).size.height * .35,
       floating: true,
       pinned: true,
-      snap: true,
+      snap: false,
       elevation: 0,
       backgroundColor: widget.isShrink! ? customThemeColor : Colors.transparent,
       leading: InkWell(

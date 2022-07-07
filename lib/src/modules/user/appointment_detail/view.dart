@@ -88,7 +88,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                       expandedHeight: MediaQuery.of(context).size.height * .24,
                       floating: true,
                       pinned: true,
-                      snap: true,
+                      snap: false,
                       elevation: 0,
                       backgroundColor: _appointmentDetailLogic.isShrink
                           ? customThemeColor

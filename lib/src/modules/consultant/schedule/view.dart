@@ -97,7 +97,7 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                         expandedHeight: MediaQuery.of(context).size.height * .2,
                         floating: true,
                         pinned: true,
-                        snap: true,
+                        snap: false,
                         elevation: 0,
                         backgroundColor: _mentorScheduleLogic.isShrink
                             ? customThemeColor

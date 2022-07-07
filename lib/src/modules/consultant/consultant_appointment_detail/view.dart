@@ -113,7 +113,7 @@ class _ConsultantAppointmentDetailPageState
                       expandedHeight: MediaQuery.of(context).size.height * .24,
                       floating: true,
                       pinned: true,
-                      snap: true,
+                      snap: false,
                       elevation: 0,
                       backgroundColor:
                           _consultantAppointmentDetailLogic.isShrink

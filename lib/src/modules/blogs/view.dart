@@ -240,7 +240,9 @@ class _BlogsPageState extends State<BlogsPage> {
                                                                 '${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].title}',
                                                                 maxLines: 3,
                                                                 softWrap: true,
-                                                                overflow: TextOverflow.ellipsis,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
                                                                 style: state
                                                                     .categoryTextStyle,
                                                               ),

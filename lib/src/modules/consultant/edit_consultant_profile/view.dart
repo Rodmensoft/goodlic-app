@@ -34,7 +34,8 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
     });
     Get.find<EditConsultantProfileLogic>().scrollController = ScrollController()
       ..addListener(Get.find<EditConsultantProfileLogic>().scrollListener);
-    Get.find<EditConsultantProfileLogic>().stepperScrollController = ScrollController();
+    Get.find<EditConsultantProfileLogic>().stepperScrollController =
+        ScrollController();
 
     Get.find<EditConsultantProfileLogic>().emptyOccupationDropDownList();
     Get.find<EditConsultantProfileLogic>().emptyCountryDropDownList();
@@ -62,7 +63,9 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
 
   @override
   void dispose() {
-    Get.find<EditConsultantProfileLogic>().scrollController!.removeListener(Get.find<EditConsultantProfileLogic>().scrollListener);
+    Get.find<EditConsultantProfileLogic>()
+        .scrollController!
+        .removeListener(Get.find<EditConsultantProfileLogic>().scrollListener);
     Get.find<EditConsultantProfileLogic>().scrollController!.dispose();
     super.dispose();
   }
@@ -89,7 +92,7 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
                       expandedHeight: MediaQuery.of(context).size.height * .3,
                       floating: true,
                       pinned: true,
-                      snap: true,
+                      snap: false,
                       elevation: 0,
                       backgroundColor: _editConsultantProfileLogic.isShrink
                           ? customThemeColor

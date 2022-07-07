@@ -91,7 +91,7 @@ class _UserHomePageState extends State<UserHomePage> {
                       expandedHeight: MediaQuery.of(context).size.height * .35,
                       floating: true,
                       pinned: true,
-                      snap: true,
+                      snap: false,
                       elevation: 0,
                       backgroundColor: _userHomeLogic.isShrink
                           ? customThemeColor
@@ -152,8 +152,9 @@ class _UserHomePageState extends State<UserHomePage> {
 
                                     ///---search-field
                                     TextFormField(
-                                      onTap: (){
-                                        Get.toNamed(PageRoutes.searchConsultant);
+                                      onTap: () {
+                                        Get.toNamed(
+                                            PageRoutes.searchConsultant);
                                       },
                                       readOnly: true,
                                       decoration: InputDecoration(

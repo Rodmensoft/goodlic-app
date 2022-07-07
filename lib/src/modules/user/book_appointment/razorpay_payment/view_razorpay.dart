@@ -16,6 +16,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:resize/resize.dart';
@@ -62,7 +63,7 @@ class _RazorPayViewState extends State<RazorPayView> {
   launchRazorPay() {
     print('testing......');
     var option = {
-      'key': 'rzp_test_hitm78nbin30uC',
+      'key': '${GlobalConfiguration().get('razorpay_key')}',
       'amount': num.parse(amountController.text) * 100,
       'name': nameController.text,
     };
@@ -252,50 +253,6 @@ class _RazorPayViewState extends State<RazorPayView> {
                         ),
                       ),
 
-                      // /// Currency
-                      // Container(
-                      //   margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                      //   child: TextFormField(
-                      //     controller: currencyController,
-                      //     textInputAction: TextInputAction.next,
-                      //     readOnly: true,
-                      //     decoration: InputDecoration(
-                      //       contentPadding: EdgeInsetsDirectional.fromSTEB(
-                      //           25.w, 15.h, 25.w, 15.h),
-                      //       hintText: 'Currency',
-                      //       hintStyle: TextStyle(
-                      //           fontFamily: SarabunFontFamily.regular,
-                      //           fontSize: 16.sp,
-                      //           color: customTextGreyColor),
-                      //       fillColor: customTextFieldColor,
-                      //       filled: true,
-                      //       enabledBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: Colors.transparent)),
-                      //       border: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: Colors.transparent)),
-                      //       focusedBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: customLightThemeColor)),
-                      //       errorBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide:
-                      //           const BorderSide(color: Colors.red)),
-                      //     ),
-                      //     validator: (value) {
-                      //       if (value!.isEmpty) {
-                      //         return 'Field is Required';
-                      //       } else {
-                      //         return null;
-                      //       }
-                      //     },
-                      //   ),
-                      // ),
-
                       /// name
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
@@ -343,135 +300,6 @@ class _RazorPayViewState extends State<RazorPayView> {
                         ),
                       ),
 
-                      // /// Email
-                      // Container(
-                      //   margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                      //   child: TextFormField(
-                      //     controller: emailController,
-                      //     keyboardType: TextInputType.emailAddress,
-                      //     decoration: InputDecoration(
-                      //       contentPadding: EdgeInsetsDirectional.fromSTEB(
-                      //           25.w, 15.h, 25.w, 15.h),
-                      //       hintText: "Email",
-                      //       hintStyle: TextStyle(
-                      //           fontFamily: SarabunFontFamily.regular,
-                      //           fontSize: 16.sp,
-                      //           color: customTextGreyColor),
-                      //       fillColor: customTextFieldColor,
-                      //       filled: true,
-                      //       enabledBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: Colors.transparent)),
-                      //       border: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: Colors.transparent)),
-                      //       focusedBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: customLightThemeColor)),
-                      //       errorBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide:
-                      //               const BorderSide(color: Colors.red)),
-                      //     ),
-                      //     validator: (value) {
-                      //       if (value!.isEmpty) {
-                      //         return 'Field is Required';
-                      //       } else if (!GetUtils.isEmail(value)) {
-                      //         return 'Enter Valid Email';
-                      //       } else {
-                      //         return null;
-                      //       }
-                      //     },
-                      //   ),
-                      // ),
-                      //
-                      // /// Phone number
-                      // Container(
-                      //   margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                      //   child: TextFormField(
-                      //     controller: phoneNumberController,
-                      //     keyboardType: TextInputType.number,
-                      //     decoration: InputDecoration(
-                      //       contentPadding: EdgeInsetsDirectional.fromSTEB(
-                      //           25.w, 15.h, 25.w, 15.h),
-                      //       hintText: 'Phone Number',
-                      //       hintStyle: TextStyle(
-                      //           fontFamily: SarabunFontFamily.regular,
-                      //           fontSize: 16.sp,
-                      //           color: customTextGreyColor),
-                      //       fillColor: customTextFieldColor,
-                      //       filled: true,
-                      //       enabledBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: Colors.transparent)),
-                      //       border: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: Colors.transparent)),
-                      //       focusedBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: customLightThemeColor)),
-                      //       errorBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide:
-                      //               const BorderSide(color: Colors.red)),
-                      //     ),
-                      //     validator: (value) {
-                      //       if (value!.isEmpty) {
-                      //         return 'Field is Required';
-                      //       } else {
-                      //         return null;
-                      //       }
-                      //     },
-                      //   ),
-                      // ),
-                      //
-                      // /// Description
-                      // Container(
-                      //   margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                      //   child: TextFormField(
-                      //     controller: descController,
-                      //     decoration: InputDecoration(
-                      //       contentPadding: EdgeInsetsDirectional.fromSTEB(
-                      //           25.w, 15.h, 25.w, 15.h),
-                      //       hintText: 'Description',
-                      //       hintStyle: TextStyle(
-                      //           fontFamily: SarabunFontFamily.regular,
-                      //           fontSize: 16.sp,
-                      //           color: customTextGreyColor),
-                      //       fillColor: customTextFieldColor,
-                      //       filled: true,
-                      //       enabledBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: Colors.transparent)),
-                      //       border: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: Colors.transparent)),
-                      //       focusedBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide: const BorderSide(
-                      //               color: customLightThemeColor)),
-                      //       errorBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8.r),
-                      //           borderSide:
-                      //               const BorderSide(color: Colors.red)),
-                      //     ),
-                      //     validator: (value) {
-                      //       if (value!.isEmpty) {
-                      //         return 'Field is Required';
-                      //       } else {
-                      //         return null;
-                      //       }
-                      //     },
-                      //   ),
-                      // ),
                       SizedBox(height: 25.h),
 
                       /// Make Payment Button
@@ -495,87 +323,4 @@ class _RazorPayViewState extends State<RazorPayView> {
       });
     });
   }
-
-  // Future<void> showLoading(String message) {
-  //   return showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         content: Container(
-  //           margin: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-  //           width: double.infinity,
-  //           height: 90.h,
-  //           child: Column(
-  //             children: [
-  //               Text(
-  //                 message,
-  //                 style: TextStyle(
-  //                   fontSize: 24.sp,
-  //                 ),
-  //               ),
-  //               InkWell(
-  //                   onTap: () {
-  //                     Get.find<GeneralController>()
-  //                         .updateFormLoaderController(true);
-  //                     postMethod(
-  //                         context,
-  //                         bookAppointmentUrl,
-  //                         {
-  //                           'token': '123',
-  //                           'mentee_id': Get.find<GeneralController>()
-  //                               .storageBox
-  //                               .read('userID'),
-  //                           'mentor_id':
-  //                               Get.find<UserHomeLogic>().selectedConsultantID,
-  //                           'payment': Get.find<BookAppointmentLogic>()
-  //                               .selectMentorAppointmentType!
-  //                               .fee,
-  //                           'payment_id': Get.find<BookAppointmentLogic>()
-  //                               .selectedPaymentType,
-  //                           'questions': Get.find<BookAppointmentLogic>()
-  //                               .questionController
-  //                               .text,
-  //                           'appointment_type_string':
-  //                               Get.find<BookAppointmentLogic>()
-  //                                   .selectMentorAppointmentType!
-  //                                   .appointmentType!
-  //                                   .name,
-  //                           'appointment_type_id':
-  //                               Get.find<BookAppointmentLogic>()
-  //                                   .selectMentorAppointmentType!
-  //                                   .appointmentType!
-  //                                   .id,
-  //                           'date': Get.find<BookAppointmentLogic>()
-  //                               .selectedDateForAppointment
-  //                               .substring(0, 11),
-  //                           'time': Get.find<BookAppointmentLogic>()
-  //                               .selectedTimeForAppointment,
-  //                         },
-  //                         true,
-  //                         flutterWaveRepo);
-  //                   },
-  //                   child: Padding(
-  //                       padding: EdgeInsets.only(top: 10.h),
-  //                       child: Container(
-  //                           decoration: BoxDecoration(
-  //                               color: customThemeColor,
-  //                               borderRadius:
-  //                                   BorderRadius.all(Radius.circular(12.r))),
-  //                           height: 45.h,
-  //                           width: 50.h,
-  //                           child: Center(
-  //                             child: Text(
-  //                               'ok',
-  //                               style: TextStyle(
-  //                                   color: Colors.white, fontSize: 18.sp),
-  //                             ),
-  //                           ))))
-  //             ],
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 }
