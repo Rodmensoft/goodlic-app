@@ -69,6 +69,4 @@ class ChatLogic extends GetxController {
   String? userName;
   String? userEmail;
   String? userImage;
-
-
 }

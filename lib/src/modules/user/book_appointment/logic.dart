@@ -26,6 +26,13 @@ class BookAppointmentLogic extends GetxController {
 
   //ModelFlutterWave modelFlutterWave = ModelFlutterWave();
 
+  bool? formLoaderController = false;
+
+  updateFormLoaderController(bool? newValue) {
+    formLoaderController = newValue;
+    update();
+  }
+
   ///----app-bar-settings-----start
   ScrollController? scrollController;
   ScrollController? scrollController2;

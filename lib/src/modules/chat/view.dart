@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -77,12 +78,12 @@ class _ChatPageState extends State<ChatPage> {
 
       Messages tempChatData = Messages.fromJson(tempMap['message']);
       Get.find<ChatLogic>().updateMessageList(tempChatData);
+      // Future.delayed(const Duration(seconds: 1)).whenComplete(() =>
+      //     Get.find<ChatLogic>().scrollController!.animateTo(
+      //         Get.find<ChatLogic>().scrollController!.position.maxScrollExtent,
+      //         curve: Curves.easeOut,
+      //         duration: const Duration(milliseconds: 500)));
       Future.delayed(const Duration(seconds: 1)).whenComplete(() =>
-          Get.find<ChatLogic>().scrollController!.animateTo(
-              Get.find<ChatLogic>().scrollController!.position.maxScrollExtent,
-              curve: Curves.easeOut,
-              duration: const Duration(milliseconds: 500)));
-      Future.delayed(const Duration(milliseconds: 1)).whenComplete(() =>
           Get.find<ChatLogic>().chatScrollController!.animateTo(
               Get.find<ChatLogic>()
                   .chatScrollController!
@@ -90,6 +91,13 @@ class _ChatPageState extends State<ChatPage> {
                   .maxScrollExtent,
               curve: Curves.easeOut,
               duration: const Duration(milliseconds: 500)));
+      // Timer(
+      //     const Duration(seconds: 1),
+      //     () => Get.find<ChatLogic>().chatScrollController!.jumpTo(
+      //         Get.find<ChatLogic>()
+      //             .chatScrollController!
+      //             .position
+      //             .maxScrollExtent));
     });
   }
 
@@ -111,6 +119,7 @@ class _ChatPageState extends State<ChatPage> {
               _generalController.focusOut(context);
             },
             child: Scaffold(
+              resizeToAvoidBottomInset: true,
               backgroundColor: const Color(0xffFBFBFB),
               body: NestedScrollView(
                 controller: _chatLogic.scrollController,

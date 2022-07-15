@@ -121,3 +121,12 @@
 
 40--> device_info_plus: BSD-3-Clause (LICENSE) -
     Flutter plugin providing detailed information about the device (make, model, etc.), and Android or iOS version the app is running on.
+
+41--> flutter_vibrate: -
+    A Flutter plugin to vibrate the device. This uses all the current Haptic Feedback APIs from Apple and provides similar feedback on Android.
+
+42--> razorpay_flutter: -
+    Flutter plugin for Razorpay SDK.
+
+43--> flutterwave_standard: -
+    Flutterwave's official library that wraps the standard implementation.

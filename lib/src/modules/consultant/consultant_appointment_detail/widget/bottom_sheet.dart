@@ -4,6 +4,7 @@ import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/logic.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/repo.dart';
+import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/widget/custom_dialog_for_notes.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -546,6 +547,102 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                           const Spacer()
                                         ],
                                       ),
+                                      SizedBox(
+                                        height: 18.h,
+                                      ),
+
+                                      ///---- attachment and notes
+                                      _consultantAppointmentDetailLogic
+                                                  .selectedAppointmentData
+                                                  .appointmentStatus ==
+                                              2
+                                          ? Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                ///---Notes
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        // LanguageConstant.city.tr,
+                                                        'Note',
+                                                        style: state
+                                                            .sectionLabelTextStyle,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 8.h,
+                                                      ),
+                                                      Text(
+                                                        _consultantAppointmentDetailLogic
+                                                                    .selectedAppointmentData
+                                                                    .mentee!
+                                                                    .city ==
+                                                                null
+                                                            ? '...'
+                                                            : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.city!}',
+                                                        softWrap: true,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        maxLines: 1,
+                                                        style: state
+                                                            .sectionDataTextStyle,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+
+                                                ///---Attachment
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        // LanguageConstant.country.tr,
+                                                        'Attachment',
+                                                        style: state
+                                                            .sectionLabelTextStyle,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 8.h,
+                                                      ),
+                                                      Text(
+                                                        _consultantAppointmentDetailLogic
+                                                                    .selectedAppointmentData
+                                                                    .mentee!
+                                                                    .userCountry ==
+                                                                null
+                                                            ? '...'
+                                                            : _consultantAppointmentDetailLogic
+                                                                .selectedAppointmentData
+                                                                .mentee!
+                                                                .userCountry!
+                                                                .name!,
+                                                        softWrap: true,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        maxLines: 1,
+                                                        style: state
+                                                            .sectionDataTextStyle,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const Spacer()
+                                              ],
+                                            )
+                                          : const SizedBox(),
                                     ],
                                   ),
                                 ),
@@ -739,49 +836,50 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                     0, 30.h, 0, 10.h),
                                 child: InkWell(
                                   onTap: () {
-                                    ///---make-notification
-                                    Get.find<GeneralController>()
-                                        .updateNotificationBody(
-                                            'Your Appointment is Completed',
-                                            '',
-                                            null,
-                                            'mentee/appointment/log',
-                                            null);
-                                    Get.find<GeneralController>()
-                                        .updateUserIdForSendNotification(
-                                            _consultantAppointmentDetailLogic
-                                                .selectedAppointmentData
-                                                .menteeId);
-                                    Get.find<GeneralController>()
-                                        .updateFormLoaderController(true);
-                                    Get.find<ConsultantAppointmentLogic>()
-                                        .updateGetUserAppointmentLoader(true);
-                                    Get.back();
-                                    Get.back();
-                                    postMethod(
-                                        context,
-                                        markAsCompleteAppointmentUrl,
-                                        {
-                                          'token': '123',
-                                          'appointment_id': Get.find<
-                                                  ConsultantAppointmentDetailLogic>()
-                                              .selectedAppointmentData
-                                              .id,
-                                        },
-                                        true,
-                                        mentorCompleteAppointmentRepo);
+                                    customDialogForNotes(context);
+                                    // ///---make-notification
+                                    // Get.find<GeneralController>()
+                                    //     .updateNotificationBody(
+                                    //         'Your Appointment is Completed',
+                                    //         '',
+                                    //         null,
+                                    //         'mentee/appointment/log',
+                                    //         null);
+                                    // Get.find<GeneralController>()
+                                    //     .updateUserIdForSendNotification(
+                                    //         _consultantAppointmentDetailLogic
+                                    //             .selectedAppointmentData
+                                    //             .menteeId);
+                                    // Get.find<GeneralController>()
+                                    //     .updateFormLoaderController(true);
+                                    // Get.find<ConsultantAppointmentLogic>()
+                                    //     .updateGetUserAppointmentLoader(true);
+                                    // Get.back();
+                                    // Get.back();
                                     // postMethod(
                                     //     context,
-                                    //     mentorChangeAppointmentStatusUrl,
+                                    //     markAsCompleteAppointmentUrl,
                                     //     {
                                     //       'token': '123',
-                                    //       'id':
-                                    //           _consultantAppointmentDetailLogic
-                                    //               .selectedAppointmentData.id,
-                                    //       'status': 2
+                                    //       'appointment_id': Get.find<
+                                    //               ConsultantAppointmentDetailLogic>()
+                                    //           .selectedAppointmentData
+                                    //           .id,
                                     //     },
                                     //     true,
                                     //     mentorCompleteAppointmentRepo);
+                                    // // postMethod(
+                                    // //     context,
+                                    // //     mentorChangeAppointmentStatusUrl,
+                                    // //     {
+                                    // //       'token': '123',
+                                    // //       'id':
+                                    // //           _consultantAppointmentDetailLogic
+                                    // //               .selectedAppointmentData.id,
+                                    // //       'status': 2
+                                    // //     },
+                                    // //     true,
+                                    // //     mentorCompleteAppointmentRepo);
                                   },
                                   child: Container(
                                     height: 55.h,

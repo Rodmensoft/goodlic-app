@@ -1,6 +1,7 @@
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/modules/wallet/logic.dart';
+import 'package:consultant_product/src/modules/wallet/razorpay_payment/view_razorpay.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -38,11 +39,14 @@ paymentBottomSheetForWallet(BuildContext context) async {
                         : EdgeInsetsDirectional.fromSTEB(8.w, 0.h, 0.w, 18.h),
                     child: InkWell(
                       onTap: () {
+                        // Get.put(GeneralController());
                         _walletLogic.selectedPaymentType = index;
                         _walletLogic.update();
                         _walletLogic.amountController.clear();
-
-                        Get.offNamed(PageRoutes.stripePaymentForWallet);
+                        _walletLogic.paymentMethodList[index].image!
+                                .contains('razorpay')
+                            ? Get.to(const RazorPayView())
+                            : Get.offNamed(PageRoutes.stripePaymentForWallet);
                       },
                       child: Container(
                         height: 61.h,

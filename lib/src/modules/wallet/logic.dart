@@ -139,5 +139,9 @@ class WalletLogic extends GetxController {
         title: 'paypal',
         image: 'assets/Icons/paypalPayment.svg',
         isSelected: false),
+    ShiftType(
+        title: 'razorpay',
+        image: 'assets/Icons/razorpay.svg',
+        isSelected: false),
   ];
 }

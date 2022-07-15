@@ -12,7 +12,6 @@ import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
-
 class UserDrawerPage extends StatefulWidget {
   const UserDrawerPage({Key? key}) : super(key: key);
 
@@ -259,8 +258,9 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                             width: 55.w,
                                             decoration: const BoxDecoration(
                                                 color: Colors.transparent,
-                                              image: DecorationImage(image: AssetImage('assets/Icons/splash_logo.png'))
-                                            ),
+                                                image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'assets/Icons/splash_logo.png'))),
                                           ),
                                           SizedBox(
                                             width: 15.w,
@@ -372,8 +372,6 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                           );
                         }),
                       )),
-
-
                     ],
                   ),
                 ),
