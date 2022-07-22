@@ -15,6 +15,7 @@ import 'state.dart';
 
 class BookAppointmentLogic extends GetxController {
   final BookAppointmentState state = BookAppointmentState();
+
   final consultantProfileLogic = Get.find<ConsultantProfileLogic>();
 
   var cardNumberMask = MaskTextInputFormatter(mask: '#### #### #### ####');

@@ -98,6 +98,7 @@ String bookAppointmentUrl = apiBaseUrl + 'bookAppointment';
 String getUserAllAppointmentsURL = apiBaseUrl + 'all-status-menteeAppointments';
 String getConsultantAllAppointmentsURL =
     apiBaseUrl + 'all-status-mentorAppointments';
+String fileAttachmentUrl = apiBaseUrl + 'appointment-attachments';
 
 ///---appointment-log-user
 String getAppointmentsDetailURL = apiBaseUrl + 'appointmentDetails';

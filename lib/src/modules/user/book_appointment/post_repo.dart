@@ -3,10 +3,15 @@ import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/header.dart';
 import 'package:consultant_product/src/api_services/logic.dart';
+import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/agora_call/repo.dart';
+import 'package:consultant_product/src/modules/sms/logic.dart';
+import 'package:consultant_product/src/modules/sms/repo.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/easy_paisa_payment/easy_paisa_payment_view.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/jazz_cash_payment/payment_jazzcash_view.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
@@ -185,6 +190,92 @@ bookAppointmentWithoutFileRepo(
               );
             });
       }
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return CustomDialogBox(
+              title: LanguageConstant.failed.tr,
+              titleColor: customDialogErrorColor,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
+              text: LanguageConstant.ok.tr,
+              functionCall: () {
+                Navigator.pop(context);
+              },
+              img: 'assets/Icons/dialog_error.svg',
+            );
+          });
+    }
+  } else {
+    Get.find<GeneralController>().updateFormLoaderController(false);
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CustomDialogBox(
+            title: LanguageConstant.failed.tr,
+            titleColor: customDialogErrorColor,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
+            text: LanguageConstant.ok.tr,
+            functionCall: () {
+              Navigator.pop(context);
+            },
+            img: 'assets/Icons/dialog_error.svg',
+          );
+        });
+  }
+}
+
+/// live appointment request accept repo
+///
+liveRequestRepo(
+    BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    Get.find<BookAppointmentLogic>().bookAppointmentModel =
+        BookAppointmentModel.fromJson(response);
+    Get.find<GeneralController>().updateFormLoaderController(false);
+    if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+
+      ///---make-notification
+      Get.find<GeneralController>().updateNotificationBody(
+          'Your Live Appointment Request Accepted',
+          '',
+          '/appointmentQuestion',
+          'mentee/appointment/log',
+          null);
+      Get.find<GeneralController>().updateUserIdForSendNotification(
+          int.parse(Get.find<GeneralController>().notificationMenteeId!));
+      // Get.find<GeneralController>().notificationMenteeId = '';
+      Get.find<GeneralController>().notificationFee = null;
+      Get.find<GeneralController>().update();
+
+      ///----send-sms
+      postMethod(
+          context,
+          sendSMSUrl,
+          {
+            'token': '123',
+            'phone': Get.find<SmsLogic>().phoneNumber,
+            'message': Get.find<GeneralController>().notificationTitle,
+          },
+          true,
+          sendSMSRepo);
+
+      ///----fcm-send-start
+      getMethod(
+          context,
+          fcmGetUrl,
+          {
+            'token': '123',
+            'user_id': Get.find<GeneralController>().notificationMenteeId
+          },
+          true,
+          getFcmTokenRepo);
+      Get.back();
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
       showDialog(

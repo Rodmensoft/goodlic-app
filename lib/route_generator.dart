@@ -4,6 +4,7 @@ import 'package:consultant_product/src/modules/agora_call/join_channel_video.dar
 import 'package:consultant_product/src/modules/blogs/view.dart';
 import 'package:consultant_product/src/modules/blogs/view_blogs_detail.dart';
 import 'package:consultant_product/src/modules/chat/view.dart';
+import 'package:consultant_product/src/modules/consultant/consultant_appointment/request_for_live_view.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/view.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/view.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_drawer/view.dart';
@@ -137,15 +138,14 @@ routes() => [
           page: () => const StripePaymentForWalletView()),
       GetPage(
           name: '/walletPaymentScreen', page: () => const WalletPaymentView()),
+      GetPage(name: '/splash', page: () => const SplashPage()),
+      GetPage(name: '/inAppWebPage', page: () => const InAppWebPage()),
       GetPage(
-          name: '/splash', page: () => const SplashPage()),
-  GetPage(
-      name: '/inAppWebPage', page: () => const InAppWebPage()),
-  GetPage(
-      name: '/stripePaymentForLater', page: () => const StripePaymentForLater()),
-  GetPage(
-      name: '/searchConsultant', page: () => const SearchConsultantPage()),
-
+          name: '/stripePaymentForLater',
+          page: () => const StripePaymentForLater()),
+      GetPage(
+          name: '/searchConsultant', page: () => const SearchConsultantPage()),
+      GetPage(name: '/requestForLive', page: () => const LiveRequest()),
     ];
 
 class PageRoutes {
@@ -196,6 +196,7 @@ class PageRoutes {
   static const String inAppWebPage = '/inAppWebPage';
   static const String stripePaymentForLater = '/stripePaymentForLater';
   static const String searchConsultant = '/searchConsultant';
+  static const String requestForLive = '/requestForLive';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -244,7 +245,7 @@ class PageRoutes {
       inAppWebPage: (context) => const InAppWebPage(),
       stripePaymentForLater: (context) => const StripePaymentForLater(),
       searchConsultant: (context) => const SearchConsultantPage(),
-
+      requestForLive: (context) => const LiveRequest(),
     };
   }
 }

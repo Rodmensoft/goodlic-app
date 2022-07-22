@@ -15,6 +15,8 @@ import 'package:consultant_product/src/modules/agora_call/init_video_call_view.d
 import 'package:consultant_product/src/modules/chat/logic.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/repo_post.dart';
 import 'package:consultant_product/src/modules/sms/logic.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
+import 'package:consultant_product/src/modules/user/consultant_profile/logic.dart';
 import 'package:consultant_product/src/utils/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -93,7 +95,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
   void initState() {
     // TODO: implement initState
     // Add the observer.
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
 
     ///---for-language-check
     Get.find<GeneralController>().checkLanguage();
@@ -101,6 +103,12 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
       String route;
 
       if (message != null) {
+        if (message.data['fee'] != null) {
+          Get.find<GeneralController>().notificationMenteeId =
+              message.data['mentee_id'];
+          Get.find<GeneralController>().notificationFee = message.data['fee'];
+          Get.find<GeneralController>().update();
+        }
         if (message.data['channel'] != null) {
           Get.find<GeneralController>().updateCallerType(2);
           Get.find<GeneralController>()
@@ -129,6 +137,12 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
             .updateTokenForCall(message.data['channel_token']);
       }
       if (message.data['routeApp'] != null) {
+        if (message.data['fee'] != null) {
+          Get.find<GeneralController>().notificationMenteeId =
+              message.data['mentee_id'];
+          Get.find<GeneralController>().notificationFee = message.data['fee'];
+          Get.find<GeneralController>().update();
+        }
         route = message.data['routeApp'];
 
         Get.to(NotificationRoute(
@@ -147,6 +161,12 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         Get.find<GeneralController>()
             .updateTokenForCall(message.data['channel_token']);
         if (message.data['routeApp'] != null) {
+          if (message.data['fee'] != null) {
+            Get.find<GeneralController>().notificationMenteeId =
+                message.data['mentee_id'];
+            Get.find<GeneralController>().notificationFee = message.data['fee'];
+            Get.find<GeneralController>().update();
+          }
           route = message.data['routeApp'];
           Get.to(NotificationRoute(
             route: route,
@@ -164,7 +184,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
   @override
   void dispose() {
     // Remove the observer
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
 
     super.dispose();
   }
@@ -246,6 +266,8 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         size: const Size(375, 812),
         builder: () {
           Get.put(ChatLogic());
+          Get.put(ConsultantProfileLogic());
+          Get.put(BookAppointmentLogic());
           return GetMaterialApp(
             navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,

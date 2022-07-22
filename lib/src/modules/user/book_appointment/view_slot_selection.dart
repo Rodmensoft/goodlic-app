@@ -1,10 +1,15 @@
-
+import 'dart:developer';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
+import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/agora_call/repo.dart';
+import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/logic.dart';
+import 'package:consultant_product/src/modules/sms/logic.dart';
+import 'package:consultant_product/src/modules/sms/repo.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/get_repo.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -31,6 +36,8 @@ class _SlotSelectionState extends State<SlotSelection> {
   final logic = Get.put(BookAppointmentLogic());
 
   final state = Get.find<BookAppointmentLogic>().state;
+
+  bool? live = false;
 
   @override
   void initState() {
@@ -101,6 +108,19 @@ class _SlotSelectionState extends State<SlotSelection> {
                                     0, 0, 18.w, 11.h),
                                 child: InkWell(
                                   onTap: () {
+                                    if (_bookAppointmentLogic
+                                            .consultantProfileLogic
+                                            .appointmentTypes[index]
+                                            .appointmentTypeId ==
+                                        6) {
+                                      setState(() {
+                                        live = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        live = false;
+                                      });
+                                    }
                                     if (_bookAppointmentLogic
                                             .consultantProfileLogic
                                             .appointmentTypes[index]
@@ -855,23 +875,84 @@ class _SlotSelectionState extends State<SlotSelection> {
                           ),
                         ]),
 
-                    ///---bottom-bar
-                    Positioned(
-                      bottom: 0.h,
-                      left: 15.w,
-                      right: 15.w,
-                      child: InkWell(
-                        onTap: () {
-                          if (!disableButton!) {
-                            Get.toNamed(PageRoutes.appointmentQuestion);
-                          }
-                        },
-                        child: MyCustomBottomBar(
-                          title: LanguageConstant.continueText.tr,
-                          disable: disableButton!,
-                        ),
-                      ),
-                    )
+                    /// bottom bar
+                    live == true
+                        ? Positioned(
+                            bottom: 0.h,
+                            left: 15.w,
+                            right: 15.w,
+                            child: InkWell(
+                              onTap: () {
+                                log('testing notification sent');
+                                Get.back();
+
+                                ///---make-notification
+                                Get.find<GeneralController>()
+                                    .updateNotificationBody(
+                                        'New Appointment Are You Live!',
+                                        '',
+                                        '/requestForLive',
+                                        'mentee/appointment/log',
+                                        null);
+                                Get.find<GeneralController>()
+                                    .updateUserIdForSendNotification(
+                                        ConsultantAppointmentDetailLogic()
+                                            .selectedAppointmentData
+                                            .mentorId);
+
+                                ///----send-sms
+                                postMethod(
+                                    context,
+                                    sendSMSUrl,
+                                    {
+                                      'token': '123',
+                                      'phone': Get.find<SmsLogic>().phoneNumber,
+                                      'message': Get.find<GeneralController>()
+                                          .notificationTitle,
+                                    },
+                                    true,
+                                    sendSMSRepo);
+
+                                ///----fcm-send-start
+                                getMethod(
+                                    context,
+                                    fcmGetUrl,
+                                    {
+                                      'token': '123',
+                                      'user_id': Get.find<UserHomeLogic>()
+                                          .selectedConsultantID
+                                    },
+                                    true,
+                                    getFcmTokenRepo);
+                                Get.snackbar('your Request is Pending!', '',
+                                    colorText: Colors.black,
+                                    backgroundColor: Colors.white);
+                              },
+                              child: MyCustomBottomBar(
+                                title: 'continue',
+                                // LanguageConstant.continueText.tr,
+                                disable: disableButton!,
+                              ),
+                            ),
+                          )
+
+                        ///---bottom-bar
+                        : Positioned(
+                            bottom: 0.h,
+                            left: 15.w,
+                            right: 15.w,
+                            child: InkWell(
+                              onTap: () {
+                                if (!disableButton!) {
+                                  Get.toNamed(PageRoutes.appointmentQuestion);
+                                }
+                              },
+                              child: MyCustomBottomBar(
+                                title: LanguageConstant.continueText.tr,
+                                disable: disableButton!,
+                              ),
+                            ),
+                          )
                   ],
                 )),
           ),

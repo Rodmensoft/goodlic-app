@@ -19,7 +19,7 @@ getAppointmentTypesRepo(
           .getAppointmentTypesModel
           .data!
           .appointmenttype!) {
-        if (element.name!.toUpperCase() != 'LIVE') {
+        if (element.name!.toUpperCase() != '') {
           Get.find<MentorScheduleLogic>()
               .updateScheduleTypeDropDownList(element.name!.toUpperCase());
         }

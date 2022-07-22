@@ -281,6 +281,44 @@ class _ConsultantAppointmentDetailPageState
                                                   : const SizedBox()
                                               : const SizedBox(),
 
+                                          ///
+                                          ///---Live
+                                          (_consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .appointmentStatus! ==
+                                                      1) &&
+                                                  (_consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .appointmentTypeString!
+                                                          .toUpperCase() ==
+                                                      'LIVE')
+                                              ? PositionedDirectional(
+                                                  end: 0,
+                                                  top: 45.h,
+                                                  child: InkWell(
+                                                    onTap: () =>
+                                                        _consultantAppointmentDetailLogic
+                                                            .videoOnTap(
+                                                                context),
+                                                    child: CircleAvatar(
+                                                      radius: 20.r,
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      child: Center(
+                                                          child:
+                                                              SvgPicture.asset(
+                                                        'assets/Icons/videoCallIcon.svg',
+                                                        height: 15.h,
+                                                        width: 15.w,
+                                                        color:
+                                                            customOrangeColor,
+                                                        fit: BoxFit.cover,
+                                                      )),
+                                                    ),
+                                                  ),
+                                                )
+                                              : const SizedBox(),
+
                                           ///---AUDIO
                                           (_consultantAppointmentDetailLogic
                                                           .selectedAppointmentData

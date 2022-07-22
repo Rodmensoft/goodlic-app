@@ -14,13 +14,16 @@ class ConsultantProfileLogic extends GetxController {
     consultantProfileLoader = newValue;
     update();
   }
-  GetMentorProfileForMenteeModel getMentorProfileForMenteeModel = GetMentorProfileForMenteeModel();
+
+  GetMentorProfileForMenteeModel getMentorProfileForMenteeModel =
+      GetMentorProfileForMenteeModel();
 
   bool? loader = true;
-  updateLoaderForViewProfile(bool? newValue){
+  updateLoaderForViewProfile(bool? newValue) {
     loader = newValue;
     update();
   }
+
   List<ScheduleTypes> appointmentTypes = [];
   List imagesForAppointmentTypes = [
     ///---audio
@@ -37,7 +40,8 @@ class ConsultantProfileLogic extends GetxController {
 
     ///---home-visit
     'assets/Icons/house-fill.svg',
+
+    ///---Live
+    'assets/Icons/live.svg',
   ];
 }
-
-

@@ -1,19 +1,22 @@
 class GetMentorScheduleModel {
   GetMentorScheduleModel({
-      bool? status, 
-      int? success,
+    bool? status,
+    int? success,
     GetMentorScheduleModelData? data,
-      String? msg,}){
+    String? msg,
+  }) {
     _status = status;
     _success = success;
     _data = data;
     _msg = msg;
-}
+  }
 
   GetMentorScheduleModel.fromJson(dynamic json) {
     _status = json['Status'];
     _success = json['success'];
-    _data = json['data'] != null ? GetMentorScheduleModelData.fromJson(json['data']) : null;
+    _data = json['data'] != null
+        ? GetMentorScheduleModelData.fromJson(json['data'])
+        : null;
     _msg = json['msg'];
   }
   bool? _status;
@@ -36,16 +39,15 @@ class GetMentorScheduleModel {
     map['msg'] = _msg;
     return map;
   }
-
 }
 
 class GetMentorScheduleModelData {
   GetMentorScheduleModelData({
-      List<MentorSchedulesFullModel>? mentorSchedules,
-    List<MentorWithoutScheduleFullModel>? mentorWithoutSchedule,}){
+    List<MentorSchedulesFullModel>? mentorSchedules,
+    List<MentorWithoutScheduleFullModel>? mentorWithoutSchedule,
+  }) {
     _mentorSchedules = mentorSchedules;
     _mentorWithoutSchedule = mentorWithoutSchedule;
-
   }
 
   GetMentorScheduleModelData.fromJson(dynamic json) {
@@ -66,33 +68,36 @@ class GetMentorScheduleModelData {
   List<MentorWithoutScheduleFullModel>? _mentorWithoutSchedule;
 
   List<MentorSchedulesFullModel>? get mentorSchedules => _mentorSchedules;
-  List<MentorWithoutScheduleFullModel>? get mentorWithoutSchedule => _mentorWithoutSchedule;
+  List<MentorWithoutScheduleFullModel>? get mentorWithoutSchedule =>
+      _mentorWithoutSchedule;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (_mentorSchedules != null) {
-      map['mentorSchedules'] = _mentorSchedules?.map((v) => v.toJson()).toList();
+      map['mentorSchedules'] =
+          _mentorSchedules?.map((v) => v.toJson()).toList();
     }
     if (_mentorWithoutSchedule != null) {
-      map['mentorWithoutSchedule'] = _mentorWithoutSchedule?.map((v) => v.toJson()).toList();
+      map['mentorWithoutSchedule'] =
+          _mentorWithoutSchedule?.map((v) => v.toJson()).toList();
     }
     return map;
   }
-
 }
 
 class MentorSchedulesFullModel {
   MentorSchedulesFullModel({
-      int? id, 
-      int? mentorId, 
-      int? appointmentTypeId, 
-      int? fee, 
-      String? day, 
-      int? isHoliday, 
-      int? isActive, 
-      String? createdAt, 
-      String? updatedAt, 
-      List<ScheduleSlots>? scheduleSlots,}){
+    int? id,
+    int? mentorId,
+    int? appointmentTypeId,
+    int? fee,
+    String? day,
+    int? isHoliday,
+    int? isActive,
+    String? createdAt,
+    String? updatedAt,
+    List<ScheduleSlots>? scheduleSlots,
+  }) {
     _id = id;
     _mentorId = mentorId;
     _appointmentTypeId = appointmentTypeId;
@@ -103,7 +108,7 @@ class MentorSchedulesFullModel {
     _createdAt = createdAt;
     _updatedAt = updatedAt;
     _scheduleSlots = scheduleSlots;
-}
+  }
 
   MentorSchedulesFullModel.fromJson(dynamic json) {
     _id = json['id'];
@@ -160,18 +165,18 @@ class MentorSchedulesFullModel {
     }
     return map;
   }
-
 }
 
 class ScheduleSlots {
   ScheduleSlots({
-      int? id, 
-      int? scheduleId, 
-      String? startTime, 
-      String? endTime, 
-      String? slotDuration, 
-      int? isActive, 
-      int? shiftId,}){
+    int? id,
+    int? scheduleId,
+    String? startTime,
+    String? endTime,
+    String? slotDuration,
+    int? isActive,
+    int? shiftId,
+  }) {
     _id = id;
     _scheduleId = scheduleId;
     _startTime = startTime;
@@ -179,7 +184,7 @@ class ScheduleSlots {
     _slotDuration = slotDuration;
     _isActive = isActive;
     _shiftId = shiftId;
-}
+  }
 
   ScheduleSlots.fromJson(dynamic json) {
     _id = json['id'];
@@ -217,7 +222,6 @@ class ScheduleSlots {
     map['shift_id'] = _shiftId;
     return map;
   }
-
 }
 
 class MentorWithoutScheduleFullModel {
@@ -230,7 +234,8 @@ class MentorWithoutScheduleFullModel {
     int? isHoliday,
     int? isActive,
     String? createdAt,
-    String? updatedAt,}){
+    String? updatedAt,
+  }) {
     _id = id;
     _mentorId = mentorId;
     _appointmentTypeId = appointmentTypeId;
@@ -286,5 +291,4 @@ class MentorWithoutScheduleFullModel {
     map['updated_at'] = _updatedAt;
     return map;
   }
-
 }

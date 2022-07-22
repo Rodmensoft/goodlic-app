@@ -183,8 +183,9 @@ class _TopConsultantsState extends State<TopConsultants> {
                                           top: -15.h,
                                           child: Image.asset(
                                             _userHomeLogic.topConsultants[index]
-                                                        .gender ==
-                                                    'male'
+                                                        .gender!
+                                                        .toUpperCase() ==
+                                                    'MALE'
                                                 ? 'assets/images/stackImage.png'
                                                 : 'assets/images/female.png',
                                             width: 100.w,

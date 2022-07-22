@@ -25,7 +25,7 @@ postMethod(
 
   setAcceptHeader(dio);
   setContentHeader(dio);
-
+  log('testing $postData');
   //-- if API need headers then this if works and it based on bool value come from function calling
   if (addAuthHeader && Get.find<ApiLogic>().storageBox.hasData('authToken')) {
     setCustomHeader(dio, 'Authorization',

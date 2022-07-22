@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -575,6 +577,7 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                       child: Center(
                                         child: InkWell(
                                           onTap: () {
+                                            log('testing it ');
                                             FocusScopeNode currentFocus =
                                                 FocusScope.of(context);
                                             if (!currentFocus.hasPrimaryFocus) {

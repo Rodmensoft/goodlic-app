@@ -305,6 +305,7 @@ class GeneralController extends GetxController {
   }
 
   String? inAppWebService;
+  String? notificationMenteeId, notificationFee;
 }
 
 class Language {

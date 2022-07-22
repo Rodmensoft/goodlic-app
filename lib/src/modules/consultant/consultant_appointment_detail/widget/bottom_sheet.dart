@@ -1,23 +1,45 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:consultant_product/multi_language/language_constants.dart';
+import 'package:consultant_product/src/api_services/header.dart';
+import 'package:consultant_product/src/api_services/logic.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment/logic.dart';
+import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/model_file_attachment.dart';
 import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/repo.dart';
-import 'package:consultant_product/src/modules/consultant/consultant_appointment_detail/widget/custom_dialog_for_notes.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
+import 'package:consultant_product/src/widgets/custom_dialog.dart';
+import 'package:dio/dio.dart' as dio_instance;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
 import 'package:intl/intl.dart';
 import 'package:resize/resize.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../logic.dart';
 
-class ModalInsideModalForConsultant extends StatelessWidget {
+class ModalInsideModalForConsultant extends StatefulWidget {
   const ModalInsideModalForConsultant({Key? key}) : super(key: key);
+
+  @override
+  State<ModalInsideModalForConsultant> createState() =>
+      _ModalInsideModalForConsultantState();
+}
+
+class _ModalInsideModalForConsultantState
+    extends State<ModalInsideModalForConsultant> {
+  File? degreeImage;
+  List degreeImagesList = [];
+
+  GlobalKey<FormState> noteFormKey = GlobalKey();
+  TextEditingController noteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -583,10 +605,13 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                         _consultantAppointmentDetailLogic
                                                                     .selectedAppointmentData
                                                                     .mentee!
-                                                                    .city ==
+                                                                    .notes_consultant ==
                                                                 null
                                                             ? '...'
-                                                            : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.city!}',
+                                                            : _consultantAppointmentDetailLogic
+                                                                .selectedAppointmentData
+                                                                .mentee!
+                                                                .notes_consultant!,
                                                         softWrap: true,
                                                         overflow: TextOverflow
                                                             .ellipsis,
@@ -621,14 +646,13 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                                         _consultantAppointmentDetailLogic
                                                                     .selectedAppointmentData
                                                                     .mentee!
-                                                                    .userCountry ==
+                                                                    .file_consultant ==
                                                                 null
                                                             ? '...'
                                                             : _consultantAppointmentDetailLogic
                                                                 .selectedAppointmentData
                                                                 .mentee!
-                                                                .userCountry!
-                                                                .name!,
+                                                                .file_consultant!,
                                                         softWrap: true,
                                                         overflow: TextOverflow
                                                             .ellipsis,
@@ -836,6 +860,7 @@ class ModalInsideModalForConsultant extends StatelessWidget {
                                     0, 30.h, 0, 10.h),
                                 child: InkWell(
                                   onTap: () {
+                                    log('this is ${_consultantAppointmentDetailLogic.selectedAppointmentData.id}');
                                     customDialogForNotes(context);
                                     // ///---make-notification
                                     // Get.find<GeneralController>()
@@ -930,5 +955,446 @@ class ModalInsideModalForConsultant extends StatelessWidget {
             )),
       );
     });
+  }
+
+  /// Dialog for notes and attachment
+  customDialogForNotes(BuildContext context) {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(builder:
+              (BuildContext context, void Function(void Function()) setState) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              content: GetBuilder<ConsultantAppointmentDetailLogic>(
+                  builder: (_consultantAppointmentDetailLogic) {
+                return Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Form(
+                    key: noteFormKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(20)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.7),
+                                spreadRadius: 3,
+                                blurRadius: 9,
+                              )
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  //  LanguageConstant.withdrawRequest.tr,
+                                  'Attachment Request',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18.sp,
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              15, 15, 15, 15),
+                          child: TextFormField(
+                            style: TextStyle(
+                                fontFamily: SarabunFontFamily.regular,
+                                fontSize: 16.sp,
+                                color: Colors.black),
+                            controller: noteController,
+                            keyboardType: TextInputType.text,
+                            maxLines: null,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  25.w, 15.h, 25.w, 15.h),
+                              hintText:
+                                  // LanguageConstant.addAmount.tr,
+                                  'Note',
+                              hintStyle: TextStyle(
+                                  fontFamily: SarabunFontFamily.regular,
+                                  fontSize: 16.sp,
+                                  color: customTextGreyColor),
+                              fillColor: customTextFieldColor,
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  borderSide: const BorderSide(
+                                      color: Colors.transparent)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  borderSide: const BorderSide(
+                                      color: Colors.transparent)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  borderSide: const BorderSide(
+                                      color: customLightThemeColor)),
+                              errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  borderSide:
+                                      const BorderSide(color: Colors.red)),
+                            ),
+                            validator: (String? value) {
+                              if (value!.isEmpty) {
+                                return LanguageConstant.fieldRequired.tr;
+                              } else {
+                                return null;
+                              }
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: InkWell(
+                                  onTap: () {
+                                    imagePickerDialog(context);
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: customTextFieldColor,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8.r))),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.w, 10.h, 10.w, 10.h),
+                                      child: Center(
+                                        child: Text(
+                                          'Attachment',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 18.sp,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10.w),
+                              _consultantAppointmentDetailLogic.fileName == null
+                                  ? const SizedBox()
+                                  : Expanded(
+                                      child: Text(
+                                        '${_consultantAppointmentDetailLogic.fileName}',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12.sp,
+                                            color: Colors.black),
+                                      ),
+                                    ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              /// cancel
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  LanguageConstant.cancel.tr,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16.sp,
+                                      color: customThemeColor),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 30,
+                              ),
+
+                              /// submit
+                              InkWell(
+                                onTap: () {
+                                  FocusScopeNode currentFocus =
+                                      FocusScope.of(context);
+                                  if (!currentFocus.hasPrimaryFocus) {
+                                    currentFocus.unfocus();
+                                  }
+                                  if (noteFormKey.currentState!.validate()) {
+                                    if (degreeImage != null) {
+                                      _consultantAppointmentDetailLogic
+                                          .updateFormLoaderController(true);
+                                      fileAttachmentRepo(degreeImage);
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          barrierDismissible: false,
+                                          builder: (BuildContext context) {
+                                            return CustomDialogBox(
+                                              title: LanguageConstant.sorry.tr,
+                                              titleColor:
+                                                  customDialogErrorColor,
+                                              descriptions:
+                                                  // LanguageConstant
+                                                  //     .uploadYourDegreePicture.tr,
+                                                  'Upload Any Attachment',
+                                              text: LanguageConstant.ok.tr,
+                                              functionCall: () {
+                                                Navigator.pop(context);
+                                              },
+                                              img:
+                                                  'assets/Icons/dialog_error.svg',
+                                            );
+                                          });
+                                    }
+                                  }
+                                },
+                                child: Text(
+                                  LanguageConstant.submit.tr,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16.sp,
+                                      color: customThemeColor),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            );
+          });
+        });
+  }
+
+  /// Image picker Dialog
+  void imagePickerDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return GetBuilder<ConsultantAppointmentDetailLogic>(
+              builder: (_consultantAppointmentDetailLogic) {
+            return CupertinoAlertDialog(
+              actions: <Widget>[
+                CupertinoDialogAction(
+                    isDefaultAction: true,
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      setState(() {
+                        degreeImagesList = [];
+                      });
+                      degreeImagesList.add(await ImagePickerGC.pickImage(
+                          enableCloseButton: true,
+                          context: context,
+                          source: ImgSource.Camera,
+                          barrierDismissible: true,
+                          imageQuality: 10,
+                          maxWidth: 400,
+                          maxHeight: 600));
+                      if (degreeImagesList.isNotEmpty) {
+                        setState(() {
+                          degreeImage = File(degreeImagesList[0].path);
+                          _consultantAppointmentDetailLogic.fileName =
+                              degreeImage!.path.split('-').last;
+                          _consultantAppointmentDetailLogic.update();
+                        });
+                      }
+                    },
+                    child: Text(
+                      LanguageConstant.camera.tr,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(fontSize: 18),
+                    )),
+                CupertinoDialogAction(
+                    isDefaultAction: true,
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      setState(() {
+                        degreeImagesList = [];
+                      });
+                      degreeImagesList.add(await ImagePickerGC.pickImage(
+                          enableCloseButton: true,
+                          context: context,
+                          source: ImgSource.Gallery,
+                          barrierDismissible: true,
+                          imageQuality: 10,
+                          maxWidth: 400,
+                          maxHeight: 600));
+
+                      if (degreeImagesList.isNotEmpty) {
+                        setState(() {
+                          degreeImage = File(degreeImagesList[0].path);
+                          _consultantAppointmentDetailLogic.fileName =
+                              degreeImage!.path.split('_').last;
+                          _consultantAppointmentDetailLogic.update();
+                        });
+                      }
+                    },
+                    child: Text(
+                      LanguageConstant.gallery.tr,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(fontSize: 18),
+                    )),
+              ],
+            );
+          });
+        });
+  }
+
+  /// Image sent repo
+
+  fileAttachmentRepo(File? file1) async {
+    dio_instance.FormData formData =
+        dio_instance.FormData.fromMap(<String, dynamic>{
+      'notes': noteController.text,
+      'appointmentId': Get.find<ConsultantAppointmentDetailLogic>()
+          .selectedAppointmentData
+          .id,
+      'file': await dio_instance.MultipartFile.fromFile(
+        file1!.path,
+      )
+    });
+    dio_instance.Dio dio = dio_instance.Dio();
+    setCustomHeader(dio, 'Authorization',
+        'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
+    dio_instance.Response response;
+    try {
+      log('testing it ${file1!.path}');
+
+      response = await dio.post(fileAttachmentUrl, data: formData);
+
+      if (response.statusCode == 200) {
+        Get.find<ConsultantAppointmentDetailLogic>().modelFileAttachment =
+            ModelFileAttachment.fromJson(response.data);
+        if (Get.find<ConsultantAppointmentDetailLogic>()
+                .modelFileAttachment
+                .status ==
+            true) {
+          // Get.find<EditConsultantProfileLogic>().updateForDisplayEducationList(
+          //     Get.find<EditConsultantProfileLogic>()
+          //         .educationInfoPostModel
+          //         .data!
+          //         .education);
+          // Get.snackbar('${LanguageConstant.addedSuccessfully.tr}!', '',
+          //     colorText: Colors.black, backgroundColor: Colors.white);
+
+          Get.find<GeneralController>().updateFormLoaderController(false);
+          setState(() {
+            noteController.clear();
+            Get.find<ConsultantAppointmentDetailLogic>().fileName = null;
+            degreeImage = null;
+            log('testing message.... ${response.data['message']}');
+          });
+          Get.find<GeneralController>().updateNotificationBody(
+              'Your Appointment is Completed',
+              '',
+              null,
+              'mentee/appointment/log',
+              null);
+          Get.find<GeneralController>().updateUserIdForSendNotification(
+              ConsultantAppointmentDetailLogic()
+                  .selectedAppointmentData
+                  .menteeId);
+          Get.find<GeneralController>().updateFormLoaderController(true);
+          Get.find<ConsultantAppointmentLogic>()
+              .updateGetUserAppointmentLoader(true);
+          Get.back();
+          Get.back();
+          Get.back();
+          postMethod(
+              context,
+              markAsCompleteAppointmentUrl,
+              {
+                'token': '123',
+                'appointment_id': Get.find<ConsultantAppointmentDetailLogic>()
+                    .selectedAppointmentData
+                    .id,
+              },
+              true,
+              mentorCompleteAppointmentRepo);
+        } else {
+          Get.find<GeneralController>().updateFormLoaderController(false);
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return CustomDialogBox(
+                  title: LanguageConstant.failed.tr,
+                  titleColor: customDialogErrorColor,
+                  descriptions: LanguageConstant.tryAgain.tr,
+                  text: LanguageConstant.ok.tr,
+                  functionCall: () {
+                    Navigator.pop(context);
+                  },
+                  img: 'assets/Icons/dialog_error.svg',
+                );
+              });
+        }
+      } else {
+        Get.find<GeneralController>().updateFormLoaderController(false);
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return CustomDialogBox(
+                title: LanguageConstant.failed.tr,
+                titleColor: customDialogErrorColor,
+                descriptions: LanguageConstant.tryAgain.tr,
+                text: LanguageConstant.ok.tr,
+                functionCall: () {
+                  Navigator.pop(context);
+                },
+                img: 'assets/Icons/dialog_error.svg',
+              );
+            });
+      }
+    } on dio_instance.DioError catch (e) {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+      log('testing....$e');
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return CustomDialogBox(
+              title: LanguageConstant.failed.tr,
+              titleColor: customDialogErrorColor,
+              descriptions: LanguageConstant.tryAgain.tr,
+              text: LanguageConstant.ok.tr,
+              functionCall: () {
+                Navigator.pop(context);
+              },
+              img: 'assets/Icons/dialog_error.svg',
+            );
+          });
+      log('ResponseError $fileAttachmentUrl-->> $e');
+    }
   }
 }

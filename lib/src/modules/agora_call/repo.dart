@@ -5,6 +5,7 @@ import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/agora_call/get_agora_token_model.dart';
 import 'package:consultant_product/src/modules/agora_call/get_fcm_token_model.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -121,12 +122,50 @@ getFcmTokenRepo(
                 "data": Get.find<GeneralController>().notificationRouteWeb,
               },
               'priority': 'high',
-              'data': <String, dynamic>{
-                'sound': Get.find<GeneralController>().sound,
-                'routeApp': Get.find<GeneralController>().notificationRouteApp,
-                'channel': Get.find<GeneralController>().channelForCall,
-                'channel_token': Get.find<GeneralController>().tokenForCall,
-              },
+              'data': Get.find<GeneralController>().channelForCall != null
+                  ? <String, dynamic>{
+                      'sound': Get.find<GeneralController>().sound,
+                      'routeApp':
+                          Get.find<GeneralController>().notificationRouteApp,
+                      'channel': Get.find<GeneralController>().channelForCall,
+                      'fee':
+                          Get.find<GeneralController>().notificationFee != null
+                              ? Get.find<BookAppointmentLogic>()
+                                  .selectMentorAppointmentType!
+                                  .fee
+                              : '',
+                      'mentee_id':
+                          Get.find<GeneralController>().notificationFee != null
+                              ? Get.find<GeneralController>()
+                                  .storageBox
+                                  .read('userID')
+                              : '',
+                      'channel_token':
+                          Get.find<GeneralController>().tokenForCall,
+                    }
+                  : <String, dynamic>{
+                      'sound': Get.find<GeneralController>().sound,
+                      'routeApp':
+                          Get.find<GeneralController>().notificationRouteApp,
+                      'channel': '',
+                      'fee': Get.find<BookAppointmentLogic>()
+                                  .selectMentorAppointmentType!
+                                  .appointmentTypeId ==
+                              6
+                          ? Get.find<BookAppointmentLogic>()
+                              .selectMentorAppointmentType!
+                              .fee
+                          : '',
+                      'mentee_id': Get.find<BookAppointmentLogic>()
+                                  .selectMentorAppointmentType!
+                                  .appointmentTypeId ==
+                              6
+                          ? Get.find<GeneralController>()
+                              .storageBox
+                              .read('userID')
+                          : '',
+                      'channel_token': '',
+                    },
               'to': element.deviceKey
             },
             false,

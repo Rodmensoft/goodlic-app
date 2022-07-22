@@ -78,5 +78,8 @@ class ConsultantAppointmentLogic extends GetxController {
 
     ///---home-visit
     'assets/Icons/house-fill.svg',
+
+    ///---Live
+    'assets/Icons/live.svg',
   ];
 }
