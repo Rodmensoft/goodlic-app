@@ -736,6 +736,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                           ),
                                                           focusColor:
                                                               Colors.white,
+                                                          hint: const Text(
+                                                              'Select Day'),
                                                           isExpanded: true,
                                                           style: state
                                                               .scheduleDayTextStyle,
@@ -842,6 +844,7 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                         isDense: true,
                                                         filled: true,
                                                         fillColor: Colors.white,
+                                                        hintText: 'Duration',
                                                         suffixIcon: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.min,
@@ -961,6 +964,16 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                   children: [
                                                     InkWell(
                                                       onTap: () async {
+                                                        /// for focus out
+                                                        FocusScopeNode
+                                                            currentFocus =
+                                                            FocusScope.of(
+                                                                context);
+                                                        if (!currentFocus
+                                                            .hasPrimaryFocus) {
+                                                          currentFocus
+                                                              .unfocus();
+                                                        } else {}
                                                         final picked =
                                                             await showTimePicker(
                                                                 context:
@@ -1006,6 +1019,7 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                                     .selectedTimeForStart =
                                                                 picked.format(
                                                                     context);
+                                                            log('This is start time: ${picked.hour}');
                                                           });
                                                         }
                                                       },
