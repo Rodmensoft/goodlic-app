@@ -26,7 +26,7 @@ getAgoraTokenRepo(
             'CALLING.....',
             'Your ${Get.find<GeneralController>().storageBox.read('userRole')} is calling you',
             '/videoCall',
-            '/appointment-detail/${Get.find<GeneralController>().appointmentIdForSendNotification}'
+            '/mentee/appointment-log-detail/${Get.find<GeneralController>().appointmentIdForSendNotification}'
                 '?auth_tocken=${Get.find<GeneralController>().getAgoraTokenModel.data!.token}'
                 '&channel_name=${Get.find<GeneralController>().channelForCall}',
             'ring_ring');
@@ -68,7 +68,7 @@ getAgoraTokenForAudioRepo(
             'CALLING.....',
             'Your ${Get.find<GeneralController>().storageBox.read('userRole')} is calling you',
             '/audioCall',
-            '/appointment-detail/${Get.find<GeneralController>().appointmentIdForSendNotification}'
+            '/mentee/appointment-log-detail/${Get.find<GeneralController>().appointmentIdForSendNotification}'
                 '?auth_tocken=${Get.find<GeneralController>().getAgoraTokenModel.data!.token}'
                 '&channel_name=${Get.find<GeneralController>().channelForCall}',
             'ring_ring');
@@ -110,6 +110,7 @@ getFcmTokenRepo(
     if (Get.find<GeneralController>().getFcmTokenModel.status == true) {
       for (var element
           in Get.find<GeneralController>().getFcmTokenModel.data!.tokens!) {
+        // log('testtting ${Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.fee}     ${Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.appointmentTypeId}');
         postMethod(
             context,
             fcmService,
@@ -128,18 +129,8 @@ getFcmTokenRepo(
                       'routeApp':
                           Get.find<GeneralController>().notificationRouteApp,
                       'channel': Get.find<GeneralController>().channelForCall,
-                      'fee':
-                          Get.find<GeneralController>().notificationFee != null
-                              ? Get.find<BookAppointmentLogic>()
-                                  .selectMentorAppointmentType!
-                                  .fee
-                              : '',
-                      'mentee_id':
-                          Get.find<GeneralController>().notificationFee != null
-                              ? Get.find<GeneralController>()
-                                  .storageBox
-                                  .read('userID')
-                              : '',
+                      'fee': '',
+                      'mentee_id': '',
                       'channel_token':
                           Get.find<GeneralController>().tokenForCall,
                     }

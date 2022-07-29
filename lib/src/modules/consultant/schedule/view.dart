@@ -1000,7 +1000,13 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                                                     ),
                                                                   );
                                                                 });
-
+                                                        String hour;
+                                                        // if (picked!.hour
+                                                        //         .toString()
+                                                        //         .length <
+                                                        //     2) {
+                                                        //   hour = picked.hour.toString();
+                                                        //   hour = '0' + hour;
                                                         if (picked != null) {
                                                           setState(() {
                                                             _mentorScheduleLogic

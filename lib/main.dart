@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
@@ -129,6 +130,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
     FirebaseMessaging.onMessage.listen((message) {
       if (message.notification != null) {}
       String route;
+      log('testing it ${message.data}');
       if (message.data['channel'] != null) {
         Get.find<GeneralController>().updateCallerType(2);
         Get.find<GeneralController>()

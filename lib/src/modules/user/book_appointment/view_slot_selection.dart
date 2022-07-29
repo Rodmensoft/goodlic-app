@@ -38,6 +38,7 @@ class _SlotSelectionState extends State<SlotSelection> {
   final state = Get.find<BookAppointmentLogic>().state;
 
   bool? live = false;
+  bool? chat = false;
 
   @override
   void initState() {
@@ -119,6 +120,21 @@ class _SlotSelectionState extends State<SlotSelection> {
                                     } else {
                                       setState(() {
                                         live = false;
+                                      });
+                                    }
+
+                                    /// for chat
+                                    if (_bookAppointmentLogic
+                                            .consultantProfileLogic
+                                            .appointmentTypes[index]
+                                            .appointmentTypeId ==
+                                        3) {
+                                      setState(() {
+                                        chat = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        chat = false;
                                       });
                                     }
                                     if (_bookAppointmentLogic
@@ -307,43 +323,50 @@ class _SlotSelectionState extends State<SlotSelection> {
                             height: 16.h,
                           ),
 
-                          ///---calender
-                          _bookAppointmentLogic.calenderLoader!
-                              ? SkeletonLoader(
-                                  period: const Duration(seconds: 2),
-                                  highlightColor: Colors.grey,
-                                  direction: SkeletonDirection.ltr,
-                                  builder: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 300.h,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8.r),
-                                    ),
-                                  ))
-                              : _bookAppointmentLogic
-                                          .getScheduleAvailableDays.data ==
-                                      null
-                                  ? const SizedBox()
-                                  : Container(
-                                      height: 300.h,
-                                      decoration: BoxDecoration(
+                          /// to hide calendar
+                          live == false
+                              ?
+
+                              ///---calender
+                              _bookAppointmentLogic.calenderLoader!
+                                  ? SkeletonLoader(
+                                      period: const Duration(seconds: 2),
+                                      highlightColor: Colors.grey,
+                                      direction: SkeletonDirection.ltr,
+                                      builder: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 300.h,
+                                        decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(8.r),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.2),
-                                              spreadRadius: -2,
-                                              blurRadius: 15,
-                                              // offset: Offset(1,5)
-                                            )
-                                          ]),
-                                      child: _getCustomizedDatePicker(
-                                          _bookAppointmentLogic
-                                              .availableScheduleDaysList!),
-                                    ),
+                                        ),
+                                      ))
+                                  : _bookAppointmentLogic
+                                              .getScheduleAvailableDays.data ==
+                                          null
+                                      ? const SizedBox()
+                                      : Container(
+                                          height: 300.h,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.2),
+                                                  spreadRadius: -2,
+                                                  blurRadius: 15,
+                                                  // offset: Offset(1,5)
+                                                )
+                                              ]),
+                                          child: _getCustomizedDatePicker(
+                                              _bookAppointmentLogic
+                                                  .availableScheduleDaysList!),
+                                        )
+                              : const SizedBox(),
 
                           SizedBox(
                             height: 30.h,
@@ -885,6 +908,9 @@ class _SlotSelectionState extends State<SlotSelection> {
                               onTap: () {
                                 log('testing notification sent');
                                 Get.back();
+                                Get.find<GeneralController>().channelForCall =
+                                    null;
+                                Get.find<GeneralController>().update();
 
                                 ///---make-notification
                                 Get.find<GeneralController>()

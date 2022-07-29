@@ -42,7 +42,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
         getUserAllAppointmentsURL,
         {
           'token': '123',
-          'mentee_id': Get.find<GeneralController>().storageBox.read('userID')
+          'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
         },
         true,
         getUserAllAppointmentsRepo);
@@ -123,7 +123,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                               'token': '123',
                               'mentee_id': Get.find<GeneralController>()
                                   .storageBox
-                                  .read('userID')
+                                  .read('userID'),
                             },
                             true,
                             getUserAllAppointmentsRepo);
@@ -133,8 +133,10 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                         controller: _myAppointmentLogic.tabController,
                         children: [
                           ///---pending
-                          _myAppointmentLogic.getUserAppointmentModel.data!
-                                  .pendingAppointments!.data!.isEmpty
+                          (_myAppointmentLogic.getUserAppointmentModel.data
+                                          ?.pendingAppointments?.data ??
+                                      [])
+                                  .isEmpty
                               ? Center(
                                   child: Text(
                                     LanguageConstant.noRecordFound.tr,
@@ -366,8 +368,10 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                 ),
 
                           ///---accepted
-                          _myAppointmentLogic.getUserAppointmentModel.data!
-                                  .acceptedAppointments!.data!.isEmpty
+                          (_myAppointmentLogic.getUserAppointmentModel.data
+                                          ?.acceptedAppointments?.data ??
+                                      [])
+                                  .isEmpty
                               ? Center(
                                   child: Text(
                                     LanguageConstant.noRecordFound.tr,
@@ -507,8 +511,10 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                 ),
 
                           ///---completed
-                          _myAppointmentLogic.getUserAppointmentModel.data!
-                                  .completedAppointments!.data!.isEmpty
+                          (_myAppointmentLogic.getUserAppointmentModel.data
+                                          ?.completedAppointments?.data ??
+                                      [])
+                                  .isEmpty
                               ? Center(
                                   child: Text(
                                     LanguageConstant.noRecordFound.tr,
@@ -648,8 +654,10 @@ class _MyAppointmentPageState extends State<MyAppointmentPage>
                                 ),
 
                           ///---cancelled
-                          _myAppointmentLogic.getUserAppointmentModel.data!
-                                  .cancelledAppointments!.data!.isEmpty
+                          (_myAppointmentLogic.getUserAppointmentModel.data
+                                          ?.cancelledAppointments?.data ??
+                                      [])
+                                  .isEmpty
                               ? Center(
                                   child: Text(
                                     LanguageConstant.noRecordFound.tr,

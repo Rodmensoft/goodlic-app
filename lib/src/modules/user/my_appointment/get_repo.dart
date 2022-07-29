@@ -24,11 +24,11 @@ getUserAllAppointmentsRepo(
       Get.find<MyAppointmentLogic>().updateGetUserAppointmentLoader(false);
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
-  } else if (!responseCheck) {
-    Get.find<MyAppointmentLogic>().updateRefreshController();
-    Get.find<MyAppointmentLogic>().updateGetUserAppointmentLoader(false);
-    Get.find<GeneralController>().updateFormLoaderController(false);
+    return;
   }
+  Get.find<MyAppointmentLogic>().updateRefreshController();
+  Get.find<MyAppointmentLogic>().updateGetUserAppointmentLoader(false);
+  Get.find<GeneralController>().updateFormLoaderController(false);
 }
 
 getUserAllAppointmentsMoreRepo(

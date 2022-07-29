@@ -676,9 +676,12 @@ class _ModalInsideModalForConsultantState
                         ),
 
                         _consultantAppointmentDetailLogic
-                                    .selectedAppointmentData
-                                    .appointmentStatus ==
-                                0
+                                        .selectedAppointmentData
+                                        .appointmentStatus ==
+                                    0 &&
+                                _consultantAppointmentDetailLogic
+                                        .selectedAppointmentData.isPaid ==
+                                    1
                             ? Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0, 30, 0, 10),

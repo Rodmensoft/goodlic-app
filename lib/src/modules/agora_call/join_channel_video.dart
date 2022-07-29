@@ -221,7 +221,7 @@ class _State extends State<JoinChannelVideo> {
                               Get.find<GeneralController>().channelForCall!,
                           uid: remoteUid[0],
                         ),
-                  SizedBox(
+                  const SizedBox(
                     width: 120,
                     height: 120,
                     child: rtc_local_view.SurfaceView(),
@@ -368,6 +368,7 @@ class _State extends State<JoinChannelVideo> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
+                              _leaveChannel();
                               Get.back();
                             },
                             child: CircleAvatar(
@@ -418,6 +419,11 @@ class CallWaitingView extends StatefulWidget {
 }
 
 class _CallWaitingViewState extends State<CallWaitingView> {
+  late final RtcEngine _engine;
+  _leaveChannel() async {
+    await _engine.leaveChannel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -489,7 +495,9 @@ class _CallWaitingViewState extends State<CallWaitingView> {
                     padding: const EdgeInsets.all(30.0),
                     child: RawMaterialButton(
                       onPressed: () {
+                        _leaveChannel();
                         Get.find<GeneralController>().updateGoForCall(false);
+
                         Get.back();
                       },
                       child: const Icon(
