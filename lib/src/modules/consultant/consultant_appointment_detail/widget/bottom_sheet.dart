@@ -327,6 +327,113 @@ class _ModalInsideModalForConsultantState
                                         ),
                                       ),
                                     ]),
+
+                                SizedBox(
+                                  height: 18.h,
+                                ),
+
+                                ///---- attachment and notes
+                                _consultantAppointmentDetailLogic
+                                            .selectedAppointmentData
+                                            .appointmentStatus ==
+                                        2
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          ///---Notes
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  // LanguageConstant.city.tr,
+                                                  'Note',
+                                                  style: state
+                                                      .sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  _consultantAppointmentDetailLogic
+                                                              .selectedAppointmentData
+                                                              .notesConsultant ==
+                                                          null
+                                                      ? '...'
+                                                      : _consultantAppointmentDetailLogic
+                                                          .selectedAppointmentData
+                                                          .notesConsultant!,
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: state
+                                                      .sectionDataTextStyle,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
+                                          ///---Attachment
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  // LanguageConstant.country.tr,
+                                                  'Attachment',
+                                                  style: state
+                                                      .sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    launch(_consultantAppointmentDetailLogic
+                                                            .selectedAppointmentData
+                                                            .fileConsultant!
+                                                            .contains('assets')
+                                                        ? '$mediaUrl/${_consultantAppointmentDetailLogic.selectedAppointmentData.fileConsultant}'
+                                                        : '${_consultantAppointmentDetailLogic.selectedAppointmentData.fileConsultant}');
+                                                  },
+                                                  child: Text(
+                                                    _consultantAppointmentDetailLogic
+                                                                .selectedAppointmentData
+                                                                .filetypeConsultant ==
+                                                            null
+                                                        ? '...'
+                                                        : _consultantAppointmentDetailLogic
+                                                            .selectedAppointmentData
+                                                            .filetypeConsultant!,
+                                                    softWrap: true,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    style: state
+                                                        .sectionDataTextStyle!
+                                                        .copyWith(
+                                                            color:
+                                                                customLightThemeColor,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const Spacer()
+                                        ],
+                                      )
+                                    : const SizedBox(),
                               ],
                             ),
                           ),
@@ -569,104 +676,6 @@ class _ModalInsideModalForConsultantState
                                           const Spacer()
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 18.h,
-                                      ),
-
-                                      ///---- attachment and notes
-                                      _consultantAppointmentDetailLogic
-                                                  .selectedAppointmentData
-                                                  .appointmentStatus ==
-                                              2
-                                          ? Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                ///---Notes
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        // LanguageConstant.city.tr,
-                                                        'Note',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        _consultantAppointmentDetailLogic
-                                                                    .selectedAppointmentData
-                                                                    .mentee!
-                                                                    .notes_consultant ==
-                                                                null
-                                                            ? '...'
-                                                            : _consultantAppointmentDetailLogic
-                                                                .selectedAppointmentData
-                                                                .mentee!
-                                                                .notes_consultant!,
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-
-                                                ///---Attachment
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        // LanguageConstant.country.tr,
-                                                        'Attachment',
-                                                        style: state
-                                                            .sectionLabelTextStyle,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 8.h,
-                                                      ),
-                                                      Text(
-                                                        _consultantAppointmentDetailLogic
-                                                                    .selectedAppointmentData
-                                                                    .mentee!
-                                                                    .file_consultant ==
-                                                                null
-                                                            ? '...'
-                                                            : _consultantAppointmentDetailLogic
-                                                                .selectedAppointmentData
-                                                                .mentee!
-                                                                .file_consultant!,
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        style: state
-                                                            .sectionDataTextStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const Spacer()
-                                              ],
-                                            )
-                                          : const SizedBox(),
                                     ],
                                   ),
                                 ),
@@ -1088,9 +1097,9 @@ class _ModalInsideModalForConsultantState
                                           10.w, 10.h, 10.w, 10.h),
                                       child: Center(
                                         child: Text(
-                                          'Attachment',
+                                          'file',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.w500,
                                               fontSize: 18.sp,
                                               color: Colors.black),
                                         ),

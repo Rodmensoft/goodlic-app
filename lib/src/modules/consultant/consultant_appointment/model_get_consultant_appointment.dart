@@ -262,6 +262,9 @@ class ConsultantAppointmentsData {
     String? category,
     String? endTime,
     Mentee? mentee,
+    String? notesConsultant,
+    String? fileConsultant,
+    String? filetypeConsultant,
   }) {
     _id = id;
     _menteeId = menteeId;
@@ -287,6 +290,9 @@ class ConsultantAppointmentsData {
     _category = category;
     _endTime = endTime;
     _mentee = mentee;
+    _notesConsultant = notesConsultant;
+    _fileConsultant = fileConsultant;
+    _filetypeConsultant = filetypeConsultant;
   }
 
   ConsultantAppointmentsData.fromJson(dynamic json) {
@@ -314,6 +320,9 @@ class ConsultantAppointmentsData {
     _category = json['category'];
     _endTime = json['end_time'];
     _mentee = json['mentee'] != null ? Mentee.fromJson(json['mentee']) : null;
+    _notesConsultant = json['notes_consultant'];
+    _fileConsultant = json['file_consultant'];
+    _filetypeConsultant = json['filetype_consultant'];
   }
   int? _id;
   int? _menteeId;
@@ -339,6 +348,9 @@ class ConsultantAppointmentsData {
   String? _category;
   String? _endTime;
   Mentee? _mentee;
+  String? _notesConsultant;
+  String? _fileConsultant;
+  String? _filetypeConsultant;
 
   int? get id => _id;
   int? get menteeId => _menteeId;
@@ -364,6 +376,9 @@ class ConsultantAppointmentsData {
   String? get category => _category;
   String? get endTime => _endTime;
   Mentee? get mentee => _mentee;
+  String? get notesConsultant => _notesConsultant;
+  String? get fileConsultant => _fileConsultant;
+  String? get filetypeConsultant => _filetypeConsultant;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -390,6 +405,9 @@ class ConsultantAppointmentsData {
     map['rating'] = _rating;
     map['category'] = _category;
     map['end_time'] = endTime;
+    map['notes_consultant'] = _notesConsultant;
+    map['file_consultant'] = _fileConsultant;
+    map['filetype_consultant'] = _filetypeConsultant;
     if (_mentee != null) {
       map['mentee'] = _mentee?.toJson();
     }
@@ -422,9 +440,6 @@ class Mentee {
     dynamic googleId,
     String? createdAt,
     String? updatedAt,
-    String? notes_consultant,
-    String? file_consultant,
-    String? filetype_consultant,
     MenteeInfo? mentee,
     UserCountry? userCountry,
   }) {
@@ -451,9 +466,6 @@ class Mentee {
     _googleId = googleId;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
-    _notes_consultant = notes_consultant;
-    _file_consultant = file_consultant;
-    _filetype_consultant = filetype_consultant;
     _mentee = mentee;
     _userCountry = userCountry;
   }
@@ -482,9 +494,6 @@ class Mentee {
     _googleId = json['google_id'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    _notes_consultant = json['notes_consultant'];
-    _file_consultant = json['file_consultant'];
-    _filetype_consultant = json['filetype_consultant'];
     _mentee =
         json['mentee'] != null ? MenteeInfo.fromJson(json['mentee']) : null;
     _userCountry = json['user_country'] != null
@@ -514,9 +523,6 @@ class Mentee {
   dynamic _googleId;
   String? _createdAt;
   String? _updatedAt;
-  String? _notes_consultant;
-  String? _file_consultant;
-  String? _filetype_consultant;
   MenteeInfo? _mentee;
   UserCountry? _userCountry;
 
@@ -543,9 +549,7 @@ class Mentee {
   dynamic get googleId => _googleId;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
-  String? get notes_consultant => _notes_consultant;
-  String? get file_consultant => _file_consultant;
-  String? get filetype_consultant => _filetype_consultant;
+
   MenteeInfo? get mentee => _mentee;
   UserCountry? get userCountry => _userCountry;
 
@@ -574,9 +578,7 @@ class Mentee {
     map['google_id'] = _googleId;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
-    map['notes_consultant'] = _notes_consultant;
-    map['file_consultant'] = _file_consultant;
-    map['filetype_consultant'] = _filetype_consultant;
+
     if (_mentee != null) {
       map['mentee'] = _mentee?.toJson();
     }
@@ -783,7 +785,6 @@ class MenteeInfo {
   int? _identityHidden;
   String? _createdAt;
   String? _updatedAt;
-
   int? get id => _id;
   int? get userId => _userId;
   dynamic get description => _description;

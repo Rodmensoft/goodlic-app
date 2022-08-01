@@ -8,7 +8,6 @@ import 'package:consultant_product/src/modules/consultant/consultant_appointment
 import 'package:consultant_product/src/modules/sms/logic.dart';
 import 'package:consultant_product/src/modules/sms/repo.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
-import 'package:consultant_product/src/modules/user/book_appointment/post_repo.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/logic.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -81,25 +80,49 @@ class _LiveRequestState extends State<LiveRequest> {
                           Get.put(BookAppointmentLogic());
                           Get.find<GeneralController>()
                               .updateFormLoaderController(true);
+
+                          ///---make-notification
+                          Get.find<GeneralController>().updateNotificationBody(
+                              'Your Live Appointment Request Accepted',
+                              '',
+                              '/appointmentQuestion',
+                              'mentee/appointment/log',
+                              null);
+                          Get.find<GeneralController>()
+                              .updateUserIdForSendNotification(int.parse(
+                                  Get.find<GeneralController>()
+                                      .notificationMenteeId!));
+                          // Get.find<GeneralController>().notificationMenteeId = '';
+                          Get.find<GeneralController>().notificationFee = null;
+                          Get.find<GeneralController>().update();
+
+                          ///----send-sms
                           postMethod(
                               context,
-                              bookAppointmentUrl,
+                              sendSMSUrl,
                               {
                                 'token': '123',
-                                'mentee_id': Get.find<GeneralController>()
-                                    .notificationMenteeId,
-                                'mentor_id': Get.find<GeneralController>()
-                                    .storageBox
-                                    .read('userID'),
-                                'payment': Get.find<GeneralController>()
-                                    .notificationFee,
-                                'payment_id': 1,
-                                'questions': 'live',
-                                'appointment_type_string': 'Live',
-                                'appointment_type_id': 6,
+                                'phone': Get.find<SmsLogic>().phoneNumber,
+                                'message': Get.find<GeneralController>()
+                                    .notificationTitle,
                               },
                               true,
-                              liveRequestRepo);
+                              sendSMSRepo);
+
+                          ///----fcm-send-start
+                          getMethod(
+                              context,
+                              fcmGetUrl,
+                              {
+                                'token': '123',
+                                'user_id': Get.find<GeneralController>()
+                                    .notificationMenteeId
+                              },
+                              true,
+                              getFcmTokenRepo);
+                          Get.find<GeneralController>()
+                              .updateFormLoaderController(false);
+                          Get.back();
                         },
                         child: Container(
                           height: 40.h,
