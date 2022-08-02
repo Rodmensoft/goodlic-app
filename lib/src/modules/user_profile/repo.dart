@@ -84,18 +84,28 @@ getUserProfileForEditRepo(
               .data!
               .userDetail!
               .about!;
-      Get.find<EditConsultantProfileLogic>().selectedGender =
-          Get.find<GeneralController>()
+      if (Get.find<GeneralController>()
               .getConsultantProfileModel
               .data!
               .userDetail!
-              .gender!;
+              .gender !=
+          null) {
+        Get.find<EditConsultantProfileLogic>().selectedGender =
+            Get.find<GeneralController>()
+                .getConsultantProfileModel
+                .data!
+                .userDetail!
+                .gender!
+                .capitalize;
+      }
+
       Get.find<EditConsultantProfileLogic>().selectedReligion =
           Get.find<GeneralController>()
               .getConsultantProfileModel
               .data!
               .userDetail!
-              .religion!;
+              .religion!
+              .capitalize;
       Get.find<EditConsultantProfileLogic>().dobController.text =
           DateFormat('dd-MM-yyyy').format(DateTime.parse(
               Get.find<GeneralController>()

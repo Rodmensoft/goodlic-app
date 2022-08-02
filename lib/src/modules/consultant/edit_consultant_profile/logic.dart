@@ -1,5 +1,3 @@
-
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_generic_data.dart';
@@ -194,6 +192,7 @@ class EditConsultantProfileLogic extends GetxController {
 
   updateCityDropDownList(String newValue) {
     cityDropDownList.add(newValue);
+
     update();
   }
 
@@ -275,7 +274,6 @@ class EditConsultantProfileLogic extends GetxController {
     categoryDropDownList = [];
     update();
   }
-
 
   int? selectedSubCategoryID;
   List<int> selectedSubCategoriesIDList = [];

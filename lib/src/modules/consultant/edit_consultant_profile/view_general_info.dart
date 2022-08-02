@@ -597,7 +597,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                               .genderDropDownList
                                               .map<DropdownMenuItem<String>>(
                                                   (String value) {
-                                            return DropdownMenuItem<String>(
+                                            return DropdownMenuItem(
                                               value: value,
                                               child: Text(
                                                 value,
@@ -608,7 +608,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                           onChanged: (String? value) {
                                             setState(() {
                                               _editConsultantProfileLogic
-                                                  .selectedGender = value;
+                                                  .selectedGender = value!;
                                             });
                                           },
                                           validator: (String? value) {

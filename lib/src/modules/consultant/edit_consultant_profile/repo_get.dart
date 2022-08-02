@@ -98,6 +98,12 @@ getCitiesRepo(
             .updateCityDropDownList(element.name!);
       }
 
+      Set<String> seen = <String>{};
+      List<String> uniquelist = Get.find<EditConsultantProfileLogic>()
+          .cityDropDownList
+          .where((val) => seen.add(val))
+          .toList();
+      Get.find<EditConsultantProfileLogic>().cityDropDownList = uniquelist;
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
