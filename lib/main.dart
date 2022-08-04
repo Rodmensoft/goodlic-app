@@ -112,6 +112,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         }
         if (message.data['channel'] != null) {
           Get.find<GeneralController>().updateCallerType(2);
+
           Get.find<GeneralController>()
               .updateChannelForCall(message.data['channel']);
           Get.find<GeneralController>()

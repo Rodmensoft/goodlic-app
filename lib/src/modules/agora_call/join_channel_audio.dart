@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:consultant_product/multi_language/language_constants.dart';
+import 'package:consultant_product/src/api_services/local_notification_service.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
@@ -238,6 +239,8 @@ class _State extends State<JoinChannelAudio> {
                               ),
                               InkWell(
                                 onTap: () {
+                                  LocalNotificationService
+                                      .cancelAllNotifications();
                                   _leaveChannel();
                                   Get.back();
                                 },
@@ -326,6 +329,7 @@ class _State extends State<JoinChannelAudio> {
                     padding: const EdgeInsets.all(30.0),
                     child: RawMaterialButton(
                       onPressed: () {
+                        LocalNotificationService.cancelAllNotifications();
                         _leaveChannel();
                         _onCallEnd(context);
                       },
@@ -402,6 +406,7 @@ class _State extends State<JoinChannelAudio> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
+                              LocalNotificationService.cancelAllNotifications();
                               Get.back();
                             },
                             child: CircleAvatar(
@@ -418,6 +423,7 @@ class _State extends State<JoinChannelAudio> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
+                              LocalNotificationService.cancelAllNotifications();
                               _joinChannel();
                             },
                             child: CircleAvatar(

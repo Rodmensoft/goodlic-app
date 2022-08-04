@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:resize/resize.dart';
 
+import '../../api_services/local_notification_service.dart';
 import 'agora.config.dart' as config;
 
 /// MultiChannel Example
@@ -294,6 +295,7 @@ class _State extends State<JoinChannelVideo> {
                       onPressed: () {
                         _leaveChannel();
                         _onCallEnd(context);
+                        LocalNotificationService.cancelAllNotifications();
                       },
                       child: const Icon(
                         Icons.clear,
@@ -368,6 +370,7 @@ class _State extends State<JoinChannelVideo> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
+                              LocalNotificationService.cancelAllNotifications();
                               _leaveChannel();
                               Get.back();
                             },
@@ -385,6 +388,7 @@ class _State extends State<JoinChannelVideo> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
+                              LocalNotificationService.cancelAllNotifications();
                               _joinChannel();
                             },
                             child: CircleAvatar(
@@ -495,6 +499,7 @@ class _CallWaitingViewState extends State<CallWaitingView> {
                     padding: const EdgeInsets.all(30.0),
                     child: RawMaterialButton(
                       onPressed: () {
+                        LocalNotificationService.cancelAllNotifications();
                         _leaveChannel();
                         Get.find<GeneralController>().updateGoForCall(false);
 

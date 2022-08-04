@@ -58,14 +58,14 @@ class LocalNotificationService {
                   importance: Importance.max,
                   playSound: true,
                   priority: Priority.high,
+                  sound: RawResourceAndroidNotificationSound("ring_ring"),
                 )
-              : AndroidNotificationDetails(
+              : const AndroidNotificationDetails(
                   "easyApproach",
                   "easyApproach channel",
                   importance: Importance.max,
                   playSound: true,
-                  sound: RawResourceAndroidNotificationSound(
-                      message.notification!.android!.sound),
+                  sound: RawResourceAndroidNotificationSound("ring_ring"),
                   priority: Priority.high,
                 ));
       final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
@@ -73,5 +73,9 @@ class LocalNotificationService {
           id, message.notification!.title, message.notification!.body, _details,
           payload: message.data['routeApp']);
     }
+  }
+
+  static cancelAllNotifications() {
+    _flutterLocalNotificationsPlugin.cancelAll();
   }
 }
