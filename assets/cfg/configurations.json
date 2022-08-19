@@ -1,8 +1,8 @@
 {
 
-  "base_url": "http://demo.consultant.nictusthemes.com/",
-  "api_base_url": "http://demo.consultant.nictusthemes.com/api/",
-  "media_url": "http://demo.consultant.nictusthemes.com",
+  "base_url": "https://consultation.softwaresbranding.com/",
+  "api_base_url": "https://consultation.softwaresbranding.com/api/",
+  "media_url": "https://consultation.softwaresbranding.com",
 
   "flutterWave_publicKey": "FLWPUBK_TEST-7f22a34d5ad0905cff21f0952ad61e7f-X",
   "agora_appId": "6e8d86e69feb401a8eee0237e07a5b3d",

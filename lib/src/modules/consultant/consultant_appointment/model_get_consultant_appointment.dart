@@ -14,9 +14,7 @@ class GetConsultantAppointmentModel {
   GetConsultantAppointmentModel.fromJson(dynamic json) {
     _status = json['Status'];
     _success = json['success'];
-    _data = json['data'] != null
-        ? GetConsultantAppointmentModelData.fromJson(json['data'])
-        : null;
+    _data = json['data'] != null ? GetConsultantAppointmentModelData.fromJson(json['data']) : null;
     _msg = json['msg'];
   }
   bool? _status;
@@ -47,36 +45,38 @@ class GetConsultantAppointmentModelData {
     AppointmentsPageData? acceptedAppointments,
     AppointmentsPageData? completedAppointments,
     AppointmentsPageData? cancelledAppointments,
+    AppointmentsPageData? archiveAppointments,
   }) {
     _pendingAppointments = pendingAppointments;
     _acceptedAppointments = acceptedAppointments;
     _completedAppointments = completedAppointments;
     _cancelledAppointments = cancelledAppointments;
+    _archiveAppointments = archiveAppointments;
   }
 
   GetConsultantAppointmentModelData.fromJson(dynamic json) {
-    _pendingAppointments = json['pendingAppointments'] != null
-        ? AppointmentsPageData.fromJson(json['pendingAppointments'])
-        : null;
-    _acceptedAppointments = json['acceptedAppointments'] != null
-        ? AppointmentsPageData.fromJson(json['acceptedAppointments'])
-        : null;
-    _completedAppointments = json['completedAppointments'] != null
-        ? AppointmentsPageData.fromJson(json['completedAppointments'])
-        : null;
-    _cancelledAppointments = json['cancelledAppointments'] != null
-        ? AppointmentsPageData.fromJson(json['cancelledAppointments'])
-        : null;
+    _pendingAppointments =
+        json['pendingAppointments'] != null ? AppointmentsPageData.fromJson(json['pendingAppointments']) : null;
+    _acceptedAppointments =
+        json['acceptedAppointments'] != null ? AppointmentsPageData.fromJson(json['acceptedAppointments']) : null;
+    _completedAppointments =
+        json['completedAppointments'] != null ? AppointmentsPageData.fromJson(json['completedAppointments']) : null;
+    _cancelledAppointments =
+        json['cancelledAppointments'] != null ? AppointmentsPageData.fromJson(json['cancelledAppointments']) : null;
+    _archiveAppointments =
+        json['archiveAppointments'] != null ? AppointmentsPageData.fromJson(json['archiveAppointments']) : null;
   }
   AppointmentsPageData? _pendingAppointments;
   AppointmentsPageData? _acceptedAppointments;
   AppointmentsPageData? _completedAppointments;
   AppointmentsPageData? _cancelledAppointments;
+  AppointmentsPageData? _archiveAppointments;
 
   AppointmentsPageData? get pendingAppointments => _pendingAppointments;
   AppointmentsPageData? get acceptedAppointments => _acceptedAppointments;
   AppointmentsPageData? get completedAppointments => _completedAppointments;
   AppointmentsPageData? get cancelledAppointments => _cancelledAppointments;
+  AppointmentsPageData? get archiveAppointments => _archiveAppointments;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -91,6 +91,9 @@ class GetConsultantAppointmentModelData {
     }
     if (_cancelledAppointments != null) {
       map['cancelledAppointments'] = _cancelledAppointments?.toJson();
+    }
+    if (_archiveAppointments != null) {
+      map['archiveAppointments'] = _archiveAppointments?.toJson();
     }
     return map;
   }
@@ -494,11 +497,8 @@ class Mentee {
     _googleId = json['google_id'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    _mentee =
-        json['mentee'] != null ? MenteeInfo.fromJson(json['mentee']) : null;
-    _userCountry = json['user_country'] != null
-        ? UserCountry.fromJson(json['user_country'])
-        : null;
+    _mentee = json['mentee'] != null ? MenteeInfo.fromJson(json['mentee']) : null;
+    _userCountry = json['user_country'] != null ? UserCountry.fromJson(json['user_country']) : null;
   }
   int? _id;
   String? _firstName;

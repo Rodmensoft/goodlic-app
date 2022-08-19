@@ -12,8 +12,7 @@ class ConsultantAppointmentLogic extends GetxController {
 
   late TabController tabController;
 
-  GetConsultantAppointmentModel getConsultantAppointmentModel =
-      GetConsultantAppointmentModel();
+  GetConsultantAppointmentModel getConsultantAppointmentModel = GetConsultantAppointmentModel();
 
   bool? getUserAppointmentLoader = true;
   updateGetUserAppointmentLoader(bool? newValue) {
@@ -27,8 +26,7 @@ class ConsultantAppointmentLogic extends GetxController {
     update();
   }
 
-  final RefreshController refreshAppointmentsController =
-      RefreshController(initialRefresh: false);
+  final RefreshController refreshAppointmentsController = RefreshController(initialRefresh: false);
 
   updateRefreshController() {
     refreshAppointmentsController.refreshCompleted();
@@ -41,8 +39,7 @@ class ConsultantAppointmentLogic extends GetxController {
   double height = 100.h;
 
   bool get isShrink {
-    return scrollController!.hasClients &&
-        scrollController!.offset > (height - kToolbarHeight);
+    return scrollController!.hasClients && scrollController!.offset > (height - kToolbarHeight);
   }
 
   void scrollListener() {
@@ -61,6 +58,7 @@ class ConsultantAppointmentLogic extends GetxController {
     ),
     Tab(text: LanguageConstant.completed.tr),
     Tab(text: LanguageConstant.cancelled.tr),
+    // Tab(text: LanguageConstant.cancelled.tr),
   ];
 
   List imagesForAppointmentTypes = [

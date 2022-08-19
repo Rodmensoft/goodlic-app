@@ -24,12 +24,10 @@ class ConsultantAppointmentPage extends StatefulWidget {
   const ConsultantAppointmentPage({Key? key}) : super(key: key);
 
   @override
-  State<ConsultantAppointmentPage> createState() =>
-      _ConsultantAppointmentPageState();
+  State<ConsultantAppointmentPage> createState() => _ConsultantAppointmentPageState();
 }
 
-class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
-    with SingleTickerProviderStateMixin {
+class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> with SingleTickerProviderStateMixin {
   final logic = Get.put(ConsultantAppointmentLogic());
 
   final state = Get.find<ConsultantAppointmentLogic>().state;
@@ -42,14 +40,10 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
     getMethod(
         context,
         getConsultantAllAppointmentsURL,
-        {
-          'token': '123',
-          'mentor_id': Get.find<GeneralController>().storageBox.read('userID')
-        },
+        {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID')},
         true,
         getConsultantAllAppointmentsRepo);
-    Get.find<ConsultantAppointmentLogic>().tabController =
-        TabController(length: logic.tabBarList.length, vsync: this);
+    Get.find<ConsultantAppointmentLogic>().tabController = TabController(length: logic.tabBarList.length, vsync: this);
 
     Get.find<ConsultantAppointmentLogic>().scrollController = ScrollController()
       ..addListener(Get.find<ConsultantAppointmentLogic>().scrollListener);
@@ -62,17 +56,14 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
         .removeListener(Get.find<ConsultantAppointmentLogic>().scrollListener);
     Get.find<ConsultantAppointmentLogic>().scrollController!.dispose();
     Get.find<ConsultantAppointmentLogic>().tabController.dispose();
-    Get.find<ConsultantAppointmentLogic>()
-        .refreshAppointmentsController
-        .dispose();
+    Get.find<ConsultantAppointmentLogic>().refreshAppointmentsController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
-      return GetBuilder<ConsultantAppointmentLogic>(
-          builder: (_consultantAppointmentLogic) {
+      return GetBuilder<ConsultantAppointmentLogic>(builder: (_consultantAppointmentLogic) {
         return GestureDetector(
           onTap: () {
             _generalController.focusOut(context);
@@ -85,35 +76,28 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                   ? const PageLoaderForConsultantAppointments()
                   : NestedScrollView(
                       controller: _consultantAppointmentLogic.scrollController,
-                      headerSliverBuilder:
-                          (BuildContext context, bool innerBoxIsScrolled) {
+                      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                         return <Widget>[
                           ///---header
                           MyCustomSliverAppBar(
                             heading: LanguageConstant.myAppointments.tr,
-                            subHeading: LanguageConstant
-                                .manageAndSeeYourAppointmentsLog.tr,
+                            subHeading: LanguageConstant.manageAndSeeYourAppointmentsLog.tr,
                             isShrink: _consultantAppointmentLogic.isShrink,
                           ),
                           SliverPersistentHeader(
                             delegate: SliverAppBarDelegate(TabBar(
                               indicator: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      6), // Creates border
+                                  borderRadius: BorderRadius.circular(6), // Creates border
                                   color: customLightThemeColor),
                               indicatorSize: TabBarIndicatorSize.tab,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.w, 5.h, 10.w, 5.h),
-                              labelPadding:
-                                  EdgeInsets.symmetric(horizontal: 25.w),
+                              padding: EdgeInsetsDirectional.fromSTEB(10.w, 5.h, 10.w, 5.h),
+                              labelPadding: EdgeInsets.symmetric(horizontal: 25.w),
                               automaticIndicatorColorAdjustment: true,
                               isScrollable: true,
-                              controller:
-                                  _consultantAppointmentLogic.tabController,
+                              controller: _consultantAppointmentLogic.tabController,
                               labelColor: Colors.white,
                               labelStyle: state.tabBarSelectedTextStyle,
-                              unselectedLabelStyle:
-                                  state.tabBarUnSelectedTextStyle,
+                              unselectedLabelStyle: state.tabBarUnSelectedTextStyle,
                               unselectedLabelColor: customLightThemeColor,
                               tabs: _consultantAppointmentLogic.tabBarList,
                             )),
@@ -122,18 +106,12 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                         ];
                       },
                       body: SmartRefresher(
-                        controller: _consultantAppointmentLogic
-                            .refreshAppointmentsController,
+                        controller: _consultantAppointmentLogic.refreshAppointmentsController,
                         onRefresh: () {
                           getMethod(
                               context,
                               getConsultantAllAppointmentsURL,
-                              {
-                                'token': '123',
-                                'mentor_id': Get.find<GeneralController>()
-                                    .storageBox
-                                    .read('userID')
-                              },
+                              {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID')},
                               true,
                               getConsultantAllAppointmentsRepo);
                         },
@@ -142,19 +120,12 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                           controller: _consultantAppointmentLogic.tabController,
                           children: [
                             ///---pending
-                            _consultantAppointmentLogic
-                                    .getConsultantAppointmentModel
-                                    .data!
-                                    .pendingAppointments!
-                                    .data!
-                                    .isEmpty
+                            _consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data!.isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
                                       style: TextStyle(
-                                          fontFamily: SarabunFontFamily.regular,
-                                          fontSize: 16.sp,
-                                          color: customTextBlackColor),
+                                          fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                     ),
                                   )
                                 : GestureDetector(
@@ -164,53 +135,28 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                       //     .requestRefresh();
                                     },
                                     child: ListView(
-                                      padding:
-                                          const EdgeInsetsDirectional.all(0),
+                                      padding: const EdgeInsetsDirectional.all(0),
                                       children: List.generate(
                                           _consultantAppointmentLogic
-                                              .getConsultantAppointmentModel
-                                              .data!
-                                              .pendingAppointments!
-                                              .data!
-                                              .length, (index) {
+                                              .getConsultantAppointmentModel.data!.pendingAppointments!.data!.length, (index) {
                                         return Column(
                                           children: [
                                             InkWell(
                                               onTap: () {
-                                                Get.put(
-                                                    ConsultantAppointmentDetailLogic());
-                                                Get.find<ConsultantAppointmentDetailLogic>()
-                                                        .selectedAppointmentData =
+                                                Get.put(ConsultantAppointmentDetailLogic());
+                                                Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
                                                     _consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel
-                                                        .data!
-                                                        .pendingAppointments!
-                                                        .data![index];
+                                                        .getConsultantAppointmentModel.data!.pendingAppointments!.data![index];
 
-                                                Get.find<
-                                                        ConsultantAppointmentDetailLogic>()
-                                                    .appointmentStatus = 0;
-                                                Get.find<
-                                                        ConsultantAppointmentDetailLogic>()
-                                                    .update();
-                                                Get.toNamed(PageRoutes
-                                                    .consultantAppointmentDetail);
+                                                Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 0;
+                                                Get.find<ConsultantAppointmentDetailLogic>().update();
+                                                Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                               },
                                               child: AppointmentDetailBox(
-                                                image: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .pendingAppointments!
-                                                    .data![index]
-                                                    .mentee!
-                                                    .imagePath,
-                                                name: _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .pendingAppointments!
-                                                            .data![index]
-                                                            .mentee!
-                                                            .firstName ==
+                                                image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                    .pendingAppointments!.data![index].mentee!.imagePath,
+                                                name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .pendingAppointments!.data![index].mentee!.firstName ==
                                                         null
                                                     ? '...'
                                                     : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].mentee!.firstName} '
@@ -222,101 +168,56 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
-                                                typeIcon: _consultantAppointmentLogic
-                                                        .imagesForAppointmentTypes[
-                                                    (_consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .pendingAppointments!
-                                                            .data![index]
-                                                            .appointmentTypeId!) -
+                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
+                                                    (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .pendingAppointments!.data![index].appointmentTypeId!) -
                                                         1],
                                                 status: 0,
-                                                date: _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .pendingAppointments!
-                                                            .data![index]
-                                                            .date ==
+                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .pendingAppointments!.data![index].date ==
                                                         null
                                                     ? null
-                                                    : DateFormat('dd/MM/yy')
-                                                        .format(DateTime.parse(
-                                                            _consultantAppointmentLogic
-                                                                .getConsultantAppointmentModel
-                                                                .data!
-                                                                .pendingAppointments!
-                                                                .data![index]
-                                                                .date!)),
+                                                    : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel
+                                                        .data!
+                                                        .pendingAppointments!
+                                                        .data![index]
+                                                        .date!)),
                                                 time: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .pendingAppointments!
-                                                    .data![index]
-                                                    .time,
+                                                    .getConsultantAppointmentModel.data!.pendingAppointments!.data![index].time,
                                                 color: customOrangeColor,
                                                 rating: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .pendingAppointments!
-                                                    .data![index]
-                                                    .rating!
+                                                    .getConsultantAppointmentModel.data!.pendingAppointments!.data![index].rating!
                                                     .toDouble(),
                                               ),
                                             ),
                                             index ==
-                                                    _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .pendingAppointments!
-                                                            .data!
-                                                            .length -
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .pendingAppointments!.data!.length -
                                                         1
                                                 ? Column(
                                                     children: [
-                                                      _consultantAppointmentLogic
-                                                                  .getConsultantAppointmentModel
-                                                                  .data!
-                                                                  .pendingAppointments!
-                                                                  .currentPage! <
-                                                              _consultantAppointmentLogic
-                                                                  .getConsultantAppointmentModel
-                                                                  .data!
-                                                                  .pendingAppointments!
-                                                                  .lastPage!
-                                                          ? _consultantAppointmentLogic
-                                                                  .getUserAppointmentMoreLoader!
+                                                      _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                                  .pendingAppointments!.currentPage! <
+                                                              _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                                  .pendingAppointments!.lastPage!
+                                                          ? _consultantAppointmentLogic.getUserAppointmentMoreLoader!
                                                               ? Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          top: 25
-                                                                              .h),
-                                                                  child:
-                                                                      const Center(
-                                                                    child:
-                                                                        CircularProgressIndicator(
-                                                                      color:
-                                                                          customThemeColor,
+                                                                  padding: EdgeInsets.only(top: 25.h),
+                                                                  child: const Center(
+                                                                    child: CircularProgressIndicator(
+                                                                      color: customThemeColor,
                                                                     ),
                                                                   ),
                                                                 )
                                                               : Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          top: 25
-                                                                              .h),
+                                                                  padding: EdgeInsets.only(top: 25.h),
                                                                   child: Center(
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsets.only(
-                                                                          bottom:
-                                                                              30.h),
-                                                                      child:
-                                                                          InkWell(
-                                                                        onTap:
-                                                                            () {
-                                                                          _consultantAppointmentLogic
-                                                                              .update();
+                                                                    child: Padding(
+                                                                      padding: EdgeInsets.only(bottom: 30.h),
+                                                                      child: InkWell(
+                                                                        onTap: () {
+                                                                          _consultantAppointmentLogic.update();
                                                                           _consultantAppointmentLogic
                                                                               .updateGetUserAppointmentMoreLoader(true);
 
@@ -339,22 +240,20 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                                                           //     true,
                                                                           //     getUserAllAppointmentsMoreRepo);
                                                                         },
-                                                                        child:
-                                                                            Container(
-                                                                          height:
-                                                                              36.h,
-                                                                          width:
-                                                                              116.w,
+                                                                        child: Container(
+                                                                          height: 36.h,
+                                                                          width: 116.w,
                                                                           decoration: BoxDecoration(
                                                                               color: Colors.white,
                                                                               border: Border.all(color: customThemeColor),
                                                                               borderRadius: BorderRadius.circular(18.r)),
-                                                                          child:
-                                                                              Center(
-                                                                            child:
-                                                                                Text(
+                                                                          child: Center(
+                                                                            child: Text(
                                                                               LanguageConstant.loadMore.tr,
-                                                                              style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customThemeColor),
+                                                                              style: TextStyle(
+                                                                                  fontFamily: SarabunFontFamily.medium,
+                                                                                  fontSize: 12.sp,
+                                                                                  color: customThemeColor),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -364,11 +263,7 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                                                 )
                                                           : const SizedBox(),
                                                       SizedBox(
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            .1,
+                                                        height: MediaQuery.of(context).size.height * .1,
                                                       ),
                                                     ],
                                                   )
@@ -380,19 +275,12 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                   ),
 
                             ///---accepted
-                            _consultantAppointmentLogic
-                                    .getConsultantAppointmentModel
-                                    .data!
-                                    .acceptedAppointments!
-                                    .data!
-                                    .isEmpty
+                            _consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data!.isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
                                       style: TextStyle(
-                                          fontFamily: SarabunFontFamily.regular,
-                                          fontSize: 16.sp,
-                                          color: customTextBlackColor),
+                                          fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                     ),
                                   )
                                 : GestureDetector(
@@ -402,52 +290,27 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                       //     .requestRefresh();
                                     },
                                     child: ListView(
-                                      padding:
-                                          const EdgeInsetsDirectional.all(0),
+                                      padding: const EdgeInsetsDirectional.all(0),
                                       children: List.generate(
                                           _consultantAppointmentLogic
-                                              .getConsultantAppointmentModel
-                                              .data!
-                                              .acceptedAppointments!
-                                              .data!
-                                              .length, (index) {
+                                              .getConsultantAppointmentModel.data!.acceptedAppointments!.data!.length, (index) {
                                         return Column(
                                           children: [
                                             InkWell(
                                               onTap: () {
-                                                Get.put(
-                                                    ConsultantAppointmentDetailLogic());
-                                                Get.find<ConsultantAppointmentDetailLogic>()
-                                                        .selectedAppointmentData =
+                                                Get.put(ConsultantAppointmentDetailLogic());
+                                                Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
                                                     _consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel
-                                                        .data!
-                                                        .acceptedAppointments!
-                                                        .data![index];
-                                                Get.find<
-                                                        ConsultantAppointmentDetailLogic>()
-                                                    .appointmentStatus = 1;
-                                                Get.find<
-                                                        ConsultantAppointmentDetailLogic>()
-                                                    .update();
-                                                Get.toNamed(PageRoutes
-                                                    .consultantAppointmentDetail);
+                                                        .getConsultantAppointmentModel.data!.acceptedAppointments!.data![index];
+                                                Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 1;
+                                                Get.find<ConsultantAppointmentDetailLogic>().update();
+                                                Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                               },
                                               child: AppointmentDetailBox(
-                                                image: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .acceptedAppointments!
-                                                    .data![index]
-                                                    .mentee!
-                                                    .imagePath,
-                                                name: _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .acceptedAppointments!
-                                                            .data![index]
-                                                            .mentee!
-                                                            .firstName ==
+                                                image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                    .acceptedAppointments!.data![index].mentee!.imagePath,
+                                                name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .acceptedAppointments!.data![index].mentee!.firstName ==
                                                         null
                                                     ? '...'
                                                     : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].mentee!.firstName} '
@@ -459,62 +322,35 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
-                                                typeIcon: _consultantAppointmentLogic
-                                                        .imagesForAppointmentTypes[
-                                                    (_consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .acceptedAppointments!
-                                                            .data![index]
-                                                            .appointmentTypeId!) -
+                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
+                                                    (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .acceptedAppointments!.data![index].appointmentTypeId!) -
                                                         1],
                                                 status: 1,
-                                                date: _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .acceptedAppointments!
-                                                            .data![index]
-                                                            .date ==
+                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .acceptedAppointments!.data![index].date ==
                                                         null
                                                     ? null
-                                                    : DateFormat('dd/MM/yy')
-                                                        .format(DateTime.parse(
-                                                            _consultantAppointmentLogic
-                                                                .getConsultantAppointmentModel
-                                                                .data!
-                                                                .acceptedAppointments!
-                                                                .data![index]
-                                                                .date!)),
+                                                    : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel
+                                                        .data!
+                                                        .acceptedAppointments!
+                                                        .data![index]
+                                                        .date!)),
                                                 time: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .acceptedAppointments!
-                                                    .data![index]
-                                                    .time,
+                                                    .getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].time,
                                                 color: customLightThemeColor,
-                                                rating: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .acceptedAppointments!
-                                                    .data![index]
-                                                    .rating!
+                                                rating: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                    .acceptedAppointments!.data![index].rating!
                                                     .toDouble(),
                                               ),
                                             ),
                                             index ==
-                                                    _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .acceptedAppointments!
-                                                            .data!
-                                                            .length -
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .acceptedAppointments!.data!.length -
                                                         1
                                                 ? SizedBox(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            .1,
+                                                    height: MediaQuery.of(context).size.height * .1,
                                                   )
                                                 : const SizedBox()
                                           ],
@@ -524,19 +360,12 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                   ),
 
                             ///---completed
-                            _consultantAppointmentLogic
-                                    .getConsultantAppointmentModel
-                                    .data!
-                                    .completedAppointments!
-                                    .data!
-                                    .isEmpty
+                            _consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data!.isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
                                       style: TextStyle(
-                                          fontFamily: SarabunFontFamily.regular,
-                                          fontSize: 16.sp,
-                                          color: customTextBlackColor),
+                                          fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                     ),
                                   )
                                 : GestureDetector(
@@ -546,52 +375,27 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                       //     .requestRefresh();
                                     },
                                     child: ListView(
-                                      padding:
-                                          const EdgeInsetsDirectional.all(0),
+                                      padding: const EdgeInsetsDirectional.all(0),
                                       children: List.generate(
                                           _consultantAppointmentLogic
-                                              .getConsultantAppointmentModel
-                                              .data!
-                                              .completedAppointments!
-                                              .data!
-                                              .length, (index) {
+                                              .getConsultantAppointmentModel.data!.completedAppointments!.data!.length, (index) {
                                         return Column(
                                           children: [
                                             InkWell(
                                               onTap: () {
-                                                Get.put(
-                                                    ConsultantAppointmentDetailLogic());
-                                                Get.find<ConsultantAppointmentDetailLogic>()
-                                                        .selectedAppointmentData =
+                                                Get.put(ConsultantAppointmentDetailLogic());
+                                                Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
                                                     _consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel
-                                                        .data!
-                                                        .completedAppointments!
-                                                        .data![index];
-                                                Get.find<
-                                                        ConsultantAppointmentDetailLogic>()
-                                                    .appointmentStatus = 2;
-                                                Get.find<
-                                                        ConsultantAppointmentDetailLogic>()
-                                                    .update();
-                                                Get.toNamed(PageRoutes
-                                                    .consultantAppointmentDetail);
+                                                        .getConsultantAppointmentModel.data!.completedAppointments!.data![index];
+                                                Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 2;
+                                                Get.find<ConsultantAppointmentDetailLogic>().update();
+                                                Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                               },
                                               child: AppointmentDetailBox(
-                                                image: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .completedAppointments!
-                                                    .data![index]
-                                                    .mentee!
-                                                    .imagePath,
-                                                name: _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .completedAppointments!
-                                                            .data![index]
-                                                            .mentee!
-                                                            .firstName ==
+                                                image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                    .completedAppointments!.data![index].mentee!.imagePath,
+                                                name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .completedAppointments!.data![index].mentee!.firstName ==
                                                         null
                                                     ? '...'
                                                     : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].mentee!.firstName} '
@@ -603,62 +407,35 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
-                                                typeIcon: _consultantAppointmentLogic
-                                                        .imagesForAppointmentTypes[
-                                                    (_consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .completedAppointments!
-                                                            .data![index]
-                                                            .appointmentTypeId!) -
+                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
+                                                    (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .completedAppointments!.data![index].appointmentTypeId!) -
                                                         1],
-                                                date: _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .completedAppointments!
-                                                            .data![index]
-                                                            .date ==
+                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .completedAppointments!.data![index].date ==
                                                         null
                                                     ? null
-                                                    : DateFormat('dd/MM/yy')
-                                                        .format(DateTime.parse(
-                                                            _consultantAppointmentLogic
-                                                                .getConsultantAppointmentModel
-                                                                .data!
-                                                                .completedAppointments!
-                                                                .data![index]
-                                                                .date!)),
+                                                    : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel
+                                                        .data!
+                                                        .completedAppointments!
+                                                        .data![index]
+                                                        .date!)),
                                                 time: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .completedAppointments!
-                                                    .data![index]
-                                                    .time,
-                                                rating: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .completedAppointments!
-                                                    .data![index]
-                                                    .rating!
+                                                    .getConsultantAppointmentModel.data!.completedAppointments!.data![index].time,
+                                                rating: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                    .completedAppointments!.data![index].rating!
                                                     .toDouble(),
                                                 status: 2,
                                                 color: customGreenColor,
                                               ),
                                             ),
                                             index ==
-                                                    _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .completedAppointments!
-                                                            .data!
-                                                            .length -
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .completedAppointments!.data!.length -
                                                         1
                                                 ? SizedBox(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            .1,
+                                                    height: MediaQuery.of(context).size.height * .1,
                                                   )
                                                 : const SizedBox()
                                           ],
@@ -668,19 +445,12 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                   ),
 
                             ///---cancelled
-                            _consultantAppointmentLogic
-                                    .getConsultantAppointmentModel
-                                    .data!
-                                    .cancelledAppointments!
-                                    .data!
-                                    .isEmpty
+                            _consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data!.isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
                                       style: TextStyle(
-                                          fontFamily: SarabunFontFamily.regular,
-                                          fontSize: 16.sp,
-                                          color: customTextBlackColor),
+                                          fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                     ),
                                   )
                                 : GestureDetector(
@@ -690,52 +460,27 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                       //     .requestRefresh();
                                     },
                                     child: ListView(
-                                      padding:
-                                          const EdgeInsetsDirectional.all(0),
+                                      padding: const EdgeInsetsDirectional.all(0),
                                       children: List.generate(
                                           _consultantAppointmentLogic
-                                              .getConsultantAppointmentModel
-                                              .data!
-                                              .cancelledAppointments!
-                                              .data!
-                                              .length, (index) {
+                                              .getConsultantAppointmentModel.data!.cancelledAppointments!.data!.length, (index) {
                                         return Column(
                                           children: [
                                             InkWell(
                                               onTap: () {
-                                                Get.put(
-                                                    ConsultantAppointmentDetailLogic());
-                                                Get.find<ConsultantAppointmentDetailLogic>()
-                                                        .selectedAppointmentData =
+                                                Get.put(ConsultantAppointmentDetailLogic());
+                                                Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
                                                     _consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel
-                                                        .data!
-                                                        .cancelledAppointments!
-                                                        .data![index];
-                                                Get.find<
-                                                        ConsultantAppointmentDetailLogic>()
-                                                    .appointmentStatus = 3;
-                                                Get.find<
-                                                        ConsultantAppointmentDetailLogic>()
-                                                    .update();
-                                                Get.toNamed(PageRoutes
-                                                    .consultantAppointmentDetail);
+                                                        .getConsultantAppointmentModel.data!.cancelledAppointments!.data![index];
+                                                Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 3;
+                                                Get.find<ConsultantAppointmentDetailLogic>().update();
+                                                Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                               },
                                               child: AppointmentDetailBox(
-                                                image: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .cancelledAppointments!
-                                                    .data![index]
-                                                    .mentee!
-                                                    .imagePath,
-                                                name: _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .cancelledAppointments!
-                                                            .data![index]
-                                                            .mentee!
-                                                            .firstName ==
+                                                image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                    .cancelledAppointments!.data![index].mentee!.imagePath,
+                                                name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .cancelledAppointments!.data![index].mentee!.firstName ==
                                                         null
                                                     ? '...'
                                                     : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].mentee!.firstName} '
@@ -747,62 +492,35 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
-                                                typeIcon: _consultantAppointmentLogic
-                                                        .imagesForAppointmentTypes[
-                                                    (_consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .cancelledAppointments!
-                                                            .data![index]
-                                                            .appointmentTypeId!) -
+                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
+                                                    (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .cancelledAppointments!.data![index].appointmentTypeId!) -
                                                         1],
-                                                date: _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .cancelledAppointments!
-                                                            .data![index]
-                                                            .date ==
+                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .cancelledAppointments!.data![index].date ==
                                                         null
                                                     ? null
-                                                    : DateFormat('dd/MM/yy')
-                                                        .format(DateTime.parse(
-                                                            _consultantAppointmentLogic
-                                                                .getConsultantAppointmentModel
-                                                                .data!
-                                                                .cancelledAppointments!
-                                                                .data![index]
-                                                                .date!)),
+                                                    : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel
+                                                        .data!
+                                                        .cancelledAppointments!
+                                                        .data![index]
+                                                        .date!)),
                                                 time: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .cancelledAppointments!
-                                                    .data![index]
-                                                    .time,
-                                                rating: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel
-                                                    .data!
-                                                    .cancelledAppointments!
-                                                    .data![index]
-                                                    .rating!
+                                                    .getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].time,
+                                                rating: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                    .cancelledAppointments!.data![index].rating!
                                                     .toDouble(),
                                                 status: 3,
                                                 color: customRedColor,
                                               ),
                                             ),
                                             index ==
-                                                    _consultantAppointmentLogic
-                                                            .getConsultantAppointmentModel
-                                                            .data!
-                                                            .cancelledAppointments!
-                                                            .data!
-                                                            .length -
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .cancelledAppointments!.data!.length -
                                                         1
                                                 ? SizedBox(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            .1,
+                                                    height: MediaQuery.of(context).size.height * .1,
                                                   )
                                                 : const SizedBox()
                                           ],
@@ -810,6 +528,92 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage>
                                       }),
                                     ),
                                   ),
+
+                            ///
+                            ///---Archive
+                            // _consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data!.isEmpty
+                            //     ? Center(
+                            //         child: Text(
+                            //           LanguageConstant.noRecordFound.tr,
+                            //           style: TextStyle(
+                            //               fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
+                            //         ),
+                            //       )
+                            //     : GestureDetector(
+                            //         onPanDown: (e) {
+                            //           // _consultantAppointmentLogic
+                            //           //     .refreshAppointmentsController
+                            //           //     .requestRefresh();
+                            //         },
+                            //         child: ListView(
+                            //           padding: const EdgeInsetsDirectional.all(0),
+                            //           children: List.generate(
+                            //               _consultantAppointmentLogic
+                            //                   .getConsultantAppointmentModel.data!.archiveAppointments!.data!.length, (index) {
+                            //             return Column(
+                            //               children: [
+                            //                 InkWell(
+                            //                   onTap: () {
+                            //                     Get.put(ConsultantAppointmentDetailLogic());
+                            //                     Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
+                            //                         _consultantAppointmentLogic
+                            //                             .getConsultantAppointmentModel.data!.archiveAppointments!.data![index];
+                            //                     Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 3;
+                            //                     Get.find<ConsultantAppointmentDetailLogic>().update();
+                            //                     Get.toNamed(PageRoutes.consultantAppointmentDetail);
+                            //                   },
+                            //                   child: AppointmentDetailBox(
+                            //                     image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                            //                         .archiveAppointments!.data![index].mentee!.imagePath,
+                            //                     name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                            //                                 .archiveAppointments!.data![index].mentee!.firstName ==
+                            //                             null
+                            //                         ? '...'
+                            //                         : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data![index].mentee!.firstName} '
+                            //                             '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data![index].mentee!.lastName}',
+                            //                     category:
+                            //                         '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data![index].mentee!.email}',
+                            //                     fee:
+                            //                         '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                            //                     type:
+                            //                         '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data![index].appointmentTypeString}'
+                            //                             .capitalizeFirst,
+                            //                     typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
+                            //                         (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                            //                                 .archiveAppointments!.data![index].appointmentTypeId!) -
+                            //                             1],
+                            //                     date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                            //                                 .archiveAppointments!.data![index].date ==
+                            //                             null
+                            //                         ? null
+                            //                         : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
+                            //                             .getConsultantAppointmentModel
+                            //                             .data!
+                            //                             .archiveAppointments!
+                            //                             .data![index]
+                            //                             .date!)),
+                            //                     time: _consultantAppointmentLogic
+                            //                         .getConsultantAppointmentModel.data!.archiveAppointments!.data![index].time,
+                            //                     rating: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                            //                         .archiveAppointments!.data![index].rating!
+                            //                         .toDouble(),
+                            //                     status: 3,
+                            //                     color: customRedColor,
+                            //                   ),
+                            //                 ),
+                            //                 index ==
+                            //                         _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                            //                                 .archiveAppointments!.data!.length -
+                            //                             1
+                            //                     ? SizedBox(
+                            //                         height: MediaQuery.of(context).size.height * .1,
+                            //                       )
+                            //                     : const SizedBox()
+                            //               ],
+                            //             );
+                            //           }),
+                            //         ),
+                            //       ),
                           ],
                         ),
                       )),
