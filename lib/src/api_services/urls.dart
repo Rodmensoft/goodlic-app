@@ -10,6 +10,7 @@ const String fcmService = 'https://fcm.googleapis.com/fcm/send';
 ///---auth
 String signUpWithEmailURL = apiBaseUrl + 'signup-email';
 String loginWithEmailURL = apiBaseUrl + 'login-email';
+String loginWithGoogleURL = apiBaseUrl + 'auth/google';
 
 String mentorApprovalStatusUrl = apiBaseUrl + 'mentorStatus';
 
@@ -64,8 +65,7 @@ String changeMentorOnlineStatusUrl = apiBaseUrl + 'changeOnlineStatus';
 String goLiveForMentorUrl = apiBaseUrl + 'turn-live-mentor';
 String inActiveLiveForMentorUrl = apiBaseUrl + 'turn-inactive-mentor';
 
-String mentorChangeAppointmentStatusUrl =
-    apiBaseUrl + 'changeAppointmentStatus';
+String mentorChangeAppointmentStatusUrl = apiBaseUrl + 'changeAppointmentStatus';
 
 ///---get-appointment-counts
 String getAppointmentCountUrl = apiBaseUrl + 'mentorAppointmentCount';
@@ -89,16 +89,16 @@ String getTopRatedConsultantURL = apiBaseUrl + 'topRatedMentors';
 String getCategoriesWithMentorURL = apiBaseUrl + 'categories/with/mentors';
 
 ///---book-appointment
-String getScheduleAvailableDaysURL =
-    apiBaseUrl + 'get-scheduled-available-days';
+String getScheduleAvailableDaysURL = apiBaseUrl + 'get-scheduled-available-days';
 String getScheduleSlotsForMenteeUrl = apiBaseUrl + 'get-date-schedule';
 String bookAppointmentUrl = apiBaseUrl + 'bookAppointment';
 
 ///---appointment-log-user
 String getUserAllAppointmentsURL = apiBaseUrl + 'all-status-menteeAppointments';
-String getConsultantAllAppointmentsURL =
-    apiBaseUrl + 'all-status-mentorAppointments';
+String getConsultantAllAppointmentsURL = apiBaseUrl + 'all-status-mentorAppointments';
 String fileAttachmentUrl = apiBaseUrl + 'appointment-attachments';
+String mentorArchivedAppointmentUrl = apiBaseUrl + 'mentor/archieved-appointment';
+String mentorUnArchivedAppointmentUrl = apiBaseUrl + 'mentor/unarchieved-appointment';
 
 ///---appointment-log-user
 String getAppointmentsDetailURL = apiBaseUrl + 'appointmentDetails';
@@ -113,8 +113,7 @@ String walletDepositUrl = apiBaseUrl + 'deposit-wallet';
 String walletDepositJazzcashUrl = apiBaseUrl + 'deposit-wallet-jazzcash';
 String walletWithdrawUrl = apiBaseUrl + 'withdraw-request';
 String walletPaymentUrl = apiBaseUrl + 'wallet-credit-transfer';
-String markAsCompleteAppointmentUrl =
-    apiBaseUrl + 'mark-appointment-as-complete';
+String markAsCompleteAppointmentUrl = apiBaseUrl + 'mark-appointment-as-complete';
 
 /// rating
 String createRatingUrl = apiBaseUrl + 'create-rating';
@@ -135,8 +134,7 @@ String fetchMessagesUrl = apiBaseUrl + 'fetch-messages';
 String sendMessageUrl = apiBaseUrl + 'send-message';
 
 ///---download-invoice
-String downloadAppointmentInvoiceForMenteeUrl =
-    baseUrl + 'completed-appointment-invoice';
+String downloadAppointmentInvoiceForMenteeUrl = baseUrl + 'completed-appointment-invoice';
 
 ///---reset-password
 String forgotPasswordUrl = apiBaseUrl + 'forget-password';

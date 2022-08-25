@@ -1,8 +1,8 @@
 {
 
-  "base_url": "https://consultation.softwaresbranding.com/",
-  "api_base_url": "https://consultation.softwaresbranding.com/api/",
-  "media_url": "https://consultation.softwaresbranding.com",
+  "base_url": "http://192.168.18.74:8000/",
+  "api_base_url": "http://192.168.18.74:8000/api/",
+  "media_url": "http://192.168.18.74:8000",
 
   "flutterWave_publicKey": "FLWPUBK_TEST-7f22a34d5ad0905cff21f0952ad61e7f-X",
   "agora_appId": "6e8d86e69feb401a8eee0237e07a5b3d",
@@ -10,5 +10,5 @@
   "place_search_key": "AIzaSyCdCdcUtLMgTMNOc0c_KrXxVhWnVUAaJYw",
   "razorpay_key": "rzp_test_hitm78nbin30uC",
 
-"fcm_key": "AAAAzbp8oYc:APA91bFdJUSDhhvlyuryxb0Gg9wStY85gsqqQarJrR3Cx1bmL2mGewaR6TVcnlG_2IvK885eQF74ufNjVpR-pXMHjpZIWickj19CMTcit4pacdZ1MzVgbAWK_R6EmJTG4P4pMN8Dmwd7"
+"fcm_key": "AAAA_lDgbm4:APA91bGZ8dkL4ceUj7RDTBmY_LyOoJrd15ZiIoiqcEV_lxKhkJAint9rJ1P_zUQ-2RX0XmrZ3fYHFf3VyVlJIj61kzQKMNzRYjs_bAyspL17U6O554kmNF-gYa4STKngo10PIFCqippu"
 }

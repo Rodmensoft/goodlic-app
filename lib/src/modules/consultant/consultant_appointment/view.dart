@@ -154,15 +154,18 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                               },
                                               child: AppointmentDetailBox(
                                                 image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                    .pendingAppointments!.data![index].mentee!.imagePath,
+                                                            .pendingAppointments?.data?[index].mentee?.imagePath ==
+                                                        null
+                                                    ? '...'
+                                                    : '',
                                                 name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .pendingAppointments!.data![index].mentee!.firstName ==
+                                                            .pendingAppointments?.data?[index].mentee?.firstName ==
                                                         null
                                                     ? '...'
                                                     : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].mentee!.firstName} '
                                                         '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].mentee!.lastName}',
                                                 category:
-                                                    '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].mentee!.email}',
+                                                    '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments?.data?[index].mentee?.email == null ? '' : ''}',
                                                 fee:
                                                     '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                                 type:
@@ -531,89 +534,90 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
 
                             ///
                             ///---Archive
-                            // _consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data!.isEmpty
-                            //     ? Center(
-                            //         child: Text(
-                            //           LanguageConstant.noRecordFound.tr,
-                            //           style: TextStyle(
-                            //               fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
-                            //         ),
-                            //       )
-                            //     : GestureDetector(
-                            //         onPanDown: (e) {
-                            //           // _consultantAppointmentLogic
-                            //           //     .refreshAppointmentsController
-                            //           //     .requestRefresh();
-                            //         },
-                            //         child: ListView(
-                            //           padding: const EdgeInsetsDirectional.all(0),
-                            //           children: List.generate(
-                            //               _consultantAppointmentLogic
-                            //                   .getConsultantAppointmentModel.data!.archiveAppointments!.data!.length, (index) {
-                            //             return Column(
-                            //               children: [
-                            //                 InkWell(
-                            //                   onTap: () {
-                            //                     Get.put(ConsultantAppointmentDetailLogic());
-                            //                     Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
-                            //                         _consultantAppointmentLogic
-                            //                             .getConsultantAppointmentModel.data!.archiveAppointments!.data![index];
-                            //                     Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 3;
-                            //                     Get.find<ConsultantAppointmentDetailLogic>().update();
-                            //                     Get.toNamed(PageRoutes.consultantAppointmentDetail);
-                            //                   },
-                            //                   child: AppointmentDetailBox(
-                            //                     image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                            //                         .archiveAppointments!.data![index].mentee!.imagePath,
-                            //                     name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                            //                                 .archiveAppointments!.data![index].mentee!.firstName ==
-                            //                             null
-                            //                         ? '...'
-                            //                         : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data![index].mentee!.firstName} '
-                            //                             '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data![index].mentee!.lastName}',
-                            //                     category:
-                            //                         '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data![index].mentee!.email}',
-                            //                     fee:
-                            //                         '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
-                            //                     type:
-                            //                         '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archiveAppointments!.data![index].appointmentTypeString}'
-                            //                             .capitalizeFirst,
-                            //                     typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
-                            //                         (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                            //                                 .archiveAppointments!.data![index].appointmentTypeId!) -
-                            //                             1],
-                            //                     date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                            //                                 .archiveAppointments!.data![index].date ==
-                            //                             null
-                            //                         ? null
-                            //                         : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
-                            //                             .getConsultantAppointmentModel
-                            //                             .data!
-                            //                             .archiveAppointments!
-                            //                             .data![index]
-                            //                             .date!)),
-                            //                     time: _consultantAppointmentLogic
-                            //                         .getConsultantAppointmentModel.data!.archiveAppointments!.data![index].time,
-                            //                     rating: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                            //                         .archiveAppointments!.data![index].rating!
-                            //                         .toDouble(),
-                            //                     status: 3,
-                            //                     color: customRedColor,
-                            //                   ),
-                            //                 ),
-                            //                 index ==
-                            //                         _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                            //                                 .archiveAppointments!.data!.length -
-                            //                             1
-                            //                     ? SizedBox(
-                            //                         height: MediaQuery.of(context).size.height * .1,
-                            //                       )
-                            //                     : const SizedBox()
-                            //               ],
-                            //             );
-                            //           }),
-                            //         ),
-                            //       ),
+                            _consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data!.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      LanguageConstant.noRecordFound.tr,
+                                      style: TextStyle(
+                                          fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
+                                    ),
+                                  )
+                                : GestureDetector(
+                                    onPanDown: (e) {
+                                      // _consultantAppointmentLogic
+                                      //     .refreshAppointmentsController
+                                      //     .requestRefresh();
+                                    },
+                                    child: ListView(
+                                      padding: const EdgeInsetsDirectional.all(0),
+                                      children: List.generate(
+                                          _consultantAppointmentLogic
+                                              .getConsultantAppointmentModel.data!.archivedAppointments!.data!.length, (index) {
+                                        return Column(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                Get.put(ConsultantAppointmentDetailLogic());
+                                                Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
+                                                    _consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel.data!.archivedAppointments!.data![index];
+                                                // Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 3;
+                                                Get.find<ConsultantAppointmentDetailLogic>().update();
+                                                Get.toNamed(PageRoutes.consultantAppointmentDetail);
+                                              },
+                                              child: AppointmentDetailBox(
+                                                image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                    .archivedAppointments!.data![index].mentee!.imagePath,
+                                                name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .archivedAppointments!.data![index].mentee!.firstName ==
+                                                        null
+                                                    ? '...'
+                                                    : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].mentee!.firstName} '
+                                                        '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].mentee!.lastName}',
+                                                category:
+                                                    '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].mentee!.email}',
+                                                fee:
+                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                                                type:
+                                                    '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].appointmentTypeString}'
+                                                        .capitalizeFirst,
+                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
+                                                    (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .archivedAppointments!.data![index].appointmentTypeId!) -
+                                                        1],
+                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .archivedAppointments!.data![index].date ==
+                                                        null
+                                                    ? null
+                                                    : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel
+                                                        .data!
+                                                        .archivedAppointments!
+                                                        .data![index]
+                                                        .date!)),
+                                                time: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.archivedAppointments!.data![index].time,
+                                                rating: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                    .archivedAppointments!.data![index].rating!
+                                                    .toDouble(),
+                                                status: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.archivedAppointments,
+                                                color: customTextGreyColor,
+                                              ),
+                                            ),
+                                            index ==
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!
+                                                            .archivedAppointments!.data!.length -
+                                                        1
+                                                ? SizedBox(
+                                                    height: MediaQuery.of(context).size.height * .1,
+                                                  )
+                                                : const SizedBox()
+                                          ],
+                                        );
+                                      }),
+                                    ),
+                                  ),
                           ],
                         ),
                       )),

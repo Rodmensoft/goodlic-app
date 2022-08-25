@@ -1,4 +1,3 @@
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/model_generic_data.dart';
@@ -28,8 +27,7 @@ class CreateProfileLogic extends GetxController {
   double height = 100.h;
 
   bool get isShrink {
-    return scrollController!.hasClients &&
-        scrollController!.offset > (height - kToolbarHeight);
+    return scrollController!.hasClients && scrollController!.offset > (height - kToolbarHeight);
   }
 
   void scrollListener() {
@@ -55,8 +53,7 @@ class CreateProfileLogic extends GetxController {
         isSelected: true,
         isCompleted: false),
     Stepper(
-        title:
-            '${LanguageConstant.educational.tr}\n${LanguageConstant.info.tr}',
+        title: '${LanguageConstant.educational.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '02',
         isSelected: false,
         isCompleted: false),
@@ -65,11 +62,7 @@ class CreateProfileLogic extends GetxController {
         stepperLabel: '03',
         isSelected: false,
         isCompleted: false),
-    Stepper(
-        title: LanguageConstant.skillInfo.tr,
-        stepperLabel: '04',
-        isSelected: false,
-        isCompleted: false),
+    Stepper(title: LanguageConstant.skillInfo.tr, stepperLabel: '04', isSelected: false, isCompleted: false),
     Stepper(
         title: '${LanguageConstant.account.tr}\n${LanguageConstant.info.tr}',
         stepperLabel: '05',
@@ -100,9 +93,7 @@ class CreateProfileLogic extends GetxController {
         }
       case 4:
         {
-          return showConfirmation!
-              ? const ConfirmationView()
-              : const AccountInfoView();
+          return showConfirmation! ? const ConfirmationView() : const AccountInfoView();
         }
       default:
         {
@@ -120,23 +111,14 @@ class CreateProfileLogic extends GetxController {
 
   getSetData(BuildContext context) {
     if (Get.find<GeneralController>().getConsultantProfileModel.data != null) {
-      firstNameController.text = Get.find<GeneralController>()
-          .getConsultantProfileModel
-          .data!
-          .userDetail!
-          .firstName!;
-      lastNameController.text = Get.find<GeneralController>()
-          .getConsultantProfileModel
-          .data!
-          .userDetail!
-          .lastName!;
+      firstNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.firstName!;
+      lastNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data?.userDetail?.lastName ?? '';
       update();
     }
   }
 
   ///-------------------------------general-tab
-  MentorProfileGenericDataModel mentorProfileGenericDataModel =
-      MentorProfileGenericDataModel();
+  MentorProfileGenericDataModel mentorProfileGenericDataModel = MentorProfileGenericDataModel();
   CitiesByIdModel citiesByIdModel = CitiesByIdModel();
   GeneralInfoPostModel generalInfoPostModel = GeneralInfoPostModel();
   final TextEditingController firstNameController = TextEditingController();

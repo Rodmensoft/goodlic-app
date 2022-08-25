@@ -1,5 +1,3 @@
-
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -34,23 +32,18 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
   @override
   Widget build(BuildContext context) {
     final state = Get.find<AppointmentDetailLogic>().state;
-    return GetBuilder<AppointmentDetailLogic>(
-        builder: (_appointmentDetailLogic) {
+    return GetBuilder<AppointmentDetailLogic>(builder: (_appointmentDetailLogic) {
       return Material(
         child: Container(
             height: MediaQuery.of(context).size.height * .8,
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                color: customTextFieldColor,
-                borderRadius:
-                    BorderRadius.vertical(top: Radius.circular(30.r))),
+            decoration:
+                BoxDecoration(color: customTextFieldColor, borderRadius: BorderRadius.vertical(top: Radius.circular(30.r))),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
               child: Column(
                 children: [
-                  Center(
-                      child: SvgPicture.asset(
-                          'assets/Icons/bottomDownArrowIcon.svg')),
+                  Center(child: SvgPicture.asset('assets/Icons/bottomDownArrowIcon.svg')),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -61,12 +54,9 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                         ///---appointment-info
                         Container(
                           width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
-                              color: Colors.white),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.r), color: Colors.white),
                           child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 20.h, horizontal: 15.w),
+                            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -82,72 +72,53 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                 Row(
                                   children: [
                                     ///---date
-                                    _appointmentDetailLogic
-                                                .selectedAppointmentData.date ==
-                                            null
+                                    _appointmentDetailLogic.selectedAppointmentData.date == null
                                         ? const SizedBox()
                                         : Expanded(
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
                                                 Text(
                                                   LanguageConstant.date.tr,
-                                                  style: state
-                                                      .sectionLabelTextStyle,
+                                                  style: state.sectionLabelTextStyle,
                                                 ),
                                                 SizedBox(
                                                   height: 8.h,
                                                 ),
                                                 Text(
                                                   DateFormat('dd/MM/yy').format(
-                                                      DateTime.parse(
-                                                          _appointmentDetailLogic
-                                                              .selectedAppointmentData
-                                                              .date!)),
+                                                      DateTime.parse(_appointmentDetailLogic.selectedAppointmentData.date!)),
                                                   softWrap: true,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
+                                                  overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
-                                                  style: state
-                                                      .sectionDataTextStyle,
+                                                  style: state.sectionDataTextStyle,
                                                 ),
                                               ],
                                             ),
                                           ),
 
                                     ///---time
-                                    _appointmentDetailLogic
-                                                .selectedAppointmentData.time ==
-                                            null
+                                    _appointmentDetailLogic.selectedAppointmentData.time == null
                                         ? const SizedBox()
                                         : Expanded(
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
                                                 Text(
                                                   LanguageConstant.time.tr,
-                                                  style: state
-                                                      .sectionLabelTextStyle,
+                                                  style: state.sectionLabelTextStyle,
                                                 ),
                                                 SizedBox(
                                                   height: 8.h,
                                                 ),
                                                 Text(
-                                                  _appointmentDetailLogic
-                                                      .selectedAppointmentData
-                                                      .time!,
+                                                  _appointmentDetailLogic.selectedAppointmentData.time!,
                                                   softWrap: true,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
+                                                  overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
-                                                  style: state
-                                                      .sectionDataTextStyle,
+                                                  style: state.sectionDataTextStyle,
                                                 ),
                                               ],
                                             ),
@@ -156,10 +127,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     ///---reg. no
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.regNo.tr,
@@ -169,9 +138,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic
-                                                .selectedAppointmentData.id
-                                                .toString(),
+                                            _appointmentDetailLogic.selectedAppointmentData.id.toString(),
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -188,16 +155,13 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
 
                                 ///---type-doc.
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
                                     ///---type
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.appointmentType.tr,
@@ -208,9 +172,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                           ),
                                           Text(
                                             _appointmentDetailLogic
-                                                .selectedAppointmentData
-                                                .appointmentTypeString!
-                                                .capitalizeFirst!,
+                                                .selectedAppointmentData.appointmentTypeString!.capitalizeFirst!,
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -221,57 +183,35 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     ),
 
                                     ///---document
-                                    _appointmentDetailLogic
-                                                    .selectedAppointmentData
-                                                    .file ==
-                                                null ||
-                                            _appointmentDetailLogic
-                                                    .selectedAppointmentData
-                                                    .file ==
-                                                ''
+                                    _appointmentDetailLogic.selectedAppointmentData.file == null ||
+                                            _appointmentDetailLogic.selectedAppointmentData.file == ''
                                         ? const SizedBox()
                                         : Expanded(
                                             flex: 2,
                                             child: InkWell(
                                               onTap: () {
-                                                launch(_appointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .file!
-                                                        .contains('assets')
+                                                launch(_appointmentDetailLogic.selectedAppointmentData.file!.contains('assets')
                                                     ? '$mediaUrl/${_appointmentDetailLogic.selectedAppointmentData.file}'
                                                     : '${_appointmentDetailLogic.selectedAppointmentData.file}');
                                               },
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    LanguageConstant
-                                                        .document.tr,
-                                                    style: state
-                                                        .sectionLabelTextStyle,
+                                                    LanguageConstant.document.tr,
+                                                    style: state.sectionLabelTextStyle,
                                                   ),
                                                   SizedBox(
                                                     height: 8.h,
                                                   ),
                                                   Text(
-                                                    _appointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .fileType!,
+                                                    _appointmentDetailLogic.selectedAppointmentData.fileType!,
                                                     softWrap: true,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
+                                                    overflow: TextOverflow.ellipsis,
                                                     maxLines: 1,
-                                                    style: state
-                                                        .sectionDataTextStyle!
-                                                        .copyWith(
-                                                            color:
-                                                                customLightThemeColor,
-                                                            decoration:
-                                                                TextDecoration
-                                                                    .underline),
+                                                    style: state.sectionDataTextStyle!.copyWith(
+                                                        color: customLightThemeColor, decoration: TextDecoration.underline),
                                                   ),
                                                 ],
                                               ),
@@ -284,39 +224,31 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                 ),
 
                                 ///---question.
-                                Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      ///---question
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              '${LanguageConstant.question.tr} ',
-                                              style:
-                                                  state.sectionLabelTextStyle,
-                                            ),
-                                            SizedBox(
-                                              height: 8.h,
-                                            ),
-                                            Text(
-                                              _appointmentDetailLogic
-                                                  .selectedAppointmentData
-                                                  .questions!,
-                                              softWrap: true,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                              style: state.sectionDataTextStyle,
-                                            ),
-                                          ],
+                                Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                                  ///---question
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${LanguageConstant.question.tr} ',
+                                          style: state.sectionLabelTextStyle,
                                         ),
-                                      ),
-                                    ]),
+                                        SizedBox(
+                                          height: 8.h,
+                                        ),
+                                        Text(
+                                          _appointmentDetailLogic.selectedAppointmentData.questions!,
+                                          softWrap: true,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          style: state.sectionDataTextStyle,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ]),
                               ],
                             ),
                           ),
@@ -328,12 +260,9 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                         ///---consultant-info
                         Container(
                           width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
-                              color: Colors.white),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.r), color: Colors.white),
                           child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 20.h, horizontal: 15.w),
+                            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -351,10 +280,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     ///---name
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.name.tr,
@@ -364,11 +291,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentor!
-                                                        .firstName ==
-                                                    null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.firstName == null
                                                 ? '...'
                                                 : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.firstName!} '
                                                     '${_appointmentDetailLogic.selectedAppointmentData.mentor!.lastName!}',
@@ -384,10 +307,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     ///---gender
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.gender.tr,
@@ -397,11 +318,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentor!
-                                                        .gender ==
-                                                    null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.gender == null
                                                 ? '...'
                                                 : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.gender!}',
                                             softWrap: true,
@@ -416,10 +333,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     ///---religion
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.religion.tr,
@@ -429,11 +344,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentor!
-                                                        .religion ==
-                                                    null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.religion == null
                                                 ? '...'
                                                 : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.religion!}',
                                             softWrap: true,
@@ -452,8 +363,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
 
                                 ///---phone-city-cnic
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
                                     // ///---phone
                                     // Expanded(
@@ -493,10 +403,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     ///---reg.date
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.regDate.tr,
@@ -506,9 +414,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            DateFormat('dd/MM/yy').format(
-                                                DateTime.parse(
-                                                    '${_appointmentDetailLogic.selectedAppointmentData.mentor!.createdAt}')),
+                                            DateFormat('dd/MM/yy').format(DateTime.parse(
+                                                '${_appointmentDetailLogic.selectedAppointmentData.mentor!.createdAt}')),
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -521,10 +428,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     ///---city
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.city.tr,
@@ -534,11 +439,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentor!
-                                                        .city ==
-                                                    null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.city == null
                                                 ? '...'
                                                 : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.city!}',
                                             softWrap: true,
@@ -553,10 +454,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     ///---country
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.country.tr,
@@ -566,17 +465,9 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentor!
-                                                        .userCountry ==
-                                                    null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.userCountry == null
                                                 ? '...'
-                                                : _appointmentDetailLogic
-                                                    .selectedAppointmentData
-                                                    .mentor!
-                                                    .userCountry!
-                                                    .name!,
+                                                : _appointmentDetailLogic.selectedAppointmentData.mentor!.userCountry!.name!,
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -625,17 +516,14 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
 
                                 ///---reg.date-address
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
                                     ///---address
                                     Expanded(
                                       flex: 2,
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.address.tr,
@@ -645,11 +533,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic
-                                                        .selectedAppointmentData
-                                                        .mentor!
-                                                        .address ==
-                                                    null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.address == null
                                                 ? '...'
                                                 : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.address!}',
                                             softWrap: true,
@@ -670,10 +554,57 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                           height: 20.h,
                         ),
 
+                        /// Reschedule Button
+
+                        _appointmentDetailLogic.selectedAppointmentData.appointmentStatus == 1 &&
+                                _appointmentDetailLogic.selectedAppointmentData.isPaid == 1
+                            ? Center(
+                                child: InkWell(
+                                  onTap: () {
+                                    paymentBottomSheetForLater(context);
+                                  },
+                                  child: Container(
+                                    color: Colors.white,
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(40.w, 0, 40.w, 0),
+                                      child: Container(
+                                        height: 55.h,
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(color: customRedColor),
+                                          borderRadius: BorderRadius.circular(5.r),
+                                        ),
+                                        child: Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(horizontal: 25.w),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  //  LanguageConstant.payNow.tr,
+                                                  'Re Schedule',
+                                                  style: TextStyle(
+                                                      fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
+                                                ),
+                                                SvgPicture.asset(
+                                                  'assets/Icons/forwardArrowRedIcon.svg',
+                                                  height: 29.h,
+                                                  width: 29.w,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
+
                         /// pay-now
-                        _appointmentDetailLogic
-                                    .selectedAppointmentData.isPaid ==
-                                1
+                        _appointmentDetailLogic.selectedAppointmentData.isPaid == 1
                             ? const SizedBox()
                             : Center(
                                 child: InkWell(
@@ -683,36 +614,25 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                   child: Container(
                                     color: Colors.white,
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          40.w, 0, 40.w, 0),
+                                      padding: EdgeInsetsDirectional.fromSTEB(40.w, 0, 40.w, 0),
                                       child: Container(
                                         height: 55.h,
-                                        width:
-                                            MediaQuery.of(context).size.width,
+                                        width: MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          border:
-                                              Border.all(color: customRedColor),
-                                          borderRadius:
-                                              BorderRadius.circular(5.r),
+                                          border: Border.all(color: customRedColor),
+                                          borderRadius: BorderRadius.circular(5.r),
                                         ),
                                         child: Center(
                                           child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 25.w),
+                                            padding: EdgeInsets.symmetric(horizontal: 25.w),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Text(
                                                   LanguageConstant.payNow.tr,
                                                   style: TextStyle(
-                                                      fontFamily:
-                                                          SarabunFontFamily
-                                                              .bold,
-                                                      fontSize: 16.sp,
-                                                      color: customRedColor),
+                                                      fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
                                                 ),
                                                 SvgPicture.asset(
                                                   'assets/Icons/forwardArrowRedIcon.svg',
@@ -731,9 +651,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
 
                         /// rating button
                         !_appointmentDetailLogic.isRated! &&
-                                _appointmentDetailLogic.selectedAppointmentData
-                                        .appointmentStatus ==
-                                    2
+                                _appointmentDetailLogic.selectedAppointmentData.appointmentStatus == 2
                             ? Center(
                                 child: InkWell(
                                   onTap: () {
@@ -741,17 +659,12 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                       Form(
                                         key: _ratingFormKey,
                                         child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 20, horizontal: 30),
+                                          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                                           decoration: const BoxDecoration(
                                             color: Colors.white,
-                                            borderRadius: BorderRadius.vertical(
-                                                top: Radius.circular(10)),
+                                            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
                                           ),
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.7,
+                                          height: MediaQuery.of(context).size.height * 0.7,
                                           child: SingleChildScrollView(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
@@ -759,23 +672,15 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                 RichText(
                                                     text: TextSpan(children: [
                                                   TextSpan(
-                                                      text: LanguageConstant
-                                                          .rate.tr,
+                                                      text: LanguageConstant.rate.tr,
                                                       style: TextStyle(
-                                                          fontSize: 22.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color:
-                                                              customThemeColor)),
+                                                          fontSize: 22.sp, fontWeight: FontWeight.bold, color: customThemeColor)),
                                                   TextSpan(
-                                                      text:
-                                                          ' ${LanguageConstant.user.tr}',
+                                                      text: ' ${LanguageConstant.user.tr}',
                                                       style: TextStyle(
                                                           fontSize: 22.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: const Color(
-                                                              0xff1B1B1C))),
+                                                          fontWeight: FontWeight.bold,
+                                                          color: const Color(0xff1B1B1C))),
                                                 ])),
                                                 const SizedBox(
                                                   height: 22,
@@ -786,11 +691,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                   direction: Axis.horizontal,
                                                   allowHalfRating: true,
                                                   itemCount: 5,
-                                                  itemPadding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 4.0),
-                                                  itemBuilder: (context, _) =>
-                                                      const Icon(
+                                                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                  itemBuilder: (context, _) => const Icon(
                                                     Icons.star,
                                                     color: Colors.amber,
                                                   ),
@@ -806,41 +708,26 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                 TextFormField(
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
-                                                      return LanguageConstant
-                                                          .fieldRequired.tr.tr;
+                                                      return LanguageConstant.fieldRequired.tr.tr;
                                                     }
                                                     return null;
                                                   },
                                                   style: TextStyle(
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      color: Colors.black),
-                                                  controller:
-                                                      _commentsController,
+                                                      fontSize: 14.sp, fontWeight: FontWeight.normal, color: Colors.black),
+                                                  controller: _commentsController,
                                                   decoration: InputDecoration(
-                                                      contentPadding: const EdgeInsets.symmetric(
-                                                          vertical: 10,
-                                                          horizontal: 20),
-                                                      fillColor: Colors.grey
-                                                          .withOpacity(0.1),
+                                                      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                                      fillColor: Colors.grey.withOpacity(0.1),
                                                       filled: true,
-                                                      hintText: LanguageConstant
-                                                          .comments.tr,
+                                                      hintText: LanguageConstant.comments.tr,
                                                       // hintStyle:
                                                       // state.hintTextStyle,
                                                       enabledBorder: OutlineInputBorder(
-                                                          borderSide: const BorderSide(
-                                                              color:
-                                                                  Colors.white),
-                                                          borderRadius: BorderRadius.circular(
-                                                              5)),
+                                                          borderSide: const BorderSide(color: Colors.white),
+                                                          borderRadius: BorderRadius.circular(5)),
                                                       focusedBorder: OutlineInputBorder(
-                                                          borderSide: const BorderSide(
-                                                              color:
-                                                                  Colors.white),
-                                                          borderRadius: BorderRadius.circular(
-                                                              5)),
+                                                          borderSide: const BorderSide(color: Colors.white),
+                                                          borderRadius: BorderRadius.circular(5)),
                                                       border: OutlineInputBorder(
                                                           borderSide: const BorderSide(color: Colors.white),
                                                           borderRadius: BorderRadius.circular(5))),
@@ -849,40 +736,25 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                   height: 40,
                                                 ),
                                                 Align(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
+                                                    alignment: Alignment.bottomCenter,
                                                     child: InkWell(
                                                       onTap: () {
-                                                        if (_ratingFormKey
-                                                            .currentState!
-                                                            .validate()) {
+                                                        if (_ratingFormKey.currentState!.validate()) {
                                                           Get.back();
-                                                          Get.find<
-                                                                  GeneralController>()
-                                                              .updateFormLoaderController(
-                                                                  true);
+                                                          Get.find<GeneralController>().updateFormLoaderController(true);
                                                           postMethod(
                                                               context,
                                                               createRatingUrl,
                                                               {
                                                                 'token': '123',
                                                                 'mentee_id':
-                                                                    _appointmentDetailLogic
-                                                                        .selectedAppointmentData
-                                                                        .menteeId,
+                                                                    _appointmentDetailLogic.selectedAppointmentData.menteeId,
                                                                 'mentor_id':
-                                                                    _appointmentDetailLogic
-                                                                        .selectedAppointmentData
-                                                                        .mentorId,
-                                                                'comments':
-                                                                    _commentsController
-                                                                        .text,
-                                                                'rating':
-                                                                    ratingValue,
+                                                                    _appointmentDetailLogic.selectedAppointmentData.mentorId,
+                                                                'comments': _commentsController.text,
+                                                                'rating': ratingValue,
                                                                 'appointment_id':
-                                                                    _appointmentDetailLogic
-                                                                        .selectedAppointmentData
-                                                                        .id
+                                                                    _appointmentDetailLogic.selectedAppointmentData.id
                                                               },
                                                               true,
                                                               createRatingRepo);
@@ -890,29 +762,17 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                       },
                                                       child: Container(
                                                         height: 47,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            .5,
+                                                        width: MediaQuery.of(context).size.width * .5,
                                                         decoration: BoxDecoration(
-                                                            color:
-                                                                customThemeColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10)),
+                                                            color: customThemeColor, borderRadius: BorderRadius.circular(10)),
                                                         child: Center(
                                                           child: Text(
-                                                            LanguageConstant
-                                                                .submit.tr,
+                                                            LanguageConstant.submit.tr,
                                                             style: TextStyle(
                                                               fontSize: 15.sp,
-                                                              color:
-                                                                  Colors.white,
+                                                              color: Colors.white,
                                                             ),
-                                                            textAlign: TextAlign
-                                                                .center,
+                                                            textAlign: TextAlign.center,
                                                           ),
                                                         ),
                                                       ),
@@ -926,27 +786,21 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                   },
                                   child: Container(
                                     height: 55.h,
-                                    width:
-                                        MediaQuery.of(context).size.width * .7,
+                                    width: MediaQuery.of(context).size.width * .7,
                                     decoration: BoxDecoration(
                                       color: customThemeColor,
                                       borderRadius: BorderRadius.circular(5.r),
                                     ),
                                     child: Center(
                                       child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 25.w),
+                                        padding: EdgeInsets.symmetric(horizontal: 25.w),
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               LanguageConstant.rateNow.tr,
                                               style: TextStyle(
-                                                  fontFamily:
-                                                      SarabunFontFamily.bold,
-                                                  fontSize: 16.sp,
-                                                  color: Colors.white),
+                                                  fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
                                             ),
                                             SvgPicture.asset(
                                               'assets/Icons/whiteForwardIcon.svg',
@@ -966,52 +820,36 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                         ),
 
                         ///---invoice
-                        _appointmentDetailLogic.selectedAppointmentData
-                                    .appointmentStatus! ==
-                                2
+                        _appointmentDetailLogic.selectedAppointmentData.appointmentStatus! == 2
                             ? Center(
                                 child: InkWell(
                                   onTap: () {
-                                    Get.find<GeneralController>()
-                                        .updateFormLoaderController(true);
-                                    launch(
-                                        '$downloadAppointmentInvoiceForMenteeUrl/'
+                                    Get.find<GeneralController>().updateFormLoaderController(true);
+                                    launch('$downloadAppointmentInvoiceForMenteeUrl/'
                                         '${_appointmentDetailLogic.selectedAppointmentData.id}');
                                   },
                                   child: Container(
                                     color: Colors.white,
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          40.w, 0, 40.w, 0),
+                                      padding: EdgeInsetsDirectional.fromSTEB(40.w, 0, 40.w, 0),
                                       child: Container(
                                         height: 55.h,
-                                        width:
-                                            MediaQuery.of(context).size.width,
+                                        width: MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          border:
-                                              Border.all(color: customRedColor),
-                                          borderRadius:
-                                              BorderRadius.circular(5.r),
+                                          border: Border.all(color: customRedColor),
+                                          borderRadius: BorderRadius.circular(5.r),
                                         ),
                                         child: Center(
                                           child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 25.w),
+                                            padding: EdgeInsets.symmetric(horizontal: 25.w),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Text(
-                                                  LanguageConstant
-                                                      .downloadInvoice.tr,
+                                                  LanguageConstant.downloadInvoice.tr,
                                                   style: TextStyle(
-                                                      fontFamily:
-                                                          SarabunFontFamily
-                                                              .bold,
-                                                      fontSize: 16.sp,
-                                                      color: customRedColor),
+                                                      fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
                                                 ),
                                                 SvgPicture.asset(
                                                   'assets/Icons/forwardArrowRedIcon.svg',

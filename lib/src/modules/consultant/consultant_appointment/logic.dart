@@ -58,7 +58,7 @@ class ConsultantAppointmentLogic extends GetxController {
     ),
     Tab(text: LanguageConstant.completed.tr),
     Tab(text: LanguageConstant.cancelled.tr),
-    // Tab(text: LanguageConstant.cancelled.tr),
+    const Tab(text: 'Archived'),
   ];
 
   List imagesForAppointmentTypes = [

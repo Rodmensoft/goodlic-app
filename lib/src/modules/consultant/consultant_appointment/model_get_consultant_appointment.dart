@@ -45,13 +45,13 @@ class GetConsultantAppointmentModelData {
     AppointmentsPageData? acceptedAppointments,
     AppointmentsPageData? completedAppointments,
     AppointmentsPageData? cancelledAppointments,
-    AppointmentsPageData? archiveAppointments,
+    AppointmentsPageData? archivedAppointments,
   }) {
     _pendingAppointments = pendingAppointments;
     _acceptedAppointments = acceptedAppointments;
     _completedAppointments = completedAppointments;
     _cancelledAppointments = cancelledAppointments;
-    _archiveAppointments = archiveAppointments;
+    _archivedAppointments = archivedAppointments;
   }
 
   GetConsultantAppointmentModelData.fromJson(dynamic json) {
@@ -63,20 +63,20 @@ class GetConsultantAppointmentModelData {
         json['completedAppointments'] != null ? AppointmentsPageData.fromJson(json['completedAppointments']) : null;
     _cancelledAppointments =
         json['cancelledAppointments'] != null ? AppointmentsPageData.fromJson(json['cancelledAppointments']) : null;
-    _archiveAppointments =
-        json['archiveAppointments'] != null ? AppointmentsPageData.fromJson(json['archiveAppointments']) : null;
+    _archivedAppointments =
+        json['archivedAppointments'] != null ? AppointmentsPageData.fromJson(json['archivedAppointments']) : null;
   }
   AppointmentsPageData? _pendingAppointments;
   AppointmentsPageData? _acceptedAppointments;
   AppointmentsPageData? _completedAppointments;
   AppointmentsPageData? _cancelledAppointments;
-  AppointmentsPageData? _archiveAppointments;
+  AppointmentsPageData? _archivedAppointments;
 
   AppointmentsPageData? get pendingAppointments => _pendingAppointments;
   AppointmentsPageData? get acceptedAppointments => _acceptedAppointments;
   AppointmentsPageData? get completedAppointments => _completedAppointments;
   AppointmentsPageData? get cancelledAppointments => _cancelledAppointments;
-  AppointmentsPageData? get archiveAppointments => _archiveAppointments;
+  AppointmentsPageData? get archivedAppointments => _archivedAppointments;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -92,8 +92,8 @@ class GetConsultantAppointmentModelData {
     if (_cancelledAppointments != null) {
       map['cancelledAppointments'] = _cancelledAppointments?.toJson();
     }
-    if (_archiveAppointments != null) {
-      map['archiveAppointments'] = _archiveAppointments?.toJson();
+    if (_archivedAppointments != null) {
+      map['archiveAppointments'] = _archivedAppointments?.toJson();
     }
     return map;
   }
@@ -248,6 +248,7 @@ class ConsultantAppointmentsData {
     String? time,
     int? payment,
     int? isPaid,
+    int? is_archieve,
     dynamic paymentStatusCode,
     dynamic paymentResponseMsg,
     dynamic paymentOrderRef,
@@ -276,6 +277,7 @@ class ConsultantAppointmentsData {
     _time = time;
     _payment = payment;
     _isPaid = isPaid;
+    _is_archieve = is_archieve;
     _paymentStatusCode = paymentStatusCode;
     _paymentResponseMsg = paymentResponseMsg;
     _paymentOrderRef = paymentOrderRef;
@@ -306,6 +308,7 @@ class ConsultantAppointmentsData {
     _time = json['time'];
     _payment = json['payment'];
     _isPaid = json['is_paid'];
+    _is_archieve = json['is_archieve'];
     _paymentStatusCode = json['payment_status_code'];
     _paymentResponseMsg = json['payment_response_msg'];
     _paymentOrderRef = json['payment_order_ref'];
@@ -334,6 +337,7 @@ class ConsultantAppointmentsData {
   String? _time;
   int? _payment;
   int? _isPaid;
+  int? _is_archieve;
   dynamic _paymentStatusCode;
   dynamic _paymentResponseMsg;
   dynamic _paymentOrderRef;
@@ -362,6 +366,7 @@ class ConsultantAppointmentsData {
   String? get time => _time;
   int? get payment => _payment;
   int? get isPaid => _isPaid;
+  int? get is_archieve => _is_archieve;
   dynamic get paymentStatusCode => _paymentStatusCode;
   dynamic get paymentResponseMsg => _paymentResponseMsg;
   dynamic get paymentOrderRef => _paymentOrderRef;
@@ -392,6 +397,7 @@ class ConsultantAppointmentsData {
     map['time'] = _time;
     map['payment'] = _payment;
     map['is_paid'] = _isPaid;
+    map['is_archieve'] = _is_archieve;
     map['payment_status_code'] = _paymentStatusCode;
     map['payment_response_msg'] = _paymentResponseMsg;
     map['payment_order_ref'] = _paymentOrderRef;

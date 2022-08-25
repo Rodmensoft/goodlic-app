@@ -1,45 +1,37 @@
 {
   "project_info": {
-    "project_number": "883597025671",
-    "project_id": "consultant-40a1f",
-    "storage_bucket": "consultant-40a1f.appspot.com"
+    "project_number": "1092278578798",
+    "project_id": "consultant-ec812",
+    "storage_bucket": "consultant-ec812.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:883597025671:android:37cb2143cf131039ab7322",
+        "mobilesdk_app_id": "1:1092278578798:android:4d8177f57b21f88960c07f",
         "android_client_info": {
-          "package_name": "com.example.consultant_product"
+          "package_name": "com.example.consultantProduct"
         }
       },
       "oauth_client": [
         {
-          "client_id": "883597025671-rie06nj6q8794khjr7ksg69d0uk9m6b4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.consultant_product",
-            "certificate_hash": "9f9f736e8c88996840da4881b7bdc2e4e03000a2"
-          }
-        },
-        {
-          "client_id": "883597025671-euab4ve9tar69d89u8anm21su3g1fk6b.apps.googleusercontent.com",
+          "client_id": "1092278578798-g47tg815aeoblnqtqsn2ni18pnnvd2a0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDHi72LCNE1o1S8cUVDqY2Ey3ne-z8aayk"
+          "current_key": "AIzaSyCbl8Ef8i2t4AC_4BY_40g36YbTj_MWj3Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "883597025671-euab4ve9tar69d89u8anm21su3g1fk6b.apps.googleusercontent.com",
+              "client_id": "1092278578798-g47tg815aeoblnqtqsn2ni18pnnvd2a0.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "883597025671-o9qq6djo68c828ij17tnou3cc9bs0237.apps.googleusercontent.com",
+              "client_id": "1092278578798-1d9r9h5ivkgojlel9q317a73gv9fvf6b.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.consultantProduct"

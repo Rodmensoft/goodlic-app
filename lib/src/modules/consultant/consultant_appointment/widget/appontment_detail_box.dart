@@ -33,13 +33,12 @@ class AppointmentDetailBox extends StatelessWidget {
   final String? typeIcon;
   final String? date;
   final String? time;
-  final int? status;
+  final dynamic? status;
   final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ConsultantAppointmentLogic>(
-        builder: (_consultantAppointmentLogic) {
+    return GetBuilder<ConsultantAppointmentLogic>(builder: (_consultantAppointmentLogic) {
       return Padding(
         padding: EdgeInsetsDirectional.fromSTEB(15.w, 20.h, 15.w, 0),
         child: Container(
@@ -68,17 +67,13 @@ class AppointmentDetailBox extends StatelessWidget {
                     Container(
                       height: 85.h,
                       width: 76.w,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(8.r)),
+                      decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2), borderRadius: BorderRadius.circular(8.r)),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.r),
                           child: image == null
                               ? const SizedBox()
                               : Image.network(
-                                  image!.contains('assets')
-                                      ? '$mediaUrl$image'
-                                      : image!,
+                                  image!.contains('assets') ? '$mediaUrl$image' : image!,
                                   fit: BoxFit.cover,
                                 )),
                     ),
@@ -92,8 +87,7 @@ class AppointmentDetailBox extends StatelessWidget {
                             ///---name
                             Text(
                               name!,
-                              style: _consultantAppointmentLogic
-                                  .state.profileNameTextStyle,
+                              style: _consultantAppointmentLogic.state.profileNameTextStyle,
                             ),
                             SizedBox(
                               height: 5.h,
@@ -102,8 +96,7 @@ class AppointmentDetailBox extends StatelessWidget {
                             ///---category
                             Text(
                               category!,
-                              style: _consultantAppointmentLogic
-                                  .state.profileCategoryTextStyle,
+                              style: _consultantAppointmentLogic.state.profileCategoryTextStyle,
                             ),
                             SizedBox(
                               height: 15.h,
@@ -118,10 +111,8 @@ class AppointmentDetailBox extends StatelessWidget {
                               allowHalfRating: true,
                               itemCount: 5,
                               itemSize: 15,
-                              itemPadding:
-                                  const EdgeInsets.symmetric(horizontal: 0.0),
-                              itemBuilder: (context, _) => SvgPicture.asset(
-                                  'assets/Icons/ratingStarIcon.svg'),
+                              itemPadding: const EdgeInsets.symmetric(horizontal: 0.0),
+                              itemBuilder: (context, _) => SvgPicture.asset('assets/Icons/ratingStarIcon.svg'),
                               onRatingUpdate: (rating) {},
                             ),
                           ],
@@ -160,8 +151,7 @@ class AppointmentDetailBox extends StatelessWidget {
                               ),
                               Text(
                                 fee!,
-                                style: _consultantAppointmentLogic
-                                    .state.feeTextStyle,
+                                style: _consultantAppointmentLogic.state.feeTextStyle,
                               )
                             ],
                           ),
@@ -190,8 +180,7 @@ class AppointmentDetailBox extends StatelessWidget {
                               ),
                               Text(
                                 type!,
-                                style: _consultantAppointmentLogic
-                                    .state.feeTextStyle,
+                                style: _consultantAppointmentLogic.state.feeTextStyle,
                               )
                             ],
                           ),
@@ -210,9 +199,7 @@ class AppointmentDetailBox extends StatelessWidget {
                     ? Container(
                         height: 45.h,
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: color!,
-                            borderRadius: BorderRadius.circular(5.r)),
+                        decoration: BoxDecoration(color: color!, borderRadius: BorderRadius.circular(5.r)),
                         child: Row(
                           children: [
                             ///---status
@@ -224,8 +211,7 @@ class AppointmentDetailBox extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5.r),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: const Color(0xff707070)
-                                          .withOpacity(0.5),
+                                      color: const Color(0xff707070).withOpacity(0.5),
                                       spreadRadius: 2,
                                       blurRadius: 15,
                                       offset: const Offset(0, 5))
@@ -251,9 +237,7 @@ class AppointmentDetailBox extends StatelessWidget {
                     ? Container(
                         height: 45.h,
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: color!,
-                            borderRadius: BorderRadius.circular(5.r)),
+                        decoration: BoxDecoration(color: color!, borderRadius: BorderRadius.circular(5.r)),
                         child: Row(
                           children: [
                             ///---status
@@ -265,19 +249,16 @@ class AppointmentDetailBox extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5.r),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: const Color(0xff707070)
-                                            .withOpacity(0.5),
+                                        color: const Color(0xff707070).withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 15,
                                         offset: const Offset(0, 5))
                                   ],
                                 ),
                                 child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       SvgPicture.asset(
@@ -290,8 +271,7 @@ class AppointmentDetailBox extends StatelessWidget {
                                       ),
                                       Text(
                                         LanguageConstant.accepted.tr,
-                                        style: _consultantAppointmentLogic
-                                            .state.statusTextStyle,
+                                        style: _consultantAppointmentLogic.state.statusTextStyle,
                                       )
                                     ],
                                   ),
@@ -310,9 +290,7 @@ class AppointmentDetailBox extends StatelessWidget {
                     ? Container(
                         height: 45.h,
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: color!,
-                            borderRadius: BorderRadius.circular(5.r)),
+                        decoration: BoxDecoration(color: color!, borderRadius: BorderRadius.circular(5.r)),
                         child: Row(
                           children: [
                             ///---status
@@ -324,19 +302,16 @@ class AppointmentDetailBox extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5.r),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: const Color(0xff707070)
-                                            .withOpacity(0.5),
+                                        color: const Color(0xff707070).withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 15,
                                         offset: const Offset(0, 5))
                                   ],
                                 ),
                                 child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       SvgPicture.asset(
@@ -349,8 +324,7 @@ class AppointmentDetailBox extends StatelessWidget {
                                       ),
                                       Text(
                                         LanguageConstant.completed.tr,
-                                        style: _consultantAppointmentLogic
-                                            .state.statusTextStyle,
+                                        style: _consultantAppointmentLogic.state.statusTextStyle,
                                       )
                                     ],
                                   ),
@@ -368,9 +342,7 @@ class AppointmentDetailBox extends StatelessWidget {
                     ? Container(
                         height: 45.h,
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: color!,
-                            borderRadius: BorderRadius.circular(5.r)),
+                        decoration: BoxDecoration(color: color!, borderRadius: BorderRadius.circular(5.r)),
                         child: Row(
                           children: [
                             ///---status
@@ -382,19 +354,16 @@ class AppointmentDetailBox extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5.r),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: const Color(0xff707070)
-                                            .withOpacity(0.5),
+                                        color: const Color(0xff707070).withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 15,
                                         offset: const Offset(0, 5))
                                   ],
                                 ),
                                 child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       SvgPicture.asset(
@@ -407,8 +376,61 @@ class AppointmentDetailBox extends StatelessWidget {
                                       ),
                                       Text(
                                         LanguageConstant.cancelled.tr,
-                                        style: _consultantAppointmentLogic
-                                            .state.statusTextStyle,
+                                        style: _consultantAppointmentLogic.state.statusTextStyle,
+                                      )
+                                    ],
+                                  ),
+                                )),
+
+                            ///---date-time
+                            dateTimeRow()
+                          ],
+                        ),
+                      )
+                    : const SizedBox(),
+
+                ///---Archived-status-date-time
+                status == Get.find<ConsultantAppointmentLogic>().getConsultantAppointmentModel.data!.archivedAppointments
+                    ? Container(
+                        height: 45.h,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(color: color!, borderRadius: BorderRadius.circular(5.r)),
+                        child: Row(
+                          children: [
+                            ///---status
+                            Container(
+                                height: 45.h,
+                                width: 87.w,
+                                decoration: BoxDecoration(
+                                  color: color!,
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: const Color(0xff707070).withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 15,
+                                        offset: const Offset(0, 5))
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/Icons/archive.svg',
+                                        height: 12.h,
+                                        width: 12.w,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Text(
+                                        //  LanguageConstant.cancelled.tr,
+                                        'Archived',
+                                        style: _consultantAppointmentLogic.state.statusTextStyle,
                                       )
                                     ],
                                   ),
@@ -441,24 +463,18 @@ class AppointmentDetailBox extends StatelessWidget {
                   ///---date
                   Text(
                     date!,
-                    style: Get.find<ConsultantAppointmentLogic>()
-                        .state
-                        .dateTimeTextStyle,
+                    style: Get.find<ConsultantAppointmentLogic>().state.dateTimeTextStyle,
                   ),
                   Text(
                     '  -  ',
-                    style: Get.find<ConsultantAppointmentLogic>()
-                        .state
-                        .dateTimeTextStyle,
+                    style: Get.find<ConsultantAppointmentLogic>().state.dateTimeTextStyle,
                   ),
                   if (time != null)
 
                     ///---time
                     Text(
                       time!,
-                      style: Get.find<ConsultantAppointmentLogic>()
-                          .state
-                          .dateTimeTextStyle,
+                      style: Get.find<ConsultantAppointmentLogic>().state.dateTimeTextStyle,
                     ),
                 ],
               ),

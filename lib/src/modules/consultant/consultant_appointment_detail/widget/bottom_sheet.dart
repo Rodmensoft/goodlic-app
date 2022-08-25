@@ -548,6 +548,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Expanded(
+                                                /// Accept Button
                                                 child: InkWell(
                                                   onTap: () {
                                                     ///---make-notification
@@ -651,7 +652,8 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                               )
                             : const SizedBox(),
 
-                        _consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus == 1
+                        _consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus == 1 &&
+                                _consultantAppointmentDetailLogic.selectedAppointmentData.is_archieve == 0
                             ? Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(0, 30.h, 0, 10.h),
                                 child: Row(
@@ -739,7 +741,22 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                     /// Archive Button
                                     Expanded(
                                       child: InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Get.find<GeneralController>().updateFormLoaderController(true);
+                                          Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
+                                          Get.back();
+                                          Get.back();
+                                          postMethod(
+                                              context,
+                                              mentorArchivedAppointmentUrl,
+                                              {
+                                                'token': '123',
+                                                'appointment_id': _consultantAppointmentDetailLogic.selectedAppointmentData.id,
+                                                'mentor_id': _consultantAppointmentDetailLogic.selectedAppointmentData.mentorId,
+                                              },
+                                              true,
+                                              mentorArchiveAppointmentRepo);
+                                        },
                                         child: Container(
                                           height: 55.h,
                                           width: MediaQuery.of(context).size.width * .45,
@@ -772,6 +789,58 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                       ),
                                     ),
                                   ],
+                                ),
+                              )
+                            : const SizedBox(),
+                        _consultantAppointmentDetailLogic.selectedAppointmentData.is_archieve == 1
+
+                            /// Un Archive Button
+
+                            ? InkWell(
+                                onTap: () {
+                                  Get.find<GeneralController>().updateFormLoaderController(true);
+                                  Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
+                                  Get.back();
+                                  Get.back();
+                                  postMethod(
+                                      context,
+                                      mentorUnArchivedAppointmentUrl,
+                                      {
+                                        'token': '123',
+                                        'appointment_id': _consultantAppointmentDetailLogic.selectedAppointmentData.id,
+                                        'mentor_id': _consultantAppointmentDetailLogic.selectedAppointmentData.mentorId,
+                                      },
+                                      true,
+                                      mentorUnArchiveAppointmentRepo);
+                                },
+                                child: Container(
+                                  height: 55.h,
+                                  width: MediaQuery.of(context).size.width * .45,
+                                  decoration: BoxDecoration(
+                                    color: customThemeColor,
+                                    borderRadius: BorderRadius.circular(5.r),
+                                  ),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            //  LanguageConstant.markAsComplete.tr,
+                                            'Mark as UnArchive',
+                                            style: TextStyle(
+                                                fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
+                                          ),
+                                          SvgPicture.asset(
+                                            'assets/Icons/whiteForwardIcon.svg',
+                                            height: 29.h,
+                                            width: 29.w,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               )
                             : const SizedBox(),

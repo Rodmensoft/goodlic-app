@@ -1,5 +1,3 @@
-
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -8,10 +6,12 @@ import 'package:consultant_product/src/modules/sign_up/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_app_bar.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
 
@@ -24,8 +24,37 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage>
-    with SingleTickerProviderStateMixin {
+class _SignUpPageState extends State<SignUpPage> with SingleTickerProviderStateMixin {
+  /// Google
+  Future<void> loginWithGoogle() async {
+    // await GoogleSignIn().signOut();
+    // return;
+    try {
+      final GoogleSignInAccount? googleSignInAccount = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleSignInAuthentication = await googleSignInAccount?.authentication;
+      if (googleSignInAuthentication?.accessToken == null) {
+        // AppDialog().showOSDialog(context, “Error”, “User cancel sign up procedure”, “OK”, () {});
+        return;
+      }
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication?.accessToken,
+        idToken: googleSignInAuthentication?.idToken,
+      );
+      print('This is $credential');
+
+      final UserCredential authResult = await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? user = authResult.user;
+      print(user.toString());
+      // if (user != null) {
+      // await checkUserExists(uid: user.uid);
+      // }
+    } catch (e) {
+      print('Google Login Error: $e');
+    }
+  }
+
   final logic = Get.put(SignUpLogic());
 
   final state = Get.find<SignUpLogic>().state;
@@ -84,19 +113,14 @@ class _SignUpPageState extends State<SignUpPage>
                       Expanded(
                         child: SingleChildScrollView(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.w, 0, 16.w, 0.h),
+                            padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 0.h),
                             child: SingleChildScrollView(
                               child: Padding(
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context)
-                                        .viewInsets
-                                        .bottom),
+                                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                                 child: Form(
                                   key: _signUpFormKey,
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
@@ -105,8 +129,7 @@ class _SignUpPageState extends State<SignUpPage>
                                       ),
                                       SizedBox(height: 6.h),
                                       Text(
-                                        LanguageConstant
-                                            .welcomToCreateYourAccount.tr,
+                                        LanguageConstant.welcomToCreateYourAccount.tr,
                                         style: state.captionTextStyle,
                                       ),
 
@@ -116,44 +139,29 @@ class _SignUpPageState extends State<SignUpPage>
                                       Center(
                                         child: Container(
                                           height: 34.h,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .6,
+                                          width: MediaQuery.of(context).size.width * .6,
                                           decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(6.r),
-                                              color: customTextFieldColor),
+                                              borderRadius: BorderRadius.circular(6.r), color: customTextFieldColor),
                                           child: TabBar(
                                               onTap: (index) {
                                                 if (index == 0) {
-                                                  _signUpLogic.selectedRole =
-                                                      'Mentee';
+                                                  _signUpLogic.selectedRole = 'Mentee';
                                                   _signUpLogic.update();
                                                 } else {
-                                                  _signUpLogic.selectedRole =
-                                                      'Mentor';
+                                                  _signUpLogic.selectedRole = 'Mentor';
                                                   _signUpLogic.update();
                                                 }
                                               },
                                               indicator: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6
-                                                          .r), // Creates border
+                                                  borderRadius: BorderRadius.circular(6.r), // Creates border
                                                   color: customThemeColor),
-                                              indicatorSize:
-                                                  TabBarIndicatorSize.tab,
-                                              automaticIndicatorColorAdjustment:
-                                                  true,
-                                              controller:
-                                                  _signUpLogic.tabController,
+                                              indicatorSize: TabBarIndicatorSize.tab,
+                                              automaticIndicatorColorAdjustment: true,
+                                              controller: _signUpLogic.tabController,
                                               labelColor: Colors.white,
-                                              unselectedLabelColor:
-                                                  customThemeColor,
-                                              indicatorColor:
-                                                  Colors.transparent,
-                                              tabs: _signUpLogic
-                                                  .signupRoleTabList),
+                                              unselectedLabelColor: customThemeColor,
+                                              indicatorColor: Colors.transparent,
+                                              tabs: _signUpLogic.signupRoleTabList),
                                         ),
                                       ),
 
@@ -166,48 +174,31 @@ class _SignUpPageState extends State<SignUpPage>
 
                                       ///---first-name-field
                                       TextFormField(
-                                        controller:
-                                            _signUpLogic.firstNameController,
+                                        controller: _signUpLogic.firstNameController,
                                         keyboardType: TextInputType.name,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.allow(
-                                              RegExp("[a-z A-Z ]"))
-                                        ],
+                                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z ]"))],
                                         decoration: InputDecoration(
-                                          contentPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  25.w, 15.h, 25.w, 15.h),
-                                          hintText:
-                                              LanguageConstant.firstName.tr,
+                                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
+                                          hintText: LanguageConstant.firstName.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
                                           enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.transparent)),
                                           border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.transparent)),
                                           focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color:
-                                                      customLightThemeColor)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: customLightThemeColor)),
                                           errorBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.red)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.red)),
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return LanguageConstant
-                                                .fieldRequired.tr;
+                                            return LanguageConstant.fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -217,48 +208,31 @@ class _SignUpPageState extends State<SignUpPage>
 
                                       ///---last-name-field
                                       TextFormField(
-                                        controller:
-                                            _signUpLogic.lastNameController,
+                                        controller: _signUpLogic.lastNameController,
                                         keyboardType: TextInputType.name,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.allow(
-                                              RegExp("[a-z A-Z ]"))
-                                        ],
+                                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z ]"))],
                                         decoration: InputDecoration(
-                                          contentPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  25.w, 15.h, 25.w, 15.h),
-                                          hintText:
-                                              LanguageConstant.lastName.tr,
+                                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
+                                          hintText: LanguageConstant.lastName.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
                                           enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.transparent)),
                                           border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.transparent)),
                                           focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color:
-                                                      customLightThemeColor)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: customLightThemeColor)),
                                           errorBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.red)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.red)),
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return LanguageConstant
-                                                .fieldRequired.tr;
+                                            return LanguageConstant.fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -268,34 +242,26 @@ class _SignUpPageState extends State<SignUpPage>
 
                                       ///---email-field
                                       TextFormField(
-                                        controller:
-                                            _signUpLogic.emailController,
-                                        keyboardType:
-                                            TextInputType.emailAddress,
+                                        controller: _signUpLogic.emailController,
+                                        keyboardType: TextInputType.emailAddress,
                                         decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    25.w, 15.h, 25.w, 15.h),
-                                            hintText: LanguageConstant
-                                                .emailAddress.tr,
+                                            contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
+                                            hintText: LanguageConstant.emailAddress.tr,
                                             hintStyle: state.hintTextStyle,
                                             fillColor: customTextFieldColor,
                                             filled: true,
                                             enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.r),
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent)),
+                                                borderRadius: BorderRadius.circular(8.r),
+                                                borderSide: const BorderSide(color: Colors.transparent)),
                                             border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.r),
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent)),
+                                                borderRadius: BorderRadius.circular(8.r),
+                                                borderSide: const BorderSide(color: Colors.transparent)),
                                             focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.r),
+                                                borderRadius: BorderRadius.circular(8.r),
                                                 borderSide: const BorderSide(color: customLightThemeColor)),
-                                            errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                                            errorBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(8.r),
+                                                borderSide: const BorderSide(color: Colors.red)),
                                             errorText: _signUpLogic.emailValidator),
                                         onChanged: (value) {
                                           _signUpLogic.emailValidator = null;
@@ -303,11 +269,9 @@ class _SignUpPageState extends State<SignUpPage>
                                         },
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return LanguageConstant
-                                                .fieldRequired.tr;
+                                            return LanguageConstant.fieldRequired.tr;
                                           } else if (!GetUtils.isEmail(value)) {
-                                            return LanguageConstant
-                                                .enterValidEmail.tr;
+                                            return LanguageConstant.enterValidEmail.tr;
                                           } else {
                                             return null;
                                           }
@@ -318,58 +282,40 @@ class _SignUpPageState extends State<SignUpPage>
                                       ///---password-field
 
                                       TextFormField(
-                                        controller:
-                                            _signUpLogic.passwordController,
+                                        controller: _signUpLogic.passwordController,
                                         keyboardType: TextInputType.text,
                                         obscureText: obscureText!,
                                         decoration: InputDecoration(
-                                          contentPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  25.w, 15.h, 25.w, 15.h),
+                                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                                           suffixIcon: InkWell(
                                             onTap: () {
                                               setState(() {
                                                 obscureText = !obscureText!;
                                               });
                                             },
-                                            child: Icon(
-                                                obscureText!
-                                                    ? Icons.visibility
-                                                    : Icons.visibility_off,
-                                                size: 20,
-                                                color: const Color(0xff8085BA)),
+                                            child: Icon(obscureText! ? Icons.visibility : Icons.visibility_off,
+                                                size: 20, color: const Color(0xff8085BA)),
                                           ),
-                                          hintText:
-                                              LanguageConstant.password.tr,
+                                          hintText: LanguageConstant.password.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
                                           enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.transparent)),
                                           border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.transparent)),
                                           focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color:
-                                                      customLightThemeColor)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: customLightThemeColor)),
                                           errorBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.red)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.red)),
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return LanguageConstant
-                                                .fieldRequired.tr;
+                                            return LanguageConstant.fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
@@ -381,120 +327,74 @@ class _SignUpPageState extends State<SignUpPage>
                                       ///---confirm-password-field
 
                                       TextFormField(
-                                        controller: _signUpLogic
-                                            .confirmPasswordController,
+                                        controller: _signUpLogic.confirmPasswordController,
                                         keyboardType: TextInputType.text,
                                         obscureText: confirmObscureText!,
                                         decoration: InputDecoration(
-                                          contentPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  25.w, 15.h, 25.w, 15.h),
+                                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                                           suffixIcon: InkWell(
                                             onTap: () {
                                               setState(() {
-                                                confirmObscureText =
-                                                    !confirmObscureText!;
+                                                confirmObscureText = !confirmObscureText!;
                                               });
                                             },
-                                            child: Icon(
-                                                confirmObscureText!
-                                                    ? Icons.visibility
-                                                    : Icons.visibility_off,
-                                                size: 20,
-                                                color: const Color(0xff8085BA)),
+                                            child: Icon(confirmObscureText! ? Icons.visibility : Icons.visibility_off,
+                                                size: 20, color: const Color(0xff8085BA)),
                                           ),
-                                          hintText: LanguageConstant
-                                              .confirmPassword.tr,
+                                          hintText: LanguageConstant.confirmPassword.tr,
                                           hintStyle: state.hintTextStyle,
                                           fillColor: customTextFieldColor,
                                           filled: true,
                                           enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.transparent)),
                                           border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.transparent)),
                                           focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color:
-                                                      customLightThemeColor)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: customLightThemeColor)),
                                           errorBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.red)),
+                                              borderRadius: BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(color: Colors.red)),
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return LanguageConstant
-                                                .fieldRequired.tr;
+                                            return LanguageConstant.fieldRequired.tr;
                                           } else {
                                             return null;
                                           }
                                         },
                                       ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              .055),
+                                      SizedBox(height: MediaQuery.of(context).size.height * .055),
 
                                       ///---signup-button
                                       Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 30.w),
+                                        padding: EdgeInsets.symmetric(horizontal: 30.w),
                                         child: InkWell(
                                             onTap: () {
-                                              if (_signUpFormKey.currentState!
-                                                  .validate()) {
-                                                _generalController
-                                                    .updateFormLoaderController(
-                                                        true);
+                                              if (_signUpFormKey.currentState!.validate()) {
+                                                _generalController.updateFormLoaderController(true);
                                                 postMethod(
                                                     context,
                                                     signUpWithEmailURL,
                                                     {
-                                                      'first_name': _signUpLogic
-                                                          .firstNameController
-                                                          .text,
-                                                      'last_name': _signUpLogic
-                                                          .lastNameController
-                                                          .text,
-                                                      'email': _signUpLogic
-                                                          .emailController.text,
-                                                      'password': _signUpLogic
-                                                          .passwordController
-                                                          .text,
-                                                      'password_confirmation':
-                                                          _signUpLogic
-                                                              .confirmPasswordController
-                                                              .text,
-                                                      'role': _signUpLogic
-                                                          .selectedRole
+                                                      'first_name': _signUpLogic.firstNameController.text,
+                                                      'last_name': _signUpLogic.lastNameController.text,
+                                                      'email': _signUpLogic.emailController.text,
+                                                      'password': _signUpLogic.passwordController.text,
+                                                      'password_confirmation': _signUpLogic.confirmPasswordController.text,
+                                                      'role': _signUpLogic.selectedRole
                                                     },
                                                     false,
                                                     signUpWithEmailRepo);
                                               }
                                             },
-                                            child: MyCustomBottomBar(
-                                                title:
-                                                    LanguageConstant.signUp.tr,
-                                                disable: false)),
+                                            child: MyCustomBottomBar(title: LanguageConstant.signUp.tr, disable: false)),
                                       ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              .04),
+                                      SizedBox(height: MediaQuery.of(context).size.height * .04),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.orSignUpWith.tr,
@@ -506,28 +406,25 @@ class _SignUpPageState extends State<SignUpPage>
 
                                       ///---social-buttons
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           ///---google-button
-                                          Container(
-                                            height: 57.h,
-                                            width: 57.w,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color:
-                                                          customLightThemeColor
-                                                              .withOpacity(0.2),
-                                                      spreadRadius: 1,
-                                                      blurRadius: 30,
-                                                      offset:
-                                                          const Offset(0, 15))
-                                                ]),
-                                            child: Center(
-                                                child: SvgPicture.asset(
-                                                    'assets/Icons/googleIcon.svg')),
+                                          InkWell(
+                                            onTap: () async {
+                                              await loginWithGoogle();
+                                            },
+                                            child: Container(
+                                              height: 57.h,
+                                              width: 57.w,
+                                              decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                                BoxShadow(
+                                                    color: customLightThemeColor.withOpacity(0.2),
+                                                    spreadRadius: 1,
+                                                    blurRadius: 30,
+                                                    offset: const Offset(0, 15))
+                                              ]),
+                                              child: Center(child: SvgPicture.asset('assets/Icons/googleIcon.svg')),
+                                            ),
                                           ),
                                           SizedBox(width: 17.w),
 
@@ -535,44 +432,37 @@ class _SignUpPageState extends State<SignUpPage>
                                           Container(
                                             height: 57.h,
                                             width: 57.w,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color:
-                                                          customLightThemeColor
-                                                              .withOpacity(0.2),
-                                                      spreadRadius: 1,
-                                                      blurRadius: 30,
-                                                      offset:
-                                                          const Offset(0, 15))
-                                                ]),
-                                            child: Center(
-                                                child: SvgPicture.asset(
-                                                    'assets/Icons/fbIcon.svg')),
+                                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                              BoxShadow(
+                                                  color: customLightThemeColor.withOpacity(0.2),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 30,
+                                                  offset: const Offset(0, 15))
+                                            ]),
+                                            child: Center(child: SvgPicture.asset('assets/Icons/fbIcon.svg')),
                                           ),
                                           SizedBox(width: 17.w),
 
-                                          ///---twitter-button
-                                          Container(
-                                            height: 57.h,
-                                            width: 57.w,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color:
-                                                          customLightThemeColor
-                                                              .withOpacity(0.2),
-                                                      spreadRadius: 1,
-                                                      blurRadius: 30,
-                                                      offset:
-                                                          const Offset(0, 15))
-                                                ]),
-                                            child: Center(
-                                                child: SvgPicture.asset(
-                                                    'assets/Icons/twitterIcon.svg')),
-                                          ),
+                                          // ///---twitter-button
+                                          // Container(
+                                          //   height: 57.h,
+                                          //   width: 57.w,
+                                          //   decoration: BoxDecoration(
+                                          //       color: Colors.white,
+                                          //       boxShadow: [
+                                          //         BoxShadow(
+                                          //             color:
+                                          //                 customLightThemeColor
+                                          //                     .withOpacity(0.2),
+                                          //             spreadRadius: 1,
+                                          //             blurRadius: 30,
+                                          //             offset:
+                                          //                 const Offset(0, 15))
+                                          //       ]),
+                                          //   child: Center(
+                                          //       child: SvgPicture.asset(
+                                          //           'assets/Icons/twitterIcon.svg')),
+                                          // ),
                                         ],
                                       ),
 
@@ -580,8 +470,7 @@ class _SignUpPageState extends State<SignUpPage>
 
                                       ///---signup-route
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             LanguageConstant.haveAnAccount.tr,
@@ -592,16 +481,11 @@ class _SignUpPageState extends State<SignUpPage>
                                               Get.back();
                                             },
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 5.h, 0, 5.h),
+                                              padding: EdgeInsetsDirectional.fromSTEB(0, 5.h, 0, 5.h),
                                               child: Text(
                                                 LanguageConstant.letsLogin.tr,
                                                 style: state.descTextStyle!
-                                                    .copyWith(
-                                                        color: customThemeColor,
-                                                        decoration:
-                                                            TextDecoration
-                                                                .underline),
+                                                    .copyWith(color: customThemeColor, decoration: TextDecoration.underline),
                                               ),
                                             ),
                                           ),
@@ -611,23 +495,16 @@ class _SignUpPageState extends State<SignUpPage>
 
                                       ///---T&C
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            LanguageConstant
-                                                .bySignUpYouAreAgreeWith.tr,
+                                            LanguageConstant.bySignUpYouAreAgreeWith.tr,
                                             style: state.descTextStyle,
                                           ),
                                           Text(
-                                            LanguageConstant
-                                                .termsAndConditions.tr,
+                                            LanguageConstant.termsAndConditions.tr,
                                             style: state.descTextStyle!
-                                                .copyWith(
-                                                    color:
-                                                        customLightThemeColor,
-                                                    decoration: TextDecoration
-                                                        .underline),
+                                                .copyWith(color: customLightThemeColor, decoration: TextDecoration.underline),
                                           ),
                                         ],
                                       ),
