@@ -554,23 +554,35 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   Future<void> loginWithFacebook() async {
     try {
       final LoginResult result = await FacebookAuth.instance.login(permissions: ["email", "public_profile"]);
-      print("-=-=-=-=-=-=-=-=-=-=--=");
-      print(result.accessToken.toString());
-      print("-=-=-=-=-=-=-=-=-=-=--=");
+      // print("-=-=-=-=-=-=-=-=-=-=--=");
+      // print(result.accessToken.toString());
+      // print("-=-=-=-=-=-=-=-=-=-=--=");
       // if (result.accessToken == null) return;
       if (result.status == LoginStatus.success) {
         Map<String, dynamic> userData =
             await FacebookAuth.instance.getUserData(fields: "first_name,name,email,picture.width(200)");
-        print("-==-=-=-=-=-=-=-=-=-=-==-=-=-");
-        print(userData);
+        // print("-==-=-=-=-=-=-=-=-=-=-==-=-=-");
+        // print(userData);
+        //
+        // print(userData["first_name"].toString());
+        // print(userData["email"].toString());
+        // print("-==-=-=-=-=-=-=-=-=-=-==-=-=-");
+        //
+        // print(userData["id"].toString());
+        // print(userData.toString());
+        // print(userData["picture"]["data"]["url"].toString());
 
-        print(userData["first_name"].toString());
-        print(userData["email"].toString());
-        print("-==-=-=-=-=-=-=-=-=-=-==-=-=-");
-
-        print(userData["id"].toString());
-        print(userData.toString());
-        print(userData["picture"]["data"]["url"].toString());
+        postMethod(
+            context,
+            loginWithGoogleURL,
+            {
+              'email': userData["email"],
+              'name': userData["first_name"],
+              'role': logic.selectedRole,
+              'id': userData["id"],
+            },
+            false,
+            loginWithEmailRepo);
       }
     } on PlatformException catch (e) {
       print("Error: ${e.toString()}");

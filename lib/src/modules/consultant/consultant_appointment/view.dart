@@ -120,7 +120,8 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                           controller: _consultantAppointmentLogic.tabController,
                           children: [
                             ///---pending
-                            _consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data!.isEmpty
+                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.pendingAppointments?.data ?? [])
+                                    .isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
@@ -154,10 +155,11 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                               },
                                               child: AppointmentDetailBox(
                                                 image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .pendingAppointments?.data?[index].mentee?.imagePath ==
-                                                        null
-                                                    ? '...'
-                                                    : '',
+                                                    .pendingAppointments?.data?[index].mentee?.imagePath,
+                                                // ==
+                                                //     null
+                                                // ? '...'
+                                                // : '',
                                                 name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
                                                             .pendingAppointments?.data?[index].mentee?.firstName ==
                                                         null
@@ -278,7 +280,8 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                   ),
 
                             ///---accepted
-                            _consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data!.isEmpty
+                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.acceptedAppointments?.data ?? [])
+                                    .isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
@@ -363,7 +366,8 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                   ),
 
                             ///---completed
-                            _consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data!.isEmpty
+                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.completedAppointments?.data ?? [])
+                                    .isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
@@ -448,7 +452,8 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                   ),
 
                             ///---cancelled
-                            _consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data!.isEmpty
+                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.cancelledAppointments?.data ?? [])
+                                    .isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
@@ -534,7 +539,8 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
 
                             ///
                             ///---Archive
-                            _consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data!.isEmpty
+                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.archivedAppointments?.data ?? [])
+                                    .isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,

@@ -1,7 +1,11 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
+import 'package:consultant_product/src/modules/login/repo.dart';
 import 'package:consultant_product/src/modules/sign_up/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_app_bar.dart';
@@ -9,6 +13,7 @@ import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -27,14 +32,11 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> with SingleTickerProviderStateMixin {
   /// Google
   Future<void> loginWithGoogle() async {
-    // await GoogleSignIn().signOut();
-    // return;
     try {
       final GoogleSignInAccount? googleSignInAccount = await GoogleSignIn().signIn();
 
       final GoogleSignInAuthentication? googleSignInAuthentication = await googleSignInAccount?.authentication;
       if (googleSignInAuthentication?.accessToken == null) {
-        // AppDialog().showOSDialog(context, “Error”, “User cancel sign up procedure”, “OK”, () {});
         return;
       }
 
@@ -42,14 +44,21 @@ class _SignUpPageState extends State<SignUpPage> with SingleTickerProviderStateM
         accessToken: googleSignInAuthentication?.accessToken,
         idToken: googleSignInAuthentication?.idToken,
       );
-      print('This is $credential');
 
       final UserCredential authResult = await FirebaseAuth.instance.signInWithCredential(credential);
       final User? user = authResult.user;
-      print(user.toString());
-      // if (user != null) {
-      // await checkUserExists(uid: user.uid);
-      // }
+
+      postMethod(
+          context,
+          loginWithGoogleURL,
+          {
+            'email': user!.email,
+            'name': user.displayName,
+            'role': logic.selectedRole,
+            'id': user.uid,
+          },
+          false,
+          loginWithEmailRepo);
     } catch (e) {
       print('Google Login Error: $e');
     }
@@ -429,40 +438,24 @@ class _SignUpPageState extends State<SignUpPage> with SingleTickerProviderStateM
                                           SizedBox(width: 17.w),
 
                                           ///---fb-button
-                                          Container(
-                                            height: 57.h,
-                                            width: 57.w,
-                                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                                              BoxShadow(
-                                                  color: customLightThemeColor.withOpacity(0.2),
-                                                  spreadRadius: 1,
-                                                  blurRadius: 30,
-                                                  offset: const Offset(0, 15))
-                                            ]),
-                                            child: Center(child: SvgPicture.asset('assets/Icons/fbIcon.svg')),
+                                          InkWell(
+                                            onTap: () {
+                                              loginWithFacebook();
+                                            },
+                                            child: Container(
+                                              height: 57.h,
+                                              width: 57.w,
+                                              decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                                BoxShadow(
+                                                    color: customLightThemeColor.withOpacity(0.2),
+                                                    spreadRadius: 1,
+                                                    blurRadius: 30,
+                                                    offset: const Offset(0, 15))
+                                              ]),
+                                              child: Center(child: SvgPicture.asset('assets/Icons/fbIcon.svg')),
+                                            ),
                                           ),
                                           SizedBox(width: 17.w),
-
-                                          // ///---twitter-button
-                                          // Container(
-                                          //   height: 57.h,
-                                          //   width: 57.w,
-                                          //   decoration: BoxDecoration(
-                                          //       color: Colors.white,
-                                          //       boxShadow: [
-                                          //         BoxShadow(
-                                          //             color:
-                                          //                 customLightThemeColor
-                                          //                     .withOpacity(0.2),
-                                          //             spreadRadius: 1,
-                                          //             blurRadius: 30,
-                                          //             offset:
-                                          //                 const Offset(0, 15))
-                                          //       ]),
-                                          //   child: Center(
-                                          //       child: SvgPicture.asset(
-                                          //           'assets/Icons/twitterIcon.svg')),
-                                          // ),
                                         ],
                                       ),
 
@@ -526,5 +519,33 @@ class _SignUpPageState extends State<SignUpPage> with SingleTickerProviderStateM
         );
       });
     });
+  }
+
+  /// Facebook
+  Future<void> loginWithFacebook() async {
+    try {
+      final LoginResult result = await FacebookAuth.instance.login(permissions: ["email", "public_profile"]);
+      if (result.accessToken == null) return;
+      if (result.status == LoginStatus.success) {
+        Map<String, dynamic> userData =
+            await FacebookAuth.instance.getUserData(fields: "first_name,name,email,picture.width(200)");
+
+        postMethod(
+            context,
+            loginWithGoogleURL,
+            {
+              'email': userData["email"],
+              'name': userData["first_name"],
+              'role': logic.selectedRole,
+              'id': userData["id"],
+            },
+            false,
+            loginWithEmailRepo);
+      }
+    } on PlatformException catch (e) {
+      log("Error: ${e.toString()}");
+    } on SocketException catch (e) {
+      log("Error: ${e.toString()}");
+    }
   }
 }
