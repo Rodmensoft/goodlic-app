@@ -4,6 +4,7 @@ import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/logic.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/widget/payment_popup.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/view_slot_selection.dart';
 import 'package:consultant_product/src/modules/user/ratings/create_rating_repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
@@ -249,6 +250,81 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     ),
                                   ),
                                 ]),
+                                SizedBox(
+                                  height: 18.h,
+                                ),
+
+                                ///---- attachment and notes
+                                _appointmentDetailLogic.selectedAppointmentData.appointmentStatus == 2
+                                    ? Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [
+                                          ///---Notes
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  // LanguageConstant.city.tr,
+                                                  'Note',
+                                                  style: state.sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  _appointmentDetailLogic.selectedAppointmentData.notesConsultant == null
+                                                      ? '...'
+                                                      : _appointmentDetailLogic.selectedAppointmentData.notesConsultant!,
+                                                  softWrap: true,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: state.sectionDataTextStyle,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
+                                          ///---Attachment
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  // LanguageConstant.country.tr,
+                                                  'Attachment',
+                                                  style: state.sectionLabelTextStyle,
+                                                ),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    launch(_appointmentDetailLogic.selectedAppointmentData.fileConsultant!
+                                                            .contains('assets')
+                                                        ? '$mediaUrl/${_appointmentDetailLogic.selectedAppointmentData.fileConsultant}'
+                                                        : '${_appointmentDetailLogic.selectedAppointmentData.fileConsultant}');
+                                                  },
+                                                  child: Text(
+                                                    _appointmentDetailLogic.selectedAppointmentData.filetypeConsultant == null
+                                                        ? '...'
+                                                        : _appointmentDetailLogic.selectedAppointmentData.filetypeConsultant!,
+                                                    softWrap: true,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    style: state.sectionDataTextStyle!.copyWith(
+                                                        color: customLightThemeColor, decoration: TextDecoration.underline),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const Spacer()
+                                        ],
+                                      )
+                                    : const SizedBox(),
                               ],
                             ),
                           ),
@@ -291,7 +367,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.firstName == null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor?.firstName == null
                                                 ? '...'
                                                 : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.firstName!} '
                                                     '${_appointmentDetailLogic.selectedAppointmentData.mentor!.lastName!}',
@@ -318,7 +394,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.gender == null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor?.gender == null
                                                 ? '...'
                                                 : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.gender!}',
                                             softWrap: true,
@@ -344,7 +420,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.religion == null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor?.religion == null
                                                 ? '...'
                                                 : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.religion!}',
                                             softWrap: true,
@@ -414,8 +490,10 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            DateFormat('dd/MM/yy').format(DateTime.parse(
-                                                '${_appointmentDetailLogic.selectedAppointmentData.mentor!.createdAt}')),
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor != null
+                                                ? DateFormat('dd/MM/yy').format(DateTime.parse(
+                                                    '${_appointmentDetailLogic.selectedAppointmentData.mentor?.createdAt}'))
+                                                : '',
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -439,7 +517,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.city == null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor?.city == null
                                                 ? '...'
                                                 : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.city!}',
                                             softWrap: true,
@@ -465,7 +543,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.userCountry == null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor?.userCountry == null
                                                 ? '...'
                                                 : _appointmentDetailLogic.selectedAppointmentData.mentor!.userCountry!.name!,
                                             softWrap: true,
@@ -533,7 +611,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic.selectedAppointmentData.mentor!.address == null
+                                            _appointmentDetailLogic.selectedAppointmentData.mentor?.address == null
                                                 ? '...'
                                                 : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.address!}',
                                             softWrap: true,
@@ -557,43 +635,45 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                         /// Reschedule Button
 
                         _appointmentDetailLogic.selectedAppointmentData.appointmentStatus == 1 &&
-                                _appointmentDetailLogic.selectedAppointmentData.isPaid == 1
+                                _appointmentDetailLogic.selectedAppointmentData.isPaid == 1 &&
+                                _appointmentDetailLogic.selectedAppointmentData.reschudlable == true
                             ? Center(
                                 child: InkWell(
                                   onTap: () {
-                                    paymentBottomSheetForLater(context);
+                                    // paymentBottomSheetForLater(context);
+                                    Get.to(SlotSelection(
+                                        appointmentId: _appointmentDetailLogic.selectedAppointmentData.id,
+                                        mentorId: _appointmentDetailLogic.selectedAppointmentData.mentor!.id,
+                                        reschedule: true));
                                   },
-                                  child: Container(
-                                    color: Colors.white,
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(40.w, 0, 40.w, 0),
-                                      child: Container(
-                                        height: 55.h,
-                                        width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(color: customRedColor),
-                                          borderRadius: BorderRadius.circular(5.r),
-                                        ),
-                                        child: Center(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 25.w),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  //  LanguageConstant.payNow.tr,
-                                                  'Re Schedule',
-                                                  style: TextStyle(
-                                                      fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
-                                                ),
-                                                SvgPicture.asset(
-                                                  'assets/Icons/forwardArrowRedIcon.svg',
-                                                  height: 29.h,
-                                                  width: 29.w,
-                                                )
-                                              ],
-                                            ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(40.w, 0, 40.w, 0),
+                                    child: Container(
+                                      height: 55.h,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: customRedColor),
+                                        borderRadius: BorderRadius.circular(5.r),
+                                      ),
+                                      child: Center(
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 25.w),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                //  LanguageConstant.payNow.tr,
+                                                'Re Schedule',
+                                                style: TextStyle(
+                                                    fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
+                                              ),
+                                              SvgPicture.asset(
+                                                'assets/Icons/forwardArrowRedIcon.svg',
+                                                height: 29.h,
+                                                width: 29.w,
+                                              )
+                                            ],
                                           ),
                                         ),
                                       ),

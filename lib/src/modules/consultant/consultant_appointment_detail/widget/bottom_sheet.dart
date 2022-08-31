@@ -531,8 +531,9 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                           height: 20.h,
                         ),
 
-                        _consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus == 0 &&
-                                _consultantAppointmentDetailLogic.selectedAppointmentData.isPaid == 1
+                        _consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus == 0
+                            // &&
+                            //         _consultantAppointmentDetailLogic.selectedAppointmentData.isPaid == 1
                             ? Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 10),
                                 child: Row(

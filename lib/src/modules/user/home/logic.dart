@@ -17,15 +17,13 @@ class UserHomeLogic extends GetxController {
   int? selectedConsultantID;
   String? selectedConsultantName;
 
-
   ///----app-bar-settings-----start
   ScrollController? scrollController;
   bool lastStatus = true;
   double height = 200.h;
 
   bool get isShrink {
-    return scrollController!.hasClients &&
-        scrollController!.offset > (height - kToolbarHeight);
+    return scrollController!.hasClients && scrollController!.positions.last.pixels > (height - kToolbarHeight);
   }
 
   void scrollListener() {
@@ -39,21 +37,21 @@ class UserHomeLogic extends GetxController {
 
   FeaturedConsultantModel featuredConsultantModel = FeaturedConsultantModel();
   bool? featuredConsultantLoader = true;
-  updateFeaturedConsultantLoader(bool? newValue){
+  updateFeaturedConsultantLoader(bool? newValue) {
     featuredConsultantLoader = newValue;
     update();
   }
+
   List<HomeStyling> topConsultants = [];
 
   ///-------
 
   GetCategoriesModel getCategoriesModel = GetCategoriesModel();
   bool? categoriesLoader = true;
-  updateCategoriesLoader(bool? newValue){
+  updateCategoriesLoader(bool? newValue) {
     categoriesLoader = newValue;
     update();
   }
-
 
   int? selectedCategoryId;
   List<HomeStyling> categoriesList = [];
@@ -69,20 +67,22 @@ class UserHomeLogic extends GetxController {
   ///-------
   TopRatedModel topRatedModel = TopRatedModel();
   bool? topRatedLoader = true;
-  updateTopRatedLoader(bool? newValue){
+  updateTopRatedLoader(bool? newValue) {
     topRatedLoader = newValue;
     update();
   }
+
   bool? topRatedLoaderMore = false;
-  updateTopRatedLoaderMore(bool? newValue){
+  updateTopRatedLoaderMore(bool? newValue) {
     topRatedLoaderMore = newValue;
     update();
   }
+
   List<TopRatedStyling> topRatedConsultantList = [];
 }
 
 class HomeStyling {
-  HomeStyling({required this.id,this.title, this.subTitle, this.image, this.color,this.gender});
+  HomeStyling({required this.id, this.title, this.subTitle, this.image, this.color, this.gender});
 
   int? id;
   String? title;
@@ -91,13 +91,19 @@ class HomeStyling {
   Color? color;
   String? gender;
 }
+
 class TopRatedStyling {
-  TopRatedStyling({required this.id,this.title, this.subTitle, this.image, this.rating,});
+  TopRatedStyling({
+    required this.id,
+    this.title,
+    this.subTitle,
+    this.image,
+    this.rating,
+  });
 
   int? id;
   String? title;
   String? subTitle;
   String? image;
   int? rating;
-
 }

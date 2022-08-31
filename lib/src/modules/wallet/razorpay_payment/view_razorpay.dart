@@ -98,30 +98,16 @@ class _RazorPayViewState extends State<RazorPayView> {
                   bookAppointmentUrl,
                   {
                     'token': '123',
-                    'mentee_id':
-                        Get.find<GeneralController>().storageBox.read('userID'),
+                    'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
                     'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
-                    'payment': Get.find<BookAppointmentLogic>()
-                        .selectMentorAppointmentType!
-                        .fee,
-                    'payment_id':
-                        Get.find<BookAppointmentLogic>().selectedPaymentType,
-                    'questions': Get.find<BookAppointmentLogic>()
-                        .questionController
-                        .text,
-                    'appointment_type_string': Get.find<BookAppointmentLogic>()
-                        .selectMentorAppointmentType!
-                        .appointmentType!
-                        .name,
-                    'appointment_type_id': Get.find<BookAppointmentLogic>()
-                        .selectMentorAppointmentType!
-                        .appointmentType!
-                        .id,
-                    'date': Get.find<BookAppointmentLogic>()
-                        .selectedDateForAppointment
-                        .substring(0, 11),
-                    'time': Get.find<BookAppointmentLogic>()
-                        .selectedTimeForAppointment,
+                    'payment': Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.fee,
+                    'payment_id': Get.find<BookAppointmentLogic>().selectedPaymentType,
+                    'questions': Get.find<BookAppointmentLogic>().questionController.text,
+                    'appointment_type_string':
+                        Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.appointmentType!.name,
+                    'appointment_type_id': Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.appointmentType!.id,
+                    'date': Get.find<BookAppointmentLogic>().selectedDateForAppointment.substring(0, 11),
+                    'time': Get.find<BookAppointmentLogic>().selectedTimeForAppointment,
                   },
                   true,
                   flutterWaveRepo);
@@ -217,30 +203,21 @@ class _RazorPayViewState extends State<RazorPayView> {
                         controller: amountController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              25.w, 15.h, 25.w, 15.h),
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                           hintText: 'Amount',
-                          hintStyle: TextStyle(
-                              fontFamily: SarabunFontFamily.regular,
-                              fontSize: 16.sp,
-                              color: customTextGreyColor),
+                          hintStyle:
+                              TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextGreyColor),
                           fillColor: customTextFieldColor,
                           filled: true,
                           enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
+                              borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
+                              borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: customLightThemeColor)),
+                              borderSide: const BorderSide(color: customLightThemeColor)),
                           errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(color: Colors.red)),
+                              borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -258,35 +235,23 @@ class _RazorPayViewState extends State<RazorPayView> {
                       child: TextFormField(
                         controller: nameController,
                         keyboardType: TextInputType.name,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp("[a-z A-Z ]"))
-                        ],
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z ]"))],
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              25.w, 15.h, 25.w, 15.h),
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                           hintText: 'Name',
-                          hintStyle: TextStyle(
-                              fontFamily: SarabunFontFamily.regular,
-                              fontSize: 16.sp,
-                              color: customTextGreyColor),
+                          hintStyle:
+                              TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextGreyColor),
                           fillColor: customTextFieldColor,
                           filled: true,
                           enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
+                              borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
+                              borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: customLightThemeColor)),
+                              borderSide: const BorderSide(color: customLightThemeColor)),
                           errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(color: Colors.red)),
+                              borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {

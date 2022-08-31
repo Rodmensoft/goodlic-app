@@ -32,8 +32,7 @@ class AppointmentDetailLogic extends GetxController {
   double height = 100.h;
 
   bool get isShrink {
-    return scrollController!.hasClients &&
-        scrollController!.offset > (height - kToolbarHeight);
+    return scrollController!.hasClients && scrollController!.offset > (height - kToolbarHeight);
   }
 
   void scrollListener() {
@@ -44,16 +43,13 @@ class AppointmentDetailLogic extends GetxController {
   }
 
   chatOnTap(BuildContext context) {
-    Get.find<ChatLogic>().userName =
-        '${selectedAppointmentData.mentor!.firstName} '
+    Get.find<ChatLogic>().userName = '${selectedAppointmentData.mentor!.firstName} '
         '${selectedAppointmentData.mentor!.lastName}';
     Get.find<ChatLogic>().userEmail = selectedAppointmentData.mentor!.email;
     Get.find<ChatLogic>().userImage = selectedAppointmentData.mentor!.imagePath;
     Get.find<ChatLogic>().updateGetMessagesLoader(true);
-    Get.find<ChatLogic>().updateSenderMessageGetId(
-        Get.find<GeneralController>().storageBox.read('userID'));
-    Get.find<ChatLogic>()
-        .updateReceiverMessageGetId(selectedAppointmentData.mentorId);
+    Get.find<ChatLogic>().updateSenderMessageGetId(Get.find<GeneralController>().storageBox.read('userID'));
+    Get.find<ChatLogic>().updateReceiverMessageGetId(selectedAppointmentData.mentorId);
     Get.toNamed(PageRoutes.chatScreen);
   }
 
@@ -72,8 +68,7 @@ class AppointmentDetailLogic extends GetxController {
   double heightStripe = 100.h;
 
   bool get isShrinkStripe {
-    return scrollControllerStripe!.hasClients &&
-        scrollControllerStripe!.offset > (heightStripe - kToolbarHeight);
+    return scrollControllerStripe!.hasClients && scrollControllerStripe!.offset > (heightStripe - kToolbarHeight);
   }
 
   void scrollListenerStripe() {
@@ -89,8 +84,7 @@ class AppointmentDetailLogic extends GetxController {
   double myWidth = 0;
   TextEditingController accountCardNumberController = TextEditingController();
   TextEditingController stripeAmountController = TextEditingController();
-  TextEditingController accountCardHolderNameController =
-      TextEditingController();
+  TextEditingController accountCardHolderNameController = TextEditingController();
   TextEditingController accountCardExpiresController = TextEditingController();
   TextEditingController accountCardCvcController = TextEditingController();
 
@@ -98,15 +92,44 @@ class AppointmentDetailLogic extends GetxController {
   var cardExpiryMask = MaskTextInputFormatter(mask: '##/##');
   int? selectedPaymentType;
   List<ShiftType> paymentMethodList = [
-    ShiftType(
-        title: 'stripe', image: 'assets/Icons/stripe.svg', isSelected: false),
-    ShiftType(
-        title: 'braintree',
-        image: 'assets/Icons/braintreePayment.svg',
-        isSelected: false),
-    ShiftType(
-        title: 'paypal',
-        image: 'assets/Icons/paypalPayment.svg',
-        isSelected: false),
+    ShiftType(title: 'stripe', image: 'assets/Icons/stripe.svg', isSelected: false),
+    ShiftType(title: 'braintree', image: 'assets/Icons/braintreePayment.svg', isSelected: false),
+    ShiftType(title: 'paypal', image: 'assets/Icons/paypalPayment.svg', isSelected: false),
   ];
+
+  /// Measure Time for Reschedule Appointment
+  bool? showRescheduleBtn = false;
+  // Future<int> getRescheduleBtn() async {
+  //   String time1 = DateTime.now().toString().substring(11, 19);
+  //   log('This is first.....$time1');
+  //   String time2 =
+  //       intl.DateFormat.Hms().format(intl.DateFormat('h:mm a').parse('${selectedAppointmentData.time.toString().substring(0, 5)}'
+  //           '${selectedAppointmentData.time.toString().substring(5, 8).toUpperCase()}'));
+  //   log('This is second.....$time2');
+  //   String time3 = intl.DateFormat.Hms()
+  //       .format(intl.DateFormat('h:mm a').parse('${selectedAppointmentData.endTime.toString().substring(0, 5)}'
+  //           '${selectedAppointmentData.endTime.toString().substring(5, 8).toUpperCase()}'));
+  //   log('last time ${selectedAppointmentData.endTime}');
+  //   log('This is third.....$time3');
+  //
+  //   intl.DateFormat dateFormat = intl.DateFormat("yyyy-MM-dd");
+  //
+  //   var _date = dateFormat.format(DateTime.now());
+  //
+  //   DateTime a = DateTime.parse('$_date $time1');
+  //   DateTime b = DateTime.parse('${selectedAppointmentData.date} $time2');
+  //   DateTime endDateTime = DateTime.parse('${selectedAppointmentData.date} $time3');
+  //
+  //   if ((b.difference(a).inMinutes <= 2) && DateTime.now().isBefore(endDateTime)) {
+  //     showRescheduleBtn = true;
+  //     //  showAppointment = selectedAppointmentData.id!;
+  //     update();
+  //   } else {
+  //     showRescheduleBtn = false;
+  //
+  //     update();
+  //   }
+  //   log('difference.........${b.difference(a).inMinutes}');
+  //   return b.difference(a).inMinutes;
+  // }
 }

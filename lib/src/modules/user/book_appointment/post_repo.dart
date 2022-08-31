@@ -16,6 +16,7 @@ import 'package:consultant_product/src/modules/user/book_appointment/easy_paisa_
 import 'package:consultant_product/src/modules/user/book_appointment/jazz_cash_payment/payment_jazzcash_view.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/model/getAppDetail_forReschedule.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
@@ -24,40 +25,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 bookAppointmentFileRepo(File file1, BuildContext context) async {
-  dio_instance.FormData formData =
-      dio_instance.FormData.fromMap(<String, dynamic>{
+  dio_instance.FormData formData = dio_instance.FormData.fromMap(<String, dynamic>{
     'token': '123',
     'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
     'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
-    'payment':
-        Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.fee,
+    'payment': Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.fee,
     'payment_id': Get.find<BookAppointmentLogic>().selectedPaymentType,
-    'appointment_type_id': Get.find<BookAppointmentLogic>()
-        .selectMentorAppointmentType!
-        .appointmentType!
-        .id,
+    'appointment_type_id': Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.appointmentType!.id,
     'questions': Get.find<BookAppointmentLogic>().questionController.text,
     'type': 'question',
-    'appointment_type_string': Get.find<BookAppointmentLogic>()
-        .selectMentorAppointmentType!
-        .appointmentType!
-        .name,
+    'appointment_type_string': Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.appointmentType!.name,
     'book_file': await dio_instance.MultipartFile.fromFile(
       file1.path,
     )
   });
   dio_instance.Dio dio = dio_instance.Dio();
-  setCustomHeader(dio, 'Authorization',
-      'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
+  setCustomHeader(dio, 'Authorization', 'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
   dio_instance.Response response;
   try {
     response = await dio.post(bookAppointmentUrl, data: formData);
     if (response.statusCode == 200) {
-      Get.find<BookAppointmentLogic>().bookAppointmentModel =
-          BookAppointmentModel.fromJson(response.data);
+      Get.find<BookAppointmentLogic>().bookAppointmentModel = BookAppointmentModel.fromJson(response.data);
       Get.find<GeneralController>().updateFormLoaderController(false);
-      if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status ==
-          true) {
+      if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
         if (Get.find<BookAppointmentLogic>().selectedPaymentType == 0) {
           Get.find<GeneralController>().updateFormLoaderController(false);
           Get.toNamed(PageRoutes.paymentStripeView);
@@ -75,8 +65,7 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
                 return CustomDialogBox(
                   title: '${LanguageConstant.info.tr}!',
                   titleColor: customDialogInfoColor,
-                  descriptions:
-                      '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
+                  descriptions: '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
                   text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
@@ -92,8 +81,7 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
                 return CustomDialogBox(
                   title: '${LanguageConstant.info.tr}!',
                   titleColor: customDialogInfoColor,
-                  descriptions:
-                      '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
+                  descriptions: '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
                   text: LanguageConstant.ok.tr,
                   functionCall: () {
                     Navigator.pop(context);
@@ -144,11 +132,9 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
   }
 }
 
-bookAppointmentWithoutFileRepo(
-    BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+bookAppointmentWithoutFileRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    Get.find<BookAppointmentLogic>().bookAppointmentModel =
-        BookAppointmentModel.fromJson(response);
+    Get.find<BookAppointmentLogic>().bookAppointmentModel = BookAppointmentModel.fromJson(response);
     Get.find<GeneralController>().updateFormLoaderController(false);
     if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
       if (Get.find<BookAppointmentLogic>().selectedPaymentType == 0) {
@@ -180,8 +166,7 @@ bookAppointmentWithoutFileRepo(
               return CustomDialogBox(
                 title: '${LanguageConstant.info.tr}!',
                 titleColor: customDialogInfoColor,
-                descriptions:
-                    '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
+                descriptions: '${LanguageConstant.thisPaymentMethodIs.tr}\n${LanguageConstant.notAvailableYet.tr}',
                 text: LanguageConstant.ok.tr,
                 functionCall: () {
                   Navigator.pop(context);
@@ -229,26 +214,68 @@ bookAppointmentWithoutFileRepo(
   }
 }
 
+/// Book Reschedule Appointment Repo
+
+bookRescheduleAppointmentWithoutFileRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    Get.find<BookAppointmentLogic>().bookAppointmentModel = BookAppointmentModel.fromJson(response);
+    if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+
+      Get.offAllNamed(PageRoutes.userHome);
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return CustomDialogBox(
+              title: LanguageConstant.failed.tr,
+              titleColor: customDialogErrorColor,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
+              text: LanguageConstant.ok.tr,
+              functionCall: () {
+                Navigator.pop(context);
+              },
+              img: 'assets/Icons/dialog_error.svg',
+            );
+          });
+    }
+  } else {
+    Get.find<GeneralController>().updateFormLoaderController(false);
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CustomDialogBox(
+            title: LanguageConstant.failed.tr,
+            titleColor: customDialogErrorColor,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
+            text: LanguageConstant.ok.tr,
+            functionCall: () {
+              Navigator.pop(context);
+            },
+            img: 'assets/Icons/dialog_error.svg',
+          );
+        });
+  }
+}
+
 /// live appointment request accept repo
 ///
-liveRequestRepo(
-    BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+liveRequestRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    Get.find<BookAppointmentLogic>().bookAppointmentModel =
-        BookAppointmentModel.fromJson(response);
+    Get.find<BookAppointmentLogic>().bookAppointmentModel = BookAppointmentModel.fromJson(response);
     Get.find<GeneralController>().updateFormLoaderController(false);
     if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
       Get.find<GeneralController>().updateFormLoaderController(false);
 
       ///---make-notification
       Get.find<GeneralController>().updateNotificationBody(
-          'Your Live Appointment Request Accepted',
-          '',
-          '/appointmentQuestion',
-          'mentee/appointment/log',
-          null);
-      Get.find<GeneralController>().updateUserIdForSendNotification(
-          int.parse(Get.find<GeneralController>().notificationMenteeId!));
+          'Your Live Appointment Request Accepted', '', '/appointmentQuestion', 'mentee/appointment/log', null);
+      Get.find<GeneralController>()
+          .updateUserIdForSendNotification(int.parse(Get.find<GeneralController>().notificationMenteeId!));
       // Get.find<GeneralController>().notificationMenteeId = '';
       Get.find<GeneralController>().notificationFee = null;
       Get.find<GeneralController>().update();
@@ -266,16 +293,93 @@ liveRequestRepo(
           sendSMSRepo);
 
       ///----fcm-send-start
-      getMethod(
-          context,
-          fcmGetUrl,
-          {
-            'token': '123',
-            'user_id': Get.find<GeneralController>().notificationMenteeId
-          },
-          true,
+      getMethod(context, fcmGetUrl, {'token': '123', 'user_id': Get.find<GeneralController>().notificationMenteeId}, true,
           getFcmTokenRepo);
       Get.back();
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return CustomDialogBox(
+              title: LanguageConstant.failed.tr,
+              titleColor: customDialogErrorColor,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
+              text: LanguageConstant.ok.tr,
+              functionCall: () {
+                Navigator.pop(context);
+              },
+              img: 'assets/Icons/dialog_error.svg',
+            );
+          });
+    }
+  } else {
+    Get.find<GeneralController>().updateFormLoaderController(false);
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CustomDialogBox(
+            title: LanguageConstant.failed.tr,
+            titleColor: customDialogErrorColor,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
+            text: LanguageConstant.ok.tr,
+            functionCall: () {
+              Navigator.pop(context);
+            },
+            img: 'assets/Icons/dialog_error.svg',
+          );
+        });
+  }
+}
+
+/// Repo for get appointment detail for Reshedule Appointment
+
+getAppDetailForReschedule(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    Get.find<BookAppointmentLogic>().getAppDetailForReschedule = GetAppDetailForReschedule.fromJson(response);
+    Get.find<GeneralController>().updateFormLoaderController(false);
+    if (Get.find<BookAppointmentLogic>().getAppDetailForReschedule.status == true) {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+
+      ///---make-notification
+      // Get.find<GeneralController>().updateNotificationBody(
+      //     'Your Live Appointment Request Accepted',
+      //     '',
+      //     '/appointmentQuestion',
+      //     'mentee/appointment/log',
+      //     null);
+      // Get.find<GeneralController>().updateUserIdForSendNotification(
+      //     int.parse(Get.find<GeneralController>().notificationMenteeId!));
+      // // Get.find<GeneralController>().notificationMenteeId = '';
+      // Get.find<GeneralController>().notificationFee = null;
+      // Get.find<GeneralController>().update();
+
+      ///----send-sms
+      // postMethod(
+      //     context,
+      //     sendSMSUrl,
+      //     {
+      //       'token': '123',
+      //       'phone': Get.find<SmsLogic>().phoneNumber,
+      //       'message': Get.find<GeneralController>().notificationTitle,
+      //     },
+      //     true,
+      //     sendSMSRepo);
+
+      ///----fcm-send-start
+      // getMethod(
+      //     context,
+      //     fcmGetUrl,
+      //     {
+      //       'token': '123',
+      //       'user_id': Get.find<GeneralController>().notificationMenteeId
+      //     },
+      //     true,
+      //     getFcmTokenRepo);
+      // Get.back();
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
       showDialog(

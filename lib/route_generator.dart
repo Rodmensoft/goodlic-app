@@ -49,28 +49,16 @@ routes() => [
       GetPage(name: "/login", page: () => const LoginPage()),
       GetPage(name: "/signUp", page: () => const SignUpPage()),
       GetPage(name: "/userHome", page: () => const UserHomePage()),
-      GetPage(
-          name: "/consultantProfileForUser",
-          page: () => const ConsultantProfilePage(),
-          transition: Transition.zoom),
-      GetPage(name: "/slotSelection", page: () => const SlotSelection()),
-      GetPage(
-          name: "/appointmentQuestion",
-          page: () => const AppointmentQuestionPage(),
-          transition: Transition.noTransition),
-      GetPage(
-          name: "/paymentStripeView",
-          page: () => const StripePaymentView(),
-          transition: Transition.noTransition),
+      GetPage(name: "/consultantProfileForUser", page: () => const ConsultantProfilePage(), transition: Transition.zoom),
+      GetPage(name: "/slotSelection", page: () => SlotSelection()),
+      GetPage(name: "/appointmentQuestion", page: () => AppointmentQuestionPage(), transition: Transition.noTransition),
+      GetPage(name: "/paymentStripeView", page: () => const StripePaymentView(), transition: Transition.noTransition),
       GetPage(name: "/allConsultants", page: () => const AllConsultantsPage()),
       GetPage(name: "/resetPassword", page: () => const ResetPasswordPage()),
       GetPage(name: "/enterOtp", page: () => const OtpPage()),
       GetPage(name: "/newPassword", page: () => const NewPasswordPage()),
-      GetPage(
-          name: "/createdPassword", page: () => const CreatedPasswordPage()),
-      GetPage(
-          name: "/appointmentConfirmation",
-          page: () => const AppointmentConfirmationView()),
+      GetPage(name: "/createdPassword", page: () => const CreatedPasswordPage()),
+      GetPage(name: "/appointmentConfirmation", page: () => const AppointmentConfirmationView()),
       GetPage(
         name: "/userDrawer",
         page: () => const UserDrawerPage(),
@@ -78,35 +66,16 @@ routes() => [
         transitionDuration: const Duration(milliseconds: 500),
       ),
       GetPage(name: "/myAppointment", page: () => const MyAppointmentPage()),
-      GetPage(
-          name: "/appointmentDetail",
-          page: () => const AppointmentDetailPage()),
+      GetPage(name: "/appointmentDetail", page: () => const AppointmentDetailPage()),
       GetPage(name: "/chatScreen", page: () => const ChatPage()),
       GetPage(name: "/walletScreen", page: () => const WalletPage()),
-      GetPage(
-          name: "/onBoard1Screen",
-          page: () => const OnBoard1Page(),
-          transition: Transition.noTransition),
-      GetPage(
-          name: "/onBoard2Screen",
-          page: () => const OnBoard2Page(),
-          transition: Transition.noTransition),
-      GetPage(
-          name: "/onBoard3Screen",
-          page: () => const OnBoard3Page(),
-          transition: Transition.noTransition),
-      GetPage(
-          name: "/onBoard4Screen",
-          page: () => const OnBoard4Page(),
-          transition: Transition.noTransition),
-      GetPage(
-          name: "/editUserProfile", page: () => const EditUserProfilePage()),
-      GetPage(
-          name: "/createConsultantProfile",
-          page: () => const CreateProfilePage()),
-      GetPage(
-          name: "/consultantDashboard",
-          page: () => const ConsultantDashboardPage()),
+      GetPage(name: "/onBoard1Screen", page: () => const OnBoard1Page(), transition: Transition.noTransition),
+      GetPage(name: "/onBoard2Screen", page: () => const OnBoard2Page(), transition: Transition.noTransition),
+      GetPage(name: "/onBoard3Screen", page: () => const OnBoard3Page(), transition: Transition.noTransition),
+      GetPage(name: "/onBoard4Screen", page: () => const OnBoard4Page(), transition: Transition.noTransition),
+      GetPage(name: "/editUserProfile", page: () => const EditUserProfilePage()),
+      GetPage(name: "/createConsultantProfile", page: () => const CreateProfilePage()),
+      GetPage(name: "/consultantDashboard", page: () => const ConsultantDashboardPage()),
       GetPage(
         name: "/consultantDrawer",
         page: () => const ConsultantDrawerPage(),
@@ -114,18 +83,10 @@ routes() => [
         transitionDuration: const Duration(milliseconds: 500),
       ),
       GetPage(name: "/scheduleCreate", page: () => const ScheduleCreatePage()),
-      GetPage(
-          name: "/consultantAllAppointment",
-          page: () => const ConsultantAppointmentPage()),
-      GetPage(
-          name: "/consultantAppointmentDetail",
-          page: () => const ConsultantAppointmentDetailPage()),
-      GetPage(
-          name: "/consultantMyProfile",
-          page: () => const ConsultantMyProfilePage()),
-      GetPage(
-          name: "/editConsultantProfile",
-          page: () => const EditConsultantProfilePage()),
+      GetPage(name: "/consultantAllAppointment", page: () => const ConsultantAppointmentPage()),
+      GetPage(name: "/consultantAppointmentDetail", page: () => const ConsultantAppointmentDetailPage()),
+      GetPage(name: "/consultantMyProfile", page: () => const ConsultantMyProfilePage()),
+      GetPage(name: "/editConsultantProfile", page: () => const EditConsultantProfilePage()),
       GetPage(name: "/blogs", page: () => const BlogsPage()),
       GetPage(name: "/blogDetail", page: () => const BlogDetailPage()),
       GetPage(name: '/videoCall', page: () => const JoinChannelVideo()),
@@ -133,18 +94,12 @@ routes() => [
       GetPage(name: '/videoCallWaiting', page: () => const CallWaitingView()),
       GetPage(name: '/aboutUs', page: () => const AboutUsPage()),
       GetPage(name: '/contactUs', page: () => const ContactUsPage()),
-      GetPage(
-          name: '/stripePaymentForWallet',
-          page: () => const StripePaymentForWalletView()),
-      GetPage(
-          name: '/walletPaymentScreen', page: () => const WalletPaymentView()),
+      GetPage(name: '/stripePaymentForWallet', page: () => const StripePaymentForWalletView()),
+      GetPage(name: '/walletPaymentScreen', page: () => const WalletPaymentView()),
       GetPage(name: '/splash', page: () => const SplashPage()),
       GetPage(name: '/inAppWebPage', page: () => const InAppWebPage()),
-      GetPage(
-          name: '/stripePaymentForLater',
-          page: () => const StripePaymentForLater()),
-      GetPage(
-          name: '/searchConsultant', page: () => const SearchConsultantPage()),
+      GetPage(name: '/stripePaymentForLater', page: () => const StripePaymentForLater()),
+      GetPage(name: '/searchConsultant', page: () => const SearchConsultantPage()),
       GetPage(name: '/requestForLive', page: () => const LiveRequest()),
     ];
 
@@ -177,8 +132,7 @@ class PageRoutes {
   static const String consultantDrawer = '/consultantDrawer';
   static const String scheduleCreate = '/scheduleCreate';
   static const String consultantAllAppointment = '/consultantAllAppointment';
-  static const String consultantAppointmentDetail =
-      '/consultantAppointmentDetail';
+  static const String consultantAppointmentDetail = '/consultantAppointmentDetail';
   static const String consultantMyProfile = '/consultantMyProfile';
   static const String editConsultantProfile = '/editConsultantProfile';
   static const String blogs = '/blogs';
@@ -204,8 +158,8 @@ class PageRoutes {
       signUp: (context) => const SignUpPage(),
       userHome: (context) => const UserHomePage(),
       consultantProfileForUser: (context) => const ConsultantProfilePage(),
-      slotSelection: (context) => const SlotSelection(),
-      appointmentQuestion: (context) => const AppointmentQuestionPage(),
+      slotSelection: (context) => SlotSelection(),
+      appointmentQuestion: (context) => AppointmentQuestionPage(),
       allConsultants: (context) => const AllConsultantsPage(),
       resetPassword: (context) => const ResetPasswordPage(),
       paymentStripeView: (context) => const StripePaymentView(),
@@ -228,8 +182,7 @@ class PageRoutes {
       consultantDrawer: (context) => const ConsultantDrawerPage(),
       scheduleCreate: (context) => const ScheduleCreatePage(),
       consultantAllAppointment: (context) => const ConsultantAppointmentPage(),
-      consultantAppointmentDetail: (context) =>
-          const ConsultantAppointmentDetailPage(),
+      consultantAppointmentDetail: (context) => const ConsultantAppointmentDetailPage(),
       consultantMyProfile: (context) => const ConsultantMyProfilePage(),
       editConsultantProfile: (context) => const EditConsultantProfilePage(),
       blogs: (context) => const BlogsPage(),

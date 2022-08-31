@@ -14,8 +14,7 @@ class MyAppointmentLogic extends GetxController {
   late TabController tabController;
 
   GetUserAppointmentModel getUserAppointmentModel = GetUserAppointmentModel();
-  GetUserAppointmentModelMore getUserAppointmentModelMore =
-      GetUserAppointmentModelMore();
+  GetUserAppointmentModelMore getUserAppointmentModelMore = GetUserAppointmentModelMore();
 
   bool? getUserAppointmentLoader = true;
   updateGetUserAppointmentLoader(bool? newValue) {
@@ -29,8 +28,7 @@ class MyAppointmentLogic extends GetxController {
     update();
   }
 
-  final RefreshController refreshAppointmentsController =
-      RefreshController(initialRefresh: false);
+  final RefreshController refreshAppointmentsController = RefreshController(initialRefresh: false);
 
   updateRefreshController() {
     refreshAppointmentsController.refreshCompleted();
@@ -43,8 +41,7 @@ class MyAppointmentLogic extends GetxController {
   double height = 100.h;
 
   bool get isShrink {
-    return scrollController!.hasClients &&
-        scrollController!.offset > (height - kToolbarHeight);
+    return scrollController!.hasClients && scrollController!.positions.last.pixels > (height - kToolbarHeight);
   }
 
   void scrollListener() {

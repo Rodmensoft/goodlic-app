@@ -1,8 +1,8 @@
 {
 
-  "base_url": "https://demo.consultant.nictusthemes.com/",
-  "api_base_url": "https://demo.consultant.nictusthemes.com/api/",
-  "media_url": "https://demo.consultant.nictusthemes.com",
+  "base_url": "http://192.168.18.74:8000/",
+  "api_base_url": "http://192.168.18.74:8000/api/",
+  "media_url": "http://192.168.18.74:8000",
 
   "flutterWave_publicKey": "FLWPUBK_TEST-7f22a34d5ad0905cff21f0952ad61e7f-X",
   "agora_appId": "6e8d86e69feb401a8eee0237e07a5b3d",

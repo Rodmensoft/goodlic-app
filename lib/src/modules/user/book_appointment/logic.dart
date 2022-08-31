@@ -1,5 +1,6 @@
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/model/getAppDetail_forReschedule.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/get_date_schedule.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/payment_stripe/model_stripe_payment.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/logic.dart';
@@ -17,13 +18,12 @@ class BookAppointmentLogic extends GetxController {
   final BookAppointmentState state = BookAppointmentState();
 
   final consultantProfileLogic = Get.find<ConsultantProfileLogic>();
+  GetAppDetailForReschedule getAppDetailForReschedule = GetAppDetailForReschedule();
 
   var cardNumberMask = MaskTextInputFormatter(mask: '#### #### #### ####');
   var cardExpiryMask = MaskTextInputFormatter(mask: '##/##');
-  final TextEditingController paymentAccountNumberTextController =
-      TextEditingController();
-  final TextEditingController jazzCashCnicTextController =
-      TextEditingController();
+  final TextEditingController paymentAccountNumberTextController = TextEditingController();
+  final TextEditingController jazzCashCnicTextController = TextEditingController();
 
   //ModelFlutterWave modelFlutterWave = ModelFlutterWave();
 
@@ -44,8 +44,7 @@ class BookAppointmentLogic extends GetxController {
   double height = 100.h;
 
   bool get isShrink {
-    return scrollController!.hasClients &&
-        scrollController!.offset > (height - kToolbarHeight);
+    return scrollController!.hasClients && scrollController!.offset > (height - kToolbarHeight);
   }
 
   void scrollListener() {
@@ -56,8 +55,7 @@ class BookAppointmentLogic extends GetxController {
   }
 
   bool get isShrink2 {
-    return scrollController2!.hasClients &&
-        scrollController2!.offset > (height - kToolbarHeight);
+    return scrollController2!.hasClients && scrollController2!.offset > (height - kToolbarHeight);
   }
 
   void scrollListener2() {
@@ -68,8 +66,7 @@ class BookAppointmentLogic extends GetxController {
   }
 
   bool get isShrink3 {
-    return scrollController3!.hasClients &&
-        scrollController3!.offset > (height - kToolbarHeight);
+    return scrollController3!.hasClients && scrollController3!.offset > (height - kToolbarHeight);
   }
 
   void scrollListener3() {
@@ -84,8 +81,7 @@ class BookAppointmentLogic extends GetxController {
   int? selectedAppointmentTypeID;
   int? selectedAppointmentTypeIndex;
 
-  GetScheduleAvailableDays getScheduleAvailableDays =
-      GetScheduleAvailableDays();
+  GetScheduleAvailableDays getScheduleAvailableDays = GetScheduleAvailableDays();
   List<DateTime>? availableScheduleDaysList = <DateTime>[];
 
   bool? calenderLoader = false;
@@ -95,8 +91,7 @@ class BookAppointmentLogic extends GetxController {
     update();
   }
 
-  GetScheduleSlotsForUserModel getScheduleSlotsForUserModel =
-      GetScheduleSlotsForUserModel();
+  GetScheduleSlotsForUserModel getScheduleSlotsForUserModel = GetScheduleSlotsForUserModel();
   String selectedDateForAppointment = '';
   String selectedTimeForAppointment = '';
   ScheduleSlots selectedScheduleSlots = ScheduleSlots();
@@ -148,52 +143,22 @@ class BookAppointmentLogic extends GetxController {
   }
 
   List<ShiftType> shiftList = [
-    ShiftType(
-        title: LanguageConstant.morning.tr,
-        image: 'assets/Icons/morningShiftIcon.svg',
-        isSelected: true),
-    ShiftType(
-        title: LanguageConstant.afternoon.tr,
-        image: 'assets/Icons/afterNoonShiftIcon.svg',
-        isSelected: false),
-    ShiftType(
-        title: LanguageConstant.evening.tr,
-        image: 'assets/Icons/nightShiftIcon.svg',
-        isSelected: false),
+    ShiftType(title: LanguageConstant.morning.tr, image: 'assets/Icons/morningShiftIcon.svg', isSelected: true),
+    ShiftType(title: LanguageConstant.afternoon.tr, image: 'assets/Icons/afterNoonShiftIcon.svg', isSelected: false),
+    ShiftType(title: LanguageConstant.evening.tr, image: 'assets/Icons/nightShiftIcon.svg', isSelected: false),
   ];
 
   int? selectedPaymentType;
   List<ShiftType> paymentMethodList = [
-    ShiftType(
-        title: 'stripe', image: 'assets/Icons/stripe.svg', isSelected: false),
-    ShiftType(
-        title: 'braintree',
-        image: 'assets/Icons/braintreePayment.svg',
-        isSelected: false),
-    ShiftType(
-        title: 'paypal',
-        image: 'assets/Icons/paypalPayment.svg',
-        isSelected: false),
-    ShiftType(
-        title: 'wallet',
-        image: 'assets/Icons/walletPayment.svg',
-        isSelected: false),
-    ShiftType(
-        title: 'jazzcash',
-        image: 'assets/Icons/jazz-cash.svg',
-        isSelected: false),
-    ShiftType(
-        title: 'easypaisa',
-        image: 'assets/Icons/easyIcon.svg',
-        isSelected: false),
-    ShiftType(
-        title: 'Wave',
-        image: 'assets/Icons/flutterwave.svg',
-        isSelected: false),
-    ShiftType(
-        title: 'razorpay',
-        image: 'assets/Icons/razorpay.svg',
-        isSelected: false),
+    ShiftType(title: 'stripe', image: 'assets/Icons/stripe.svg', isSelected: false),
+    ShiftType(title: 'braintree', image: 'assets/Icons/braintreePayment.svg', isSelected: false),
+    ShiftType(title: 'paypal', image: 'assets/Icons/paypalPayment.svg', isSelected: false),
+    ShiftType(title: 'wallet', image: 'assets/Icons/walletPayment.svg', isSelected: false),
+    ShiftType(title: 'jazzcash', image: 'assets/Icons/jazz-cash.svg', isSelected: false),
+    ShiftType(title: 'easypaisa', image: 'assets/Icons/easyIcon.svg', isSelected: false),
+    ShiftType(title: 'Wave', image: 'assets/Icons/flutterwave.svg', isSelected: false),
+    ShiftType(title: 'razorpay', image: 'assets/Icons/razorpay.svg', isSelected: false),
+    // ShiftType(title: 'wallet', image: 'assets/Icons/walletPayment.svg', isSelected: false),
   ];
 
   String? selectedFileName;
@@ -217,8 +182,7 @@ class BookAppointmentLogic extends GetxController {
 
   double myWidth = 0;
   TextEditingController accountCardNumberController = TextEditingController();
-  TextEditingController accountCardHolderNameController =
-      TextEditingController();
+  TextEditingController accountCardHolderNameController = TextEditingController();
   TextEditingController accountCardExpiresController = TextEditingController();
   TextEditingController accountCardCvcController = TextEditingController();
 }

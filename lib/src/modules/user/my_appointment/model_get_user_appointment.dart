@@ -1,14 +1,15 @@
 class GetUserAppointmentModel {
   GetUserAppointmentModel({
-      bool? status, 
-      int? success,
+    bool? status,
+    int? success,
     GetUserAppointmentModelData? data,
-      String? msg,}){
+    String? msg,
+  }) {
     _status = status;
     _success = success;
     _data = data;
     _msg = msg;
-}
+  }
 
   GetUserAppointmentModel.fromJson(dynamic json) {
     _status = json['Status'];
@@ -36,7 +37,6 @@ class GetUserAppointmentModel {
     map['msg'] = _msg;
     return map;
   }
-
 }
 
 class GetUserAppointmentModelData {
@@ -44,18 +44,23 @@ class GetUserAppointmentModelData {
     AppointmentsPageData? pendingAppointments,
     AppointmentsPageData? acceptedAppointments,
     AppointmentsPageData? completedAppointments,
-    AppointmentsPageData? cancelledAppointments,}){
+    AppointmentsPageData? cancelledAppointments,
+  }) {
     _pendingAppointments = pendingAppointments;
     _acceptedAppointments = acceptedAppointments;
     _completedAppointments = completedAppointments;
     _cancelledAppointments = cancelledAppointments;
-}
+  }
 
   GetUserAppointmentModelData.fromJson(dynamic json) {
-    _pendingAppointments = json['pendingAppointments'] != null ? AppointmentsPageData.fromJson(json['pendingAppointments']) : null;
-    _acceptedAppointments = json['acceptedAppointments'] != null ? AppointmentsPageData.fromJson(json['acceptedAppointments']) : null;
-    _completedAppointments = json['completedAppointments'] != null ? AppointmentsPageData.fromJson(json['completedAppointments']) : null;
-    _cancelledAppointments = json['cancelledAppointments'] != null ? AppointmentsPageData.fromJson(json['cancelledAppointments']) : null;
+    _pendingAppointments =
+        json['pendingAppointments'] != null ? AppointmentsPageData.fromJson(json['pendingAppointments']) : null;
+    _acceptedAppointments =
+        json['acceptedAppointments'] != null ? AppointmentsPageData.fromJson(json['acceptedAppointments']) : null;
+    _completedAppointments =
+        json['completedAppointments'] != null ? AppointmentsPageData.fromJson(json['completedAppointments']) : null;
+    _cancelledAppointments =
+        json['cancelledAppointments'] != null ? AppointmentsPageData.fromJson(json['cancelledAppointments']) : null;
   }
   AppointmentsPageData? _pendingAppointments;
   AppointmentsPageData? _acceptedAppointments;
@@ -83,18 +88,18 @@ class GetUserAppointmentModelData {
     }
     return map;
   }
-
 }
 
 class Links {
   Links({
-      dynamic url, 
-      String? label, 
-      bool? active,}){
+    dynamic url,
+    String? label,
+    bool? active,
+  }) {
     _url = url;
     _label = label;
     _active = active;
-}
+  }
 
   Links.fromJson(dynamic json) {
     _url = json['url'];
@@ -116,24 +121,24 @@ class Links {
     map['active'] = _active;
     return map;
   }
-
 }
 
 class AppointmentsPageData {
   AppointmentsPageData({
-      int? currentPage, 
-      List<UserAppointmentsData>? data,
-      String? firstPageUrl, 
-      dynamic from, 
-      int? lastPage, 
-      String? lastPageUrl, 
-      List<Links>? links, 
-      dynamic nextPageUrl, 
-      String? path, 
-      int? perPage, 
-      dynamic prevPageUrl, 
-      dynamic to, 
-      int? total,}){
+    int? currentPage,
+    List<UserAppointmentsData>? data,
+    String? firstPageUrl,
+    dynamic from,
+    int? lastPage,
+    String? lastPageUrl,
+    List<Links>? links,
+    dynamic nextPageUrl,
+    String? path,
+    int? perPage,
+    dynamic prevPageUrl,
+    dynamic to,
+    int? total,
+  }) {
     currentPage = currentPage;
     data = data;
     _firstPageUrl = firstPageUrl;
@@ -147,7 +152,7 @@ class AppointmentsPageData {
     _prevPageUrl = prevPageUrl;
     _to = to;
     _total = total;
-}
+  }
 
   AppointmentsPageData.fromJson(dynamic json) {
     currentPage = json['current_page'];
@@ -219,34 +224,38 @@ class AppointmentsPageData {
     map['total'] = _total;
     return map;
   }
-
 }
 
 class UserAppointmentsData {
   UserAppointmentsData({
-      int? id, 
-      int? menteeId, 
-      int? mentorId, 
-      String? date, 
-      String? time, 
-      int? payment, 
-      int? isPaid, 
-      dynamic paymentStatusCode, 
-      dynamic paymentResponseMsg, 
-      dynamic paymentOrderRef, 
-      int? paymentId, 
-      String? appointmentTypeString, 
-      int? appointmentTypeId, 
-      String? questions, 
-      String? file, 
-      String? fileType, 
-      int? appointmentStatus, 
-      int? refund, 
-      String? createdAt, 
-      String? updatedAt,
+    int? id,
+    int? menteeId,
+    int? mentorId,
+    String? date,
+    String? time,
+    int? payment,
+    int? isPaid,
+    dynamic paymentStatusCode,
+    dynamic paymentResponseMsg,
+    dynamic paymentOrderRef,
+    int? paymentId,
+    String? appointmentTypeString,
+    int? appointmentTypeId,
+    String? questions,
+    String? file,
+    String? fileType,
+    int? appointmentStatus,
+    int? refund,
+    String? createdAt,
+    String? updatedAt,
     int? rating,
     String? category,
-    UserAppointmentsDataMentor? mentor,}){
+    UserAppointmentsDataMentor? mentor,
+    String? notesConsultant,
+    String? fileConsultant,
+    String? filetypeConsultant,
+    bool? reschudlable,
+  }) {
     _id = id;
     _menteeId = menteeId;
     _mentorId = mentorId;
@@ -270,7 +279,11 @@ class UserAppointmentsData {
     _rating = rating;
     _category = category;
     _mentor = mentor;
-}
+    _notesConsultant = notesConsultant;
+    _fileConsultant = fileConsultant;
+    _filetypeConsultant = filetypeConsultant;
+    _reschudlable = reschudlable;
+  }
 
   UserAppointmentsData.fromJson(dynamic json) {
     _id = json['id'];
@@ -296,6 +309,10 @@ class UserAppointmentsData {
     _rating = json['rating'];
     _category = json['category'];
     _mentor = json['mentor'] != null ? UserAppointmentsDataMentor.fromJson(json['mentor']) : null;
+    _notesConsultant = json['notes_consultant'];
+    _fileConsultant = json['file_consultant'];
+    _filetypeConsultant = json['filetype_consultant'];
+    _reschudlable = json['reschudlable'];
   }
   int? _id;
   int? _menteeId;
@@ -318,8 +335,12 @@ class UserAppointmentsData {
   String? _createdAt;
   String? _updatedAt;
   int? _rating;
-      String? _category;
+  String? _category;
   UserAppointmentsDataMentor? _mentor;
+  String? _notesConsultant;
+  String? _fileConsultant;
+  String? _filetypeConsultant;
+  bool? _reschudlable;
 
   int? get id => _id;
   int? get menteeId => _menteeId;
@@ -344,6 +365,10 @@ class UserAppointmentsData {
   int? get rating => _rating;
   String? get category => _category;
   UserAppointmentsDataMentor? get mentor => _mentor;
+  String? get notesConsultant => _notesConsultant;
+  String? get fileConsultant => _fileConsultant;
+  String? get filetypeConsultant => _filetypeConsultant;
+  bool? get reschudlable => _reschudlable;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -369,40 +394,44 @@ class UserAppointmentsData {
     map['updated_at'] = _updatedAt;
     map['rating'] = _rating;
     map['category'] = _category;
+    map['notes_consultant'] = _notesConsultant;
+    map['file_consultant'] = _fileConsultant;
+    map['filetype_consultant'] = _filetypeConsultant;
+    map['reschudlable'] = _reschudlable;
     if (_mentor != null) {
       map['mentor'] = _mentor?.toJson();
     }
     return map;
   }
-
 }
 
 class UserAppointmentsDataMentor {
   UserAppointmentsDataMentor({
-      int? id, 
-      dynamic firstName, 
-      dynamic lastName, 
-      dynamic email, 
-      String? phone, 
-      dynamic imagePath, 
-      dynamic country, 
-      dynamic city, 
-      dynamic address, 
-      dynamic postalCode, 
-      dynamic isOtpVerified, 
-      dynamic fatherName, 
-      dynamic cnic, 
-      dynamic gender, 
-      dynamic religion, 
-      dynamic dob, 
-      dynamic occupation, 
-      String? onlineStatus, 
-      int? adminUser, 
-      dynamic fbId, 
-      dynamic googleId, 
-      String? createdAt, 
-      String? updatedAt,
-    UserCountry? userCountry,}){
+    int? id,
+    dynamic firstName,
+    dynamic lastName,
+    dynamic email,
+    String? phone,
+    dynamic imagePath,
+    dynamic country,
+    dynamic city,
+    dynamic address,
+    dynamic postalCode,
+    dynamic isOtpVerified,
+    dynamic fatherName,
+    dynamic cnic,
+    dynamic gender,
+    dynamic religion,
+    dynamic dob,
+    dynamic occupation,
+    String? onlineStatus,
+    int? adminUser,
+    dynamic fbId,
+    dynamic googleId,
+    String? createdAt,
+    String? updatedAt,
+    UserCountry? userCountry,
+  }) {
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -427,7 +456,7 @@ class UserAppointmentsDataMentor {
     _createdAt = createdAt;
     _updatedAt = updatedAt;
     _userCountry = userCountry;
-}
+  }
 
   UserAppointmentsDataMentor.fromJson(dynamic json) {
     _id = json['id'];
@@ -535,8 +564,8 @@ class UserAppointmentsDataMentor {
     }
     return map;
   }
-
 }
+
 class UserCountry {
   UserCountry({
     int? id,
@@ -561,7 +590,8 @@ class UserCountry {
     String? createdAt,
     String? updatedAt,
     int? flag,
-    String? wikiDataId,}){
+    String? wikiDataId,
+  }) {
     _id = id;
     _name = name;
     _isoCode3 = isoCode3;
@@ -687,5 +717,4 @@ class UserCountry {
     map['wikiDataId'] = _wikiDataId;
     return map;
   }
-
 }

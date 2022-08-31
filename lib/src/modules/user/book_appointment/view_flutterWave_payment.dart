@@ -97,10 +97,7 @@ class _FlutterWaveState extends State<FlutterWave> {
                       ),
                       Text(
                         'Flutter Wave Payment',
-                        style: TextStyle(
-                            fontFamily: SarabunFontFamily.bold,
-                            fontSize: 28.sp,
-                            color: customTextBlackColor),
+                        style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 28.sp, color: customTextBlackColor),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * .03,
@@ -115,31 +112,23 @@ class _FlutterWaveState extends State<FlutterWave> {
                           controller: amountController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                25.w, 15.h, 25.w, 15.h),
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                             hintText: 'Amount',
-                            hintStyle: TextStyle(
-                                fontFamily: SarabunFontFamily.regular,
-                                fontSize: 16.sp,
-                                color: customTextGreyColor),
+                            hintStyle:
+                                TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextGreyColor),
                             fillColor: customTextFieldColor,
                             filled: true,
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
+                                borderSide: const BorderSide(color: Colors.transparent)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
+                                borderSide: const BorderSide(color: Colors.transparent)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: customLightThemeColor)),
+                                borderSide: const BorderSide(color: customLightThemeColor)),
                             errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.r),
-                                borderSide:
-                                    const BorderSide(color: Colors.red)),
+                                borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -159,31 +148,23 @@ class _FlutterWaveState extends State<FlutterWave> {
                           textInputAction: TextInputAction.next,
                           readOnly: true,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                25.w, 15.h, 25.w, 15.h),
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                             hintText: 'Currency',
-                            hintStyle: TextStyle(
-                                fontFamily: SarabunFontFamily.regular,
-                                fontSize: 16.sp,
-                                color: customTextGreyColor),
+                            hintStyle:
+                                TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextGreyColor),
                             fillColor: customTextFieldColor,
                             filled: true,
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
+                                borderSide: const BorderSide(color: Colors.transparent)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
+                                borderSide: const BorderSide(color: Colors.transparent)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: customLightThemeColor)),
+                                borderSide: const BorderSide(color: customLightThemeColor)),
                             errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.r),
-                                borderSide:
-                                    const BorderSide(color: Colors.red)),
+                                borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -201,36 +182,25 @@ class _FlutterWaveState extends State<FlutterWave> {
                         child: TextFormField(
                           controller: nameController,
                           keyboardType: TextInputType.name,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(
-                                RegExp("[a-z A-Z ]"))
-                          ],
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z ]"))],
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                25.w, 15.h, 25.w, 15.h),
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                             hintText: 'Name',
-                            hintStyle: TextStyle(
-                                fontFamily: SarabunFontFamily.regular,
-                                fontSize: 16.sp,
-                                color: customTextGreyColor),
+                            hintStyle:
+                                TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextGreyColor),
                             fillColor: customTextFieldColor,
                             filled: true,
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
+                                borderSide: const BorderSide(color: Colors.transparent)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
+                                borderSide: const BorderSide(color: Colors.transparent)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: customLightThemeColor)),
+                                borderSide: const BorderSide(color: customLightThemeColor)),
                             errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.r),
-                                borderSide:
-                                    const BorderSide(color: Colors.red)),
+                                borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -249,31 +219,23 @@ class _FlutterWaveState extends State<FlutterWave> {
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                25.w, 15.h, 25.w, 15.h),
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                             hintText: "Email",
-                            hintStyle: TextStyle(
-                                fontFamily: SarabunFontFamily.regular,
-                                fontSize: 16.sp,
-                                color: customTextGreyColor),
+                            hintStyle:
+                                TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextGreyColor),
                             fillColor: customTextFieldColor,
                             filled: true,
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
+                                borderSide: const BorderSide(color: Colors.transparent)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
+                                borderSide: const BorderSide(color: Colors.transparent)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: customLightThemeColor)),
+                                borderSide: const BorderSide(color: customLightThemeColor)),
                             errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.r),
-                                borderSide:
-                                    const BorderSide(color: Colors.red)),
+                                borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -294,31 +256,23 @@ class _FlutterWaveState extends State<FlutterWave> {
                           controller: phoneNumberController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                25.w, 15.h, 25.w, 15.h),
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                             hintText: 'Phone Number',
-                            hintStyle: TextStyle(
-                                fontFamily: SarabunFontFamily.regular,
-                                fontSize: 16.sp,
-                                color: customTextGreyColor),
+                            hintStyle:
+                                TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextGreyColor),
                             fillColor: customTextFieldColor,
                             filled: true,
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
+                                borderSide: const BorderSide(color: Colors.transparent)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
+                                borderSide: const BorderSide(color: Colors.transparent)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                    color: customLightThemeColor)),
+                                borderSide: const BorderSide(color: customLightThemeColor)),
                             errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.r),
-                                borderSide:
-                                    const BorderSide(color: Colors.red)),
+                                borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -392,8 +346,7 @@ class _FlutterWaveState extends State<FlutterWave> {
         fontSize: 18,
       ),
       mainBackgroundColor: Colors.white,
-      mainTextStyle:
-          const TextStyle(color: Colors.white, fontSize: 19, letterSpacing: 2),
+      mainTextStyle: const TextStyle(color: Colors.white, fontSize: 19, letterSpacing: 2),
       dialogBackgroundColor: customThemeColor,
       appBarIcon: const Icon(Icons.monetization_on, color: Colors.white),
       buttonText:
@@ -404,20 +357,12 @@ class _FlutterWaveState extends State<FlutterWave> {
       ),
     );
 
-    final Customer customer = Customer(
-        name: nameController.text,
-        phoneNumber: phoneNumberController.text,
-        email: emailController.text);
+    final Customer customer =
+        Customer(name: nameController.text, phoneNumber: phoneNumberController.text, email: emailController.text);
 
     final subAccounts = [
-      SubAccount(
-          id: "RS_1A3278129B808CB588B53A14608169AD",
-          transactionChargeType: "flat",
-          transactionPercentage: 25),
-      SubAccount(
-          id: "RS_C7C265B8E4B16C2D472475D7F9F4426A",
-          transactionChargeType: "flat",
-          transactionPercentage: 50)
+      SubAccount(id: "RS_1A3278129B808CB588B53A14608169AD", transactionChargeType: "flat", transactionPercentage: 25),
+      SubAccount(id: "RS_C7C265B8E4B16C2D472475D7F9F4426A", transactionChargeType: "flat", transactionPercentage: 50)
     ];
 
     final Flutterwave flutterwave = Flutterwave(
@@ -505,41 +450,23 @@ class _FlutterWaveState extends State<FlutterWave> {
                 ),
                 InkWell(
                     onTap: () {
-                      Get.find<GeneralController>()
-                          .updateFormLoaderController(true);
+                      Get.find<GeneralController>().updateFormLoaderController(true);
                       postMethod(
                           context,
                           bookAppointmentUrl,
                           {
                             'token': '123',
-                            'mentee_id': Get.find<GeneralController>()
-                                .storageBox
-                                .read('userID'),
-                            'mentor_id':
-                                Get.find<UserHomeLogic>().selectedConsultantID,
-                            'payment': Get.find<BookAppointmentLogic>()
-                                .selectMentorAppointmentType!
-                                .fee,
-                            'payment_id': Get.find<BookAppointmentLogic>()
-                                .selectedPaymentType,
-                            'questions': Get.find<BookAppointmentLogic>()
-                                .questionController
-                                .text,
+                            'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
+                            'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
+                            'payment': Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.fee,
+                            'payment_id': Get.find<BookAppointmentLogic>().selectedPaymentType,
+                            'questions': Get.find<BookAppointmentLogic>().questionController.text,
                             'appointment_type_string':
-                                Get.find<BookAppointmentLogic>()
-                                    .selectMentorAppointmentType!
-                                    .appointmentType!
-                                    .name,
+                                Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.appointmentType!.name,
                             'appointment_type_id':
-                                Get.find<BookAppointmentLogic>()
-                                    .selectMentorAppointmentType!
-                                    .appointmentType!
-                                    .id,
-                            'date': Get.find<BookAppointmentLogic>()
-                                .selectedDateForAppointment
-                                .substring(0, 11),
-                            'time': Get.find<BookAppointmentLogic>()
-                                .selectedTimeForAppointment,
+                                Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.appointmentType!.id,
+                            'date': Get.find<BookAppointmentLogic>().selectedDateForAppointment.substring(0, 11),
+                            'time': Get.find<BookAppointmentLogic>().selectedTimeForAppointment,
                           },
                           true,
                           flutterWaveRepo);
@@ -547,17 +474,14 @@ class _FlutterWaveState extends State<FlutterWave> {
                     child: Padding(
                         padding: EdgeInsets.only(top: 10.h),
                         child: Container(
-                            decoration: BoxDecoration(
-                                color: customThemeColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12.r))),
+                            decoration:
+                                BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.all(Radius.circular(12.r))),
                             height: 45.h,
                             width: 50.h,
                             child: Center(
                               child: Text(
                                 'ok',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18.sp),
+                                style: TextStyle(color: Colors.white, fontSize: 18.sp),
                               ),
                             ))))
               ],
@@ -591,17 +515,13 @@ class _FlutterWaveState extends State<FlutterWave> {
                       Get.back();
                     },
                     child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12.r))),
+                        decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.all(Radius.circular(12.r))),
                         height: 45.h,
                         width: 50.h,
                         child: Center(
                           child: Text(
                             'ok',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 18.sp),
+                            style: TextStyle(color: Colors.white, fontSize: 18.sp),
                           ),
                         )))
               ],
