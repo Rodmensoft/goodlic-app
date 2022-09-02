@@ -386,8 +386,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                 }
 
                                                 /// Show paytm payment button
-                                                if (_bookAppointmentLogic.paymentMethodList[index].image!
-                                                    .contains('walletPayment')) {
+                                                if (_bookAppointmentLogic.paymentMethodList[index].image!.contains('paytm')) {
                                                   setState(() {
                                                     paytm = true;
                                                   });
@@ -499,8 +498,33 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                   left: 15.w,
                                   right: 15.w,
                                   child: InkWell(
-                                    onTap: () {
-                                      Get.back();
+                                    onTap: (){
+
+                                      postMethod(
+                                          context,
+                                          'https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=Ddqckl36992914432459&orderId=ORDERID_98765',
+                                          {
+                                            "body":
+                                            {
+                                              "requestType":"Payment",
+                                              "mid":"Ddqckl36992914432459",
+                                              "websiteName":"Consultant",
+                                              "orderId":"ORDERID_98765",
+                                              "txnAmount":{
+                                                "value":"100.00",
+                                                "currency":"USD"
+                                              },
+                                              "userInfo":{
+                                                "custId":"CUST_001"
+                                              },
+                                              "callbackUrl":"https://docs.flutter.dev/cookbook/networking/fetch-data"
+                                            },
+                                            "head":{
+                                              "signature":"Consultant"
+                                            }
+                                          },
+                                          true,
+                                          post)
                                     },
                                     child: const MyCustomBottomBar(
                                       title: 'Paytm',

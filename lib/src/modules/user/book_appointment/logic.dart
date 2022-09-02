@@ -158,7 +158,7 @@ class BookAppointmentLogic extends GetxController {
     ShiftType(title: 'easypaisa', image: 'assets/Icons/easyIcon.svg', isSelected: false),
     ShiftType(title: 'Wave', image: 'assets/Icons/flutterwave.svg', isSelected: false),
     ShiftType(title: 'razorpay', image: 'assets/Icons/razorpay.svg', isSelected: false),
-    // ShiftType(title: 'wallet', image: 'assets/Icons/walletPayment.svg', isSelected: false),
+    ShiftType(title: 'paytm', image: 'assets/Icons/paytm.svg', isSelected: false),
   ];
 
   String? selectedFileName;
