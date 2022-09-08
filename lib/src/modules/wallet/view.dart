@@ -1,6 +1,7 @@
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/post_repo.dart';
 import 'package:consultant_product/src/modules/wallet/repo_get.dart';
 import 'package:consultant_product/src/modules/wallet/widget/custom_dialog_for_withdraw_amount.dart';
 import 'package:consultant_product/src/modules/wallet/widget/payment_popup.dart';
@@ -35,8 +36,7 @@ class _WalletPageState extends State<WalletPage> {
     // TODO: implement initState
     super.initState();
 
-    Get.find<WalletLogic>().scrollController = ScrollController()
-      ..addListener(Get.find<WalletLogic>().scrollListener);
+    Get.find<WalletLogic>().scrollController = ScrollController()..addListener(Get.find<WalletLogic>().scrollListener);
 
     getMethod(
         context,
@@ -56,13 +56,13 @@ class _WalletPageState extends State<WalletPage> {
         },
         true,
         getWalletTransactionRepo);
+
+    getMethod(context, getPaymentMethodsUrl, {'token': 123, 'platform': 'app'}, true, getPaymentMethodsRepo);
   }
 
   @override
   void dispose() {
-    Get.find<WalletLogic>()
-        .scrollController!
-        .removeListener(Get.find<WalletLogic>().scrollListener);
+    Get.find<WalletLogic>().scrollController!.removeListener(Get.find<WalletLogic>().scrollListener);
     Get.find<WalletLogic>().scrollController!.dispose();
     super.dispose();
   }
@@ -81,20 +81,16 @@ class _WalletPageState extends State<WalletPage> {
               backgroundColor: const Color(0xffFBFBFB),
               body: NestedScrollView(
                   controller: _walletLogic.scrollController,
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
+                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       ///---header
                       SliverAppBar(
-                          expandedHeight:
-                              MediaQuery.of(context).size.height * .24,
+                          expandedHeight: MediaQuery.of(context).size.height * .24,
                           floating: true,
                           pinned: true,
                           snap: false,
                           elevation: 0,
-                          backgroundColor: _walletLogic.isShrink
-                              ? customThemeColor
-                              : Colors.transparent,
+                          backgroundColor: _walletLogic.isShrink ? customThemeColor : Colors.transparent,
                           leading: InkWell(
                             onTap: () {
                               Get.back();
@@ -103,8 +99,7 @@ class _WalletPageState extends State<WalletPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset(
-                                    'assets/Icons/whiteBackArrow.svg'),
+                                SvgPicture.asset('assets/Icons/whiteBackArrow.svg'),
                               ],
                             ),
                           ),
@@ -115,106 +110,67 @@ class _WalletPageState extends State<WalletPage> {
                           flexibleSpace: FlexibleSpaceBar(
                             centerTitle: true,
                             background: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.vertical(
-                                      bottom: Radius.circular(40.r))),
+                              decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.vertical(bottom: Radius.circular(40.r))),
                               child: Column(children: [
                                 Stack(
                                   children: [
                                     SvgPicture.asset(
                                       'assets/images/bookAppointmentAppBar.svg',
                                       width: MediaQuery.of(context).size.width,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              .27,
+                                      height: MediaQuery.of(context).size.height * .27,
                                       fit: BoxFit.fill,
                                     ),
                                     SafeArea(
                                         child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.w, 25.h, 16.w, 16.h),
+                                      padding: EdgeInsetsDirectional.fromSTEB(16.w, 25.h, 16.w, 16.h),
                                       child: Stack(children: [
-                                        Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                        Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.start, children: [
+                                          SizedBox(
+                                            height: 25.h,
+                                          ),
+                                          Text(LanguageConstant.amountInWallet.tr, style: state.descTextStyle),
+                                          SizedBox(
+                                            height: 10.h,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              SizedBox(
-                                                height: 25.h,
-                                              ),
-                                              Text(
-                                                  LanguageConstant
-                                                      .amountInWallet.tr,
-                                                  style: state.descTextStyle),
-                                              SizedBox(
-                                                height: 10.h,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  _walletLogic
-                                                          .getWalletBalanceLoader!
-                                                      ? SizedBox(
-                                                          height: 20.h,
-                                                          width: 100.w,
-                                                          child: SkeletonLoader(
-                                                              period:
-                                                                  const Duration(
-                                                                      seconds:
-                                                                          2),
-                                                              highlightColor:
-                                                                  Colors.grey,
-                                                              direction:
-                                                                  SkeletonDirection
-                                                                      .ltr,
-                                                              builder:
-                                                                  Container(
-                                                                height: 20.h,
-                                                                width: 100.w,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(10
-                                                                            .r),
-                                                                    color: Colors
-                                                                        .white),
-                                                              )),
-                                                        )
-                                                      : Text(
-                                                          '\$${_walletLogic.getWalletBalanceModel.data!.userBalance}',
-                                                          style: state
-                                                              .headingTextStyle),
-                                                  if (_generalController
-                                                          .storageBox
-                                                          .read('userRole') ==
-                                                      'Mentee')
-                                                    InkWell(
-                                                      onTap: () {
-                                                        paymentBottomSheetForWallet(
-                                                            context);
-                                                      },
-                                                      child: CircleAvatar(
-                                                        radius: 20.r,
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        child: Center(
-                                                            child: SvgPicture
-                                                                .asset(
-                                                          'assets/Icons/add.svg',
-                                                          height: 20.h,
-                                                          width: 20.w,
-                                                          color:
-                                                              customOrangeColor,
-                                                          fit: BoxFit.cover,
-                                                        )),
-                                                      ),
-                                                    ),
-                                                ],
-                                              ),
-                                            ]),
+                                              _walletLogic.getWalletBalanceLoader!
+                                                  ? SizedBox(
+                                                      height: 20.h,
+                                                      width: 100.w,
+                                                      child: SkeletonLoader(
+                                                          period: const Duration(seconds: 2),
+                                                          highlightColor: Colors.grey,
+                                                          direction: SkeletonDirection.ltr,
+                                                          builder: Container(
+                                                            height: 20.h,
+                                                            width: 100.w,
+                                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r), color: Colors.white),
+                                                          )),
+                                                    )
+                                                  : Text('\$${_walletLogic.getWalletBalanceModel.data?.userBalance ?? '0'}', style: state.headingTextStyle),
+                                              if (_generalController.storageBox.read('userRole') == 'Mentee')
+                                                InkWell(
+                                                  onTap: () {
+                                                    paymentBottomSheetForWallet(context);
+                                                  },
+                                                  child: CircleAvatar(
+                                                    radius: 20.r,
+                                                    backgroundColor: Colors.white,
+                                                    child: Center(
+                                                        child: SvgPicture.asset(
+                                                      'assets/Icons/add.svg',
+                                                      height: 20.h,
+                                                      width: 20.w,
+                                                      color: customOrangeColor,
+                                                      fit: BoxFit.cover,
+                                                    )),
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                        ]),
                                       ]),
                                     )),
                                   ],
@@ -230,13 +186,11 @@ class _WalletPageState extends State<WalletPage> {
                         child: Column(
                           children: [
                             Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(LanguageConstant.transactionLog.tr,
-                                      style: state.recordTextStyle),
+                                  Text(LanguageConstant.transactionLog.tr, style: state.recordTextStyle),
                                 ],
                               ),
                             ),
@@ -249,13 +203,10 @@ class _WalletPageState extends State<WalletPage> {
                                     builder: Wrap(
                                       children: List.generate(10, (index) {
                                         return Padding(
-                                          padding: const EdgeInsetsDirectional
-                                              .fromSTEB(0, 10, 0, 0),
+                                          padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                                           child: Container(
                                             height: 70,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
+                                            width: MediaQuery.of(context).size.width,
                                             color: Colors.white,
                                           ),
                                         );
@@ -266,72 +217,39 @@ class _WalletPageState extends State<WalletPage> {
                                         child: Text(
                                           LanguageConstant.notAvailableYet.tr,
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 25.sp,
-                                              fontFamily:
-                                                  SarabunFontFamily.bold,
-                                              color: Colors.black),
+                                          style: TextStyle(fontSize: 25.sp, fontFamily: SarabunFontFamily.bold, color: Colors.black),
                                         ),
                                       )
                                     : Wrap(
                                         children: List.generate(
-                                        _walletLogic
-                                            .getAllTransactionList.length,
+                                        _walletLogic.getAllTransactionList.length,
                                         (index) => Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.w, 0, 16.w, 15.h),
+                                          padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 15.h),
                                           child: Container(
                                             // height: 90.h,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.r),
-                                                color: customTextFieldColor),
+                                            width: MediaQuery.of(context).size.width,
+                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.r), color: customTextFieldColor),
                                             child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 10.h),
+                                              padding: EdgeInsets.symmetric(vertical: 10.h),
                                               child: Row(
                                                 children: [
                                                   SizedBox(width: 15.w),
                                                   Expanded(
                                                       child: Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: _walletLogic
-                                                                .getAllTransactionList[
-                                                                    index]
-                                                                .type
-                                                                .toString() ==
-                                                            'deposit'
+                                                    alignment: Alignment.centerLeft,
+                                                    child: _walletLogic.getAllTransactionList[index].type.toString() == 'deposit'
                                                         ? Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        6.w,
-                                                                        0,
-                                                                        0,
-                                                                        0),
+                                                            padding: EdgeInsetsDirectional.fromSTEB(6.w, 0, 0, 0),
                                                             child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
+                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                              crossAxisAlignment: CrossAxisAlignment.center,
                                                               children: [
                                                                 CircleAvatar(
                                                                   radius: 12.r,
-                                                                  backgroundColor:
-                                                                      customLightThemeColor,
-                                                                  child:
-                                                                      const Icon(
-                                                                    Icons
-                                                                        .arrow_downward,
-                                                                    color: Colors
-                                                                        .white,
+                                                                  backgroundColor: customLightThemeColor,
+                                                                  child: const Icon(
+                                                                    Icons.arrow_downward,
+                                                                    color: Colors.white,
                                                                     size: 15,
                                                                   ),
                                                                 ),
@@ -339,36 +257,22 @@ class _WalletPageState extends State<WalletPage> {
                                                                   height: 6.h,
                                                                 ),
                                                                 Text(
-                                                                  _walletLogic
-                                                                      .getAllTransactionList[
-                                                                          index]
-                                                                      .type
-                                                                      .toString()
-                                                                      .toUpperCase(),
-                                                                  style: state
-                                                                      .typeTextStyle,
+                                                                  _walletLogic.getAllTransactionList[index].type.toString().toUpperCase(),
+                                                                  style: state.typeTextStyle,
                                                                 ),
                                                               ],
                                                             ),
                                                           )
                                                         : Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
+                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                             children: [
                                                               CircleAvatar(
                                                                 radius: 12.r,
-                                                                backgroundColor:
-                                                                    customLightThemeColor,
-                                                                child:
-                                                                    const Icon(
-                                                                  Icons
-                                                                      .arrow_upward,
-                                                                  color: Colors
-                                                                      .white,
+                                                                backgroundColor: customLightThemeColor,
+                                                                child: const Icon(
+                                                                  Icons.arrow_upward,
+                                                                  color: Colors.white,
                                                                   size: 15,
                                                                 ),
                                                               ),
@@ -376,44 +280,28 @@ class _WalletPageState extends State<WalletPage> {
                                                                 height: 6.h,
                                                               ),
                                                               Text(
-                                                                _walletLogic
-                                                                    .getAllTransactionList[
-                                                                        index]
-                                                                    .type
-                                                                    .toString()
-                                                                    .toUpperCase(),
-                                                                style: state
-                                                                    .typeTextStyle,
+                                                                _walletLogic.getAllTransactionList[index].type.toString().toUpperCase(),
+                                                                style: state.typeTextStyle,
                                                               ),
                                                             ],
                                                           ),
                                                   )),
                                                   Expanded(
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
+                                                      mainAxisAlignment: MainAxisAlignment.start,
                                                       children: [
-                                                        SvgPicture.asset(
-                                                            'assets/Icons/feeIcon.svg'),
+                                                        SvgPicture.asset('assets/Icons/feeIcon.svg'),
                                                         Text(
                                                           '  \$${_walletLogic.getAllTransactionList[index].amount.toString()}',
-                                                          style: state
-                                                              .feeTextStyle,
+                                                          style: state.feeTextStyle,
                                                         )
                                                       ],
                                                     ),
                                                   ),
                                                   Expanded(
                                                     child: Text(
-                                                      _walletLogic
-                                                          .getAllTransactionList[
-                                                              index]
-                                                          .createdAt
-                                                          .toString()
-                                                          .substring(0, 10),
-                                                      style:
-                                                          state.dateTextStyle,
+                                                      _walletLogic.getAllTransactionList[index].createdAt.toString().substring(0, 10),
+                                                      style: state.dateTextStyle,
                                                     ),
                                                   ),
                                                 ],
@@ -427,11 +315,7 @@ class _WalletPageState extends State<WalletPage> {
                       ),
                       _walletLogic.getWalletBalanceLoader!
                           ? const SizedBox()
-                          : _generalController.storageBox.read('userRole') ==
-                                      'Mentee' ||
-                                  _walletLogic.getWalletBalanceModel.data!
-                                          .userBalance ==
-                                      '0'
+                          : _generalController.storageBox.read('userRole') == 'Mentee' || _walletLogic.getWalletBalanceModel.data!.userBalance == '0'
                               ? const SizedBox()
                               : Positioned(
                                   bottom: 0.h,
@@ -439,8 +323,7 @@ class _WalletPageState extends State<WalletPage> {
                                   right: 15.w,
                                   child: InkWell(
                                     onTap: () {
-                                      _walletLogic.withdrawAmountController
-                                          .clear();
+                                      _walletLogic.withdrawAmountController.clear();
                                       customDialogForWithdrawAmount(context);
                                     },
                                     child: MyCustomBottomBar(

@@ -22,12 +22,10 @@ class ConsultantAppointmentDetailPage extends StatefulWidget {
   const ConsultantAppointmentDetailPage({Key? key}) : super(key: key);
 
   @override
-  State<ConsultantAppointmentDetailPage> createState() =>
-      _ConsultantAppointmentDetailPageState();
+  State<ConsultantAppointmentDetailPage> createState() => _ConsultantAppointmentDetailPageState();
 }
 
-class _ConsultantAppointmentDetailPageState
-    extends State<ConsultantAppointmentDetailPage> {
+class _ConsultantAppointmentDetailPageState extends State<ConsultantAppointmentDetailPage> {
   final logic = Get.put(ConsultantAppointmentDetailLogic());
 
   final state = Get.find<ConsultantAppointmentDetailLogic>().state;
@@ -39,34 +37,17 @@ class _ConsultantAppointmentDetailPageState
     // TODO: implement initState
     super.initState();
 
-    Get.find<ConsultantAppointmentDetailLogic>().scrollController =
-        ScrollController()
-          ..addListener(
-              Get.find<ConsultantAppointmentDetailLogic>().scrollListener);
+    Get.find<ConsultantAppointmentDetailLogic>().scrollController = ScrollController()
+      ..addListener(Get.find<ConsultantAppointmentDetailLogic>().scrollListener);
 
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      Get.find<GeneralController>().updateUserIdForSendNotification(
-          Get.find<ConsultantAppointmentDetailLogic>()
-              .selectedAppointmentData
-              .menteeId);
-      Get.find<GeneralController>().updateAppointmentIdForSendNotification(
-          Get.find<ConsultantAppointmentDetailLogic>()
-              .selectedAppointmentData
-              .id);
-      Get.find<SmsLogic>().updatePhoneNumber(
-          Get.find<ConsultantAppointmentDetailLogic>()
-              .selectedAppointmentData
-              .mentee!
-              .phone);
+      Get.find<GeneralController>().updateUserIdForSendNotification(Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.menteeId);
+      Get.find<GeneralController>().updateAppointmentIdForSendNotification(Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.id);
+      Get.find<SmsLogic>().updatePhoneNumber(Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.mentee?.phone ?? '02158860509');
+      // log(' ${Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.mentee?.phone}');
     });
-    if (Get.find<ConsultantAppointmentDetailLogic>()
-                .selectedAppointmentData
-                .date !=
-            null &&
-        Get.find<ConsultantAppointmentDetailLogic>()
-                .selectedAppointmentData
-                .time !=
-            null) {
+    if (Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.date != null &&
+        Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.time != null) {
       _timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
         Get.find<ConsultantAppointmentDetailLogic>().getAudioDifference();
         Get.find<ConsultantAppointmentDetailLogic>().getVideoDifference();
@@ -76,27 +57,17 @@ class _ConsultantAppointmentDetailPageState
 
   @override
   void dispose() {
-    Get.find<ConsultantAppointmentDetailLogic>()
-        .scrollController!
-        .removeListener(
-            Get.find<ConsultantAppointmentDetailLogic>().scrollListener);
+    Get.find<ConsultantAppointmentDetailLogic>().scrollController!.removeListener(Get.find<ConsultantAppointmentDetailLogic>().scrollListener);
     Get.find<ConsultantAppointmentDetailLogic>().scrollController!.dispose();
-    if (Get.find<ConsultantAppointmentDetailLogic>()
-                .selectedAppointmentData
-                .date !=
-            null &&
-        Get.find<ConsultantAppointmentDetailLogic>()
-                .selectedAppointmentData
-                .time !=
-            null) _timer!.cancel();
+    if (Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.date != null &&
+        Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData.time != null) _timer!.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
-      return GetBuilder<ConsultantAppointmentDetailLogic>(
-          builder: (_consultantAppointmentDetailLogic) {
+      return GetBuilder<ConsultantAppointmentDetailLogic>(builder: (_consultantAppointmentDetailLogic) {
         return GestureDetector(
           onTap: () {
             _generalController.focusOut(context);
@@ -105,8 +76,7 @@ class _ConsultantAppointmentDetailPageState
             backgroundColor: const Color(0xffFBFBFB),
             body: NestedScrollView(
                 controller: _consultantAppointmentDetailLogic.scrollController,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
+                headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
                     ///---header
                     SliverAppBar(
@@ -115,10 +85,7 @@ class _ConsultantAppointmentDetailPageState
                       pinned: true,
                       snap: false,
                       elevation: 0,
-                      backgroundColor:
-                          _consultantAppointmentDetailLogic.isShrink
-                              ? customThemeColor
-                              : Colors.transparent,
+                      backgroundColor: _consultantAppointmentDetailLogic.isShrink ? customThemeColor : Colors.transparent,
                       leading: InkWell(
                         onTap: () {
                           Get.back();
@@ -139,10 +106,7 @@ class _ConsultantAppointmentDetailPageState
                       flexibleSpace: FlexibleSpaceBar(
                         centerTitle: true,
                         background: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(40.r))),
+                          decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.vertical(bottom: Radius.circular(40.r))),
                           child: Column(
                             children: [
                               Stack(
@@ -150,50 +114,34 @@ class _ConsultantAppointmentDetailPageState
                                   SvgPicture.asset(
                                     'assets/images/bookAppointmentAppBar.svg',
                                     width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height *
-                                        .27,
+                                    height: MediaQuery.of(context).size.height * .27,
                                     fit: BoxFit.fill,
                                   ),
                                   SafeArea(
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.w, 25.h, 16.w, 16.h),
+                                      padding: EdgeInsetsDirectional.fromSTEB(16.w, 25.h, 16.w, 16.h),
                                       child: Stack(
                                         children: [
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               SizedBox(
                                                 height: 25.h,
                                               ),
                                               Text(
                                                 LanguageConstant.apptDetail.tr,
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        SarabunFontFamily.bold,
-                                                    fontSize: 28.sp,
-                                                    color:
-                                                        customLightThemeColor),
+                                                style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 28.sp, color: customLightThemeColor),
                                               ),
                                               SizedBox(
                                                 height: 10.h,
                                               ),
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Text(
                                                     '${LanguageConstant.yourAppointmentDetailsWith.tr} ${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName}',
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            SarabunFontFamily
-                                                                .medium,
-                                                        fontSize: 12.sp,
-                                                        color: Colors.white),
+                                                    style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: Colors.white),
                                                   ),
                                                 ],
                                               ),
@@ -201,34 +149,22 @@ class _ConsultantAppointmentDetailPageState
                                           ),
 
                                           ///---CHAT
-                                          (_consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData
-                                                          .appointmentStatus! ==
-                                                      1) &&
-                                                  (_consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData
-                                                          .appointmentTypeString!
-                                                          .toUpperCase() ==
-                                                      'CHAT')
+                                          (_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus! == 1) &&
+                                                  (_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeString!.toUpperCase() == 'CHAT')
                                               ? PositionedDirectional(
                                                   end: 0,
                                                   top: 45.h,
                                                   child: InkWell(
-                                                    onTap: () =>
-                                                        _consultantAppointmentDetailLogic
-                                                            .chatOnTap(context),
+                                                    onTap: () => _consultantAppointmentDetailLogic.chatOnTap(context),
                                                     child: CircleAvatar(
                                                       radius: 20.r,
-                                                      backgroundColor:
-                                                          Colors.white,
+                                                      backgroundColor: Colors.white,
                                                       child: Center(
-                                                          child:
-                                                              SvgPicture.asset(
+                                                          child: SvgPicture.asset(
                                                         'assets/Icons/chatIcon.svg',
                                                         height: 15.h,
                                                         width: 15.w,
-                                                        color:
-                                                            customOrangeColor,
+                                                        color: customOrangeColor,
                                                         fit: BoxFit.cover,
                                                       )),
                                                     ),
@@ -237,42 +173,25 @@ class _ConsultantAppointmentDetailPageState
                                               : const SizedBox(),
 
                                           ///---VIDEO
-                                          (_consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData
-                                                          .appointmentStatus! ==
-                                                      1) &&
-                                                  (_consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData
-                                                          .appointmentTypeString!
-                                                          .toUpperCase() ==
-                                                      'VIDEO')
-                                              ? _consultantAppointmentDetailLogic
-                                                          .showVideoCallButton! &&
-                                                      _consultantAppointmentDetailLogic
-                                                              .showAppointment ==
-                                                          _consultantAppointmentDetailLogic
-                                                              .selectedAppointmentData
-                                                              .id
+                                          (_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus! == 1) &&
+                                                  (_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeString!.toUpperCase() == 'VIDEO')
+                                              ? _consultantAppointmentDetailLogic.showVideoCallButton! &&
+                                                      _consultantAppointmentDetailLogic.showAppointment ==
+                                                          _consultantAppointmentDetailLogic.selectedAppointmentData.id
                                                   ? PositionedDirectional(
                                                       end: 0,
                                                       top: 45.h,
                                                       child: InkWell(
-                                                        onTap: () =>
-                                                            _consultantAppointmentDetailLogic
-                                                                .videoOnTap(
-                                                                    context),
+                                                        onTap: () => _consultantAppointmentDetailLogic.videoOnTap(context),
                                                         child: CircleAvatar(
                                                           radius: 20.r,
-                                                          backgroundColor:
-                                                              Colors.white,
+                                                          backgroundColor: Colors.white,
                                                           child: Center(
-                                                              child: SvgPicture
-                                                                  .asset(
+                                                              child: SvgPicture.asset(
                                                             'assets/Icons/videoCallIcon.svg',
                                                             height: 15.h,
                                                             width: 15.w,
-                                                            color:
-                                                                customOrangeColor,
+                                                            color: customOrangeColor,
                                                             fit: BoxFit.cover,
                                                           )),
                                                         ),
@@ -283,35 +202,22 @@ class _ConsultantAppointmentDetailPageState
 
                                           ///
                                           ///---Live
-                                          (_consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData
-                                                          .appointmentStatus! ==
-                                                      1) &&
-                                                  (_consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData
-                                                          .appointmentTypeString!
-                                                          .toUpperCase() ==
-                                                      'LIVE')
+                                          (_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus! == 1) &&
+                                                  (_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeString!.toUpperCase() == 'LIVE')
                                               ? PositionedDirectional(
                                                   end: 0,
                                                   top: 45.h,
                                                   child: InkWell(
-                                                    onTap: () =>
-                                                        _consultantAppointmentDetailLogic
-                                                            .videoOnTap(
-                                                                context),
+                                                    onTap: () => _consultantAppointmentDetailLogic.videoOnTap(context),
                                                     child: CircleAvatar(
                                                       radius: 20.r,
-                                                      backgroundColor:
-                                                          Colors.white,
+                                                      backgroundColor: Colors.white,
                                                       child: Center(
-                                                          child:
-                                                              SvgPicture.asset(
+                                                          child: SvgPicture.asset(
                                                         'assets/Icons/videoCallIcon.svg',
                                                         height: 15.h,
                                                         width: 15.w,
-                                                        color:
-                                                            customOrangeColor,
+                                                        color: customOrangeColor,
                                                         fit: BoxFit.cover,
                                                       )),
                                                     ),
@@ -320,42 +226,25 @@ class _ConsultantAppointmentDetailPageState
                                               : const SizedBox(),
 
                                           ///---AUDIO
-                                          (_consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData
-                                                          .appointmentStatus! ==
-                                                      1) &&
-                                                  (_consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData
-                                                          .appointmentTypeString!
-                                                          .toUpperCase() ==
-                                                      'AUDIO')
-                                              ? _consultantAppointmentDetailLogic
-                                                          .showAudioCallButton! &&
-                                                      _consultantAppointmentDetailLogic
-                                                              .showAppointment ==
-                                                          _consultantAppointmentDetailLogic
-                                                              .selectedAppointmentData
-                                                              .id
+                                          (_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus! == 1) &&
+                                                  (_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeString!.toUpperCase() == 'AUDIO')
+                                              ? _consultantAppointmentDetailLogic.showAudioCallButton! &&
+                                                      _consultantAppointmentDetailLogic.showAppointment ==
+                                                          _consultantAppointmentDetailLogic.selectedAppointmentData.id
                                                   ? PositionedDirectional(
                                                       end: 0,
                                                       top: 45.h,
                                                       child: InkWell(
-                                                        onTap: () =>
-                                                            _consultantAppointmentDetailLogic
-                                                                .audioOnTap(
-                                                                    context),
+                                                        onTap: () => _consultantAppointmentDetailLogic.audioOnTap(context),
                                                         child: CircleAvatar(
                                                           radius: 20.r,
-                                                          backgroundColor:
-                                                              Colors.white,
+                                                          backgroundColor: Colors.white,
                                                           child: Center(
-                                                              child: SvgPicture
-                                                                  .asset(
+                                                              child: SvgPicture.asset(
                                                             'assets/Icons/audio.svg',
                                                             height: 15.h,
                                                             width: 15.w,
-                                                            color:
-                                                                customOrangeColor,
+                                                            color: customOrangeColor,
                                                             fit: BoxFit.cover,
                                                           )),
                                                         ),
@@ -379,51 +268,27 @@ class _ConsultantAppointmentDetailPageState
                 body: Column(
                   children: [
                     AppointmentDetailBox(
-                      image: _consultantAppointmentDetailLogic
-                          .selectedAppointmentData.mentee!.imagePath,
-                      name: _consultantAppointmentDetailLogic
-                                  .selectedAppointmentData.mentee!.firstName ==
-                              null
+                      image: _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.imagePath,
+                      name: _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName == null
                           ? '...'
                           : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName} '
                               '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.lastName}',
-                      category:
-                          '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.email}',
-                      fee:
-                          '\$${_consultantAppointmentDetailLogic.selectedAppointmentData.payment!} ${LanguageConstant.fees.tr}',
-                      type:
-                          '${_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeString}'
-                              .capitalizeFirst,
+                      category: '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.email}',
+                      fee: '\$${_consultantAppointmentDetailLogic.selectedAppointmentData.payment!} ${LanguageConstant.fees.tr}',
+                      type: '${_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeString}'.capitalizeFirst,
                       typeIcon: Get.find<ConsultantAppointmentLogic>()
-                              .imagesForAppointmentTypes[
-                          (_consultantAppointmentDetailLogic
-                                  .selectedAppointmentData.appointmentTypeId!) -
-                              1],
-                      date: _consultantAppointmentDetailLogic
-                                  .selectedAppointmentData.date ==
-                              null
+                          .imagesForAppointmentTypes[(_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeId!) - 1],
+                      date: _consultantAppointmentDetailLogic.selectedAppointmentData.date == null
                           ? null
-                          : DateFormat('dd/MM/yy').format(DateTime.parse(
-                              _consultantAppointmentDetailLogic
-                                  .selectedAppointmentData.date!)),
-                      time: _consultantAppointmentDetailLogic
-                                  .selectedAppointmentData.time ==
-                              null
+                          : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentDetailLogic.selectedAppointmentData.date!)),
+                      time: _consultantAppointmentDetailLogic.selectedAppointmentData.time == null
                           ? null
-                          : _consultantAppointmentDetailLogic
-                              .selectedAppointmentData.time!,
-                      rating: _consultantAppointmentDetailLogic
-                                  .selectedAppointmentData.rating ==
-                              null
+                          : _consultantAppointmentDetailLogic.selectedAppointmentData.time!,
+                      rating: _consultantAppointmentDetailLogic.selectedAppointmentData.rating == null
                           ? 0
-                          : _consultantAppointmentDetailLogic
-                              .selectedAppointmentData.rating!
-                              .toDouble(),
-                      status:
-                          _consultantAppointmentDetailLogic.appointmentStatus,
-                      color: _consultantAppointmentDetailLogic
-                              .colorForAppointmentTypes[
-                          _consultantAppointmentDetailLogic.appointmentStatus!],
+                          : _consultantAppointmentDetailLogic.selectedAppointmentData.rating!.toDouble(),
+                      status: _consultantAppointmentDetailLogic.appointmentStatus,
+                      color: _consultantAppointmentDetailLogic.colorForAppointmentTypes[_consultantAppointmentDetailLogic.appointmentStatus!],
                     )
                   ],
                 )),
@@ -437,18 +302,14 @@ class _ConsultantAppointmentDetailPageState
               child: Container(
                 height: 74.h,
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        spreadRadius: 2,
-                        blurRadius: 15,
-                        // offset: Offset(1,5)
-                      )
-                    ],
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(30.r))),
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 15,
+                    // offset: Offset(1,5)
+                  )
+                ], color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(30.r))),
                 child: Center(
                     child: Padding(
                   padding: EdgeInsets.only(bottom: 20.h),

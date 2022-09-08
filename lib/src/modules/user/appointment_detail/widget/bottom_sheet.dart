@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/logic.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/widget/payment_popup.dart';
-import 'package:consultant_product/src/modules/user/book_appointment/view_slot_selection.dart';
+import 'package:consultant_product/src/modules/user/consultant_profile/view.dart';
 import 'package:consultant_product/src/modules/user/ratings/create_rating_repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
@@ -38,8 +40,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
         child: Container(
             height: MediaQuery.of(context).size.height * .8,
             width: MediaQuery.of(context).size.width,
-            decoration:
-                BoxDecoration(color: customTextFieldColor, borderRadius: BorderRadius.vertical(top: Radius.circular(30.r))),
+            decoration: BoxDecoration(color: customTextFieldColor, borderRadius: BorderRadius.vertical(top: Radius.circular(30.r))),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
               child: Column(
@@ -88,8 +89,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                   height: 8.h,
                                                 ),
                                                 Text(
-                                                  DateFormat('dd/MM/yy').format(
-                                                      DateTime.parse(_appointmentDetailLogic.selectedAppointmentData.date!)),
+                                                  DateFormat('dd/MM/yy').format(DateTime.parse(_appointmentDetailLogic.selectedAppointmentData.date!)),
                                                   softWrap: true,
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
@@ -172,8 +172,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _appointmentDetailLogic
-                                                .selectedAppointmentData.appointmentTypeString!.capitalizeFirst!,
+                                            _appointmentDetailLogic.selectedAppointmentData.appointmentTypeString!.capitalizeFirst!,
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -184,8 +183,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                     ),
 
                                     ///---document
-                                    _appointmentDetailLogic.selectedAppointmentData.file == null ||
-                                            _appointmentDetailLogic.selectedAppointmentData.file == ''
+                                    _appointmentDetailLogic.selectedAppointmentData.file == null || _appointmentDetailLogic.selectedAppointmentData.file == ''
                                         ? const SizedBox()
                                         : Expanded(
                                             flex: 2,
@@ -211,8 +209,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                     softWrap: true,
                                                     overflow: TextOverflow.ellipsis,
                                                     maxLines: 1,
-                                                    style: state.sectionDataTextStyle!.copyWith(
-                                                        color: customLightThemeColor, decoration: TextDecoration.underline),
+                                                    style: state.sectionDataTextStyle!
+                                                        .copyWith(color: customLightThemeColor, decoration: TextDecoration.underline),
                                                   ),
                                                 ],
                                               ),
@@ -302,8 +300,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                 ),
                                                 InkWell(
                                                   onTap: () {
-                                                    launch(_appointmentDetailLogic.selectedAppointmentData.fileConsultant!
-                                                            .contains('assets')
+                                                    launch(_appointmentDetailLogic.selectedAppointmentData.fileConsultant!.contains('assets')
                                                         ? '$mediaUrl/${_appointmentDetailLogic.selectedAppointmentData.fileConsultant}'
                                                         : '${_appointmentDetailLogic.selectedAppointmentData.fileConsultant}');
                                                   },
@@ -314,8 +311,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                     softWrap: true,
                                                     overflow: TextOverflow.ellipsis,
                                                     maxLines: 1,
-                                                    style: state.sectionDataTextStyle!.copyWith(
-                                                        color: customLightThemeColor, decoration: TextDecoration.underline),
+                                                    style: state.sectionDataTextStyle!
+                                                        .copyWith(color: customLightThemeColor, decoration: TextDecoration.underline),
                                                   ),
                                                 ),
                                               ],
@@ -491,8 +488,8 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                           ),
                                           Text(
                                             _appointmentDetailLogic.selectedAppointmentData.mentor != null
-                                                ? DateFormat('dd/MM/yy').format(DateTime.parse(
-                                                    '${_appointmentDetailLogic.selectedAppointmentData.mentor?.createdAt}'))
+                                                ? DateFormat('dd/MM/yy')
+                                                    .format(DateTime.parse('${_appointmentDetailLogic.selectedAppointmentData.mentor?.createdAt}'))
                                                 : '',
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
@@ -640,8 +637,9 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                             ? Center(
                                 child: InkWell(
                                   onTap: () {
+                                    log('${_appointmentDetailLogic.selectedAppointmentData.mentor!.id}');
                                     // paymentBottomSheetForLater(context);
-                                    Get.to(SlotSelection(
+                                    Get.to(ConsultantProfilePage(
                                         appointmentId: _appointmentDetailLogic.selectedAppointmentData.id,
                                         mentorId: _appointmentDetailLogic.selectedAppointmentData.mentor!.id,
                                         reschedule: true));
@@ -665,8 +663,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                               Text(
                                                 //  LanguageConstant.payNow.tr,
                                                 'Re Schedule',
-                                                style: TextStyle(
-                                                    fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
+                                                style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
                                               ),
                                               SvgPicture.asset(
                                                 'assets/Icons/forwardArrowRedIcon.svg',
@@ -681,7 +678,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                   ),
                                 ),
                               )
-                            : SizedBox(),
+                            : const SizedBox(),
 
                         /// pay-now
                         _appointmentDetailLogic.selectedAppointmentData.isPaid == 1
@@ -691,36 +688,32 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                   onTap: () {
                                     paymentBottomSheetForLater(context);
                                   },
-                                  child: Container(
-                                    color: Colors.white,
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(40.w, 0, 40.w, 0),
-                                      child: Container(
-                                        height: 55.h,
-                                        width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(color: customRedColor),
-                                          borderRadius: BorderRadius.circular(5.r),
-                                        ),
-                                        child: Center(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 25.w),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  LanguageConstant.payNow.tr,
-                                                  style: TextStyle(
-                                                      fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
-                                                ),
-                                                SvgPicture.asset(
-                                                  'assets/Icons/forwardArrowRedIcon.svg',
-                                                  height: 29.h,
-                                                  width: 29.w,
-                                                )
-                                              ],
-                                            ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(40.w, 0, 40.w, 0),
+                                    child: Container(
+                                      height: 55.h,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: customRedColor),
+                                        borderRadius: BorderRadius.circular(5.r),
+                                      ),
+                                      child: Center(
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 25.w),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                LanguageConstant.payNow.tr,
+                                                style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
+                                              ),
+                                              SvgPicture.asset(
+                                                'assets/Icons/forwardArrowRedIcon.svg',
+                                                height: 29.h,
+                                                width: 29.w,
+                                              )
+                                            ],
                                           ),
                                         ),
                                       ),
@@ -730,8 +723,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                               ),
 
                         /// rating button
-                        !_appointmentDetailLogic.isRated! &&
-                                _appointmentDetailLogic.selectedAppointmentData.appointmentStatus == 2
+                        !_appointmentDetailLogic.isRated! && _appointmentDetailLogic.selectedAppointmentData.appointmentStatus == 2
                             ? Center(
                                 child: InkWell(
                                   onTap: () {
@@ -753,14 +745,10 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                     text: TextSpan(children: [
                                                   TextSpan(
                                                       text: LanguageConstant.rate.tr,
-                                                      style: TextStyle(
-                                                          fontSize: 22.sp, fontWeight: FontWeight.bold, color: customThemeColor)),
+                                                      style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold, color: customThemeColor)),
                                                   TextSpan(
                                                       text: ' ${LanguageConstant.user.tr}',
-                                                      style: TextStyle(
-                                                          fontSize: 22.sp,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: const Color(0xff1B1B1C))),
+                                                      style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold, color: const Color(0xff1B1B1C))),
                                                 ])),
                                                 const SizedBox(
                                                   height: 22,
@@ -792,8 +780,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                     }
                                                     return null;
                                                   },
-                                                  style: TextStyle(
-                                                      fontSize: 14.sp, fontWeight: FontWeight.normal, color: Colors.black),
+                                                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.normal, color: Colors.black),
                                                   controller: _commentsController,
                                                   decoration: InputDecoration(
                                                       contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -803,14 +790,11 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                       // hintStyle:
                                                       // state.hintTextStyle,
                                                       enabledBorder: OutlineInputBorder(
-                                                          borderSide: const BorderSide(color: Colors.white),
-                                                          borderRadius: BorderRadius.circular(5)),
+                                                          borderSide: const BorderSide(color: Colors.white), borderRadius: BorderRadius.circular(5)),
                                                       focusedBorder: OutlineInputBorder(
-                                                          borderSide: const BorderSide(color: Colors.white),
-                                                          borderRadius: BorderRadius.circular(5)),
+                                                          borderSide: const BorderSide(color: Colors.white), borderRadius: BorderRadius.circular(5)),
                                                       border: OutlineInputBorder(
-                                                          borderSide: const BorderSide(color: Colors.white),
-                                                          borderRadius: BorderRadius.circular(5))),
+                                                          borderSide: const BorderSide(color: Colors.white), borderRadius: BorderRadius.circular(5))),
                                                 ),
                                                 const SizedBox(
                                                   height: 40,
@@ -827,14 +811,11 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                               createRatingUrl,
                                                               {
                                                                 'token': '123',
-                                                                'mentee_id':
-                                                                    _appointmentDetailLogic.selectedAppointmentData.menteeId,
-                                                                'mentor_id':
-                                                                    _appointmentDetailLogic.selectedAppointmentData.mentorId,
+                                                                'mentee_id': _appointmentDetailLogic.selectedAppointmentData.menteeId,
+                                                                'mentor_id': _appointmentDetailLogic.selectedAppointmentData.mentorId,
                                                                 'comments': _commentsController.text,
                                                                 'rating': ratingValue,
-                                                                'appointment_id':
-                                                                    _appointmentDetailLogic.selectedAppointmentData.id
+                                                                'appointment_id': _appointmentDetailLogic.selectedAppointmentData.id
                                                               },
                                                               true,
                                                               createRatingRepo);
@@ -843,8 +824,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                                       child: Container(
                                                         height: 47,
                                                         width: MediaQuery.of(context).size.width * .5,
-                                                        decoration: BoxDecoration(
-                                                            color: customThemeColor, borderRadius: BorderRadius.circular(10)),
+                                                        decoration: BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.circular(10)),
                                                         child: Center(
                                                           child: Text(
                                                             LanguageConstant.submit.tr,
@@ -879,8 +859,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                           children: [
                                             Text(
                                               LanguageConstant.rateNow.tr,
-                                              style: TextStyle(
-                                                  fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
+                                              style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
                                             ),
                                             SvgPicture.asset(
                                               'assets/Icons/whiteForwardIcon.svg',
@@ -928,8 +907,7 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                               children: [
                                                 Text(
                                                   LanguageConstant.downloadInvoice.tr,
-                                                  style: TextStyle(
-                                                      fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
+                                                  style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: customRedColor),
                                                 ),
                                                 SvgPicture.asset(
                                                   'assets/Icons/forwardArrowRedIcon.svg',

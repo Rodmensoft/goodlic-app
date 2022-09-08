@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/getAppDetail_forReschedule.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/get_date_schedule.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/model/get_payment_methods.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/payment_stripe/model_stripe_payment.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/logic.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/model_consultant_profile.dart';
@@ -19,6 +22,8 @@ class BookAppointmentLogic extends GetxController {
 
   final consultantProfileLogic = Get.find<ConsultantProfileLogic>();
   GetAppDetailForReschedule getAppDetailForReschedule = GetAppDetailForReschedule();
+  GetPaymentMethods getPaymentMethods = GetPaymentMethods();
+  // GetConfigCredentialModel getConfigCredentialModel = GetConfigCredentialModel();
 
   var cardNumberMask = MaskTextInputFormatter(mask: '#### #### #### ####');
   var cardExpiryMask = MaskTextInputFormatter(mask: '##/##');
@@ -102,10 +107,28 @@ class BookAppointmentLogic extends GetxController {
     update();
   }
 
+  List<GetPaymentMethodData> getPaymentMethodList = [];
+
+  updatePaymentMethodList(GetPaymentMethodData newValue) {
+    if (newValue.isDefault == 1) {
+      updateSelectedMethod(newValue.id);
+    }
+    getPaymentMethodList.add(newValue);
+    update();
+  }
+
   int? appointmentShiftType = 0;
 
   updateAppointmentShiftType(int? newValue) {
     appointmentShiftType = newValue;
+    update();
+  }
+
+  int? selectedMethod = 9190;
+
+  updateSelectedMethod(int? newValue) {
+    log(newValue.toString());
+    selectedMethod = newValue;
     update();
   }
 

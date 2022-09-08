@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
@@ -39,8 +40,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
   void initState() {
     super.initState();
 
-    Get.find<BookAppointmentLogic>().scrollController2 = ScrollController()
-      ..addListener(Get.find<BookAppointmentLogic>().scrollListener2);
+    Get.find<BookAppointmentLogic>().scrollController2 = ScrollController()..addListener(Get.find<BookAppointmentLogic>().scrollListener2);
     Get.find<BookAppointmentLogic>().selectedPaymentType = null;
     Get.find<BookAppointmentLogic>().questionController.clear();
 
@@ -54,6 +54,16 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
         },
         true,
         getAppDetailForReschedule);
+
+    getMethod(
+        context,
+        getPaymentMethodsUrl,
+        {
+          'token': 123,
+          'platform': 'app',
+        },
+        true,
+        getPaymentMethodsRepo);
   }
 
   @override
@@ -95,8 +105,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                         subHeading: LanguageConstant.byJustFewEasySteps.tr,
                         trailing: LanguageConstant.step2Of3.tr,
                         isShrink: _bookAppointmentLogic.isShrink2,
-                        fee:
-                            '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
+                        fee: '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
                         feeImage:
                             '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes[_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].appointmentTypeId! - 1]}',
                       ),
@@ -141,18 +150,14 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                       contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                                       fillColor: customTextFieldColor,
                                       filled: true,
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(color: Colors.transparent)),
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(color: Colors.transparent)),
+                                      enabledBorder:
+                                          OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                      border:
+                                          OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
                                       focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(color: customLightThemeColor)),
-                                      errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(color: Colors.red)),
+                                          borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                                      errorBorder:
+                                          OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                                     ),
                                     validator: (value) {
                                       if (value!.isEmpty) {
@@ -198,8 +203,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                     ),
                                     Text(
                                       '  (${LanguageConstant.ifAny.tr})',
-                                      style: TextStyle(
-                                          fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customTextBlackColor),
+                                      style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customTextBlackColor),
                                     ),
                                   ],
                                 ),
@@ -235,8 +239,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                 );
                                               });
                                         } else {
-                                          _bookAppointmentLogic
-                                              .updateSelectedFileName(_bookAppointmentLogic.filePickerResult!.files[0].name);
+                                          _bookAppointmentLogic.updateSelectedFileName(_bookAppointmentLogic.filePickerResult!.files[0].name);
                                           setState(() {});
                                         }
                                       }
@@ -245,8 +248,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                   child: Container(
                                     height: 69.h,
                                     width: double.infinity,
-                                    decoration:
-                                        BoxDecoration(color: customLightOrangeColor, borderRadius: BorderRadius.circular(8.r)),
+                                    decoration: BoxDecoration(color: customLightOrangeColor, borderRadius: BorderRadius.circular(8.r)),
                                     child: Stack(
                                       children: [
                                         Padding(
@@ -270,10 +272,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                           softWrap: true,
                                                           maxLines: 1,
                                                           overflow: TextOverflow.ellipsis,
-                                                          style: TextStyle(
-                                                              fontFamily: SarabunFontFamily.medium,
-                                                              fontSize: 12.sp,
-                                                              color: customOrangeColor),
+                                                          style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customOrangeColor),
                                                         ),
                                                       ),
                                                       InkWell(
@@ -303,10 +302,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                     ),
                                                     Text(
                                                       LanguageConstant.uploadHere.tr,
-                                                      style: TextStyle(
-                                                          fontFamily: SarabunFontFamily.medium,
-                                                          fontSize: 12.sp,
-                                                          color: customOrangeColor),
+                                                      style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customOrangeColor),
                                                     )
                                                   ],
                                                 ),
@@ -345,26 +341,27 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                         height: 20.h,
                                       ),
                                       Wrap(
-                                        children: List.generate(_bookAppointmentLogic.paymentMethodList.length, (index) {
+                                        children: List.generate(_bookAppointmentLogic.getPaymentMethodList.length, (index) {
                                           return Padding(
                                             padding: index % 2 == 0
                                                 ? EdgeInsetsDirectional.fromSTEB(0, 0, 8.w, 18.h)
                                                 : EdgeInsetsDirectional.fromSTEB(8.w, 0.h, 0.w, 18.h),
                                             child: InkWell(
                                               onTap: () {
-                                                for (var element in _bookAppointmentLogic.paymentMethodList) {
-                                                  element.isSelected = false;
-                                                }
-                                                _bookAppointmentLogic.paymentMethodList[index].isSelected = true;
-                                                _bookAppointmentLogic.selectedPaymentType = index;
+                                                // for (var element in _bookAppointmentLogic.paymentMethodList) {
+                                                //   element.isSelected = false;
+                                                // }
+                                                log('${_bookAppointmentLogic.getPaymentMethodList[index].id}');
+
+                                                _bookAppointmentLogic.updateSelectedMethod(_bookAppointmentLogic.getPaymentMethodList[index].id);
+                                                // _bookAppointmentLogic.selectedPaymentType = index;
                                                 _bookAppointmentLogic.update();
                                                 setState(() {
                                                   disableButton = false;
                                                 });
 
                                                 /// Show flutterwave payment button
-                                                if (_bookAppointmentLogic.paymentMethodList[index].image!
-                                                    .contains('flutterwave')) {
+                                                if (_bookAppointmentLogic.getPaymentMethodList[index].code!.contains('flutterwave')) {
                                                   setState(() {
                                                     wave = true;
                                                   });
@@ -375,7 +372,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                 }
 
                                                 /// Show razorPay payment button
-                                                if (_bookAppointmentLogic.paymentMethodList[index].image!.contains('razorpay')) {
+                                                if (_bookAppointmentLogic.getPaymentMethodList[index].code!.contains('razorpay')) {
                                                   setState(() {
                                                     razorPay = true;
                                                   });
@@ -386,7 +383,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                 }
 
                                                 /// Show paytm payment button
-                                                if (_bookAppointmentLogic.paymentMethodList[index].image!.contains('paytm')) {
+                                                if (_bookAppointmentLogic.getPaymentMethodList[index].code!.contains('paytm')) {
                                                   setState(() {
                                                     paytm = true;
                                                   });
@@ -402,14 +399,15 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     border: Border.all(
-                                                        color: _bookAppointmentLogic.paymentMethodList[index].isSelected!
+                                                        color: (_bookAppointmentLogic.selectedMethod ?? 9091) ==
+                                                                _bookAppointmentLogic.getPaymentMethodList[index].id
                                                             ? customLightThemeColor
                                                             : Colors.white,
                                                         width: 2),
                                                     borderRadius: BorderRadius.circular(8.r),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: _bookAppointmentLogic.paymentMethodList[index].isSelected!
+                                                        color: _bookAppointmentLogic.getPaymentMethodList[index].isDefault == 1
                                                             ? customLightThemeColor.withOpacity(0.2)
                                                             : Colors.grey.withOpacity(0.2),
                                                         spreadRadius: -2,
@@ -417,12 +415,11 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                         // offset: Offset(1,5)
                                                       )
                                                     ]),
-                                                child: _bookAppointmentLogic.paymentMethodList[index].image!
-                                                        .contains('braintreePayment')
+                                                child: _bookAppointmentLogic.getPaymentMethodList[index].code!.contains('braintreePayment')
                                                     ? ClipRRect(
                                                         borderRadius: BorderRadius.circular(8.r),
-                                                        child: SvgPicture.asset(
-                                                          '${_bookAppointmentLogic.paymentMethodList[index].image}',
+                                                        child: Image.network(
+                                                          '$mediaUrl${_bookAppointmentLogic.getPaymentMethodList[index].imagePath}',
                                                           width: double.infinity,
                                                           height: double.infinity,
                                                         ),
@@ -431,8 +428,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                         crossAxisAlignment: CrossAxisAlignment.center,
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
-                                                          SvgPicture.asset(
-                                                            '${_bookAppointmentLogic.paymentMethodList[index].image}',
+                                                          Image.network(
+                                                            '$mediaUrl${_bookAppointmentLogic.getPaymentMethodList[index].imagePath}',
                                                             width: MediaQuery.of(context).size.width * .15,
                                                           ),
                                                         ],
@@ -446,7 +443,6 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                   ),
                                 ),
                               ),
-
                         SizedBox(
                           height: MediaQuery.of(context).size.height * .15,
                         ),
@@ -469,13 +465,10 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                         'mentee_id': _bookAppointmentLogic.getAppDetailForReschedule.data!.appointment!.menteeId,
                                         'mentor_id': widget.mentorId,
                                         'payment': _bookAppointmentLogic.getAppDetailForReschedule.data!.appointment!.payment,
-                                        'payment_id':
-                                            _bookAppointmentLogic.getAppDetailForReschedule.data!.appointment!.paymentId,
+                                        'payment_id': _bookAppointmentLogic.getAppDetailForReschedule.data!.appointment!.paymentId,
                                         'questions': _bookAppointmentLogic.getAppDetailForReschedule.data!.appointment!.questions,
-                                        'appointment_type_string':
-                                            _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name,
-                                        'appointment_type_id':
-                                            _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id,
+                                        'appointment_type_string': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name,
+                                        'appointment_type_id': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id,
                                         'date': _bookAppointmentLogic.selectedDateForAppointment.substring(0, 11),
                                         'time': _bookAppointmentLogic.selectedTimeForAppointment,
                                         'bookAppointmentId': widget.appointmentId
@@ -497,36 +490,36 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                   bottom: 0.h,
                                   left: 15.w,
                                   right: 15.w,
-                                  child: InkWell(
-                                    onTap: (){
-
-                                      postMethod(
-                                          context,
-                                          'https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=Ddqckl36992914432459&orderId=ORDERID_98765',
-                                          {
-                                            "body":
-                                            {
-                                              "requestType":"Payment",
-                                              "mid":"Ddqckl36992914432459",
-                                              "websiteName":"Consultant",
-                                              "orderId":"ORDERID_98765",
-                                              "txnAmount":{
-                                                "value":"100.00",
-                                                "currency":"USD"
-                                              },
-                                              "userInfo":{
-                                                "custId":"CUST_001"
-                                              },
-                                              "callbackUrl":"https://docs.flutter.dev/cookbook/networking/fetch-data"
-                                            },
-                                            "head":{
-                                              "signature":"Consultant"
-                                            }
-                                          },
-                                          true,
-                                          post)
-                                    },
-                                    child: const MyCustomBottomBar(
+                                  child: const InkWell(
+                                    // onTap: (){
+                                    //
+                                    //   postMethod(
+                                    //       context,
+                                    //       'https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=Ddqckl36992914432459&orderId=ORDERID_98765',
+                                    //       {
+                                    //         "body":
+                                    //         {
+                                    //           "requestType":"Payment",
+                                    //           "mid":"Ddqckl36992914432459",
+                                    //           "websiteName":"Consultant",
+                                    //           "orderId":"ORDERID_98765",
+                                    //           "txnAmount":{
+                                    //             "value":"100.00",
+                                    //             "currency":"USD"
+                                    //           },
+                                    //           "userInfo":{
+                                    //             "custId":"CUST_001"
+                                    //           },
+                                    //           "callbackUrl":"https://docs.flutter.dev/cookbook/networking/fetch-data"
+                                    //         },
+                                    //         "head":{
+                                    //           "signature":"Consultant"
+                                    //         }
+                                    //       },
+                                    //       true,
+                                    //       post)
+                                    // },
+                                    child: MyCustomBottomBar(
                                       title: 'Paytm',
                                       disable: false,
                                     ),
@@ -542,8 +535,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                       child: InkWell(
                                         onTap: () {
                                           if (_formKey.currentState!.validate()) {
-                                            Get.to(RazorPayView(
-                                                amount: _bookAppointmentLogic.selectMentorAppointmentType!.fee.toString()));
+                                            Get.to(RazorPayView(amount: _bookAppointmentLogic.selectMentorAppointmentType!.fee.toString()));
                                           }
                                         },
                                         child: const MyCustomBottomBar(
@@ -562,8 +554,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                           child: InkWell(
                                             onTap: () {
                                               if (_formKey.currentState!.validate()) {
-                                                Get.to(FlutterWave(
-                                                    amount: _bookAppointmentLogic.selectMentorAppointmentType!.fee.toString()));
+                                                Get.to(FlutterWave(amount: _bookAppointmentLogic.selectMentorAppointmentType!.fee.toString()));
                                               }
                                             },
                                             child: const MyCustomBottomBar(
@@ -581,9 +572,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                               if (!disableButton! && _formKey.currentState!.validate()) {
                                                 if (_bookAppointmentLogic.selectedFileName == null) {
                                                   _generalController.updateFormLoaderController(true);
-                                                  if (_bookAppointmentLogic
-                                                          .selectMentorAppointmentType!.appointmentType!.isScheduleRequired ==
-                                                      1) {
+                                                  if (_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.isScheduleRequired == 1) {
                                                     postMethod(
                                                         context,
                                                         bookAppointmentUrl,
@@ -594,12 +583,9 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                           'payment': _bookAppointmentLogic.selectMentorAppointmentType!.fee,
                                                           'payment_id': _bookAppointmentLogic.selectedPaymentType,
                                                           'questions': _bookAppointmentLogic.questionController.text,
-                                                          'appointment_type_string': _bookAppointmentLogic
-                                                              .selectMentorAppointmentType!.appointmentType!.name,
-                                                          'appointment_type_id': _bookAppointmentLogic
-                                                              .selectMentorAppointmentType!.appointmentType!.id,
-                                                          'date':
-                                                              _bookAppointmentLogic.selectedDateForAppointment.substring(0, 11),
+                                                          'appointment_type_string': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name,
+                                                          'appointment_type_id': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id,
+                                                          'date': _bookAppointmentLogic.selectedDateForAppointment.substring(0, 11),
                                                           'time': _bookAppointmentLogic.selectedTimeForAppointment,
                                                         },
                                                         true,
@@ -615,18 +601,15 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                           'payment': _bookAppointmentLogic.selectMentorAppointmentType!.fee,
                                                           'payment_id': _bookAppointmentLogic.selectedPaymentType,
                                                           'questions': _bookAppointmentLogic.questionController.text,
-                                                          'appointment_type_string': _bookAppointmentLogic
-                                                              .selectMentorAppointmentType!.appointmentType!.name,
-                                                          'appointment_type_id': _bookAppointmentLogic
-                                                              .selectMentorAppointmentType!.appointmentType!.id,
+                                                          'appointment_type_string': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name,
+                                                          'appointment_type_id': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id,
                                                         },
                                                         true,
                                                         bookAppointmentWithoutFileRepo);
                                                   }
                                                 } else {
                                                   _generalController.updateFormLoaderController(true);
-                                                  bookAppointmentFileRepo(
-                                                      File(_bookAppointmentLogic.filePickerResult!.files[0].path!), context);
+                                                  bookAppointmentFileRepo(File(_bookAppointmentLogic.filePickerResult!.files[0].path!), context);
                                                 }
                                                 // Get.toNamed(PageRoutes.paymentView);
                                               }

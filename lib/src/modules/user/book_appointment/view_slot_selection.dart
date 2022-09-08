@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
-import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -48,8 +47,7 @@ class _SlotSelectionState extends State<SlotSelection> {
   void initState() {
     super.initState();
 
-    Get.find<BookAppointmentLogic>().scrollController = ScrollController()
-      ..addListener(Get.find<BookAppointmentLogic>().scrollListener);
+    Get.find<BookAppointmentLogic>().scrollController = ScrollController()..addListener(Get.find<BookAppointmentLogic>().scrollListener);
   }
 
   @override
@@ -124,9 +122,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                     chat = false;
                                   });
                                 }
-                                if (_bookAppointmentLogic
-                                        .consultantProfileLogic.appointmentTypes[index].appointmentType!.isScheduleRequired ==
-                                    1) {
+                                if (_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentType!.isScheduleRequired == 1) {
                                   setState(() {
                                     disableButton = true;
                                   });
@@ -136,21 +132,30 @@ class _SlotSelectionState extends State<SlotSelection> {
                                   _bookAppointmentLogic.selectedAppointmentTypeID =
                                       _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId;
                                   _bookAppointmentLogic.selectedAppointmentTypeIndex = index;
-                                  _bookAppointmentLogic.updateSelectMentorAppointmentType(
-                                      _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index]);
+                                  _bookAppointmentLogic.updateSelectMentorAppointmentType(_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index]);
                                   _bookAppointmentLogic.update();
                                   _bookAppointmentLogic.updateCalenderLoader(true);
-                                  getMethod(
-                                      context,
-                                      getScheduleAvailableDaysURL,
-                                      {
-                                        'token': '123',
-                                        'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
-                                        'appointment_type_id': _bookAppointmentLogic
-                                            .consultantProfileLogic.appointmentTypes[index].appointmentTypeId,
-                                      },
-                                      true,
-                                      getScheduleAvailableDaysRepo);
+                                  widget.mentorId != null
+                                      ? getMethod(
+                                          context,
+                                          getScheduleAvailableDaysURL,
+                                          {
+                                            'token': '123',
+                                            'mentor_id': widget.mentorId,
+                                            'appointment_type_id': _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId,
+                                          },
+                                          true,
+                                          getScheduleAvailableDaysRepo)
+                                      : getMethod(
+                                          context,
+                                          getScheduleAvailableDaysURL,
+                                          {
+                                            'token': '123',
+                                            'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
+                                            'appointment_type_id': _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId,
+                                          },
+                                          true,
+                                          getScheduleAvailableDaysRepo);
                                 } else {
                                   setState(() {
                                     disableButton = false;
@@ -161,8 +166,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                   _bookAppointmentLogic.selectedAppointmentTypeID =
                                       _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId;
                                   _bookAppointmentLogic.selectedAppointmentTypeIndex = index;
-                                  _bookAppointmentLogic.updateSelectMentorAppointmentType(
-                                      _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index]);
+                                  _bookAppointmentLogic.updateSelectMentorAppointmentType(_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index]);
                                   _bookAppointmentLogic.update();
                                 }
                               },
@@ -176,8 +180,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                     boxShadow: [
                                       BoxShadow(
                                         color: _bookAppointmentLogic.selectedAppointmentTypeID ==
-                                                _bookAppointmentLogic
-                                                    .consultantProfileLogic.appointmentTypes[index].appointmentTypeId
+                                                _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
                                             ? customLightThemeColor.withOpacity(0.6)
                                             : Colors.grey.withOpacity(0.2),
                                         spreadRadius: -2,
@@ -199,8 +202,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             height: 12.h,
                                             width: 19.w,
                                             color: _bookAppointmentLogic.selectedAppointmentTypeID ==
-                                                    _bookAppointmentLogic
-                                                        .consultantProfileLogic.appointmentTypes[index].appointmentTypeId
+                                                    _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
                                                 ? Colors.white
                                                 : customThemeColor,
                                           ),
@@ -208,13 +210,11 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             width: 10.w,
                                           ),
                                           Text(
-                                            _bookAppointmentLogic
-                                                .consultantProfileLogic.appointmentTypes[index].appointmentType!.name!
+                                            _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentType!.name!
                                                 .toString()
                                                 .capitalizeFirst!,
                                             style: _bookAppointmentLogic.selectedAppointmentTypeID ==
-                                                    _bookAppointmentLogic
-                                                        .consultantProfileLogic.appointmentTypes[index].appointmentTypeId
+                                                    _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
                                                 ? state.typeTextStyle!.copyWith(color: Colors.white)
                                                 : state.typeTextStyle,
                                           ),
@@ -228,8 +228,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                         child: Text(
                                           '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].fee}',
                                           style: _bookAppointmentLogic.selectedAppointmentTypeID ==
-                                                  _bookAppointmentLogic
-                                                      .consultantProfileLogic.appointmentTypes[index].appointmentTypeId
+                                                  _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
                                               ? state.typePriceTextStyle!.copyWith(color: Colors.white)
                                               : state.typePriceTextStyle,
                                         ),
@@ -269,17 +268,14 @@ class _SlotSelectionState extends State<SlotSelection> {
                                   ? const SizedBox()
                                   : Container(
                                       height: 300.h,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(8.r),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.grey.withOpacity(0.2),
-                                              spreadRadius: -2,
-                                              blurRadius: 15,
-                                              // offset: Offset(1,5)
-                                            )
-                                          ]),
+                                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.2),
+                                          spreadRadius: -2,
+                                          blurRadius: 15,
+                                          // offset: Offset(1,5)
+                                        )
+                                      ]),
                                       child: _getCustomizedDatePicker(_bookAppointmentLogic.availableScheduleDaysList!),
                                     )
                           : const SizedBox(),
@@ -340,8 +336,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             child: Container(
                                               height: 30,
                                               width: 60,
-                                              decoration:
-                                                  BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(100)),
+                                              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(100)),
                                             ),
                                           );
                                         }),
@@ -377,9 +372,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                               child: Container(
                                                 height: 78.h,
                                                 decoration: BoxDecoration(
-                                                    color: _bookAppointmentLogic.appointmentShiftType == index
-                                                        ? customLightThemeColor
-                                                        : Colors.white,
+                                                    color: _bookAppointmentLogic.appointmentShiftType == index ? customLightThemeColor : Colors.white,
                                                     borderRadius: BorderRadius.circular(8.r),
                                                     boxShadow: [
                                                       BoxShadow(
@@ -439,10 +432,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                         ? _bookAppointmentLogic.morningSlots.isEmpty
                                             ? Text(
                                                 LanguageConstant.noSlotsAvailable.tr,
-                                                style: TextStyle(
-                                                    fontFamily: SarabunFontFamily.regular,
-                                                    fontSize: 16.sp,
-                                                    color: customTextBlackColor),
+                                                style: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                               )
                                             : Wrap(
                                                 children: List.generate(_bookAppointmentLogic.morningSlots.length, (secondIndex) {
@@ -459,8 +449,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                       },
                                                       child: Container(
                                                         decoration: BoxDecoration(
-                                                            color: _bookAppointmentLogic.morningSlots[secondIndex].id ==
-                                                                    selectedSlotID
+                                                            color: _bookAppointmentLogic.morningSlots[secondIndex].id == selectedSlotID
                                                                 ? customThemeColor
                                                                 : Colors.white,
                                                             borderRadius: BorderRadius.circular(100)),
@@ -469,8 +458,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                           child: Text(
                                                             '${_bookAppointmentLogic.morningSlots[secondIndex].startTime}',
                                                             textDirection: TextDirection.ltr,
-                                                            style: _bookAppointmentLogic.morningSlots[secondIndex].id ==
-                                                                    selectedSlotID
+                                                            style: _bookAppointmentLogic.morningSlots[secondIndex].id == selectedSlotID
                                                                 ? state.shiftTitleTextStyle!.copyWith(color: Colors.white)
                                                                 : state.shiftTitleTextStyle,
                                                           ),
@@ -487,14 +475,10 @@ class _SlotSelectionState extends State<SlotSelection> {
                                         ? _bookAppointmentLogic.afterNoonSlots.isEmpty
                                             ? Text(
                                                 LanguageConstant.noSlotsAvailable.tr,
-                                                style: TextStyle(
-                                                    fontFamily: SarabunFontFamily.regular,
-                                                    fontSize: 16.sp,
-                                                    color: customTextBlackColor),
+                                                style: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                               )
                                             : Wrap(
-                                                children:
-                                                    List.generate(_bookAppointmentLogic.afterNoonSlots.length, (secondIndex) {
+                                                children: List.generate(_bookAppointmentLogic.afterNoonSlots.length, (secondIndex) {
                                                   return Padding(
                                                     padding: EdgeInsets.fromLTRB(0, 0, 6.w, 6.h),
                                                     child: InkWell(
@@ -508,8 +492,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                       },
                                                       child: Container(
                                                         decoration: BoxDecoration(
-                                                            color: _bookAppointmentLogic.afterNoonSlots[secondIndex].id ==
-                                                                    selectedSlotID
+                                                            color: _bookAppointmentLogic.afterNoonSlots[secondIndex].id == selectedSlotID
                                                                 ? customThemeColor
                                                                 : Colors.white,
                                                             borderRadius: BorderRadius.circular(100)),
@@ -518,8 +501,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                           child: Text(
                                                             '${_bookAppointmentLogic.afterNoonSlots[secondIndex].startTime}',
                                                             textDirection: TextDirection.ltr,
-                                                            style: _bookAppointmentLogic.afterNoonSlots[secondIndex].id ==
-                                                                    selectedSlotID
+                                                            style: _bookAppointmentLogic.afterNoonSlots[secondIndex].id == selectedSlotID
                                                                 ? state.shiftTitleTextStyle!.copyWith(color: Colors.white)
                                                                 : state.shiftTitleTextStyle,
                                                           ),
@@ -536,10 +518,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                         ? _bookAppointmentLogic.eveningSlots.isEmpty
                                             ? Text(
                                                 LanguageConstant.noSlotsAvailable.tr,
-                                                style: TextStyle(
-                                                    fontFamily: SarabunFontFamily.regular,
-                                                    fontSize: 16.sp,
-                                                    color: customTextBlackColor),
+                                                style: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                               )
                                             : Wrap(
                                                 children: List.generate(_bookAppointmentLogic.eveningSlots.length, (secondIndex) {
@@ -556,8 +535,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                       },
                                                       child: Container(
                                                         decoration: BoxDecoration(
-                                                            color: _bookAppointmentLogic.eveningSlots[secondIndex].id ==
-                                                                    selectedSlotID
+                                                            color: _bookAppointmentLogic.eveningSlots[secondIndex].id == selectedSlotID
                                                                 ? customThemeColor
                                                                 : Colors.white,
                                                             borderRadius: BorderRadius.circular(100)),
@@ -566,8 +544,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                           child: Text(
                                                             '${_bookAppointmentLogic.eveningSlots[secondIndex].startTime}',
                                                             textDirection: TextDirection.ltr,
-                                                            style: _bookAppointmentLogic.eveningSlots[secondIndex].id ==
-                                                                    selectedSlotID
+                                                            style: _bookAppointmentLogic.eveningSlots[secondIndex].id == selectedSlotID
                                                                 ? state.shiftTitleTextStyle!.copyWith(color: Colors.white)
                                                                 : state.shiftTitleTextStyle,
                                                           ),
@@ -632,8 +609,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                             child: InkWell(
                               onTap: () {
                                 if (!disableButton!) {
-                                  Get.to(AppointmentQuestionPage(
-                                      appointmentId: widget.appointmentId, mentorId: widget.mentorId, showPaymentSection: true));
+                                  Get.to(AppointmentQuestionPage(appointmentId: widget.appointmentId, mentorId: widget.mentorId, showPaymentSection: true));
                                 }
                               },
                               child: MyCustomBottomBar(
@@ -656,10 +632,10 @@ class _SlotSelectionState extends State<SlotSelection> {
                                     Get.find<GeneralController>().update();
 
                                     ///---make-notification
-                                    Get.find<GeneralController>().updateNotificationBody(
-                                        'New Appointment Are You Live!', '', '/requestForLive', 'mentee/appointment/log', null);
-                                    Get.find<GeneralController>().updateUserIdForSendNotification(
-                                        ConsultantAppointmentDetailLogic().selectedAppointmentData.mentorId);
+                                    Get.find<GeneralController>()
+                                        .updateNotificationBody('New Appointment Are You Live!', '', '/requestForLive', 'mentee/appointment/log', null);
+                                    Get.find<GeneralController>()
+                                        .updateUserIdForSendNotification(ConsultantAppointmentDetailLogic().selectedAppointmentData.mentorId);
 
                                     ///----send-sms
                                     postMethod(
@@ -675,13 +651,8 @@ class _SlotSelectionState extends State<SlotSelection> {
 
                                     ///----fcm-send-start
                                     getMethod(
-                                        context,
-                                        fcmGetUrl,
-                                        {'token': '123', 'user_id': Get.find<UserHomeLogic>().selectedConsultantID},
-                                        true,
-                                        getFcmTokenRepo);
-                                    Get.snackbar('your Request is Pending!', '',
-                                        colorText: Colors.black, backgroundColor: Colors.white);
+                                        context, fcmGetUrl, {'token': '123', 'user_id': Get.find<UserHomeLogic>().selectedConsultantID}, true, getFcmTokenRepo);
+                                    Get.snackbar('your Request is Pending!', '', colorText: Colors.black, backgroundColor: Colors.white);
                                   },
                                   child: MyCustomBottomBar(
                                     title: 'continue',
@@ -699,7 +670,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                 child: InkWell(
                                   onTap: () {
                                     if (!disableButton!) {
-                                      Get.toNamed(PageRoutes.appointmentQuestion);
+                                      Get.to(AppointmentQuestionPage(appointmentId: 0, mentorId: 0, showPaymentSection: false));
                                     }
                                   },
                                   child: MyCustomBottomBar(
@@ -727,17 +698,29 @@ class _SlotSelectionState extends State<SlotSelection> {
         Get.find<BookAppointmentLogic>().emptyMorningSlots();
         Get.find<BookAppointmentLogic>().emptyAfterNoonSlots();
         Get.find<BookAppointmentLogic>().emptyEveningSlots();
-        getMethod(
-            context,
-            getScheduleSlotsForMenteeUrl,
-            {
-              'token': '123',
-              'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
-              'date': Get.find<BookAppointmentLogic>().selectedDateForAppointment.substring(0, 11),
-              'appointment_type_id': Get.find<BookAppointmentLogic>().selectedAppointmentTypeID
-            },
-            true,
-            getScheduleSlotsRepo);
+        widget.mentorId != null
+            ? getMethod(
+                context,
+                getScheduleSlotsForMenteeUrl,
+                {
+                  'token': '123',
+                  'mentor_id': widget.mentorId,
+                  'date': Get.find<BookAppointmentLogic>().selectedDateForAppointment.substring(0, 11),
+                  'appointment_type_id': Get.find<BookAppointmentLogic>().selectedAppointmentTypeID
+                },
+                true,
+                getScheduleSlotsRepo)
+            : getMethod(
+                context,
+                getScheduleSlotsForMenteeUrl,
+                {
+                  'token': '123',
+                  'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
+                  'date': Get.find<BookAppointmentLogic>().selectedDateForAppointment.substring(0, 11),
+                  'appointment_type_id': Get.find<BookAppointmentLogic>().selectedAppointmentTypeID
+                },
+                true,
+                getScheduleSlotsRepo);
         Get.find<BookAppointmentLogic>().update();
       }
     });
@@ -758,8 +741,8 @@ class _SlotSelectionState extends State<SlotSelection> {
         textStyle: TextStyle(fontFamily: SarabunFontFamily.extraBold, fontSize: 18.sp, color: customTextBlackColor),
       ),
       monthCellStyle: DateRangePickerMonthCellStyle(
-        specialDatesDecoration: const MonthCellDecoration(
-            borderColor: null, backgroundColor: customLightThemeColor, showIndicator: true, indicatorColor: customThemeColor),
+        specialDatesDecoration:
+            const MonthCellDecoration(borderColor: null, backgroundColor: customLightThemeColor, showIndicator: true, indicatorColor: customThemeColor),
         // textStyle: TextStyle(color: const Color(0xffe2d7fe), fontSize: 14),
         specialDatesTextStyle: TextStyle(color: Colors.white, fontSize: 14.sp, fontFamily: SarabunFontFamily.regular),
         // todayTextStyle: TextStyle(color: highlightColor, fontSize: 14)
@@ -774,8 +757,8 @@ class _SlotSelectionState extends State<SlotSelection> {
       todayHighlightColor: customLightThemeColor,
       monthViewSettings: DateRangePickerMonthViewSettings(
         firstDayOfWeek: 1,
-        viewHeaderStyle: DateRangePickerViewHeaderStyle(
-            textStyle: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 16.sp, color: customTextBlackColor)),
+        viewHeaderStyle:
+            DateRangePickerViewHeaderStyle(textStyle: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 16.sp, color: customTextBlackColor)),
         // dayFormat: 'EEE',
         showTrailingAndLeadingDates: false,
         specialDates: specialDates,

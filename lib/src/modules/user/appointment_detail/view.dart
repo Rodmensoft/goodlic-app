@@ -5,6 +5,7 @@ import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/widget/bottom_sheet.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/post_repo.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/my_appointment/widgets/appontment_detail_box.dart';
 import 'package:consultant_product/src/modules/user/ratings/rating_exist_repo.dart';
@@ -49,13 +50,14 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
         },
         true,
         ratingExistRepo);
+
+    getMethod(context, getPaymentMethodsUrl, {'token': 123, 'platform': 'app'}, true, getPaymentMethodsRepo);
+
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      Get.find<GeneralController>()
-          .updateUserIdForSendNotification(Get.find<AppointmentDetailLogic>().selectedAppointmentData.mentorId);
+      Get.find<GeneralController>().updateUserIdForSendNotification(Get.find<AppointmentDetailLogic>().selectedAppointmentData.mentorId);
     });
 
-    Get.find<AppointmentDetailLogic>().scrollController = ScrollController()
-      ..addListener(Get.find<AppointmentDetailLogic>().scrollListener);
+    Get.find<AppointmentDetailLogic>().scrollController = ScrollController()..addListener(Get.find<AppointmentDetailLogic>().scrollListener);
 
     _timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
       //  Get.find<ConsultantAppointmentDetailLogic>().getRescheduleBtn();
@@ -112,8 +114,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                       flexibleSpace: FlexibleSpaceBar(
                         centerTitle: true,
                         background: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.transparent, borderRadius: BorderRadius.vertical(bottom: Radius.circular(40.r))),
+                          decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.vertical(bottom: Radius.circular(40.r))),
                           child: Column(
                             children: [
                               Stack(
@@ -138,10 +139,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                               ),
                                               Text(
                                                 LanguageConstant.apptDetail.tr,
-                                                style: TextStyle(
-                                                    fontFamily: SarabunFontFamily.bold,
-                                                    fontSize: 28.sp,
-                                                    color: customLightThemeColor),
+                                                style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 28.sp, color: customLightThemeColor),
                                               ),
                                               SizedBox(
                                                 height: 10.h,
@@ -151,10 +149,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                                 children: [
                                                   Text(
                                                     '${LanguageConstant.yourAppointmentDetailWith.tr} ${_appointmentDetailLogic.selectedAppointmentData.mentor?.firstName}',
-                                                    style: TextStyle(
-                                                        fontFamily: SarabunFontFamily.medium,
-                                                        fontSize: 12.sp,
-                                                        color: Colors.white),
+                                                    style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: Colors.white),
                                                   ),
                                                 ],
                                               ),
@@ -164,9 +159,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                           ///---CHAT
                                           _appointmentDetailLogic.selectedAppointmentData.appointmentStatus! != 1
                                               ? const SizedBox()
-                                              : _appointmentDetailLogic.selectedAppointmentData.appointmentTypeString!
-                                                          .toUpperCase() ==
-                                                      'CHAT'
+                                              : _appointmentDetailLogic.selectedAppointmentData.appointmentTypeString!.toUpperCase() == 'CHAT'
                                                   ? PositionedDirectional(
                                                       end: 0,
                                                       top: 45.h,
@@ -211,14 +204,12 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                       category: '${_appointmentDetailLogic.selectedAppointmentData.category}',
                       fee: '\$${_appointmentDetailLogic.selectedAppointmentData.payment!} ${LanguageConstant.fees.tr}',
                       type: '${_appointmentDetailLogic.selectedAppointmentData.appointmentTypeString}'.capitalizeFirst,
-                      typeIcon: Get.find<MyAppointmentLogic>()
-                          .imagesForAppointmentTypes[(_appointmentDetailLogic.selectedAppointmentData.appointmentTypeId!) - 1],
+                      typeIcon:
+                          Get.find<MyAppointmentLogic>().imagesForAppointmentTypes[(_appointmentDetailLogic.selectedAppointmentData.appointmentTypeId!) - 1],
                       date: _appointmentDetailLogic.selectedAppointmentData.date == null
                           ? null
                           : DateFormat('dd/MM/yy').format(DateTime.parse(_appointmentDetailLogic.selectedAppointmentData.date!)),
-                      time: _appointmentDetailLogic.selectedAppointmentData.time == null
-                          ? null
-                          : _appointmentDetailLogic.selectedAppointmentData.time!,
+                      time: _appointmentDetailLogic.selectedAppointmentData.time == null ? null : _appointmentDetailLogic.selectedAppointmentData.time!,
                       rating: _appointmentDetailLogic.selectedAppointmentData.rating!.toDouble(),
                       status: _appointmentDetailLogic.appointmentStatus,
                       color: _appointmentDetailLogic.colorForAppointmentTypes[_appointmentDetailLogic.appointmentStatus!],
@@ -259,10 +250,6 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
 
   openBottomSheet() {
     return showCupertinoModalBottomSheet(
-        topRadius: Radius.circular(30.r),
-        expand: false,
-        context: context,
-        backgroundColor: Colors.transparent,
-        builder: (context) => const ModalInsideModal());
+        topRadius: Radius.circular(30.r), expand: false, context: context, backgroundColor: Colors.transparent, builder: (context) => const ModalInsideModal());
   }
 }

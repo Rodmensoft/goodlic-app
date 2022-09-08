@@ -47,8 +47,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
         child: Container(
             height: MediaQuery.of(context).size.height * .8,
             width: MediaQuery.of(context).size.width,
-            decoration:
-                BoxDecoration(color: customTextFieldColor, borderRadius: BorderRadius.vertical(top: Radius.circular(30.r))),
+            decoration: BoxDecoration(color: customTextFieldColor, borderRadius: BorderRadius.vertical(top: Radius.circular(30.r))),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
               child: Column(
@@ -97,8 +96,8 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                   height: 8.h,
                                                 ),
                                                 Text(
-                                                  DateFormat('dd/MM/yy').format(DateTime.parse(
-                                                      _consultantAppointmentDetailLogic.selectedAppointmentData.date!)),
+                                                  DateFormat('dd/MM/yy')
+                                                      .format(DateTime.parse(_consultantAppointmentDetailLogic.selectedAppointmentData.date!)),
                                                   softWrap: true,
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
@@ -181,8 +180,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                             height: 8.h,
                                           ),
                                           Text(
-                                            _consultantAppointmentDetailLogic
-                                                .selectedAppointmentData.appointmentTypeString!.capitalizeFirst!,
+                                            _consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeString!.capitalizeFirst!,
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -200,8 +198,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                             flex: 2,
                                             child: InkWell(
                                               onTap: () {
-                                                launch(_consultantAppointmentDetailLogic.selectedAppointmentData.file!
-                                                        .contains('assets')
+                                                launch(_consultantAppointmentDetailLogic.selectedAppointmentData.file!.contains('assets')
                                                     ? '$mediaUrl/${_consultantAppointmentDetailLogic.selectedAppointmentData.file}'
                                                     : '${_consultantAppointmentDetailLogic.selectedAppointmentData.file}');
                                               },
@@ -221,8 +218,8 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                     softWrap: true,
                                                     overflow: TextOverflow.ellipsis,
                                                     maxLines: 1,
-                                                    style: state.sectionDataTextStyle!.copyWith(
-                                                        color: customLightThemeColor, decoration: TextDecoration.underline),
+                                                    style: state.sectionDataTextStyle!
+                                                        .copyWith(color: customLightThemeColor, decoration: TextDecoration.underline),
                                                   ),
                                                 ],
                                               ),
@@ -285,11 +282,9 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                   height: 8.h,
                                                 ),
                                                 Text(
-                                                  _consultantAppointmentDetailLogic.selectedAppointmentData.notesConsultant ==
-                                                          null
+                                                  _consultantAppointmentDetailLogic.selectedAppointmentData.notesConsultant == null
                                                       ? '...'
-                                                      : _consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData.notesConsultant!,
+                                                      : _consultantAppointmentDetailLogic.selectedAppointmentData.notesConsultant!,
                                                   softWrap: true,
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
@@ -315,24 +310,19 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                 ),
                                                 InkWell(
                                                   onTap: () {
-                                                    launch(_consultantAppointmentDetailLogic
-                                                            .selectedAppointmentData.fileConsultant!
-                                                            .contains('assets')
+                                                    launch(_consultantAppointmentDetailLogic.selectedAppointmentData.fileConsultant!.contains('assets')
                                                         ? '$mediaUrl/${_consultantAppointmentDetailLogic.selectedAppointmentData.fileConsultant}'
                                                         : '${_consultantAppointmentDetailLogic.selectedAppointmentData.fileConsultant}');
                                                   },
                                                   child: Text(
-                                                    _consultantAppointmentDetailLogic
-                                                                .selectedAppointmentData.filetypeConsultant ==
-                                                            null
+                                                    _consultantAppointmentDetailLogic.selectedAppointmentData.filetypeConsultant == null
                                                         ? '...'
-                                                        : _consultantAppointmentDetailLogic
-                                                            .selectedAppointmentData.filetypeConsultant!,
+                                                        : _consultantAppointmentDetailLogic.selectedAppointmentData.filetypeConsultant!,
                                                     softWrap: true,
                                                     overflow: TextOverflow.ellipsis,
                                                     maxLines: 1,
-                                                    style: state.sectionDataTextStyle!.copyWith(
-                                                        color: customLightThemeColor, decoration: TextDecoration.underline),
+                                                    style: state.sectionDataTextStyle!
+                                                        .copyWith(color: customLightThemeColor, decoration: TextDecoration.underline),
                                                   ),
                                                 ),
                                               ],
@@ -354,8 +344,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                         _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.mentee!.identityHidden == 1
                             ? Text(
                                 LanguageConstant.userProfileIsHidden.tr,
-                                style:
-                                    TextStyle(fontFamily: SarabunFontFamily.extraBold, fontSize: 18.sp, color: customThemeColor),
+                                style: TextStyle(fontFamily: SarabunFontFamily.extraBold, fontSize: 18.sp, color: customThemeColor),
                               )
                             : Container(
                                 width: MediaQuery.of(context).size.width,
@@ -390,11 +379,9 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                   height: 8.h,
                                                 ),
                                                 Text(
-                                                  _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName ==
-                                                          null
+                                                  _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName == null
                                                       ? '...'
-                                                      : _consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData.mentee!.firstName!,
+                                                      : _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName!,
                                                   softWrap: true,
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
@@ -418,11 +405,9 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                   height: 8.h,
                                                 ),
                                                 Text(
-                                                  _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.lastName ==
-                                                          null
+                                                  _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.lastName == null
                                                       ? '...'
-                                                      : _consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData.mentee!.lastName!,
+                                                      : _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.lastName!,
                                                   softWrap: true,
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
@@ -507,11 +492,9 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                   height: 8.h,
                                                 ),
                                                 Text(
-                                                  _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.userCountry ==
-                                                          null
+                                                  _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.userCountry == null
                                                       ? '...'
-                                                      : _consultantAppointmentDetailLogic
-                                                          .selectedAppointmentData.mentee!.userCountry!.name!,
+                                                      : _consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.userCountry!.name!,
                                                   softWrap: true,
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
@@ -531,9 +514,8 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                           height: 20.h,
                         ),
 
-                        _consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus == 0
-                            // &&
-                            //         _consultantAppointmentDetailLogic.selectedAppointmentData.isPaid == 1
+                        _consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus == 0 &&
+                                _consultantAppointmentDetailLogic.selectedAppointmentData.isPaid == 1
                             ? Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 10),
                                 child: Row(
@@ -553,10 +535,10 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                 child: InkWell(
                                                   onTap: () {
                                                     ///---make-notification
-                                                    Get.find<GeneralController>().updateNotificationBody(
-                                                        'Your Appointment is Accepted', '', null, 'mentee/appointment/log', null);
-                                                    Get.find<GeneralController>().updateUserIdForSendNotification(
-                                                        _consultantAppointmentDetailLogic.selectedAppointmentData.menteeId);
+                                                    Get.find<GeneralController>()
+                                                        .updateNotificationBody('Your Appointment is Accepted', '', null, 'mentee/appointment/log', null);
+                                                    Get.find<GeneralController>()
+                                                        .updateUserIdForSendNotification(_consultantAppointmentDetailLogic.selectedAppointmentData.menteeId);
                                                     Get.find<GeneralController>().updateFormLoaderController(true);
                                                     Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
                                                     Get.back();
@@ -564,27 +546,19 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                     postMethod(
                                                         context,
                                                         mentorChangeAppointmentStatusUrl,
-                                                        {
-                                                          'token': '123',
-                                                          'id': _consultantAppointmentDetailLogic.selectedAppointmentData.id,
-                                                          'status': 1
-                                                        },
+                                                        {'token': '123', 'id': _consultantAppointmentDetailLogic.selectedAppointmentData.id, 'status': 1},
                                                         true,
                                                         mentorAcceptAppointmentRepo);
                                                   },
                                                   child: Container(
                                                     height: 40.h,
-                                                    decoration: BoxDecoration(
-                                                        color: customThemeColor, borderRadius: BorderRadius.circular(4)),
+                                                    decoration: BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.circular(4)),
                                                     child: Padding(
                                                       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                                                       child: Center(
                                                         child: Text(
                                                           LanguageConstant.accept.tr,
-                                                          style: TextStyle(
-                                                              fontFamily: SarabunFontFamily.bold,
-                                                              fontSize: 16.sp,
-                                                              color: Colors.white),
+                                                          style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
                                                         ),
                                                       ),
                                                     ),
@@ -598,14 +572,10 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                 child: InkWell(
                                                   onTap: () {
                                                     ///---make-notification
-                                                    Get.find<GeneralController>().updateNotificationBody(
-                                                        'Your Appointment is Cancelled',
-                                                        '',
-                                                        null,
-                                                        'mentee/appointment/log',
-                                                        null);
-                                                    Get.find<GeneralController>().updateUserIdForSendNotification(
-                                                        _consultantAppointmentDetailLogic.selectedAppointmentData.menteeId);
+                                                    Get.find<GeneralController>()
+                                                        .updateNotificationBody('Your Appointment is Cancelled', '', null, 'mentee/appointment/log', null);
+                                                    Get.find<GeneralController>()
+                                                        .updateUserIdForSendNotification(_consultantAppointmentDetailLogic.selectedAppointmentData.menteeId);
                                                     Get.find<GeneralController>().updateFormLoaderController(true);
                                                     Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
                                                     Get.back();
@@ -613,27 +583,19 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                     postMethod(
                                                         context,
                                                         mentorChangeAppointmentStatusUrl,
-                                                        {
-                                                          'token': '123',
-                                                          'id': _consultantAppointmentDetailLogic.selectedAppointmentData.id,
-                                                          'status': 3
-                                                        },
+                                                        {'token': '123', 'id': _consultantAppointmentDetailLogic.selectedAppointmentData.id, 'status': 3},
                                                         true,
                                                         mentorRejectAppointmentRepo);
                                                   },
                                                   child: Container(
                                                     height: 40.h,
-                                                    decoration:
-                                                        BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(4)),
+                                                    decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(4)),
                                                     child: Padding(
                                                       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                                                       child: Center(
                                                         child: Text(
                                                           LanguageConstant.reject.tr,
-                                                          style: TextStyle(
-                                                              fontFamily: SarabunFontFamily.bold,
-                                                              fontSize: 16.sp,
-                                                              color: Colors.white),
+                                                          style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
                                                         ),
                                                       ),
                                                     ),
@@ -723,8 +685,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                               children: [
                                                 Text(
                                                   LanguageConstant.markAsComplete.tr,
-                                                  style: TextStyle(
-                                                      fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
+                                                  style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
                                                 ),
                                                 SvgPicture.asset(
                                                   'assets/Icons/whiteForwardIcon.svg',
@@ -774,8 +735,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                   Text(
                                                     //  LanguageConstant.markAsComplete.tr,
                                                     'Mark as Archive',
-                                                    style: TextStyle(
-                                                        fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
+                                                    style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
                                                   ),
                                                   SvgPicture.asset(
                                                     'assets/Icons/whiteForwardIcon.svg',
@@ -830,8 +790,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                           Text(
                                             //  LanguageConstant.markAsComplete.tr,
                                             'Mark as UnArchive',
-                                            style: TextStyle(
-                                                fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
+                                            style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: Colors.white),
                                           ),
                                           SvgPicture.asset(
                                             'assets/Icons/whiteForwardIcon.svg',
@@ -923,21 +882,15 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                               hintText:
                                   // LanguageConstant.addAmount.tr,
                                   'Note',
-                              hintStyle:
-                                  TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextGreyColor),
+                              hintStyle: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextGreyColor),
                               fillColor: customTextFieldColor,
                               filled: true,
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(color: Colors.transparent)),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(color: Colors.transparent)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(color: customLightThemeColor)),
-                              errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                              enabledBorder:
+                                  OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                              focusedBorder:
+                                  OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                              errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                             ),
                             validator: (String? value) {
                               if (value!.isEmpty) {
@@ -958,8 +911,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                     imagePickerDialog(context);
                                   },
                                   child: Container(
-                                    decoration: BoxDecoration(
-                                        color: customTextFieldColor, borderRadius: BorderRadius.all(Radius.circular(8.r))),
+                                    decoration: BoxDecoration(color: customTextFieldColor, borderRadius: BorderRadius.all(Radius.circular(8.r))),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(10.w, 10.h, 10.w, 10.h),
                                       child: Center(
@@ -1159,10 +1111,8 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
             degreeImage = null;
             log('testing message.... ${response.data['message']}');
           });
-          Get.find<GeneralController>()
-              .updateNotificationBody('Your Appointment is Completed', '', null, 'mentee/appointment/log', null);
-          Get.find<GeneralController>()
-              .updateUserIdForSendNotification(ConsultantAppointmentDetailLogic().selectedAppointmentData.menteeId);
+          Get.find<GeneralController>().updateNotificationBody('Your Appointment is Completed', '', null, 'mentee/appointment/log', null);
+          Get.find<GeneralController>().updateUserIdForSendNotification(ConsultantAppointmentDetailLogic().selectedAppointmentData.menteeId);
           Get.find<GeneralController>().updateFormLoaderController(true);
           Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);
           Get.back();

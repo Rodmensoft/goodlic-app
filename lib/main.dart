@@ -4,17 +4,18 @@ import 'dart:io';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:consultant_product/multi_language/languages.dart';
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/local_notification_service.dart';
 import 'package:consultant_product/src/api_services/logic.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
-import 'package:consultant_product/src/modules/agora_call/agora.config.dart'
-    as config;
+import 'package:consultant_product/src/modules/agora_call/agora.config.dart' as config;
 import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/modules/agora_call/init_video_call_view.dart';
 import 'package:consultant_product/src/modules/chat/logic.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/repo_post.dart';
+import 'package:consultant_product/src/modules/main_repo/main_repo.dart';
 import 'package:consultant_product/src/modules/sms/logic.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/consultant_profile/logic.dart';
@@ -29,13 +30,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:resize/resize.dart';
 
-final GlobalKey<NavigatorState> navigatorKey =
-    GlobalKey(debugLabel: "Main Navigator");
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: "Main Navigator");
 RtcEngine? _engine;
 
 _initEngine(String? route) async {
-  _engine =
-      await RtcEngine.createWithContext(RtcEngineContext(config.agoraAppId));
+  _engine = await RtcEngine.createWithContext(RtcEngineContext(config.agoraAppId));
 
   await _engine!.enableVideo();
   await _engine!.startPreview();
@@ -57,14 +56,11 @@ Future<void> main() async {
   if (Platform.isAndroid) {
     await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
 
-    var swAvailable = await AndroidWebViewFeature.isFeatureSupported(
-        AndroidWebViewFeature.SERVICE_WORKER_BASIC_USAGE);
-    var swInterceptAvailable = await AndroidWebViewFeature.isFeatureSupported(
-        AndroidWebViewFeature.SERVICE_WORKER_SHOULD_INTERCEPT_REQUEST);
+    var swAvailable = await AndroidWebViewFeature.isFeatureSupported(AndroidWebViewFeature.SERVICE_WORKER_BASIC_USAGE);
+    var swInterceptAvailable = await AndroidWebViewFeature.isFeatureSupported(AndroidWebViewFeature.SERVICE_WORKER_SHOULD_INTERCEPT_REQUEST);
 
     if (swAvailable && swInterceptAvailable) {
-      AndroidServiceWorkerController serviceWorkerController =
-          AndroidServiceWorkerController.instance();
+      AndroidServiceWorkerController serviceWorkerController = AndroidServiceWorkerController.instance();
 
       serviceWorkerController.setServiceWorkerClient(AndroidServiceWorkerClient(
         shouldInterceptRequest: (request) async {
@@ -105,18 +101,15 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
 
       if (message != null) {
         if (message.data['fee'] != null) {
-          Get.find<GeneralController>().notificationMenteeId =
-              message.data['mentee_id'];
+          Get.find<GeneralController>().notificationMenteeId = message.data['mentee_id'];
           Get.find<GeneralController>().notificationFee = message.data['fee'];
           Get.find<GeneralController>().update();
         }
         if (message.data['channel'] != null) {
           Get.find<GeneralController>().updateCallerType(2);
 
-          Get.find<GeneralController>()
-              .updateChannelForCall(message.data['channel']);
-          Get.find<GeneralController>()
-              .updateTokenForCall(message.data['channel_token']);
+          Get.find<GeneralController>().updateChannelForCall(message.data['channel']);
+          Get.find<GeneralController>().updateTokenForCall(message.data['channel_token']);
         }
         if (message.data['routeApp'] != null) {
           route = message.data['routeApp'];
@@ -134,15 +127,12 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
       log('testing it ${message.data}');
       if (message.data['channel'] != null) {
         Get.find<GeneralController>().updateCallerType(2);
-        Get.find<GeneralController>()
-            .updateChannelForCall(message.data['channel']);
-        Get.find<GeneralController>()
-            .updateTokenForCall(message.data['channel_token']);
+        Get.find<GeneralController>().updateChannelForCall(message.data['channel']);
+        Get.find<GeneralController>().updateTokenForCall(message.data['channel_token']);
       }
       if (message.data['routeApp'] != null) {
         if (message.data['fee'] != null) {
-          Get.find<GeneralController>().notificationMenteeId =
-              message.data['mentee_id'];
+          Get.find<GeneralController>().notificationMenteeId = message.data['mentee_id'];
           Get.find<GeneralController>().notificationFee = message.data['fee'];
           Get.find<GeneralController>().update();
         }
@@ -159,14 +149,11 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
       String route;
       if (message.data['channel'] != null) {
         Get.find<GeneralController>().updateCallerType(2);
-        Get.find<GeneralController>()
-            .updateChannelForCall(message.data['channel']);
-        Get.find<GeneralController>()
-            .updateTokenForCall(message.data['channel_token']);
+        Get.find<GeneralController>().updateChannelForCall(message.data['channel']);
+        Get.find<GeneralController>().updateTokenForCall(message.data['channel_token']);
         if (message.data['routeApp'] != null) {
           if (message.data['fee'] != null) {
-            Get.find<GeneralController>().notificationMenteeId =
-                message.data['mentee_id'];
+            Get.find<GeneralController>().notificationMenteeId = message.data['mentee_id'];
             Get.find<GeneralController>().notificationFee = message.data['fee'];
             Get.find<GeneralController>().update();
           }
@@ -180,6 +167,37 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         route = message.data['routeApp'];
       }
     });
+
+    /// Get config Credential
+
+    getMethod(
+        context,
+        getConfigCredentialUrl,
+        {
+          'token': 123,
+        },
+        false,
+        getConfigCredentialRepo);
+
+    /// Get General Settings
+    getMethod(
+        context,
+        getGeneralSettingUrl,
+        {
+          'token': 123,
+        },
+        false,
+        getGeneralSettingRepo);
+
+    /// Get General Settings
+    getMethod(
+        context,
+        getTermsConditionsUrl,
+        {
+          'token': 123,
+        },
+        false,
+        getTermsConditionsRepo);
 
     super.initState();
   }
@@ -201,56 +219,20 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         !Get.find<GeneralController>().storageBox.hasData('onlineStatus')) {
       switch (state) {
         case AppLifecycleState.resumed:
-          postMethod(
-              context,
-              changeMentorOnlineStatusUrl,
-              {
-                'token': '123',
-                'user_id':
-                    Get.find<GeneralController>().storageBox.read('userID'),
-                'status': 'online'
-              },
-              true,
-              changeMentorOnlineStatusRepo);
+          postMethod(context, changeMentorOnlineStatusUrl,
+              {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID'), 'status': 'online'}, true, changeMentorOnlineStatusRepo);
           break;
         case AppLifecycleState.inactive:
-          postMethod(
-              context,
-              changeMentorOnlineStatusUrl,
-              {
-                'token': '123',
-                'user_id':
-                    Get.find<GeneralController>().storageBox.read('userID'),
-                'status': 'offline'
-              },
-              true,
-              changeMentorOnlineStatusRepo);
+          postMethod(context, changeMentorOnlineStatusUrl,
+              {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID'), 'status': 'offline'}, true, changeMentorOnlineStatusRepo);
           break;
         case AppLifecycleState.paused:
-          postMethod(
-              context,
-              changeMentorOnlineStatusUrl,
-              {
-                'token': '123',
-                'user_id':
-                    Get.find<GeneralController>().storageBox.read('userID'),
-                'status': 'offline'
-              },
-              true,
-              changeMentorOnlineStatusRepo);
+          postMethod(context, changeMentorOnlineStatusUrl,
+              {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID'), 'status': 'offline'}, true, changeMentorOnlineStatusRepo);
           break;
         case AppLifecycleState.detached:
-          postMethod(
-              context,
-              changeMentorOnlineStatusUrl,
-              {
-                'token': '123',
-                'user_id':
-                    Get.find<GeneralController>().storageBox.read('userID'),
-                'status': 'offline'
-              },
-              true,
-              changeMentorOnlineStatusRepo);
+          postMethod(context, changeMentorOnlineStatusUrl,
+              {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID'), 'status': 'offline'}, true, changeMentorOnlineStatusRepo);
           break;
       }
     }
@@ -275,12 +257,10 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
             navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
             translations: LanguagesChang(),
-            locale: Locale(
-                '${Get.find<GeneralController>().storageBox.read('languageCode')}',
-                '${Get.find<GeneralController>().storageBox.read('countryCode')}'),
-            fallbackLocale: Locale(
-                '${Get.find<GeneralController>().storageBox.read('languageCode')}',
-                '${Get.find<GeneralController>().storageBox.read('countryCode')}'),
+            locale:
+                Locale('${Get.find<GeneralController>().storageBox.read('languageCode')}', '${Get.find<GeneralController>().storageBox.read('countryCode')}'),
+            fallbackLocale:
+                Locale('${Get.find<GeneralController>().storageBox.read('languageCode')}', '${Get.find<GeneralController>().storageBox.read('countryCode')}'),
             initialRoute: PageRoutes.splash,
             getPages: routes(),
             themeMode: ThemeMode.light,

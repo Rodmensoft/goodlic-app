@@ -17,6 +17,7 @@ import 'package:consultant_product/src/modules/user/book_appointment/jazz_cash_p
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/getAppDetail_forReschedule.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/model/get_payment_methods.dart';
 import 'package:consultant_product/src/modules/user/home/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
@@ -272,10 +273,9 @@ liveRequestRepo(BuildContext context, bool responseCheck, Map<String, dynamic> r
       Get.find<GeneralController>().updateFormLoaderController(false);
 
       ///---make-notification
-      Get.find<GeneralController>().updateNotificationBody(
-          'Your Live Appointment Request Accepted', '', '/appointmentQuestion', 'mentee/appointment/log', null);
       Get.find<GeneralController>()
-          .updateUserIdForSendNotification(int.parse(Get.find<GeneralController>().notificationMenteeId!));
+          .updateNotificationBody('Your Live Appointment Request Accepted', '', '/appointmentQuestion', 'mentee/appointment/log', null);
+      Get.find<GeneralController>().updateUserIdForSendNotification(int.parse(Get.find<GeneralController>().notificationMenteeId!));
       // Get.find<GeneralController>().notificationMenteeId = '';
       Get.find<GeneralController>().notificationFee = null;
       Get.find<GeneralController>().update();
@@ -293,8 +293,7 @@ liveRequestRepo(BuildContext context, bool responseCheck, Map<String, dynamic> r
           sendSMSRepo);
 
       ///----fcm-send-start
-      getMethod(context, fcmGetUrl, {'token': '123', 'user_id': Get.find<GeneralController>().notificationMenteeId}, true,
-          getFcmTokenRepo);
+      getMethod(context, fcmGetUrl, {'token': '123', 'user_id': Get.find<GeneralController>().notificationMenteeId}, true, getFcmTokenRepo);
       Get.back();
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
@@ -416,5 +415,29 @@ getAppDetailForReschedule(BuildContext context, bool responseCheck, Map<String, 
             img: 'assets/Icons/dialog_error.svg',
           );
         });
+  }
+}
+
+/// repo for get payment methods
+
+getPaymentMethodsRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    log("--=-=-=-=-=--=--=-");
+    log("${response.toString()}");
+    log("--=-=-=-=-=--=--=-");
+    Get.find<BookAppointmentLogic>().getPaymentMethods = GetPaymentMethods.fromJson(response);
+    if (Get.find<BookAppointmentLogic>().getPaymentMethods.success == true) {
+      ///--- Payment Methods
+      Get.find<BookAppointmentLogic>().getPaymentMethodList = [];
+      for (GetPaymentMethodData element in Get.find<BookAppointmentLogic>().getPaymentMethods.data ?? []) {
+        Get.find<BookAppointmentLogic>().updatePaymentMethodList(element);
+      }
+
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    }
+  } else if (!responseCheck) {
+    Get.find<GeneralController>().updateFormLoaderController(false);
   }
 }

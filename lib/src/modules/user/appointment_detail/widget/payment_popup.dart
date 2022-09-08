@@ -1,8 +1,9 @@
 import 'package:consultant_product/route_generator.dart';
+import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/user/appointment_detail/logic.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
@@ -29,15 +30,13 @@ paymentBottomSheetForLater(BuildContext context) async {
                 height: 20.h,
               ),
               Wrap(
-                children: List.generate(
-                    _appointmentDetailLogic.paymentMethodList.length, (index) {
+                children: List.generate(Get.find<BookAppointmentLogic>().getPaymentMethodList.length, (index) {
                   return Padding(
-                    padding: index % 2 == 0
-                        ? EdgeInsetsDirectional.fromSTEB(0, 0, 8.w, 18.h)
-                        : EdgeInsetsDirectional.fromSTEB(8.w, 0.h, 0.w, 18.h),
+                    padding: index % 2 == 0 ? EdgeInsetsDirectional.fromSTEB(0, 0, 8.w, 18.h) : EdgeInsetsDirectional.fromSTEB(8.w, 0.h, 0.w, 18.h),
                     child: InkWell(
                       onTap: () {
-                        _appointmentDetailLogic.selectedPaymentType = index;
+                        //   _appointmentDetailLogic.selectedPaymentType = index;
+                        Get.find<BookAppointmentLogic>().updateSelectedMethod(Get.find<BookAppointmentLogic>().getPaymentMethodList[index].id);
                         _appointmentDetailLogic.update();
                         _appointmentDetailLogic.amountController.clear();
 
@@ -51,16 +50,12 @@ paymentBottomSheetForLater(BuildContext context) async {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(
-                                color: _appointmentDetailLogic
-                                        .paymentMethodList[index].isSelected!
-                                    ? customLightThemeColor
-                                    : Colors.white,
+                                color: Get.find<BookAppointmentLogic>().getPaymentMethodList[index].isDefault == 1 ? customLightThemeColor : Colors.white,
                                 width: 2),
                             borderRadius: BorderRadius.circular(8.r),
                             boxShadow: [
                               BoxShadow(
-                                color: _appointmentDetailLogic
-                                        .paymentMethodList[index].isSelected!
+                                color: Get.find<BookAppointmentLogic>().getPaymentMethodList[index].isDefault == 1
                                     ? customLightThemeColor.withOpacity(0.2)
                                     : Colors.grey.withOpacity(0.2),
                                 spreadRadius: -2,
@@ -68,13 +63,11 @@ paymentBottomSheetForLater(BuildContext context) async {
                                 // offset: Offset(1,5)
                               )
                             ]),
-                        child: _appointmentDetailLogic
-                                .paymentMethodList[index].image!
-                                .contains('braintreePayment')
+                        child: Get.find<BookAppointmentLogic>().getPaymentMethodList[index].code!.contains('braintreePayment')
                             ? ClipRRect(
                                 borderRadius: BorderRadius.circular(8.r),
-                                child: SvgPicture.asset(
-                                  '${_appointmentDetailLogic.paymentMethodList[index].image}',
+                                child: Image.network(
+                                  '$mediaUrl${Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath}',
                                   width: double.infinity,
                                   height: double.infinity,
                                 ),
@@ -83,10 +76,9 @@ paymentBottomSheetForLater(BuildContext context) async {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SvgPicture.asset(
-                                    '${_appointmentDetailLogic.paymentMethodList[index].image}',
-                                    width:
-                                        MediaQuery.of(context).size.width * .15,
+                                  Image.network(
+                                    '$mediaUrl${Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath}',
+                                    width: MediaQuery.of(context).size.width * .15,
                                   ),
                                 ],
                               ),

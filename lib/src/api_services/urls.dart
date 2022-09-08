@@ -20,6 +20,7 @@ String contactUsUrl = apiBaseUrl + 'contactus';
 String paymentMethodUrl = apiBaseUrl + 'execute-payment';
 String jazzCashPaymentUrl = apiBaseUrl + 'makeJazzcashPayment';
 String getAppointmentPaymentStatusUrl = baseUrl + 'getAppointmentStatus';
+String getPaymentMethodsUrl = apiBaseUrl + 'payment_methods';
 
 ///---search
 String searchConsultantUrl = apiBaseUrl + 'search-mentor-mobile';
@@ -143,3 +144,15 @@ String newPasswordUrl = apiBaseUrl + 'reset-password';
 /// Flutter wave
 
 String flutterWaveUrl = apiBaseUrl + 'flutter-wave-after-payment';
+
+/// Config Credential
+
+String getConfigCredentialUrl = apiBaseUrl + 'notification_settings';
+
+/// General Settings
+
+String getGeneralSettingUrl = apiBaseUrl + 'general_settings';
+
+/// Get Terms and Conditions
+
+String getTermsConditionsUrl = apiBaseUrl + 'terms_conditions';
