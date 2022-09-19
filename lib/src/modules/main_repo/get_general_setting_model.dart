@@ -67,8 +67,8 @@ class Data {
     String? currencySymbol,
     String? aboutCompany,
     String? loginType,
-    double? longitude,
-    double? latitude,
+    dynamic longitude,
+    dynamic latitude,
   }) {
     _id = id;
     _logo = logo;
@@ -123,8 +123,8 @@ class Data {
   String? _currencySymbol;
   String? _aboutCompany;
   String? _loginType;
-  double? _longitude;
-  double? _latitude;
+  dynamic _longitude;
+  dynamic _latitude;
   Data copyWith(
           {num? id,
           String? logo,
@@ -141,8 +141,8 @@ class Data {
           String? currencySymbol,
           String? aboutCompany,
           String? loginType,
-          double? longitude,
-          double? latitude}) =>
+          dynamic longitude,
+          dynamic latitude}) =>
       Data(
         id: id ?? _id,
         logo: logo ?? _logo,
@@ -177,8 +177,8 @@ class Data {
   String? get currencySymbol => _currencySymbol;
   String? get aboutCompany => _aboutCompany;
   String? get loginType => _loginType;
-  double? get longitude => _longitude;
-  double? get latitude => _latitude;
+  dynamic get longitude => _longitude;
+  dynamic get latitude => _latitude;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

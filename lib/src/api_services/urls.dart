@@ -11,6 +11,7 @@ const String fcmService = 'https://fcm.googleapis.com/fcm/send';
 String signUpWithEmailURL = apiBaseUrl + 'signup-email';
 String loginWithEmailURL = apiBaseUrl + 'login-email';
 String loginWithGoogleURL = apiBaseUrl + 'auth/google';
+String loginWithOtpURL = apiBaseUrl + 'login-signup';
 
 String mentorApprovalStatusUrl = apiBaseUrl + 'mentorStatus';
 

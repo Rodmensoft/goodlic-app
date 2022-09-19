@@ -13,12 +13,6 @@ getConfigCredentialRepo(BuildContext context, bool responseCheck, Map<String, dy
     Get.put(MainLogic());
     Get.find<MainLogic>().getConfigCredentialModel = GetConfigCredentialModel.fromJson(response);
     if (Get.find<MainLogic>().getConfigCredentialModel.success == true) {
-      // ///--- Payment Methods
-      // Get.find<BookAppointmentLogic>().getPaymentMethodList = [];
-      // for (GetPaymentMethodData element in Get.find<BookAppointmentLogic>().getPaymentMethods.data ?? []) {
-      //   Get.find<BookAppointmentLogic>().updatePaymentMethodList(element);
-      // }
-
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
@@ -35,11 +29,8 @@ getGeneralSettingRepo(BuildContext context, bool responseCheck, Map<String, dyna
     Get.put(MainLogic());
     Get.find<MainLogic>().getGeneralSettingModel = GetGeneralSettingModel.fromJson(response);
     if (Get.find<MainLogic>().getConfigCredentialModel.success == true) {
-      // ///--- Payment Methods
-      // Get.find<BookAppointmentLogic>().getPaymentMethodList = [];
-      // for (GetPaymentMethodData element in Get.find<BookAppointmentLogic>().getPaymentMethods.data ?? []) {
-      //   Get.find<BookAppointmentLogic>().updatePaymentMethodList(element);
-      // }
+      Get.find<GeneralController>().storageBox.write('loginType', Get.find<MainLogic>().getGeneralSettingModel.data!.loginType);
+      Get.find<GeneralController>().storageBox.write('currency', Get.find<MainLogic>().getGeneralSettingModel.data!.currencySymbol);
 
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
@@ -57,12 +48,6 @@ getTermsConditionsRepo(BuildContext context, bool responseCheck, Map<String, dyn
     Get.put(MainLogic());
     Get.find<MainLogic>().termsConditionModel = TermsConditionModel.fromJson(response);
     if (Get.find<MainLogic>().termsConditionModel.success == true) {
-      // ///--- Payment Methods
-      // Get.find<BookAppointmentLogic>().getPaymentMethodList = [];
-      // for (GetPaymentMethodData element in Get.find<BookAppointmentLogic>().getPaymentMethods.data ?? []) {
-      //   Get.find<BookAppointmentLogic>().updatePaymentMethodList(element);
-      // }
-
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);

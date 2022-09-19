@@ -47,27 +47,11 @@ class CreateProfileLogic extends GetxController {
   ScrollController stepperScrollController = ScrollController();
 
   List<Stepper> stepperList = [
-    Stepper(
-        title: '${LanguageConstant.general.tr}\n${LanguageConstant.info.tr}',
-        stepperLabel: '01',
-        isSelected: true,
-        isCompleted: false),
-    Stepper(
-        title: '${LanguageConstant.educational.tr}\n${LanguageConstant.info.tr}',
-        stepperLabel: '02',
-        isSelected: false,
-        isCompleted: false),
-    Stepper(
-        title: '${LanguageConstant.experience.tr}\n${LanguageConstant.info.tr}',
-        stepperLabel: '03',
-        isSelected: false,
-        isCompleted: false),
+    Stepper(title: '${LanguageConstant.general.tr}\n${LanguageConstant.info.tr}', stepperLabel: '01', isSelected: true, isCompleted: false),
+    Stepper(title: '${LanguageConstant.educational.tr}\n${LanguageConstant.info.tr}', stepperLabel: '02', isSelected: false, isCompleted: false),
+    Stepper(title: '${LanguageConstant.experience.tr}\n${LanguageConstant.info.tr}', stepperLabel: '03', isSelected: false, isCompleted: false),
     Stepper(title: LanguageConstant.skillInfo.tr, stepperLabel: '04', isSelected: false, isCompleted: false),
-    Stepper(
-        title: '${LanguageConstant.account.tr}\n${LanguageConstant.info.tr}',
-        stepperLabel: '05',
-        isSelected: false,
-        isCompleted: false),
+    Stepper(title: '${LanguageConstant.account.tr}\n${LanguageConstant.info.tr}', stepperLabel: '05', isSelected: false, isCompleted: false),
   ];
 
   consultantProfileNavigation(
@@ -111,7 +95,7 @@ class CreateProfileLogic extends GetxController {
 
   getSetData(BuildContext context) {
     if (Get.find<GeneralController>().getConsultantProfileModel.data != null) {
-      firstNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.firstName!;
+      firstNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data?.userDetail?.firstName ?? '';
       lastNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data?.userDetail?.lastName ?? '';
       update();
     }

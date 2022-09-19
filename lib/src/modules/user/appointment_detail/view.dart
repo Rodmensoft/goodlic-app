@@ -202,7 +202,8 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                           : '${_appointmentDetailLogic.selectedAppointmentData.mentor!.firstName} '
                               '${_appointmentDetailLogic.selectedAppointmentData.mentor!.lastName}',
                       category: '${_appointmentDetailLogic.selectedAppointmentData.category}',
-                      fee: '\$${_appointmentDetailLogic.selectedAppointmentData.payment!} ${LanguageConstant.fees.tr}',
+                      fee:
+                          '${Get.find<GeneralController>().storageBox.read('currency')}${_appointmentDetailLogic.selectedAppointmentData.payment!} ${LanguageConstant.fees.tr}',
                       type: '${_appointmentDetailLogic.selectedAppointmentData.appointmentTypeString}'.capitalizeFirst,
                       typeIcon:
                           Get.find<MyAppointmentLogic>().imagesForAppointmentTypes[(_appointmentDetailLogic.selectedAppointmentData.appointmentTypeId!) - 1],

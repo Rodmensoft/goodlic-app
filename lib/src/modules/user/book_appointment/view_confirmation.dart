@@ -84,8 +84,7 @@ class _AppointmentConfirmationViewState extends State<AppointmentConfirmationVie
                                   ///---success-text
                                   Text(
                                     LanguageConstant.congratulations.tr,
-                                    style: TextStyle(
-                                        fontFamily: SarabunFontFamily.bold, fontSize: 28.sp, color: customTextBlackColor),
+                                    style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 28.sp, color: customTextBlackColor),
                                   ),
                                   SizedBox(
                                     height: 15.h,
@@ -94,8 +93,7 @@ class _AppointmentConfirmationViewState extends State<AppointmentConfirmationVie
                                   ///---message-text
                                   Text(
                                     LanguageConstant.yourAppointmentHasBeenBookedWith.tr,
-                                    style: TextStyle(
-                                        fontFamily: SarabunFontFamily.regular, fontSize: 14.sp, color: const Color(0xff9D9D9D)),
+                                    style: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 14.sp, color: const Color(0xff9D9D9D)),
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -113,8 +111,7 @@ class _AppointmentConfirmationViewState extends State<AppointmentConfirmationVie
                                       ///---consultant-name
                                       Text(
                                         '${Get.find<UserHomeLogic>().selectedConsultantName}',
-                                        style: TextStyle(
-                                            fontFamily: SarabunFontFamily.regular, fontSize: 14.sp, color: customOrangeColor),
+                                        style: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 14.sp, color: customOrangeColor),
                                       ),
                                     ],
                                   ),
@@ -131,8 +128,7 @@ class _AppointmentConfirmationViewState extends State<AppointmentConfirmationVie
                                         child: Padding(
                                           padding: EdgeInsets.only(right: 8.w),
                                           child: BookAppointmentDetailBox(
-                                            title: '${_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name}'
-                                                .capitalize,
+                                            title: '${_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name}'.capitalize,
                                             image:
                                                 '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes[_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].appointmentTypeId! - 1]}',
                                           ),
@@ -145,7 +141,7 @@ class _AppointmentConfirmationViewState extends State<AppointmentConfirmationVie
                                           padding: EdgeInsets.only(left: 8.w),
                                           child: BookAppointmentDetailBox(
                                             title:
-                                                '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee} ${LanguageConstant.fees.tr}',
+                                                '${Get.find<GeneralController>().storageBox.read('currency')}${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee} ${LanguageConstant.fees.tr}',
                                             image: 'assets/Icons/feeIcon.svg',
                                           ),
                                         ),
@@ -165,8 +161,7 @@ class _AppointmentConfirmationViewState extends State<AppointmentConfirmationVie
                                               child: Padding(
                                                 padding: EdgeInsets.only(right: 8.w),
                                                 child: BookAppointmentDetailBox(
-                                                  title: DateFormat('dd/MM/yy')
-                                                      .format(DateTime.parse(_bookAppointmentLogic.selectedDateForAppointment)),
+                                                  title: DateFormat('dd/MM/yy').format(DateTime.parse(_bookAppointmentLogic.selectedDateForAppointment)),
                                                   image: 'assets/Icons/calenderIcon.svg',
                                                 ),
                                               ),
@@ -233,8 +228,7 @@ class _AppointmentConfirmationViewState extends State<AppointmentConfirmationVie
                                       children: [
                                         Text(
                                           LanguageConstant.goToHome.tr,
-                                          style: const TextStyle(
-                                              fontFamily: SarabunFontFamily.bold, fontSize: 16, color: customOrangeColor),
+                                          style: const TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16, color: customOrangeColor),
                                         ),
                                         SvgPicture.asset(
                                           'assets/Icons/forwardArrowOrangeIcon.svg',

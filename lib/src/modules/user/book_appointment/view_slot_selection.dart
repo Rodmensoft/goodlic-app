@@ -226,7 +226,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                       Padding(
                                         padding: EdgeInsets.only(left: 28.w),
                                         child: Text(
-                                          '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].fee}',
+                                          '${Get.find<GeneralController>().storageBox.read('currency')}${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].fee}',
                                           style: _bookAppointmentLogic.selectedAppointmentTypeID ==
                                                   _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
                                               ? state.typePriceTextStyle!.copyWith(color: Colors.white)

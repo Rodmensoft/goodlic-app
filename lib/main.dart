@@ -15,6 +15,7 @@ import 'package:consultant_product/src/modules/agora_call/agora_logic.dart';
 import 'package:consultant_product/src/modules/agora_call/init_video_call_view.dart';
 import 'package:consultant_product/src/modules/chat/logic.dart';
 import 'package:consultant_product/src/modules/consultant/dashboard/repo_post.dart';
+import 'package:consultant_product/src/modules/main_repo/main_logic.dart';
 import 'package:consultant_product/src/modules/main_repo/main_repo.dart';
 import 'package:consultant_product/src/modules/sms/logic.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
@@ -73,6 +74,7 @@ Future<void> main() async {
   Get.put(ApiLogic());
   Get.put(AgoraLogic());
   Get.put(SmsLogic());
+  Get.put(MainLogic());
 
   //-----load-configurations-from-local-json
   await GlobalConfiguration().loadFromAsset("configurations");

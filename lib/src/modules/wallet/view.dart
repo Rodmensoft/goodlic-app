@@ -149,7 +149,9 @@ class _WalletPageState extends State<WalletPage> {
                                                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r), color: Colors.white),
                                                           )),
                                                     )
-                                                  : Text('\$${_walletLogic.getWalletBalanceModel.data?.userBalance ?? '0'}', style: state.headingTextStyle),
+                                                  : Text(
+                                                      '${Get.find<GeneralController>().storageBox.read('currency')}${_walletLogic.getWalletBalanceModel.data?.userBalance ?? '0'}',
+                                                      style: state.headingTextStyle),
                                               if (_generalController.storageBox.read('userRole') == 'Mentee')
                                                 InkWell(
                                                   onTap: () {
@@ -292,7 +294,7 @@ class _WalletPageState extends State<WalletPage> {
                                                       children: [
                                                         SvgPicture.asset('assets/Icons/feeIcon.svg'),
                                                         Text(
-                                                          '  \$${_walletLogic.getAllTransactionList[index].amount.toString()}',
+                                                          '  ${Get.find<GeneralController>().storageBox.read('currency')}${_walletLogic.getAllTransactionList[index].amount.toString()}',
                                                           style: state.feeTextStyle,
                                                         )
                                                       ],

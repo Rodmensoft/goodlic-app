@@ -105,7 +105,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                         subHeading: LanguageConstant.byJustFewEasySteps.tr,
                         trailing: LanguageConstant.step2Of3.tr,
                         isShrink: _bookAppointmentLogic.isShrink2,
-                        fee: '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
+                        fee:
+                            '${Get.find<GeneralController>().storageBox.read('currency')}${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
                         feeImage:
                             '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes[_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].appointmentTypeId! - 1]}',
                       ),

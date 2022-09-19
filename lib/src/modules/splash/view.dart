@@ -5,6 +5,7 @@ import 'package:consultant_product/src/modules/user/home/view.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'logic.dart';
 
 class SplashPage extends StatefulWidget {
@@ -36,10 +37,7 @@ class _SplashPageState extends State<SplashPage> {
         Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/splash_background.png'),
-                  fit: BoxFit.cover)),
+          decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/splash_background.png'), fit: BoxFit.cover)),
         ),
         Container(
           height: MediaQuery.of(context).size.height,
@@ -70,8 +68,7 @@ class _SplashPageState extends State<SplashPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * .1),
+                        SizedBox(height: MediaQuery.of(context).size.height * .1),
                         Text(
                           'Top Notch Consultants',
                           textAlign: TextAlign.center,
@@ -99,11 +96,7 @@ class ScreenController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Get.find<GeneralController>().storageBox.hasData('authToken')) {
-      if (Get.find<GeneralController>()
-              .storageBox
-              .read('userRole')
-              .toString() ==
-          'Mentee') {
+      if (Get.find<GeneralController>().storageBox.read('userRole').toString() == 'Mentee') {
         return const UserHomePage();
       } else {
         return const ConsultantDashboardPage();

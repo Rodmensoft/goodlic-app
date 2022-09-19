@@ -37,23 +37,16 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
     // TODO: implement initState
     super.initState();
 
-    getMethod(
-        context,
-        getConsultantAllAppointmentsURL,
-        {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID')},
-        true,
+    getMethod(context, getConsultantAllAppointmentsURL, {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID')}, true,
         getConsultantAllAppointmentsRepo);
     Get.find<ConsultantAppointmentLogic>().tabController = TabController(length: logic.tabBarList.length, vsync: this);
 
-    Get.find<ConsultantAppointmentLogic>().scrollController = ScrollController()
-      ..addListener(Get.find<ConsultantAppointmentLogic>().scrollListener);
+    Get.find<ConsultantAppointmentLogic>().scrollController = ScrollController()..addListener(Get.find<ConsultantAppointmentLogic>().scrollListener);
   }
 
   @override
   void dispose() {
-    Get.find<ConsultantAppointmentLogic>()
-        .scrollController!
-        .removeListener(Get.find<ConsultantAppointmentLogic>().scrollListener);
+    Get.find<ConsultantAppointmentLogic>().scrollController!.removeListener(Get.find<ConsultantAppointmentLogic>().scrollListener);
     Get.find<ConsultantAppointmentLogic>().scrollController!.dispose();
     Get.find<ConsultantAppointmentLogic>().tabController.dispose();
     Get.find<ConsultantAppointmentLogic>().refreshAppointmentsController.dispose();
@@ -108,25 +101,19 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                       body: SmartRefresher(
                         controller: _consultantAppointmentLogic.refreshAppointmentsController,
                         onRefresh: () {
-                          getMethod(
-                              context,
-                              getConsultantAllAppointmentsURL,
-                              {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID')},
-                              true,
-                              getConsultantAllAppointmentsRepo);
+                          getMethod(context, getConsultantAllAppointmentsURL,
+                              {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getConsultantAllAppointmentsRepo);
                         },
                         child: TabBarView(
                           physics: const BouncingScrollPhysics(),
                           controller: _consultantAppointmentLogic.tabController,
                           children: [
                             ///---pending
-                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.pendingAppointments?.data ?? [])
-                                    .isEmpty
+                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.pendingAppointments?.data ?? []).isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
-                                      style: TextStyle(
-                                          fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
+                                      style: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                     ),
                                   )
                                 : GestureDetector(
@@ -137,31 +124,29 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                     },
                                     child: ListView(
                                       padding: const EdgeInsetsDirectional.all(0),
-                                      children: List.generate(
-                                          _consultantAppointmentLogic
-                                              .getConsultantAppointmentModel.data!.pendingAppointments!.data!.length, (index) {
+                                      children: List.generate(_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data!.length,
+                                          (index) {
                                         return Column(
                                           children: [
                                             InkWell(
                                               onTap: () {
                                                 Get.put(ConsultantAppointmentDetailLogic());
                                                 Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
-                                                    _consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel.data!.pendingAppointments!.data![index];
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index];
 
                                                 Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 0;
                                                 Get.find<ConsultantAppointmentDetailLogic>().update();
                                                 Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                               },
                                               child: AppointmentDetailBox(
-                                                image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                    .pendingAppointments?.data?[index].mentee?.imagePath,
+                                                image: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.pendingAppointments?.data?[index].mentee?.imagePath,
                                                 // ==
                                                 //     null
                                                 // ? '...'
                                                 // : '',
-                                                name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .pendingAppointments?.data?[index].mentee?.firstName ==
+                                                name: _consultantAppointmentLogic
+                                                            .getConsultantAppointmentModel.data!.pendingAppointments?.data?[index].mentee?.firstName ==
                                                         null
                                                     ? '...'
                                                     : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].mentee!.firstName} '
@@ -169,43 +154,31 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                                 category:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments?.data?[index].mentee?.email == null ? '' : ''}',
                                                 fee:
-                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                                                    '${Get.find<GeneralController>().storageBox.read('currency')}${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
-                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
-                                                    (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .pendingAppointments!.data![index].appointmentTypeId!) -
-                                                        1],
+                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[(_consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeId!) -
+                                                    1],
                                                 status: 0,
-                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .pendingAppointments!.data![index].date ==
+                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].date ==
                                                         null
                                                     ? null
                                                     : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel
-                                                        .data!
-                                                        .pendingAppointments!
-                                                        .data![index]
-                                                        .date!)),
-                                                time: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel.data!.pendingAppointments!.data![index].time,
+                                                        .getConsultantAppointmentModel.data!.pendingAppointments!.data![index].date!)),
+                                                time: _consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data![index].time,
                                                 color: customOrangeColor,
                                                 rating: _consultantAppointmentLogic
                                                     .getConsultantAppointmentModel.data!.pendingAppointments!.data![index].rating!
                                                     .toDouble(),
                                               ),
                                             ),
-                                            index ==
-                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .pendingAppointments!.data!.length -
-                                                        1
+                                            index == _consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.data!.length - 1
                                                 ? Column(
                                                     children: [
-                                                      _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                                  .pendingAppointments!.currentPage! <
-                                                              _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                                  .pendingAppointments!.lastPage!
+                                                      _consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.currentPage! <
+                                                              _consultantAppointmentLogic.getConsultantAppointmentModel.data!.pendingAppointments!.lastPage!
                                                           ? _consultantAppointmentLogic.getUserAppointmentMoreLoader!
                                                               ? Padding(
                                                                   padding: EdgeInsets.only(top: 25.h),
@@ -223,8 +196,7 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                                                       child: InkWell(
                                                                         onTap: () {
                                                                           _consultantAppointmentLogic.update();
-                                                                          _consultantAppointmentLogic
-                                                                              .updateGetUserAppointmentMoreLoader(true);
+                                                                          _consultantAppointmentLogic.updateGetUserAppointmentMoreLoader(true);
 
                                                                           // getMethod(
                                                                           //     context,
@@ -280,13 +252,11 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                   ),
 
                             ///---accepted
-                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.acceptedAppointments?.data ?? [])
-                                    .isEmpty
+                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.acceptedAppointments?.data ?? []).isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
-                                      style: TextStyle(
-                                          fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
+                                      style: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                     ),
                                   )
                                 : GestureDetector(
@@ -298,25 +268,23 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                     child: ListView(
                                       padding: const EdgeInsetsDirectional.all(0),
                                       children: List.generate(
-                                          _consultantAppointmentLogic
-                                              .getConsultantAppointmentModel.data!.acceptedAppointments!.data!.length, (index) {
+                                          _consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data!.length, (index) {
                                         return Column(
                                           children: [
                                             InkWell(
                                               onTap: () {
                                                 Get.put(ConsultantAppointmentDetailLogic());
                                                 Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
-                                                    _consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel.data!.acceptedAppointments!.data![index];
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index];
                                                 Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 1;
                                                 Get.find<ConsultantAppointmentDetailLogic>().update();
                                                 Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                               },
                                               child: AppointmentDetailBox(
-                                                image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                    .acceptedAppointments!.data![index].mentee!.imagePath,
-                                                name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .acceptedAppointments!.data![index].mentee!.firstName ==
+                                                image: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].mentee!.imagePath,
+                                                name: _consultantAppointmentLogic
+                                                            .getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].mentee!.firstName ==
                                                         null
                                                     ? '...'
                                                     : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].mentee!.firstName} '
@@ -324,37 +292,27 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                                 category:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].mentee!.email}',
                                                 fee:
-                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                                                    '${Get.find<GeneralController>().storageBox.read('currency')}${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
-                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
-                                                    (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .acceptedAppointments!.data![index].appointmentTypeId!) -
-                                                        1],
+                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[(_consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeId!) -
+                                                    1],
                                                 status: 1,
-                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .acceptedAppointments!.data![index].date ==
+                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].date ==
                                                         null
                                                     ? null
                                                     : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel
-                                                        .data!
-                                                        .acceptedAppointments!
-                                                        .data![index]
-                                                        .date!)),
-                                                time: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].time,
+                                                        .getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].date!)),
+                                                time: _consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].time,
                                                 color: customLightThemeColor,
-                                                rating: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                    .acceptedAppointments!.data![index].rating!
+                                                rating: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.acceptedAppointments!.data![index].rating!
                                                     .toDouble(),
                                               ),
                                             ),
-                                            index ==
-                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .acceptedAppointments!.data!.length -
-                                                        1
+                                            index == _consultantAppointmentLogic.getConsultantAppointmentModel.data!.acceptedAppointments!.data!.length - 1
                                                 ? SizedBox(
                                                     height: MediaQuery.of(context).size.height * .1,
                                                   )
@@ -366,13 +324,11 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                   ),
 
                             ///---completed
-                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.completedAppointments?.data ?? [])
-                                    .isEmpty
+                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.completedAppointments?.data ?? []).isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
-                                      style: TextStyle(
-                                          fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
+                                      style: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                     ),
                                   )
                                 : GestureDetector(
@@ -384,25 +340,23 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                     child: ListView(
                                       padding: const EdgeInsetsDirectional.all(0),
                                       children: List.generate(
-                                          _consultantAppointmentLogic
-                                              .getConsultantAppointmentModel.data!.completedAppointments!.data!.length, (index) {
+                                          _consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data!.length, (index) {
                                         return Column(
                                           children: [
                                             InkWell(
                                               onTap: () {
                                                 Get.put(ConsultantAppointmentDetailLogic());
                                                 Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
-                                                    _consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel.data!.completedAppointments!.data![index];
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index];
                                                 Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 2;
                                                 Get.find<ConsultantAppointmentDetailLogic>().update();
                                                 Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                               },
                                               child: AppointmentDetailBox(
-                                                image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                    .completedAppointments!.data![index].mentee!.imagePath,
-                                                name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .completedAppointments!.data![index].mentee!.firstName ==
+                                                image: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.completedAppointments!.data![index].mentee!.imagePath,
+                                                name: _consultantAppointmentLogic
+                                                            .getConsultantAppointmentModel.data!.completedAppointments!.data![index].mentee!.firstName ==
                                                         null
                                                     ? '...'
                                                     : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].mentee!.firstName} '
@@ -410,37 +364,28 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                                 category:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].mentee!.email}',
                                                 fee:
-                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                                                    '${Get.find<GeneralController>().storageBox.read('currency')}${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
-                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
-                                                    (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .completedAppointments!.data![index].appointmentTypeId!) -
-                                                        1],
-                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .completedAppointments!.data![index].date ==
-                                                        null
-                                                    ? null
-                                                    : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel
-                                                        .data!
-                                                        .completedAppointments!
-                                                        .data![index]
-                                                        .date!)),
-                                                time: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel.data!.completedAppointments!.data![index].time,
-                                                rating: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                    .completedAppointments!.data![index].rating!
+                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[(_consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeId!) -
+                                                    1],
+                                                date:
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].date ==
+                                                            null
+                                                        ? null
+                                                        : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
+                                                            .getConsultantAppointmentModel.data!.completedAppointments!.data![index].date!)),
+                                                time: _consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data![index].time,
+                                                rating: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.completedAppointments!.data![index].rating!
                                                     .toDouble(),
                                                 status: 2,
                                                 color: customGreenColor,
                                               ),
                                             ),
-                                            index ==
-                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .completedAppointments!.data!.length -
-                                                        1
+                                            index == _consultantAppointmentLogic.getConsultantAppointmentModel.data!.completedAppointments!.data!.length - 1
                                                 ? SizedBox(
                                                     height: MediaQuery.of(context).size.height * .1,
                                                   )
@@ -452,13 +397,11 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                   ),
 
                             ///---cancelled
-                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.cancelledAppointments?.data ?? [])
-                                    .isEmpty
+                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.cancelledAppointments?.data ?? []).isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
-                                      style: TextStyle(
-                                          fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
+                                      style: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                     ),
                                   )
                                 : GestureDetector(
@@ -470,25 +413,23 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                     child: ListView(
                                       padding: const EdgeInsetsDirectional.all(0),
                                       children: List.generate(
-                                          _consultantAppointmentLogic
-                                              .getConsultantAppointmentModel.data!.cancelledAppointments!.data!.length, (index) {
+                                          _consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data!.length, (index) {
                                         return Column(
                                           children: [
                                             InkWell(
                                               onTap: () {
                                                 Get.put(ConsultantAppointmentDetailLogic());
                                                 Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
-                                                    _consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel.data!.cancelledAppointments!.data![index];
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index];
                                                 Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 3;
                                                 Get.find<ConsultantAppointmentDetailLogic>().update();
                                                 Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                               },
                                               child: AppointmentDetailBox(
-                                                image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                    .cancelledAppointments!.data![index].mentee!.imagePath,
-                                                name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .cancelledAppointments!.data![index].mentee!.firstName ==
+                                                image: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].mentee!.imagePath,
+                                                name: _consultantAppointmentLogic
+                                                            .getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].mentee!.firstName ==
                                                         null
                                                     ? '...'
                                                     : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].mentee!.firstName} '
@@ -496,37 +437,28 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                                 category:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].mentee!.email}',
                                                 fee:
-                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                                                    '${Get.find<GeneralController>().storageBox.read('currency')}${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
-                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
-                                                    (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .cancelledAppointments!.data![index].appointmentTypeId!) -
-                                                        1],
-                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .cancelledAppointments!.data![index].date ==
-                                                        null
-                                                    ? null
-                                                    : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel
-                                                        .data!
-                                                        .cancelledAppointments!
-                                                        .data![index]
-                                                        .date!)),
-                                                time: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].time,
-                                                rating: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                    .cancelledAppointments!.data![index].rating!
+                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[(_consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeId!) -
+                                                    1],
+                                                date:
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].date ==
+                                                            null
+                                                        ? null
+                                                        : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
+                                                            .getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].date!)),
+                                                time: _consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].time,
+                                                rating: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.cancelledAppointments!.data![index].rating!
                                                     .toDouble(),
                                                 status: 3,
                                                 color: customRedColor,
                                               ),
                                             ),
-                                            index ==
-                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .cancelledAppointments!.data!.length -
-                                                        1
+                                            index == _consultantAppointmentLogic.getConsultantAppointmentModel.data!.cancelledAppointments!.data!.length - 1
                                                 ? SizedBox(
                                                     height: MediaQuery.of(context).size.height * .1,
                                                   )
@@ -539,13 +471,11 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
 
                             ///
                             ///---Archive
-                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.archivedAppointments?.data ?? [])
-                                    .isEmpty
+                            (_consultantAppointmentLogic.getConsultantAppointmentModel.data?.archivedAppointments?.data ?? []).isEmpty
                                 ? Center(
                                     child: Text(
                                       LanguageConstant.noRecordFound.tr,
-                                      style: TextStyle(
-                                          fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
+                                      style: TextStyle(fontFamily: SarabunFontFamily.regular, fontSize: 16.sp, color: customTextBlackColor),
                                     ),
                                   )
                                 : GestureDetector(
@@ -557,25 +487,23 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                     child: ListView(
                                       padding: const EdgeInsetsDirectional.all(0),
                                       children: List.generate(
-                                          _consultantAppointmentLogic
-                                              .getConsultantAppointmentModel.data!.archivedAppointments!.data!.length, (index) {
+                                          _consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data!.length, (index) {
                                         return Column(
                                           children: [
                                             InkWell(
                                               onTap: () {
                                                 Get.put(ConsultantAppointmentDetailLogic());
                                                 Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
-                                                    _consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel.data!.archivedAppointments!.data![index];
+                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index];
                                                 // Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 3;
                                                 Get.find<ConsultantAppointmentDetailLogic>().update();
                                                 Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                               },
                                               child: AppointmentDetailBox(
-                                                image: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                    .archivedAppointments!.data![index].mentee!.imagePath,
-                                                name: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .archivedAppointments!.data![index].mentee!.firstName ==
+                                                image: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.archivedAppointments!.data![index].mentee!.imagePath,
+                                                name: _consultantAppointmentLogic
+                                                            .getConsultantAppointmentModel.data!.archivedAppointments!.data![index].mentee!.firstName ==
                                                         null
                                                     ? '...'
                                                     : '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].mentee!.firstName} '
@@ -583,38 +511,27 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
                                                 category:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].mentee!.email}',
                                                 fee:
-                                                    '\$${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                                                    '${Get.find<GeneralController>().storageBox.read('currency')}${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
                                                 type:
                                                     '${_consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].appointmentTypeString}'
                                                         .capitalizeFirst,
-                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[
-                                                    (_consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .archivedAppointments!.data![index].appointmentTypeId!) -
-                                                        1],
-                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .archivedAppointments!.data![index].date ==
+                                                typeIcon: _consultantAppointmentLogic.imagesForAppointmentTypes[(_consultantAppointmentLogic
+                                                        .getConsultantAppointmentModel.data!.archivedAppointments!.data![index].appointmentTypeId!) -
+                                                    1],
+                                                date: _consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].date ==
                                                         null
                                                     ? null
                                                     : DateFormat('dd/MM/yy').format(DateTime.parse(_consultantAppointmentLogic
-                                                        .getConsultantAppointmentModel
-                                                        .data!
-                                                        .archivedAppointments!
-                                                        .data![index]
-                                                        .date!)),
-                                                time: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel.data!.archivedAppointments!.data![index].time,
-                                                rating: _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                    .archivedAppointments!.data![index].rating!
+                                                        .getConsultantAppointmentModel.data!.archivedAppointments!.data![index].date!)),
+                                                time: _consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data![index].time,
+                                                rating: _consultantAppointmentLogic
+                                                    .getConsultantAppointmentModel.data!.archivedAppointments!.data![index].rating!
                                                     .toDouble(),
-                                                status: _consultantAppointmentLogic
-                                                    .getConsultantAppointmentModel.data!.archivedAppointments,
+                                                status: _consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments,
                                                 color: customTextGreyColor,
                                               ),
                                             ),
-                                            index ==
-                                                    _consultantAppointmentLogic.getConsultantAppointmentModel.data!
-                                                            .archivedAppointments!.data!.length -
-                                                        1
+                                            index == _consultantAppointmentLogic.getConsultantAppointmentModel.data!.archivedAppointments!.data!.length - 1
                                                 ? SizedBox(
                                                     height: MediaQuery.of(context).size.height * .1,
                                                   )

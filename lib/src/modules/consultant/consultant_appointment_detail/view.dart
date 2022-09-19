@@ -274,7 +274,8 @@ class _ConsultantAppointmentDetailPageState extends State<ConsultantAppointmentD
                           : '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.firstName} '
                               '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.lastName}',
                       category: '${_consultantAppointmentDetailLogic.selectedAppointmentData.mentee!.email}',
-                      fee: '\$${_consultantAppointmentDetailLogic.selectedAppointmentData.payment!} ${LanguageConstant.fees.tr}',
+                      fee:
+                          '${Get.find<GeneralController>().storageBox.read('currency')}${_consultantAppointmentDetailLogic.selectedAppointmentData.payment!} ${LanguageConstant.fees.tr}',
                       type: '${_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeString}'.capitalizeFirst,
                       typeIcon: Get.find<ConsultantAppointmentLogic>()
                           .imagesForAppointmentTypes[(_consultantAppointmentDetailLogic.selectedAppointmentData.appointmentTypeId!) - 1],
