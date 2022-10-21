@@ -138,7 +138,7 @@ bookAppointmentWithoutFileRepo(BuildContext context, bool responseCheck, Map<Str
     Get.find<BookAppointmentLogic>().bookAppointmentModel = BookAppointmentModel.fromJson(response);
     Get.find<GeneralController>().updateFormLoaderController(false);
     if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
-      if (Get.find<BookAppointmentLogic>().selectedPaymentType == 0) {
+      if (Get.find<BookAppointmentLogic>().paymentName == 'Stripe') {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.paymentStripeView);
       } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 1) {

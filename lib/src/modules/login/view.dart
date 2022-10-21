@@ -721,12 +721,15 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          textColor: Theme.of(context).primaryColor,
-          child: const Text('Close'),
+          // textColor: Theme.of(context).primaryColor,
+          child: Text(
+            'Close',
+            style: TextStyle(color: Theme.of(context).primaryColor),
+          ),
         ),
       ],
     );

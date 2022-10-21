@@ -582,7 +582,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                           'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
                                                           'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
                                                           'payment': _bookAppointmentLogic.selectMentorAppointmentType!.fee,
-                                                          'payment_id': _bookAppointmentLogic.selectedPaymentType,
+                                                          'payment_id': _bookAppointmentLogic.paymentId,
                                                           'questions': _bookAppointmentLogic.questionController.text,
                                                           'appointment_type_string': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name,
                                                           'appointment_type_id': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id,

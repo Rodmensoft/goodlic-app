@@ -108,10 +108,13 @@ class BookAppointmentLogic extends GetxController {
   }
 
   List<GetPaymentMethodData> getPaymentMethodList = [];
-
+  int? paymentId;
+  String? paymentName;
   updatePaymentMethodList(GetPaymentMethodData newValue) {
     if (newValue.isDefault == 1) {
       updateSelectedMethod(newValue.id);
+      paymentId = (newValue.id);
+      paymentName = (newValue.name);
     }
     getPaymentMethodList.add(newValue);
     update();
