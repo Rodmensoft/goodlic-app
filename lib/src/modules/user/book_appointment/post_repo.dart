@@ -141,19 +141,19 @@ bookAppointmentWithoutFileRepo(BuildContext context, bool responseCheck, Map<Str
       if (Get.find<BookAppointmentLogic>().paymentName == 'Stripe') {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.paymentStripeView);
-      } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 1) {
+      } else if (Get.find<BookAppointmentLogic>().paymentName == 'braintree') {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.paymentStripeView);
-      } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 2) {
+      } else if (Get.find<BookAppointmentLogic>().paymentName == 'paypal') {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.paymentStripeView);
-      } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 3) {
+      } else if (Get.find<BookAppointmentLogic>().paymentName == 'wallet') {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.walletPaymentScreen);
-      } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 4) {
+      } else if (Get.find<BookAppointmentLogic>().paymentName == 'jazzcash') {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.to(const PaymentJazzCashView());
-      } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 5) {
+      } else if (Get.find<BookAppointmentLogic>().paymentName == 'easypaisa') {
         Get.find<GeneralController>().updateFormLoaderController(false);
         Get.to(const PaymentEasyPaisaView());
         // } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 6) {
