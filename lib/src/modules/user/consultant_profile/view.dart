@@ -118,7 +118,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                           width: MediaQuery.of(context).size.width,
                                           height: MediaQuery.of(context).size.height * .45,
                                           child: Center(
-                                            child: _consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath == null
+                                            child: _consultantProfileLogic.consultantProfileModel.data?.userDetail?.imagePath == null
                                                 ? Image.asset(
                                                     'assets/images/stackImage.png',
                                                     width: MediaQuery.of(context).size.width * .5,
@@ -240,8 +240,8 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                         : ListView(padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 0), children: [
                             ///---name
                             Text(
-                              '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.firstName ?? '...'} '
-                              '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.lastName ?? ''}',
+                              '${_consultantProfileLogic.consultantProfileModel.data?.userDetail?.firstName ?? '...'} '
+                              '${_consultantProfileLogic.consultantProfileModel.data?.userDetail?.lastName ?? ''}',
                               style: state.profileNameTextStyle,
                             ),
                             SizedBox(
@@ -254,16 +254,14 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                               children: [
                                 ///---category
                                 Text(
-                                  _consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories![0].category == null
-                                      ? '...'
-                                      : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.categories![0].category!.name}',
+                                  _consultantProfileLogic.consultantProfileModel.data?.userDetail?.mentor?.categories?[0].category?.name ?? "...",
                                   style: state.categoryTextStyle,
                                 ),
 
                                 ///---rating-bar
                                 RatingBar.builder(
                                   ignoreGestures: true,
-                                  initialRating: double.parse(_consultantProfileLogic.consultantProfileModel.data!.userDetail!.ratingsAvg.toString()),
+                                  initialRating: double.parse((_consultantProfileLogic.consultantProfileModel.data?.userDetail?.ratingsAvg ?? 0).toString()),
                                   minRating: 1,
                                   direction: Axis.horizontal,
                                   allowHalfRating: true,
@@ -303,7 +301,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                               width: 4.w,
                                             ),
                                             Text(
-                                              '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.ratingsAvg}.0',
+                                              '${_consultantProfileLogic.consultantProfileModel.data?.userDetail?.ratingsAvg ?? '0'}.0',
                                               style: const TextStyle(fontFamily: SarabunFontFamily.extraBold, fontSize: 16, color: customThemeColor),
                                             )
                                           ],
@@ -338,7 +336,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                               width: 4.w,
                                             ),
                                             Text(
-                                              '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.appointmentCount}+',
+                                              '${_consultantProfileLogic.consultantProfileModel.data?.userDetail?.appointmentCount ?? '0'}+',
                                               style: const TextStyle(fontFamily: SarabunFontFamily.extraBold, fontSize: 16, color: customThemeColor),
                                             )
                                           ],
@@ -374,7 +372,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                               width: 4.w,
                                             ),
                                             Text(
-                                              '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.experience}+',
+                                              '${_consultantProfileLogic.consultantProfileModel.data?.userDetail?.mentor?.experience ?? '0'}+',
                                               style: const TextStyle(fontFamily: SarabunFontFamily.extraBold, fontSize: 16, color: customThemeColor),
                                             )
                                           ],
@@ -407,7 +405,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                   height: 15.h,
                                 ),
                                 Text(
-                                  '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.mentor!.about}',
+                                  _consultantProfileLogic.consultantProfileModel.data?.userDetail?.mentor?.about ?? 'N/A',
                                   style: state.dataTextStyle,
                                 ),
                               ],

@@ -36,7 +36,8 @@ paymentBottomSheetForLater(BuildContext context) async {
                     child: InkWell(
                       onTap: () {
                         //   _appointmentDetailLogic.selectedPaymentType = index;
-                        Get.find<BookAppointmentLogic>().updateSelectedMethod(Get.find<BookAppointmentLogic>().getPaymentMethodList[index].id);
+                        Get.find<BookAppointmentLogic>().updateSelectedMethod(Get.find<BookAppointmentLogic>().getPaymentMethodList[index].id,
+                            Get.find<BookAppointmentLogic>().getPaymentMethodList[index].name!);
                         _appointmentDetailLogic.update();
                         _appointmentDetailLogic.amountController.clear();
 

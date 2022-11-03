@@ -1,5 +1,3 @@
-
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
@@ -17,7 +15,8 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
 
 class WalletPaymentView extends StatefulWidget {
-  const WalletPaymentView({Key? key}) : super(key: key);
+  int? appointmentId;
+  WalletPaymentView({Key? key, this.appointmentId}) : super(key: key);
 
   @override
   _WalletPaymentViewState createState() => _WalletPaymentViewState();
@@ -30,15 +29,12 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
   void initState() {
     super.initState();
 
-    Get.find<BookAppointmentLogic>().scrollController3 = ScrollController()
-      ..addListener(Get.find<BookAppointmentLogic>().scrollListener3);
+    Get.find<BookAppointmentLogic>().scrollController3 = ScrollController()..addListener(Get.find<BookAppointmentLogic>().scrollListener3);
   }
 
   @override
   void dispose() {
-    Get.find<BookAppointmentLogic>()
-        .scrollController3!
-        .removeListener(Get.find<BookAppointmentLogic>().scrollListener3);
+    Get.find<BookAppointmentLogic>().scrollController3!.removeListener(Get.find<BookAppointmentLogic>().scrollListener3);
     Get.find<BookAppointmentLogic>().scrollController3!.dispose();
     super.dispose();
   }
@@ -64,8 +60,7 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
               resizeToAvoidBottomInset: false,
               body: NestedScrollView(
                   controller: _bookAppointmentLogic.scrollController3,
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
+                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       ///---header
                       MyCustomSliverAppBar(
@@ -73,8 +68,7 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
                         subHeading: LanguageConstant.byJustFewEasySteps.tr,
                         trailing: LanguageConstant.step3Of3.tr,
                         isShrink: _bookAppointmentLogic.isShrink3,
-                        fee:
-                            '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
+                        fee: '\$${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].fee}',
                         feeImage:
                             '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes[_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[_bookAppointmentLogic.selectedAppointmentTypeIndex!].appointmentTypeId! - 1]}',
                       ),
@@ -488,26 +482,20 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
                                 onHorizontalDragUpdate: (event) async {},
                                 onHorizontalDragEnd: (event) {
                                   _generalController.focusOut(context);
-                                  _generalController
-                                      .updateFormLoaderController(true);
+                                  _generalController.updateFormLoaderController(true);
                                   postMethod(
                                       context,
                                       walletPaymentUrl,
                                       {
                                         'token': '123',
-                                        'from_user_id':
-                                            Get.find<GeneralController>()
-                                                .storageBox
-                                                .read('userID'),
-                                        'to_user_id': Get.find<UserHomeLogic>()
-                                            .selectedConsultantID,
-                                        'bookAppointmentId':
-                                            _bookAppointmentLogic
-                                                .bookAppointmentModel
-                                                .data!
-                                                .appointmentNo,
-                                        'amount': _bookAppointmentLogic
-                                            .selectMentorAppointmentType!.fee,
+                                        'from_user_id': Get.find<GeneralController>().storageBox.read('userID'),
+                                        'to_user_id': Get.find<UserHomeLogic>().selectedConsultantID,
+                                        'bookAppointmentId': widget.appointmentId,
+                                        // _bookAppointmentLogic
+                                        //     .bookAppointmentModel
+                                        //     .data!
+                                        //     .appointmentNo,
+                                        'amount': _bookAppointmentLogic.selectMentorAppointmentType!.fee,
                                       },
                                       true,
                                       walletPaymentRepo);
@@ -515,24 +503,14 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
                                 child: Container(
                                   height: 56.h,
                                   width: MediaQuery.of(context).size.width * .7,
-                                  decoration: BoxDecoration(
-                                      color: customThemeColor,
-                                      borderRadius: BorderRadius.circular(5.r),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: customThemeColor
-                                                .withOpacity(0.7),
-                                            spreadRadius: -18,
-                                            blurRadius: 30,
-                                            offset: const Offset(0, 35))
-                                      ]),
+                                  decoration: BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.circular(5.r), boxShadow: [
+                                    BoxShadow(color: customThemeColor.withOpacity(0.7), spreadRadius: -18, blurRadius: 30, offset: const Offset(0, 35))
+                                  ]),
                                   child: Center(
                                     child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 25.w),
+                                      padding: EdgeInsets.symmetric(horizontal: 25.w),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           paymentSuccessful(),
                                           _bookAppointmentLogic.myWidth == 0.0
@@ -544,15 +522,8 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
                                               : const SizedBox(),
                                           _bookAppointmentLogic.myWidth == 0.0
                                               ? Text(
-                                                  LanguageConstant
-                                                      .slideToPay.tr,
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          SarabunFontFamily
-                                                              .bold,
-                                                      fontSize: 16.sp,
-                                                      color: const Color(
-                                                          0xff8889BB)),
+                                                  LanguageConstant.slideToPay.tr,
+                                                  style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 16.sp, color: const Color(0xff8889BB)),
                                                 )
                                               : const SizedBox(),
                                         ],

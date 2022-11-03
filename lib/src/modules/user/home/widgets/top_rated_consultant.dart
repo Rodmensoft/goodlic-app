@@ -1,5 +1,3 @@
-
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
@@ -38,14 +36,11 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(15.w, 20.h, 15.w, 0.h),
+                      padding: EdgeInsetsDirectional.fromSTEB(15.w, 20.h, 15.w, 0.h),
                       child: Container(
                         height: 15.h,
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.r)),
+                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8.r)),
                       )),
                   SizedBox(
                     height: 25.h,
@@ -54,22 +49,18 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                     child: Wrap(
                       children: List.generate(4, (index) {
                         return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              15.w, 0.h, 15.w, 15.h),
+                          padding: EdgeInsetsDirectional.fromSTEB(15.w, 0.h, 15.w, 15.h),
                           child: Container(
                             height: 109.h,
                             width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: -2,
-                                    blurRadius: 15,
-                                    // offset: Offset(1,5)
-                                  )
-                                ]),
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: -2,
+                                blurRadius: 15,
+                                // offset: Offset(1,5)
+                              )
+                            ]),
                           ),
                         );
                       }),
@@ -84,8 +75,7 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(15.w, 20.h, 15.w, 0.h),
+                      padding: EdgeInsetsDirectional.fromSTEB(15.w, 20.h, 15.w, 0.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -108,72 +98,57 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                     ),
                     Center(
                       child: Wrap(
-                        children: List.generate(
-                            _userHomeLogic.topRatedConsultantList.length,
-                            (index) {
+                        children: List.generate(_userHomeLogic.topRatedConsultantList.length, (index) {
                           return Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                15.w, 0.h, 15.w, 15.h),
+                            padding: EdgeInsetsDirectional.fromSTEB(15.w, 0.h, 15.w, 15.h),
                             child: InkWell(
                               onTap: () {
-                                _userHomeLogic.selectedConsultantID =
-                                    _userHomeLogic
-                                        .topRatedConsultantList[index].id;
-                                _userHomeLogic.selectedConsultantName =
-                                    '${_userHomeLogic.topRatedConsultantList[index].title}';
+                                _userHomeLogic.selectedConsultantID = _userHomeLogic.topRatedConsultantList[index].id;
+                                _userHomeLogic.selectedConsultantName = '${_userHomeLogic.topRatedConsultantList[index].title}';
                                 _userHomeLogic.update();
-                                Get.toNamed(
-                                    PageRoutes.consultantProfileForUser);
+                                Get.toNamed(PageRoutes.consultantProfileForUser);
                               },
                               child: Container(
                                 height: 109.h,
                                 width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.2),
-                                        spreadRadius: -2,
-                                        blurRadius: 15,
-                                        // offset: Offset(1,5)
-                                      )
-                                    ]),
+                                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    spreadRadius: -2,
+                                    blurRadius: 15,
+                                    // offset: Offset(1,5)
+                                  )
+                                ]),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      18.w, 12.h, 18.w, 12.h),
+                                  padding: EdgeInsetsDirectional.fromSTEB(18.w, 12.h, 18.w, 12.h),
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       ///---profile-image
                                       Material(
                                         color: customLightThemeColor,
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        child: _userHomeLogic
-                                                    .topRatedConsultantList[
-                                                        index]
-                                                    .image ==
-                                                null
+                                        borderRadius: BorderRadius.circular(8.r),
+                                        child: _userHomeLogic.topRatedConsultantList[index].image == null
                                             ? SizedBox(
                                                 width: 76.w,
                                                 height: 85.h,
                                               )
                                             : ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.r),
+                                                borderRadius: BorderRadius.circular(8.r),
                                                 child: Image.network(
-                                                  _userHomeLogic
-                                                          .topRatedConsultantList[
-                                                              index]
-                                                          .image!
-                                                          .contains('assets')
+                                                  _userHomeLogic.topRatedConsultantList[index].image!.contains('assets')
                                                       ? '$mediaUrl${_userHomeLogic.topRatedConsultantList[index].image}'
                                                       : '${_userHomeLogic.topRatedConsultantList[index].image}',
                                                   width: 76.w,
                                                   height: 85.h,
                                                   fit: BoxFit.cover,
+                                                  errorBuilder: (context, object, trace) {
+                                                    return const Icon(
+                                                      Icons.broken_image,
+                                                      size: 50,
+                                                      color: Colors.grey,
+                                                    );
+                                                  },
                                                 ),
                                               ),
                                       ),
@@ -181,10 +156,8 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                         width: 21.w,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
                                             height: 6.h,
@@ -195,10 +168,8 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                             '${_userHomeLogic.topRatedConsultantList[index].title}',
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
-                                            style: state.topTitleTextStyle!
-                                                .copyWith(
-                                                    color:
-                                                        customTextBlackColor),
+                                            maxLines: 1,
+                                            style: state.topTitleTextStyle!.copyWith(color: customTextBlackColor),
                                           ),
                                           SizedBox(
                                             height: 5.h,
@@ -209,35 +180,22 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                             '${_userHomeLogic.topRatedConsultantList[index].subTitle}',
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
-                                            style: state.topSubTitleTextStyle!
-                                                .copyWith(
-                                                    color:
-                                                        customTextBlackColor),
+                                            style: state.topSubTitleTextStyle!.copyWith(color: customTextBlackColor),
                                           ),
                                           const Spacer(),
 
                                           ///---rating-bar
                                           RatingBar.builder(
                                             ignoreGestures: true,
-                                            initialRating: double.parse(
-                                                _userHomeLogic
-                                                    .topRatedConsultantList[
-                                                        index]
-                                                    .rating
-                                                    .toString()),
+                                            initialRating: double.parse(_userHomeLogic.topRatedConsultantList[index].rating.toString()),
                                             minRating: 1,
                                             direction: Axis.horizontal,
                                             allowHalfRating: true,
                                             itemCount: 5,
                                             itemSize: 15,
-                                            itemPadding:
-                                                const EdgeInsets.symmetric(
-                                                    horizontal: 0.0),
-                                            itemBuilder: (context, _) =>
-                                                SvgPicture.asset(
-                                                    'assets/Icons/ratingStarIcon.svg'),
-                                            onRatingUpdate: (rating) {
-                                            },
+                                            itemPadding: const EdgeInsets.symmetric(horizontal: 0.0),
+                                            itemBuilder: (context, _) => SvgPicture.asset('assets/Icons/ratingStarIcon.svg'),
+                                            onRatingUpdate: (rating) {},
                                           ),
                                           SizedBox(
                                             height: 6.h,
@@ -268,31 +226,19 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                               color: customThemeColor,
                             ),
                           )
-                        : _userHomeLogic.topRatedModel.data!.topRatedMentors!
-                                    .currentPage! <
-                                _userHomeLogic.topRatedModel.data!
-                                    .topRatedMentors!.lastPage!
+                        : _userHomeLogic.topRatedModel.data!.topRatedMentors!.currentPage! < _userHomeLogic.topRatedModel.data!.topRatedMentors!.lastPage!
                             ? Center(
                                 child: Padding(
                                   padding: EdgeInsets.only(bottom: 30.h),
                                   child: InkWell(
                                     onTap: () {
-                                      _userHomeLogic
-                                          .updateTopRatedLoaderMore(true);
+                                      _userHomeLogic.updateTopRatedLoaderMore(true);
 
                                       ///---top-rated-API-call
                                       getMethod(
                                           context,
                                           getTopRatedConsultantURL,
-                                          {
-                                            'token': '123',
-                                            'page': _userHomeLogic
-                                                    .topRatedModel
-                                                    .data!
-                                                    .topRatedMentors!
-                                                    .currentPage! +
-                                                1
-                                          },
+                                          {'token': '123', 'page': _userHomeLogic.topRatedModel.data!.topRatedMentors!.currentPage! + 1},
                                           false,
                                           getTopRatedConsultantMoreRepo);
                                     },
@@ -300,19 +246,11 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                       height: 36.h,
                                       width: 116.w,
                                       decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              color: customThemeColor),
-                                          borderRadius:
-                                              BorderRadius.circular(18.r)),
+                                          color: Colors.white, border: Border.all(color: customThemeColor), borderRadius: BorderRadius.circular(18.r)),
                                       child: Center(
                                         child: Text(
                                           LanguageConstant.loadMore.tr,
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  SarabunFontFamily.medium,
-                                              fontSize: 12.sp,
-                                              color: customThemeColor),
+                                          style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customThemeColor),
                                         ),
                                       ),
                                     ),

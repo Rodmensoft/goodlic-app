@@ -150,7 +150,7 @@ class _WalletPageState extends State<WalletPage> {
                                                           )),
                                                     )
                                                   : Text(
-                                                      '${Get.find<GeneralController>().storageBox.read('currency')}${_walletLogic.getWalletBalanceModel.data?.userBalance ?? '0'}',
+                                                      '${Get.find<GeneralController>().storageBox.read('currency') ?? ""}${_walletLogic.getWalletBalanceModel.data?.userBalance ?? '0'}',
                                                       style: state.headingTextStyle),
                                               if (_generalController.storageBox.read('userRole') == 'Mentee')
                                                 InkWell(

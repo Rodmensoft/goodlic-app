@@ -56,7 +56,7 @@ class GetPaymentMethods {
 }
 
 class GetPaymentMethodData {
-  Data({
+  GetPaymentMethodData({
     int? id,
     String? name,
     String? description,
@@ -109,7 +109,7 @@ class GetPaymentMethodData {
     String? createdAt,
     String? updatedAt,
   }) =>
-      Data(
+      GetPaymentMethodData(
         id: id ?? _id,
         name: name ?? _name,
         description: description ?? _description,

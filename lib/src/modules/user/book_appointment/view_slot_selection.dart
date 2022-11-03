@@ -440,27 +440,36 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                     padding: EdgeInsets.fromLTRB(0, 0, 6.w, 6.h),
                                                     child: InkWell(
                                                       onTap: () {
+                                                        if (_bookAppointmentLogic.morningSlots[secondIndex].isBooked == 1) {
+                                                          return;
+                                                        }
                                                         setState(() {
                                                           selectedSlotID = _bookAppointmentLogic.morningSlots[secondIndex].id!;
                                                           _bookAppointmentLogic.selectedTimeForAppointment =
                                                               _bookAppointmentLogic.morningSlots[secondIndex].startTime!;
+                                                          _bookAppointmentLogic.selectedEndTimeForAppointment =
+                                                              _bookAppointmentLogic.morningSlots[secondIndex].endTime!;
                                                           disableButton = false;
                                                         });
                                                       },
                                                       child: Container(
                                                         decoration: BoxDecoration(
-                                                            color: _bookAppointmentLogic.morningSlots[secondIndex].id == selectedSlotID
-                                                                ? customThemeColor
-                                                                : Colors.white,
+                                                            color: _bookAppointmentLogic.morningSlots[secondIndex].isBooked == 1
+                                                                ? Colors.redAccent
+                                                                : _bookAppointmentLogic.morningSlots[secondIndex].id == selectedSlotID
+                                                                    ? customThemeColor
+                                                                    : Colors.white,
                                                             borderRadius: BorderRadius.circular(100)),
                                                         child: Padding(
                                                           padding: EdgeInsets.fromLTRB(11.w, 4.h, 11.w, 4.h),
                                                           child: Text(
                                                             '${_bookAppointmentLogic.morningSlots[secondIndex].startTime}',
                                                             textDirection: TextDirection.ltr,
-                                                            style: _bookAppointmentLogic.morningSlots[secondIndex].id == selectedSlotID
-                                                                ? state.shiftTitleTextStyle!.copyWith(color: Colors.white)
-                                                                : state.shiftTitleTextStyle,
+                                                            style: state.shiftTitleTextStyle!.copyWith(
+                                                                color: _bookAppointmentLogic.morningSlots[secondIndex].id == selectedSlotID ||
+                                                                        _bookAppointmentLogic.morningSlots[secondIndex].isBooked == 1
+                                                                    ? Colors.white
+                                                                    : null),
                                                           ),
                                                         ),
                                                       ),
@@ -483,27 +492,36 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                     padding: EdgeInsets.fromLTRB(0, 0, 6.w, 6.h),
                                                     child: InkWell(
                                                       onTap: () {
+                                                        if (_bookAppointmentLogic.afterNoonSlots[secondIndex].isBooked == 1) {
+                                                          return;
+                                                        }
                                                         setState(() {
                                                           selectedSlotID = _bookAppointmentLogic.afterNoonSlots[secondIndex].id!;
                                                           _bookAppointmentLogic.selectedTimeForAppointment =
                                                               _bookAppointmentLogic.afterNoonSlots[secondIndex].startTime!;
+                                                          _bookAppointmentLogic.selectedEndTimeForAppointment =
+                                                              _bookAppointmentLogic.afterNoonSlots[secondIndex].endTime!;
                                                           disableButton = false;
                                                         });
                                                       },
                                                       child: Container(
                                                         decoration: BoxDecoration(
-                                                            color: _bookAppointmentLogic.afterNoonSlots[secondIndex].id == selectedSlotID
-                                                                ? customThemeColor
-                                                                : Colors.white,
+                                                            color: _bookAppointmentLogic.afterNoonSlots[secondIndex].isBooked == 1
+                                                                ? Colors.redAccent
+                                                                : _bookAppointmentLogic.afterNoonSlots[secondIndex].id == selectedSlotID
+                                                                    ? customThemeColor
+                                                                    : Colors.white,
                                                             borderRadius: BorderRadius.circular(100)),
                                                         child: Padding(
                                                           padding: EdgeInsets.fromLTRB(11.w, 4.h, 11.w, 4.h),
                                                           child: Text(
                                                             '${_bookAppointmentLogic.afterNoonSlots[secondIndex].startTime}',
                                                             textDirection: TextDirection.ltr,
-                                                            style: _bookAppointmentLogic.afterNoonSlots[secondIndex].id == selectedSlotID
-                                                                ? state.shiftTitleTextStyle!.copyWith(color: Colors.white)
-                                                                : state.shiftTitleTextStyle,
+                                                            style: state.shiftTitleTextStyle!.copyWith(
+                                                                color: _bookAppointmentLogic.afterNoonSlots[secondIndex].id == selectedSlotID ||
+                                                                        _bookAppointmentLogic.afterNoonSlots[secondIndex].isBooked == 1
+                                                                    ? Colors.white
+                                                                    : null),
                                                           ),
                                                         ),
                                                       ),
@@ -526,27 +544,36 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                     padding: EdgeInsets.fromLTRB(0, 0, 6.w, 6.h),
                                                     child: InkWell(
                                                       onTap: () {
+                                                        if (_bookAppointmentLogic.eveningSlots[secondIndex].isBooked == 1) {
+                                                          return;
+                                                        }
                                                         setState(() {
                                                           selectedSlotID = _bookAppointmentLogic.eveningSlots[secondIndex].id!;
                                                           _bookAppointmentLogic.selectedTimeForAppointment =
                                                               _bookAppointmentLogic.eveningSlots[secondIndex].startTime!;
+                                                          _bookAppointmentLogic.selectedEndTimeForAppointment =
+                                                              _bookAppointmentLogic.eveningSlots[secondIndex].endTime!;
                                                           disableButton = false;
                                                         });
                                                       },
                                                       child: Container(
                                                         decoration: BoxDecoration(
-                                                            color: _bookAppointmentLogic.eveningSlots[secondIndex].id == selectedSlotID
-                                                                ? customThemeColor
-                                                                : Colors.white,
+                                                            color: _bookAppointmentLogic.eveningSlots[secondIndex].isBooked == 1
+                                                                ? Colors.redAccent
+                                                                : _bookAppointmentLogic.eveningSlots[secondIndex].id == selectedSlotID
+                                                                    ? customThemeColor
+                                                                    : Colors.white,
                                                             borderRadius: BorderRadius.circular(100)),
                                                         child: Padding(
                                                           padding: EdgeInsets.fromLTRB(11.w, 4.h, 11.w, 4.h),
                                                           child: Text(
                                                             '${_bookAppointmentLogic.eveningSlots[secondIndex].startTime}',
                                                             textDirection: TextDirection.ltr,
-                                                            style: _bookAppointmentLogic.eveningSlots[secondIndex].id == selectedSlotID
-                                                                ? state.shiftTitleTextStyle!.copyWith(color: Colors.white)
-                                                                : state.shiftTitleTextStyle,
+                                                            style: state.shiftTitleTextStyle!.copyWith(
+                                                                color: _bookAppointmentLogic.eveningSlots[secondIndex].id == selectedSlotID ||
+                                                                        _bookAppointmentLogic.eveningSlots[secondIndex].isBooked == 1
+                                                                    ? Colors.white
+                                                                    : null),
                                                           ),
                                                         ),
                                                       ),

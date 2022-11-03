@@ -9,32 +9,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart' as intl;
 
-getScheduleAvailableDaysRepo(
-    BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+getScheduleAvailableDaysRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    Get.find<BookAppointmentLogic>().getScheduleAvailableDays =
-        GetScheduleAvailableDays.fromJson(response);
+    Get.find<BookAppointmentLogic>().getScheduleAvailableDays = GetScheduleAvailableDays.fromJson(response);
     Get.find<BookAppointmentLogic>().update();
-    if (Get.find<BookAppointmentLogic>()
-            .getScheduleAvailableDays
-            .status
-            .toString() ==
-        'true') {
+    if (Get.find<BookAppointmentLogic>().getScheduleAvailableDays.status.toString() == 'true') {
       List.generate(30, (index) {
         DateTime current = DateTime.now();
 
-        for (var element in Get.find<BookAppointmentLogic>()
-            .getScheduleAvailableDays
-            .data!
-            .mentorSchedules!) {
-          if (intl.DateFormat('EEEE')
-                  .format(DateTime.now().add(Duration(days: index)))
-                  .toLowerCase() ==
-              element.day) {
+        for (var element in Get.find<BookAppointmentLogic>().getScheduleAvailableDays.data!.mentorSchedules!) {
+          if (intl.DateFormat('EEEE').format(DateTime.now().add(Duration(days: index))).toLowerCase() == element.day) {
             current = DateTime.now().add(Duration(days: index));
-            Get.find<BookAppointmentLogic>()
-                .availableScheduleDaysList!
-                .add(current);
+            Get.find<BookAppointmentLogic>().availableScheduleDaysList!.add(current);
           }
         }
       });
@@ -51,58 +37,33 @@ getScheduleAvailableDaysRepo(
   }
 }
 
-getScheduleSlotsRepo(
-    BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+getScheduleSlotsRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    Get.find<BookAppointmentLogic>().getScheduleSlotsForUserModel =
-        GetScheduleSlotsForUserModel.fromJson(response);
-    if (Get.find<BookAppointmentLogic>().getScheduleSlotsForUserModel.status ==
-        true) {
-      Get.find<BookAppointmentLogic>()
-          .updateGetScheduleSlotsForMenteeLoader(false);
+    Get.find<BookAppointmentLogic>().getScheduleSlotsForUserModel = GetScheduleSlotsForUserModel.fromJson(response);
+    if (Get.find<BookAppointmentLogic>().getScheduleSlotsForUserModel.status == true) {
+      Get.find<BookAppointmentLogic>().updateGetScheduleSlotsForMenteeLoader(false);
 
-      if (Get.find<BookAppointmentLogic>()
-              .getScheduleSlotsForUserModel
-              .data!
-              .schedule !=
-          null) {
-        if (Get.find<BookAppointmentLogic>()
-            .getScheduleSlotsForUserModel
-            .data!
-            .schedule!
-            .scheduleSlots!
-            .isNotEmpty) {
-          for (var element in Get.find<BookAppointmentLogic>()
-              .getScheduleSlotsForUserModel
-              .data!
-              .schedule!
-              .scheduleSlots!) {
-            if (element.isBooked == 0) {
-              String? temp =
-                  element.startTime!.replaceAll(' ', '').toUpperCase();
-              DateTime date = intl.DateFormat("hh:mma").parse(temp);
-              String dateFinal = intl.DateFormat("HH:mm").format(date);
+      if (Get.find<BookAppointmentLogic>().getScheduleSlotsForUserModel.data!.schedule != null) {
+        if (Get.find<BookAppointmentLogic>().getScheduleSlotsForUserModel.data!.schedule!.scheduleSlots!.isNotEmpty) {
+          for (var element in Get.find<BookAppointmentLogic>().getScheduleSlotsForUserModel.data!.schedule!.scheduleSlots!) {
+            String? temp = element.startTime!.replaceAll(' ', '').toUpperCase();
+            DateTime date = intl.DateFormat("hh:mma").parse(temp);
+            String dateFinal = intl.DateFormat("HH:mm").format(date);
 
-              if (int.parse(dateFinal.substring(0, 2)) >= 01 &&
-                  int.parse(dateFinal.substring(0, 2)) < 07) {
-                Get.find<BookAppointmentLogic>().updateEveningSlots(element);
-              } else if (int.parse(dateFinal.substring(0, 2)) >= 07 &&
-                  int.parse(dateFinal.substring(0, 2)) < 12) {
-                Get.find<BookAppointmentLogic>().updateMorningSlots(element);
-              } else if (int.parse(dateFinal.substring(0, 2)) >= 12 &&
-                  int.parse(dateFinal.substring(0, 2)) < 18) {
-                Get.find<BookAppointmentLogic>().updateAfterNoonSlots(element);
-              } else if (int.parse(dateFinal.substring(0, 2)) >= 18) {
-                Get.find<BookAppointmentLogic>().updateEveningSlots(element);
-              }
-            } else {}
+            if (int.parse(dateFinal.substring(0, 2)) >= 01 && int.parse(dateFinal.substring(0, 2)) < 07) {
+              Get.find<BookAppointmentLogic>().updateEveningSlots(element);
+            } else if (int.parse(dateFinal.substring(0, 2)) >= 07 && int.parse(dateFinal.substring(0, 2)) < 12) {
+              Get.find<BookAppointmentLogic>().updateMorningSlots(element);
+            } else if (int.parse(dateFinal.substring(0, 2)) >= 12 && int.parse(dateFinal.substring(0, 2)) < 18) {
+              Get.find<BookAppointmentLogic>().updateAfterNoonSlots(element);
+            } else if (int.parse(dateFinal.substring(0, 2)) >= 18) {
+              Get.find<BookAppointmentLogic>().updateEveningSlots(element);
+            }
           }
 
           if (Get.find<BookAppointmentLogic>().morningSlots.isNotEmpty) {
             Get.find<BookAppointmentLogic>().updateAppointmentShiftType(0);
-          } else if (Get.find<BookAppointmentLogic>()
-              .afterNoonSlots
-              .isNotEmpty) {
+          } else if (Get.find<BookAppointmentLogic>().afterNoonSlots.isNotEmpty) {
             Get.find<BookAppointmentLogic>().updateAppointmentShiftType(1);
           } else if (Get.find<BookAppointmentLogic>().eveningSlots.isNotEmpty) {
             Get.find<BookAppointmentLogic>().updateAppointmentShiftType(2);
@@ -142,11 +103,9 @@ getScheduleSlotsRepo(
             });
       }
     } else {
-      Get.find<BookAppointmentLogic>()
-          .updateGetScheduleSlotsForMenteeLoader(false);
+      Get.find<BookAppointmentLogic>().updateGetScheduleSlotsForMenteeLoader(false);
     }
   } else {
-    Get.find<BookAppointmentLogic>()
-        .updateGetScheduleSlotsForMenteeLoader(false);
+    Get.find<BookAppointmentLogic>().updateGetScheduleSlotsForMenteeLoader(false);
   }
 }

@@ -429,9 +429,12 @@ getPaymentMethodsRepo(BuildContext context, bool responseCheck, Map<String, dyna
     if (Get.find<BookAppointmentLogic>().getPaymentMethods.success == true) {
       ///--- Payment Methods
       Get.find<BookAppointmentLogic>().getPaymentMethodList = [];
+
       for (GetPaymentMethodData element in Get.find<BookAppointmentLogic>().getPaymentMethods.data ?? []) {
         Get.find<BookAppointmentLogic>().updatePaymentMethodList(element);
       }
+      Get.find<BookAppointmentLogic>().updatePaymentMethodList(
+          GetPaymentMethodData(id: 110, imagePath: 'assets/Icons/walletPayment.svg', name: 'wallet', code: 'wallet', isActive: 1, isDefault: 0));
 
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {

@@ -433,6 +433,7 @@ class _FlutterWaveState extends State<FlutterWave> {
                             'appointment_type_id': Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.appointmentType!.id,
                             'date': Get.find<BookAppointmentLogic>().selectedDateForAppointment.substring(0, 11),
                             'time': Get.find<BookAppointmentLogic>().selectedTimeForAppointment,
+                            'end_time': Get.find<BookAppointmentLogic>().selectedEndTimeForAppointment
                           },
                           true,
                           flutterWaveRepo);

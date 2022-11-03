@@ -99,10 +99,11 @@ class BookAppointmentLogic extends GetxController {
   GetScheduleSlotsForUserModel getScheduleSlotsForUserModel = GetScheduleSlotsForUserModel();
   String selectedDateForAppointment = '';
   String selectedTimeForAppointment = '';
+  String selectedEndTimeForAppointment = '';
   ScheduleSlots selectedScheduleSlots = ScheduleSlots();
 
-  bool? getScheduleSlotsForMenteeLoader = false;
-  updateGetScheduleSlotsForMenteeLoader(bool? newValue) {
+  bool getScheduleSlotsForMenteeLoader = false;
+  updateGetScheduleSlotsForMenteeLoader(bool newValue) {
     getScheduleSlotsForMenteeLoader = newValue;
     update();
   }
@@ -112,7 +113,7 @@ class BookAppointmentLogic extends GetxController {
   String? paymentName;
   updatePaymentMethodList(GetPaymentMethodData newValue) {
     if (newValue.isDefault == 1) {
-      updateSelectedMethod(newValue.id);
+      updateSelectedMethod(newValue.id, newValue.name!);
       paymentId = (newValue.id);
       paymentName = (newValue.name);
     }
@@ -127,11 +128,13 @@ class BookAppointmentLogic extends GetxController {
     update();
   }
 
-  int? selectedMethod = 9190;
+  int? selectedMethodId = 9190;
+  String selectedMethodTitle = '';
 
-  updateSelectedMethod(int? newValue) {
+  updateSelectedMethod(int? newValue, String title) {
     log(newValue.toString());
-    selectedMethod = newValue;
+    selectedMethodId = newValue;
+    selectedMethodTitle = title;
     update();
   }
 
