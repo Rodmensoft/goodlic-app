@@ -375,7 +375,7 @@ class _StripePaymentForWalletViewState extends State<StripePaymentForWalletView>
                                         {
                                           "mentee_id": Get.find<GeneralController>().storageBox.read('userID'),
                                           "total": _walletLogic.stripeAmountController.text,
-                                          "payment_method_code": Get.find<BookAppointmentLogic>().selectedMethodTitle,
+                                          "payment_method_code": Get.find<BookAppointmentLogic>().paymentName,
                                           "cardInfo": {
                                             "number": _walletLogic.accountCardNumberController.text.replaceAll(' ', ''),
                                             "exp_month": _walletLogic.accountCardExpiresController.text.toString().substring(0, 2),

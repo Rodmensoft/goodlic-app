@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/main_repo/get_config_credential_model.dart';
 import 'package:consultant_product/src/modules/main_repo/get_general_setting_model.dart';
@@ -31,6 +33,7 @@ getGeneralSettingRepo(BuildContext context, bool responseCheck, Map<String, dyna
     if (Get.find<MainLogic>().getConfigCredentialModel.success == true) {
       Get.find<GeneralController>().storageBox.write('loginType', Get.find<MainLogic>().getGeneralSettingModel.data!.loginType);
       Get.find<GeneralController>().storageBox.write('currency', Get.find<MainLogic>().getGeneralSettingModel.data!.currencySymbol);
+      log("My save Currency------->>${Get.find<GeneralController>().storageBox.read('currency')}");
 
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {

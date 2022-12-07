@@ -2,6 +2,7 @@ import 'package:consultant_product/src/modules/wallet/model_deposit_wallet.dart'
 import 'package:consultant_product/src/modules/wallet/model_get_all_transaction.dart';
 import 'package:consultant_product/src/modules/wallet/model_get_wallet_balance.dart';
 import 'package:consultant_product/src/modules/wallet/payment_stripe/model_stripe_payment.dart';
+import 'package:consultant_product/src/modules/wallet/razorpay_payment/model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -19,8 +20,7 @@ class WalletLogic extends GetxController {
   double height = 100.h;
 
   bool get isShrink {
-    return scrollController!.hasClients &&
-        scrollController!.offset > (height - kToolbarHeight);
+    return scrollController!.hasClients && scrollController!.offset > (height - kToolbarHeight);
   }
 
   void scrollListener() {
@@ -35,8 +35,7 @@ class WalletLogic extends GetxController {
   double heightStripe = 100.h;
 
   bool get isShrinkStripe {
-    return scrollControllerStripe!.hasClients &&
-        scrollControllerStripe!.offset > (heightStripe - kToolbarHeight);
+    return scrollControllerStripe!.hasClients && scrollControllerStripe!.offset > (heightStripe - kToolbarHeight);
   }
 
   void scrollListenerStripe() {
@@ -51,8 +50,7 @@ class WalletLogic extends GetxController {
   double height2 = 100.h;
 
   bool get isShrink2 {
-    return scrollController2!.hasClients &&
-        scrollController2!.offset > (height2 - kToolbarHeight);
+    return scrollController2!.hasClients && scrollController2!.offset > (height2 - kToolbarHeight);
   }
 
   void scrollListener2() {
@@ -65,17 +63,16 @@ class WalletLogic extends GetxController {
   GetWalletBalanceModel getWalletBalanceModel = GetWalletBalanceModel();
   GetAllTransactionModel getAllTransactionModel = GetAllTransactionModel();
   DepositWalletModel depositWalletModel = DepositWalletModel();
+  RazorWalletDepositModel razorWalletDepositModel = RazorWalletDepositModel();
 
   TextEditingController amountController = TextEditingController();
   TextEditingController stripeAmountController = TextEditingController();
   TextEditingController easypaisaAmountController = TextEditingController();
   TextEditingController withdrawAmountController = TextEditingController();
   TextEditingController jazzCashCnicTextController = TextEditingController();
-  TextEditingController paymentAccountNumberTextController =
-      TextEditingController();
+  TextEditingController paymentAccountNumberTextController = TextEditingController();
 
-  final RefreshController refreshAppointmentsController =
-      RefreshController(initialRefresh: false);
+  final RefreshController refreshAppointmentsController = RefreshController(initialRefresh: false);
 
   updateRefreshController() {
     refreshAppointmentsController.refreshCompleted();
@@ -119,8 +116,7 @@ class WalletLogic extends GetxController {
 
   double myWidth = 0;
   TextEditingController accountCardNumberController = TextEditingController();
-  TextEditingController accountCardHolderNameController =
-      TextEditingController();
+  TextEditingController accountCardHolderNameController = TextEditingController();
   TextEditingController accountCardExpiresController = TextEditingController();
   TextEditingController accountCardCvcController = TextEditingController();
 
@@ -129,15 +125,8 @@ class WalletLogic extends GetxController {
 
   int? selectedPaymentType;
   List<ShiftType> paymentMethodList = [
-    ShiftType(
-        title: 'stripe', image: 'assets/Icons/stripe.svg', isSelected: false),
-    ShiftType(
-        title: 'braintree',
-        image: 'assets/Icons/braintreePayment.svg',
-        isSelected: false),
-    ShiftType(
-        title: 'paypal',
-        image: 'assets/Icons/paypalPayment.svg',
-        isSelected: false),
+    ShiftType(title: 'stripe', image: 'assets/Icons/stripe.svg', isSelected: false),
+    ShiftType(title: 'braintree', image: 'assets/Icons/braintreePayment.svg', isSelected: false),
+    ShiftType(title: 'paypal', image: 'assets/Icons/paypalPayment.svg', isSelected: false),
   ];
 }

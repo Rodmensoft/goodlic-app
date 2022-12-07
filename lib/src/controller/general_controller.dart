@@ -25,8 +25,7 @@ class GeneralController extends GetxController {
   }
 
   ///---get-user-profile
-  GetConsultantProfileModel getConsultantProfileModel =
-      GetConsultantProfileModel();
+  GetConsultantProfileModel getConsultantProfileModel = GetConsultantProfileModel();
 
   bool? formLoaderController = false;
 
@@ -54,12 +53,10 @@ class GeneralController extends GetxController {
   }
 
   ///---random-string-open
-  String chars =
-      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  String chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
   math.Random rnd = math.Random();
 
-  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-      length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
+  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
 
   String? selectedChannel;
 
@@ -117,8 +114,7 @@ class GeneralController extends GetxController {
   String? notificationRouteWeb;
   String? sound;
 
-  updateNotificationBody(String? newTitle, String? newBody, String? newRouteApp,
-      String? newRouteWeb, String? newSound) {
+  updateNotificationBody(String? newTitle, String? newBody, String? newRouteApp, String? newRouteWeb, String? newSound) {
     notificationTitle = newTitle;
     notificationBody = newBody;
     notificationRouteApp = newRouteApp;
@@ -157,15 +153,11 @@ class GeneralController extends GetxController {
       return iosDeviceInfo.identifierForVendor; // unique ID on iOS
     } else {
       var androidDeviceInfo = await deviceInfo.androidInfo;
+
       postMethod(
           context,
           fcmUpdateUrl,
-          {
-            'token': '123',
-            'fcm_token': fcmToken,
-            'device_id': androidDeviceInfo.androidId,
-            'user_id': Get.find<GeneralController>().storageBox.read('userID')
-          },
+          {'token': '123', 'fcm_token': fcmToken, 'device_id': androidDeviceInfo.androidId, 'user_id': Get.find<GeneralController>().storageBox.read('userID')},
           false,
           updateFcmTokenRepo);
       return androidDeviceInfo.androidId; // unique ID on Android
@@ -188,8 +180,7 @@ class GeneralController extends GetxController {
 
   checkLanguage() {
     if (storageBox.hasData('languageIndex')) {
-      updateSelectedLocale(
-          localeList[int.parse(storageBox.read('languageIndex').toString())]);
+      updateSelectedLocale(localeList[int.parse(storageBox.read('languageIndex').toString())]);
     } else {
       storageBox.write('languageCode', localeList[0].languageCode);
       storageBox.write('countryCode', localeList[0].countryCode);
@@ -220,8 +211,7 @@ class GeneralController extends GetxController {
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(20)),
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.7),
@@ -238,10 +228,7 @@ class GeneralController extends GetxController {
                             Text(
                               LanguageConstant.selectLanguage.tr,
                               textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 24.sp,
-                                  color: Colors.black),
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24.sp, color: Colors.black),
                             ),
                           ],
                         ),
@@ -255,40 +242,28 @@ class GeneralController extends GetxController {
                           children: List.generate(localeList.length, (index) {
                             return InkWell(
                               onTap: () {
-                                storageBox.write('languageCode',
-                                    localeList[index].languageCode);
-                                storageBox.write('countryCode',
-                                    localeList[index].countryCode);
+                                storageBox.write('languageCode', localeList[index].languageCode);
+                                storageBox.write('countryCode', localeList[index].countryCode);
                                 storageBox.write('languageIndex', index);
                                 selectedLocale = localeList[index];
-                                var locale = Locale(
-                                    localeList[index].languageCode,
-                                    localeList[index].countryCode);
+                                var locale = Locale(localeList[index].languageCode, localeList[index].countryCode);
                                 Get.updateLocale(locale);
                                 update();
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                               },
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       localeList[index].name,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 18.sp,
-                                          color: Colors.black),
+                                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp, color: Colors.black),
                                     ),
                                     Text(
                                       localeList[index].flag,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20.sp,
-                                          color: Colors.black),
+                                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.sp, color: Colors.black),
                                     ),
                                   ],
                                 ),

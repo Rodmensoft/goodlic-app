@@ -26,8 +26,7 @@ class PaymentEasyPaisaView extends StatefulWidget {
   _PaymentEasyPaisaViewState createState() => _PaymentEasyPaisaViewState();
 }
 
-class _PaymentEasyPaisaViewState extends State<PaymentEasyPaisaView>
-    with TickerProviderStateMixin {
+class _PaymentEasyPaisaViewState extends State<PaymentEasyPaisaView> with TickerProviderStateMixin {
   final logic = Get.put(BookAppointmentLogic());
   final state = Get.find<BookAppointmentLogic>().state;
 
@@ -57,9 +56,7 @@ class _PaymentEasyPaisaViewState extends State<PaymentEasyPaisaView>
     bool canVibrate = await Vibrate.canVibrate;
     setState(() {
       _canVibrate = canVibrate;
-      _canVibrate
-          ? debugPrint('This device can vibrate')
-          : debugPrint('This device cannot vibrate');
+      _canVibrate ? debugPrint('This device can vibrate') : debugPrint('This device cannot vibrate');
     });
   }
 
@@ -81,8 +78,7 @@ class _PaymentEasyPaisaViewState extends State<PaymentEasyPaisaView>
         }
       },
       child: GetBuilder<BookAppointmentLogic>(
-        builder: (_bookAppointmentLogicController) =>
-            GetBuilder<GeneralController>(builder: (_generalController) {
+        builder: (_bookAppointmentLogicController) => GetBuilder<GeneralController>(builder: (_generalController) {
           return ModalProgressHUD(
             progressIndicator: const CircularProgressIndicator(
               color: customThemeColor,
@@ -91,8 +87,7 @@ class _PaymentEasyPaisaViewState extends State<PaymentEasyPaisaView>
             child: Scaffold(
                 resizeToAvoidBottomInset: false,
                 backgroundColor: Colors.white,
-                appBar: const MyCustomAppBar(
-                    drawerShow: false, whiteBackground: true),
+                appBar: const MyCustomAppBar(drawerShow: false, whiteBackground: true),
                 body: SizedBox(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
@@ -108,35 +103,26 @@ class _PaymentEasyPaisaViewState extends State<PaymentEasyPaisaView>
                           Container(
                             height: 52,
                             width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: customThemeColor,
-                                borderRadius: BorderRadius.circular(8)),
+                            decoration: BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.circular(8)),
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                               child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Align(
-                                      alignment: _generalController
-                                              .isDirectionRTL(context)
-                                          ? Alignment.centerRight
-                                          : Alignment.centerLeft,
-                                      child: Text(
-                                        '${'you_will_be_charge'.tr}:',
-                                        style: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  // Expanded(
+                                  //   child: Align(
+                                  //     alignment: _generalController.isDirectionRTL(context) ? Alignment.centerRight : Alignment.centerLeft,
+                                  //     // child: Text(
+                                  //     //   '${'you_will_be_charge'.tr}:',
+                                  //     //   style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.white),
+                                  //     // ),
+                                  //   ),
+                                  // ),
                                   Center(
                                     child: Text(
-                                      '${'rs'.tr}. ${Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.fee}',
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
+                                      // '${'rs'.tr}. ${Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.fee}',
+                                      'No Transaction Available',
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                                     ),
                                   ),
                                 ],
@@ -422,8 +408,7 @@ class _PaymentEasyPaisaViewState extends State<PaymentEasyPaisaView>
 
 class InAppWebViewExampleScreen extends StatefulWidget {
   @override
-  _InAppWebViewExampleScreenState createState() =>
-      new _InAppWebViewExampleScreenState();
+  _InAppWebViewExampleScreenState createState() => new _InAppWebViewExampleScreenState();
 }
 
 class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
@@ -474,13 +459,8 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
           print("onHideContextMenu");
         },
         onContextMenuActionItemClicked: (contextMenuItemClicked) async {
-          var id = (Platform.isAndroid)
-              ? contextMenuItemClicked.androidId
-              : contextMenuItemClicked.iosId;
-          print("onContextMenuActionItemClicked: " +
-              id.toString() +
-              " " +
-              contextMenuItemClicked.title);
+          var id = (Platform.isAndroid) ? contextMenuItemClicked.androidId : contextMenuItemClicked.iosId;
+          print("onContextMenuActionItemClicked: " + id.toString() + " " + contextMenuItemClicked.title);
         });
 
     pullToRefreshController = PullToRefreshController(
@@ -491,8 +471,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
         if (Platform.isAndroid) {
           webViewController?.reload();
         } else if (Platform.isIOS) {
-          webViewController?.loadUrl(
-              urlRequest: URLRequest(url: await webViewController?.getUrl()));
+          webViewController?.loadUrl(urlRequest: URLRequest(url: await webViewController?.getUrl()));
         }
       },
     );
@@ -532,24 +511,13 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
                   urlController.text = this.url;
                 });
               },
-              androidOnPermissionRequest:
-                  (controller, origin, resources) async {
-                return PermissionRequestResponse(
-                    resources: resources,
-                    action: PermissionRequestResponseAction.GRANT);
+              androidOnPermissionRequest: (controller, origin, resources) async {
+                return PermissionRequestResponse(resources: resources, action: PermissionRequestResponseAction.GRANT);
               },
               shouldOverrideUrlLoading: (controller, navigationAction) async {
                 var uri = navigationAction.request.url!;
 
-                if (![
-                  "http",
-                  "https",
-                  "file",
-                  "chrome",
-                  "data",
-                  "javascript",
-                  "about"
-                ].contains(uri.scheme)) {
+                if (!["http", "https", "file", "chrome", "data", "javascript", "about"].contains(uri.scheme)) {
                   if (await canLaunch(url)) {
                     // Launch the App
                     await launch(
@@ -578,17 +546,10 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
                     getMethod(
                         context,
                         getAppointmentPaymentStatusUrl,
-                        {
-                          'token': '123',
-                          'bookAppointmentId': Get.find<BookAppointmentLogic>()
-                              .bookAppointmentModel
-                              .data!
-                              .appointmentNo
-                        },
+                        {'token': '123', 'bookAppointmentId': Get.find<BookAppointmentLogic>().bookAppointmentModel.data!.appointmentNo},
                         true,
                         easyPaisaPaymentRepo);
-                    Get.find<GeneralController>()
-                        .updateFormLoaderController(true);
+                    Get.find<GeneralController>().updateFormLoaderController(true);
                     Get.back();
                   });
                 }
@@ -615,9 +576,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
                 print(consoleMessage);
               },
             ),
-            progress < 1.0
-                ? LinearProgressIndicator(value: progress)
-                : Container(),
+            progress < 1.0 ? LinearProgressIndicator(value: progress) : Container(),
           ],
         ),
       ),

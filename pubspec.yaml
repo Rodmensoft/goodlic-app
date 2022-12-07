@@ -33,55 +33,55 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
 
   resize: ^1.0.0
   global_configuration: ^2.0.0-nullsafety.1
 
-  get: ^4.6.1
+  get: ^4.6.5
   get_storage: ^2.0.3
-  dio: ^4.0.4
+  dio: ^4.0.6
   intl_phone_field: ^3.0.1
   pin_code_fields: ^7.3.0
 
   modal_progress_hud_nsn: ^0.1.0-nullsafety-1
   skeleton_loader: ^2.0.0+4
 
-  file_picker: ^4.4.0
+  file_picker: ^4.6.1
   image_picker_gallery_camera: ^0.2.2
-  flutter_svg: ^0.23.0+1
-  flutter_rating_bar: ^4.0.0
-  datetime_picker_formfield: ^2.0.0
-  syncfusion_flutter_calendar: ^19.4.53
+  flutter_svg: ^1.1.6
+  flutter_rating_bar: ^4.0.1
+  datetime_picker_formfield: ^2.0.1
+  syncfusion_flutter_calendar: ^20.2.39
 
-  mask_text_input_formatter: ^2.1.0
+  mask_text_input_formatter: ^2.4.0
   animation_wrappers: ^3.0.0
-  modal_bottom_sheet: ^2.0.0
+  modal_bottom_sheet: ^2.1.2
 
-  permission_handler: ^8.3.0
-  syncfusion_flutter_charts: ^19.4.53
+  permission_handler: ^10.2.0
+  syncfusion_flutter_charts: ^20.3.57
 
   rounded_expansion_tile: ^0.0.13
-  progress_indicator: ^0.2.0
+  progress_indicator: ^0.2.2
   pull_to_refresh: ^2.0.0
 
   maps_launcher: ^2.0.1
 
-  photo_view: ^0.13.0
-  flutter_inappwebview: ^5.3.2
-  url_launcher: ^6.0.12
+  photo_view: ^0.14.0
+  flutter_inappwebview: ^5.7.1+1
+  url_launcher: ^6.1.6
 
-  geolocator: ^8.0.1
-  geocoding: ^2.0.1
-  app_settings: ^4.0.4
-  uuid: ^3.0.5
-  flutterwave_standard: ^1.0.3
-  razorpay_flutter: ^1.3.0
+  geolocator: ^9.0.2
+  geocoding: ^2.0.5
+  app_settings: ^4.1.8
+  uuid: ^3.0.7
+  flutterwave_standard: ^1.0.6
+  razorpay_flutter: ^1.3.4
   flutter_vibrate: ^1.3.0
   google_sign_in: ^5.4.1
-  flutter_facebook_auth: ^4.4.1
-  paytm_allinonesdk: ^1.1.7
-  flutter_html: ^2.2.1
+  flutter_facebook_auth: ^5.0.6
+  flutter_html: ^3.0.0-alpha.6
+  paytm_allinonesdk: ^1.2.0
 
 
   #agora call video/audio
@@ -90,14 +90,14 @@ dependencies:
   # pusher client for live chat event
   pusher_client: ^2.0.0
 
-  firebase_core: ^1.8.0
-  firebase_auth: ^3.1.4
+  firebase_core: ^2.2.0
+  firebase_auth: ^4.1.2
 
-  firebase_messaging: ^11.1.0
+  firebase_messaging: ^14.1.0
   flutter_local_notifications: ^9.0.2
   flutter_ringtone_player: ^3.1.0
 
-  device_info_plus: ^3.1.1
+  device_info_plus: ^3.2.1
 
 dev_dependencies:
   flutter_test:

@@ -7,6 +7,7 @@ import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
+import 'package:consultant_product/src/modules/user/book_appointment/payTm/payTm_view.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/post_repo.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/razorpay_payment/view_razorpay.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/view_flutterWave_payment.dart';
@@ -513,35 +514,27 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                   bottom: 0.h,
                                   left: 15.w,
                                   right: 15.w,
-                                  child: const InkWell(
-                                    // onTap: (){
-                                    //
-                                    //   postMethod(
-                                    //       context,
-                                    //       'https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=Ddqckl36992914432459&orderId=ORDERID_98765',
-                                    //       {
-                                    //         "body":
-                                    //         {
-                                    //           "requestType":"Payment",
-                                    //           "mid":"Ddqckl36992914432459",
-                                    //           "websiteName":"Consultant",
-                                    //           "orderId":"ORDERID_98765",
-                                    //           "txnAmount":{
-                                    //             "value":"100.00",
-                                    //             "currency":"USD"
-                                    //           },
-                                    //           "userInfo":{
-                                    //             "custId":"CUST_001"
-                                    //           },
-                                    //           "callbackUrl":"https://docs.flutter.dev/cookbook/networking/fetch-data"
-                                    //         },
-                                    //         "head":{
-                                    //           "signature":"Consultant"
-                                    //         }
-                                    //       },
-                                    //       true,
-                                    //       post)
-                                    // },
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.to(const PayTm());
+                                      // postMethod(
+                                      //     context,
+                                      //     'https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=Ddqckl36992914432459&orderId=ORDERID_98765',
+                                      //     {
+                                      //       "body": {
+                                      //         "requestType": "Payment",
+                                      //         "mid": "Ddqckl36992914432459",
+                                      //         "websiteName": "Consultant",
+                                      //         "orderId": "ORDERID_98765",
+                                      //         "txnAmount": {"value": "100.00", "currency": "USD"},
+                                      //         "userInfo": {"custId": "CUST_001"},
+                                      //         "callbackUrl": "https://docs.flutter.dev/cookbook/networking/fetch-data"
+                                      //       },
+                                      //       "head": {"signature": "Consultant"}
+                                      //     },
+                                      //     true,
+                                      //     pytmRepo);
+                                    },
                                     child: MyCustomBottomBar(
                                       title: 'Paytm',
                                       disable: false,

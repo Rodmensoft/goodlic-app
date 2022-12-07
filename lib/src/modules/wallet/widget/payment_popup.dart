@@ -2,6 +2,9 @@ import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/route_generator.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
+import 'package:consultant_product/src/modules/wallet/easyPaisa_patment_wallet/maintenece.dart';
+import 'package:consultant_product/src/modules/wallet/flutterwave_payment/view_flutterWave_payment.dart';
+import 'package:consultant_product/src/modules/wallet/jazz_cash_payment/payment_jazzcash_view.dart';
 import 'package:consultant_product/src/modules/wallet/logic.dart';
 import 'package:consultant_product/src/modules/wallet/razorpay_payment/view_razorpay.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -47,9 +50,17 @@ paymentBottomSheetForWallet(BuildContext context) async {
                               Get.find<BookAppointmentLogic>().getPaymentMethodList[index].name!);
                           _walletLogic.update();
                           _walletLogic.amountController.clear();
-                          Get.find<BookAppointmentLogic>().getPaymentMethodList[index].code!.contains('razorpay')
-                              ? Get.to(const RazorPayView())
-                              : Get.offNamed(PageRoutes.stripePaymentForWallet);
+                          if (Get.find<BookAppointmentLogic>().getPaymentMethodList[index].code!.contains('razorpay')) {
+                            Get.to(const RazorPayWalletView());
+                          } else if (Get.find<BookAppointmentLogic>().getPaymentMethodList[index].code!.contains('flutterwave')) {
+                            Get.to(FlutterWaveWalletDeposit());
+                          } else if (Get.find<BookAppointmentLogic>().getPaymentMethodList[index].code!.contains('jazzcash')) {
+                            Get.to(const PaymentJazzCashWalletView());
+                          } else if (Get.find<BookAppointmentLogic>().getPaymentMethodList[index].code!.contains('easypaisa')) {
+                            Get.to(const EnvironmentMaintenancePage());
+                          } else {
+                            Get.offNamed(PageRoutes.stripePaymentForWallet);
+                          }
                         },
                         child: Container(
                           height: 61.h,

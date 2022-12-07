@@ -4,9 +4,8 @@ import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
-import 'package:consultant_product/src/modules/user/book_appointment/flutter_wave_repo.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/logic.dart';
-import 'package:consultant_product/src/modules/user/home/logic.dart';
+import 'package:consultant_product/src/modules/wallet/razorpay_payment/repo.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/utils/constants.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
@@ -20,17 +19,17 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:resize/resize.dart';
 
-class RazorPayView extends StatefulWidget {
-  const RazorPayView({Key? key}) : super(key: key);
+class RazorPayWalletView extends StatefulWidget {
+  const RazorPayWalletView({Key? key}) : super(key: key);
 
   // String? amount;
   // RazorPayView({Key? key, this.amount}) : super(key: key);
 
   @override
-  _RazorPayViewState createState() => _RazorPayViewState();
+  _RazorPayWalletViewState createState() => _RazorPayWalletViewState();
 }
 
-class _RazorPayViewState extends State<RazorPayView> {
+class _RazorPayWalletViewState extends State<RazorPayWalletView> {
   final formKey = GlobalKey<FormState>();
   final amountController = TextEditingController();
   final nameController = TextEditingController();
@@ -86,31 +85,23 @@ class _RazorPayViewState extends State<RazorPayView> {
           return CustomDialogBox(
             title: LanguageConstant.success.tr,
             titleColor: customDialogSuccessColor,
-            descriptions: 'Your Payment Successfully Paid!',
+            descriptions: 'Add To Wallet Successfully!',
             text: LanguageConstant.ok.tr,
             functionCall: () {
               //Navigator.pop(context);
-              // Get.back();
+              Get.back();
               Get.find<GeneralController>().updateFormLoaderController(true);
 
               postMethod(
                   context,
-                  bookAppointmentUrl,
+                  walletDepositUrl,
                   {
                     'token': '123',
-                    'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
-                    'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
-                    'payment': Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.fee,
-                    'payment_id': Get.find<BookAppointmentLogic>().selectedPaymentType,
-                    'questions': Get.find<BookAppointmentLogic>().questionController.text,
-                    'appointment_type_string': Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.appointmentType!.name,
-                    'appointment_type_id': Get.find<BookAppointmentLogic>().selectMentorAppointmentType!.appointmentType!.id,
-                    'date': Get.find<BookAppointmentLogic>().selectedDateForAppointment.substring(0, 11),
-                    'time': Get.find<BookAppointmentLogic>().selectedTimeForAppointment,
-                    'end_time': Get.find<BookAppointmentLogic>().selectedEndTimeForAppointment
+                    'user_id': Get.find<GeneralController>().storageBox.read('userID'),
+                    'amount': amountController.text,
                   },
                   true,
-                  flutterWaveRepo);
+                  razorWalletDeposiRepo);
             },
             img: 'assets/Icons/dialog_success.svg',
           );
@@ -199,7 +190,6 @@ class _RazorPayViewState extends State<RazorPayView> {
 
                           /// Amount
                           TextFormField(
-                        enabled: false,
                         controller: amountController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
