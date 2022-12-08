@@ -503,9 +503,10 @@ class _WalletPaymentViewState extends State<WalletPaymentView> {
                                 child: Container(
                                   height: 56.h,
                                   width: MediaQuery.of(context).size.width * .7,
-                                  decoration: BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.circular(5.r), boxShadow: [
-                                    BoxShadow(color: customThemeColor.withOpacity(0.7), spreadRadius: -18, blurRadius: 30, offset: const Offset(0, 35))
-                                  ]),
+                                  decoration: BoxDecoration(
+                                      color: customThemeColor,
+                                      borderRadius: BorderRadius.circular(5.r),
+                                      boxShadow: [BoxShadow(color: customThemeColor.withOpacity(0.7), spreadRadius: -18, blurRadius: 30, offset: const Offset(0, 35))]),
                                   child: Center(
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(horizontal: 25.w),

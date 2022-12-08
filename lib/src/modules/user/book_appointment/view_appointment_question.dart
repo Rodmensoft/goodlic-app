@@ -24,6 +24,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
+import 'package:dio/dio.dart' as dio_instance;
 
 class AppointmentQuestionPage extends StatefulWidget {
   int? appointmentId;
@@ -45,17 +46,18 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
     Get.find<BookAppointmentLogic>().scrollController2 = ScrollController()..addListener(Get.find<BookAppointmentLogic>().scrollListener2);
     Get.find<BookAppointmentLogic>().selectedPaymentType = null;
     Get.find<BookAppointmentLogic>().questionController.clear();
-
-    getMethod(
-        context,
-        getAppointmentsDetailURL,
-        {
-          'token': 123,
-          'appointment_id': widget.appointmentId,
-          'user_id': Get.find<GeneralController>().storageBox.read('userID'),
-        },
-        true,
-        getAppDetailForReschedule);
+    if (widget.appointmentId != null) {
+      getMethod(
+          context,
+          getAppointmentsDetailURL,
+          {
+            'token': 123,
+            'appointment_id': widget.appointmentId,
+            'user_id': Get.find<GeneralController>().storageBox.read('userID'),
+          },
+          true,
+          getAppDetailForReschedule);
+    }
 
     getMethod(
         context,
@@ -154,14 +156,10 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                       contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                                       fillColor: customTextFieldColor,
                                       filled: true,
-                                      enabledBorder:
-                                          OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
-                                      border:
-                                          OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
-                                      errorBorder:
-                                          OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                                      errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                                     ),
                                     validator: (value) {
                                       if (value!.isEmpty) {
@@ -327,10 +325,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                         widget.showPaymentSection == true
                             ? const SizedBox()
                             : Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    border: Border.all(color: customTextBlackColor, width: 1)),
+                                decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(8.r), border: Border.all(color: customTextBlackColor, width: 1)),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(20.w, 25.h, 20.w, 7.h),
                                   child: Column(
@@ -347,9 +342,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                       Wrap(
                                         children: List.generate(_bookAppointmentLogic.getPaymentMethodList.length, (index) {
                                           return Padding(
-                                            padding: index % 2 == 0
-                                                ? EdgeInsetsDirectional.fromSTEB(0, 0, 8.w, 18.h)
-                                                : EdgeInsetsDirectional.fromSTEB(8.w, 0.h, 0.w, 18.h),
+                                            padding: index % 2 == 0 ? EdgeInsetsDirectional.fromSTEB(0, 0, 8.w, 18.h) : EdgeInsetsDirectional.fromSTEB(8.w, 0.h, 0.w, 18.h),
                                             child: InkWell(
                                               onTap: () {
                                                 // for (var element in _bookAppointmentLogic.paymentMethodList) {
@@ -358,8 +351,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                 log('${_bookAppointmentLogic.getPaymentMethodList[index].id}');
                                                 log('${_bookAppointmentLogic.getPaymentMethodList[index].name}');
 
-                                                _bookAppointmentLogic.updateSelectedMethod(_bookAppointmentLogic.getPaymentMethodList[index].id,
-                                                    _bookAppointmentLogic.getPaymentMethodList[index].name!);
+                                                _bookAppointmentLogic.updateSelectedMethod(
+                                                    _bookAppointmentLogic.getPaymentMethodList[index].id, _bookAppointmentLogic.getPaymentMethodList[index].name!);
                                                 // _bookAppointmentLogic.selectedPaymentType = index;
                                                 _bookAppointmentLogic.update();
                                                 setState(() {
@@ -416,17 +409,14 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     border: Border.all(
-                                                        color: (_bookAppointmentLogic.selectedMethodId ?? 9091) ==
-                                                                _bookAppointmentLogic.getPaymentMethodList[index].id
+                                                        color: (_bookAppointmentLogic.selectedMethodId ?? 9091) == _bookAppointmentLogic.getPaymentMethodList[index].id
                                                             ? customLightThemeColor
                                                             : Colors.white,
                                                         width: 2),
                                                     borderRadius: BorderRadius.circular(8.r),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: _bookAppointmentLogic.getPaymentMethodList[index].isDefault == 1
-                                                            ? customLightThemeColor.withOpacity(0.2)
-                                                            : Colors.grey.withOpacity(0.2),
+                                                        color: _bookAppointmentLogic.getPaymentMethodList[index].isDefault == 1 ? customLightThemeColor.withOpacity(0.2) : Colors.grey.withOpacity(0.2),
                                                         spreadRadius: -2,
                                                         blurRadius: 15,
                                                         // offset: Offset(1,5)
@@ -466,9 +456,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                   ),
                                 ),
                               ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * .15,
-                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height * .15),
                       ]),
 
                       ///---bottom-bar
@@ -480,6 +468,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                               child: InkWell(
                                 onTap: () {
                                   Get.find<GeneralController>().updateFormLoaderController(true);
+                                  print(_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id);
+                                  print(_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType);
                                   postMethod(
                                       context,
                                       bookAppointmentUrl,
@@ -535,15 +525,34 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                       //     true,
                                       //     pytmRepo);
                                     },
-                                    child: MyCustomBottomBar(
-                                      title: 'Paytm',
-                                      disable: false,
-                                    ),
+                                    child: const MyCustomBottomBar(title: 'Paytm', disable: false),
                                   ),
                                 )
 
                               ///  wallet
-                              : wallet == true
+                              // : wallet == true
+                              //     ? Positioned(
+                              //         bottom: 0.h,
+                              //         left: 15.w,
+                              //         right: 15.w,
+                              //         child: InkWell(
+                              //           onTap: () {
+                              //             if (_formKey.currentState!.validate()) {
+                              //               print("-=-=----=-=-=-=-=-=-=-");
+                              //               print(widget.appointmentId);
+                              //
+                              //               Get.to(WalletPaymentView(appointmentId: widget.appointmentId));
+                              //             }
+                              //           },
+                              //           child: const MyCustomBottomBar(
+                              //             title: 'Wallet',
+                              //             disable: false,
+                              //           ),
+                              //         ),
+                              //       )
+
+                              /// RazorPay
+                              : razorPay == true
                                   ? Positioned(
                                       bottom: 0.h,
                                       left: 15.w,
@@ -551,18 +560,18 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                       child: InkWell(
                                         onTap: () {
                                           if (_formKey.currentState!.validate()) {
-                                            Get.to(WalletPaymentView(appointmentId: widget.appointmentId));
+                                            Get.to(RazorPayView(amount: _bookAppointmentLogic.selectMentorAppointmentType!.fee.toString()));
                                           }
                                         },
                                         child: const MyCustomBottomBar(
-                                          title: 'Wallet',
+                                          title: 'Razor Pay',
                                           disable: false,
                                         ),
                                       ),
                                     )
 
-                                  /// RazorPay
-                                  : razorPay == true
+                                  /// FlutterWave
+                                  : wave == true
                                       ? Positioned(
                                           bottom: 0.h,
                                           left: 15.w,
@@ -570,95 +579,53 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                           child: InkWell(
                                             onTap: () {
                                               if (_formKey.currentState!.validate()) {
-                                                Get.to(RazorPayView(amount: _bookAppointmentLogic.selectMentorAppointmentType!.fee.toString()));
+                                                Get.to(FlutterWave(amount: _bookAppointmentLogic.selectMentorAppointmentType!.fee.toString()));
                                               }
                                             },
                                             child: const MyCustomBottomBar(
-                                              title: 'Razor Pay',
+                                              title: 'Flutter Wave',
                                               disable: false,
                                             ),
                                           ),
                                         )
+                                      : Positioned(
+                                          bottom: 0.h,
+                                          left: 15.w,
+                                          right: 15.w,
+                                          child: InkWell(
+                                            onTap: () async {
+                                              if (!disableButton! && _formKey.currentState!.validate()) {
+                                                _generalController.updateFormLoaderController(true);
 
-                                      /// FlutterWave
-                                      : wave == true
-                                          ? Positioned(
-                                              bottom: 0.h,
-                                              left: 15.w,
-                                              right: 15.w,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  if (_formKey.currentState!.validate()) {
-                                                    Get.to(FlutterWave(amount: _bookAppointmentLogic.selectMentorAppointmentType!.fee.toString()));
-                                                  }
-                                                },
-                                                child: const MyCustomBottomBar(
-                                                  title: 'Flutter Wave',
-                                                  disable: false,
-                                                ),
-                                              ),
-                                            )
-                                          : Positioned(
-                                              bottom: 0.h,
-                                              left: 15.w,
-                                              right: 15.w,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  if (!disableButton! && _formKey.currentState!.validate()) {
-                                                    if (_bookAppointmentLogic.selectedFileName == null) {
-                                                      _generalController.updateFormLoaderController(true);
-                                                      if (_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.isScheduleRequired == 1) {
-                                                        postMethod(
-                                                            context,
-                                                            bookAppointmentUrl,
-                                                            {
-                                                              'token': '123',
-                                                              'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
-                                                              'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
-                                                              'payment': _bookAppointmentLogic.selectMentorAppointmentType!.fee,
-                                                              'payment_id': _bookAppointmentLogic.paymentId,
-                                                              'questions': _bookAppointmentLogic.questionController.text,
-                                                              'appointment_type_string':
-                                                                  _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name,
-                                                              'appointment_type_id': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id,
-                                                              'date': _bookAppointmentLogic.selectedDateForAppointment.substring(0, 11),
-                                                              'time': _bookAppointmentLogic.selectedTimeForAppointment,
-                                                              'end_time': _bookAppointmentLogic.selectedEndTimeForAppointment
-                                                            },
-                                                            true,
-                                                            bookAppointmentWithoutFileRepo);
-                                                      } else {
-                                                        postMethod(
-                                                            context,
-                                                            bookAppointmentUrl,
-                                                            {
-                                                              'token': '123',
-                                                              'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
-                                                              'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
-                                                              'payment': _bookAppointmentLogic.selectMentorAppointmentType!.fee,
-                                                              'payment_id': _bookAppointmentLogic.selectedPaymentType,
-                                                              'questions': _bookAppointmentLogic.questionController.text,
-                                                              'appointment_type_string':
-                                                                  _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name,
-                                                              'appointment_type_id': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id,
-                                                              'end_time': _bookAppointmentLogic.selectedEndTimeForAppointment
-                                                            },
-                                                            true,
-                                                            bookAppointmentWithoutFileRepo);
-                                                      }
-                                                    } else {
-                                                      _generalController.updateFormLoaderController(true);
-                                                      bookAppointmentFileRepo(File(_bookAppointmentLogic.filePickerResult!.files[0].path!), context);
-                                                    }
-                                                    // Get.toNamed(PageRoutes.paymentView);
-                                                  }
-                                                },
-                                                child: MyCustomBottomBar(
-                                                  title: LanguageConstant.continueText.tr,
-                                                  disable: disableButton!,
-                                                ),
-                                              ),
-                                            )
+                                                dio_instance.FormData formData = dio_instance.FormData.fromMap(<String, dynamic>{
+                                                  'token': '123',
+                                                  'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
+                                                  'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID,
+                                                  'payment': _bookAppointmentLogic.selectMentorAppointmentType!.fee,
+                                                  'payment_id': _bookAppointmentLogic.paymentId,
+                                                  'questions': _bookAppointmentLogic.questionController.text,
+                                                  'appointment_type_string': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.name,
+                                                  'appointment_type_id': _bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id,
+                                                  if (_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.isScheduleRequired == 1)
+                                                    'date': _bookAppointmentLogic.selectedDateForAppointment.substring(0, 11),
+                                                  if (_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.isScheduleRequired == 1)
+                                                    'time': _bookAppointmentLogic.selectedTimeForAppointment,
+                                                  'end_time': _bookAppointmentLogic.selectedEndTimeForAppointment,
+                                                  if (_bookAppointmentLogic.selectedFileName != null)
+                                                    'book_file': await dio_instance.MultipartFile.fromFile(
+                                                      File(_bookAppointmentLogic.filePickerResult!.files[0].path!).path,
+                                                    )
+                                                });
+
+                                                postMethod(context, bookAppointmentUrl, formData, true, bookAppointmentRepo);
+                                              }
+                                            },
+                                            child: MyCustomBottomBar(
+                                              title: LanguageConstant.continueText.tr,
+                                              disable: disableButton!,
+                                            ),
+                                          ),
+                                        )
                     ],
                   )),
             ),

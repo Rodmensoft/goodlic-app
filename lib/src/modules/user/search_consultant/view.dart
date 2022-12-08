@@ -125,10 +125,8 @@ class _SearchConsultantPageState extends State<SearchConsultantPage> {
                                           padding: EdgeInsetsDirectional.fromSTEB(15.w, 0.h, 15.w, 15.h),
                                           child: InkWell(
                                             onTap: () {
-                                              Get.find<UserHomeLogic>().selectedConsultantID =
-                                                  _searchConsultantLogic.searchConsultantModel.data!.results![index].userId;
-                                              Get.find<UserHomeLogic>().selectedConsultantName =
-                                                  '${_searchConsultantLogic.searchConsultantModel.data!.results![index].user!.firstName} '
+                                              Get.find<UserHomeLogic>().selectedConsultantID = _searchConsultantLogic.searchConsultantModel.data!.results![index].userId;
+                                              Get.find<UserHomeLogic>().selectedConsultantName = '${_searchConsultantLogic.searchConsultantModel.data!.results![index].user!.firstName} '
                                                   '${_searchConsultantLogic.searchConsultantModel.data!.results![index].user!.lastName}';
                                               _searchConsultantLogic.update();
                                               Get.toNamed(PageRoutes.consultantProfileForUser);
@@ -161,13 +159,15 @@ class _SearchConsultantPageState extends State<SearchConsultantPage> {
                                                           : ClipRRect(
                                                               borderRadius: BorderRadius.circular(8.r),
                                                               child: Image.network(
-                                                                _searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath!
-                                                                        .contains('assets')
+                                                                _searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath!.contains('assets')
                                                                     ? '$mediaUrl${_searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath}'
                                                                     : '${_searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath}',
                                                                 width: 76.w,
                                                                 height: 85.h,
                                                                 fit: BoxFit.cover,
+                                                                errorBuilder: (context, error, stackTrace) {
+                                                                  return SizedBox(width: 76.w, height: 85.h, child: Icon(Icons.broken_image));
+                                                                },
                                                               ),
                                                             ),
                                                     ),
@@ -206,8 +206,7 @@ class _SearchConsultantPageState extends State<SearchConsultantPage> {
                                                         ///---rating-bar
                                                         RatingBar.builder(
                                                           ignoreGestures: true,
-                                                          initialRating: double.parse(
-                                                              _searchConsultantLogic.searchConsultantModel.data!.results![index].ratingAvg.toString()),
+                                                          initialRating: double.parse(_searchConsultantLogic.searchConsultantModel.data!.results![index].ratingAvg.toString()),
                                                           minRating: 1,
                                                           direction: Axis.horizontal,
                                                           allowHalfRating: true,

@@ -30,7 +30,8 @@ postMethod(BuildContext context, String apiUrl, dynamic postData, bool addAuthHe
     setCustomHeader(dio, 'Content-Type', 'application/json');
     setCustomHeader(dio, 'Authorization', 'key=${Get.find<MainLogic>().getConfigCredentialModel.data!.firebase![0].value}');
   }
-
+  log('post method api.... $apiUrl');
+  log('postData.... $postData');
   try {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -39,16 +40,15 @@ postMethod(BuildContext context, String apiUrl, dynamic postData, bool addAuthHe
         response = await dio.post(apiUrl, data: postData);
 
         if (response.statusCode == 200) {
+          log('response  ....  ${response.data}');
           executionMethod(context, true, response.data);
-          log('testing 2....{$apiUrl}');
-          log('testing 1....{$postData}');
-          log('testing 2....{$response}');
-        } else {
-          log('testing 4....{$response}');
-          executionMethod(context, false, {'status': null});
+
+          return;
         }
+        log('response   ....  {$response}');
+        executionMethod(context, false, {'status': null});
       } on dio_instance.DioError catch (e) {
-        log('testing 5....${e.response}');
+        log('Dio Error  ....  ${e.response}');
         executionMethod(context, false, {'status': null});
 
         if (e.response != null) {

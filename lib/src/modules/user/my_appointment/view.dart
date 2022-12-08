@@ -140,34 +140,25 @@ class _MyAppointmentPageState extends State<MyAppointmentPage> with SingleTicker
                                           InkWell(
                                             onTap: () {
                                               Get.put(AppointmentDetailLogic());
-                                              Get.find<AppointmentDetailLogic>().selectedAppointmentData =
-                                                  _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index];
+                                              Get.find<AppointmentDetailLogic>().selectedAppointmentData = _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index];
 
                                               Get.find<AppointmentDetailLogic>().appointmentStatus = 0;
                                               Get.find<AppointmentDetailLogic>().update();
                                               Get.toNamed(PageRoutes.appointmentDetail);
                                             },
                                             child: AppointmentDetailBox(
-                                              image: _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data?[index].mentor?.imagePath ??
-                                                  '...',
-                                              name: _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].mentor?.firstName ==
-                                                      null
-                                                  ? '...'
-                                                  : '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].mentor!.firstName} '
-                                                      '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].mentor!.lastName}',
+                                              image: _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data?[index].mentor?.imagePath ?? '...',
+                                              name: '${_myAppointmentLogic.getUserAppointmentModel.data?.pendingAppointments?.data?[index].mentor?.firstName ?? '...'} '
+                                                  '${_myAppointmentLogic.getUserAppointmentModel.data?.pendingAppointments?.data?[index].mentor?.lastName ?? ""}',
                                               category: '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].category}',
-                                              fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
-                                              type:
-                                                  '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeString}'
-                                                      .capitalizeFirst,
-                                              typeIcon: _myAppointmentLogic.imagesForAppointmentTypes[
-                                                  (_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeId!) - 1],
+                                              fee: '\$${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                                              type: '${_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeString}'.capitalizeFirst,
+                                              typeIcon: _myAppointmentLogic
+                                                  .imagesForAppointmentTypes[(_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].appointmentTypeId!) - 1],
                                               status: 0,
                                               date: _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].date == null
                                                   ? null
-                                                  : DateFormat('dd/MM/yy').format(DateTime.parse(
-                                                      _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].date!)),
+                                                  : DateFormat('dd/MM/yy').format(DateTime.parse(_myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].date!)),
                                               time: _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].time,
                                               color: customOrangeColor,
                                               rating: _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].rating!.toDouble(),
@@ -204,11 +195,9 @@ class _MyAppointmentPageState extends State<MyAppointmentPage> with SingleTicker
                                                                             {
                                                                               'token': '123',
                                                                               'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
-                                                                              'appointment_status': _myAppointmentLogic.getUserAppointmentModel.data!
-                                                                                  .pendingAppointments!.data![index].appointmentStatus,
-                                                                              'page': _myAppointmentLogic
-                                                                                      .getUserAppointmentModel.data!.pendingAppointments!.currentPage! +
-                                                                                  1
+                                                                              'appointment_status':
+                                                                                  _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.data![index].appointmentStatus,
+                                                                              'page': _myAppointmentLogic.getUserAppointmentModel.data!.pendingAppointments!.currentPage! + 1
                                                                             },
                                                                             true,
                                                                             getUserAllAppointmentsMoreRepo);
@@ -216,15 +205,12 @@ class _MyAppointmentPageState extends State<MyAppointmentPage> with SingleTicker
                                                                       child: Container(
                                                                         height: 36.h,
                                                                         width: 116.w,
-                                                                        decoration: BoxDecoration(
-                                                                            color: Colors.white,
-                                                                            border: Border.all(color: customThemeColor),
-                                                                            borderRadius: BorderRadius.circular(18.r)),
+                                                                        decoration:
+                                                                            BoxDecoration(color: Colors.white, border: Border.all(color: customThemeColor), borderRadius: BorderRadius.circular(18.r)),
                                                                         child: Center(
                                                                           child: Text(
                                                                             LanguageConstant.loadMore.tr,
-                                                                            style: TextStyle(
-                                                                                fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customThemeColor),
+                                                                            style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customThemeColor),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -267,33 +253,26 @@ class _MyAppointmentPageState extends State<MyAppointmentPage> with SingleTicker
                                           InkWell(
                                             onTap: () {
                                               Get.put(AppointmentDetailLogic());
-                                              Get.find<AppointmentDetailLogic>().selectedAppointmentData =
-                                                  _myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index];
+                                              Get.find<AppointmentDetailLogic>().selectedAppointmentData = _myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index];
                                               Get.find<AppointmentDetailLogic>().appointmentStatus = 1;
                                               Get.find<AppointmentDetailLogic>().update();
                                               Get.toNamed(PageRoutes.appointmentDetail);
                                             },
                                             child: AppointmentDetailBox(
                                               image: _myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].mentor?.imagePath,
-                                              name: _myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].mentor?.firstName ==
-                                                      null
+                                              name: _myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].mentor?.firstName == null
                                                   ? '...'
                                                   : '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].mentor!.firstName} '
                                                       '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].mentor!.lastName}',
                                               category: '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].category}',
-                                              fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
-                                              type:
-                                                  '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeString}'
-                                                      .capitalizeFirst,
-                                              typeIcon: _myAppointmentLogic.imagesForAppointmentTypes[
-                                                  (_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeId!) -
-                                                      1],
+                                              fee: '\$${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                                              type: '${_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeString}'.capitalizeFirst,
+                                              typeIcon: _myAppointmentLogic
+                                                  .imagesForAppointmentTypes[(_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].appointmentTypeId!) - 1],
                                               status: 1,
                                               date: _myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].date == null
                                                   ? null
-                                                  : DateFormat('dd/MM/yy').format(DateTime.parse(
-                                                      _myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].date!)),
+                                                  : DateFormat('dd/MM/yy').format(DateTime.parse(_myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].date!)),
                                               time: _myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].time,
                                               color: customLightThemeColor,
                                               rating: _myAppointmentLogic.getUserAppointmentModel.data!.acceptedAppointments!.data![index].rating!.toDouble(),
@@ -333,32 +312,25 @@ class _MyAppointmentPageState extends State<MyAppointmentPage> with SingleTicker
                                           InkWell(
                                             onTap: () {
                                               Get.put(AppointmentDetailLogic());
-                                              Get.find<AppointmentDetailLogic>().selectedAppointmentData =
-                                                  _myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index];
+                                              Get.find<AppointmentDetailLogic>().selectedAppointmentData = _myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index];
                                               Get.find<AppointmentDetailLogic>().appointmentStatus = 2;
                                               Get.find<AppointmentDetailLogic>().update();
                                               Get.toNamed(PageRoutes.appointmentDetail);
                                             },
                                             child: AppointmentDetailBox(
                                               image: _myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].mentor?.imagePath,
-                                              name: _myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].mentor?.firstName ==
-                                                      null
+                                              name: _myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].mentor?.firstName == null
                                                   ? '...'
                                                   : '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].mentor!.firstName} '
                                                       '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].mentor!.lastName}',
                                               category: '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].category}',
-                                              fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
-                                              type:
-                                                  '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeString}'
-                                                      .capitalizeFirst,
-                                              typeIcon: _myAppointmentLogic.imagesForAppointmentTypes[
-                                                  (_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeId!) -
-                                                      1],
+                                              fee: '\$${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                                              type: '${_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeString}'.capitalizeFirst,
+                                              typeIcon: _myAppointmentLogic
+                                                  .imagesForAppointmentTypes[(_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].appointmentTypeId!) - 1],
                                               date: _myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].date == null
                                                   ? null
-                                                  : DateFormat('dd/MM/yy').format(DateTime.parse(
-                                                      _myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].date!)),
+                                                  : DateFormat('dd/MM/yy').format(DateTime.parse(_myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].date!)),
                                               time: _myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].time,
                                               rating: _myAppointmentLogic.getUserAppointmentModel.data!.completedAppointments!.data![index].rating!.toDouble(),
                                               status: 2,
@@ -399,32 +371,25 @@ class _MyAppointmentPageState extends State<MyAppointmentPage> with SingleTicker
                                           InkWell(
                                             onTap: () {
                                               Get.put(AppointmentDetailLogic());
-                                              Get.find<AppointmentDetailLogic>().selectedAppointmentData =
-                                                  _myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index];
+                                              Get.find<AppointmentDetailLogic>().selectedAppointmentData = _myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index];
                                               Get.find<AppointmentDetailLogic>().appointmentStatus = 3;
                                               Get.find<AppointmentDetailLogic>().update();
                                               Get.toNamed(PageRoutes.appointmentDetail);
                                             },
                                             child: AppointmentDetailBox(
                                               image: _myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].mentor!.imagePath,
-                                              name: _myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].mentor!.firstName ==
-                                                      null
+                                              name: _myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].mentor!.firstName == null
                                                   ? '...'
                                                   : '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].mentor!.firstName} '
                                                       '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].mentor!.lastName}',
                                               category: '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].category}',
-                                              fee:
-                                                  '\$${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
-                                              type:
-                                                  '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeString}'
-                                                      .capitalizeFirst,
-                                              typeIcon: _myAppointmentLogic.imagesForAppointmentTypes[
-                                                  (_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeId!) -
-                                                      1],
+                                              fee: '\$${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].payment!} ${LanguageConstant.fees.tr}',
+                                              type: '${_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeString}'.capitalizeFirst,
+                                              typeIcon: _myAppointmentLogic
+                                                  .imagesForAppointmentTypes[(_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].appointmentTypeId!) - 1],
                                               date: _myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].date == null
                                                   ? null
-                                                  : DateFormat('dd/MM/yy').format(DateTime.parse(
-                                                      _myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].date!)),
+                                                  : DateFormat('dd/MM/yy').format(DateTime.parse(_myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].date!)),
                                               time: _myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].time,
                                               rating: _myAppointmentLogic.getUserAppointmentModel.data!.cancelledAppointments!.data![index].rating!.toDouble(),
                                               status: 3,

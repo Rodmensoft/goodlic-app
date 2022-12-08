@@ -129,8 +129,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                   _bookAppointmentLogic.morningSlots.clear();
                                   _bookAppointmentLogic.afterNoonSlots.clear();
                                   _bookAppointmentLogic.eveningSlots.clear();
-                                  _bookAppointmentLogic.selectedAppointmentTypeID =
-                                      _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId;
+                                  _bookAppointmentLogic.selectedAppointmentTypeID = _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId;
                                   _bookAppointmentLogic.selectedAppointmentTypeIndex = index;
                                   _bookAppointmentLogic.updateSelectMentorAppointmentType(_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index]);
                                   _bookAppointmentLogic.update();
@@ -163,8 +162,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                   _bookAppointmentLogic.morningSlots.clear();
                                   _bookAppointmentLogic.afterNoonSlots.clear();
                                   _bookAppointmentLogic.eveningSlots.clear();
-                                  _bookAppointmentLogic.selectedAppointmentTypeID =
-                                      _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId;
+                                  _bookAppointmentLogic.selectedAppointmentTypeID = _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId;
                                   _bookAppointmentLogic.selectedAppointmentTypeIndex = index;
                                   _bookAppointmentLogic.updateSelectMentorAppointmentType(_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index]);
                                   _bookAppointmentLogic.update();
@@ -172,15 +170,13 @@ class _SlotSelectionState extends State<SlotSelection> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                    color: _bookAppointmentLogic.selectedAppointmentTypeID ==
-                                            _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
+                                    color: _bookAppointmentLogic.selectedAppointmentTypeID == _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
                                         ? customLightThemeColor
                                         : Colors.white,
                                     borderRadius: BorderRadius.circular(8.r),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: _bookAppointmentLogic.selectedAppointmentTypeID ==
-                                                _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
+                                        color: _bookAppointmentLogic.selectedAppointmentTypeID == _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
                                             ? customLightThemeColor.withOpacity(0.6)
                                             : Colors.grey.withOpacity(0.2),
                                         spreadRadius: -2,
@@ -201,8 +197,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             '${_bookAppointmentLogic.consultantProfileLogic.imagesForAppointmentTypes[_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId! - 1]}',
                                             height: 12.h,
                                             width: 19.w,
-                                            color: _bookAppointmentLogic.selectedAppointmentTypeID ==
-                                                    _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
+                                            color: _bookAppointmentLogic.selectedAppointmentTypeID == _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
                                                 ? Colors.white
                                                 : customThemeColor,
                                           ),
@@ -210,11 +205,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                             width: 10.w,
                                           ),
                                           Text(
-                                            _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentType!.name!
-                                                .toString()
-                                                .capitalizeFirst!,
-                                            style: _bookAppointmentLogic.selectedAppointmentTypeID ==
-                                                    _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
+                                            _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentType!.name!.toString().capitalizeFirst!,
+                                            style: _bookAppointmentLogic.selectedAppointmentTypeID == _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
                                                 ? state.typeTextStyle!.copyWith(color: Colors.white)
                                                 : state.typeTextStyle,
                                           ),
@@ -227,8 +219,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                         padding: EdgeInsets.only(left: 28.w),
                                         child: Text(
                                           '${Get.find<GeneralController>().storageBox.read('currency')}${_bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].fee}',
-                                          style: _bookAppointmentLogic.selectedAppointmentTypeID ==
-                                                  _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
+                                          style: _bookAppointmentLogic.selectedAppointmentTypeID == _bookAppointmentLogic.consultantProfileLogic.appointmentTypes[index].appointmentTypeId
                                               ? state.typePriceTextStyle!.copyWith(color: Colors.white)
                                               : state.typePriceTextStyle,
                                         ),
@@ -376,9 +367,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                     borderRadius: BorderRadius.circular(8.r),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: _bookAppointmentLogic.appointmentShiftType == index
-                                                            ? customLightThemeColor.withOpacity(0.5)
-                                                            : Colors.grey.withOpacity(0.2),
+                                                        color: _bookAppointmentLogic.appointmentShiftType == index ? customLightThemeColor.withOpacity(0.5) : Colors.grey.withOpacity(0.2),
                                                         spreadRadius: -2,
                                                         blurRadius: 15,
                                                         // offset: Offset(1,5)
@@ -409,9 +398,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                         '${_bookAppointmentLogic.shiftList[index].title}',
                                                         softWrap: true,
                                                         overflow: TextOverflow.ellipsis,
-                                                        style: _bookAppointmentLogic.appointmentShiftType == index
-                                                            ? state.typeTextStyle!.copyWith(color: Colors.white)
-                                                            : state.typeTextStyle,
+                                                        style: _bookAppointmentLogic.appointmentShiftType == index ? state.typeTextStyle!.copyWith(color: Colors.white) : state.typeTextStyle,
                                                       ),
                                                     ],
                                                   ),
@@ -445,10 +432,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                         }
                                                         setState(() {
                                                           selectedSlotID = _bookAppointmentLogic.morningSlots[secondIndex].id!;
-                                                          _bookAppointmentLogic.selectedTimeForAppointment =
-                                                              _bookAppointmentLogic.morningSlots[secondIndex].startTime!;
-                                                          _bookAppointmentLogic.selectedEndTimeForAppointment =
-                                                              _bookAppointmentLogic.morningSlots[secondIndex].endTime!;
+                                                          _bookAppointmentLogic.selectedTimeForAppointment = _bookAppointmentLogic.morningSlots[secondIndex].startTime!;
+                                                          _bookAppointmentLogic.selectedEndTimeForAppointment = _bookAppointmentLogic.morningSlots[secondIndex].endTime!;
                                                           disableButton = false;
                                                         });
                                                       },
@@ -497,10 +482,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                         }
                                                         setState(() {
                                                           selectedSlotID = _bookAppointmentLogic.afterNoonSlots[secondIndex].id!;
-                                                          _bookAppointmentLogic.selectedTimeForAppointment =
-                                                              _bookAppointmentLogic.afterNoonSlots[secondIndex].startTime!;
-                                                          _bookAppointmentLogic.selectedEndTimeForAppointment =
-                                                              _bookAppointmentLogic.afterNoonSlots[secondIndex].endTime!;
+                                                          _bookAppointmentLogic.selectedTimeForAppointment = _bookAppointmentLogic.afterNoonSlots[secondIndex].startTime!;
+                                                          _bookAppointmentLogic.selectedEndTimeForAppointment = _bookAppointmentLogic.afterNoonSlots[secondIndex].endTime!;
                                                           disableButton = false;
                                                         });
                                                       },
@@ -549,10 +532,8 @@ class _SlotSelectionState extends State<SlotSelection> {
                                                         }
                                                         setState(() {
                                                           selectedSlotID = _bookAppointmentLogic.eveningSlots[secondIndex].id!;
-                                                          _bookAppointmentLogic.selectedTimeForAppointment =
-                                                              _bookAppointmentLogic.eveningSlots[secondIndex].startTime!;
-                                                          _bookAppointmentLogic.selectedEndTimeForAppointment =
-                                                              _bookAppointmentLogic.eveningSlots[secondIndex].endTime!;
+                                                          _bookAppointmentLogic.selectedTimeForAppointment = _bookAppointmentLogic.eveningSlots[secondIndex].startTime!;
+                                                          _bookAppointmentLogic.selectedEndTimeForAppointment = _bookAppointmentLogic.eveningSlots[secondIndex].endTime!;
                                                           disableButton = false;
                                                         });
                                                       },
@@ -635,6 +616,9 @@ class _SlotSelectionState extends State<SlotSelection> {
                             right: 15.w,
                             child: InkWell(
                               onTap: () {
+                                print("object 1");
+                                print("object 1 ${widget.appointmentId}");
+                                // return;
                                 if (!disableButton!) {
                                   Get.to(AppointmentQuestionPage(appointmentId: widget.appointmentId, mentorId: widget.mentorId, showPaymentSection: true));
                                 }
@@ -653,16 +637,16 @@ class _SlotSelectionState extends State<SlotSelection> {
                                 right: 15.w,
                                 child: InkWell(
                                   onTap: () {
+                                    print("object 2");
+                                    // return;
                                     log('testing notification sent');
                                     Get.back();
                                     Get.find<GeneralController>().channelForCall = null;
                                     Get.find<GeneralController>().update();
 
                                     ///---make-notification
-                                    Get.find<GeneralController>()
-                                        .updateNotificationBody('New Appointment Are You Live!', '', '/requestForLive', 'mentee/appointment/log', null);
-                                    Get.find<GeneralController>()
-                                        .updateUserIdForSendNotification(ConsultantAppointmentDetailLogic().selectedAppointmentData.mentorId);
+                                    Get.find<GeneralController>().updateNotificationBody('New Appointment Are You Live!', '', '/requestForLive', 'mentee/appointment/log', null);
+                                    Get.find<GeneralController>().updateUserIdForSendNotification(ConsultantAppointmentDetailLogic().selectedAppointmentData.mentorId);
 
                                     ///----send-sms
                                     postMethod(
@@ -677,8 +661,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                                         sendSMSRepo);
 
                                     ///----fcm-send-start
-                                    getMethod(
-                                        context, fcmGetUrl, {'token': '123', 'user_id': Get.find<UserHomeLogic>().selectedConsultantID}, true, getFcmTokenRepo);
+                                    getMethod(context, fcmGetUrl, {'token': '123', 'user_id': Get.find<UserHomeLogic>().selectedConsultantID}, true, getFcmTokenRepo);
                                     Get.snackbar('your Request is Pending!', '', colorText: Colors.black, backgroundColor: Colors.white);
                                   },
                                   child: MyCustomBottomBar(
@@ -696,8 +679,11 @@ class _SlotSelectionState extends State<SlotSelection> {
                                 right: 15.w,
                                 child: InkWell(
                                   onTap: () {
+                                    print("object 3");
+                                    print("object  ${widget.appointmentId}");
+                                    // return;
                                     if (!disableButton!) {
-                                      Get.to(AppointmentQuestionPage(appointmentId: 0, mentorId: 0, showPaymentSection: false));
+                                      Get.to(AppointmentQuestionPage(appointmentId: widget.appointmentId, mentorId: 0, showPaymentSection: false));
                                     }
                                   },
                                   child: MyCustomBottomBar(
@@ -768,8 +754,7 @@ class _SlotSelectionState extends State<SlotSelection> {
         textStyle: TextStyle(fontFamily: SarabunFontFamily.extraBold, fontSize: 18.sp, color: customTextBlackColor),
       ),
       monthCellStyle: DateRangePickerMonthCellStyle(
-        specialDatesDecoration:
-            const MonthCellDecoration(borderColor: null, backgroundColor: customLightThemeColor, showIndicator: true, indicatorColor: customThemeColor),
+        specialDatesDecoration: const MonthCellDecoration(borderColor: null, backgroundColor: customLightThemeColor, showIndicator: true, indicatorColor: customThemeColor),
         // textStyle: TextStyle(color: const Color(0xffe2d7fe), fontSize: 14),
         specialDatesTextStyle: TextStyle(color: Colors.white, fontSize: 14.sp, fontFamily: SarabunFontFamily.regular),
         // todayTextStyle: TextStyle(color: highlightColor, fontSize: 14)
@@ -784,8 +769,7 @@ class _SlotSelectionState extends State<SlotSelection> {
       todayHighlightColor: customLightThemeColor,
       monthViewSettings: DateRangePickerMonthViewSettings(
         firstDayOfWeek: 1,
-        viewHeaderStyle:
-            DateRangePickerViewHeaderStyle(textStyle: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 16.sp, color: customTextBlackColor)),
+        viewHeaderStyle: DateRangePickerViewHeaderStyle(textStyle: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 16.sp, color: customTextBlackColor)),
         // dayFormat: 'EEE',
         showTrailingAndLeadingDates: false,
         specialDates: specialDates,
@@ -804,8 +788,7 @@ class MonthCellDecoration extends Decoration {
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
-    return _MonthCellDecorationPainter(
-        borderColor: borderColor, backgroundColor: backgroundColor, showIndicator: showIndicator, indicatorColor: indicatorColor);
+    return _MonthCellDecorationPainter(borderColor: borderColor, backgroundColor: backgroundColor, showIndicator: showIndicator, indicatorColor: indicatorColor);
   }
 }
 

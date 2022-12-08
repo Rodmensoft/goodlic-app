@@ -143,10 +143,13 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                                   height: 85.h,
                                                   fit: BoxFit.cover,
                                                   errorBuilder: (context, object, trace) {
-                                                    return const Icon(
-                                                      Icons.broken_image,
-                                                      size: 50,
-                                                      color: Colors.grey,
+                                                    return SizedBox(
+                                                      width: 76.w,
+                                                      height: 85.h,
+                                                      child: const Icon(
+                                                        Icons.broken_image,
+                                                        color: Colors.white,
+                                                      ),
                                                     );
                                                   },
                                                 ),
@@ -235,18 +238,13 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                       _userHomeLogic.updateTopRatedLoaderMore(true);
 
                                       ///---top-rated-API-call
-                                      getMethod(
-                                          context,
-                                          getTopRatedConsultantURL,
-                                          {'token': '123', 'page': _userHomeLogic.topRatedModel.data!.topRatedMentors!.currentPage! + 1},
-                                          false,
+                                      getMethod(context, getTopRatedConsultantURL, {'token': '123', 'page': _userHomeLogic.topRatedModel.data!.topRatedMentors!.currentPage! + 1}, false,
                                           getTopRatedConsultantMoreRepo);
                                     },
                                     child: Container(
                                       height: 36.h,
                                       width: 116.w,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white, border: Border.all(color: customThemeColor), borderRadius: BorderRadius.circular(18.r)),
+                                      decoration: BoxDecoration(color: Colors.white, border: Border.all(color: customThemeColor), borderRadius: BorderRadius.circular(18.r)),
                                       child: Center(
                                         child: Text(
                                           LanguageConstant.loadMore.tr,

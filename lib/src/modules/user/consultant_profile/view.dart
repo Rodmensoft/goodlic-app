@@ -41,8 +41,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
     super.initState();
     widget.mentorId != null
         ? getMethod(context, getMentorProfileForMenteeUrl, {'token': '123', 'mentor_id': widget.mentorId}, true, getMentorProfileForMenteeRepo)
-        : getMethod(context, getMentorProfileForMenteeUrl, {'token': '123', 'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID}, true,
-            getMentorProfileForMenteeRepo);
+        : getMethod(context, getMentorProfileForMenteeUrl, {'token': '123', 'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID}, true, getMentorProfileForMenteeRepo);
     widget.mentorId != null
         ? getMethod(context, getUserProfileUrl, {'token': '123', 'user_id': widget.mentorId}, true, getConsultantProfileRepo)
         : getMethod(context, getUserProfileUrl, {'token': '123', 'user_id': Get.find<UserHomeLogic>().selectedConsultantID}, true, getConsultantProfileRepo);
@@ -127,10 +126,9 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                 : InkWell(
                                                     onTap: () {
                                                       Get.to(ImageViewScreen(
-                                                        networkImage:
-                                                            _consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath.contains('assets')
-                                                                ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
-                                                                : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
+                                                        networkImage: _consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath.contains('assets')
+                                                            ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
+                                                            : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
                                                       ));
                                                     },
                                                     child: Image.network(
@@ -139,6 +137,13 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                           : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
                                                       width: MediaQuery.of(context).size.width,
                                                       fit: BoxFit.fill,
+                                                      errorBuilder: (context, error, stackTrace) {
+                                                        return Icon(
+                                                          Icons.person,
+                                                          size: MediaQuery.of(context).size.width * .4,
+                                                          color: Colors.white,
+                                                        );
+                                                      },
                                                     ),
                                                   ),
                                           ),
@@ -155,8 +160,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                   child: Container(
                                                     height: 30.h,
                                                     width: 80.w,
-                                                    decoration: BoxDecoration(
-                                                        color: customThemeColor, borderRadius: BorderRadius.horizontal(right: Radius.circular(10.r))),
+                                                    decoration: BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.horizontal(right: Radius.circular(10.r))),
                                                     child: Center(
                                                       child: Text(
                                                         LanguageConstant.online.tr,
@@ -171,8 +175,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                   child: Container(
                                                     height: 30.h,
                                                     width: 80.w,
-                                                    decoration:
-                                                        BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.horizontal(right: Radius.circular(10.r))),
+                                                    decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.horizontal(right: Radius.circular(10.r))),
                                                     child: Center(
                                                       child: Text(
                                                         LanguageConstant.offline.tr,

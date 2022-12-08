@@ -47,10 +47,8 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                           padding: EdgeInsets.only(top: 0.h),
                           child: InkWell(
                             onTap: () {
-                              Get.find<UserHomeLogic>().selectedConsultantID =
-                                  _allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user?.id;
-                              Get.find<UserHomeLogic>().selectedConsultantName =
-                                  '${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user?.firstName} '
+                              Get.find<UserHomeLogic>().selectedConsultantID = _allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user?.id;
+                              Get.find<UserHomeLogic>().selectedConsultantName = '${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user?.firstName} '
                                   '${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user?.lastName}';
                               Get.find<UserHomeLogic>().update();
                               Get.toNamed(PageRoutes.consultantProfileForUser);
@@ -74,21 +72,31 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                                       child: _allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.data?[index].user?.imagePath == null
                                           ? const SizedBox()
                                           : Image.network(
-                                              _allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath!
-                                                      .contains('assets')
-                                                  ? '$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].user!.imagePath}'
-                                                  : '${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].user!.imagePath}',
+                                              (_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.data?[index].user?.imagePath ?? "").contains('assets')
+                                                  ? '$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}'
+                                                  : '${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}',
                                               width: double.infinity,
                                               fit: BoxFit.fill,
                                               height: double.infinity,
+                                              // loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                              //   if (loadingProgress == null) return child;
+                                              //   return Center(
+                                              //     child: CircularProgressIndicator(
+                                              //       value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
+                                              //     ),
+                                              //   );
+                                              // },
+                                              errorBuilder: (context, object, trace) {
+                                                return const Icon(Icons.broken_image, size: 30, color: Colors.white);
+                                              },
                                             ),
                                     ),
                                   ),
 
                                   ///---name
                                   Text(
-                                    '${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].user?.firstName ?? ''} '
-                                    '${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].user?.lastName ?? ''}',
+                                    '${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.data?[index].user?.firstName ?? ''} '
+                                    '${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.data?[index].user?.lastName ?? ''}',
                                     maxLines: 1,
                                     softWrap: true,
                                     overflow: TextOverflow.ellipsis,
@@ -98,9 +106,7 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
 
                                   ///---category
                                   Text(
-                                    _allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].category == null
-                                        ? ''
-                                        : '${_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].category!.name}',
+                                    _allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.data?[index].category?.name ?? "N/A",
                                     style: _allConsultantsLogic.state.consultantCategoryTextStyle,
                                   ),
                                   SizedBox(height: 6.h),
@@ -108,8 +114,7 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                                   ///---rating
                                   RatingBar.builder(
                                     ignoreGestures: true,
-                                    initialRating:
-                                        double.parse(_allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.data![index].ratingAvg.toString()),
+                                    initialRating: double.parse((_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.data?[index].ratingAvg ?? 0).toString()),
                                     minRating: 1,
                                     direction: Axis.horizontal,
                                     allowHalfRating: true,
@@ -128,8 +133,7 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                       )),
             ),
           ),
-          _allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.currentPage! <
-                  _allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.lastPage!
+          (_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.currentPage ?? 0) < (_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.lastPage ?? 0)
               ? _allConsultantsLogic.allConsultantMoreLoader!
                   ? Padding(
                       padding: EdgeInsets.only(top: 25.h),
@@ -154,8 +158,8 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                                   context,
                                   getCategoriesWithMentorURL,
                                   {
-                                    'category_id': _allConsultantsLogic.allConsultantList[widget.parentIndex!].id,
-                                    'page': _allConsultantsLogic.allConsultantList[widget.parentIndex!].mentors!.currentPage! + 1
+                                    'category_id': _allConsultantsLogic.allConsultantList[widget.parentIndex].id,
+                                    'page': _allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.currentPage! + 1
                                   },
                                   false,
                                   getCategoriesWithConsultantMoreRepo);
@@ -163,8 +167,7 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                             child: Container(
                               height: 36.h,
                               width: 116.w,
-                              decoration:
-                                  BoxDecoration(color: Colors.white, border: Border.all(color: customThemeColor), borderRadius: BorderRadius.circular(18.r)),
+                              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: customThemeColor), borderRadius: BorderRadius.circular(18.r)),
                               child: Center(
                                 child: Text(
                                   'Load More',

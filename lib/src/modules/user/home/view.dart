@@ -36,38 +36,24 @@ class _UserHomePageState extends State<UserHomePage> {
       Get.find<GeneralController>().updateFcmToken(context);
 
       ///---get-user-API-call
-      getMethod(
-          context,
-          getMenteeProfileUrl,
-          {
-            'token': '123',
-            'user_id': Get.find<GeneralController>().storageBox.read('userID')
-          },
-          true,
-          getUserProfileRepo);
+      getMethod(context, getMenteeProfileUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getUserProfileRepo);
     }
 
     ///---featured-API-call
-    getMethod(context, getFeaturedURL, {'token': '123'}, false,
-        getFeaturedConsultantRepo);
+    getMethod(context, getFeaturedURL, {'token': '123'}, false, getFeaturedConsultantRepo);
 
     ///---categories-API-call
-    getMethod(
-        context, getCategoriesURL, {'token': '123'}, false, getCategoriesRepo);
+    getMethod(context, getCategoriesURL, {'token': '123'}, false, getCategoriesRepo);
 
     ///---top-rated-API-call
-    getMethod(context, getTopRatedConsultantURL, {'token': '123'}, false,
-        getTopRatedConsultantRepo);
+    getMethod(context, getTopRatedConsultantURL, {'token': '123'}, false, getTopRatedConsultantRepo);
 
-    Get.find<UserHomeLogic>().scrollController = ScrollController()
-      ..addListener(Get.find<UserHomeLogic>().scrollListener);
+    Get.find<UserHomeLogic>().scrollController = ScrollController()..addListener(Get.find<UserHomeLogic>().scrollListener);
   }
 
   @override
   void dispose() {
-    Get.find<UserHomeLogic>()
-        .scrollController!
-        .removeListener(Get.find<UserHomeLogic>().scrollListener);
+    Get.find<UserHomeLogic>().scrollController!.removeListener(Get.find<UserHomeLogic>().scrollListener);
     Get.find<UserHomeLogic>().scrollController!.dispose();
     super.dispose();
   }
@@ -83,8 +69,7 @@ class _UserHomePageState extends State<UserHomePage> {
           child: Scaffold(
             body: NestedScrollView(
                 controller: _userHomeLogic.scrollController,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
+                headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
                     ///---header
                     SliverAppBar(
@@ -93,9 +78,7 @@ class _UserHomePageState extends State<UserHomePage> {
                       pinned: true,
                       snap: false,
                       elevation: 0,
-                      backgroundColor: _userHomeLogic.isShrink
-                          ? customThemeColor
-                          : Colors.white,
+                      backgroundColor: _userHomeLogic.isShrink ? customThemeColor : Colors.white,
                       // backgroundColor: customThemeColor,
                       leading: InkWell(
                         onTap: () {
@@ -125,8 +108,7 @@ class _UserHomePageState extends State<UserHomePage> {
                             ),
                             SafeArea(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.w, 20.h, 16.w, 16.h),
+                                padding: EdgeInsetsDirectional.fromSTEB(16.w, 20.h, 16.w, 16.h),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -136,16 +118,12 @@ class _UserHomePageState extends State<UserHomePage> {
                                     ),
                                     Text(
                                       LanguageConstant.findYour.tr,
-                                      style: TextStyle(
-                                          fontFamily: SarabunFontFamily.medium,
-                                          fontSize: 17.sp,
-                                          color: Colors.white),
+                                      style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 17.sp, color: Colors.white),
                                     ),
                                     SizedBox(
                                       height: 10.h,
                                     ),
-                                    Text(LanguageConstant.mentor.tr,
-                                        style: state.headingTextStyle),
+                                    Text(LanguageConstant.mentor.tr, style: state.headingTextStyle),
                                     SizedBox(
                                       height: 20.h,
                                     ),
@@ -153,61 +131,32 @@ class _UserHomePageState extends State<UserHomePage> {
                                     ///---search-field
                                     TextFormField(
                                       onTap: () {
-                                        Get.toNamed(
-                                            PageRoutes.searchConsultant);
+                                        Get.toNamed(PageRoutes.searchConsultant);
                                       },
                                       readOnly: true,
                                       decoration: InputDecoration(
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                25.w, 15.h, 25.w, 15.h),
+                                        contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                                         suffixIcon: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
-                                            SvgPicture.asset(
-                                                'assets/Icons/searchIcon.svg'),
+                                            SvgPicture.asset('assets/Icons/searchIcon.svg'),
                                           ],
                                         ),
-                                        hintText:
-                                            LanguageConstant.searchHere.tr,
-                                        hintStyle: const TextStyle(
-                                            fontFamily:
-                                                SarabunFontFamily.medium,
-                                            fontSize: 14,
-                                            color: Color(0xffA3A7AA)),
+                                        hintText: LanguageConstant.searchHere.tr,
+                                        hintStyle: const TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 14, color: Color(0xffA3A7AA)),
                                         fillColor: customTextFieldColor,
                                         filled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(22.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(22.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(22.r),
-                                            borderSide: const BorderSide(
-                                                color: customLightThemeColor)),
-                                        errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(22.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.red)),
+                                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(22.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(22.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(22.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                                        errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(22.r), borderSide: const BorderSide(color: Colors.red)),
                                       ),
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return LanguageConstant
-                                              .fieldRequired.tr;
+                                          return LanguageConstant.fieldRequired.tr;
                                         } else if (!GetUtils.isEmail(value)) {
-                                          return LanguageConstant
-                                              .enterValidEmail.tr;
+                                          return LanguageConstant.enterValidEmail.tr;
                                         } else {
                                           return null;
                                         }
@@ -223,18 +172,16 @@ class _UserHomePageState extends State<UserHomePage> {
                     ),
                   ];
                 },
-                body: ListView(
-                    padding: const EdgeInsets.only(top: 0),
-                    children: const [
-                      ///---top-consultants
-                      TopConsultants(),
+                body: ListView(padding: const EdgeInsets.only(top: 0), children: const [
+                  ///---top-consultants
+                  TopConsultants(),
 
-                      ///---categories
-                      CategoriesWidget(),
+                  ///---categories
+                  CategoriesWidget(),
 
-                      ///---top-rated-consultant
-                      TopRatedConsultants(),
-                    ])),
+                  ///---top-rated-consultant
+                  TopRatedConsultants(),
+                ])),
           ),
         );
       });

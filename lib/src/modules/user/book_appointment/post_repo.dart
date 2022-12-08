@@ -25,6 +25,8 @@ import 'package:dio/dio.dart' as dio_instance;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'wallet_payment/view.dart';
+
 bookAppointmentFileRepo(File file1, BuildContext context) async {
   dio_instance.FormData formData = dio_instance.FormData.fromMap(<String, dynamic>{
     'token': '123',
@@ -133,28 +135,22 @@ bookAppointmentFileRepo(File file1, BuildContext context) async {
   }
 }
 
-bookAppointmentWithoutFileRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+bookAppointmentRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<BookAppointmentLogic>().bookAppointmentModel = BookAppointmentModel.fromJson(response);
     Get.find<GeneralController>().updateFormLoaderController(false);
     if (Get.find<BookAppointmentLogic>().bookAppointmentModel.status == true) {
-      if (Get.find<BookAppointmentLogic>().paymentName == 'Stripe') {
-        Get.find<GeneralController>().updateFormLoaderController(false);
+      if (Get.find<BookAppointmentLogic>().selectedMethodTitle == 'wallet') {
+        Get.to(WalletPaymentView(appointmentId: Get.find<BookAppointmentLogic>().bookAppointmentModel.data?.appointmentNo));
+      } else if (Get.find<BookAppointmentLogic>().paymentName == 'Stripe') {
         Get.toNamed(PageRoutes.paymentStripeView);
       } else if (Get.find<BookAppointmentLogic>().paymentName == 'braintree') {
-        Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.paymentStripeView);
       } else if (Get.find<BookAppointmentLogic>().paymentName == 'paypal') {
-        Get.find<GeneralController>().updateFormLoaderController(false);
         Get.toNamed(PageRoutes.paymentStripeView);
-      } else if (Get.find<BookAppointmentLogic>().paymentName == 'wallet') {
-        Get.find<GeneralController>().updateFormLoaderController(false);
-        Get.toNamed(PageRoutes.walletPaymentScreen);
       } else if (Get.find<BookAppointmentLogic>().paymentName == 'jazzcash') {
-        Get.find<GeneralController>().updateFormLoaderController(false);
         Get.to(const PaymentJazzCashView());
       } else if (Get.find<BookAppointmentLogic>().paymentName == 'easypaisa') {
-        Get.find<GeneralController>().updateFormLoaderController(false);
         Get.to(const PaymentEasyPaisaView());
         // } else if (Get.find<BookAppointmentLogic>().selectedPaymentType == 6) {
         //   Get.find<GeneralController>().updateFormLoaderController(false);
@@ -273,8 +269,7 @@ liveRequestRepo(BuildContext context, bool responseCheck, Map<String, dynamic> r
       Get.find<GeneralController>().updateFormLoaderController(false);
 
       ///---make-notification
-      Get.find<GeneralController>()
-          .updateNotificationBody('Your Live Appointment Request Accepted', '', '/appointmentQuestion', 'mentee/appointment/log', null);
+      Get.find<GeneralController>().updateNotificationBody('Your Live Appointment Request Accepted', '', '/appointmentQuestion', 'mentee/appointment/log', null);
       Get.find<GeneralController>().updateUserIdForSendNotification(int.parse(Get.find<GeneralController>().notificationMenteeId!));
       // Get.find<GeneralController>().notificationMenteeId = '';
       Get.find<GeneralController>().notificationFee = null;
@@ -433,8 +428,7 @@ getPaymentMethodsRepo(BuildContext context, bool responseCheck, Map<String, dyna
       for (GetPaymentMethodData element in Get.find<BookAppointmentLogic>().getPaymentMethods.data ?? []) {
         Get.find<BookAppointmentLogic>().updatePaymentMethodList(element);
       }
-      Get.find<BookAppointmentLogic>().updatePaymentMethodList(
-          GetPaymentMethodData(id: 110, imagePath: 'assets/Icons/walletPayment.svg', name: 'wallet', code: 'wallet', isActive: 1, isDefault: 0));
+      Get.find<BookAppointmentLogic>().updatePaymentMethodList(GetPaymentMethodData(id: 110, imagePath: 'assets/Icons/walletPayment.svg', name: 'wallet', code: 'wallet', isActive: 1, isDefault: 0));
 
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {

@@ -1,5 +1,8 @@
 import 'package:global_configuration/global_configuration.dart';
 
+//  "base_url": "https://demo.consultant.nictusthemes.com/",
+//  "api_base_url": "https://demo.consultant.nictusthemes.com/api/",
+//  "media_url": "https://demo.consultant.nictusthemes.com/",
 final String baseUrl = GlobalConfiguration().get('base_url');
 final String apiBaseUrl = GlobalConfiguration().get('api_base_url');
 final String mediaUrl = GlobalConfiguration().get('media_url');

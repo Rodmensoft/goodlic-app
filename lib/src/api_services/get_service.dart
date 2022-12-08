@@ -11,21 +11,16 @@ import 'package:dio/dio.dart' as dio_instance;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-getMethod(
-    BuildContext context,
-    String apiUrl,
-    dynamic queryData,
-    bool addAuthHeader,
-    Function executionMethod // for performing functionalities
+getMethod(BuildContext context, String apiUrl, dynamic queryData, bool addAuthHeader, Function executionMethod // for performing functionalities
     ) async {
   dio_instance.Response response;
   dio_instance.Dio dio = dio_instance.Dio();
 
   if (addAuthHeader && Get.find<ApiLogic>().storageBox.hasData('authToken')) {
-    setCustomHeader(dio, 'Authorization',
-        'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
-  } else if (addAuthHeader &&
-      !Get.find<ApiLogic>().storageBox.hasData('authToken')) {}
+    setCustomHeader(dio, 'Authorization', 'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
+  }
+  log('Get Method Api $apiUrl ---->>>>');
+  log('queryData $queryData ---->>>>');
 
   try {
     final result = await InternetAddress.lookup('google.com');
@@ -33,17 +28,19 @@ getMethod(
       Get.find<ApiLogic>().changeInternetCheckerState(true);
       try {
         response = await dio.get(apiUrl, queryParameters: queryData);
-        log('testing here $apiUrl$queryData ---->>>>${response.data}');
+
         if (response.statusCode == 200) {
+          log('getApi $apiUrl ---->>>>  ${response.data}');
           executionMethod(context, true, response.data);
-        } else {
-          executionMethod(context, false, {'status': null});
+          return;
         }
+        log('getApi $apiUrl ---->>>>  ${response.data}');
+        executionMethod(context, false, {'status': null});
       } on dio_instance.DioError catch (e) {
+        log('Dio Error     $apiUrl$queryData ---->>>>${e.response}');
         executionMethod(context, false, {'status': null});
 
         if (e.response != null) {
-          log('testing here $apiUrl$queryData ---->>>>${e.response}');
         } else {}
       }
     }
