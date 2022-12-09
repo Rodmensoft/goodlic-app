@@ -34,14 +34,11 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.w, 0.h, 11.w, 0.h),
+                        padding: EdgeInsetsDirectional.fromSTEB(0.w, 0.h, 11.w, 0.h),
                         child: Container(
                           height: 15.h,
                           width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.r)),
+                          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8.r)),
                         )),
                     SizedBox(
                       height: 25.h,
@@ -54,9 +51,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                             child: Container(
                               height: 123.h,
                               width: 106.w,
-                              decoration: BoxDecoration(
-                                  color: customTextFieldColor,
-                                  borderRadius: BorderRadius.circular(8)),
+                              decoration: BoxDecoration(color: customTextFieldColor, borderRadius: BorderRadius.circular(8)),
                             ),
                           );
                         }),
@@ -71,8 +66,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.w, 0.h, 11.w, 0.h),
+                        padding: EdgeInsetsDirectional.fromSTEB(0.w, 0.h, 11.w, 0.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -99,29 +93,21 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                       ),
                       Center(
                         child: Wrap(
-                          children: List.generate(
-                              _userHomeLogic.categoriesList.length > 6
-                                  ? 6
-                                  : _userHomeLogic.categoriesList.length,
-                              (index) {
+                          children: List.generate(_userHomeLogic.categoriesList.length > 6 ? 6 : _userHomeLogic.categoriesList.length, (index) {
                             return Padding(
                               padding: EdgeInsets.fromLTRB(0, 0, 11.w, 12.h),
                               child: InkWell(
                                 onTap: () {
-                                  _userHomeLogic.selectedCategoryId =
-                                      _userHomeLogic.categoriesList[index].id;
+                                  _userHomeLogic.selectedCategoryId = _userHomeLogic.categoriesList[index].id;
                                   _userHomeLogic.update();
                                   Get.toNamed(PageRoutes.allConsultants);
                                 },
                                 child: Container(
                                   height: 123.h,
                                   width: 106.w,
-                                  decoration: BoxDecoration(
-                                      color: customTextFieldColor,
-                                      borderRadius: BorderRadius.circular(8)),
+                                  decoration: BoxDecoration(color: customTextFieldColor, borderRadius: BorderRadius.circular(8)),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       SizedBox(
@@ -129,21 +115,14 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                       ),
                                       CircleAvatar(
                                         radius: 20.r,
-                                        backgroundColor: _userHomeLogic
-                                            .categoriesColor[index],
+                                        backgroundColor: _userHomeLogic.categoriesColor[index],
                                         child: CircleAvatar(
-
                                           radius: 18.r,
-                                          backgroundImage:  NetworkImage(
-                                                  _userHomeLogic
-                                                      .categoriesList[index].image!.contains('assets')
-                                                      ?'$mediaUrl${_userHomeLogic
-                                                      .categoriesList[index].image!}'
-                                                      :_userHomeLogic
-                                    .categoriesList[index].image!,
-
-
-                                         ),
+                                          backgroundImage: NetworkImage(
+                                            _userHomeLogic.categoriesList[index].image!.contains('assets')
+                                                ? '$mediaUrl${_userHomeLogic.categoriesList[index].image!}'
+                                                : _userHomeLogic.categoriesList[index].image!,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
@@ -151,19 +130,11 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                       ),
                                       Text(
                                         '${_userHomeLogic.categoriesList[index].title}',
-                                        style: TextStyle(
-                                            fontFamily:
-                                                SarabunFontFamily.semiBold,
-                                            fontSize: 14.sp,
-                                            color: _userHomeLogic
-                                                .categoriesColor[index]),
+                                        style: TextStyle(fontFamily: SarabunFontFamily.semiBold, fontSize: 14.sp, color: _userHomeLogic.categoriesColor[index]),
                                       ),
                                       Text(
                                         '(${_userHomeLogic.categoriesList[index].subTitle} ${LanguageConstant.consultants.tr})',
-                                        style: TextStyle(
-                                            fontFamily: SarabunFontFamily.light,
-                                            fontSize: 10.sp,
-                                            color: customTextGreyColor),
+                                        style: TextStyle(fontFamily: SarabunFontFamily.light, fontSize: 10.sp, color: customTextGreyColor),
                                       ),
                                     ],
                                   ),

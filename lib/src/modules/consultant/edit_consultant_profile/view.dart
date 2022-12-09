@@ -16,8 +16,7 @@ class EditConsultantProfilePage extends StatefulWidget {
   const EditConsultantProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<EditConsultantProfilePage> createState() =>
-      _EditConsultantProfilePageState();
+  State<EditConsultantProfilePage> createState() => _EditConsultantProfilePageState();
 }
 
 class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
@@ -29,13 +28,11 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Get.find<GeneralController>().updateFormLoaderController(true);
     });
-    Get.find<EditConsultantProfileLogic>().scrollController = ScrollController()
-      ..addListener(Get.find<EditConsultantProfileLogic>().scrollListener);
-    Get.find<EditConsultantProfileLogic>().stepperScrollController =
-        ScrollController();
+    Get.find<EditConsultantProfileLogic>().scrollController = ScrollController()..addListener(Get.find<EditConsultantProfileLogic>().scrollListener);
+    Get.find<EditConsultantProfileLogic>().stepperScrollController = ScrollController();
 
     Get.find<EditConsultantProfileLogic>().emptyOccupationDropDownList();
     Get.find<EditConsultantProfileLogic>().emptyCountryDropDownList();
@@ -45,27 +42,15 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
 
     Get.find<EditConsultantProfileLogic>().getSetData(context);
 
-    getMethod(
-        context,
-        getUserProfileUrl,
-        {
-          'token': '123',
-          'user_id': Get.find<GeneralController>().storageBox.read('userID')
-        },
-        true,
-        getUserProfileForEditRepo);
-    getMethod(context, mentorProfileGenericDataUrl, {'token': '123'}, false,
-        getGenericDataRepo);
+    getMethod(context, getUserProfileUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getUserProfileForEditRepo);
+    getMethod(context, mentorProfileGenericDataUrl, {'token': '123'}, false, getGenericDataRepo);
 
-    getMethod(context, mentorParentCategoryDataUrl, {'token': '123'}, false,
-        getParentCategoryRepo);
+    getMethod(context, mentorParentCategoryDataUrl, {'token': '123'}, false, getParentCategoryRepo);
   }
 
   @override
   void dispose() {
-    Get.find<EditConsultantProfileLogic>()
-        .scrollController!
-        .removeListener(Get.find<EditConsultantProfileLogic>().scrollListener);
+    Get.find<EditConsultantProfileLogic>().scrollController!.removeListener(Get.find<EditConsultantProfileLogic>().scrollListener);
     Get.find<EditConsultantProfileLogic>().scrollController!.dispose();
     super.dispose();
   }
@@ -73,8 +58,7 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
-      return GetBuilder<EditConsultantProfileLogic>(
-          builder: (_editConsultantProfileLogic) {
+      return GetBuilder<EditConsultantProfileLogic>(builder: (_editConsultantProfileLogic) {
         return GestureDetector(
           onTap: () {
             _generalController.focusOut(context);
@@ -84,8 +68,7 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
             backgroundColor: customThemeColor,
             body: NestedScrollView(
                 controller: _editConsultantProfileLogic.scrollController,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
+                headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
                     ///---header
                     SliverAppBar(
@@ -94,9 +77,7 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
                       pinned: true,
                       snap: false,
                       elevation: 0,
-                      backgroundColor: _editConsultantProfileLogic.isShrink
-                          ? customThemeColor
-                          : Colors.transparent,
+                      backgroundColor: _editConsultantProfileLogic.isShrink ? customThemeColor : Colors.transparent,
                       leading: InkWell(
                         onTap: () {
                           Get.back();
@@ -112,10 +93,7 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
                       flexibleSpace: FlexibleSpaceBar(
                         centerTitle: true,
                         background: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(40.r))),
+                          decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.vertical(bottom: Radius.circular(40.r))),
                           child: Column(
                             children: [
                               Stack(
@@ -123,104 +101,61 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
                                   SvgPicture.asset(
                                     'assets/images/bookAppointmentAppBar.svg',
                                     width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height *
-                                        .23,
+                                    height: MediaQuery.of(context).size.height * .23,
                                     fit: BoxFit.fill,
                                   ),
                                   SafeArea(
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.w, 25.h, 0.w, 16.h),
+                                      padding: EdgeInsetsDirectional.fromSTEB(0.w, 25.h, 0.w, 16.h),
                                       child: Stack(
                                         children: [
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               SizedBox(
                                                 height: 25.h,
                                               ),
                                               Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 16.w),
-                                                child: Text(
-                                                    LanguageConstant
-                                                        .editProfile.tr,
-                                                    style:
-                                                        state.headingTextStyle),
+                                                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                                child: Text(LanguageConstant.editProfile.tr, style: state.headingTextStyle),
                                               ),
                                               SizedBox(
                                                 height: 10.h,
                                               ),
                                               Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 16.w),
-                                                child: Text(
-                                                    LanguageConstant
-                                                        .editYourProfile.tr,
-                                                    style: state
-                                                        .subHeadingTextStyle),
+                                                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                                child: Text(LanguageConstant.editYourProfile.tr, style: state.subHeadingTextStyle),
                                               ),
 
                                               ///---stepper
                                               Column(
                                                 children: [
                                                   Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(5.w,
-                                                                  20.h, 5.w, 0),
+                                                      padding: EdgeInsetsDirectional.fromSTEB(5.w, 20.h, 5.w, 0),
                                                       child: SizedBox(
                                                         height: 85.h,
-                                                        width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width,
+                                                        width: MediaQuery.of(context).size.width,
                                                         child: ListView(
-                                                            controller:
-                                                                _editConsultantProfileLogic
-                                                                    .stepperScrollController,
-                                                            scrollDirection:
-                                                                Axis.horizontal,
-                                                            children:
-                                                                List.generate(
-                                                              _editConsultantProfileLogic
-                                                                  .stepperList
-                                                                  .length,
+                                                            controller: _editConsultantProfileLogic.stepperScrollController,
+                                                            scrollDirection: Axis.horizontal,
+                                                            children: List.generate(
+                                                              _editConsultantProfileLogic.stepperList.length,
                                                               (index) {
                                                                 return InkWell(
                                                                   onTap: () {
-                                                                    if (_editConsultantProfileLogic
-                                                                            .stepperList[
-                                                                                index]
-                                                                            .isCompleted! ||
-                                                                        _editConsultantProfileLogic
-                                                                            .stepperList[index]
-                                                                            .isSelected!) {
-                                                                      _editConsultantProfileLogic
-                                                                          .updateStepperIndex(
-                                                                              index);
+                                                                    if (_editConsultantProfileLogic.stepperList[index].isCompleted! || _editConsultantProfileLogic.stepperList[index].isSelected!) {
+                                                                      _editConsultantProfileLogic.updateStepperIndex(index);
                                                                     }
                                                                   },
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        .25,
-                                                                    child:
-                                                                        Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .center,
+                                                                  child: SizedBox(
+                                                                    width: MediaQuery.of(context).size.width * .25,
+                                                                    child: Column(
+                                                                      crossAxisAlignment: CrossAxisAlignment.center,
                                                                       children: [
                                                                         Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.start,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.center,
+                                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                                          crossAxisAlignment: CrossAxisAlignment.center,
                                                                           children: [
                                                                             index == 0
                                                                                 ? const Spacer()
@@ -268,17 +203,12 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
                                                                           ],
                                                                         ),
                                                                         SizedBox(
-                                                                          height:
-                                                                              4.h,
+                                                                          height: 4.h,
                                                                         ),
                                                                         Text(
-                                                                          _editConsultantProfileLogic
-                                                                              .stepperList[index]
-                                                                              .title!,
-                                                                          textAlign:
-                                                                              TextAlign.center,
-                                                                          style:
-                                                                              state.stepperLabelTextStyle,
+                                                                          _editConsultantProfileLogic.stepperList[index].title!,
+                                                                          textAlign: TextAlign.center,
+                                                                          style: state.stepperLabelTextStyle,
                                                                         ),
                                                                       ],
                                                                     ),
@@ -307,19 +237,10 @@ class _EditConsultantProfilePageState extends State<EditConsultantProfilePage> {
                 body: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        color: customTextFieldColor,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(25.r),
-                            topRight: Radius.circular(25.r))),
+                    decoration: BoxDecoration(color: customTextFieldColor, borderRadius: BorderRadius.only(topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r))),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25.r),
-                          topRight: Radius.circular(25.r)),
-                      child: _editConsultantProfileLogic
-                          .consultantProfileNavigation(
-                              _editConsultantProfileLogic.stepperIndex,
-                              context),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r)),
+                      child: _editConsultantProfileLogic.consultantProfileNavigation(_editConsultantProfileLogic.stepperIndex, context),
                     ))),
           ),
         );

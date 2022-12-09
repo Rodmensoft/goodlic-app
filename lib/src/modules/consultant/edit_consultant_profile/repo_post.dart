@@ -3,13 +3,15 @@ import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/logic.dart';
-import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_account_info.dart';
-import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_general_info.dart';
-import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_skill_info.dart';
+
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../create_profile/models/model_post_account_info.dart';
+import '../create_profile/models/model_post_general_info.dart';
+import '../create_profile/models/model_post_skill_info.dart';
 
 mentorGeneralInfo2Repo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {

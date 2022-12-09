@@ -1,14 +1,15 @@
 class ExperienceInfoPostModel {
   ExperienceInfoPostModel({
-      bool? status, 
-      int? success,
+    bool? status,
+    int? success,
     ExperienceInfoPostModelData? data,
-      String? msg,}){
+    String? msg,
+  }) {
     _status = status;
     _success = success;
     _data = data;
     _msg = msg;
-}
+  }
 
   ExperienceInfoPostModel.fromJson(dynamic json) {
     _status = json['Status'];
@@ -36,14 +37,14 @@ class ExperienceInfoPostModel {
     map['msg'] = _msg;
     return map;
   }
-
 }
 
 class ExperienceInfoPostModelData {
   ExperienceInfoPostModelData({
-      Experience? experience,}){
+    Experience? experience,
+  }) {
     _experience = experience;
-}
+  }
 
   ExperienceInfoPostModelData.fromJson(dynamic json) {
     _experience = json['experience'] != null ? Experience.fromJson(json['experience']) : null;
@@ -59,19 +60,19 @@ class ExperienceInfoPostModelData {
     }
     return map;
   }
-
 }
 
 class Experience {
   Experience({
-      String? mentorId, 
-      String? company, 
-      String? from, 
-      String? to, 
-      String? imagePath, 
-      String? updatedAt, 
-      String? createdAt, 
-      int? id,}){
+    String? mentorId,
+    String? company,
+    String? from,
+    String? to,
+    String? imagePath,
+    String? updatedAt,
+    String? createdAt,
+    int? id,
+  }) {
     _mentorId = mentorId;
     _company = company;
     _from = from;
@@ -80,7 +81,7 @@ class Experience {
     _updatedAt = updatedAt;
     _createdAt = createdAt;
     _id = id;
-}
+  }
 
   Experience.fromJson(dynamic json) {
     _mentorId = json['mentor_id'].toString();
@@ -122,5 +123,4 @@ class Experience {
     map['id'] = _id;
     return map;
   }
-
 }

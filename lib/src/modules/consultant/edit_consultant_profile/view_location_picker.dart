@@ -1,9 +1,10 @@
-import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/place_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
+
+import '../create_profile/models/place_service.dart';
 
 class PlacesAutoComplete extends StatefulWidget {
   const PlacesAutoComplete({Key? key, this.title}) : super(key: key);
@@ -53,15 +54,9 @@ class _PlacesAutoCompleteState extends State<PlacesAutoComplete> {
                   delegate: AddressSearch(sessionToken),
                 );
                 if (result != null) {
-                  final placeDetails = await PlaceApiProvider(sessionToken)
-                      .getPlaceDetailFromId(result.placeId);
+                  final placeDetails = await PlaceApiProvider(sessionToken).getPlaceDetailFromId(result.placeId);
 
-                  await saveData(
-                      latLong: json.encode({
-                        'lat': placeDetails['lat'],
-                        'lng': placeDetails['lng']
-                      }),
-                      place: result.description);
+                  await saveData(latLong: json.encode({'lat': placeDetails['lat'], 'lng': placeDetails['lng']}), place: result.description);
 
                   setState(() {});
                 }
@@ -127,41 +122,29 @@ class AddressSearch extends SearchDelegate<Suggestion> {
   @override
   Widget buildSuggestions(BuildContext context) {
     return FutureBuilder(
-      future: query == ""
-          ? null
-          : apiClient!.fetchSuggestions(
-              query, Localizations.localeOf(context).languageCode),
-      builder: (context, AsyncSnapshot<List<Suggestion>> snapshot) =>
-          query == ''
-              ? Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: const Text('Enter your address'),
+      future: query == "" ? null : apiClient!.fetchSuggestions(query, Localizations.localeOf(context).languageCode),
+      builder: (context, AsyncSnapshot<List<Suggestion>> snapshot) => query == ''
+          ? Container(
+              padding: const EdgeInsets.all(16.0),
+              child: const Text('Enter your address'),
+            )
+          : snapshot.hasData
+              ? ListView.builder(
+                  itemBuilder: (context, index) => Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), boxShadow: [
+                      BoxShadow(color: Colors.grey.withOpacity(0.5), offset: const Offset(0, 10), blurRadius: 10, spreadRadius: 3),
+                    ]),
+                    child: ListTile(
+                      title: Text(snapshot.data![index].description),
+                      onTap: () {
+                        close(context, snapshot.data![index]);
+                      },
+                    ),
+                  ),
+                  itemCount: snapshot.data!.length,
                 )
-              : snapshot.hasData
-                  ? ListView.builder(
-                      itemBuilder: (context, index) => Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  offset: const Offset(0, 10),
-                                  blurRadius: 10,
-                                  spreadRadius: 3),
-                            ]),
-                        child: ListTile(
-                          title: Text(snapshot.data![index].description),
-                          onTap: () {
-                            close(context, snapshot.data![index]);
-                          },
-                        ),
-                      ),
-                      itemCount: snapshot.data!.length,
-                    )
-                  : const SizedBox(child: Text('Loading...')),
+              : const SizedBox(child: Text('Loading...')),
     );
   }
 }

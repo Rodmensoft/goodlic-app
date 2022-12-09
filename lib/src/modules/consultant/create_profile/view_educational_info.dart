@@ -8,8 +8,7 @@ import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/logic.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_education_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/repo_delete.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/models/model_post_education_info.dart';
 import 'package:consultant_product/src/modules/image_full_view/view.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
@@ -25,6 +24,8 @@ import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
+
+import 'repos/repo_delete.dart';
 
 class EducationalInfoView extends StatefulWidget {
   const EducationalInfoView({Key? key}) : super(key: key);
@@ -70,38 +71,22 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                   children: [
                     ///---institution-field
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          15.w, 25.h, 15.w, 16.h),
+                      padding: EdgeInsetsDirectional.fromSTEB(15.w, 25.h, 15.w, 16.h),
                       child: TextFormField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp("[a-z A-Z ]"))
-                        ],
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z ]"))],
                         style: state.textFieldTextStyle,
                         controller: _institutionController,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              25.w, 15.h, 25.w, 15.h),
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                           hintText: LanguageConstant.institute.tr,
                           hintStyle: state.hintTextStyle,
                           fillColor: Colors.white,
                           filled: true,
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: customLightThemeColor)),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(color: Colors.red)),
+                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                          errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
@@ -119,15 +104,13 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                         ///---degree
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                15.w, 0, 8.w, 16.h),
+                            padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 8.w, 16.h),
                             child: ButtonTheme(
                               alignedDropdown: true,
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButtonFormField<String>(
                                   onTap: () {
-                                    FocusScopeNode currentFocus =
-                                        FocusScope.of(context);
+                                    FocusScopeNode currentFocus = FocusScope.of(context);
                                     if (!currentFocus.hasPrimaryFocus) {
                                       currentFocus.unfocus();
                                     }
@@ -137,31 +120,13 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                     style: state.hintTextStyle,
                                   ),
                                   decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            15.w, 14.h, 15.w, 14.h),
+                                    contentPadding: EdgeInsetsDirectional.fromSTEB(15.w, 14.h, 15.w, 14.h),
                                     fillColor: Colors.white,
                                     filled: true,
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: Colors.transparent)),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: Colors.transparent)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: customLightThemeColor)),
-                                    errorBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        borderSide: const BorderSide(
-                                            color: Colors.red)),
+                                    enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                    focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                                    errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                                   ),
                                   isExpanded: true,
                                   focusColor: Colors.white,
@@ -170,9 +135,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                   icon: const Icon(Icons.keyboard_arrow_down),
                                   iconSize: 25,
                                   value: _createProfileLogic.selectedDegree,
-                                  items: _createProfileLogic.degreeDropDownList
-                                      .map<DropdownMenuItem<String>>(
-                                          (String value) {
+                                  items: _createProfileLogic.degreeDropDownList.map<DropdownMenuItem<String>>((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
                                       child: Text(
@@ -183,8 +146,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                   }).toList(),
                                   onChanged: (String? value) {
                                     setState(() {
-                                      _createProfileLogic.selectedDegree =
-                                          value;
+                                      _createProfileLogic.selectedDegree = value;
                                     });
                                   },
                                   validator: (String? value) {
@@ -203,39 +165,22 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                         ///---subject
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                8.w, 0, 15.w, 16.h),
+                            padding: EdgeInsetsDirectional.fromSTEB(8.w, 0, 15.w, 16.h),
                             child: TextFormField(
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp("[a-z A-Z ]"))
-                              ],
+                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z ]"))],
                               style: state.textFieldTextStyle,
                               controller: _subjectController,
                               keyboardType: TextInputType.text,
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    25.w, 15.h, 25.w, 15.h),
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                                 hintText: LanguageConstant.subject.tr,
                                 hintStyle: state.hintTextStyle,
                                 fillColor: Colors.white,
                                 filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: customLightThemeColor)),
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide:
-                                        const BorderSide(color: Colors.red)),
+                                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                                errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                               ),
                               validator: (String? value) {
                                 if (value!.isEmpty) {
@@ -256,8 +201,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                         ///---year
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                15.w, 0, 15.w, 16.h),
+                            padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
                             child: TextFormField(
                               onTap: () async {
                                 showDialog(
@@ -269,17 +213,10 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                         width: 300,
                                         height: 300,
                                         child: Theme(
-                                          data: ThemeData(
-                                              colorScheme: ColorScheme
-                                                      .fromSwatch()
-                                                  .copyWith(
-                                                      primary:
-                                                          customThemeColor)),
+                                          data: ThemeData(colorScheme: ColorScheme.fromSwatch().copyWith(primary: customThemeColor)),
                                           child: YearPicker(
-                                            firstDate: DateTime(
-                                                DateTime.now().year - 50, 1),
-                                            lastDate: DateTime(
-                                                DateTime.now().year, 1),
+                                            firstDate: DateTime(DateTime.now().year - 50, 1),
+                                            lastDate: DateTime(DateTime.now().year, 1),
 
                                             // save the selected date to _selectedDate DateTime variable.
                                             // It's used to set the previous selected date when
@@ -288,15 +225,8 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                             selectedDate: DateTime.now(),
                                             onChanged: (DateTime dateTime) {
                                               setState(() {
-                                                _createProfileLogic
-                                                        .selectedYear =
-                                                    DateFormat('yyyy')
-                                                        .format(dateTime);
-                                                _yearController =
-                                                    TextEditingController(
-                                                        text:
-                                                            _createProfileLogic
-                                                                .selectedYear);
+                                                _createProfileLogic.selectedYear = DateFormat('yyyy').format(dateTime);
+                                                _yearController = TextEditingController(text: _createProfileLogic.selectedYear);
                                               });
                                               // close the dialog when year is selected.
                                               Navigator.pop(context);
@@ -314,34 +244,19 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                               controller: _yearController,
                               style: state.textFieldTextStyle,
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    25.w, 15.h, 25.w, 15.h),
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
                                 hintText: LanguageConstant.year.tr,
                                 hintStyle: state.hintTextStyle,
                                 fillColor: Colors.white,
                                 filled: true,
                                 suffixIcon: Padding(
-                                  padding:
-                                      const EdgeInsetsDirectional.all(15.0),
-                                  child: SvgPicture.asset(
-                                      'assets/Icons/calendarIcon.svg'),
+                                  padding: const EdgeInsetsDirectional.all(15.0),
+                                  child: SvgPicture.asset('assets/Icons/calendarIcon.svg'),
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide: const BorderSide(
-                                        color: customLightThemeColor)),
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    borderSide:
-                                        const BorderSide(color: Colors.red)),
+                                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                                errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                               ),
                               validator: (String? value) {
                                 if (value!.isEmpty) {
@@ -383,21 +298,17 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
 
                     ///---add-button
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
                       child: Center(
                         child: InkWell(
                           onTap: () {
-                            FocusScopeNode currentFocus =
-                                FocusScope.of(context);
+                            FocusScopeNode currentFocus = FocusScope.of(context);
                             if (!currentFocus.hasPrimaryFocus) {
                               currentFocus.unfocus();
                             }
-                            if (_educationalInfoFormKey.currentState!
-                                .validate()) {
+                            if (_educationalInfoFormKey.currentState!.validate()) {
                               if (degreeImage != null) {
-                                Get.find<GeneralController>()
-                                    .updateFormLoaderController(true);
+                                Get.find<GeneralController>().updateFormLoaderController(true);
                                 mentorEducationInfoRepo(degreeImage);
                               } else {
                                 showDialog(
@@ -407,8 +318,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                       return CustomDialogBox(
                                         title: LanguageConstant.sorry.tr,
                                         titleColor: customDialogErrorColor,
-                                        descriptions: LanguageConstant
-                                            .uploadYourProfilePicture.tr,
+                                        descriptions: LanguageConstant.uploadYourProfilePicture.tr,
                                         text: LanguageConstant.ok.tr,
                                         functionCall: () {
                                           Navigator.pop(context);
@@ -422,9 +332,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                           child: Container(
                             height: 40,
                             width: MediaQuery.of(context).size.width * .45,
-                            decoration: BoxDecoration(
-                                color: customLightThemeColor,
-                                borderRadius: BorderRadius.circular(8)),
+                            decoration: BoxDecoration(color: customLightThemeColor, borderRadius: BorderRadius.circular(8)),
                             child: Center(
                               child: Text(
                                 '+${LanguageConstant.addEducation.tr}',
@@ -438,42 +346,29 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
 
                     ///---added-record-preview
                     Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            15, 15, 15, 20),
+                        padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 20),
                         child: Wrap(
-                          children: List.generate(
-                              _createProfileLogic
-                                  .forDisplayEducationList!.length, (index) {
+                          children: List.generate(_createProfileLogic.forDisplayEducationList!.length, (index) {
                             return Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0, 15, 0, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
                               child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(14),
-                                      color: Colors.white),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(14), color: Colors.white),
                                   child: Padding(
-                                    padding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            15, 15, 7, 15),
+                                    padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 7, 15),
                                     child: Column(
                                       children: [
                                         ///---institution
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    LanguageConstant
-                                                        .institute.tr,
-                                                    style: state
-                                                        .previewLabelTextStyle,
+                                                    LanguageConstant.institute.tr,
+                                                    style: state.previewLabelTextStyle,
                                                   ),
                                                   const SizedBox(
                                                     height: 4,
@@ -481,43 +376,24 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                   Text(
                                                     '${_createProfileLogic.forDisplayEducationList![index].institute}',
                                                     softWrap: true,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
+                                                    overflow: TextOverflow.ellipsis,
                                                     maxLines: 2,
-                                                    style: state
-                                                        .previewValueTextStyle,
+                                                    style: state.previewValueTextStyle,
                                                   ),
                                                 ],
                                               ),
                                             ),
                                             InkWell(
                                                 onTap: () {
-                                                  _generalController
-                                                      .updateFormLoaderController(
-                                                          true);
-                                                  postMethod(
-                                                      context,
-                                                      mentorEducationalInfoDeleteUrl,
-                                                      {
-                                                        'token': '123',
-                                                        'id': _createProfileLogic
-                                                            .forDisplayEducationList![
-                                                                index]
-                                                            .id
-                                                      },
-                                                      true,
+                                                  _generalController.updateFormLoaderController(true);
+                                                  postMethod(context, mentorEducationalInfoDeleteUrl, {'token': '123', 'id': _createProfileLogic.forDisplayEducationList![index].id}, true,
                                                       deleteEducationRepo);
-                                                  _createProfileLogic
-                                                      .forDisplayEducationList!
-                                                      .removeAt(index);
+                                                  _createProfileLogic.forDisplayEducationList!.removeAt(index);
                                                   setState(() {});
                                                 },
                                                 child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .all(8.0),
-                                                  child: SvgPicture.asset(
-                                                      'assets/Icons/deleteIcon.svg'),
+                                                  padding: const EdgeInsetsDirectional.all(8.0),
+                                                  child: SvgPicture.asset('assets/Icons/deleteIcon.svg'),
                                                 ))
                                           ],
                                         ),
@@ -531,38 +407,31 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                           children: [
                                             Expanded(
                                               child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     LanguageConstant.degree.tr,
-                                                    style: state
-                                                        .previewLabelTextStyle,
+                                                    style: state.previewLabelTextStyle,
                                                   ),
                                                   const SizedBox(
                                                     height: 4,
                                                   ),
                                                   Text(
                                                     '${_createProfileLogic.forDisplayEducationList![index].degree}',
-                                                    style: state
-                                                        .previewValueTextStyle,
+                                                    style: state.previewValueTextStyle,
                                                   ),
                                                 ],
                                               ),
                                             ),
                                             Expanded(
                                               child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     LanguageConstant.subject.tr,
-                                                    style: state
-                                                        .previewLabelTextStyle,
+                                                    style: state.previewLabelTextStyle,
                                                   ),
                                                   const SizedBox(
                                                     height: 4,
@@ -570,11 +439,9 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                   Text(
                                                     '${_createProfileLogic.forDisplayEducationList![index].subject}',
                                                     softWrap: true,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
+                                                    overflow: TextOverflow.ellipsis,
                                                     maxLines: 1,
-                                                    style: state
-                                                        .previewValueTextStyle,
+                                                    style: state.previewValueTextStyle,
                                                   ),
                                                 ],
                                               ),
@@ -590,71 +457,42 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                           children: [
                                             Expanded(
                                               child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     LanguageConstant.year.tr,
-                                                    style: state
-                                                        .previewLabelTextStyle,
+                                                    style: state.previewLabelTextStyle,
                                                   ),
                                                   const SizedBox(
                                                     height: 4,
                                                   ),
                                                   Text(
                                                     '${_createProfileLogic.forDisplayEducationList![index].period}',
-                                                    style: state
-                                                        .previewValueTextStyle,
+                                                    style: state.previewValueTextStyle,
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                            _createProfileLogic
-                                                        .forDisplayEducationList![
-                                                            index]
-                                                        .imagePath !=
-                                                    null
+                                            _createProfileLogic.forDisplayEducationList![index].imagePath != null
                                                 ? Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .only(end: 8.w),
+                                                    padding: EdgeInsetsDirectional.only(end: 8.w),
                                                     child: InkWell(
                                                       onTap: () {
                                                         Get.to(ImageViewScreen(
-                                                          networkImage: _createProfileLogic
-                                                                  .forDisplayEducationList![
-                                                                      index]
-                                                                  .imagePath!
-                                                                  .contains(
-                                                                      'assets')
+                                                          networkImage: _createProfileLogic.forDisplayEducationList![index].imagePath!.contains('assets')
                                                               ? '$mediaUrl${_createProfileLogic.forDisplayEducationList![index].imagePath}'
-                                                              : _createProfileLogic
-                                                                  .forDisplayEducationList![
-                                                                      index]
-                                                                  .imagePath!,
+                                                              : _createProfileLogic.forDisplayEducationList![index].imagePath!,
                                                         ));
                                                       },
                                                       child: SizedBox(
                                                           height: 30.h,
                                                           width: 30.w,
                                                           child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4.r),
-                                                            child: Image.network(_createProfileLogic
-                                                                    .forDisplayEducationList![
-                                                                        index]
-                                                                    .imagePath!
-                                                                    .contains(
-                                                                        'assets')
+                                                            borderRadius: BorderRadius.circular(4.r),
+                                                            child: Image.network(_createProfileLogic.forDisplayEducationList![index].imagePath!.contains('assets')
                                                                 ? '$mediaUrl${_createProfileLogic.forDisplayEducationList![index].imagePath}'
-                                                                : _createProfileLogic
-                                                                    .forDisplayEducationList![
-                                                                        index]
-                                                                    .imagePath!),
+                                                                : _createProfileLogic.forDisplayEducationList![index].imagePath!),
                                                           )),
                                                     ),
                                                   )
@@ -674,19 +512,11 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                 padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 0),
                 child: InkWell(
                     onTap: () {
-                      if (_createProfileLogic
-                          .forDisplayEducationList!.isNotEmpty) {
+                      if (_createProfileLogic.forDisplayEducationList!.isNotEmpty) {
                         setState(() {
-                          _createProfileLogic
-                              .stepperList[_createProfileLogic.stepperIndex!]
-                              .isSelected = false;
-                          _createProfileLogic
-                              .stepperList[_createProfileLogic.stepperIndex!]
-                              .isCompleted = true;
-                          _createProfileLogic
-                              .stepperList[
-                                  _createProfileLogic.stepperIndex! + 1]
-                              .isSelected = true;
+                          _createProfileLogic.stepperList[_createProfileLogic.stepperIndex!].isSelected = false;
+                          _createProfileLogic.stepperList[_createProfileLogic.stepperIndex!].isCompleted = true;
+                          _createProfileLogic.stepperList[_createProfileLogic.stepperIndex! + 1].isSelected = true;
                           _createProfileLogic.updateStepperIndex(2);
                         });
                       } else {
@@ -697,8 +527,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                               return CustomDialogBox(
                                 title: LanguageConstant.failed.tr,
                                 titleColor: customDialogErrorColor,
-                                descriptions:
-                                    LanguageConstant.addEducationPlease.tr,
+                                descriptions: LanguageConstant.addEducationPlease.tr,
                                 text: LanguageConstant.ok.tr,
                                 functionCall: () {
                                   Navigator.pop(context);
@@ -708,8 +537,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                             });
                       }
                     },
-                    child: MyCustomBottomBar(
-                        title: LanguageConstant.nextStep.tr, disable: false)),
+                    child: MyCustomBottomBar(title: LanguageConstant.nextStep.tr, disable: false)),
               )),
         ),
       ),
@@ -729,14 +557,8 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                     setState(() {
                       degreeImagesList = [];
                     });
-                    degreeImagesList.add(await ImagePickerGC.pickImage(
-                        enableCloseButton: true,
-                        context: context,
-                        source: ImgSource.Camera,
-                        barrierDismissible: true,
-                        imageQuality: 10,
-                        maxWidth: 400,
-                        maxHeight: 600));
+                    degreeImagesList.add(
+                        await ImagePickerGC.pickImage(enableCloseButton: true, context: context, source: ImgSource.Camera, barrierDismissible: true, imageQuality: 10, maxWidth: 400, maxHeight: 600));
                     if (degreeImagesList.isNotEmpty) {
                       setState(() {
                         degreeImage = File(degreeImagesList[0].path);
@@ -745,10 +567,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                   },
                   child: Text(
                     LanguageConstant.camera.tr,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5!
-                        .copyWith(fontSize: 18),
+                    style: Theme.of(context).textTheme.headline5!.copyWith(fontSize: 18),
                   )),
               CupertinoDialogAction(
                   isDefaultAction: true,
@@ -757,14 +576,8 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                     setState(() {
                       degreeImagesList = [];
                     });
-                    degreeImagesList.add(await ImagePickerGC.pickImage(
-                        enableCloseButton: true,
-                        context: context,
-                        source: ImgSource.Gallery,
-                        barrierDismissible: true,
-                        imageQuality: 10,
-                        maxWidth: 400,
-                        maxHeight: 600));
+                    degreeImagesList.add(
+                        await ImagePickerGC.pickImage(enableCloseButton: true, context: context, source: ImgSource.Gallery, barrierDismissible: true, imageQuality: 10, maxWidth: 400, maxHeight: 600));
                     if (degreeImagesList.isNotEmpty) {
                       setState(() {
                         degreeImage = File(degreeImagesList[0].path);
@@ -773,10 +586,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                   },
                   child: Text(
                     LanguageConstant.gallery.tr,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5!
-                        .copyWith(fontSize: 18),
+                    style: Theme.of(context).textTheme.headline5!.copyWith(fontSize: 18),
                   )),
             ],
           );
@@ -784,8 +594,7 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
   }
 
   mentorEducationInfoRepo(File? file1) async {
-    dio_instance.FormData formData =
-        dio_instance.FormData.fromMap(<String, dynamic>{
+    dio_instance.FormData formData = dio_instance.FormData.fromMap(<String, dynamic>{
       'token': '123',
       'mentor_id': Get.find<GeneralController>().storageBox.read('userID'),
       'institute': _institutionController.text,
@@ -797,24 +606,16 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
       )
     });
     dio_instance.Dio dio = dio_instance.Dio();
-    setCustomHeader(dio, 'Authorization',
-        'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
+    setCustomHeader(dio, 'Authorization', 'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
     dio_instance.Response response;
     try {
       response = await dio.post(mentorEducationalInfoPostUrl, data: formData);
 
       if (response.statusCode == 200) {
-        Get.find<CreateProfileLogic>().educationInfoPostModel =
-            EducationInfoPostModel.fromJson(response.data);
-        if (Get.find<CreateProfileLogic>().educationInfoPostModel.status ==
-            true) {
-          Get.find<CreateProfileLogic>().updateForDisplayEducationList(
-              Get.find<CreateProfileLogic>()
-                  .educationInfoPostModel
-                  .data!
-                  .education);
-          Get.snackbar('${LanguageConstant.addedSuccessfully.tr}!', '',
-              colorText: Colors.black, backgroundColor: Colors.white);
+        Get.find<CreateProfileLogic>().educationInfoPostModel = EducationInfoPostModel.fromJson(response.data);
+        if (Get.find<CreateProfileLogic>().educationInfoPostModel.status == true) {
+          Get.find<CreateProfileLogic>().updateForDisplayEducationList(Get.find<CreateProfileLogic>().educationInfoPostModel.data!.education);
+          Get.snackbar('${LanguageConstant.addedSuccessfully.tr}!', '', colorText: Colors.black, backgroundColor: Colors.white);
 
           Get.find<GeneralController>().updateFormLoaderController(false);
           setState(() {

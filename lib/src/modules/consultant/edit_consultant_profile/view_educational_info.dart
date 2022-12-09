@@ -8,7 +8,6 @@ import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/logic.dart';
-import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_education_info.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_delete.dart';
 import 'package:consultant_product/src/modules/image_full_view/view.dart';
 import 'package:consultant_product/src/utils/colors.dart';
@@ -25,6 +24,8 @@ import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
+
+import '../create_profile/models/model_post_education_info.dart';
 
 class EducationalInfoView extends StatefulWidget {
   const EducationalInfoView({Key? key}) : super(key: key);

@@ -1,12 +1,11 @@
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_generic_data.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_get_categories.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_account_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_education_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_experience_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_general_info.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/model_post_skill_info.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/models/model_generic_data.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/models/model_get_categories.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/models/model_post_account_info.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/models/model_post_education_info.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/models/model_post_general_info.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/models/model_post_skill_info.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/view_account_info.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/view_confirmation.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/view_educational_info.dart';
@@ -17,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import 'models/model_get_sub_categorie.dart';
+import 'models/model_post_experience_info.dart';
 import 'state.dart';
 
 class CreateProfileLogic extends GetxController {
@@ -223,7 +224,9 @@ class CreateProfileLogic extends GetxController {
 
   ///-------------------------------skill-tab
   GetCategoriesModel getParentCategoriesModel = GetCategoriesModel();
-  GetCategoriesModel getChildCategoriesModel = GetCategoriesModel();
+  SubCategoriesModel subCategoriesModel = SubCategoriesModel();
+
+  // GetCategoriesModel getChildCategoriesModel = GetCategoriesModel();
   SkillInfoPostModel skillInfoPostModel = SkillInfoPostModel();
 
   String? selectedCategory;
@@ -239,19 +242,6 @@ class CreateProfileLogic extends GetxController {
     update();
   }
 
-  // List<String> subCategoryDropDownList = [];
-  //
-  // updateSubCategoryDropDownList(String newValue) {
-  //   subCategoryDropDownList.add(newValue);
-  //   update();
-  // }
-  //
-  // emptySubCategoryDropDownList() {
-  //   subCategoryDropDownList = [];
-  //   update();
-  // }
-
-  int? selectedSubCategoryID;
   List<int> selectedSubCategoriesIDList = [];
 
   updateSelectedSubCategoriesIDList(int newValue) {
@@ -264,40 +254,15 @@ class CreateProfileLogic extends GetxController {
     update();
   }
 
-  String? selectedSubCategory;
-  List<String> selectedSubCategoriesList = [];
+  List<int> selectedSubCategoriesExpandList = [];
 
-  updateSelectedSubCategoriesList(String newValue) {
-    selectedSubCategoriesList.add(newValue);
+  updateSelectedSubCategoriesExpandList(int newValue) {
+    selectedSubCategoriesExpandList.add(newValue);
     update();
   }
 
-  emptySelectedSubCategoriesList() {
-    selectedSubCategoriesList = [];
-    update();
-  }
-
-  List<GetCategoriesModel> allSubCategoriesList = [];
-
-  updateAllSubCategoriesList(GetCategoriesModel newValue) {
-    allSubCategoriesList.add(newValue);
-    update();
-  }
-
-  emptyAllSubCategoriesList() {
-    allSubCategoriesList = [];
-    update();
-  }
-
-  List<List<String>> allSubCategoriesForDropDownList = [];
-
-  updateAllSubCategoriesForDropDownList(List<String> newValue) {
-    allSubCategoriesForDropDownList.add(newValue);
-    update();
-  }
-
-  emptyAllSubCategoriesForDropDownList() {
-    allSubCategoriesForDropDownList = [];
+  emptySelectedSubCategoriesExpandList() {
+    selectedSubCategoriesExpandList = [];
     update();
   }
 

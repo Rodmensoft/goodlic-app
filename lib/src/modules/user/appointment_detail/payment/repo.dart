@@ -1,5 +1,3 @@
-
-
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/api_services/get_service.dart';
 import 'package:consultant_product/src/api_services/post_service.dart';
@@ -17,20 +15,14 @@ import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-stripePaymentRepoForLater(
-    BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+stripePaymentRepoForLater(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response.containsKey('original')) {
-      Get.find<AppointmentDetailLogic>().modelStripePayment =
-          ModelStripePayment.fromJson(response);
+      Get.find<AppointmentDetailLogic>().modelStripePayment = ModelStripePayment.fromJson(response);
 
       Get.find<GeneralController>().updateFormLoaderController(false);
 
-      if (Get.find<AppointmentDetailLogic>()
-              .modelStripePayment
-              .original!
-              .status ==
-          true) {
+      if (Get.find<AppointmentDetailLogic>().modelStripePayment.original!.status == true) {
         Get.find<AppointmentDetailLogic>().myWidth = 0;
         Get.find<AppointmentDetailLogic>().update();
 
@@ -47,29 +39,9 @@ stripePaymentRepoForLater(
             sendSMSRepo);
 
         ///----fcm-send-start
-        getMethod(
-            context,
-            fcmGetUrl,
-            {
-              'token': '123',
-              'user_id': Get.find<AppointmentDetailLogic>()
-                  .selectedAppointmentData
-                  .mentor!
-                  .id
-            },
-            true,
-            getFcmTokenRepo);
+        getMethod(context, fcmGetUrl, {'token': '123', 'user_id': Get.find<AppointmentDetailLogic>().selectedAppointmentData.mentor!.id}, true, getFcmTokenRepo);
 
-        getMethod(
-            context,
-            getUserAllAppointmentsURL,
-            {
-              'token': '123',
-              'mentee_id':
-                  Get.find<GeneralController>().storageBox.read('userID')
-            },
-            true,
-            getUserAllAppointmentsRepo);
+        getMethod(context, getUserAllAppointmentsURL, {'token': '123', 'mentee_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getUserAllAppointmentsRepo);
         Get.back();
         Get.back();
       } else {
@@ -98,8 +70,7 @@ stripePaymentRepoForLater(
       Get.find<AppointmentDetailLogic>().myWidth = 0;
       Get.find<AppointmentDetailLogic>().update();
       if (response['authorization_url'] != null) {
-        Get.find<GeneralController>().inAppWebService =
-            response['authorization_url'];
+        Get.find<GeneralController>().inAppWebService = response['authorization_url'];
         Get.off(const InAppWebPage());
       } else {
         showDialog(

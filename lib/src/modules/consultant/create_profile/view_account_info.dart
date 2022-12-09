@@ -3,7 +3,7 @@ import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/create_profile/logic.dart';
-import 'package:consultant_product/src/modules/consultant/create_profile/repo_post.dart';
+import 'package:consultant_product/src/modules/consultant/create_profile/repos/repo_post.dart';
 import 'package:consultant_product/src/utils/colors.dart';
 import 'package:consultant_product/src/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +25,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
   final GlobalKey<FormState> _accountInfoFormKey = GlobalKey();
 
   final TextEditingController _accountTitleController = TextEditingController();
-  final TextEditingController _accountNumberController =
-      TextEditingController();
+  final TextEditingController _accountNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,15 +46,13 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                   children: [
                     ///---bank
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          15.w, 25.h, 15.w, 16.h),
+                      padding: EdgeInsetsDirectional.fromSTEB(15.w, 25.h, 15.w, 16.h),
                       child: ButtonTheme(
                         alignedDropdown: true,
                         child: DropdownButtonHideUnderline(
                           child: DropdownButtonFormField<String>(
                             onTap: () {
-                              FocusScopeNode currentFocus =
-                                  FocusScope.of(context);
+                              FocusScopeNode currentFocus = FocusScope.of(context);
                               if (!currentFocus.hasPrimaryFocus) {
                                 currentFocus.unfocus();
                               }
@@ -65,26 +62,13 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                               style: state.hintTextStyle,
                             ),
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  15.w, 14.h, 15.w, 14.h),
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(15.w, 14.h, 15.w, 14.h),
                               fillColor: Colors.white,
                               filled: true,
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent)),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: customLightThemeColor)),
-                              errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide:
-                                      const BorderSide(color: Colors.red)),
+                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                              errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                             ),
                             isExpanded: true,
                             focusColor: Colors.white,
@@ -93,8 +77,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                             icon: const Icon(Icons.keyboard_arrow_down),
                             iconSize: 25,
                             value: _createProfileLogic.selectedBank,
-                            items: _createProfileLogic.bankDropDownList
-                                .map<DropdownMenuItem<String>>((String value) {
+                            items: _createProfileLogic.bankDropDownList.map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(
@@ -122,39 +105,22 @@ class _AccountInfoViewState extends State<AccountInfoView> {
 
                     ///---account-title-field
                     Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
+                      padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
                       child: TextFormField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp("[a-z A-Z ]"))
-                        ],
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z ]"))],
                         style: state.textFieldTextStyle,
                         controller: _accountTitleController,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              25.w, 15.h, 25.w, 15.h),
-                          hintText: LanguageConstant
-                              .accountTitle.tr.tr.capitalizeFirst,
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
+                          hintText: LanguageConstant.accountTitle.tr.tr.capitalizeFirst,
                           hintStyle: state.hintTextStyle,
                           fillColor: Colors.white,
                           filled: true,
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: customLightThemeColor)),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(color: Colors.red)),
+                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                          errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
@@ -168,38 +134,22 @@ class _AccountInfoViewState extends State<AccountInfoView> {
 
                     ///---account-number-field
                     Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
+                      padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
                       child: TextFormField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp("[0-9]"))
-                        ],
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
                         style: state.textFieldTextStyle,
                         controller: _accountNumberController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              25.w, 15.h, 25.w, 15.h),
-                          hintText:
-                              LanguageConstant.accountNumber.tr.capitalizeFirst,
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
+                          hintText: LanguageConstant.accountNumber.tr.capitalizeFirst,
                           hintStyle: state.hintTextStyle,
                           fillColor: Colors.white,
                           filled: true,
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(
-                                  color: customLightThemeColor)),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                              borderSide: const BorderSide(color: Colors.red)),
+                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                          errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) {
@@ -222,25 +172,18 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                         currentFocus.unfocus();
                       }
                       if (_accountInfoFormKey.currentState!.validate()) {
-                        Get.find<GeneralController>()
-                            .updateFormLoaderController(true);
+                        Get.find<GeneralController>().updateFormLoaderController(true);
 
                         setState(() {
-                          _createProfileLogic
-                              .stepperList[_createProfileLogic.stepperIndex!]
-                              .isSelected = false;
-                          _createProfileLogic
-                              .stepperList[_createProfileLogic.stepperIndex!]
-                              .isCompleted = true;
+                          _createProfileLogic.stepperList[_createProfileLogic.stepperIndex!].isSelected = false;
+                          _createProfileLogic.stepperList[_createProfileLogic.stepperIndex!].isCompleted = true;
                         });
                         postMethod(
                             context,
                             mentorAccountInfoUrl,
                             {
                               'token': '123',
-                              'mentor_id': Get.find<GeneralController>()
-                                  .storageBox
-                                  .read('userID'),
+                              'mentor_id': Get.find<GeneralController>().storageBox.read('userID'),
                               'account_title': _accountTitleController.text,
                               'account_number': _accountNumberController.text,
                               'bank': _createProfileLogic.selectedBank,
@@ -249,8 +192,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                             mentorAccountInfoRepo);
                       }
                     },
-                    child: MyCustomBottomBar(
-                        title: LanguageConstant.saveNext.tr, disable: false)),
+                    child: MyCustomBottomBar(title: LanguageConstant.saveNext.tr, disable: false)),
               )),
         ),
       ),

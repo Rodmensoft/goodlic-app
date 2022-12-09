@@ -1,12 +1,13 @@
-import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_education_info.dart';
-import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_experience_info.dart';
+import '../consultant/create_profile/models/model_post_education_info.dart';
+import '../consultant/create_profile/models/model_post_experience_info.dart';
 
 class GetConsultantProfileModel {
   GetConsultantProfileModel({
     bool? status,
     int? success,
     GetConsultantProfileModelData? data,
-    String? msg,}){
+    String? msg,
+  }) {
     _status = status;
     _success = success;
     _data = data;
@@ -39,12 +40,12 @@ class GetConsultantProfileModel {
     map['msg'] = _msg;
     return map;
   }
-
 }
 
 class GetConsultantProfileModelData {
   GetConsultantProfileModelData({
-    ConsultantDetailFromGetProfile? userDetail,}){
+    ConsultantDetailFromGetProfile? userDetail,
+  }) {
     _userDetail = userDetail;
   }
 
@@ -62,7 +63,6 @@ class GetConsultantProfileModelData {
     }
     return map;
   }
-
 }
 
 class ConsultantDetailFromGetProfile {
@@ -93,7 +93,8 @@ class ConsultantDetailFromGetProfile {
     UserCountry? userCountry,
     List<Education>? educations,
     List<Experience>? experiences,
-    CardDetail? cardDetail,}){
+    CardDetail? cardDetail,
+  }) {
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -273,7 +274,6 @@ class ConsultantDetailFromGetProfile {
     }
     return map;
   }
-
 }
 
 class CardDetail {
@@ -282,7 +282,8 @@ class CardDetail {
     String? accountTitle,
     String? accountNumber,
     String? bank,
-    int? mentorId,}){
+    int? mentorId,
+  }) {
     _id = id;
     _accountTitle = accountTitle;
     _accountNumber = accountNumber;
@@ -318,7 +319,6 @@ class CardDetail {
     map['mentor_id'] = _mentorId;
     return map;
   }
-
 }
 
 class UserCountry {
@@ -345,7 +345,8 @@ class UserCountry {
     String? createdAt,
     String? updatedAt,
     int? flag,
-    String? wikiDataId,}){
+    String? wikiDataId,
+  }) {
     _id = id;
     _name = name;
     _isoCode3 = isoCode3;
@@ -471,7 +472,6 @@ class UserCountry {
     map['wikiDataId'] = _wikiDataId;
     return map;
   }
-
 }
 
 class Mentor {
@@ -490,7 +490,8 @@ class Mentor {
     String? updatedAt,
     List<Categories>? categories,
     String? about,
-    int? experience,}){
+    int? experience,
+  }) {
     _id = id;
     _userId = userId;
     _description = description;
@@ -583,7 +584,6 @@ class Mentor {
     map['experience'] = _experience;
     return map;
   }
-
 }
 
 class Categories {
@@ -591,7 +591,8 @@ class Categories {
     int? id,
     int? mentorId,
     int? categoryId,
-    Category? category,}){
+    Category? category,
+  }) {
     _id = id;
     _mentorId = mentorId;
     _categoryId = categoryId;
@@ -624,7 +625,6 @@ class Categories {
     }
     return map;
   }
-
 }
 
 class Category {
@@ -636,7 +636,8 @@ class Category {
     String? imagePath,
     String? description,
     String? createdAt,
-    String? updatedAt,}){
+    String? updatedAt,
+  }) {
     _id = id;
     _parentId = parentId;
     _name = name;
@@ -687,14 +688,14 @@ class Category {
     map['updated_at'] = _updatedAt;
     return map;
   }
-
 }
 
 class ScheduleTypes {
   ScheduleTypes({
     int? appointmentTypeId,
     int? fee,
-    AppointmentType? appointmentType,}){
+    AppointmentType? appointmentType,
+  }) {
     _appointmentTypeId = appointmentTypeId;
     _fee = fee;
     _appointmentType = appointmentType;
@@ -722,14 +723,14 @@ class ScheduleTypes {
     }
     return map;
   }
-
 }
 
 class AppointmentType {
   AppointmentType({
     int? id,
     String? name,
-    int? isScheduleRequired,}){
+    int? isScheduleRequired,
+  }) {
     _id = id;
     _name = name;
     _isScheduleRequired = isScheduleRequired;
@@ -755,5 +756,4 @@ class AppointmentType {
     map['is_schedule_required'] = _isScheduleRequired;
     return map;
   }
-
 }

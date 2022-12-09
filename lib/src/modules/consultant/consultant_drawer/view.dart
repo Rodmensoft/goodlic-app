@@ -42,8 +42,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
       return GetBuilder<DashboardLogic>(builder: (_dashboardLogic) {
-        return GetBuilder<ConsultantDrawerLogic>(
-            builder: (_consultantDrawerLogic) {
+        return GetBuilder<ConsultantDrawerLogic>(builder: (_consultantDrawerLogic) {
           return ModalProgressHUD(
             inAsyncCall: _generalController.formLoaderController!,
             child: Scaffold(
@@ -72,52 +71,39 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
 
                           ///---profile-area
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16.w, vertical: 10.h),
+                            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Expanded(
-                                  child: _generalController
-                                              .getConsultantProfileModel.data ==
-                                          null
+                                  child: _generalController.getConsultantProfileModel.data == null
                                       ? SkeletonLoader(
                                           period: const Duration(seconds: 2),
                                           highlightColor: Colors.grey,
                                           direction: SkeletonDirection.ltr,
                                           builder: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               ///---image
                                               Container(
                                                 height: 49.h,
                                                 width: 49.w,
-                                                decoration: const BoxDecoration(
-                                                    color: Colors.white,
-                                                    shape: BoxShape.circle),
+                                                decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                                               ),
                                               SizedBox(
                                                 width: 15.w,
                                               ),
                                               Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
                                                   ///---name
                                                   Container(
                                                     height: 10.h,
                                                     width: 80.w,
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5.r)),
+                                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5.r)),
                                                   ),
 
                                                   SizedBox(
@@ -128,11 +114,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                                   Container(
                                                     height: 10.h,
                                                     width: 150.w,
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5.r)),
+                                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5.r)),
                                                   ),
                                                 ],
                                               ),
@@ -141,37 +123,20 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                           ),
                                         )
                                       : Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             ///---image
                                             Container(
                                               height: 49.h,
                                               width: 49.w,
-                                              decoration: const BoxDecoration(
-                                                  color: Colors.grey,
-                                                  shape: BoxShape.circle),
-                                              child: Get.find<GeneralController>()
-                                                          .getConsultantProfileModel
-                                                          .data!
-                                                          .userDetail!
-                                                          .imagePath ==
-                                                      null
+                                              decoration: const BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
+                                              child: Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath == null
                                                   ? const SizedBox()
                                                   : ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30),
+                                                      borderRadius: BorderRadius.circular(30),
                                                       child: Image.network(
-                                                        Get.find<GeneralController>()
-                                                                .getConsultantProfileModel
-                                                                .data!
-                                                                .userDetail!
-                                                                .imagePath!
-                                                                .contains(
-                                                                    'assets')
+                                                        Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
                                                             ? '$mediaUrl${Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath}'
                                                             : '${Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                         fit: BoxFit.cover,
@@ -182,19 +147,12 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                               width: 15.w,
                                             ),
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
                                                 ///---name
                                                 Text(
-                                                  Get.find<GeneralController>()
-                                                          .getConsultantProfileModel
-                                                          .data!
-                                                          .userDetail!
-                                                          .firstName ??
-                                                      '',
+                                                  Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.firstName ?? '',
                                                   style: state.nameTextStyle,
                                                 ),
 
@@ -204,12 +162,7 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
 
                                                 ///---email
                                                 Text(
-                                                  Get.find<GeneralController>()
-                                                          .getConsultantProfileModel
-                                                          .data!
-                                                          .userDetail!
-                                                          .email ??
-                                                      '',
+                                                  Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.email ?? '',
                                                   style: state.emailTextStyle,
                                                 ),
                                               ],
@@ -223,17 +176,13 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                       Get.back();
                                     },
                                     child: Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(5.w, 5.h, 0, 5.h),
+                                      padding: EdgeInsets.fromLTRB(5.w, 5.h, 0, 5.h),
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Center(
-                                            child: SvgPicture.asset(
-                                                'assets/Icons/drawerBackArrowIcon.svg'),
+                                            child: SvgPicture.asset('assets/Icons/drawerBackArrowIcon.svg'),
                                           ),
                                         ],
                                       ),
@@ -247,41 +196,20 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                           ),
 
                           ListTile(
-                            title: Text(LanguageConstant.onlineStatus.tr,
-                                style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontFamily: SarabunFontFamily.regular,
-                                    color: Colors.white)),
+                            title: Text(LanguageConstant.onlineStatus.tr, style: TextStyle(fontSize: 14.sp, fontFamily: SarabunFontFamily.regular, color: Colors.white)),
                             trailing: Switch(
                               activeColor: customLightThemeColor,
-                              value: Get.find<GeneralController>()
-                                          .getConsultantProfileModel
-                                          .data!
-                                          .userDetail!
-                                          .onlineStatus ==
-                                      'online'
-                                  ? true
-                                  : false,
+                              value: Get.find<GeneralController>().getConsultantProfileModel.data?.userDetail?.onlineStatus == 'online' ? true : false,
                               onChanged: (bool? newValue) {
                                 if (!newValue!) {
-                                  Get.find<GeneralController>()
-                                      .storageBox
-                                      .write('onlineStatus', 'off');
+                                  Get.find<GeneralController>().storageBox.write('onlineStatus', 'off');
                                 } else {
-                                  Get.find<GeneralController>()
-                                      .storageBox
-                                      .remove('onlineStatus');
+                                  Get.find<GeneralController>().storageBox.remove('onlineStatus');
                                 }
                                 postMethod(
                                     context,
                                     changeMentorOnlineStatusUrl,
-                                    {
-                                      'token': '123',
-                                      'user_id': Get.find<GeneralController>()
-                                          .storageBox
-                                          .read('userID'),
-                                      'status': newValue ? 'online' : 'offline'
-                                    },
+                                    {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID'), 'status': newValue ? 'online' : 'offline'},
                                     true,
                                     changeMentorOnlineStatusRepo);
                               },
@@ -291,39 +219,27 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                           ///---list
                           Expanded(
                               child: ListView(
-                            children: List.generate(
-                                _consultantDrawerLogic.drawerList.length,
-                                (index) {
-                              List<DrawerTile> drawerShowList =
-                                  _consultantDrawerLogic.drawerList;
+                            children: List.generate(_consultantDrawerLogic.drawerList.length, (index) {
+                              List<DrawerTile> drawerShowList = _consultantDrawerLogic.drawerList;
                               return Center(
                                 child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 70.w),
+                                  padding: EdgeInsets.symmetric(horizontal: 70.w),
                                   child: FadedSlideAnimation(
-                                    slideDuration:
-                                        const Duration(milliseconds: 1000),
-                                    fadeDuration:
-                                        const Duration(milliseconds: 2000),
+                                    slideDuration: const Duration(milliseconds: 1000),
+                                    fadeDuration: const Duration(milliseconds: 2000),
                                     beginOffset: const Offset(0.3, 0.2),
                                     endOffset: const Offset(0, 0),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         ListTile(
                                           onTap: () {
-                                            _consultantDrawerLogic
-                                                .consultantDrawerNavigation(
-                                                    index, context);
+                                            _consultantDrawerLogic.consultantDrawerNavigation(index, context);
                                           },
                                           leading: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
                                               SvgPicture.asset(
                                                 '${drawerShowList[index].icon}',
@@ -349,7 +265,6 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                               );
                             }),
                           )),
-
                         ],
                       ),
                     ),

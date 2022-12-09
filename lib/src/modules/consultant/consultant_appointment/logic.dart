@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:resize/resize.dart';
 
+import 'more_appointment_consultant_model.dart';
 import 'state.dart';
 
 class ConsultantAppointmentLogic extends GetxController {
@@ -13,6 +14,7 @@ class ConsultantAppointmentLogic extends GetxController {
   late TabController tabController;
 
   GetConsultantAppointmentModel getConsultantAppointmentModel = GetConsultantAppointmentModel();
+  MoreConsultantAppointmentModel moreConsultantAppointmentModel = MoreConsultantAppointmentModel();
 
   bool? getUserAppointmentLoader = true;
   updateGetUserAppointmentLoader(bool? newValue) {

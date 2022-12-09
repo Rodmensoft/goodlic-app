@@ -1,14 +1,15 @@
 class EducationInfoPostModel {
   EducationInfoPostModel({
-      bool? status, 
-      int? success,
+    bool? status,
+    int? success,
     EducationInfoPostModelData? data,
-      String? msg,}){
+    String? msg,
+  }) {
     _status = status;
     _success = success;
     _data = data;
     _msg = msg;
-}
+  }
 
   EducationInfoPostModel.fromJson(dynamic json) {
     _status = json['Status'];
@@ -36,14 +37,14 @@ class EducationInfoPostModel {
     map['msg'] = _msg;
     return map;
   }
-
 }
 
 class EducationInfoPostModelData {
   EducationInfoPostModelData({
-      Education? education,}){
+    Education? education,
+  }) {
     _education = education;
-}
+  }
 
   EducationInfoPostModelData.fromJson(dynamic json) {
     _education = json['education'] != null ? Education.fromJson(json['education']) : null;
@@ -59,20 +60,20 @@ class EducationInfoPostModelData {
     }
     return map;
   }
-
 }
 
 class Education {
   Education({
-      String? mentorId, 
-      String? institute, 
-      String? degree, 
-      String? subject, 
-      String? period, 
-      String? imagePath, 
-      String? updatedAt, 
-      String? createdAt, 
-      int? id,}){
+    String? mentorId,
+    String? institute,
+    String? degree,
+    String? subject,
+    String? period,
+    String? imagePath,
+    String? updatedAt,
+    String? createdAt,
+    int? id,
+  }) {
     _mentorId = mentorId;
     _institute = institute;
     _degree = degree;
@@ -82,10 +83,10 @@ class Education {
     _updatedAt = updatedAt;
     _createdAt = createdAt;
     _id = id;
-}
+  }
 
   Education.fromJson(dynamic json) {
-    _mentorId = json['mentor_id'];
+    _mentorId = json['mentor_id'].toString();
     _institute = json['institute'];
     _degree = json['degree'];
     _subject = json['subject'];
@@ -128,5 +129,4 @@ class Education {
     map['id'] = _id;
     return map;
   }
-
 }

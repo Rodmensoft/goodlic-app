@@ -36,15 +36,7 @@ class _MyAppointmentPageState extends State<MyAppointmentPage> with SingleTicker
     // TODO: implement initState
     super.initState();
 
-    getMethod(
-        context,
-        getUserAllAppointmentsURL,
-        {
-          'token': '123',
-          'mentee_id': Get.find<GeneralController>().storageBox.read('userID'),
-        },
-        true,
-        getUserAllAppointmentsRepo);
+    getMethod(context, getUserAllAppointmentsURL, {'token': '123', 'mentee_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getUserAllAppointmentsRepo);
     Get.find<MyAppointmentLogic>().tabController = TabController(length: logic.tabBarList.length, vsync: this);
 
     Get.find<MyAppointmentLogic>().scrollController = ScrollController()..addListener(Get.find<MyAppointmentLogic>().scrollListener);

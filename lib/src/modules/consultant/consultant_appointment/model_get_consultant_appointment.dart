@@ -55,16 +55,11 @@ class GetConsultantAppointmentModelData {
   }
 
   GetConsultantAppointmentModelData.fromJson(dynamic json) {
-    _pendingAppointments =
-        json['pendingAppointments'] != null ? AppointmentsPageData.fromJson(json['pendingAppointments']) : null;
-    _acceptedAppointments =
-        json['acceptedAppointments'] != null ? AppointmentsPageData.fromJson(json['acceptedAppointments']) : null;
-    _completedAppointments =
-        json['completedAppointments'] != null ? AppointmentsPageData.fromJson(json['completedAppointments']) : null;
-    _cancelledAppointments =
-        json['cancelledAppointments'] != null ? AppointmentsPageData.fromJson(json['cancelledAppointments']) : null;
-    _archivedAppointments =
-        json['archivedAppointments'] != null ? AppointmentsPageData.fromJson(json['archivedAppointments']) : null;
+    _pendingAppointments = json['pendingAppointments'] != null ? AppointmentsPageData.fromJson(json['pendingAppointments']) : null;
+    _acceptedAppointments = json['acceptedAppointments'] != null ? AppointmentsPageData.fromJson(json['acceptedAppointments']) : null;
+    _completedAppointments = json['completedAppointments'] != null ? AppointmentsPageData.fromJson(json['completedAppointments']) : null;
+    _cancelledAppointments = json['cancelledAppointments'] != null ? AppointmentsPageData.fromJson(json['cancelledAppointments']) : null;
+    _archivedAppointments = json['archivedAppointments'] != null ? AppointmentsPageData.fromJson(json['archivedAppointments']) : null;
   }
   AppointmentsPageData? _pendingAppointments;
   AppointmentsPageData? _acceptedAppointments;
@@ -114,94 +109,66 @@ class AppointmentsPageData {
     dynamic prevPageUrl,
     int? to,
     int? total,
-  }) {
-    _currentPage = currentPage;
-    _data = data;
-    _firstPageUrl = firstPageUrl;
-    _from = from;
-    _lastPage = lastPage;
-    _lastPageUrl = lastPageUrl;
-    _links = links;
-    _nextPageUrl = nextPageUrl;
-    _path = path;
-    _perPage = perPage;
-    _prevPageUrl = prevPageUrl;
-    _to = to;
-    _total = total;
-  }
+  });
 
   AppointmentsPageData.fromJson(dynamic json) {
-    _currentPage = json['current_page'];
+    currentPage = json['current_page'];
     if (json['data'] != null) {
-      _data = [];
+      data = [];
       json['data'].forEach((v) {
-        _data?.add(ConsultantAppointmentsData.fromJson(v));
+        data?.add(ConsultantAppointmentsData.fromJson(v));
       });
     }
-    _firstPageUrl = json['first_page_url'];
-    _from = json['from'];
-    _lastPage = json['last_page'];
-    _lastPageUrl = json['last_page_url'];
+    firstPageUrl = json['first_page_url'];
+    from = json['from'];
+    lastPage = json['last_page'];
+    lastPageUrl = json['last_page_url'];
     if (json['links'] != null) {
-      _links = [];
+      links = [];
       json['links'].forEach((v) {
-        _links?.add(Links.fromJson(v));
+        links?.add(Links.fromJson(v));
       });
     }
-    _nextPageUrl = json['next_page_url'];
-    _path = json['path'];
-    _perPage = json['per_page'];
-    _prevPageUrl = json['prev_page_url'];
-    _to = json['to'];
-    _total = json['total'];
+    nextPageUrl = json['next_page_url'];
+    path = json['path'];
+    perPage = json['per_page'];
+    prevPageUrl = json['prev_page_url'];
+    to = json['to'];
+    total = json['total'];
   }
-  int? _currentPage;
-  List<ConsultantAppointmentsData>? _data;
-  String? _firstPageUrl;
-  int? _from;
-  int? _lastPage;
-  String? _lastPageUrl;
-  List<Links>? _links;
-  String? _nextPageUrl;
-  String? _path;
-  int? _perPage;
-  dynamic _prevPageUrl;
-  int? _to;
-  int? _total;
-
-  int? get currentPage => _currentPage;
-  List<ConsultantAppointmentsData>? get data => _data;
-  String? get firstPageUrl => _firstPageUrl;
-  int? get from => _from;
-  int? get lastPage => _lastPage;
-  String? get lastPageUrl => _lastPageUrl;
-  List<Links>? get links => _links;
-  String? get nextPageUrl => _nextPageUrl;
-  String? get path => _path;
-  int? get perPage => _perPage;
-  dynamic get prevPageUrl => _prevPageUrl;
-  int? get to => _to;
-  int? get total => _total;
+  int? currentPage;
+  List<ConsultantAppointmentsData>? data;
+  String? firstPageUrl;
+  int? from;
+  int? lastPage;
+  String? lastPageUrl;
+  List<Links>? links;
+  String? nextPageUrl;
+  String? path;
+  int? perPage;
+  dynamic prevPageUrl;
+  int? to;
+  int? total;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['current_page'] = _currentPage;
-    if (_data != null) {
-      map['data'] = _data?.map((v) => v.toJson()).toList();
+    map['current_page'] = currentPage;
+    if (data != null) {
+      map['data'] = data?.map((v) => v.toJson()).toList();
     }
-    map['first_page_url'] = _firstPageUrl;
-    map['from'] = _from;
-    map['last_page'] = _lastPage;
-    map['last_page_url'] = _lastPageUrl;
-    if (_links != null) {
-      map['links'] = _links?.map((v) => v.toJson()).toList();
+    map['first_page_url'] = firstPageUrl;
+    map['from'] = from;
+    map['last_page'] = lastPage;
+    map['last_page_url'] = lastPageUrl;
+    if (links != null) {
+      map['links'] = links?.map((v) => v.toJson()).toList();
     }
-    map['next_page_url'] = _nextPageUrl;
-    map['path'] = _path;
-    map['per_page'] = _perPage;
-    map['prev_page_url'] = _prevPageUrl;
-    map['to'] = _to;
-    map['total'] = _total;
+    map['next_page_url'] = nextPageUrl;
+    map['path'] = path;
+    map['per_page'] = perPage;
+    map['prev_page_url'] = prevPageUrl;
+    map['to'] = to;
+    map['total'] = total;
     return map;
   }
 }

@@ -4,7 +4,6 @@ import 'package:consultant_product/src/api_services/post_service.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
 import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/logic.dart';
-import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/model_post_skill_info.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_delete.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_get.dart';
 import 'package:consultant_product/src/modules/consultant/edit_consultant_profile/repo_post.dart';
@@ -16,6 +15,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
+
+import '../create_profile/models/model_get_sub_categorie.dart';
+import '../create_profile/models/model_post_skill_info.dart';
 
 class SkillInfoView extends StatefulWidget {
   const SkillInfoView({Key? key}) : super(key: key);
@@ -33,13 +35,9 @@ class _SkillInfoViewState extends State<SkillInfoView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Get.find<EditConsultantProfileLogic>().scrollController!.animateTo(
-        Get.find<EditConsultantProfileLogic>()
-            .scrollController!
-            .position
-            .minScrollExtent,
-        curve: Curves.easeOut,
-        duration: const Duration(milliseconds: 500));
+    Get.find<EditConsultantProfileLogic>()
+        .scrollController!
+        .animateTo(Get.find<EditConsultantProfileLogic>().scrollController!.position.minScrollExtent, curve: Curves.easeOut, duration: const Duration(milliseconds: 500));
   }
 
   @override
@@ -61,15 +59,13 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                   children: [
                     ///---category
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          15.w, 25.h, 15.w, 16.h),
+                      padding: EdgeInsetsDirectional.fromSTEB(15.w, 25.h, 15.w, 16.h),
                       child: ButtonTheme(
                         alignedDropdown: true,
                         child: DropdownButtonHideUnderline(
                           child: DropdownButtonFormField<String>(
                             onTap: () {
-                              FocusScopeNode currentFocus =
-                                  FocusScope.of(context);
+                              FocusScopeNode currentFocus = FocusScope.of(context);
                               if (!currentFocus.hasPrimaryFocus) {
                                 currentFocus.unfocus();
                               }
@@ -79,26 +75,13 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                               style: state.hintTextStyle,
                             ),
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  15.w, 14.h, 15.w, 14.h),
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(15.w, 14.h, 15.w, 14.h),
                               fillColor: Colors.white,
                               filled: true,
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent)),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide: const BorderSide(
-                                      color: customLightThemeColor)),
-                              errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  borderSide:
-                                      const BorderSide(color: Colors.red)),
+                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                              errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
                             ),
                             isExpanded: true,
                             focusColor: Colors.white,
@@ -107,9 +90,7 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             icon: const Icon(Icons.keyboard_arrow_down),
                             iconSize: 25,
                             value: _editConsultantProfileLogic.selectedCategory,
-                            items: _editConsultantProfileLogic
-                                .categoryDropDownList
-                                .map<DropdownMenuItem<String>>((String value) {
+                            items: _editConsultantProfileLogic.categoryDropDownList.map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(
@@ -119,47 +100,22 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                               );
                             }).toList(),
                             onChanged: (String? value) {
-                              _editConsultantProfileLogic
-                                  .emptySelectedSubCategoriesIDList();
-                              _editConsultantProfileLogic
-                                  .emptyAllSubCategoriesList();
-                              _editConsultantProfileLogic
-                                  .emptyAllSubCategoriesForDropDownList();
-                              _editConsultantProfileLogic
-                                  .emptySelectedSubCategoriesList();
+                              _editConsultantProfileLogic.emptySelectedSubCategoriesIDList();
+                              _editConsultantProfileLogic.emptySelectedSubCategoriesExpandList();
                               setState(() {
-                                _editConsultantProfileLogic.selectedCategory =
-                                    value;
-                                _editConsultantProfileLogic
-                                    .updateSelectedSubCategoriesList(value!);
-                                _editConsultantProfileLogic
-                                    .updateSelectedSubCategoriesIDList(
-                                        _editConsultantProfileLogic
-                                            .getParentCategoriesModel
-                                            .data!
-                                            .mentorCategories![
-                                                _editConsultantProfileLogic
-                                                    .categoryDropDownList
-                                                    .indexOf(value)]
-                                            .id!);
+                                _editConsultantProfileLogic.selectedCategory = value;
+
+                                _editConsultantProfileLogic.updateSelectedSubCategoriesIDList(
+                                    _editConsultantProfileLogic.getParentCategoriesModel.data!.mentorCategories![_editConsultantProfileLogic.categoryDropDownList.indexOf(value!)].id!);
                               });
-                              Get.find<GeneralController>()
-                                  .updateFormLoaderController(true);
+                              Get.find<GeneralController>().updateFormLoaderController(true);
                               getMethod(
                                   context,
                                   mentorChildCategoryDataUrl,
                                   {
                                     'token': '123',
                                     'parent_id': _editConsultantProfileLogic
-                                        .getParentCategoriesModel
-                                        .data!
-                                        .mentorCategories![
-                                            _editConsultantProfileLogic
-                                                .categoryDropDownList
-                                                .indexOf(
-                                                    _editConsultantProfileLogic
-                                                        .selectedCategory!)]
-                                        .id
+                                        .getParentCategoriesModel.data!.mentorCategories![_editConsultantProfileLogic.categoryDropDownList.indexOf(_editConsultantProfileLogic.selectedCategory!)].id
                                   },
                                   false,
                                   getChildCategoryRepo);
@@ -177,192 +133,101 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                     ),
 
                     ///---sub-category
-                    Wrap(
-                      children: List.generate(
-                          _editConsultantProfileLogic
-                              .allSubCategoriesForDropDownList.length,
-                          (index) => SubCategoryDropDown(
-                                selectedIndex: index,
-                                selectedValue: '',
-                                dropDownList: _editConsultantProfileLogic
-                                    .allSubCategoriesForDropDownList[index],
-                                onSelectionTap: (String? newValue) {
-                                  if (_editConsultantProfileLogic
-                                              .allSubCategoriesForDropDownList
-                                              .length -
-                                          1 >
-                                      index) {
-                                    ///--------------------------------------
-                                    _editConsultantProfileLogic
-                                        .allSubCategoriesForDropDownList
-                                        .removeAt(_editConsultantProfileLogic
-                                                .allSubCategoriesForDropDownList
-                                                .length -
-                                            1);
-                                    for (int i = _editConsultantProfileLogic
-                                                .allSubCategoriesForDropDownList
-                                                .length -
-                                            1;
-                                        i > index;
-                                        i--) {
-                                      _editConsultantProfileLogic
-                                          .allSubCategoriesForDropDownList
-                                          .removeAt(i);
-                                      setState(() {});
+                    ///---sub-category
+                    if ((_editConsultantProfileLogic.subCategoriesModel.data?.mentorCategories ?? []).isNotEmpty) ...[
+                      Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
+                          child: Row(
+                            children: [
+                              Text(
+                                LanguageConstant.category.tr.capitalizeFirst!,
+                                style: state.textFieldTextStyle,
+                              )
+                            ],
+                          )),
+                      ...(_editConsultantProfileLogic.subCategoriesModel.data?.mentorCategories ?? []).map(
+                        (e) => Card(
+                          margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4), side: const BorderSide(color: customTextGreyColor)),
+                          child: Column(children: [
+                            InkWell(
+                              onTap: () {
+                                if ((e.subCategories ?? []).isNotEmpty && !_editConsultantProfileLogic.selectedSubCategoriesIDList.contains(e.id)) {
+                                  for (var value in e.subCategories!) {
+                                    if (!_editConsultantProfileLogic.selectedSubCategoriesIDList.contains(value.id)) {
+                                      _editConsultantProfileLogic.selectedSubCategoriesIDList.add(value.id!);
                                     }
-
-                                    ///--------------------------------------
-                                    for (int i = _editConsultantProfileLogic
-                                                .allSubCategoriesList.length -
-                                            1;
-                                        i > index;
-                                        i--) {
-                                      _editConsultantProfileLogic
-                                          .allSubCategoriesList
-                                          .removeAt(i);
-                                      setState(() {});
-                                    }
-
-                                    ///--------------------------------------
-                                    for (int i = _editConsultantProfileLogic
-                                                .selectedSubCategoriesList
-                                                .length -
-                                            1;
-                                        i > index;
-                                        i--) {
-                                      _editConsultantProfileLogic
-                                          .selectedSubCategoriesList
-                                          .removeAt(i);
-                                      _editConsultantProfileLogic
-                                          .selectedSubCategoriesIDList
-                                          .removeAt(i);
-                                      setState(() {});
-                                    }
-                                    _editConsultantProfileLogic
-                                        .updateSelectedSubCategoriesList(
-                                            newValue!);
-                                    _editConsultantProfileLogic.updateSelectedSubCategoriesIDList(
-                                        _editConsultantProfileLogic
-                                            .allSubCategoriesList[index]
-                                            .data!
-                                            .mentorCategories![_editConsultantProfileLogic
-                                                .allSubCategoriesForDropDownList[
-                                                    index]
-                                                .indexOf(_editConsultantProfileLogic
-                                                        .selectedSubCategoriesList[
-                                                    _editConsultantProfileLogic
-                                                            .selectedSubCategoriesList
-                                                            .length -
-                                                        1])]
-                                            .id!);
-                                    Get.find<GeneralController>()
-                                        .updateFormLoaderController(true);
-                                    getMethod(
-                                        context,
-                                        mentorChildCategoryDataUrl,
-                                        {
-                                          'token': '123',
-                                          'parent_id': _editConsultantProfileLogic
-                                              .allSubCategoriesList[index]
-                                              .data!
-                                              .mentorCategories![_editConsultantProfileLogic
-                                                  .allSubCategoriesForDropDownList[
-                                                      index]
-                                                  .indexOf(_editConsultantProfileLogic
-                                                          .selectedSubCategoriesList[
-                                                      _editConsultantProfileLogic
-                                                              .selectedSubCategoriesList
-                                                              .length -
-                                                          1])]
-                                              .id,
-                                        },
-                                        false,
-                                        getChildCategoryRepo);
                                   }
-
-                                  if (_editConsultantProfileLogic
-                                      .getChildCategoriesModel
-                                      .data!
-                                      .mentorCategories!
-                                      .isNotEmpty) {
-                                    _editConsultantProfileLogic
-                                        .updateSelectedSubCategoriesList(
-                                            newValue!);
-                                    _editConsultantProfileLogic.updateSelectedSubCategoriesIDList(
-                                        _editConsultantProfileLogic
-                                            .allSubCategoriesList[index]
-                                            .data!
-                                            .mentorCategories![_editConsultantProfileLogic
-                                                .allSubCategoriesForDropDownList[
-                                                    index]
-                                                .indexOf(_editConsultantProfileLogic
-                                                        .selectedSubCategoriesList[
-                                                    _editConsultantProfileLogic
-                                                            .selectedSubCategoriesList
-                                                            .length -
-                                                        1])]
-                                            .id!);
-                                    Get.find<GeneralController>()
-                                        .updateFormLoaderController(true);
-                                    getMethod(
-                                        context,
-                                        mentorChildCategoryDataUrl,
-                                        {
-                                          'token': '123',
-                                          'parent_id': _editConsultantProfileLogic
-                                              .allSubCategoriesList[index]
-                                              .data!
-                                              .mentorCategories![_editConsultantProfileLogic
-                                                  .allSubCategoriesForDropDownList[
-                                                      index]
-                                                  .indexOf(_editConsultantProfileLogic
-                                                          .selectedSubCategoriesList[
-                                                      _editConsultantProfileLogic
-                                                              .selectedSubCategoriesList
-                                                              .length -
-                                                          1])]
-                                              .id,
-                                        },
-                                        false,
-                                        getChildCategoryRepo);
+                                }
+                                if ((e.subCategories ?? []).isNotEmpty && _editConsultantProfileLogic.selectedSubCategoriesIDList.contains(e.id)) {
+                                  for (var value in e.subCategories!) {
+                                    if (_editConsultantProfileLogic.selectedSubCategoriesIDList.contains(value.id)) {
+                                      _editConsultantProfileLogic.selectedSubCategoriesIDList.remove(value.id!);
+                                    }
                                   }
-                                },
-                              )),
-                    ),
+                                }
+                                _editConsultantProfileLogic.selectedSubCategoriesIDList.contains(e.id)
+                                    ? _editConsultantProfileLogic.selectedSubCategoriesIDList.remove(e.id)
+                                    : _editConsultantProfileLogic.selectedSubCategoriesIDList.add(e.id!);
+                                _editConsultantProfileLogic.update();
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
+                                child: Row(children: [
+                                  const SizedBox(width: 5),
+                                  Icon(_editConsultantProfileLogic.selectedSubCategoriesIDList.contains(e.id) ? Icons.check_box_outlined : Icons.check_box_outline_blank_outlined,
+                                      color: customThemeColor),
+                                  const SizedBox(width: 8),
+                                  Expanded(child: Text("${e.name}")),
+                                  (e.subCategories ?? []).isNotEmpty
+                                      ? InkWell(
+                                          onTap: () {
+                                            _editConsultantProfileLogic.selectedSubCategoriesExpandList.contains(e.id)
+                                                ? _editConsultantProfileLogic.selectedSubCategoriesExpandList.remove(e.id)
+                                                : _editConsultantProfileLogic.selectedSubCategoriesExpandList.add(e.id!);
+                                            _editConsultantProfileLogic.update();
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Icon(_editConsultantProfileLogic.selectedSubCategoriesExpandList.contains(e.id) ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                                                color: customThemeColor),
+                                          ),
+                                        )
+                                      : const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Icon(Icons.keyboard_arrow_up, color: Colors.transparent),
+                                        ),
+                                ]),
+                              ),
+                            ),
+                            if ((e.subCategories ?? []).isNotEmpty && _editConsultantProfileLogic.selectedSubCategoriesExpandList.contains(e.id)) ...[
+                              const SizedBox(height: 5),
+                              buildCategoriesChild(e.subCategories!, _editConsultantProfileLogic),
+                            ]
+                          ]),
+                        ),
+                      ),
+                    ],
 
                     ///---add-button
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
                       child: Center(
                         child: InkWell(
                           onTap: () {
-                            FocusScopeNode currentFocus =
-                                FocusScope.of(context);
+                            FocusScopeNode currentFocus = FocusScope.of(context);
                             if (!currentFocus.hasPrimaryFocus) {
                               currentFocus.unfocus();
                             }
-                            if (_editConsultantProfileLogic
-                                .getChildCategoriesModel
-                                .data!
-                                .mentorCategories!
-                                .isEmpty) {
-                              _editConsultantProfileLogic.forDisplaySkillList =
-                                  [];
+                            if (_editConsultantProfileLogic.selectedSubCategoriesIDList.isNotEmpty) {
+                              _editConsultantProfileLogic.forDisplaySkillList = [];
                               _editConsultantProfileLogic.update();
-                              Get.find<GeneralController>()
-                                  .updateFormLoaderController(true);
+                              Get.find<GeneralController>().updateFormLoaderController(true);
                               postMethod(
                                   context,
                                   mentorSkillInfoUrl,
-                                  {
-                                    'token': '123',
-                                    'mentor_id': Get.find<GeneralController>()
-                                        .storageBox
-                                        .read('userID'),
-                                    'categories': _editConsultantProfileLogic
-                                        .selectedSubCategoriesIDList
-                                  },
+                                  {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID'), 'categories': _editConsultantProfileLogic.selectedSubCategoriesIDList},
                                   true,
                                   mentorSkillInfoRepo);
                             } else {
@@ -373,8 +238,7 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                     return CustomDialogBox(
                                       title: LanguageConstant.failed.tr,
                                       titleColor: customDialogErrorColor,
-                                      descriptions:
-                                          '${LanguageConstant.selectCategoryPlease.tr}!',
+                                      descriptions: '${LanguageConstant.selectCategoryPlease.tr}!',
                                       text: LanguageConstant.ok.tr,
                                       functionCall: () {
                                         Navigator.pop(context);
@@ -387,16 +251,10 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                           child: Container(
                             height: 40,
                             width: MediaQuery.of(context).size.width * .45,
-                            decoration: BoxDecoration(
-                                color: customLightThemeColor,
-                                borderRadius: BorderRadius.circular(8)),
+                            decoration: BoxDecoration(color: customLightThemeColor, borderRadius: BorderRadius.circular(8)),
                             child: Center(
                               child: Text(
-                                _editConsultantProfileLogic
-                                            .skillInfoPostModel.data ==
-                                        null
-                                    ? LanguageConstant.addSkill.tr
-                                    : LanguageConstant.update.tr,
+                                _editConsultantProfileLogic.skillInfoPostModel.data == null ? LanguageConstant.addSkill.tr : LanguageConstant.update.tr,
                                 style: state.addButtonTextStyle,
                               ),
                             ),
@@ -409,47 +267,28 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                     _editConsultantProfileLogic.skillInfoPostModel.data == null
                         ? const SizedBox()
                         : Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                15, 28, 15, 20),
+                            padding: const EdgeInsetsDirectional.fromSTEB(15, 28, 15, 20),
                             child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(14),
-                                    color: Colors.white),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(14), color: Colors.white),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      15, 15, 7, 15),
+                                  padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 7, 15),
                                   child: Column(
                                     children: [
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: List.generate(
-                                                _editConsultantProfileLogic
-                                                    .skillInfoPostModel
-                                                    .data!
-                                                    .category!
-                                                    .length,
+                                                (_editConsultantProfileLogic.skillInfoPostModel.data?.category ?? []).length,
                                                 (index) => Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      0 +
-                                                          (index.toDouble() *
-                                                              5),
-                                                      6,
-                                                      0,
-                                                      0),
+                                                  padding: EdgeInsets.fromLTRB(index == 0 ? 0 : 5, 6, 0, 0),
                                                   child: Text(
-                                                    '${index + 1}-> ${_editConsultantProfileLogic.skillInfoPostModel.data!.category![index].name}',
-                                                    style: state
-                                                        .previewLabelTextStyle,
+                                                    _editConsultantProfileLogic.skillInfoPostModel.data?.category?[index].name ?? "N/A",
+                                                    style: state.previewLabelTextStyle,
                                                   ),
                                                 ),
                                               ),
@@ -457,32 +296,15 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              _generalController
-                                                  .updateFormLoaderController(
-                                                      true);
+                                              _generalController.updateFormLoaderController(true);
                                               postMethod(
-                                                  context,
-                                                  mentorSkillInfoDeleteUrl,
-                                                  {
-                                                    'token': '123',
-                                                    'mentor_id': Get.find<
-                                                            GeneralController>()
-                                                        .storageBox
-                                                        .read('userID')
-                                                  },
-                                                  true,
-                                                  deleteEducationRepo);
-                                              _editConsultantProfileLogic
-                                                      .skillInfoPostModel =
-                                                  SkillInfoPostModel();
+                                                  context, mentorSkillInfoDeleteUrl, {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID')}, true, deleteEducationRepo);
+                                              _editConsultantProfileLogic.skillInfoPostModel = SkillInfoPostModel();
                                               setState(() {});
                                             },
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsetsDirectional
-                                                      .all(8.0),
-                                              child: SvgPicture.asset(
-                                                  'assets/Icons/deleteIcon.svg'),
+                                              padding: const EdgeInsetsDirectional.all(8.0),
+                                              child: SvgPicture.asset('assets/Icons/deleteIcon.svg'),
                                             ),
                                           )
                                         ],
@@ -490,48 +312,31 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                                     ],
                                   ),
                                 ))),
-                    _editConsultantProfileLogic.forDisplaySkillList!.isEmpty
+                    (_editConsultantProfileLogic.forDisplaySkillList ?? []).isEmpty
                         ? const SizedBox()
                         : Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                15, 28, 15, 20),
+                            padding: const EdgeInsetsDirectional.fromSTEB(15, 28, 15, 20),
                             child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(14),
-                                    color: Colors.white),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(14), color: Colors.white),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      15, 15, 7, 15),
+                                  padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 7, 15),
                                   child: Column(
                                     children: [
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: List.generate(
-                                                _editConsultantProfileLogic
-                                                    .forDisplaySkillList!
-                                                    .length,
+                                                (_editConsultantProfileLogic.forDisplaySkillList ?? []).length,
                                                 (index) => Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      0 +
-                                                          (index.toDouble() *
-                                                              5),
-                                                      6,
-                                                      0,
-                                                      0),
+                                                  padding: EdgeInsets.fromLTRB(index == 0 ? 0 : 5, 6, 0, 0),
                                                   child: Text(
-                                                    '${index + 1}-> ${_editConsultantProfileLogic.forDisplaySkillList![index].category!.name}',
-                                                    style: state
-                                                        .previewLabelTextStyle,
+                                                    _editConsultantProfileLogic.forDisplaySkillList?[index].category?.name ?? "N/A",
+                                                    style: state.previewLabelTextStyle,
                                                   ),
                                                 ),
                                               ),
@@ -549,29 +354,12 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                 padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 0),
                 child: InkWell(
                     onTap: () {
-                      if ((_editConsultantProfileLogic
-                                      .skillInfoPostModel.data !=
-                                  null &&
-                              _editConsultantProfileLogic
-                                  .forDisplaySkillList!.isEmpty) ||
-                          (_editConsultantProfileLogic
-                                      .skillInfoPostModel.data ==
-                                  null &&
-                              _editConsultantProfileLogic
-                                  .forDisplaySkillList!.isNotEmpty)) {
+                      if ((_editConsultantProfileLogic.skillInfoPostModel.data != null && _editConsultantProfileLogic.forDisplaySkillList!.isEmpty) ||
+                          (_editConsultantProfileLogic.skillInfoPostModel.data == null && _editConsultantProfileLogic.forDisplaySkillList!.isNotEmpty)) {
                         setState(() {
-                          _editConsultantProfileLogic
-                              .stepperList[
-                                  _editConsultantProfileLogic.stepperIndex!]
-                              .isSelected = false;
-                          _editConsultantProfileLogic
-                              .stepperList[
-                                  _editConsultantProfileLogic.stepperIndex!]
-                              .isCompleted = true;
-                          _editConsultantProfileLogic
-                              .stepperList[
-                                  _editConsultantProfileLogic.stepperIndex! + 1]
-                              .isSelected = true;
+                          _editConsultantProfileLogic.stepperList[_editConsultantProfileLogic.stepperIndex!].isSelected = false;
+                          _editConsultantProfileLogic.stepperList[_editConsultantProfileLogic.stepperIndex!].isCompleted = true;
+                          _editConsultantProfileLogic.stepperList[_editConsultantProfileLogic.stepperIndex! + 1].isSelected = true;
                           _editConsultantProfileLogic.updateStepperIndex(4);
                         });
                       } else {
@@ -582,8 +370,7 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                               return CustomDialogBox(
                                 title: LanguageConstant.failed.tr,
                                 titleColor: customDialogErrorColor,
-                                descriptions:
-                                    LanguageConstant.addSkillPlease.tr,
+                                descriptions: LanguageConstant.addSkillPlease.tr,
                                 text: LanguageConstant.ok.tr,
                                 functionCall: () {
                                   Navigator.pop(context);
@@ -593,103 +380,87 @@ class _SkillInfoViewState extends State<SkillInfoView> {
                             });
                       }
                     },
-                    child: MyCustomBottomBar(
-                        title: LanguageConstant.nextStep.tr, disable: false)),
+                    child: MyCustomBottomBar(title: LanguageConstant.nextStep.tr, disable: false)),
               )),
         ),
       ),
     );
   }
-}
 
-class SubCategoryDropDown extends StatefulWidget {
-  const SubCategoryDropDown(
-      {Key? key,
-      required this.selectedIndex,
-      required this.selectedValue,
-      required this.dropDownList,
-      required this.onSelectionTap})
-      : super(key: key);
+  Widget buildCategoriesChild(List<SubCategories> childLIst, EditConsultantProfileLogic createProfileLogic) {
+    return Column(children: [
+      ...childLIst.map(
+        (e) => Container(
+          padding: const EdgeInsets.only(left: 12, top: 8, bottom: 0),
+          width: MediaQuery.of(Get.context!).size.width,
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  if ((e.subCategories ?? []).isNotEmpty && !createProfileLogic.selectedSubCategoriesIDList.contains(e.id)) {
+                    for (var value in e.subCategories!) {
+                      if (!createProfileLogic.selectedSubCategoriesIDList.contains(value.id)) {
+                        createProfileLogic.selectedSubCategoriesIDList.add(value.id!);
+                      }
+                    }
+                  }
+                  if ((e.subCategories ?? []).isNotEmpty && createProfileLogic.selectedSubCategoriesIDList.contains(e.id)) {
+                    for (var value in e.subCategories!) {
+                      if (createProfileLogic.selectedSubCategoriesIDList.contains(value.id)) {
+                        createProfileLogic.selectedSubCategoriesIDList.remove(value.id!);
+                      }
+                    }
+                  }
+                  if (createProfileLogic.selectedSubCategoriesIDList.contains(e.id)) {
+                    createProfileLogic.selectedSubCategoriesIDList.remove(e.id);
+                    createProfileLogic.update();
+                    return;
+                  }
 
-  final int? selectedIndex;
-  final String? selectedValue;
-  final List<String>? dropDownList;
-  final Function? onSelectionTap;
-
-  @override
-  _SubCategoryDropDownState createState() => _SubCategoryDropDownState();
-}
-
-class _SubCategoryDropDownState extends State<SubCategoryDropDown> {
-  final state = Get.find<EditConsultantProfileLogic>().state;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
-      child: ButtonTheme(
-        alignedDropdown: true,
-        child: DropdownButtonHideUnderline(
-          child: DropdownButtonFormField<String>(
-            onTap: () {
-              FocusScopeNode currentFocus = FocusScope.of(context);
-              if (!currentFocus.hasPrimaryFocus) {
-                currentFocus.unfocus();
-              }
-            },
-            hint: Text(
-              LanguageConstant.category.tr.capitalizeFirst!,
-              style: state.hintTextStyle,
-            ),
-            decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsetsDirectional.fromSTEB(15.w, 14.h, 15.w, 14.h),
-              fillColor: Colors.white,
-              filled: true,
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                  borderSide: const BorderSide(color: Colors.transparent)),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                  borderSide: const BorderSide(color: Colors.transparent)),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                  borderSide: const BorderSide(color: customLightThemeColor)),
-              errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                  borderSide: const BorderSide(color: Colors.red)),
-            ),
-            isExpanded: true,
-            focusColor: Colors.white,
-            style: state.textFieldTextStyle,
-            iconEnabledColor: customThemeColor,
-            icon: const Icon(Icons.keyboard_arrow_down),
-            iconSize: 25,
-            items: widget.dropDownList!
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(
-                  value,
-                  style: state.textFieldTextStyle,
+                  createProfileLogic.selectedSubCategoriesIDList.add(e.id!);
+                  if (!createProfileLogic.selectedSubCategoriesIDList.contains(e.parentId)) {
+                    createProfileLogic.selectedSubCategoriesIDList.add(e.parentId!);
+                  }
+                  createProfileLogic.update();
+                  // }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(children: [
+                    const SizedBox(width: 5),
+                    Icon(createProfileLogic.selectedSubCategoriesIDList.contains(e.id) ? Icons.check_box_outlined : Icons.check_box_outline_blank_outlined, color: customThemeColor),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text("${e.name}")),
+                    (e.subCategories ?? []).isNotEmpty
+                        ? InkWell(
+                            onTap: () {
+                              createProfileLogic.selectedSubCategoriesExpandList.contains(e.id)
+                                  ? createProfileLogic.selectedSubCategoriesExpandList.remove(e.id)
+                                  : createProfileLogic.selectedSubCategoriesExpandList.add(e.id!);
+                              createProfileLogic.update();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(createProfileLogic.selectedSubCategoriesExpandList.contains(e.id) ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, color: customThemeColor),
+                            ),
+                          )
+                        : const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(Icons.keyboard_arrow_up, color: Colors.transparent),
+                          ),
+                  ]),
                 ),
-              );
-            }).toList(),
-            onChanged: (String? value) {
-              setState(() {
-                widget.onSelectionTap!(value);
-              });
-            },
-            validator: (String? value) {
-              if (value == null) {
-                return LanguageConstant.fieldRequired.tr;
-              } else {
-                return null;
-              }
-            },
+              ),
+              if ((e.subCategories ?? []).isNotEmpty && createProfileLogic.selectedSubCategoriesExpandList.contains(e.id)) ...[
+                const Divider(color: customHintColor),
+                const SizedBox(height: 5),
+                buildCategoriesChild(e.subCategories!, createProfileLogic),
+                const Divider(color: customHintColor)
+              ],
+            ],
           ),
         ),
-      ),
-    );
+      )
+    ]);
   }
 }
