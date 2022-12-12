@@ -47,13 +47,14 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
 
     if (timeNow <= 12) {
       return LanguageConstant.goodMorning.tr;
-    } else if ((timeNow > 12) && (timeNow <= 16)) {
-      return LanguageConstant.goodAfternoon.tr;
-    } else if ((timeNow > 16) && (timeNow < 20)) {
-      return LanguageConstant.goodEvening.tr;
-    } else {
-      return LanguageConstant.goodNight.tr;
     }
+    if ((timeNow > 12) && (timeNow <= 16)) {
+      return LanguageConstant.goodAfternoon.tr;
+    }
+    if ((timeNow > 16) && (timeNow < 20)) {
+      return LanguageConstant.goodEvening.tr;
+    }
+    return LanguageConstant.goodNight.tr;
   }
 
   Timer? _timer;
@@ -69,13 +70,11 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
     getMethod(context, getUserProfileUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getUserProfileRepo);
     _timer = Timer.periodic(const Duration(seconds: 2), (Timer t) {
       if (!logic.approvalCheckerApiStopLoader!) {
-        getMethod(context, mentorApprovalStatusUrl, {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID')}, true,
-            getMentorApprovalRepo);
+        getMethod(context, mentorApprovalStatusUrl, {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getMentorApprovalRepo);
       }
     });
 
-    getMethod(context, getAppointmentCountForMentorUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, true,
-        getAppointmentCountMentorRepo);
+    getMethod(context, getAppointmentCountForMentorUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getAppointmentCountMentorRepo);
 
     getMethod(
         context,
@@ -96,8 +95,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
         true,
         getRatingMentorRepo);
     if (!Get.find<GeneralController>().storageBox.hasData('onlineStatus')) {
-      postMethod(context, changeMentorOnlineStatusUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID'), 'status': 'online'},
-          true, changeMentorOnlineStatusRepo);
+      postMethod(context, changeMentorOnlineStatusUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID'), 'status': 'online'}, true, changeMentorOnlineStatusRepo);
     }
   }
 
@@ -171,8 +169,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                     flexibleSpace: FlexibleSpaceBar(
                                       centerTitle: true,
                                       background: Container(
-                                        decoration:
-                                            BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.vertical(bottom: Radius.circular(40.r))),
+                                        decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.vertical(bottom: Radius.circular(40.r))),
                                         child: Column(
                                           children: [
                                             Stack(
@@ -225,13 +222,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                               body: SmartRefresher(
                                 controller: _dashboardLogic.refreshAppointmentsController,
                                 onRefresh: () {
-                                  getMethod(context, getUserProfileUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')},
-                                      true, getUserProfileRepo);
-                                  getMethod(
-                                      context,
-                                      getAppointmentCountForMentorUrl,
-                                      {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')},
-                                      true,
+                                  getMethod(context, getUserProfileUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getUserProfileRepo);
+                                  getMethod(context, getAppointmentCountForMentorUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, true,
                                       getAppointmentCountMentorRepo);
 
                                   getMethod(
@@ -253,11 +245,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                       true,
                                       getRatingMentorRepo);
                                   if (!Get.find<GeneralController>().storageBox.hasData('onlineStatus')) {
-                                    postMethod(
-                                        context,
-                                        changeMentorOnlineStatusUrl,
-                                        {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID'), 'status': 'online'},
-                                        true,
+                                    postMethod(context, changeMentorOnlineStatusUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID'), 'status': 'online'}, true,
                                         changeMentorOnlineStatusRepo);
                                   }
                                 },
@@ -289,17 +277,14 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                               : Stack(
                                                                   children: [
                                                                     Hero(
-                                                                      tag: _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!
-                                                                              .contains('assets')
+                                                                      tag: _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
                                                                           ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
                                                                           : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                                       child: Material(
                                                                         child: InkWell(
                                                                           onTap: () {
                                                                             Get.to(ImageViewScreen(
-                                                                              networkImage: _generalController
-                                                                                      .getConsultantProfileModel.data!.userDetail!.imagePath!
-                                                                                      .contains('assets')
+                                                                              networkImage: _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
                                                                                   ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
                                                                                   : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                                             ));
@@ -307,8 +292,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                           child: ClipRRect(
                                                                             borderRadius: BorderRadius.circular(30.r),
                                                                             child: Image.network(
-                                                                              _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!
-                                                                                      .contains('assets')
+                                                                              _generalController.getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
                                                                                   ? '$mediaUrl${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}'
                                                                                   : '${_generalController.getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                                               width: 60,
@@ -346,12 +330,8 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                               children: [
                                                                 Text('$greetingMes ', style: state.mentorDetailTileTitle2TextStyle),
                                                                 Expanded(
-                                                                  child: Text(
-                                                                      '${_generalController.getConsultantProfileModel.data!.userDetail!.firstName}'.capitalize!,
-                                                                      softWrap: true,
-                                                                      overflow: TextOverflow.ellipsis,
-                                                                      maxLines: 1,
-                                                                      style: state.mentorDetailTileTitleTextStyle),
+                                                                  child: Text('${_generalController.getConsultantProfileModel.data!.userDetail!.firstName}'.capitalize!,
+                                                                      softWrap: true, overflow: TextOverflow.ellipsis, maxLines: 1, style: state.mentorDetailTileTitleTextStyle),
                                                                 ),
                                                               ],
                                                             ),
@@ -423,9 +403,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                     ),
                                                   ),
                                                 ),
-                                          const SizedBox(
-                                            height: 12,
-                                          ),
+                                          const SizedBox(height: 12),
 
                                           ///---appointment-details
                                           Padding(
@@ -539,9 +517,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 12.h,
-                                          ),
+                                          SizedBox(height: 12.h),
 
                                           ///---rating
                                           Padding(
@@ -602,8 +578,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                     color: customOrangeColor,
                                                                     backColor: const Color(0xffDBDBDB),
                                                                     showPercentage: true,
-                                                                    textStyle: TextStyle(
-                                                                        fontSize: 18.sp, fontFamily: SarabunFontFamily.bold, color: customTextBlackColor),
+                                                                    textStyle: TextStyle(fontSize: 18.sp, fontFamily: SarabunFontFamily.bold, color: customTextBlackColor),
                                                                     stroke: 0,
                                                                     round: true,
                                                                   ),
@@ -645,8 +620,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             SizedBox(
                                                                               width: 4.w,
                                                                             ),
-                                                                            Text('(${_dashboardLogic.getRatingsModel.data!.fiveRatings})',
-                                                                                style: state.ratingTextStyle),
+                                                                            Text('(${_dashboardLogic.getRatingsModel.data!.fiveRatings})', style: state.ratingTextStyle),
                                                                           ],
                                                                         ),
                                                                         SizedBox(
@@ -682,8 +656,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             SizedBox(
                                                                               width: 4.w,
                                                                             ),
-                                                                            Text('(${_dashboardLogic.getRatingsModel.data!.fourRatings})',
-                                                                                style: state.ratingTextStyle),
+                                                                            Text('(${_dashboardLogic.getRatingsModel.data!.fourRatings})', style: state.ratingTextStyle),
                                                                           ],
                                                                         ),
                                                                         SizedBox(
@@ -719,8 +692,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             SizedBox(
                                                                               width: 4.w,
                                                                             ),
-                                                                            Text('(${_dashboardLogic.getRatingsModel.data!.threeRatings})',
-                                                                                style: state.ratingTextStyle),
+                                                                            Text('(${_dashboardLogic.getRatingsModel.data!.threeRatings})', style: state.ratingTextStyle),
                                                                           ],
                                                                         ),
                                                                         SizedBox(
@@ -756,8 +728,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             SizedBox(
                                                                               width: 4.w,
                                                                             ),
-                                                                            Text('(${_dashboardLogic.getRatingsModel.data!.twoRatings})',
-                                                                                style: state.ratingTextStyle),
+                                                                            Text('(${_dashboardLogic.getRatingsModel.data!.twoRatings})', style: state.ratingTextStyle),
                                                                           ],
                                                                         ),
                                                                         SizedBox(
@@ -793,8 +764,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                             SizedBox(
                                                                               width: 4.w,
                                                                             ),
-                                                                            Text('(${_dashboardLogic.getRatingsModel.data!.oneRatings})',
-                                                                                style: state.ratingTextStyle),
+                                                                            Text('(${_dashboardLogic.getRatingsModel.data!.oneRatings})', style: state.ratingTextStyle),
                                                                           ],
                                                                         ),
                                                                       ],
@@ -807,9 +777,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                         ),
                                                       ),
                                                     )),
-                                          const SizedBox(
-                                            height: 30,
-                                          ),
+                                          const SizedBox(height: 30),
 
                                           ///---today-appointments
                                           Padding(
@@ -898,8 +866,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                     height: 6,
                                                                                   ),
                                                                                   Text(
-                                                                                    '${_dashboardLogic.getTodayAppointmentList[index].appointmentTypeString}'
-                                                                                        .toUpperCase(),
+                                                                                    '${_dashboardLogic.getTodayAppointmentList[index].appointmentTypeString}'.toUpperCase(),
                                                                                     style: state.appointmentListValueTextStyle,
                                                                                   ),
                                                                                 ],
@@ -921,8 +888,7 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                   ),
                                                                                   Text(
                                                                                     '${LanguageConstant.rs.tr}.${_dashboardLogic.getTodayAppointmentList[index].payment}',
-                                                                                    style: state.appointmentListValueTextStyle
-                                                                                        ?.copyWith(color: customLightThemeColor),
+                                                                                    style: state.appointmentListValueTextStyle?.copyWith(color: customLightThemeColor),
                                                                                   ),
                                                                                 ],
                                                                               ),
@@ -1094,11 +1060,9 @@ class _ConsultantDashboardPageState extends State<ConsultantDashboardPage> {
                                                                                             onTap: () {
                                                                                               Get.put(ConsultantAppointmentLogic());
                                                                                               Get.put(ConsultantAppointmentDetailLogic());
-                                                                                              Get.find<ConsultantAppointmentDetailLogic>()
-                                                                                                      .selectedAppointmentData =
+                                                                                              Get.find<ConsultantAppointmentDetailLogic>().selectedAppointmentData =
                                                                                                   _dashboardLogic.getTodayAppointmentList[index];
-                                                                                              Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus =
-                                                                                                  1;
+                                                                                              Get.find<ConsultantAppointmentDetailLogic>().appointmentStatus = 1;
                                                                                               Get.find<ConsultantAppointmentDetailLogic>().update();
                                                                                               Get.toNamed(PageRoutes.consultantAppointmentDetail);
                                                                                             },

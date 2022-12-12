@@ -30,10 +30,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
   final state = Get.find<ContactUsLogic>().state;
 
   final GlobalKey<FormState> _contactUsFormKey = GlobalKey();
-  final TextEditingController? _nameController = TextEditingController();
-  final TextEditingController? _emailController = TextEditingController();
-  final TextEditingController? _subjectController = TextEditingController();
-  final TextEditingController? _messageController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _subjectController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
 
   @override
   void initState() {
@@ -114,8 +114,8 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             /// Address
                                             InkWell(
                                               onTap: () {
-                                                MapsLauncher.launchCoordinates((Get.find<MainLogic>().getGeneralSettingModel.data?.latitude)!.toDouble(),
-                                                    (Get.find<MainLogic>().getGeneralSettingModel.data?.longitude)!.toDouble(), 'Here');
+                                                MapsLauncher.launchCoordinates(double.parse((Get.find<MainLogic>().getGeneralSettingModel.data?.latitude).toString()),
+                                                    double.parse((Get.find<MainLogic>().getGeneralSettingModel.data?.longitude).toString()), 'Here');
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.all(Radius.circular(8.r))),
@@ -220,11 +220,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                     border: UnderlineInputBorder(borderSide: BorderSide(color: customHintColor)),
                                                   ),
                                                   validator: (String? value) {
-                                                    if (value!.isEmpty) {
+                                                    if ((value ?? '').isEmpty) {
                                                       return LanguageConstant.fieldRequired.tr;
-                                                    } else {
-                                                      return null;
                                                     }
+                                                    return null;
                                                   },
                                                 ),
                                                 SizedBox(height: 20.h),
@@ -248,13 +247,13 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                     border: UnderlineInputBorder(borderSide: BorderSide(color: customHintColor)),
                                                   ),
                                                   validator: (String? value) {
-                                                    if (value!.isEmpty) {
+                                                    if ((value ?? "").isEmpty) {
                                                       return LanguageConstant.fieldRequired.tr;
-                                                    } else if (!GetUtils.isEmail(_emailController!.text)) {
-                                                      return LanguageConstant.enterValidEmail.tr;
-                                                    } else {
-                                                      return null;
                                                     }
+                                                    if (!GetUtils.isEmail(_emailController.text)) {
+                                                      return LanguageConstant.enterValidEmail.tr;
+                                                    }
+                                                    return null;
                                                   },
                                                 ),
                                                 SizedBox(height: 20.h),
@@ -277,11 +276,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                     border: UnderlineInputBorder(borderSide: BorderSide(color: customHintColor)),
                                                   ),
                                                   validator: (String? value) {
-                                                    if (value!.isEmpty) {
+                                                    if ((value ?? "").isEmpty) {
                                                       return LanguageConstant.fieldRequired.tr;
-                                                    } else {
-                                                      return null;
                                                     }
+                                                    return null;
                                                   },
                                                 ),
 
@@ -309,11 +307,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                     border: UnderlineInputBorder(borderSide: BorderSide(color: customHintColor)),
                                                   ),
                                                   validator: (String? value) {
-                                                    if (value!.isEmpty) {
+                                                    if ((value ?? '').isEmpty) {
                                                       return LanguageConstant.fieldRequired.tr;
-                                                    } else {
-                                                      return null;
                                                     }
+                                                    return null;
                                                   },
                                                 ),
                                                 // SizedBox(height: 20.h),
@@ -345,13 +342,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                   postMethod(
                                       context,
                                       contactUsUrl,
-                                      {
-                                        'token': '123',
-                                        'name': _nameController!.text,
-                                        'email': _emailController!.text,
-                                        'subject': _subjectController!.text,
-                                        'message': _messageController!.text
-                                      },
+                                      {'token': '123', 'name': _nameController.text, 'email': _emailController.text, 'subject': _subjectController.text, 'message': _messageController.text},
                                       true,
                                       contactUsRepo);
                                 }

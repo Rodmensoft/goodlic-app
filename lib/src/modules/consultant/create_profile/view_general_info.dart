@@ -54,7 +54,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Get.find<GeneralController>().updateFormLoaderController(false);
     });
   }

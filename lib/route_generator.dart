@@ -45,6 +45,8 @@ import 'package:consultant_product/src/modules/wallet/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'src/modules/consultant/create_blog/create_blog_view.dart';
+
 routes() => [
       GetPage(name: "/login", page: () => const LoginPage()),
       GetPage(name: "/signUp", page: () => const SignUpPage()),
@@ -88,6 +90,7 @@ routes() => [
       GetPage(name: "/consultantMyProfile", page: () => const ConsultantMyProfilePage()),
       GetPage(name: "/editConsultantProfile", page: () => const EditConsultantProfilePage()),
       GetPage(name: "/blogs", page: () => const BlogsPage()),
+      GetPage(name: "/createBlog", page: () => CreateBlogPage()),
       GetPage(name: "/blogDetail", page: () => const BlogDetailPage()),
       GetPage(name: '/videoCall', page: () => const JoinChannelVideo()),
       GetPage(name: '/audioCall', page: () => const JoinChannelAudio()),
@@ -136,6 +139,7 @@ class PageRoutes {
   static const String consultantMyProfile = '/consultantMyProfile';
   static const String editConsultantProfile = '/editConsultantProfile';
   static const String blogs = '/blogs';
+  static const String createBlog = '/createBlog';
   static const String blogDetail = '/blogDetail';
   static const String depositJazzcash = '/depositJazzcash';
   static const String depositEasypaisa = '/depositEasypaisa';
@@ -186,6 +190,7 @@ class PageRoutes {
       consultantMyProfile: (context) => const ConsultantMyProfilePage(),
       editConsultantProfile: (context) => const EditConsultantProfilePage(),
       blogs: (context) => const BlogsPage(),
+      createBlog: (context) => CreateBlogPage(),
       blogDetail: (context) => const BlogDetailPage(),
       videoCall: (context) => const JoinChannelVideo(),
       audioCall: (context) => const JoinChannelAudio(),

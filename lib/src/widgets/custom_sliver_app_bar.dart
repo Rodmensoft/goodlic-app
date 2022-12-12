@@ -10,16 +10,7 @@ import 'package:resize/resize.dart';
 
 class MyCustomSliverAppBar extends StatefulWidget {
   const MyCustomSliverAppBar(
-      {Key? key,
-      this.heading,
-      this.subHeading,
-      this.trailing,
-      this.trailingIcon,
-      this.fee,
-      this.feeImage,
-      this.isShrink,
-      this.searchIconShow,
-      this.onTapTrailing})
+      {Key? key, this.heading, this.subHeading, this.trailing, this.trailingIcon, this.fee, this.feeImage, this.isShrink, this.searchIconShow, this.onTapTrailing, this.showCreateBlogWidget})
       : super(key: key);
 
   final String? heading;
@@ -30,6 +21,7 @@ class MyCustomSliverAppBar extends StatefulWidget {
   final String? feeImage;
   final bool? isShrink;
   final bool? searchIconShow;
+  final bool? showCreateBlogWidget;
   final Function? onTapTrailing;
 
   @override
@@ -41,9 +33,7 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: widget.fee == null
-          ? MediaQuery.of(context).size.height * .24
-          : MediaQuery.of(context).size.height * .35,
+      expandedHeight: widget.fee == null ? MediaQuery.of(context).size.height * .24 : MediaQuery.of(context).size.height * .35,
       floating: true,
       pinned: true,
       snap: false,
@@ -51,8 +41,7 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
       backgroundColor: widget.isShrink! ? customThemeColor : Colors.transparent,
       leading: InkWell(
         onTap: () {
-          if (Get.previousRoute.contains('appointmentConfirmation') ||
-              Get.previousRoute.contains('myAppointment')) {
+          if (Get.previousRoute.contains('appointmentConfirmation') || Get.previousRoute.contains('myAppointment')) {
             Get.offAllNamed(PageRoutes.userHome);
           } else {
             Get.back();
@@ -86,12 +75,7 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         background: Container(
-          decoration: BoxDecoration(
-              color: widget.fee == null
-                  ? Colors.transparent
-                  : customLightThemeColor,
-              borderRadius:
-                  BorderRadius.vertical(bottom: Radius.circular(40.r))),
+          decoration: BoxDecoration(color: widget.fee == null ? Colors.transparent : customLightThemeColor, borderRadius: BorderRadius.vertical(bottom: Radius.circular(40.r))),
           child: Column(
             children: [
               Stack(
@@ -104,47 +88,53 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
                   ),
                   SafeArea(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          16.w, 25.h, 16.w, 16.h),
+                      padding: EdgeInsetsDirectional.fromSTEB(16.w, 25.h, 16.w, 16.h),
                       child: Stack(
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                height: 25.h,
-                              ),
-                              Text(
-                                '${widget.heading}',
-                                style: TextStyle(
-                                    fontFamily: SarabunFontFamily.bold,
-                                    fontSize: 28.sp,
-                                    color: customLightThemeColor),
+                              SizedBox(height: 25.h),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '${widget.heading}',
+                                    style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 28.sp, color: customLightThemeColor),
+                                  ),
+                                  widget.showCreateBlogWidget ?? false
+                                      ? InkWell(
+                                          onTap: () {
+                                            Get.toNamed(PageRoutes.createBlog);
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+                                            decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(5)), border: Border.all(color: Colors.white)),
+                                            child: Text(
+                                              LanguageConstant.createBlog.tr,
+                                              style: TextStyle(fontSize: 16.sp, fontFamily: SarabunFontFamily.extraBold, color: Colors.white),
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox(),
+                                ],
                               ),
                               SizedBox(
                                 height: 10.h,
                               ),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     '${widget.subHeading}',
-                                    style: TextStyle(
-                                        fontFamily: SarabunFontFamily.medium,
-                                        fontSize: 12.sp,
-                                        color: Colors.white),
+                                    style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: Colors.white),
                                   ),
                                   widget.trailing == null
                                       ? const SizedBox()
                                       : Text(
                                           '${widget.trailing}',
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  SarabunFontFamily.medium,
-                                              fontSize: 12.sp,
-                                              color: Colors.white),
+                                          style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: Colors.white),
                                         ),
                                 ],
                               ),
@@ -189,10 +179,7 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
                       children: [
                         Text(
                           LanguageConstant.youWillPay.tr,
-                          style: TextStyle(
-                              fontFamily: SarabunFontFamily.medium,
-                              fontSize: 12.sp,
-                              color: Colors.white),
+                          style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: Colors.white),
                         ),
                         // SizedBox(
                         //   height: 8.h,
@@ -213,10 +200,7 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
                             ),
                             Text(
                               '${widget.fee}',
-                              style: TextStyle(
-                                  fontFamily: SarabunFontFamily.bold,
-                                  fontSize: 28.sp,
-                                  color: Colors.white),
+                              style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 28.sp, color: Colors.white),
                             ),
                           ],
                         )

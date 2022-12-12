@@ -23,8 +23,7 @@ class LanguageConstant {
   static const String aboutYourSelf = 'about_your_self';
   static const String myWallet = 'my_wallet';
   static const String payAmountForAppointment = 'pay_amount_for_appointment';
-  static const String welcomToCreateYourAccount =
-      'welcome_to_create_your_account';
+  static const String welcomToCreateYourAccount = 'welcome_to_create_your_account';
   static const String signUp = 'sign_up';
   static const String haveAnAccount = 'have_an_account';
   static const String bySignUpYouAreAgreeWith = 'by_sign_up_you_are_agree';
@@ -34,8 +33,7 @@ class LanguageConstant {
   static const String registerNow = 'register_now';
   static const String doNotHaveAccount = 'don’t_have_an_account';
   static const String enterValidEmail = 'enter_valid_email';
-  static const String slotMustBeGreaterThan5Minutes =
-      'slot_must_be_greater_than_5_minute';
+  static const String slotMustBeGreaterThan5Minutes = 'slot_must_be_greater_than_5_minute';
   static const String minChargesIs = 'min_charges_is';
   static const String profileUpdated = 'profile_updated';
   static const String selectCategoryPlease = 'select_category_please';
@@ -43,14 +41,12 @@ class LanguageConstant {
   static const String emailAddress = 'email_address';
   static const String password = 'password';
   static const String dashboard = 'dashboard';
-  static const String manageAllOfYourAppointment =
-      'manage_all_of_your_appointment';
+  static const String manageAllOfYourAppointment = 'manage_all_of_your_appointment';
   static const String todayAppointment = 'today_appointment';
   static const String noAppointmentForToday = 'no_appointment_for_today';
   static const String logout = 'logout';
   static const String appointmentLogs = 'appointments_log';
-  static const String yourAppointmentDetailsWith =
-      'your_appointment_details_with';
+  static const String yourAppointmentDetailsWith = 'your_appointment_details_with';
   static const String userProfileIsHidden = 'user_profile_is_hidden';
   static const String nextStep = 'next_step';
   static const String uploadProfilePhoto = 'upload_profile_photo';
@@ -76,13 +72,11 @@ class LanguageConstant {
   static const String autoMobiles = 'auto_mobiles';
   static const String services = 'services';
   static const String resetPassword = 'reset_password';
-  static const String aResetLinkWillBeShareViaEmail =
-      'a_reset_link_will_be_share_via_email';
+  static const String aResetLinkWillBeShareViaEmail = 'a_reset_link_will_be_share_via_email';
   static const String enterPhone = 'enter_phone';
   static const String confirm = 'confirm';
   static const String enterOTP = 'enter_OTP';
-  static const String anOTPCodeHasBeenSentToYourGivenToYourPhoneNumber =
-      'an_OTP_code_has_been_sent_to_your_given_to_your_phone_number';
+  static const String anOTPCodeHasBeenSentToYourGivenToYourPhoneNumber = 'an_OTP_code_has_been_sent_to_your_given_to_your_phone_number';
   static const String youWillReceiveCodeIn = 'you_will_receive_code_in';
   static const String newPassword = 'new_password';
   static const String createNewPassword = 'create_new_password';
@@ -97,29 +91,27 @@ class LanguageConstant {
   static const String contactUs = 'contact_us';
   static const String blogs = 'blogs';
   static const String aboutUs = 'about_us';
-  static const String weAreJustOneStepAwayReachOut =
-      'we_are_just_one_step_away_reach_out';
+  static const String weAreJustOneStepAwayReachOut = 'we_are_just_one_step_away_reach_out';
   static const String address = 'address';
   static const String callUs = 'call_us';
   static const String emailUs = 'email_us';
   static const String blog = 'blog';
-  static const String exploreTodayTrendingArticles =
-      'explore_today_trending_articles';
+  static const String exploreTodayTrendingArticles = 'explore_today_trending_articles';
   static const String recommendedBlogs = 'recommended_blogs';
+  static const String createBlog = 'create_blog';
+  static const String createABlog = 'create_a_blog';
+  static const String strangerOnce = "stranger_once";
   static const String forYou = 'for_you';
-  static const String getKnowAboutOurVisionAndMission =
-      'get_know_about_our_Vision_and_mission';
+  static const String getKnowAboutOurVisionAndMission = 'get_know_about_our_Vision_and_mission';
   static const String ourVision = 'our_vision';
   static const String ourMission = 'our_mission';
   static const String whyChooseUs = 'why_choose_us';
   static const String easySignup = 'easy_signup';
   static const String professionalConsultants = 'professional_consultants';
   static const String myAppointments = 'my_appointments';
-  static const String manageAndSeeYourAppointmentsLog =
-      'manage_and_see_your_appointments_log';
+  static const String manageAndSeeYourAppointmentsLog = 'manage_and_see_your_appointments_log';
   static const String apptDetail = 'appt_detail';
-  static const String yourAppointmentDetailWithNull =
-      'your_appointment_detail_with_null';
+  static const String yourAppointmentDetailWithNull = 'your_appointment_detail_with_null';
   static const String regNo = 'reg_no';
   static const String question = 'question';
   static const String consultantInfo = 'consultant_info';
@@ -127,16 +119,14 @@ class LanguageConstant {
   static const String downloadInvoice = 'download_invoice';
   static const String document = 'document';
   static const String editYourProfile = 'edit_your_profile';
-  static const String profileUpdatedSuccessfully =
-      'profile_updated_successfully';
+  static const String profileUpdatedSuccessfully = 'profile_updated_successfully';
   static const String amountInWallet = 'amount_in_wallet';
   static const String deposit = 'deposit';
   static const String withdraw = 'withdraw';
   static const String addAmountToYourWallet = 'add_amount_to_your_wallet';
   static const String cardDetails = 'card_details';
   static const String enterCardNumber = 'enter_card_number';
-  static const String yourAppointmentDetailWith =
-      'your_appointment_detail_with';
+  static const String yourAppointmentDetailWith = 'your_appointment_detail_with';
   static const String cardHolder = 'card_holder';
   static const String expires = 'expires';
   static const String cvv = 'cvv';
@@ -151,16 +141,13 @@ class LanguageConstant {
   static const String typeYourQuestion = 'type_your_question';
   static const String uploadHere = 'upload_here';
   static const String paymentMethod = 'payment_method';
-  static const String thisPaymentMethodIsNotAvailableYet =
-      'this_payment_method_is_not_available_yet';
+  static const String thisPaymentMethodIsNotAvailableYet = 'this_payment_method_is_not_available_yet';
   static const String congratulations = 'congratulations';
-  static const String yourAppointmentHasBeenBookedWith =
-      'your_appointment_has_been_booked_with';
+  static const String yourAppointmentHasBeenBookedWith = 'your_appointment_has_been_booked_with';
   static const String goToHome = 'go_to_home';
   static const String forgotPassword = 'forgot_password';
   static const String orLoginWith = 'or_login_with';
-  static const String byLoginYouAreAgreeWithOur =
-      'by_login_you_are_agree_with_our';
+  static const String byLoginYouAreAgreeWithOur = 'by_login_you_are_agree_with_our';
   static const String login = 'login';
   static const String welcomeBackToYourAccount = 'welcome_back_to_your_account';
   static const String audio = 'audio';
@@ -170,15 +157,13 @@ class LanguageConstant {
   static const String yearsOfExperience = 'years_of_experience';
   static const String positiveRating = 'positive_rating';
   static const String offline = 'offline';
-  static const String bestConsultantsJustOneClickAway =
-      'best_consultants_just_one_click_away';
+  static const String bestConsultantsJustOneClickAway = 'best_consultants_just_one_click_away';
   static const String topRatedConsultant = 'top_rated_consultant';
   static const String viewAll = 'view_all';
   static const String featuredConsultants = 'featured_consultants';
   static const String searchHere = 'search_here';
   static const String privacyPolicy = 'privacy_policy';
-  static const String youAreReceivingCallFrom =
-      'you are receiving a call from ';
+  static const String youAreReceivingCallFrom = 'you are receiving a call from ';
   static const String mentee = 'mentee';
   static const String mentor = 'mentor';
   static const String enterYourPhone = 'enter_your_phone';
@@ -277,8 +262,7 @@ class LanguageConstant {
   static const String selectType = 'select_type';
   static const String enterCharges = 'enter_charges';
   static const String selectHoliday = 'select_holiday';
-  static const String generateSlotsAutomatically =
-      'generate_slots_automatically';
+  static const String generateSlotsAutomatically = 'generate_slots_automatically';
   static const String monday = 'monday';
   static const String tuesday = 'tuesday';
   static const String wednesday = 'wednesday';
@@ -340,8 +324,7 @@ class LanguageConstant {
   static const String resendOTPCode = 'resend_OTP_code';
   static const String enterOTPCodeBelow = 'enter_OTP_code_below';
   static const String yourProfileIsUnder = 'your_profile_is_under';
-  static const String youWillBeNotifiedOnceItGetApprove =
-      'you_will_be_notified_once_it_get_approve';
+  static const String youWillBeNotifiedOnceItGetApprove = 'you_will_be_notified_once_it_get_approve';
   static const String under = 'under';
   static const String review = 'review';
   static const String goodNight = 'good_night';
@@ -359,12 +342,9 @@ class LanguageConstant {
   static const String addSkill = 'add_skill';
   static const String sorry = 'sorry';
   static const String selectLanguage = 'select_language';
-  static const String appointmentCompletedSuccessfully =
-      'appointment_completed_successfully';
-  static const String appointmentAcceptedSuccessfully =
-      'appointment_accepted_successfully';
-  static const String appointmentRejectedSuccessfully =
-      'appointment_rejected_successfully';
+  static const String appointmentCompletedSuccessfully = 'appointment_completed_successfully';
+  static const String appointmentAcceptedSuccessfully = 'appointment_accepted_successfully';
+  static const String appointmentRejectedSuccessfully = 'appointment_rejected_successfully';
   static const String deleteSuccessfully = 'delete_successfully';
   static const String skillAddedSuccessfully = 'skill_added_successfully';
   static const String addedSuccessfully = 'added_successfully';
@@ -380,8 +360,7 @@ class LanguageConstant {
   static const String noRecordFound = 'no_record_found';
   static const String loginPlease = 'login_please';
   static const String addEducationPlease = 'add_education_please';
-  static const String uploadYourExperienceCertificate =
-      'upload_your_experience_certificate';
+  static const String uploadYourExperienceCertificate = 'upload_your_experience_certificate';
   static const String addWorkExperiencePlease = 'add_work_experience_please';
   static const String uploadYourProfilePicture = 'upload_your_profile_picture';
   static const String addSkillPlease = 'add_skill_please';
@@ -396,16 +375,13 @@ class LanguageConstant {
   static const String newText = 'new';
   static const String add = 'add';
   static const String withdrawRequest = 'withdraw_request';
-  static const String youDoNotHaveSufficientBalance =
-      'you_do_not_have_sufficient_balance';
+  static const String youDoNotHaveSufficientBalance = 'you_do_not_have_sufficient_balance';
   static const String location = 'location';
   static const String pleaseTurnOnYourLocation = 'please_turn_on_your_location';
   static const String online = 'Online';
-  static const String
-      mashvraWillConnectYouWithTheBestCertifiedSpecialistAndGetProfessionaLSolutionsAccordingToYourNeedsRightAwayWithTheLargeNetworkOfConsultantsAcrossTheWorld =
+  static const String mashvraWillConnectYouWithTheBestCertifiedSpecialistAndGetProfessionaLSolutionsAccordingToYourNeedsRightAwayWithTheLargeNetworkOfConsultantsAcrossTheWorld =
       'Mashvra will connect you with the best certified specialist and get professional solutions according to your needs right-away, with the large network of Consultants across the world. ';
-  static const String
-      veryEasyWayToSignUpByUsingYourPhoneNumberAfterPuttingYourPhoneNumberYouWillReceiveA6DigitOTPAfterSigningUpYouCanBookYourAppointmentOnJustASingleClick =
+  static const String veryEasyWayToSignUpByUsingYourPhoneNumberAfterPuttingYourPhoneNumberYouWillReceiveA6DigitOTPAfterSigningUpYouCanBookYourAppointmentOnJustASingleClick =
       'Very easy way to sign up by using your phone number, after putting your phone number you will receive a 6-digit OTP. After signing up you can book your appointment on just a single click.';
   static const String
       mashvraIsAHumanCareConsultingPlatformAndASolutionHubThatAllowsMenteeToBookTheExpertsOfEveryFieldOfLifeRegardingMedicalSpiritualReligiousCorporateFinancialPhycologicalSocialEducationistsCareerLegalCulturalTravelAndAnyOtherExpertsConsultantsSpecialistsConsultantsAroundTheWorldInSecondsWhileProvidingInformationRelatedToTheConsultancyRequirementUsingReliableAndSecureVirtualConnectivityWithTheProfessionalsForSolutionProvisionEasyAndUserFriendlyPaymentMethodsAreUsed =
@@ -419,12 +395,9 @@ class LanguageConstant {
   static const String offlineStatus = 'offline_status';
   static const String orSignUpWith = 'or_sign_up_with';
 
-  static const String enterLast6DigitsOfYourCNIC =
-      'enter_last_6_digits_of_your_cnic';
+  static const String enterLast6DigitsOfYourCNIC = 'enter_last_6_digits_of_your_cnic';
   static const String enterAmount = 'enter_amount';
   static const String signUpAsConsultant = 'sign_up_as_consultant';
-  static const String theBalanceInAccountIsInsufficientForTheTransaction =
-      'the_balance_in_account_is_insufficient_for_the_transaction';
-  static const String thankYouUsingJazzCashYourTransactionWasSuccessful =
-      'thank_you_using_jazzcash_your_transaction_was_successful';
+  static const String theBalanceInAccountIsInsufficientForTheTransaction = 'the_balance_in_account_is_insufficient_for_the_transaction';
+  static const String thankYouUsingJazzCashYourTransactionWasSuccessful = 'thank_you_using_jazzcash_your_transaction_was_successful';
 }

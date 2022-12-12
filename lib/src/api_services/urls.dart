@@ -3,6 +3,11 @@ import 'package:global_configuration/global_configuration.dart';
 //  "base_url": "https://demo.consultant.nictusthemes.com/",
 //  "api_base_url": "https://demo.consultant.nictusthemes.com/api/",
 //  "media_url": "https://demo.consultant.nictusthemes.com/",
+
+// "base_url": "http://192.168.88.185:8000/",
+// "api_base_url": "http://192.168.88.185:8000/api/",
+// "media_url": "http://192.168.88.185:8000/",
+
 final String baseUrl = GlobalConfiguration().get('base_url');
 final String apiBaseUrl = GlobalConfiguration().get('api_base_url');
 final String mediaUrl = GlobalConfiguration().get('media_url');
@@ -109,7 +114,9 @@ String mentorUnArchivedAppointmentUrl = apiBaseUrl + 'mentor/unarchieved-appoint
 String getAppointmentsDetailURL = apiBaseUrl + 'appointmentDetails';
 
 /// Blogs
-String blogCategoriesUrl = apiBaseUrl + 'categoriesBlogs';
+String categoriesBlogUrl = apiBaseUrl + 'categoriesBlogs';
+String blogCategoriesUrl = apiBaseUrl + 'blogCategories';
+String createConsultantBlogUrl = apiBaseUrl + 'create_consultant_blog';
 
 /// wallet
 String getWalletBalanceUrl = apiBaseUrl + 'check-balance';

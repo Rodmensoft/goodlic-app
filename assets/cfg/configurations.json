@@ -1,9 +1,10 @@
 {
 
 
-  "base_url": "http://192.168.88.185:8000/",
-  "api_base_url": "http://192.168.88.185:8000/api/",
-  "media_url": "http://192.168.88.185:8000/",
+  "base_url": "https://consultation.softwaresbranding.com/",
+  "api_base_url": "https://consultation.softwaresbranding.com/api/",
+  "media_url": "https://consultation.softwaresbranding.com/",
+
 
 
   "flutterWave_publicKey": "FLWPUBK_TEST-7f22a34d5ad0905cff21f0952ad61e7f-X",

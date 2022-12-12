@@ -10,15 +10,15 @@ class BlogsLogic extends GetxController {
 
   GetAllBlogModel getAllBlogModel = GetAllBlogModel();
 
-  bool? blogLoader = false;
-  updateBlogLoader(bool? newValue) {
+  bool blogLoader = false;
+  updateBlogLoader(bool newValue) {
     blogLoader = newValue;
     update();
   }
 
   String? selectedBlogCategory;
   BlogModel selectedBlogForView = BlogModel();
-  updateSelectedBlogForView(BlogModel newValue,String? newSelectedBlogCategory) {
+  updateSelectedBlogForView(BlogModel newValue, String? newSelectedBlogCategory) {
     selectedBlogForView = newValue;
     selectedBlogCategory = newSelectedBlogCategory;
     update();
@@ -36,8 +36,7 @@ class BlogsLogic extends GetxController {
   double height = 100.h;
 
   bool get isShrink {
-    return scrollController!.hasClients &&
-        scrollController!.offset > (height - kToolbarHeight);
+    return scrollController!.hasClients && scrollController!.offset > (height - kToolbarHeight);
   }
 
   void scrollListener() {

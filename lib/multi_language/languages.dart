@@ -27,8 +27,7 @@ class LanguagesChang extends Translations {
           'view': 'View',
           'min_charges_is': 'Min Charges is',
           'minute': 'min',
-          'slot_must_be_greater_than_5_minute':
-              'Slot must be greater than 5 min',
+          'slot_must_be_greater_than_5_minute': 'Slot must be greater than 5 min',
           'enter_valid_email': 'Enter Valid Email',
           'don’t_have_an_account': 'Don’t have an account',
           'register_now': 'Register now',
@@ -81,13 +80,11 @@ class LanguagesChang extends Translations {
           'services': 'Services',
 
           'reset_password': 'Reset Password',
-          'a_reset_link_will_be_share_via_email':
-              'A Reset Link Will be Share Via Email',
+          'a_reset_link_will_be_share_via_email': 'A Reset Link Will be Share Via Email',
           'enter_phone': 'Enter Phone',
           'confirm': 'Confirm',
           'enter_OTP': 'Enter OTP',
-          'an_OTP_code_has_been_sent_to_your_given_to_your_phone_number':
-              'An OTP code Has Been Sent To Your Given Phone Number',
+          'an_OTP_code_has_been_sent_to_your_given_to_your_phone_number': 'An OTP code Has Been Sent To Your Given Phone Number',
           'you_will_receive_code_in': 'You Will Receive Code In',
           'new_password': 'New Password',
           'create_new_password': 'Create New Password',
@@ -102,29 +99,27 @@ class LanguagesChang extends Translations {
           'contact_us': 'Contact Us',
           'blogs': 'Blogs',
           'about_us': 'About Us',
-          'we_are_just_one_step_away_reach_out':
-              'We Are Just One Step Away Reach Out',
+          'we_are_just_one_step_away_reach_out': 'We Are Just One Step Away Reach Out',
           'address': 'Address',
           'call_us': 'Call Us',
           'email_us': 'Email Us',
           'blog': 'Blog',
-          'explore_today_trending_articles':
-              'Explore Today\'s Trending Articles',
+          'explore_today_trending_articles': 'Explore Today\'s Trending Articles',
           'recommended_blogs': 'Recommended Blogs',
+          'stranger_once': "You're only a stranger once.",
+          'create_blog': 'Create Blog',
+          'create_a_blog': 'Create a blog',
           'for_you': 'For You',
-          'get_know_about_our_Vision_and_mission':
-              'Get Know About Our Vision And Mission',
+          'get_know_about_our_Vision_and_mission': 'Get Know About Our Vision And Mission',
           'our_vision': 'Our Vision',
           'our_mission': 'Our Mission',
           'why_choose_us': 'Why Choose Us',
           'easy_signup': 'Easy SignUp',
           'professional_consultants': 'Professional Consultants',
           'my_appointments': 'My Appointments',
-          'manage_and_see_your_appointments_log':
-              'Manage And See Your Appointments Log',
+          'manage_and_see_your_appointments_log': 'Manage And See Your Appointments Log',
           'appt_detail': 'Appt Detail',
-          'your_appointment_detail_with_null':
-              'Your Appointment Detail With Null',
+          'your_appointment_detail_with_null': 'Your Appointment Detail With Null',
           'reg_no': 'Reg No.',
           'question': 'Question',
           'consultant_info': 'Consultant Info',
@@ -154,16 +149,13 @@ class LanguagesChang extends Translations {
           'type_your_question': 'Type Your Question',
           'upload_here': 'Upload Here',
           'payment_method': 'Payment Method',
-          'this_payment_method_is_not_available_yet':
-              'This Payment Method Is Not Available Yet',
+          'this_payment_method_is_not_available_yet': 'This Payment Method Is Not Available Yet',
           'congratulations': 'Congratulations',
-          'your_appointment_has_been_booked_with':
-              'Your Appointment Has Been Booked With',
+          'your_appointment_has_been_booked_with': 'Your Appointment Has Been Booked With',
           'go_to_home': 'Go To Home',
           'forgot_password': 'Forgot Password',
           'or_login_with': 'Or Login With',
-          'do_not_have_an_account?register_now':
-              'Do Not Have an account? Register Now',
+          'do_not_have_an_account?register_now': 'Do Not Have an account? Register Now',
           'by_login_you_are_agree_with_our': 'By Login You Are Agree With Our',
           'welcome_back_to_your_account': 'Welcome Back To Your Account',
           'audio': 'Audio',
@@ -173,8 +165,7 @@ class LanguagesChang extends Translations {
           'years_of_experience': 'Years Of Exp',
           'positive_rating': 'Positive Rating',
           'offline': 'OffLine',
-          'best_consultants_just_one_click_away':
-              'Best Consultants just one click away',
+          'best_consultants_just_one_click_away': 'Best Consultants just one click away',
           'top_rated_consultant': 'Top Rated Consultant',
           'view_all': 'View All',
           'featured_consultants': 'Featured Consultants',
@@ -348,8 +339,7 @@ class LanguagesChang extends Translations {
           ' resend_OTP_code': 'Resend OTP Code',
           ' enter_OTP_code_below': 'Enter OTP Code Below',
           'your_profile_is_under': 'Your Profile Is Under',
-          'you_will_be_notified_once_it_get_approve':
-              'You Will Be Notified Once It Get Approve',
+          'you_will_be_notified_once_it_get_approve': 'You Will Be Notified Once It Get Approve',
           'under': 'Under',
           'review': 'Review',
           'good_night': 'Good Night',
@@ -368,12 +358,9 @@ class LanguagesChang extends Translations {
           'add_skill': 'Add Skill',
           'sorry!': 'SORRY!',
           'select_language': 'Select Language',
-          'appointment_completed_successfully':
-              'Appointment Completed Successfully',
-          'appointment_accepted_successfully':
-              'Appointment Accepted Successfully',
-          'appointment_rejected_successfully':
-              'Appointment Rejected Successfully',
+          'appointment_completed_successfully': 'Appointment Completed Successfully',
+          'appointment_accepted_successfully': 'Appointment Accepted Successfully',
+          'appointment_rejected_successfully': 'Appointment Rejected Successfully',
           'delete_successfully': 'DELETED SUCCESSFULLY',
           'skill_added_successfully': 'SKILL ADDED SUCCESSFULLY',
           'added_successfully': 'ADDED SUCCESSFULLY',
@@ -390,8 +377,7 @@ class LanguagesChang extends Translations {
           'login_please': 'Login Please',
           'upload_your_degree_picture': 'Upload Your Degree Picture',
           'add_education_please': 'Add Education Please',
-          'upload_your_experience_certificate':
-              'Upload Your Experience Certificate',
+          'upload_your_experience_certificate': 'Upload Your Experience Certificate',
           'add_work_experience_please': 'Add Work Experience Please',
           'upload_your_profile_picture': 'Upload Your Profile Picture',
           'add_skill_please': 'Add Skill Please',
@@ -406,8 +392,7 @@ class LanguagesChang extends Translations {
           'add': 'ADD',
           'new': 'New',
           'withdraw_request': 'Withdraw Request',
-          'you_do_not_have_sufficient_balance':
-              'You Do not Have Sufficient Balance',
+          'you_do_not_have_sufficient_balance': 'You Do not Have Sufficient Balance',
           'location': 'LOCATION',
           'please_turn_on_your_location': 'Please turn on your location',
           'Online': 'Online',
@@ -426,10 +411,8 @@ class LanguagesChang extends Translations {
           'enter_last_6_digits': 'Enter Last 6-Digits of Your CNIC',
           'enter_amount': 'Enter Amount',
           'sign_up_as_consultant': 'Sign Up as Consultant',
-          'the_balance_insufficient':
-              'The balance in account is insufficient for the transaction',
-          'thank_you_using_jazzcash':
-              'Thank you for Using JazzCash.Your Transaction was successful',
+          'the_balance_insufficient': 'The balance in account is insufficient for the transaction',
+          'thank_you_using_jazzcash': 'Thank you for Using JazzCash.Your Transaction was successful',
         },
         'ur_PK': {
           'Find_your': 'اپنا تلاش کرو',
@@ -454,8 +437,7 @@ class LanguagesChang extends Translations {
           'view': 'دیکھیں',
           'min_charges_is': 'کم از کم چارجز ہیں۔',
           'minute': 'منٹ',
-          'slot_must_be_greater_than_5_minute':
-              'سلاٹ 5 منٹ سے زیادہ ہونا چاہیے۔',
+          'slot_must_be_greater_than_5_minute': 'سلاٹ 5 منٹ سے زیادہ ہونا چاہیے۔',
           'enter_valid_email': 'درست ای میل درج کریں۔',
           'don’t_have_an_account': 'اکاؤنٹ نہیں ہے۔',
           'register_now': 'ابھی رجسٹر کریں',
@@ -473,8 +455,7 @@ class LanguagesChang extends Translations {
           'my_wallet': 'میرا بٹوہ',
           'about_your_self': 'اپنے بارے میں',
           'pay_amount_for_appointment': 'تقرری کے لیے رقم ادا کریں۔',
-          'get_know_about_our_Vision_and_mission':
-              'ہمارے وژن اور مشن کے بارے میں جانیں۔',
+          'get_know_about_our_Vision_and_mission': 'ہمارے وژن اور مشن کے بارے میں جانیں۔',
           'manage_all_of_your_appointment': 'اپنی تمام ملاقات کا انتظام کریں۔',
           'today_appointment': 'آج کی ملاقات',
           'no_appointment_for_today': 'آج کے لیے کوئی ملاقات نہیں۔',
@@ -510,10 +491,8 @@ class LanguagesChang extends Translations {
           'password': 'پاس ورڈ',
           'forgot_password': 'پاسورڈ بھول گے',
           'or_login_with': 'یا لاگ ان کریں۔',
-          'do_not_have_an_account?register_now':
-              'کیا_اکاؤنٹ_نہیں_ہے؟ ابھی رجسٹر کریں۔',
-          'by_login_you_are_agree_with_our':
-              'لاگ ان کرکے آپ ہماری بات سے متفق ہیں۔',
+          'do_not_have_an_account?register_now': 'کیا_اکاؤنٹ_نہیں_ہے؟ ابھی رجسٹر کریں۔',
+          'by_login_you_are_agree_with_our': 'لاگ ان کرکے آپ ہماری بات سے متفق ہیں۔',
           'welcome_back_to_your_account': 'آپ کے اکاؤنٹ میں واپس خوش آمدید',
           'login': 'لاگ ان کریں',
           'available_options': 'دستیاب اختیارات',
@@ -523,8 +502,7 @@ class LanguagesChang extends Translations {
           'unassign': 'تفویض ختم کرنا',
           'positive_rating': 'مثبت درجہ بندی',
           'offline': 'آف لائن',
-          'best_consultants_just_one_click_away':
-              'بہترین مشیر صرف ایک کلک کی دوری پر',
+          'best_consultants_just_one_click_away': 'بہترین مشیر صرف ایک کلک کی دوری پر',
           'top_rated_consultant': 'ٹاپ ریٹیڈ کنسلٹنٹ',
           'view_all': 'سب دیکھیں',
           'featured_consultants': 'نمایاں کنسلٹنٹس',
@@ -532,13 +510,11 @@ class LanguagesChang extends Translations {
           'search_here': 'یہاں تلاش کریں۔',
           'home': 'گھر',
           'reset_password': 'پاس ورڈ ری سیٹ',
-          'a_reset_link_will_be_share_via_otp':
-              'ایک ری سیٹ لنک OTP کے ذریعے شیئر کیا جائے گا۔',
+          'a_reset_link_will_be_share_via_otp': 'ایک ری سیٹ لنک OTP کے ذریعے شیئر کیا جائے گا۔',
           'enter_phone': 'فون داخل کریں۔',
           'confirm': 'تصدیق کریں۔',
           'enter_OTP': 'OTP درج کریں۔',
-          'an_OTP_code_has_been_sent_to_your_given_to_your_phone_number':
-              'آپ کے دیے گئے فون نمبر پر ایک OTP کوڈ بھیجا گیا ہے۔',
+          'an_OTP_code_has_been_sent_to_your_given_to_your_phone_number': 'آپ کے دیے گئے فون نمبر پر ایک OTP کوڈ بھیجا گیا ہے۔',
           'you_will_receive_code_in': 'آپ کو کوڈ موصول ہوگا۔',
           'new_password': 'New Password',
           'create_new_password': 'نیا پاس ورڈ بنائیں',
@@ -551,15 +527,16 @@ class LanguagesChang extends Translations {
           'contact_us': 'ہم سے رابطہ کریں۔',
           'blogs': 'بلاگز',
           'about_us': 'ہمارے بارے میں',
-          'we_are_just_one_step_away_reach_out':
-              'ہم صرف ایک قدم کے فاصلے پر پہنچ گئے ہیں۔',
+          'we_are_just_one_step_away_reach_out': 'ہم صرف ایک قدم کے فاصلے پر پہنچ گئے ہیں۔',
           'address': 'پتہ',
           'call_us': 'ہمیں بلائیں',
           'email_us': 'ہمیں ای میل کریں',
           'blog': 'بلاگ',
-          'explore_today_trending_articles':
-              'آج کے رجحان ساز مضامین کو دریافت کریں۔',
+          'explore_today_trending_articles': 'آج کے رجحان ساز مضامین کو دریافت کریں۔',
           'recommended_blogs': 'تجویز کردہ بلاگز',
+          'stranger_once': "آپ صرف ایک بار اجنبی ہیں۔",
+          'create_a_blog': 'ایک بلاگ بنائیں',
+          'create_blog': 'بلاگ بنائیں',
           'for_you': 'آپ کے لیے',
           'our_vision': 'ہمارا وژن',
           'our_mission': 'ہمارا مقصد',
@@ -567,11 +544,9 @@ class LanguagesChang extends Translations {
           'easy_signup': 'آسان سائن اپ',
           'professional_consultants': 'پروفیشنل کنسلٹنٹس',
           'my_appointments': 'میری اپائنٹمنٹس',
-          'manage_and_see_your_appointments_log':
-              'اپنے اپائنٹمنٹ لاگ کا نظم کریں اور دیکھیں',
+          'manage_and_see_your_appointments_log': 'اپنے اپائنٹمنٹ لاگ کا نظم کریں اور دیکھیں',
           'appt_detail': 'تقرری کی تفصیل',
-          'your_appointment_detail_with_null':
-              'آپ کی اپوائنٹمنٹ کی تفصیل Null کے ساتھ',
+          'your_appointment_detail_with_null': 'آپ کی اپوائنٹمنٹ کی تفصیل Null کے ساتھ',
           'question': 'سوالات',
           'consultant_info': 'کنسلٹنٹ کی معلومات',
           'reg_date': 'رجسٹر کی تاریخ',
@@ -579,8 +554,7 @@ class LanguagesChang extends Translations {
           'document': 'دستاویز',
           'edit_your_profile': 'اپنے پروفائل میں ترمیم کریں۔',
           'success': 'کامیابی',
-          'profile_updated_successfully':
-              'پروفائل کامیابی کے ساتھ اپ ڈیٹ ہو گیا۔',
+          'profile_updated_successfully': 'پروفائل کامیابی کے ساتھ اپ ڈیٹ ہو گیا۔',
           'amount_in_wallet': 'والیٹ میں رقم',
           'deposit': 'جمع',
           'withdraw': 'ڈرا کے ساتھ',
@@ -601,11 +575,9 @@ class LanguagesChang extends Translations {
           'type_your_question': 'اپنا سوال ٹائپ کریں۔',
           'upload_here': 'یہاں اپ لوڈ کریں۔',
           'payment_method': 'ادائیگی کا طریقہ',
-          'this_payment_method_is_not_available_yet':
-              'یہ ادائیگی کا طریقہ ابھی تک دستیاب نہیں ہے۔',
+          'this_payment_method_is_not_available_yet': 'یہ ادائیگی کا طریقہ ابھی تک دستیاب نہیں ہے۔',
           'congratulations': 'مبارک ہو',
-          'your_appointment_has_been_booked_with':
-              'آپ کی اپوائنٹمنٹ بک کر دی گئی ہے۔',
+          'your_appointment_has_been_booked_with': 'آپ کی اپوائنٹمنٹ بک کر دی گئی ہے۔',
           'go_to_home': 'گھر جاو',
           'privacy_policy': 'رازداری کی پالیسی',
           'mentee': 'مینٹی',
@@ -616,8 +588,7 @@ class LanguagesChang extends Translations {
           'you_are_receiving_call_from': 'آپ کو کال موصول ہو رہی ',
           'or_sign_up_with': 'یا اس کے ساتھ سائن اپ کریں۔',
           'have_an_account': 'یا آپ کا اکاؤنٹ ہے؟',
-          'by_sign_up_you_are_agree':
-              'سائن اپ کرکے، آپ ہماری بات سے اتفاق کرتے ہیں۔',
+          'by_sign_up_you_are_agree': 'سائن اپ کرکے، آپ ہماری بات سے اتفاق کرتے ہیں۔',
           "your_appointment_detail_with": 'سے آپ کی ملاقات کی تفصیلات',
           'total_appointments': 'کل تقرریاں',
           'pending_appointments': 'زیر غور تقرریاں',
@@ -775,8 +746,7 @@ class LanguagesChang extends Translations {
           ' resend_OTP_code': ' کوڈ دوبارہ بھیجیں۔',
           ' enter_OTP_code_below': ' نیچے  کوڈ درج کریں۔',
           'your_profile_is_under': 'آپ کا پروفائل زیر غور ہے۔',
-          'you_will_be_notified_once_it_get_approve':
-              'اس کی پروفائل منظوری کے بعد آپ کو مطلع کیا جائے گا',
+          'you_will_be_notified_once_it_get_approve': 'اس کی پروفائل منظوری کے بعد آپ کو مطلع کیا جائے گا',
           'under': 'زیر ',
           'review': 'جائزہ لینا',
           'good_night': 'شب بخیر',
@@ -795,10 +765,8 @@ class LanguagesChang extends Translations {
           'add_skill': 'مہارت شامل کریں',
           'sorry!': 'معذرت!',
           'select_language': 'زبان منتخب کریں',
-          'appointment_completed_successfully':
-              ' ملاقات کامیابی کے ساتھ مکمل ہو گئی ہے۔',
-          'appointment_accepted_successfully':
-              ' تقرری کامیابی کے ساتھ قبول کر لی گئی ہے۔ ',
+          'appointment_completed_successfully': ' ملاقات کامیابی کے ساتھ مکمل ہو گئی ہے۔',
+          'appointment_accepted_successfully': ' تقرری کامیابی کے ساتھ قبول کر لی گئی ہے۔ ',
           'appointment_rejected_successfully': 'تقرری مسترد کر دی گئی ',
           'delete_successfully': ' کامیابی سے ہٹا دیا گیا۔',
           'skill_added_successfully': 'مہارت کو شامل کیا گیا۔',
@@ -816,8 +784,7 @@ class LanguagesChang extends Translations {
           'login_please': 'لاگ ان کریں',
           'upload_your_degree_picture': 'اپنی ڈگری کی تصویر اپ لوڈ کریں۔',
           'add_education_please': 'برائے مہربانی تعلیم شامل کریں۔',
-          'upload_your_experience_certificate':
-              'اپنا تجربہ سرٹیفکیٹ اپ لوڈ کریں۔',
+          'upload_your_experience_certificate': 'اپنا تجربہ سرٹیفکیٹ اپ لوڈ کریں۔',
           'add_work_experience_please': 'براہ کرم کام کا تجربہ شامل کریں۔',
           'upload_your_profile_picture': 'اپنی پروفائل تصویر اپ لوڈ کریں۔',
           'add_skill_please': 'براہ کرم مہارت شامل کریں۔',
@@ -836,8 +803,7 @@ class LanguagesChang extends Translations {
           'please_turn_on_your_location': 'براہ کرم اپنا مقام آن کریں۔',
           'online': 'آن لائن',
           ' update_your_profile': '  اپنے پروفائل کو اپ ڈیٹ کریں۔',
-          'about_us_1':
-              'مشورا آپ کو بہترین مصدقہ ماہر سے مربوط کرے گا اور آپ کی ضروریات کے مطابق پیشہ ورانہ حل فوراً حاصل کرے گا، دنیا بھر میں مینٹرز کے بڑے نیٹ ورک کے ساتھ۔',
+          'about_us_1': 'مشورا آپ کو بہترین مصدقہ ماہر سے مربوط کرے گا اور آپ کی ضروریات کے مطابق پیشہ ورانہ حل فوراً حاصل کرے گا، دنیا بھر میں مینٹرز کے بڑے نیٹ ورک کے ساتھ۔',
           'about_us_2':
               'اپنا فون نمبر استعمال کرکے سائن اپ کرنے کا بہت آسان طریقہ، اپنا فون نمبر ڈالنے کے بعد آپ کو 6 ہندسوں کا OTP موصول ہوگا۔ سائن اپ کرنے کے بعد آپ صرف ایک کلک پر اپنی اپائنٹمنٹ بک کر سکتے ہیں۔',
           'about_us_3':
@@ -848,14 +814,11 @@ class LanguagesChang extends Translations {
           'pay_now': 'ابھی ادائیگی کریں۔',
           'online_status': 'آن لائن اسٹیٹس',
           'offline_status': 'آف لائناسٹیٹس',
-          'enter_last_6_digits':
-              'اپنے قومی شناختی کارڈ نمبر کے آخری 6 ہندسے درج کریں۔',
+          'enter_last_6_digits': 'اپنے قومی شناختی کارڈ نمبر کے آخری 6 ہندسے درج کریں۔',
           'enter_amount': 'رقم درج کریں۔',
           'sign_up_as_consultant': 'بطور کنسلٹنٹ سائن اپ کریں۔',
-          'the_balance_insufficient':
-              'اکاؤنٹ میں بیلنس ٹرانزیکشن کے لیے ناکافی ہے۔',
-          'thank_you_using_jazzcash':
-              'JazzCash استعمال کرنے کا شکریہ۔ آپ کا لین دین کامیاب رہا۔',
+          'the_balance_insufficient': 'اکاؤنٹ میں بیلنس ٹرانزیکشن کے لیے ناکافی ہے۔',
+          'thank_you_using_jazzcash': 'JazzCash استعمال کرنے کا شکریہ۔ آپ کا لین دین کامیاب رہا۔',
         },
         'bn_BD': {
           'find_your': 'আপনার খুঁজুন',
@@ -878,8 +841,7 @@ class LanguagesChang extends Translations {
           'view': 'দেখুন',
           'min_charges_is': 'ন্যূনতম চার্জ হল',
           'minute': 'মিনিট',
-          'slot_must_be_greater_than_5_minute':
-              'স্লট অবশ্যই 5 মিনিটের বেশি হতে হবে',
+          'slot_must_be_greater_than_5_minute': 'স্লট অবশ্যই 5 মিনিটের বেশি হতে হবে',
           'enter_valid_email': 'সঠিক ইমেইল এড্রেস প্রদান করুন',
           'don’t_have_an_account': 'একটি অ্যাকাউন্ট নেই',
           'register_now': 'এখন নিবন্ধন করুন',
@@ -887,8 +849,7 @@ class LanguagesChang extends Translations {
           'password_not_match': 'পাসওয়ার্ড মেলে না',
           'enter_email': 'ইমেইল প্রদান করুন',
           'sign_up': 'নিবন্ধন করুন',
-          'welcome_to_create_your_account':
-              'আপনার অ্যাকাউন্ট তৈরি করতে স্বাগতম',
+          'welcome_to_create_your_account': 'আপনার অ্যাকাউন্ট তৈরি করতে স্বাগতম',
           'enter_details': 'বিস্তারিত লিখুন',
           'reg_no': 'রেজি নং',
           'step_3_of_3': '৩টির মধ্যে ৩য় ধাপ',
@@ -897,22 +858,18 @@ class LanguagesChang extends Translations {
           'special': 'বিশেষ',
           'my_wallet': 'আমার মানিব্যাগ',
           'about_your_self': 'নিজেকে সম্পর্কে',
-          'pay_amount_for_appointment':
-              'অ্যাপয়েন্টমেন্টের জন্য অর্থ প্রদান করুন',
-          'get_know_about_our_Vision_and_mission':
-              'আমাদের ভিশন এবং মিশন সম্পর্কে জানুন',
+          'pay_amount_for_appointment': 'অ্যাপয়েন্টমেন্টের জন্য অর্থ প্রদান করুন',
+          'get_know_about_our_Vision_and_mission': 'আমাদের ভিশন এবং মিশন সম্পর্কে জানুন',
           'enter_login_details': 'লগইন বিবরণ লিখুন',
           'email_address': 'ইমেল ঠিকানা',
           'password': 'পাসওয়ার্ড',
           'dashboard': 'ড্যাশবোর্ড',
-          'manage_all_of_your_appointment':
-              'আপনার সমস্ত অ্যাপয়েন্টমেন্ট পরিচালনা করুন',
+          'manage_all_of_your_appointment': 'আপনার সমস্ত অ্যাপয়েন্টমেন্ট পরিচালনা করুন',
           'today_appointment': 'আজকের অ্যাপয়েন্টমেন্ট',
           'no_appointment_for_today': 'আজকের জন্য কোনো অ্যাপয়েন্টমেন্ট নেই',
           'logout': 'প্রস্থান',
           'appointment_logs': 'অ্যাপয়েন্টমেন্ট লগ',
-          'your_appointment_details_with':
-              'সঙ্গে আপনার অ্যাপয়েন্টমেন্ট বিস্তারিত',
+          'your_appointment_details_with': 'সঙ্গে আপনার অ্যাপয়েন্টমেন্ট বিস্তারিত',
           'user_profile_is_hidden': 'ব্যবহারকারীর প্রোফাইল লুকানো আছে',
           'next_step': 'পরবর্তী পর্ব',
           'upload_profile_photo': 'প্রোফাইল ফটো আপলোড করুন',
@@ -939,8 +896,7 @@ class LanguagesChang extends Translations {
           'services': 'সেবা',
           'forgot_password': 'পাসওয়ার্ড ভুলে গেছেন',
           'or_login_with': 'অথবা লগইন করুন',
-          'do_not_have_an_account?register_now':
-              'একটি অ্যাকাউন্ট নেই? এখন নিবন্ধন',
+          'do_not_have_an_account?register_now': 'একটি অ্যাকাউন্ট নেই? এখন নিবন্ধন',
           'by_login_you_are_agree_with_our': 'লগইন করে আপনি আমাদের সাথে একমত',
           'audio': 'শ্রুতি',
           'video': 'ভিডিও',
@@ -960,13 +916,11 @@ class LanguagesChang extends Translations {
           'search_here': 'এখানে অনুসন্ধান করুন',
           'home': 'বাড়ি',
           'reset_password': 'পাসওয়ার্ড রিসেট করুন',
-          'a_reset_link_will_be_share_via_otp':
-              'একটি রিসেট লিঙ্ক otp মাধ্যমে শেয়ার করা হবে',
+          'a_reset_link_will_be_share_via_otp': 'একটি রিসেট লিঙ্ক otp মাধ্যমে শেয়ার করা হবে',
           'enter_phone': 'ফোন লিখুন',
           'confirm': 'নিশ্চিত করুন',
           'enter_OTP': 'OTP লিখুন',
-          'an_OTP_code_has_been_sent_to_your_given_to_your_phone_number':
-              'আপনার দেওয়া ফোন নম্বরে একটি OTP কোড পাঠানো হয়েছে',
+          'an_OTP_code_has_been_sent_to_your_given_to_your_phone_number': 'আপনার দেওয়া ফোন নম্বরে একটি OTP কোড পাঠানো হয়েছে',
           'you_will_receive_code_in': 'আপনি কোড ইন পাবেন',
           'new_password': 'নতুন পাসওয়ার্ড',
           'create_new_password': 'নতুন পাসওয়ার্ড তৈরি করুন',
@@ -984,9 +938,11 @@ class LanguagesChang extends Translations {
           'call_us': 'আমাদের কল করুন',
           'email_us': 'আমাদেরকে ইমেইল করুন',
           'blog': 'ব্লগ',
-          'explore_today_trending_articles':
-              'আজকের ট্রেন্ডিং নিবন্ধগুলি অন্বেষণ করুন৷',
+          'explore_today_trending_articles': 'আজকের ট্রেন্ডিং নিবন্ধগুলি অন্বেষণ করুন৷',
           'recommended_blogs': 'প্রস্তাবিত ব্লগ',
+          'stranger_once': "তুমি শুধু একবার অপরিচিত।",
+          'create_a_blog': 'একটি ব্লগ তৈরি করুন',
+          'create_blog': 'ব্লগ তৈরি করুন',
           'for_you': 'তোমার জন্য',
           'our_vision': 'আমাদের দৃষ্টি',
           'our_mission': 'আমাদের লক্ষ্য',
@@ -994,11 +950,9 @@ class LanguagesChang extends Translations {
           'easy_signup': 'সহজ সাইন আপ',
           'professional_consultants': 'পেশাদার পরামর্শদাতা',
           'my_appointments': 'আমার অ্যাপয়েন্টমেন্ট',
-          'manage_and_see_your_appointments_log':
-              'আপনার অ্যাপয়েন্টমেন্ট লগ পরিচালনা করুন এবং দেখুন',
+          'manage_and_see_your_appointments_log': 'আপনার অ্যাপয়েন্টমেন্ট লগ পরিচালনা করুন এবং দেখুন',
           'appt_detail': 'অ্যাপয়েন্টমেন্টের বিবরণ',
-          'your_appointment_detail_with_null':
-              'শূন্য সহ আপনার অ্যাপয়েন্টমেন্টের বিবরণ',
+          'your_appointment_detail_with_null': 'শূন্য সহ আপনার অ্যাপয়েন্টমেন্টের বিবরণ',
           'question': 'প্রশ্ন',
           'consultant_info': 'পরামর্শদাতা তথ্য',
           'reg_date': 'রেজিঃ তারিখ',
@@ -1027,11 +981,9 @@ class LanguagesChang extends Translations {
           'type_your_question': 'আপনার প্রশ্ন টাইপ করুন',
           'upload_here': 'এখানে আপলোড করুন',
           'payment_method': 'মূল্যপরিশোধ পদ্ধতি',
-          'this_payment_method_is_not_available_yet':
-              'এই অর্থপ্রদান পদ্ধতি এখনও উপলব্ধ নয়',
+          'this_payment_method_is_not_available_yet': 'এই অর্থপ্রদান পদ্ধতি এখনও উপলব্ধ নয়',
           'congratulations': 'অভিনন্দন',
-          'your_appointment_has_been_booked_with':
-              'আপনার অ্যাপয়েন্টমেন্ট বুক করা হয়েছে সঙ্গে',
+          'your_appointment_has_been_booked_with': 'আপনার অ্যাপয়েন্টমেন্ট বুক করা হয়েছে সঙ্গে',
           'go_to_home': 'বাড়িতে যেতে',
           'privacy_policy': 'গোপনীয়তা নীতি',
           'mentee': 'মেন্টি',
@@ -1199,8 +1151,7 @@ class LanguagesChang extends Translations {
           ' resend_OTP_code': 'OTP কোড আবার পাঠান',
           ' enter_OTP_code_below': ' নিচে ওটিপি কোড লিখুন',
           'your_profile_is_under': 'আপনার প্রোফাইল অধীনে আছে',
-          'you_will_be_notified_once_it_get_approve':
-              'এটি অনুমোদন পেলে আপনাকে অবহিত করা হবে',
+          'you_will_be_notified_once_it_get_approve': 'এটি অনুমোদন পেলে আপনাকে অবহিত করা হবে',
           'under': 'অধীন',
           'review': 'পুনঃমূল্যায়ন',
           'good_night': 'শুভ রাত্রি',
@@ -1219,12 +1170,9 @@ class LanguagesChang extends Translations {
           'add_skill': 'দক্ষতা যোগ করুন',
           'sorry!': 'দুঃখিত!',
           'select_language': 'ভাষা নির্বাচন কর',
-          'appointment_completed_successfully':
-              'অ্যাপয়েন্টমেন্ট সফলভাবে সম্পন্ন হয়েছে',
-          'appointment_accepted_successfully':
-              'অ্যাপয়েন্টমেন্ট সফলভাবে গৃহীত হয়েছে',
-          'appointment_rejected_successfully':
-              'অ্যাপয়েন্টমেন্ট সফলভাবে প্রত্যাখ্যান করা হয়েছে',
+          'appointment_completed_successfully': 'অ্যাপয়েন্টমেন্ট সফলভাবে সম্পন্ন হয়েছে',
+          'appointment_accepted_successfully': 'অ্যাপয়েন্টমেন্ট সফলভাবে গৃহীত হয়েছে',
+          'appointment_rejected_successfully': 'অ্যাপয়েন্টমেন্ট সফলভাবে প্রত্যাখ্যান করা হয়েছে',
           'delete_successfully': 'সফলভাবে মুছে ফেলা হয়েছে',
           'skill_added_successfully': 'দক্ষতা সফলভাবে যোগ করা হয়েছে',
           'added_successfully': 'সফলভাবে যোগ করা হয়েছে',
@@ -1241,8 +1189,7 @@ class LanguagesChang extends Translations {
           'login_please': 'লগইন করুন',
           'upload_your_degree_picture': 'আপনার ডিগ্রী ছবি আপলোড',
           'add_education_please': 'শিক্ষা যোগ করুন দয়া করে',
-          'upload_your_experience_certificate':
-              'আপনার অভিজ্ঞতার শংসাপত্র আপলোড করুন',
+          'upload_your_experience_certificate': 'আপনার অভিজ্ঞতার শংসাপত্র আপলোড করুন',
           'add_work_experience_please': 'কাজের অভিজ্ঞতা যোগ করুন',
           'upload_your_profile_picture': 'আপনার প্রোফাইল ছবি আপলোড করুন',
           'add_skill_please': 'দয়া করে দক্ষতা যোগ করুন',
@@ -1261,8 +1208,7 @@ class LanguagesChang extends Translations {
           'please_turn_on_your_location': 'আপনার অবস্থান চালু করুন',
           'Online': 'অনলাইন',
           ' update_your_profile': ' আপনার প্রোফাইল আপডেট করুন ',
-          'about_us_1':
-              'Mashvra আপনাকে সর্বোত্তম প্রত্যয়িত বিশেষজ্ঞের সাথে সংযুক্ত করবে এবং বিশ্বজুড়ে পরামর্শদাতাদের বৃহৎ নেটওয়ার্কের সাথে সাথে সাথেই আপনার চাহিদা অনুযায়ী পেশাদার সমাধান পাবে।',
+          'about_us_1': 'Mashvra আপনাকে সর্বোত্তম প্রত্যয়িত বিশেষজ্ঞের সাথে সংযুক্ত করবে এবং বিশ্বজুড়ে পরামর্শদাতাদের বৃহৎ নেটওয়ার্কের সাথে সাথে সাথেই আপনার চাহিদা অনুযায়ী পেশাদার সমাধান পাবে।',
           'about_us_2':
               ' আপনার ফোন নম্বর ব্যবহার করে সাইন আপ করার খুব সহজ উপায়, আপনার ফোন নম্বর দেওয়ার পরে আপনি একটি 6-সংখ্যার OTP পাবেন। সাইন আপ করার পর আপনি শুধুমাত্র একটি ক্লিকেই আপনার অ্যাপয়েন্টমেন্ট বুক করতে পারবেন। ',
           'about_us_3':
@@ -1273,14 +1219,11 @@ class LanguagesChang extends Translations {
           'pay_now': 'এখন পরিশোধ করুন',
           'online_status': 'অনলাইন স্ট্যাটাস',
           'offline_status': 'অফলাইন অবস্থা',
-          'enter_last_6_digits':
-              'আপনার জাতীয় পরিচয়পত্র নম্বরের শেষ 6-অঙ্ক লিখুন',
+          'enter_last_6_digits': 'আপনার জাতীয় পরিচয়পত্র নম্বরের শেষ 6-অঙ্ক লিখুন',
           'enter_amount': 'পরিমান লিখুন',
           'sign_up_as_consultant': 'পরামর্শদাতা হিসাবে সাইন আপ করুন',
-          'the_balance_insufficient':
-              'অ্যাকাউন্টে ব্যালেন্স লেনদেনের জন্য অপর্যাপ্ত',
-          'thank_you_using_jazzcash':
-              'JazzCash ব্যবহার করার জন্য আপনাকে ধন্যবাদ। আপনার লেনদেন সফল হয়েছে',
+          'the_balance_insufficient': 'অ্যাকাউন্টে ব্যালেন্স লেনদেনের জন্য অপর্যাপ্ত',
+          'thank_you_using_jazzcash': 'JazzCash ব্যবহার করার জন্য আপনাকে ধন্যবাদ। আপনার লেনদেন সফল হয়েছে',
         },
         'hi_IN': {
           'find_your': 'अपना ढूँढो',
@@ -1303,8 +1246,7 @@ class LanguagesChang extends Translations {
           'view': 'दृश्य',
           'min_charges_is': 'न्यूनतम शुल्क है',
           'minute': 'मिनट',
-          'slot_must_be_greater_than_5_minute':
-              'स्लॉट 5 मिनट से बड़ा होना चाहिए',
+          'slot_must_be_greater_than_5_minute': 'स्लॉट 5 मिनट से बड़ा होना चाहिए',
           'enter_valid_email': 'मान्य ईमेल दर्ज करें',
           'don’t_have_an_account': 'खाता नहीं है',
           'register_now': 'अभी पंजीकरण करें',
@@ -1312,8 +1254,7 @@ class LanguagesChang extends Translations {
           'password_not_match': 'पासवर्ड मेल नहीं खाता',
           'enter_email': 'ईमेल दर्ज करें',
           'sign_up': 'साइन अप करें',
-          'welcome_to_create_your_account':
-              'अपना खाता बनाने के लिए आपका स्वागत है',
+          'welcome_to_create_your_account': 'अपना खाता बनाने के लिए आपका स्वागत है',
           'enter_details': 'विवरण दर्ज करें',
           'reg_no': 'रेग नंबर',
           'step_3_of_3': 'चरण 3 का 3',
@@ -1323,8 +1264,7 @@ class LanguagesChang extends Translations {
           'my_wallet': 'मेरा बटुआ',
           'about_your_self': 'अपने बारे में',
           'pay_amount_for_appointment': 'नियुक्ति के लिए भुगतान राशि',
-          'get_know_about_our_Vision_and_mission':
-              'हमारे विजन और मिशन के बारे में जानें',
+          'get_know_about_our_Vision_and_mission': 'हमारे विजन और मिशन के बारे में जानें',
           'enter_login_details': 'लॉगिन विवरण दर्ज करें',
           'email_address': 'ईमेल पता',
           'password': 'पासवर्ड',
@@ -1361,10 +1301,8 @@ class LanguagesChang extends Translations {
           'services': 'सेवाएं',
           'forgot_password': 'पासवर्ड भूल गए',
           'or_login-with': 'या लॉगिन करें',
-          'do_not_have_an_account?register_now':
-              'क्या आपका कोई खाता नहीं है? अभी पंजीकरण करें',
-          'by_login_you_are_agree_with_our':
-              'लॉग इन करके आप हमारी बात से सहमत हैं',
+          'do_not_have_an_account?register_now': 'क्या आपका कोई खाता नहीं है? अभी पंजीकरण करें',
+          'by_login_you_are_agree_with_our': 'लॉग इन करके आप हमारी बात से सहमत हैं',
           'audio': 'ऑडियो',
           'video': 'वीडियो',
           'login': 'लॉग इन करें',
@@ -1383,13 +1321,11 @@ class LanguagesChang extends Translations {
           'search_here': 'यहाँ ढूँढे',
           'home': 'घर',
           'reset_password': 'पासवर्ड रीसेट',
-          'a_reset_link_will_be_share_via_otp':
-              'एक रीसेट लिंक ओटीपी के माध्यम से साझा किया जाएगा',
+          'a_reset_link_will_be_share_via_otp': 'एक रीसेट लिंक ओटीपी के माध्यम से साझा किया जाएगा',
           'enter_phone': 'फ़ोन दर्ज करें',
           'confirm': 'पुष्टि करना',
           'enter_OTP': 'ओटीपी दर्ज करें ओटीपी दर्ज करें',
-          'an_OTP_code_has_been_sent_to_your_given_to_your_phone_number':
-              'आपके दिए गए फोन नंबर पर एक ओटीपी कोड भेजा गया है',
+          'an_OTP_code_has_been_sent_to_your_given_to_your_phone_number': 'आपके दिए गए फोन नंबर पर एक ओटीपी कोड भेजा गया है',
           'you_will_receive_code_in': 'आपको कोड प्राप्त होगा',
           'new_password': 'नया पासवर्ड',
           'create_new_password': 'नया पासवर्ड बनाएं',
@@ -1402,15 +1338,16 @@ class LanguagesChang extends Translations {
           'contact_us': 'संपर्क करें',
           'blogs': 'ब्लॉग',
           'about_us': 'हमारे बारे में',
-          'we_are_just_one_step_away_reach_out':
-              'हम बस एक कदम दूर पहुंच गए हैं',
+          'we_are_just_one_step_away_reach_out': 'हम बस एक कदम दूर पहुंच गए हैं',
           'address': 'पता',
           'call_us': 'हमें कॉल करें',
           'email_us': 'हमे ईमेल करे',
           'blog': 'ब्लॉग',
-          'explore_today_trending_articles':
-              'आज के रुझान वाले लेख एक्सप्लोर करें',
+          'explore_today_trending_articles': 'आज के रुझान वाले लेख एक्सप्लोर करें',
           'recommended_blogs': 'अनुशंसित ब्लॉग',
+          'stranger_once': "आप केवल एक बार अजनबी हैं।",
+          'create_a_blog': 'एक ब्लॉग बनाएँ',
+          'create_blog': 'ब्लॉग बनाएँ',
           'for_you': 'आपके लिए',
           'our_vision': 'हमारा नज़रिया',
           'our_mission': 'हमारा लक्ष्य',
@@ -1418,11 +1355,9 @@ class LanguagesChang extends Translations {
           'easy_signup': 'आसान साइनअप',
           'professional_consultants': 'पेशेवर सलाहकार',
           'my_appointments': 'मेरी नियुक्तियाँ',
-          'manage_and_see_your_appointments_log':
-              'प्रबंधित करें और अपनी नियुक्तियों को देखें लॉग',
+          'manage_and_see_your_appointments_log': 'प्रबंधित करें और अपनी नियुक्तियों को देखें लॉग',
           'appt_detail': 'नियुक्ति विवरण',
-          'your_appointment_detail_with_null':
-              'आपका अपॉइंटमेंट विवरण शून्य के साथ',
+          'your_appointment_detail_with_null': 'आपका अपॉइंटमेंट विवरण शून्य के साथ',
           'question': 'प्रशन',
           'consultant_info': 'सलाहकार जानकारी',
           'reg_date': 'रेग तिथि',
@@ -1430,8 +1365,7 @@ class LanguagesChang extends Translations {
           'document': 'दस्तावेज़',
           'edit_your_profile': 'अपनी प्रोफाइल सम्पादित करें',
           'success': 'सफलता',
-          'profile_updated_successfully':
-              'प्रोफाइल को सफलतापूर्वक अपडेट किया गया',
+          'profile_updated_successfully': 'प्रोफाइल को सफलतापूर्वक अपडेट किया गया',
           'amount_in_wallet': 'वॉलेट में राशि',
           'deposit': 'जमा करना',
           'withdraw': 'निकालना',
@@ -1452,11 +1386,9 @@ class LanguagesChang extends Translations {
           'type_your_question': 'अपना प्रश्न टाइप करें',
           'upload_here': 'यहाँ अपलोड करें',
           'payment_method': 'भुगतान का तरीका',
-          'this_payment_method_is_not_available_yet':
-              'यह भुगतान विधि अभी तक उपलब्ध नहीं है',
+          'this_payment_method_is_not_available_yet': 'यह भुगतान विधि अभी तक उपलब्ध नहीं है',
           'congratulations': 'बधाई हो',
-          'your_appointment_has_been_booked_with':
-              'आपकी अपॉइंटमेंट बुक हो चुकी है',
+          'your_appointment_has_been_booked_with': 'आपकी अपॉइंटमेंट बुक हो चुकी है',
           'go_to_home': 'घर जाओ',
           'privacy_policy': 'गोपनीयता नीति',
           'mentee': 'मेंटी',
@@ -1623,8 +1555,7 @@ class LanguagesChang extends Translations {
           ' or_login_with': 'साथ प्रवेश करना',
           ' resend_OTP_code': 'ओटीपी कोड दोबारा भेजें',
           ' enter_OTP_code_below': 'नीचे ओटीपी कोड दर्ज करें',
-          'you_will_be_notified_once_it_get_approve':
-              'स्वीकृति मिलते ही आपको सूचित कर दिया जाएगा',
+          'you_will_be_notified_once_it_get_approve': 'स्वीकृति मिलते ही आपको सूचित कर दिया जाएगा',
           'under': 'अंतर्गत',
           'review': 'समीक्षा',
           'good_night': 'शुभ रात्रि',
@@ -1644,10 +1575,8 @@ class LanguagesChang extends Translations {
           'sorry!': 'माफ़ कीजिये!',
           'select_language': 'भाषा चुने',
           'appointment_completed_successfully': 'नियुक्ति सफलतापूर्वक पूरी हुई',
-          'appointment_accepted_successfully':
-              'नियुक्ति सफलतापूर्वक स्वीकार की गई',
-          'appointment_rejected_successfully':
-              'अपॉइंटमेंट सफलतापूर्वक अस्वीकार कर दिया गया',
+          'appointment_accepted_successfully': 'नियुक्ति सफलतापूर्वक स्वीकार की गई',
+          'appointment_rejected_successfully': 'अपॉइंटमेंट सफलतापूर्वक अस्वीकार कर दिया गया',
           'delete_successfully': 'सफलतापूर्वक हटा दिया गया',
           'skill_added_successfully': 'দক্ষতা সফলভাবে যোগ করা হয়েছে',
           'added_successfully': 'सफलतापूर्वक जोड़ा गया',
@@ -1664,8 +1593,7 @@ class LanguagesChang extends Translations {
           'login_please': 'कृपया लॉगिन करें',
           'upload_your_degree_picture': 'अपनी डिग्री तस्वीर अपलोड करें',
           'add_education_please': 'कृपया शिक्षा जोड़ें',
-          'upload_your_experience_certificate':
-              'अपना अनुभव प्रमाणपत्र अपलोड करें',
+          'upload_your_experience_certificate': 'अपना अनुभव प्रमाणपत्र अपलोड करें',
           'add_work_experience_please': 'कृपया कार्य अनुभव जोड़ें',
           'upload_your_profile_picture': 'अपना प्रोफ़ाइल चित्र अपलोड करें',
           'add_skill_please': 'कृपया कौशल जोड़ें',
@@ -1679,14 +1607,12 @@ class LanguagesChang extends Translations {
           'add': 'जोड़ें',
           'new': 'नया',
           'withdraw_request': 'नकद निकासी अनुरोध',
-          'you_do_not_have_sufficient_balance':
-              'आपके पास पर्याप्त संतुलन नहीं है',
+          'you_do_not_have_sufficient_balance': 'आपके पास पर्याप्त संतुलन नहीं है',
           'location': 'आपके पास पर्याप्त संतुलन नहीं है',
           'please_turn_on_your_location': 'आपके पास पर्याप्त संतुलन नहीं है',
           'Online': 'ऑनलाइन',
           ' update_your_profile': ' अपने प्रालेख का अद्यतन करें',
-          'about_us_1':
-              'मशवरा आपको दुनिया भर में मेंटर्स के बड़े नेटवर्क के साथ सर्वश्रेष्ठ प्रमाणित विशेषज्ञ से जोड़ेगा और आपकी आवश्यकताओं के अनुसार तुरंत पेशेवर समाधान प्राप्त करेगा।',
+          'about_us_1': 'मशवरा आपको दुनिया भर में मेंटर्स के बड़े नेटवर्क के साथ सर्वश्रेष्ठ प्रमाणित विशेषज्ञ से जोड़ेगा और आपकी आवश्यकताओं के अनुसार तुरंत पेशेवर समाधान प्राप्त करेगा।',
           'about_us_2':
               ' अपने फ़ोन नंबर का उपयोग करके साइन अप करने का बहुत आसान तरीका, अपना फ़ोन नंबर डालने के बाद आपको 6 अंकों का ओटीपी प्राप्त होगा। साइन अप करने के बाद आप सिर्फ एक क्लिक पर अपना अपॉइंटमेंट बुक कर सकते हैं।',
           'about_us_3':
@@ -1700,10 +1626,8 @@ class LanguagesChang extends Translations {
           'enter_last_6_digits': 'अपने सीएनआईसी के अंतिम 6-अंक दर्ज करें',
           'enter_amount': 'राशि डालें',
           'sign_up_as_consultant': 'सलाहकार के रूप में साइन अप करें',
-          'the_balance_insufficient':
-              'खाते में शेष राशि लेनदेन के लिए अपर्याप्त है',
-          'thank_you_using_jazzcash':
-              'जैज़कैश का उपयोग करने के लिए धन्यवाद। आपका लेन-देन सफल रहा',
+          'the_balance_insufficient': 'खाते में शेष राशि लेनदेन के लिए अपर्याप्त है',
+          'thank_you_using_jazzcash': 'जैज़कैश का उपयोग करने के लिए धन्यवाद। आपका लेन-देन सफल रहा',
         }
       };
 }

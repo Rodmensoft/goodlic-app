@@ -11,35 +11,16 @@ class ConsultantDrawerLogic extends GetxController {
   final ConsultantDrawerState state = ConsultantDrawerState();
 
   List<DrawerTile> drawerList = [
-    DrawerTile(
-        title: LanguageConstant.home.tr,
-        icon: 'assets/Icons/drawerHomeIcon.svg'),
-    DrawerTile(
-        title: LanguageConstant.appointmentLogs.tr,
-        icon: 'assets/Icons/drawerAppointmentIcon.svg'),
-    DrawerTile(
-        title: LanguageConstant.editProfile.tr,
-        icon: 'assets/Icons/editProfile.svg'),
-    DrawerTile(
-        title: LanguageConstant.mySchedule.tr,
-        icon: 'assets/Icons/feeIcon.svg'),
-    DrawerTile(
-        title: LanguageConstant.myWallet.tr, icon: 'assets/Icons/feeIcon.svg'),
-    DrawerTile(
-        title: LanguageConstant.contactUs.tr,
-        icon: 'assets/Icons/drawerContactUsIcon.svg'),
-    DrawerTile(
-        title: LanguageConstant.blogs.tr,
-        icon: 'assets/Icons/drawerBlogIcon.svg'),
-    DrawerTile(
-        title: LanguageConstant.aboutUs.tr,
-        icon: 'assets/Icons/drawerPrivacyIcon.svg'),
-    DrawerTile(
-        title: 'Languages',
-        icon: 'assets/Icons/language.svg'),
-    DrawerTile(
-        title: LanguageConstant.logout.tr,
-        icon: 'assets/Icons/drawerLogoutIcon.svg'),
+    DrawerTile(title: LanguageConstant.home.tr, icon: 'assets/Icons/drawerHomeIcon.svg'),
+    DrawerTile(title: LanguageConstant.appointmentLogs.tr, icon: 'assets/Icons/drawerAppointmentIcon.svg'),
+    DrawerTile(title: LanguageConstant.editProfile.tr, icon: 'assets/Icons/editProfile.svg'),
+    DrawerTile(title: LanguageConstant.mySchedule.tr, icon: 'assets/Icons/feeIcon.svg'),
+    DrawerTile(title: LanguageConstant.myWallet.tr, icon: 'assets/Icons/feeIcon.svg'),
+    DrawerTile(title: LanguageConstant.contactUs.tr, icon: 'assets/Icons/drawerContactUsIcon.svg'),
+    DrawerTile(title: LanguageConstant.blogs.tr, icon: 'assets/Icons/drawerBlogIcon.svg'),
+    DrawerTile(title: LanguageConstant.aboutUs.tr, icon: 'assets/Icons/drawerPrivacyIcon.svg'),
+    DrawerTile(title: 'Languages', icon: 'assets/Icons/language.svg'),
+    DrawerTile(title: LanguageConstant.logout.tr, icon: 'assets/Icons/drawerLogoutIcon.svg'),
   ];
 
   consultantDrawerNavigation(
@@ -92,21 +73,11 @@ class ConsultantDrawerLogic extends GetxController {
         }
       case 9:
         {
-          Get.find<GeneralController>()
-              .storageBox
-              .remove('userID');
-          Get.find<GeneralController>()
-              .storageBox
-              .remove('authToken');
-          Get.find<GeneralController>()
-              .storageBox
-              .remove('onlineStatus');
-          Get.find<GeneralController>()
-              .storageBox
-              .remove('userRole');
-          Get.find<GeneralController>()
-              .storageBox
-              .remove('fcmToken');
+          Get.find<GeneralController>().storageBox.remove('userID');
+          Get.find<GeneralController>().storageBox.remove('authToken');
+          Get.find<GeneralController>().storageBox.remove('onlineStatus');
+          Get.find<GeneralController>().storageBox.remove('userRole');
+          Get.find<GeneralController>().storageBox.remove('fcmToken');
 
           return Get.offAllNamed(PageRoutes.userHome);
         }

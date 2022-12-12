@@ -7,6 +7,7 @@ import 'package:resize/resize.dart';
 import '../../api_services/urls.dart';
 import '../../controller/general_controller.dart';
 import '../../utils/colors.dart';
+import '../../widgets/custom_sliver_app_bar.dart';
 import '../../widgets/notififcation_icon.dart';
 import 'logic.dart';
 
@@ -32,10 +33,10 @@ class _BlogDetailPage extends State<BlogDetailPage> {
           },
           child: Scaffold(
             body: NestedScrollView(
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
+                headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
                     ///---header
+
                     SliverAppBar(
                       expandedHeight: MediaQuery.of(context).size.height * .35,
                       // floating: true,
@@ -54,7 +55,7 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                           ],
                         ),
                       ),
-                      backgroundColor: customLightThemeColor,
+                      backgroundColor: customThemeColor,
                       actions: const [
                         ///---notifications
 
@@ -65,26 +66,18 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                         child: Container(
                           height: 15.h,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(30.r)),
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
                               color: Colors.white,
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Colors.white,
-                                    spreadRadius: 3,
-                                    offset: Offset(0, 1))
-                              ]),
+                              boxShadow: const [BoxShadow(color: Colors.white, spreadRadius: 3, offset: Offset(0, 1))]),
                         ),
                       ),
                       flexibleSpace: FlexibleSpaceBar(
                           centerTitle: true,
-                          background: _blogsLogic.selectedBlogForView.imagePath
-                                      .toString() !=
-                                  'null'
+                          background: _blogsLogic.selectedBlogForView.imagePath.toString() != 'null'
                               ? Image.network(
-                            _blogsLogic.selectedBlogForView.imagePath!.contains('assets')
-                          ?'$mediaUrl${_blogsLogic.selectedBlogForView.imagePath}'
-                              :'${_blogsLogic.selectedBlogForView.imagePath}',
+                                  _blogsLogic.selectedBlogForView.imagePath!.contains('assets')
+                                      ? '$mediaUrl${_blogsLogic.selectedBlogForView.imagePath}'
+                                      : '${_blogsLogic.selectedBlogForView.imagePath}',
                                   fit: BoxFit.cover,
                                 )
                               : Image.asset(
@@ -111,10 +104,7 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                                 Container(
                                   height: 25.h,
                                   width: 108.w,
-                                  decoration: BoxDecoration(
-                                      color: customLightOrangeColor,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(6.r))),
+                                  decoration: BoxDecoration(color: customLightOrangeColor, borderRadius: BorderRadius.all(Radius.circular(6.r))),
                                   child: Center(
                                     child: Text(
                                       '${_blogsLogic.selectedBlogCategory}',
@@ -126,17 +116,12 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                                 /// Time
                                 Row(
                                   children: [
-                                    SvgPicture.asset(
-                                        'assets/Icons/blogTimeIcon.svg'),
+                                    SvgPicture.asset('assets/Icons/blogTimeIcon.svg'),
                                     SizedBox(width: 4.w),
                                     Text(
                                       //  '  ${_blogsLogic.selectedBlogForView.createdAt!.substring(0, 10)}',
-                                      DateFormat('dd-MM-yyyy').format(
-                                          DateTime.parse(
-                                              '${_blogsLogic.selectedBlogForView.createdAt}')),
-                                      style: state.blogCategoryTextStyle
-                                          ?.copyWith(
-                                              color: customTextBlackColor),
+                                      DateFormat('dd-MM-yyyy').format(DateTime.parse('${_blogsLogic.selectedBlogForView.createdAt}')),
+                                      style: state.blogCategoryTextStyle?.copyWith(color: customTextBlackColor),
                                     ),
                                   ],
                                 ),
@@ -205,8 +190,7 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                               softWrap: true,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
-                              style: state.blogNameTextStyle
-                                  ?.copyWith(color: customTextBlackColor),
+                              style: state.blogNameTextStyle?.copyWith(color: customTextBlackColor),
                             ),
                             SizedBox(height: 18.h),
                             Text(
