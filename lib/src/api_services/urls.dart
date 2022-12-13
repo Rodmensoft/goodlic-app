@@ -117,6 +117,10 @@ String getAppointmentsDetailURL = apiBaseUrl + 'appointmentDetails';
 String categoriesBlogUrl = apiBaseUrl + 'categoriesBlogs';
 String blogCategoriesUrl = apiBaseUrl + 'blogCategories';
 String createConsultantBlogUrl = apiBaseUrl + 'create_consultant_blog';
+String consultantBlogUrl = apiBaseUrl + 'consultant_blogs';
+String blogDetailUrl = apiBaseUrl + 'blogDetail';
+String updateConsultantBlogUrl = apiBaseUrl + 'update_consultant_blog';
+String deleteConsultantBlogUrl = apiBaseUrl + 'delete_consultant_blog';
 
 /// wallet
 String getWalletBalanceUrl = apiBaseUrl + 'check-balance';

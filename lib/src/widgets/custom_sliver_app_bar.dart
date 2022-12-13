@@ -8,6 +8,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import '../modules/consultant/create_blog/create_blog_logic.dart';
+
 class MyCustomSliverAppBar extends StatefulWidget {
   const MyCustomSliverAppBar(
       {Key? key, this.heading, this.subHeading, this.trailing, this.trailingIcon, this.fee, this.feeImage, this.isShrink, this.searchIconShow, this.onTapTrailing, this.showCreateBlogWidget})
@@ -80,12 +82,7 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
             children: [
               Stack(
                 children: [
-                  SvgPicture.asset(
-                    'assets/images/bookAppointmentAppBar.svg',
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * .27,
-                    fit: BoxFit.fill,
-                  ),
+                  SvgPicture.asset('assets/images/bookAppointmentAppBar.svg', width: MediaQuery.of(context).size.width, height: MediaQuery.of(context).size.height * .27, fit: BoxFit.fill),
                   SafeArea(
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16.w, 25.h, 16.w, 16.h),
@@ -106,6 +103,8 @@ class _MyCustomSliverAppBarState extends State<MyCustomSliverAppBar> {
                                   widget.showCreateBlogWidget ?? false
                                       ? InkWell(
                                           onTap: () {
+                                            Get.put(CreateBlogLogic());
+                                            Get.find<CreateBlogLogic>().updateBlogId(null);
                                             Get.toNamed(PageRoutes.createBlog);
                                           },
                                           child: Container(

@@ -11,8 +11,7 @@ import 'package:dio/dio.dart' as dio_instance;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-getMethod(BuildContext context, String apiUrl, dynamic queryData, bool addAuthHeader, Function executionMethod // for performing functionalities
-    ) async {
+getMethod(BuildContext context, String apiUrl, dynamic queryData, bool addAuthHeader, Function executionMethod) async {
   dio_instance.Response response;
   dio_instance.Dio dio = dio_instance.Dio();
 
@@ -37,7 +36,7 @@ getMethod(BuildContext context, String apiUrl, dynamic queryData, bool addAuthHe
         log('getApi $apiUrl ---->>>>  ${response.data}');
         executionMethod(context, false, {'status': null});
       } on dio_instance.DioError catch (e) {
-        log('Dio Error     $apiUrl$queryData ---->>>>${e.response}');
+        log('Dio Error     $apiUrl $queryData ---->>>>${e.response}');
         executionMethod(context, false, {'status': null});
 
         if (e.response != null) {

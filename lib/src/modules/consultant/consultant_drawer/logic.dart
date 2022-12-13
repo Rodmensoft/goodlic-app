@@ -17,6 +17,7 @@ class ConsultantDrawerLogic extends GetxController {
     DrawerTile(title: LanguageConstant.mySchedule.tr, icon: 'assets/Icons/feeIcon.svg'),
     DrawerTile(title: LanguageConstant.myWallet.tr, icon: 'assets/Icons/feeIcon.svg'),
     DrawerTile(title: LanguageConstant.contactUs.tr, icon: 'assets/Icons/drawerContactUsIcon.svg'),
+    DrawerTile(title: "My Blogs".tr, icon: 'assets/Icons/drawerBlogIcon.svg'),
     DrawerTile(title: LanguageConstant.blogs.tr, icon: 'assets/Icons/drawerBlogIcon.svg'),
     DrawerTile(title: LanguageConstant.aboutUs.tr, icon: 'assets/Icons/drawerPrivacyIcon.svg'),
     DrawerTile(title: 'Languages', icon: 'assets/Icons/language.svg'),
@@ -60,18 +61,23 @@ class ConsultantDrawerLogic extends GetxController {
       case 6:
         {
           Get.back();
-          return Get.toNamed(PageRoutes.blogs);
+          return Get.toNamed(PageRoutes.allBlogs);
         }
       case 7:
         {
           Get.back();
-          return Get.toNamed(PageRoutes.aboutUs);
+          return Get.toNamed(PageRoutes.blogs);
         }
       case 8:
         {
-          return Get.find<GeneralController>().customDropDownDialogForLocale(context);
+          Get.back();
+          return Get.toNamed(PageRoutes.aboutUs);
         }
       case 9:
+        {
+          return Get.find<GeneralController>().customDropDownDialogForLocale(context);
+        }
+      case 10:
         {
           Get.find<GeneralController>().storageBox.remove('userID');
           Get.find<GeneralController>().storageBox.remove('authToken');

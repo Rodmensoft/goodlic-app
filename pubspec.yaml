@@ -83,7 +83,7 @@ dependencies:
   flutter_html: ^3.0.0-alpha.6
   html_editor_enhanced: ^2.5.0
   paytm_allinonesdk: ^1.2.0
-
+  html: ^0.15.1
 
   #agora call video/audio
   agora_rtc_engine: ^5.2.0

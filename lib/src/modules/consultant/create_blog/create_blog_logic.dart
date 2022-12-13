@@ -10,6 +10,8 @@ import '../../../api_services/get_service.dart';
 import '../../../api_services/urls.dart';
 import 'create_blog_state.dart';
 import 'models/blog_categories_model.dart';
+import 'models/blog_details_model.dart';
+import 'repos/get_repo/get_blog_details.dart';
 import 'repos/get_repo/get_blog_repo.dart';
 
 class CreateBlogLogic extends GetxController {
@@ -23,10 +25,11 @@ class CreateBlogLogic extends GetxController {
   double height = 100.h;
 
   BlogCategoriesModel blogCategoriesModel = BlogCategoriesModel();
+  BlogDetailsModel blogDetailsModel = BlogDetailsModel();
 
   String? selectedCategory;
   int? selectedCategoryId;
-  String? description = "";
+  String? description;
 
   updateSelectedCategory(String? value) {
     selectedCategory = value;
@@ -61,6 +64,13 @@ class CreateBlogLogic extends GetxController {
     update();
   }
 
+  bool formLoaderController = false;
+
+  updateFormLoaderController(bool newValue) {
+    formLoaderController = newValue;
+    update();
+  }
+
   bool get isShrink {
     return scrollController.hasClients && scrollController.offset > (height - kToolbarHeight);
   }
@@ -72,22 +82,10 @@ class CreateBlogLogic extends GetxController {
     }
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-
-    scrollController = ScrollController()..addListener(scrollListener);
-    // Get.find<BookAppointmentLogic>().selectedPaymentType = null;
-    // Get.find<BookAppointmentLogic>().questionController.clear();
-
-    getMethod(Get.context!, blogCategoriesUrl, {'token': 123, 'platform': 'app'}, true, blogCategoriesRepo);
-  }
-
-  @override
-  void onClose() {
-    scrollController.removeListener(scrollListener);
-    scrollController.dispose();
-    super.onClose();
+  int? blogId;
+  updateBlogId(int? value) {
+    blogId = value;
+    update();
   }
 
   String? selectedFileName;
@@ -99,4 +97,35 @@ class CreateBlogLogic extends GetxController {
   }
 
   final GlobalKey<FormState> formKey = GlobalKey();
+
+  ///--focus-out
+  focusOut(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+  }
+
+  initializeValue() async {
+    descriptionController.insertHtml((blogDetailsModel.data?.blog?.description ?? "").toString());
+    description = blogDetailsModel.data?.blog?.description ?? "";
+    titleController.text = blogDetailsModel.data?.blog?.title ?? "";
+    selectedCategoryId = blogDetailsModel.data?.blog?.categoryId;
+    for (Categories element in (blogCategoriesModel.data?.categories ?? [])) {
+      if (selectedCategoryId == element.id) {
+        selectedCategory = element.name;
+      }
+    }
+
+    update();
+  }
+
+  clearValue() {
+    blogDetailsModel = BlogDetailsModel();
+    description = null;
+    selectedCategory = null;
+    selectedCategoryId = null;
+    titleController.clear();
+    update();
+  }
 }

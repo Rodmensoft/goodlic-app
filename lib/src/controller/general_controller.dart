@@ -27,9 +27,9 @@ class GeneralController extends GetxController {
   ///---get-user-profile
   GetConsultantProfileModel getConsultantProfileModel = GetConsultantProfileModel();
 
-  bool? formLoaderController = false;
+  bool formLoaderController = false;
 
-  updateFormLoaderController(bool? newValue) {
+  updateFormLoaderController(bool newValue) {
     formLoaderController = newValue;
     update();
   }
@@ -139,26 +139,13 @@ class GeneralController extends GetxController {
     var deviceInfo = DeviceInfoPlugin();
     if (Platform.isIOS) {
       var iosDeviceInfo = await deviceInfo.iosInfo;
-      postMethod(
-          context,
-          fcmUpdateUrl,
-          {
-            'token': '123',
-            'fcm_token': fcmToken,
-            'device_id': iosDeviceInfo.identifierForVendor,
-            'user_id': Get.find<GeneralController>().storageBox.read('userID')
-          },
-          false,
-          updateFcmTokenRepo);
+      postMethod(context, fcmUpdateUrl, {'token': '123', 'fcm_token': fcmToken, 'device_id': iosDeviceInfo.identifierForVendor, 'user_id': Get.find<GeneralController>().storageBox.read('userID')},
+          false, updateFcmTokenRepo);
       return iosDeviceInfo.identifierForVendor; // unique ID on iOS
     } else {
       var androidDeviceInfo = await deviceInfo.androidInfo;
 
-      postMethod(
-          context,
-          fcmUpdateUrl,
-          {'token': '123', 'fcm_token': fcmToken, 'device_id': androidDeviceInfo.androidId, 'user_id': Get.find<GeneralController>().storageBox.read('userID')},
-          false,
+      postMethod(context, fcmUpdateUrl, {'token': '123', 'fcm_token': fcmToken, 'device_id': androidDeviceInfo.androidId, 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, false,
           updateFcmTokenRepo);
       return androidDeviceInfo.androidId; // unique ID on Android
     }

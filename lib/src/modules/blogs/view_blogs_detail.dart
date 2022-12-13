@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -193,11 +194,14 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                               style: state.blogNameTextStyle?.copyWith(color: customTextBlackColor),
                             ),
                             SizedBox(height: 18.h),
-                            Text(
-                              '${_blogsLogic.selectedBlogForView.description}',
-                              style: state.blogDescTextStyle,
-                              textAlign: TextAlign.justify,
+                            Html(
+                              data: '${_blogsLogic.selectedBlogForView.description}',
                             )
+                            // Text(
+                            //   '${_blogsLogic.selectedBlogForView.description}',
+                            //   style: state.blogDescTextStyle,
+                            //   textAlign: TextAlign.justify,
+                            // )
                           ],
                         ),
                       ),

@@ -1,19 +1,24 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:consultant_product/multi_language/language_constants.dart';
-import 'package:consultant_product/src/api_services/header.dart';
-import 'package:consultant_product/src/api_services/logic.dart';
 import 'package:consultant_product/src/api_services/urls.dart';
-import 'package:consultant_product/src/controller/general_controller.dart';
-import 'package:consultant_product/src/modules/main_repo/main_logic.dart';
-import 'package:consultant_product/src/utils/colors.dart';
-import 'package:consultant_product/src/widgets/custom_dialog.dart';
 import 'package:dio/dio.dart' as dio_instance;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-postMethod(BuildContext context, String apiUrl, dynamic postData, bool addAuthHeader, Function executionMethod // for performing functionalities
+
+
+
+import '../../multi_language/language_constants.dart';
+import '../controller/general_controller.dart';
+import '../modules/main_repo/main_logic.dart';
+import '../utils/colors.dart';
+import '../widgets/custom_dialog.dart';
+import 'header.dart';
+import 'logic.dart';
+
+deleteMethod(BuildContext context,String apiUrl, dynamic queryData, bool addAuthHeader, Function executionMethod
+    // for performing functionalities
     ) async {
   dio_instance.Response response;
   dio_instance.Dio dio = dio_instance.Dio();
@@ -25,18 +30,15 @@ postMethod(BuildContext context, String apiUrl, dynamic postData, bool addAuthHe
     setCustomHeader(dio, 'Authorization', 'Bearer ${Get.find<ApiLogic>().storageBox.read('authToken')}');
   }
 
-  if (apiUrl == fcmService) {
-    setCustomHeader(dio, 'Content-Type', 'application/json');
-    setCustomHeader(dio, 'Authorization', 'key=${Get.find<MainLogic>().getConfigCredentialModel.data!.firebase![0].value}');
-  }
-  log('post method api.... $apiUrl');
-  log('postData.... $postData');
+
+  log('delete method api.... $apiUrl');
+  log('queryData.... $queryData');
   try {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
       Get.find<ApiLogic>().changeInternetCheckerState(true);
       try {
-        response = await dio.post(apiUrl, data: postData);
+        response = await dio.delete(apiUrl, queryParameters: queryData);
 
         if (response.statusCode == 200) {
           log('response  ....  ${response.data}');
@@ -49,9 +51,6 @@ postMethod(BuildContext context, String apiUrl, dynamic postData, bool addAuthHe
       } on dio_instance.DioError catch (e) {
         log('Dio Error  ....  ${e.response}');
         executionMethod(context, false, {'status': null});
-
-        if (e.response != null) {
-        } else {}
       }
     }
   } on SocketException catch (_) {
