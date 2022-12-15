@@ -103,7 +103,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                   Get.toNamed(PageRoutes.allConsultants);
                                 },
                                 child: Container(
-                                  height: 123.h,
+                                  // height: 123.h,
                                   width: 106.w,
                                   decoration: BoxDecoration(color: customTextFieldColor, borderRadius: BorderRadius.circular(8)),
                                   child: Column(
@@ -130,6 +130,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                       ),
                                       Text(
                                         '${_userHomeLogic.categoriesList[index].title}',
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(fontFamily: SarabunFontFamily.semiBold, fontSize: 14.sp, color: _userHomeLogic.categoriesColor[index]),
                                       ),
                                       Text(
