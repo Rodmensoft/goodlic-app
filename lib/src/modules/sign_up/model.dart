@@ -59,7 +59,7 @@ class SignupModel {
 
 class Data {
   Data({
-    User? user,
+    SignUpUser? user,
     dynamic role,
   }) {
     _user = user;
@@ -67,13 +67,13 @@ class Data {
   }
 
   Data.fromJson(dynamic json) {
-    _user = json['user'] != null ? User.fromJson(json['user']) : null;
+    _user = json['user'] != null ? SignUpUser.fromJson(json['user']) : null;
     _role = json['role'];
   }
-  User? _user;
+  SignUpUser? _user;
   dynamic _role;
 
-  User? get user => _user;
+  SignUpUser? get user => _user;
   dynamic get role => _role;
 
   Map<String, dynamic> toJson() {
@@ -86,8 +86,8 @@ class Data {
   }
 }
 
-class User {
-  User({
+class SignUpUser {
+  SignUpUser({
     String? firstName,
     String? lastName,
     String? email,
@@ -105,7 +105,7 @@ class User {
     _id = id;
   }
 
-  User.fromJson(dynamic json) {
+  SignUpUser.fromJson(dynamic json) {
     _firstName = json['first_name'];
     _lastName = json['last_name'];
     _email = json['email'];

@@ -26,6 +26,8 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
 import 'package:dio/dio.dart' as dio_instance;
 
+import 'get_repo.dart';
+
 class AppointmentQuestionPage extends StatefulWidget {
   int? appointmentId;
   int? mentorId;
@@ -46,6 +48,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
     Get.find<BookAppointmentLogic>().scrollController2 = ScrollController()..addListener(Get.find<BookAppointmentLogic>().scrollListener2);
     Get.find<BookAppointmentLogic>().selectedPaymentType = null;
     Get.find<BookAppointmentLogic>().questionController.clear();
+    Get.find<BookAppointmentLogic>().ListOfFile.clear();
     if (widget.appointmentId != null) {
       getMethod(
           context,
@@ -68,6 +71,7 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
         },
         true,
         getPaymentMethodsRepo);
+    getPaymentMerhod();
   }
 
   @override
@@ -76,13 +80,24 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
     Get.find<BookAppointmentLogic>().scrollController2!.dispose();
     super.dispose();
   }
+  getPaymentMerhod() async {
+    await Future.delayed(Duration(seconds: 3
+    ));
 
+    Get.find<BookAppointmentLogic>().updateSelectedMethod(Get.find<BookAppointmentLogic>().getPaymentMethodList[0].id, Get.find<BookAppointmentLogic>().getPaymentMethodList[0].name!);
+    // _bookAppointmentLogic.selectedPaymentType = index;
+    Get.find<BookAppointmentLogic>().update();
+    setState(() {
+      disableButton = false;
+    });
+  }
   bool? disableButton = true;
   bool? wave = false;
   bool? razorPay = false;
   bool? paytm = false;
   bool? wallet = false;
-
+  List<File>? files;
+  late List<File>? uploadfiles;
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
@@ -212,19 +227,131 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                 SizedBox(
                                   height: 20.h,
                                 ),
+                                // InkWell(
+                                //   onTap: () async {
+                                //     if (_bookAppointmentLogic.selectedFileName == null) {
+                                //       _bookAppointmentLogic.filePickerResult = await FilePicker.platform.pickFiles(
+                                //         type: FileType.any,
+                                //         // allowedExtensions: ["jpg", "png", "pdf", "doc"],
+                                //       );
+                                //       if (_bookAppointmentLogic.filePickerResult != null) {
+                                //         final file = File(_bookAppointmentLogic.filePickerResult!.files[0].path!);
+                                //         setState(() {});
+                                //         int sizeInBytes = file.lengthSync();
+                                //         double sizeInMb = sizeInBytes / (1024 * 1024);
+                                //         if (sizeInMb > 10) {
+                                //           showDialog(
+                                //               context: context,
+                                //               barrierDismissible: false,
+                                //               builder: (BuildContext context) {
+                                //                 return CustomDialogBox(
+                                //                   title: LanguageConstant.failed.tr,
+                                //                   titleColor: customDialogErrorColor,
+                                //                   descriptions: LanguageConstant.fileIsGreaterThan10mb.tr,
+                                //                   text: LanguageConstant.ok.tr,
+                                //                   functionCall: () {
+                                //                     Navigator.pop(context);
+                                //                   },
+                                //                   img: 'assets/Icons/dialog_error.svg',
+                                //                 );
+                                //               });
+                                //         } else {
+                                //           _bookAppointmentLogic.updateSelectedFileName(_bookAppointmentLogic.filePickerResult!.files[0].name);
+                                //           setState(() {});
+                                //         }
+                                //       }
+                                //     }
+                                //   },
+                                //   child: Container(
+                                //     height: 69.h,
+                                //     width: double.infinity,
+                                //     decoration: BoxDecoration(color: customLightOrangeColor, borderRadius: BorderRadius.circular(8.r)),
+                                //     child: Stack(
+                                //       children: [
+                                //         Padding(
+                                //           padding: const EdgeInsets.all(8.0),
+                                //           child: SvgPicture.asset(
+                                //             'assets/Icons/dottedBorder.svg',
+                                //             width: MediaQuery.of(context).size.width,
+                                //             fit: BoxFit.fill,
+                                //           ),
+                                //         ),
+                                //         Center(
+                                //           child: _bookAppointmentLogic.selectedFileName != null
+                                //               ? Padding(
+                                //                   padding: const EdgeInsets.all(15.0),
+                                //                   child: Row(
+                                //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                //                     children: [
+                                //                       Expanded(
+                                //                         child: Text(
+                                //                           _bookAppointmentLogic.selectedFileName!,
+                                //                           softWrap: true,
+                                //                           maxLines: 1,
+                                //                           overflow: TextOverflow.ellipsis,
+                                //                           style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customOrangeColor),
+                                //                         ),
+                                //                       ),
+                                //                       InkWell(
+                                //                         onTap: () {
+                                //                           _bookAppointmentLogic.updateSelectedFileName(null);
+                                //                         },
+                                //                         child: const Icon(
+                                //                           Icons.cancel,
+                                //                           color: customOrangeColor,
+                                //                           size: 25,
+                                //                         ),
+                                //                       )
+                                //                     ],
+                                //                   ),
+                                //                 )
+                                //               : Row(
+                                //                   mainAxisAlignment: MainAxisAlignment.center,
+                                //                   crossAxisAlignment: CrossAxisAlignment.center,
+                                //                   children: [
+                                //                     SvgPicture.asset(
+                                //                       'assets/Icons/uploadIcon.svg',
+                                //                       height: 23.h,
+                                //                       width: 25.w,
+                                //                     ),
+                                //                     SizedBox(
+                                //                       width: 10.w,
+                                //                     ),
+                                //                     Text(
+                                //                       LanguageConstant.uploadHere.tr,
+                                //                       style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customOrangeColor),
+                                //                     )
+                                //                   ],
+                                //                 ),
+                                //         )
+                                //       ],
+                                //     ),
+                                //   ),
+                                // )
                                 InkWell(
                                   onTap: () async {
-                                    if (_bookAppointmentLogic.selectedFileName == null) {
-                                      _bookAppointmentLogic.filePickerResult = await FilePicker.platform.pickFiles(
-                                        type: FileType.any,
-                                        // allowedExtensions: ["jpg", "png", "pdf", "doc"],
-                                      );
-                                      if (_bookAppointmentLogic.filePickerResult != null) {
-                                        final file = File(_bookAppointmentLogic.filePickerResult!.files[0].path!);
+                                    _bookAppointmentLogic.filePickerResult = await FilePicker.platform.pickFiles(
+                                      allowMultiple: true,
+                                      type: FileType.custom,
+                                      allowedExtensions: ["jpg", "png", "pdf", "doc"],
+                                    );
+                                    if (_bookAppointmentLogic.filePickerResult != null) {
+
+                                      files = _bookAppointmentLogic.filePickerResult!.paths!.map((path) => File(path!)).toList();
+
+
+
+                                      for (var i = 0; i < files!.length; i++) {
+                                        _bookAppointmentLogic.updateSelectedFileName(_bookAppointmentLogic.filePickerResult!.files[i].name);
+
+
+
+                                        ///
                                         setState(() {});
-                                        int sizeInBytes = file.lengthSync();
+                                        int sizeInBytes = files![i].lengthSync();
+
                                         double sizeInMb = sizeInBytes / (1024 * 1024);
-                                        if (sizeInMb > 10) {
+                                        if (files![i].path.isVideoFileName || files![i].path.isAudioFileName) {
                                           showDialog(
                                               context: context,
                                               barrierDismissible: false,
@@ -232,7 +359,23 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                 return CustomDialogBox(
                                                   title: LanguageConstant.failed.tr,
                                                   titleColor: customDialogErrorColor,
-                                                  descriptions: LanguageConstant.fileIsGreaterThan10mb.tr,
+                                                  descriptions: 'Audio And Video File Not Allowed',
+                                                  text: LanguageConstant.ok.tr,
+                                                  functionCall: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  img: 'assets/Icons/dialog_error.svg',
+                                                );
+                                              });
+                                        } else if (sizeInMb > 10){
+                                          showDialog(
+                                              context: context,
+                                              barrierDismissible: false,
+                                              builder: (BuildContext context) {
+                                                return CustomDialogBox(
+                                                  title: LanguageConstant.failed.tr,
+                                                  titleColor: customDialogErrorColor,
+                                                  descriptions: 'File Size Is Larger Than 10mb',
                                                   text: LanguageConstant.ok.tr,
                                                   functionCall: () {
                                                     Navigator.pop(context);
@@ -241,16 +384,38 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                 );
                                               });
                                         } else {
-                                          _bookAppointmentLogic.updateSelectedFileName(_bookAppointmentLogic.filePickerResult!.files[0].name);
+
+                                          late dio_instance.FormData formData;
+
+
+
+                                            String fileName = files![i].path.split('/').last;
+
+                                            formData = dio_instance.FormData.fromMap(<String, dynamic>{
+                                              'file': await dio_instance.MultipartFile.fromFile(files![i].path, filename: fileName),
+                                            });
+                                            postMethod(context, uploadMultipleUrl, formData, true, uploadMultipleFiles);
+
+
+
                                           setState(() {});
+                                          _bookAppointmentLogic.selectedFiles = files!;
+
+
+
                                         }
+                                        ///
                                       }
+
+
+
+
                                     }
                                   },
                                   child: Container(
                                     height: 69.h,
                                     width: double.infinity,
-                                    decoration: BoxDecoration(color: customLightOrangeColor, borderRadius: BorderRadius.circular(8.r)),
+                                    decoration: BoxDecoration(color: customThemeColor.withOpacity(0.8), borderRadius: BorderRadius.circular(8.r)),
                                     child: Stack(
                                       children: [
                                         Padding(
@@ -262,57 +427,74 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                           ),
                                         ),
                                         Center(
-                                          child: _bookAppointmentLogic.selectedFileName != null
-                                              ? Padding(
-                                                  padding: const EdgeInsets.all(15.0),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      Expanded(
-                                                        child: Text(
-                                                          _bookAppointmentLogic.selectedFileName!,
-                                                          softWrap: true,
-                                                          maxLines: 1,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customOrangeColor),
-                                                        ),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          _bookAppointmentLogic.updateSelectedFileName(null);
-                                                        },
-                                                        child: const Icon(
-                                                          Icons.cancel,
-                                                          color: customOrangeColor,
-                                                          size: 25,
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              : Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: [
-                                                    SvgPicture.asset(
-                                                      'assets/Icons/uploadIcon.svg',
-                                                      height: 23.h,
-                                                      width: 25.w,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10.w,
-                                                    ),
-                                                    Text(
-                                                      LanguageConstant.uploadHere.tr,
-                                                      style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customOrangeColor),
-                                                    )
-                                                  ],
-                                                ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              SvgPicture.asset('assets/Icons/uploadIcon.svg', height: 23.h, width: 25.w, ),
+                                              SizedBox(
+                                                width: 10.w,
+                                              ),
+                                              Text(
+                                                LanguageConstant.uploadHere.tr,
+                                                style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: Colors.black),
+                                              )
+                                            ],
+                                          ),
                                         )
                                       ],
                                     ),
                                   ),
+                                ),
+                                _bookAppointmentLogic.ListOfFile.isNotEmpty
+                                    ? Container(
+                                  height: 150,
+                                  child: ListView.builder(
+                                      itemBuilder: (BuildContext context, int index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 2),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  _bookAppointmentLogic.ListOfFile[index]['name'],
+                                                  softWrap: true,
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(fontFamily: SarabunFontFamily.medium, fontSize: 12.sp, color: customOrangeColor),
+                                                ),
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  _bookAppointmentLogic.listOfFileIndex.value = index;
+                                                  _bookAppointmentLogic.getValue(index);
+
+                                                  getMethod(
+                                                      context,
+                                                      deleteMultipleUrl,
+                                                      {
+                                                        'token': '123',
+                                                        'media_id': _bookAppointmentLogic.ListOfFile![index]['id'],
+                                                      },
+                                                      true,
+                                                      deleteUploadedFiles);
+                                                },
+                                                child: const Icon(
+                                                  Icons.cancel,
+                                                  color: customOrangeColor,
+                                                  size: 25,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                      itemCount: _bookAppointmentLogic.ListOfFile.length
+                                    //_bookAppointmentLogic.ListOfFile.isEmpty ? 0 : _bookAppointmentLogic.ListOfFile.length,
+                                  ),
                                 )
+                                    : SizedBox()
                               ],
                             ),
                           ),
@@ -426,7 +608,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                     ? ClipRRect(
                                                         borderRadius: BorderRadius.circular(8.r),
                                                         child: Image.network(
-                                                          '$mediaUrl${_bookAppointmentLogic.getPaymentMethodList[index].imagePath}',
+                                                          Get.find<GeneralController>().checKImage(_bookAppointmentLogic.getPaymentMethodList[index].imagePath!),
+                                                        //  '$mediaUrl${_bookAppointmentLogic.getPaymentMethodList[index].imagePath}',
                                                           width: double.infinity,
                                                           height: double.infinity,
                                                         ),
@@ -442,7 +625,8 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                                   height: 25.h,
                                                                 )
                                                               : Image.network(
-                                                                  '$mediaUrl${_bookAppointmentLogic.getPaymentMethodList[index].imagePath}',
+                                              Get.find<GeneralController>().checKImage(_bookAppointmentLogic.getPaymentMethodList[index].imagePath!),
+                                                                //  '$mediaUrl${_bookAppointmentLogic.getPaymentMethodList[index].imagePath}',
                                                                   width: MediaQuery.of(context).size.width * .15,
                                                                 ),
                                                         ],
@@ -468,8 +652,6 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                               child: InkWell(
                                 onTap: () {
                                   Get.find<GeneralController>().updateFormLoaderController(true);
-                                  print(_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.id);
-                                  print(_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType);
                                   postMethod(
                                       context,
                                       bookAppointmentUrl,
@@ -611,10 +793,11 @@ class _AppointmentQuestionPageState extends State<AppointmentQuestionPage> {
                                                   if (_bookAppointmentLogic.selectMentorAppointmentType!.appointmentType!.isScheduleRequired == 1)
                                                     'time': _bookAppointmentLogic.selectedTimeForAppointment,
                                                   'end_time': _bookAppointmentLogic.selectedEndTimeForAppointment,
-                                                  if (_bookAppointmentLogic.selectedFileName != null)
-                                                    'book_file': await dio_instance.MultipartFile.fromFile(
-                                                      File(_bookAppointmentLogic.filePickerResult!.files[0].path!).path,
-                                                    )
+                                                  // if (_bookAppointmentLogic.selectedFileName != null)
+                                                  //   'book_file': await dio_instance.MultipartFile.fromFile(
+                                                  //     File(_bookAppointmentLogic.filePickerResult!.files[0].path!).path,
+                                                  //   )
+                                                  'uploadedMediaDetails': _bookAppointmentLogic.ListOfFile,
                                                 });
 
                                                 postMethod(context, bookAppointmentUrl, formData, true, bookAppointmentRepo);

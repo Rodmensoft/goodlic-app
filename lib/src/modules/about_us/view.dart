@@ -5,8 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import '../../api_services/get_service.dart';
+import '../../api_services/urls.dart';
 import '../../controller/general_controller.dart';
 import '../../widgets/custom_sliver_app_bar.dart';
+import 'crop_image_text.dart';
+import 'get_repo.dart';
 import 'logic.dart';
 
 class AboutUsPage extends StatefulWidget {
@@ -26,15 +30,20 @@ class _AboutUsPageState extends State<AboutUsPage> {
     // TODO: implement initState
     super.initState();
 
-    Get.find<AboutUsLogic>().scrollController = ScrollController()
-      ..addListener(Get.find<AboutUsLogic>().scrollListener);
+    getMethod(
+        context,
+        getAboutUsUrl,
+        {'token': '123', },
+        true,
+        aboutUsRepo);
+
+
+    Get.find<AboutUsLogic>().scrollController = ScrollController()..addListener(Get.find<AboutUsLogic>().scrollListener);
   }
 
   @override
   void dispose() {
-    Get.find<AboutUsLogic>()
-        .scrollController!
-        .removeListener(Get.find<AboutUsLogic>().scrollListener);
+    Get.find<AboutUsLogic>().scrollController!.removeListener(Get.find<AboutUsLogic>().scrollListener);
     Get.find<AboutUsLogic>().scrollController!.dispose();
     super.dispose();
   }
@@ -48,17 +57,15 @@ class _AboutUsPageState extends State<AboutUsPage> {
             _generalController.focusOut(context);
           },
           child: Scaffold(
-            backgroundColor: const Color(0xffFBFBFB),
+            backgroundColor: Colors.white,
             body: NestedScrollView(
                 controller: _aboutUsLogic.scrollController,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
+                headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
                     ///---header
                     MyCustomSliverAppBar(
                       heading: LanguageConstant.aboutUs.tr,
-                      subHeading:
-                          LanguageConstant.getKnowAboutOurVisionAndMission.tr,
+                      subHeading: LanguageConstant.getKnowAboutOurVisionAndMission.tr,
                       isShrink: _aboutUsLogic.isShrink,
                     ),
                   ];
@@ -70,163 +77,343 @@ class _AboutUsPageState extends State<AboutUsPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+
+
+
+
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
                           child: Text(
-                            LanguageConstant.ourVision.tr,
+                            _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Title ?? '',
+                            //LanguageConstant.ourVision.tr,
                             style: state.headingTextStyle,
                           ),
                         ),
                         SizedBox(height: 16.h),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsetsDirectional.only(end: 14.w),
-                                  child: Text(
-                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                                    'Pellentesque sem elit, tempus ac justo eu, pellentesque laoreet velit. '
-                                    'Suspendisse lobortis a lacus quis pretium. Aliquam posuere auctor fermentum.',
-                                    // softWrap: true,
-                                    // overflow: TextOverflow.ellipsis,
-                                    // maxLines: 5,
-                                    // textAlign: TextAlign.justify,
-                                    style: state.descTextStyle,
-                                  ),
+                          padding:  EdgeInsets.symmetric(horizontal: 14.0 ),
+                          child: DropCapText(
+                            _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Description ?? '',dropCapStyle:  state.descTextStyle ,dropCapChars: 10,parseInlineMarkdown: true,
+                            dropCap: DropCap(
+                              width: 174.w,
+                              height: 140,
+                              child: Padding(
+                                padding:  EdgeInsets.only(right: 9,bottom: 9),
+                                child: Image.network(
+                                    Get.find<GeneralController>().checKImage(_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Image ??"" ),
+                                 //   '$mediaUrl${_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Image }',
+                                  loadingBuilder:
+                                      (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent?
+                                      loadingProgress) {
+                                    if (loadingProgress == null)
+                                      return child;
+                                    return Center(
+                                      child: SizedBox(
+                                        height: MediaQuery.of(context)
+                                            .size
+                                            .height /
+                                            3,
+                                        width: MediaQuery.of(context)
+                                            .size
+                                            .width /
+                                            2,
+                                        child:
+                                        CircularProgressIndicator(
+                                          value: loadingProgress
+                                              .expectedTotalBytes !=
+                                              null
+                                              ? loadingProgress
+                                              .cumulativeBytesLoaded /
+                                              loadingProgress
+                                                  .expectedTotalBytes!
+                                              : null,
+                                          color: customThemeColor,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                    return SizedBox(
+                                      height: MediaQuery.of(context).size.height / 43,
+                                      width: MediaQuery.of(context).size.width / 22,
+                                      child:  Center(
+                                        child: Image.network("https://us.123rf.com/450wm/mathier/mathier1905/mathier190500002/mathier190500002.jpg?ver=6"),
+                                      ),
+                                    );
+                                  },
+
                                 ),
                               ),
-                              // SizedBox(width: 28.w),
-                              Expanded(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsetsDirectional.only(start: 14.w),
-                                  child: SizedBox(
-                                    // height: 149.h,
-                                    width: 136.w,
-                                    child: Image.asset(
-                                      'assets/images/vision.png',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+                            ),),
                         ),
+                        // Padding(
+                        //   padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 0),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: [
+                        //       Expanded(
+                        //         child: Padding(
+                        //           padding: EdgeInsetsDirectional.only(end: 14.w),
+                        //           child: Text(
+                        //             _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Description ?? '',
+                        //             // softWrap: true,
+                        //             // overflow: TextOverflow.ellipsis,
+                        //             // maxLines: 5,
+                        //             // textAlign: TextAlign.justify,
+                        //             style: state.descTextStyle,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       // SizedBox(width: 28.w),
+                        //       Expanded(
+                        //         child: Padding(
+                        //           padding: EdgeInsetsDirectional.only(start: 14.w),
+                        //           child: SizedBox(
+                        //             // height: 149.h,
+                        //             width: 136.w,
+                        //             child: Image.network(
+                        //               //'$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}'
+                        //               '$mediaUrl${_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Image }',
+                        //            // ' mediaUrl+${ _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Title ?? ''} ',
+                        //               fit: BoxFit.fill,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
                         SizedBox(height: 36.h),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  (MediaQuery.of(context).size.width * .5 / 2) +
-                                      15,
-                                  0,
-                                  0,
-                                  0),
+                              padding: EdgeInsetsDirectional.fromSTEB( 15, 0, 0, 0),
                               child: Text(
-                                LanguageConstant.ourMission.tr,
+                                _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section3Title ?? '',
                                 style: state.headingTextStyle,
                               ),
                             ),
                             SizedBox(height: 16.h),
+
+                            // Padding(
+                            //   padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 16.w, 0),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //     crossAxisAlignment: CrossAxisAlignment.start,
+                            //     children: [
+                            //       Expanded(
+                            //         child: Padding(
+                            //           padding: EdgeInsetsDirectional.only(end: 28.w),
+                            //           child: SizedBox(
+                            //             // height: 149.h,
+                            //             width: 136.w,
+                            //             child:  Image.network(
+                            //               //'$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}'
+                            //               '$mediaUrl${_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section3Image }',
+                            //               // ' mediaUrl+${ _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Title ?? ''} ',
+                            //               fit: BoxFit.fill,
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       // SizedBox(width: 15.w),
+                            //       Expanded(
+                            //         child: Text(
+                            //           _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2Description ?? '',
+                            //           // softWrap: true,
+                            //           // overflow: TextOverflow.ellipsis,
+                            //           // maxLines: 5,
+                            //           // textAlign: TextAlign.justify,
+                            //           style: state.descTextStyle,
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.w, 0, 16.w, 0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsetsDirectional.only(end: 28.w),
+                              padding:  EdgeInsets.symmetric(horizontal: 14.0 ),
+                              child: DropCapText(
+
+                                _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section3Description ?? '',dropCapStyle:  state.descTextStyle ,dropCapChars: 10,parseInlineMarkdown: true,
+
+                                dropCapPosition: DropCapPosition.end,  dropCap: DropCap(
+                                width: 174.w,
+                                height: 140,
+
+                                child: Padding(
+                                  padding:  EdgeInsets.only(left: 9,bottom: 9),
+                                  child: Image.network(
+                                    Get.find<GeneralController>().checKImage(_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section3Image??""),
+                                  //    '$mediaUrl${_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section3Image }'
+                                  loadingBuilder:
+                                      (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent?
+                                      loadingProgress) {
+                                    if (loadingProgress == null)
+                                      return child;
+                                    return Center(
                                       child: SizedBox(
-                                        // height: 149.h,
-                                        width: 136.w,
-                                        child: Image.asset(
-                                          'assets/images/mission.png',
-                                          fit: BoxFit.fill,
+                                        height: MediaQuery.of(context)
+                                            .size
+                                            .height /
+                                            3,
+                                        width: MediaQuery.of(context)
+                                            .size
+                                            .width /
+                                            2,
+                                        child:
+                                        CircularProgressIndicator(
+                                          value: loadingProgress
+                                              .expectedTotalBytes !=
+                                              null
+                                              ? loadingProgress
+                                              .cumulativeBytesLoaded /
+                                              loadingProgress
+                                                  .expectedTotalBytes!
+                                              : null,
+                                          color: customThemeColor,
                                         ),
                                       ),
-                                    ),
+                                    );
+                                  },
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                      return SizedBox(
+                                        height: MediaQuery.of(context).size.height / 43,
+                                        width: MediaQuery.of(context).size.width / 22,
+                                        child:  Center(
+                                          child: Image.network("https://us.123rf.com/450wm/mathier/mathier1905/mathier190500002/mathier190500002.jpg?ver=6"),
+                                        ),
+                                      );
+                                    },
+
                                   ),
-                                  // SizedBox(width: 15.w),
-                                  Expanded(
-                                    child: Text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                                      'Pellentesque sem elit, tempus ac justo eu, pellentesque laoreet velit. '
-                                      'Suspendisse lobortis a lacus quis pretium. Aliquam posuere auctor fermentum.',
-                                      // softWrap: true,
-                                      // overflow: TextOverflow.ellipsis,
-                                      // maxLines: 5,
-                                      // textAlign: TextAlign.justify,
-                                      style: state.descTextStyle,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ),),
                             ),
                           ],
                         ),
                         // SizedBox(height: 50.h),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * .06),
+                        SizedBox(height: MediaQuery.of(context).size.height * .06),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
                           child: Text(
-                            LanguageConstant.whyChooseUs.tr,
+                            _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2Title ?? '',
                             style: state.headingTextStyle,
                           ),
                         ),
+
                         SizedBox(height: 23.h),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16.w, 0, 0, 0),
+                          child:   DropCapText(
+                            _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2Description ?? '',dropCapStyle:  state.descTextStyle ,dropCapChars: 10,parseInlineMarkdown: true,
+                          ),
+                          // child: Text(
+                          //   _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2Description ?? '',
+                          //   style: state.descTextStyle,
+                          // ),
+                        ),
+                        SizedBox(height: 23.h),
+                        // Expanded(
+                        //   //         child: Text(
+                        //   //           _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2Description ?? '',
+                        //   //           // softWrap: true,
+                        //   //           // overflow: TextOverflow.ellipsis,
+                        //   //           // maxLines: 5,
+                        //   //           // textAlign: TextAlign.justify,
+                        //   //           style: state.descTextStyle,
+                        //   //         ),
+                        //   //       ),
                         Column(
                           children: [
                             Container(
-                              color: customThemeColor,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding:
-                                        EdgeInsetsDirectional.only(top: 16.h),
+                                    padding: EdgeInsetsDirectional.only(top: 16.h),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Container(
-                                            width: 74,
+                                          width: 74,
+                                          padding: EdgeInsets.all(15),
+                                          child: Image.network(
+                                              Get.find<GeneralController>().checKImage(_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2FirstImage??""),
+                                            //'$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}'
+                                            //'$mediaUrl${_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2FirstImage }',
+                                            // ' mediaUrl+${ _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Title ?? ''} ',
+                                            loadingBuilder:
+                                                (BuildContext context,
+                                                Widget child,
+                                                ImageChunkEvent?
+                                                loadingProgress) {
+                                              if (loadingProgress == null)
+                                                return child;
+                                              return Center(
+                                                child: SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                      3,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                      2,
+                                                  child:
+                                                  CircularProgressIndicator(
+                                                    value: loadingProgress
+                                                        .expectedTotalBytes !=
+                                                        null
+                                                        ? loadingProgress
+                                                        .cumulativeBytesLoaded /
+                                                        loadingProgress
+                                                            .expectedTotalBytes!
+                                                        : null,
+                                                    color: customThemeColor,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                              return SizedBox(
+                                                height: MediaQuery.of(context).size.height / 43,
+                                                width: MediaQuery.of(context).size.width / 22,
+                                                child:  Center(
+                                                  child: Image.network("https://us.123rf.com/450wm/mathier/mathier1905/mathier190500002/mathier190500002.jpg?ver=6"),
+                                                ),
+                                              );
+                                            },
+
+
                                             color: customThemeColor,
-                                            child: SvgPicture.asset(
-                                                'assets/Icons/check-circle.svg')),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
                                   Expanded(
                                     child: Container(
-                                      color: customLightThemeColor,
+                                      margin: EdgeInsets.only(right: 5),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25)), color: customThemeColor),
                                       child: Padding(
-                                        padding:
-                                            const EdgeInsetsDirectional.all(15),
+                                        padding:  EdgeInsetsDirectional.all(15),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             ///---heading
                                             Text(
-                                              LanguageConstant.easySignUp.tr,
+                                              _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2FirstHeading ?? '',
                                               style: state.subHeadingTextStyle,
                                             ),
                                             const SizedBox(
@@ -235,12 +422,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
 
                                             ///---detail
                                             Text(
-                                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sem elit, '
-                                                      'tempus ac justo eu, pellentesque laoreet'
-                                                  .tr,
-                                              style: state.descTextStyle
-                                                  ?.copyWith(
-                                                      color: Colors.white),
+                                              _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2FirstSubHeading ?? '',
+                                              style: state.descTextStyle,
                                             ),
                                           ],
                                         ),
@@ -251,48 +434,93 @@ class _AboutUsPageState extends State<AboutUsPage> {
                               ),
                             ),
                             Container(
-                              height: 1,
+                              height: 2,
                               width: MediaQuery.of(context).size.width,
-                              color: Colors.grey,
+
                             ),
                             Container(
-                              color: customThemeColor,
+                              decoration: BoxDecoration(
+                                //borderRadius: BorderRadius.only(bottomLeft: Radius.circular(2)),
+                              ),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding:
-                                        EdgeInsetsDirectional.only(top: 16.h),
+                                    padding: EdgeInsetsDirectional.only(top: 16.h),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Container(
-                                            width: 74,
+                                          width: 74,
+                                          padding: EdgeInsets.all(15),
+                                          child: Image.network(
+                                              Get.find<GeneralController>().checKImage(_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2SecondImage??""),
+                                            //'$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}'
+                                           // '$mediaUrl${_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2SecondImage }',
+                                            loadingBuilder:
+                                                (BuildContext context,
+                                                Widget child,
+                                                ImageChunkEvent?
+                                                loadingProgress) {
+                                              if (loadingProgress == null)
+                                                return child;
+                                              return Center(
+                                                child: SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                      3,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                      2,
+                                                  child:
+                                                  CircularProgressIndicator(
+                                                    value: loadingProgress
+                                                        .expectedTotalBytes !=
+                                                        null
+                                                        ? loadingProgress
+                                                        .cumulativeBytesLoaded /
+                                                        loadingProgress
+                                                            .expectedTotalBytes!
+                                                        : null,
+                                                    color: customThemeColor,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                              return SizedBox(
+                                                height: MediaQuery.of(context).size.height / 43,
+                                                width: MediaQuery.of(context).size.width / 22,
+                                                child:  Center(
+                                                  child: Image.network("https://us.123rf.com/450wm/mathier/mathier1905/mathier190500002/mathier190500002.jpg?ver=6"),
+                                                ),
+                                              );
+                                            },
+
+                                            // ' mediaUrl+${ _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Title ?? ''} ',
+
                                             color: customThemeColor,
-                                            child: SvgPicture.asset(
-                                                'assets/Icons/user-badged.svg')),
+                                          ),),
                                       ],
                                     ),
                                   ),
                                   Expanded(
                                     child: Container(
-                                      color: customLightThemeColor,
+                                      margin: EdgeInsets.only(right: 5, ),
+                                      decoration: BoxDecoration( color: customThemeColor),
                                       child: Padding(
-                                        padding:
-                                            const EdgeInsetsDirectional.all(15),
+                                        padding: const EdgeInsetsDirectional.all(15),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             ///---heading
                                             Text(
-                                              LanguageConstant
-                                                  .professionalConsultants.tr,
+                                              _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2SecondHeading ?? '',
                                               style: state.subHeadingTextStyle,
                                             ),
                                             const SizedBox(
@@ -301,12 +529,123 @@ class _AboutUsPageState extends State<AboutUsPage> {
 
                                             ///---detail
                                             Text(
-                                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sem elit, '
-                                                      'tempus ac justo eu, pellentesque laoreet'
-                                                  .tr,
-                                              style: state.descTextStyle
-                                                  ?.copyWith(
-                                                      color: Colors.white),
+                                              _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2SecondSubHeading ?? '',
+                                              style: state.descTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 2,
+                              width: MediaQuery.of(context).size.width,
+                           //   color: customAppBackgroundColor,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(2)),
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.only(top: 16.h),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: 74,
+                                          padding: EdgeInsets.all(15),
+                                          // child: Image.network(
+                                          //   //'$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}'
+                                          //   '$mediaUrl${_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2ThirdImage }',
+                                          //   // ' mediaUrl+${ _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Title ?? ''} ',
+                                          //   fit: BoxFit.fill,
+                                          //   color: customThemeColor,
+                                          // ),
+                                      child:Image.network(
+                                        Get.find<GeneralController>().checKImage(_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2ThirdImage??""),
+                                        //'$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}'
+                                       // '$mediaUrl${_aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2ThirdImage }',
+                                        loadingBuilder:
+                                            (BuildContext context,
+                                            Widget child,
+                                            ImageChunkEvent?
+                                            loadingProgress) {
+                                          if (loadingProgress == null)
+                                            return child;
+                                          return Center(
+                                            child: SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                                  3,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                                  2,
+                                              child:
+                                              CircularProgressIndicator(
+                                                value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                    null
+                                                    ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                    loadingProgress
+                                                        .expectedTotalBytes!
+                                                    : null,
+                                                color: customThemeColor,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                          return SizedBox(
+                                            height: MediaQuery.of(context).size.height / 43,
+                                            width: MediaQuery.of(context).size.width / 22,
+                                            child:  Center(
+                                              child: Image.network("https://us.123rf.com/450wm/mathier/mathier1905/mathier190500002/mathier190500002.jpg?ver=6"),
+                                            ),
+                                          );
+                                        },
+
+                                        // ' mediaUrl+${ _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section1Title ?? ''} ',
+
+                                        color: customThemeColor,
+                                      ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 5, bottom: 5),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.only(bottomRight: Radius.circular(25), bottomLeft: Radius.circular(25)), color: customThemeColor),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.all(15),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            ///---heading
+                                            Text(
+                                              _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2ThirdHeading ?? '',
+                                              style: state.subHeadingTextStyle,
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+
+                                            ///---detail
+                                            Text(
+                                              _aboutUsLogic.aboutUsModel.data?.aboutUsContent?.section2ThirdSubHeading ?? '',
+                                              style: state.descTextStyle,
                                             ),
                                           ],
                                         ),

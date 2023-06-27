@@ -154,9 +154,10 @@ class _BlogsPageState extends State<BlogsPage> {
                                                           borderRadius: BorderRadius.circular(14),
                                                           child: _blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath.toString() != 'null'
                                                               ? Image.network(
-                                                                  _blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath!.contains('assets')
-                                                                      ? '$mediaUrl${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath}'
-                                                                      : '${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath}',
+                                                            Get.find<GeneralController>().checKImage( _blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath!),
+                                                                  // _blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath!.contains('assets')
+                                                                  //     ? '$mediaUrl${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath}'
+                                                                  //     : '${_blogsLogic.getAllBlogModel.data!.featuredBlogs![index].imagePath}',
                                                                   fit: BoxFit.cover,
                                                                 )
                                                               : Image.asset(
@@ -392,10 +393,11 @@ class _BlogsPageState extends State<BlogsPage> {
                                                                                     .toString() !=
                                                                                 'null'
                                                                             ? Image.network(
-                                                                                _blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath!
-                                                                                        .contains('assets')
-                                                                                    ? '$mediaUrl${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath}'
-                                                                                    : '${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath}',
+                                                                          Get.find<GeneralController>().checKImage(_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath!),
+                                                                                // _blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath!
+                                                                                //         .contains('assets')
+                                                                                //     ? '$mediaUrl${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath}'
+                                                                                //     : '${_blogsLogic.getAllBlogModel.data!.categoryBlogs![_blogsLogic.selectedBlogCategoryIndex!].blogs![index].imagePath}',
                                                                                 fit: BoxFit.cover,
                                                                               )
                                                                             : Image.asset(

@@ -26,14 +26,36 @@ getConfigCredentialRepo(BuildContext context, bool responseCheck, Map<String, dy
 
 /// repo  Get General Setting
 
+// getGeneralSettingRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+//   if (responseCheck) {
+//     Get.put(MainLogic());
+//     Get.find<MainLogic>().getGeneralSettingModel = GetGeneralSettingModel.fromJson(response);
+//     if (Get.find<MainLogic>().getConfigCredentialModel.success == true) {
+//       Get.find<GeneralController>().storageBox.write('loginType', Get.find<MainLogic>().getGeneralSettingModel.data!.loginType);
+//       Get.find<GeneralController>().storageBox.write('loginType', Get.find<GeneralController>().getGeneralSettingModel.data!.loginType);
+//       print("This is login type ${Get.find<GeneralController>().getGeneralSettingModel.data!.loginType}");
+//
+//
+//       Get.find<GeneralController>().storageBox.write('currency', Get.find<MainLogic>().getGeneralSettingModel.data!.currencySymbol);
+//       log("My save Currency------->>${Get.find<GeneralController>().storageBox.read('currency')}");
+//
+//       Get.find<GeneralController>().updateFormLoaderController(false);
+//     } else {
+//       Get.find<GeneralController>().updateFormLoaderController(false);
+//     }
+//   } else if (!responseCheck) {
+//     Get.find<GeneralController>().updateFormLoaderController(false);
+//   }
+// }
+
 getGeneralSettingRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.put(MainLogic());
-    Get.find<MainLogic>().getGeneralSettingModel = GetGeneralSettingModel.fromJson(response);
-    if (Get.find<MainLogic>().getConfigCredentialModel.success == true) {
-      Get.find<GeneralController>().storageBox.write('loginType', Get.find<MainLogic>().getGeneralSettingModel.data!.loginType);
-      Get.find<GeneralController>().storageBox.write('currency', Get.find<MainLogic>().getGeneralSettingModel.data!.currencySymbol);
-      log("My save Currency------->>${Get.find<GeneralController>().storageBox.read('currency')}");
+    Get.find<GeneralController>().getGeneralSettingModel = GetGeneralSettingModel.fromJson(response);
+    if (Get.find<GeneralController>().getGeneralSettingModel.success == true) {
+      Get.find<GeneralController>().storageBox.write('loginType', Get.find<GeneralController>().getGeneralSettingModel.data!.loginType);
+
+      Get.find<GeneralController>().storageBox.write('currency', Get.find<GeneralController>().getGeneralSettingModel.data!.currencySymbol);
 
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {

@@ -15,6 +15,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+
+import '../edit_user_profile/get_repo.dart';
+import '../edit_user_profile/logic.dart';
 import 'logic.dart';
 
 class UserHomePage extends StatefulWidget {
@@ -44,13 +47,49 @@ class _UserHomePageState extends State<UserHomePage> {
 
     ///---categories-API-call
     getMethod(context, getCategoriesURL, {'token': '123'}, false, getCategoriesRepo);
-
+    Get.put(EditUserProfileLogic());
     ///---top-rated-API-call
     getMethod(context, getTopRatedConsultantURL, {'token': '123'}, false, getTopRatedConsultantRepo);
 
     Get.find<UserHomeLogic>().scrollController = ScrollController()..addListener(Get.find<UserHomeLogic>().scrollListener);
+    getMethod(context, getMenteeProfileUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getMenteeProfileRepo);
+    if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data?.user?.country == null) {
+      Get.find<EditUserProfileLogic>().selectedCountry = Get.find<GeneralController>().initialCountry.value;
+      getState();
+    }
   }
+  getState() async {
+    await Future.delayed(Duration(seconds: 3));
+    Get.put(EditUserProfileLogic());
+    if (Get.find<EditUserProfileLogic>().countryDropDownList.contains(Get.find<GeneralController>().initialCountry.value)) {
+      var countryId = Get.find<EditUserProfileLogic>()
+          .menteeProfileGenericDataModel
+          .data
+          ?.countries![Get.find<EditUserProfileLogic>().countryDropDownList.indexOf(Get.find<GeneralController>().initialCountry.value)]
+          .id;
 
+      getMethod(context, getstatesByIdUrl, {'token': '123', 'country_id': countryId}, false, getStateRepo);
+
+      Get.find<EditUserProfileLogic>().selectedState = Get.find<GeneralController>().initialState.value;
+       getCities();
+    }
+  }
+  getCities() async {
+    await Future.delayed(Duration(seconds: 3));
+    Get.put(EditUserProfileLogic());
+    if (Get.find<EditUserProfileLogic>().stateDropDownList.contains(Get.find<GeneralController>().initialState.value)) {
+      var countryId = Get.find<EditUserProfileLogic>()
+          .stateByModel
+          .data
+          ?.states![Get.find<EditUserProfileLogic>().stateDropDownList.indexOf(Get.find<GeneralController>().initialState.value)]
+          .id;
+
+      getMethod(context, getCitiesByIdUrl, {'token': '123', 'state_id': countryId}, false, getCitiesRepo);
+
+      Get.find<EditUserProfileLogic>().selectedCity = Get.find<GeneralController>().initialCity.value;
+
+    }
+  }
   @override
   void dispose() {
     Get.find<UserHomeLogic>().scrollController!.removeListener(Get.find<UserHomeLogic>().scrollListener);

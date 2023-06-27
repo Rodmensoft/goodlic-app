@@ -84,6 +84,8 @@ class ConsultantDrawerLogic extends GetxController {
           Get.find<GeneralController>().storageBox.remove('onlineStatus');
           Get.find<GeneralController>().storageBox.remove('userRole');
           Get.find<GeneralController>().storageBox.remove('fcmToken');
+          Get.find<GeneralController>().storageBox.remove('consultantID');
+          Get.find<GeneralController>().storageBox.remove('route');
 
           return Get.offAllNamed(PageRoutes.userHome);
         }

@@ -4,6 +4,7 @@ import 'package:consultant_product/src/controller/general_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../edit_user_profile/logic.dart';
 import 'state.dart';
 
 class UserDrawerLogic extends GetxController {
@@ -111,22 +112,17 @@ class UserDrawerLogic extends GetxController {
         }
       case 9:
         {
-          Get.find<GeneralController>()
-              .storageBox
-              .remove('userID');
-          Get.find<GeneralController>()
-              .storageBox
-              .remove('authToken');
-          Get.find<GeneralController>()
-              .storageBox
-              .remove('onlineStatus');
-          Get.find<GeneralController>()
-              .storageBox
-              .remove('userRole');
-          Get.find<GeneralController>()
-              .storageBox
-              .remove('fcmToken');
+          Get.find<GeneralController>().storageBox.remove('userID');
+          Get.find<GeneralController>().storageBox.remove('authToken');
+          Get.find<GeneralController>().storageBox.remove('onlineStatus');
+          Get.find<GeneralController>().storageBox.remove('userRole');
+          Get.find<GeneralController>().storageBox.remove('fcmToken');
+          Get.find<EditUserProfileLogic>().firstNameController.clear;
+          Get.find<EditUserProfileLogic>().lastNameController.clear;
 
+          Get.find<GeneralController>().storageBox.remove('route');
+
+          Get.find<GeneralController>().storageBox.remove('consultantID');
           return Get.offAllNamed(PageRoutes.userHome);
         }
       default:

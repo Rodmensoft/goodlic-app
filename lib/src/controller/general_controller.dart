@@ -11,22 +11,88 @@ import 'package:consultant_product/src/modules/user_profile/get_user_profile_mod
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+
+
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:resize/resize.dart';
 
+import '../modules/main_repo/get_general_setting_model.dart';
+
 class GeneralController extends GetxController {
   GetStorage storageBox = GetStorage();
+
+
+
+
+  RxString initialCountryCode= ' '.obs;
+  RxString initialCountry=''.obs;
+  RxString initialState=''.obs;
+  RxString initialAddress=''.obs;
+
+  RxString initialCity=''.obs;
+  Future getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.bestForNavigation);
+
+      List<Placemark> placemarks =
+      await placemarkFromCoordinates(position.latitude, position.longitude);
+
+      Placemark place = placemarks[0];
+      initialCountryCode.value=place.isoCountryCode!;
+      initialCountry.value=place.country!;
+      initialState.value=place.administrativeArea!;
+      initialCity.value=place.locality!;
+      initialAddress.value=place.street!+"\t , "+  place.subLocality!+'\t, '+place.locality!;
+      print(initialCountryCode.value);
+
+
+      // setState(() {
+      //   _initialCountryCode = place.isoCountryCode;
+      // });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   bool isDirectionRTL(BuildContext context) {
     final TextDirection currentDirection = Directionality.of(context);
     final bool isRTL = currentDirection == TextDirection.rtl;
     return isRTL;
   }
+///--- check Image
+  checKImage(String  url){
 
+
+    if(url.isEmpty){
+      return " https://us.123rf.com/450wm/mathier/mathier1905/mathier190500002/mathier190500002.jpg?ver=6";
+    }
+
+
+    if(url.contains('https')){
+
+      return url;
+
+    }else{
+      if(url.startsWith('/')){
+
+        return '$mediaUrl${url}';
+      }
+      else
+
+        return'$mediaUrl/${ url}';
+    }
+
+
+    // }else
+
+  }
   ///---get-user-profile
   GetConsultantProfileModel getConsultantProfileModel = GetConsultantProfileModel();
-
+  GetGeneralSettingModel getGeneralSettingModel = GetGeneralSettingModel();
   bool formLoaderController = false;
 
   updateFormLoaderController(bool newValue) {

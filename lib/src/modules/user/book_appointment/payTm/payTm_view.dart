@@ -22,7 +22,7 @@ class _PayTmState extends State<PayTm> {
   bool enableAssist = true;
   @override
   void initState() {
-    print("initState");
+
     super.initState();
   }
 
@@ -156,7 +156,7 @@ class _PayTmState extends State<PayTm> {
     try {
       var response = AllInOneSdk.startTransaction("Ddqckl36992914432459", "112", amount, "FLWSECK_TESTa144fbd78848", "DEFAULT", true, true, false);
       response.then((value) {
-        print(value);
+
         setState(() {
           result = value.toString();
         });

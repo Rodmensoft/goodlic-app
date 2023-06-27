@@ -86,7 +86,7 @@ class _LiveRequestState extends State<LiveRequest> {
                               'Your Live Appointment Request Accepted',
                               '',
                               '/appointmentQuestion',
-                              'mentee/appointment/log',
+                              'mentee/appointment-log-detail',
                               null);
                           Get.find<GeneralController>()
                               .updateUserIdForSendNotification(int.parse(

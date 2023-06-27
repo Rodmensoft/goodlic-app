@@ -30,15 +30,18 @@ class EditUserProfileLogic extends GetxController {
       MenteeProfileGenericDataModel();
   CitiesByIdModel citiesByIdModel = CitiesByIdModel();
   GetMenteeProfileModel getMenteeProfileModel = GetMenteeProfileModel();
-
+  StateModel stateByModel=StateModel();
   File? profileImage;
   List profileImagesList = [];
 
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
-
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   String? selectedGender;
   List<String> genderDropDownList = ['Male', 'Female', 'Other'];
+
+
 
   String? selectedCountry;
   List<String> countryDropDownList = [];
@@ -50,12 +53,18 @@ class EditUserProfileLogic extends GetxController {
 
   String? selectedCity;
   List<String> cityDropDownList = [];
-
   updateCityDropDownList(String newValue) {
     cityDropDownList.add(newValue);
     update();
   }
+  String? selectedState;
+  //RxList<dynamic>  stateDropDownList = [].obs;
+  List<String> stateDropDownList = [];
 
+  updateStateDropDownList(String newValue) {
+    stateDropDownList.add(newValue);
+    update();
+  }
   bool? profileHiddenSwitch = false;
   updateProfileHiddenSwitch(bool? newValue) {
     profileHiddenSwitch = newValue;

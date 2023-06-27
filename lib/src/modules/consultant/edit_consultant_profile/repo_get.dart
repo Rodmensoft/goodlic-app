@@ -55,19 +55,19 @@ getGenericDataRepo(BuildContext context, bool responseCheck, Map<String, dynamic
   }
 }
 
-getCitiesRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+
+getStateRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  Get.put(EditConsultantProfileLogic());
   if (responseCheck) {
-    Get.find<EditConsultantProfileLogic>().citiesByIdModel = CitiesByIdModel.fromJson(response);
-    if (Get.find<EditConsultantProfileLogic>().citiesByIdModel.status == true) {
+    Get.find<EditConsultantProfileLogic>().stateByModel = StateModel.fromJson(response);
+    if (Get.find<EditConsultantProfileLogic>().stateByModel.status == true) {
       ///---cities
-      Get.find<EditConsultantProfileLogic>().emptyCityDropDownList();
-      for (var element in Get.find<EditConsultantProfileLogic>().citiesByIdModel.data!.cities!) {
-        Get.find<EditConsultantProfileLogic>().updateCityDropDownList(element.name!);
+      Get.find<EditConsultantProfileLogic>().stateDropDownList = [];
+      Get.find<EditConsultantProfileLogic>().update();
+      for (var element in Get.find<EditConsultantProfileLogic>().stateByModel.data!.states!) {
+        Get.find<EditConsultantProfileLogic>().updateStateDropDownList(element.name!);
       }
 
-      Set<String> seen = <String>{};
-      List<String> uniquelist = Get.find<EditConsultantProfileLogic>().cityDropDownList.where((val) => seen.add(val)).toList();
-      Get.find<EditConsultantProfileLogic>().cityDropDownList = uniquelist;
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
@@ -76,6 +76,48 @@ getCitiesRepo(BuildContext context, bool responseCheck, Map<String, dynamic> res
     Get.find<GeneralController>().updateFormLoaderController(false);
   }
 }
+getCitiesRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  Get.put(EditConsultantProfileLogic());
+  if (responseCheck) {
+    Get.find<EditConsultantProfileLogic>().citiesByIdModel = CitiesByIdModel.fromJson(response);
+    if (Get.find<EditConsultantProfileLogic>().citiesByIdModel.status == true) {
+      ///---cities
+      Get.find<EditConsultantProfileLogic>().cityDropDownList = [];
+      Get.find<EditConsultantProfileLogic>().update();
+      for (var element in Get.find<EditConsultantProfileLogic>().citiesByIdModel.data!.cities!) {
+        Get.find<EditConsultantProfileLogic>().updateCityDropDownList(element.name!);
+      }
+
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    }
+  } else if (!responseCheck) {
+    Get.find<GeneralController>().updateFormLoaderController(false);
+  }
+}
+//
+// getCitiesRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+//   if (responseCheck) {
+//     Get.find<EditConsultantProfileLogic>().citiesByIdModel = CitiesByIdModel.fromJson(response);
+//     if (Get.find<EditConsultantProfileLogic>().citiesByIdModel.status == true) {
+//       ///---cities
+//       Get.find<EditConsultantProfileLogic>().emptyCityDropDownList();
+//       for (var element in Get.find<EditConsultantProfileLogic>().citiesByIdModel.data!.cities!) {
+//         Get.find<EditConsultantProfileLogic>().updateCityDropDownList(element.name!);
+//       }
+//
+//       Set<String> seen = <String>{};
+//       List<String> uniquelist = Get.find<EditConsultantProfileLogic>().cityDropDownList.where((val) => seen.add(val)).toList();
+//       Get.find<EditConsultantProfileLogic>().cityDropDownList = uniquelist;
+//       Get.find<GeneralController>().updateFormLoaderController(false);
+//     } else {
+//       Get.find<GeneralController>().updateFormLoaderController(false);
+//     }
+//   } else if (!responseCheck) {
+//     Get.find<GeneralController>().updateFormLoaderController(false);
+//   }
+// }
 
 getParentCategoryRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {

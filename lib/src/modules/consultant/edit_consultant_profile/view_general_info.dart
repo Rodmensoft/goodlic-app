@@ -53,6 +53,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
   }
 
   @override
@@ -356,7 +357,97 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                 },
                               ),
                             ),
-
+                            ///---email-field
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  15.w, 0, 15.w, 16.h),
+                              child: TextFormField(
+                                style: state.textFieldTextStyle,
+                                controller: _editConsultantProfileLogic.emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      25.w, 15.h, 25.w, 15.h),
+                                  hintText: 'Email Address',
+                                  hintStyle: state.hintTextStyle,
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: customLightThemeColor)),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide:
+                                      const BorderSide(color: Colors.red)),
+                                ),
+                                validator: (String? value) {
+                                  if (value!.isEmpty) {
+                                    return 'Field Required'.tr;
+                                  } else if (!GetUtils.isEmail(
+                                      _editConsultantProfileLogic
+                                          .emailController.text)) {
+                                    return 'Enter Valid Email';
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  15.w, 0, 15.w, 16.h),
+                              child: TextFormField(
+                                style: state.textFieldTextStyle,
+                                controller: _editConsultantProfileLogic.phoneController,
+                                keyboardType: TextInputType.phone,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      25.w, 15.h, 25.w, 15.h),
+                                  hintText: 'Phone Number',
+                                  hintStyle: state.hintTextStyle,
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: customLightThemeColor)),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide:
+                                      const BorderSide(color: Colors.red)),
+                                ),
+                                validator: (String? value) {
+                                  if (value!.isEmpty) {
+                                    return 'Field Required'.tr;
+                                  } else if (!GetUtils.isPhoneNumber(
+                                      _editConsultantProfileLogic
+                                          .phoneController.text)) {
+                                    return 'Enter Valid Phone number';
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                              ),
+                            ),
                             ///---about-field
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
@@ -485,9 +576,13 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                           iconEnabledColor: customThemeColor,
                                           icon: const Icon(Icons.keyboard_arrow_down),
                                           iconSize: 25,
-                                          value: _editConsultantProfileLogic.selectedReligion,
+                                          value:
+                                        // _editConsultantProfileLogic.religionDropDownList[0],
+                                       //    "Buddist",
+                                           Get.find<EditConsultantProfileLogic>().selectedReligion,
                                           items: _editConsultantProfileLogic.religionDropDownList.map<DropdownMenuItem<String>>((String value) {
                                             return DropdownMenuItem<String>(
+
                                               value: value,
                                               child: Text(
                                                 value,
@@ -497,6 +592,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                           }).toList(),
                                           onChanged: (String? value) {
                                             setState(() {
+
                                               _editConsultantProfileLogic.selectedReligion = value;
                                             });
                                           },
@@ -512,6 +608,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                     ),
                                   ),
                                 ),
+
                               ],
                             ),
 
@@ -682,18 +779,17 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                           onChanged: (String? value) {
                                             setState(() {
                                               _editConsultantProfileLogic.selectedCountry = value;
+                                              _editConsultantProfileLogic.selectedState = null;
+                                              _editConsultantProfileLogic.selectedCity = null;
                                             });
                                             Get.find<GeneralController>().updateFormLoaderController(true);
-                                            getMethod(
-                                                context,
-                                                getCitiesByIdUrl,
+                                            getMethod(context, getstatesByIdUrl,
                                                 {
                                                   'token': '123',
-                                                  'country_id': _editConsultantProfileLogic.mentorProfileGenericDataModel.data!
-                                                      .countries![_editConsultantProfileLogic.countryDropDownList.indexOf(_editConsultantProfileLogic.selectedCountry!)].id
+                                                  'country_id': _editConsultantProfileLogic.mentorProfileGenericDataModel.data!.countries![_editConsultantProfileLogic.countryDropDownList.indexOf(_editConsultantProfileLogic.selectedCountry!)].id
                                                 },
                                                 false,
-                                                getCitiesRepo);
+                                                getStateRepo);
                                           },
                                           validator: (String? value) {
                                             if (value == null) {
@@ -707,6 +803,80 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                     ),
                                   ),
                                 ),
+
+                                ///---state
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(8.w, 0, 15.w, 16.h),
+                                    child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButtonHideUnderline(
+                                        child: DropdownButtonFormField<String>(
+                                          onTap: () {
+                                            FocusScopeNode currentFocus = FocusScope.of(context);
+                                            if (!currentFocus.hasPrimaryFocus) {
+                                              currentFocus.unfocus();
+                                            }
+                                          },
+                                          hint: Text(
+                                            LanguageConstant.state.tr,
+                                            style: state.hintTextStyle,
+                                          ),
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsetsDirectional.fromSTEB(15.w, 14.h, 15.w, 14.h),
+                                            fillColor: Colors.white,
+                                            filled: true,
+                                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                                            errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                                          ),
+                                          isExpanded: true,
+                                          focusColor: Colors.white,
+                                          style: state.textFieldTextStyle,
+                                          iconEnabledColor: customThemeColor,
+                                          icon: const Icon(Icons.keyboard_arrow_down),
+                                          iconSize: 25,
+                                          value: _editConsultantProfileLogic.selectedState,
+                                          items: _editConsultantProfileLogic.stateDropDownList.map<DropdownMenuItem<String>>((String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(
+                                                value,
+                                                style: state.textFieldTextStyle,
+                                              ),
+                                            );
+                                          }).toList(),
+                                          onChanged: (String? value) {
+                                            _editConsultantProfileLogic.selectedState = value;
+                                            _editConsultantProfileLogic.selectedCity = null;
+                                            getMethod(context, getCitiesByIdUrl,
+                                                {
+                                                  'token': '123',
+                                                  'state_id': _editConsultantProfileLogic.stateByModel.data!.states![_editConsultantProfileLogic.stateDropDownList.indexOf(_editConsultantProfileLogic.selectedState!)].id
+                                                },
+                                                false,
+                                                getCitiesRepo);
+                                            _editConsultantProfileLogic.update();
+                                          },
+                                          validator: (String? value) {
+                                            if (value == null) {
+                                              return LanguageConstant.fieldRequired.tr;
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                ///---country
+
 
                                 ///---city
                                 Expanded(
@@ -811,6 +981,14 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                     'country': _editConsultantProfileLogic
                                         .mentorProfileGenericDataModel.data!.countries![_editConsultantProfileLogic.countryDropDownList.indexOf(_editConsultantProfileLogic.selectedCountry!)].id,
                                     'city': _editConsultantProfileLogic.selectedCity,
+                                    'state_id':_editConsultantProfileLogic
+                                        .stateByModel
+                                        .data!
+                                        .states![_editConsultantProfileLogic
+                                        .stateDropDownList
+                                        .indexOf(_editConsultantProfileLogic
+                                        .selectedState!)]
+                                        .id,
                                   },
                                   true,
                                   mentorGeneralInfo2Repo);
@@ -828,6 +1006,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                     'cnic': _editConsultantProfileLogic.cnicController.text,
                                     'about': _editConsultantProfileLogic.aboutController.text,
                                     'email': _editConsultantProfileLogic.emailController.text,
+                                    'phone': _editConsultantProfileLogic.phoneController.text,
                                     'address': _editConsultantProfileLogic.addressController.text,
                                     'gender': _editConsultantProfileLogic.selectedGender,
                                     'religion': _editConsultantProfileLogic.selectedReligion,
@@ -837,6 +1016,14 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                     'country': _editConsultantProfileLogic
                                         .mentorProfileGenericDataModel.data!.countries![_editConsultantProfileLogic.countryDropDownList.indexOf(_editConsultantProfileLogic.selectedCountry!)].id,
                                     'city': _editConsultantProfileLogic.selectedCity,
+                                    'state_id':_editConsultantProfileLogic
+                                        .stateByModel
+                                        .data!
+                                        .states![_editConsultantProfileLogic
+                                        .stateDropDownList
+                                        .indexOf(_editConsultantProfileLogic
+                                        .selectedState!)]
+                                        .id,
                                   },
                                   true,
                                   mentorGeneralInfo2Repo);
@@ -962,6 +1149,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
       'last_name': Get.find<EditConsultantProfileLogic>().lastNameController.text,
       'father_name': Get.find<EditConsultantProfileLogic>().fatherNameController.text,
       'cnic': Get.find<EditConsultantProfileLogic>().cnicController.text,
+      'email': Get.find<EditConsultantProfileLogic>().emailController.text,
+      'phone': Get.find<EditConsultantProfileLogic>().phoneController.text,
       'address': Get.find<EditConsultantProfileLogic>().addressController.text,
       'about': Get.find<EditConsultantProfileLogic>().aboutController.text,
       'gender': Get.find<EditConsultantProfileLogic>().selectedGender,
@@ -978,6 +1167,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
           .countries![Get.find<EditConsultantProfileLogic>().countryDropDownList.indexOf(Get.find<EditConsultantProfileLogic>().selectedCountry!)]
           .id,
       'city': Get.find<EditConsultantProfileLogic>().selectedCity,
+      'state_id':   Get.find<EditConsultantProfileLogic>().stateByModel.data!.states![Get.find<EditConsultantProfileLogic>().stateDropDownList.indexOf(Get.find<EditConsultantProfileLogic>().selectedState!)].id,
+
       'picture': await dio_instance.MultipartFile.fromFile(
         file1!.path,
       )

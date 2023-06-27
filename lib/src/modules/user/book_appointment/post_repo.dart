@@ -25,7 +25,56 @@ import 'package:dio/dio.dart' as dio_instance;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'model/multiple_upload_files_model.dart';
 import 'wallet_payment/view.dart';
+uploadMultipleFiles(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    Get.find<BookAppointmentLogic>().multipleUploadFilesModel = MultipleUploadFilesModel.fromJson(response);
+    Get.find<GeneralController>().updateFormLoaderController(false);
+    if (Get.find<BookAppointmentLogic>().multipleUploadFilesModel.status == true) {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+
+      Get.find<BookAppointmentLogic>().ListOfFile.add(response['data']['file_details']);
+
+
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return CustomDialogBox(
+              title:"this is error",
+              titleColor: customDialogErrorColor,
+              descriptions: "this is erroor",
+              text: LanguageConstant.ok.tr,
+              functionCall: () {
+                Navigator.pop(context);
+              },
+              img: 'assets/Icons/dialog_error.svg',
+            );
+          });
+    }
+  } else {
+    Get.find<GeneralController>().updateFormLoaderController(false);
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CustomDialogBox(
+            title: LanguageConstant.failed.tr,
+            titleColor: customDialogErrorColor,
+            descriptions:'Try Again',
+            text: LanguageConstant.ok.tr,
+            functionCall: () {
+              Navigator.pop(context);
+            },
+            img: 'assets/Icons/dialog_error.svg',
+          );
+        });
+  }
+}
 
 bookAppointmentFileRepo(File file1, BuildContext context) async {
   dio_instance.FormData formData = dio_instance.FormData.fromMap(<String, dynamic>{
@@ -269,7 +318,7 @@ liveRequestRepo(BuildContext context, bool responseCheck, Map<String, dynamic> r
       Get.find<GeneralController>().updateFormLoaderController(false);
 
       ///---make-notification
-      Get.find<GeneralController>().updateNotificationBody('Your Live Appointment Request Accepted', '', '/appointmentQuestion', 'mentee/appointment/log', null);
+      Get.find<GeneralController>().updateNotificationBody('Your Live Appointment Request Accepted', '', '/appointmentQuestion', 'mentee/appointment-log-detail', null);
       Get.find<GeneralController>().updateUserIdForSendNotification(int.parse(Get.find<GeneralController>().notificationMenteeId!));
       // Get.find<GeneralController>().notificationMenteeId = '';
       Get.find<GeneralController>().notificationFee = null;

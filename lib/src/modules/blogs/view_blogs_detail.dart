@@ -76,9 +76,10 @@ class _BlogDetailPage extends State<BlogDetailPage> {
                           centerTitle: true,
                           background: _blogsLogic.selectedBlogForView.imagePath.toString() != 'null'
                               ? Image.network(
-                                  _blogsLogic.selectedBlogForView.imagePath!.contains('assets')
-                                      ? '$mediaUrl${_blogsLogic.selectedBlogForView.imagePath}'
-                                      : '${_blogsLogic.selectedBlogForView.imagePath}',
+                            Get.find<GeneralController>().checKImage(_blogsLogic.selectedBlogForView.imagePath!),
+                                  // _blogsLogic.selectedBlogForView.imagePath!.contains('assets')
+                                  //     ? '$mediaUrl${_blogsLogic.selectedBlogForView.imagePath}'
+                                  //     : '${_blogsLogic.selectedBlogForView.imagePath}',
                                   fit: BoxFit.cover,
                                 )
                               : Image.asset(

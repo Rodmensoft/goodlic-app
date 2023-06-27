@@ -72,6 +72,7 @@ class ConsultantDetailFromGetProfile {
     String? lastName,
     String? email,
     String? about,
+    String? phone,
     String? imagePath,
     String? createdAt,
     int? country,
@@ -100,6 +101,7 @@ class ConsultantDetailFromGetProfile {
     _lastName = lastName;
     _email = email;
     _about = about;
+    _phone=phone;
     _imagePath = imagePath;
     _createdAt = createdAt;
     _country = country;
@@ -130,6 +132,7 @@ class ConsultantDetailFromGetProfile {
     _lastName = json['last_name'];
     _email = json['email'];
     _about = json['about'];
+    _phone=json['phone'];
     _imagePath = json['image_path'];
     _createdAt = json['created_at'];
     _country = json['country'];
@@ -181,6 +184,7 @@ class ConsultantDetailFromGetProfile {
   String? _imagePath;
   String? _createdAt;
   int? _country;
+  String? _phone;
   String? _fatherName;
   String? _cnic;
   String? _gender;
@@ -209,6 +213,7 @@ class ConsultantDetailFromGetProfile {
   String? get imagePath => _imagePath;
   String? get createdAt => _createdAt;
   int? get country => _country;
+  String? get phone=> _phone;
   String? get fatherName => _fatherName;
   String? get cnic => _cnic;
   String? get gender => _gender;
@@ -243,6 +248,7 @@ class ConsultantDetailFromGetProfile {
     map['cnic'] = _cnic;
     map['gender'] = _gender;
     map['dob'] = _dob;
+    map['phone']=_phone;
     map['city'] = _city;
     map['address'] = _address;
     map['occupation'] = _occupation;

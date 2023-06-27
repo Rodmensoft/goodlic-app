@@ -16,7 +16,7 @@ getUserProfileRepo(
     Get.find<UserHomeLogic>().update();
     if (Get.find<UserHomeLogic>().getUserProfileModel.status.toString() ==
         'true') {
-      Get.find<GeneralController>().updateFormLoaderController(false);
+        Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
       Get.find<GeneralController>().updateFormLoaderController(false);
     }
@@ -71,6 +71,7 @@ getCategoriesRepo(
         Get.find<UserHomeLogic>().categoriesList.add(HomeStyling(
             id: element.id,
             title: element.name,
+            icon: element.category_icon,
             subTitle: element.mentorPCount.toString(),
             image: element.imagePath,
             color: customThemeColor));

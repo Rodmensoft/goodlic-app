@@ -1,4 +1,5 @@
 import 'package:consultant_product/src/modules/chat/fetch_messages_model.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
@@ -19,6 +20,12 @@ class ChatLogic extends GetxController {
   List messageList = [];
   updateMessageList(newValue) {
     messageList.add(newValue);
+    update();
+  }
+  FilePickerResult? filePickerResult;
+  String? selectedFileName;
+  updateSelectedFileName(String? newValue) {
+    selectedFileName = newValue;
     update();
   }
 

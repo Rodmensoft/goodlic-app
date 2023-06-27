@@ -13,6 +13,8 @@ import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
+import '../../../../controller/general_controller.dart';
+
 class TopRatedConsultants extends StatefulWidget {
   const TopRatedConsultants({Key? key}) : super(key: key);
 
@@ -136,9 +138,10 @@ class _TopRatedConsultantsState extends State<TopRatedConsultants> {
                                             : ClipRRect(
                                                 borderRadius: BorderRadius.circular(8.r),
                                                 child: Image.network(
-                                                  _userHomeLogic.topRatedConsultantList[index].image!.contains('assets')
-                                                      ? '$mediaUrl${_userHomeLogic.topRatedConsultantList[index].image}'
-                                                      : '${_userHomeLogic.topRatedConsultantList[index].image}',
+                                                  Get.find<GeneralController>().checKImage(_userHomeLogic.topRatedConsultantList[index].image!),
+                                                  // _userHomeLogic.topRatedConsultantList[index].image!.contains('assets')
+                                                  //     ? '$mediaUrl${_userHomeLogic.topRatedConsultantList[index].image}'
+                                                  //     : '${_userHomeLogic.topRatedConsultantList[index].image}',
                                                   width: 76.w,
                                                   height: 85.h,
                                                   fit: BoxFit.cover,

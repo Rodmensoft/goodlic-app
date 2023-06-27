@@ -145,7 +145,7 @@ class _InAppWebPageState extends State<InAppWebPage> {
                         this.url = url.toString();
                         urlController.text = this.url;
                       });
-                      debugPrint('URL--->>> ${url.toString()}');
+
                       if (url.toString().contains("processingPayment")) {
                         // get your token from url
                         Future.delayed(const Duration(seconds: 4))

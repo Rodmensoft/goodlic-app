@@ -136,9 +136,10 @@ class _ConsultantDrawerPageState extends State<ConsultantDrawerPage> {
                                                   : ClipRRect(
                                                       borderRadius: BorderRadius.circular(30),
                                                       child: Image.network(
-                                                        Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
-                                                            ? '$mediaUrl${Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath}'
-                                                            : '${Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath}',
+                                                        Get.find<GeneralController>().checKImage(Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath!),
+                                                        // Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath!.contains('assets')
+                                                        //     ? '$mediaUrl${Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath}'
+                                                        //     : '${Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.imagePath}',
                                                         fit: BoxFit.cover,
                                                       ),
                                                     ),

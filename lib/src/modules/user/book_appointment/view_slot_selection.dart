@@ -46,7 +46,7 @@ class _SlotSelectionState extends State<SlotSelection> {
   @override
   void initState() {
     super.initState();
-
+    Get.find<BookAppointmentLogic>().ListOfFile.clear();
     Get.find<BookAppointmentLogic>().scrollController = ScrollController()..addListener(Get.find<BookAppointmentLogic>().scrollListener);
   }
 
@@ -616,9 +616,7 @@ class _SlotSelectionState extends State<SlotSelection> {
                             right: 15.w,
                             child: InkWell(
                               onTap: () {
-                                print("object 1");
-                                print("object 1 ${widget.appointmentId}");
-                                // return;
+                               // return;
                                 if (!disableButton!) {
                                   Get.to(AppointmentQuestionPage(appointmentId: widget.appointmentId, mentorId: widget.mentorId, showPaymentSection: true));
                                 }
@@ -637,15 +635,12 @@ class _SlotSelectionState extends State<SlotSelection> {
                                 right: 15.w,
                                 child: InkWell(
                                   onTap: () {
-                                    print("object 2");
-                                    // return;
-                                    log('testing notification sent');
                                     Get.back();
                                     Get.find<GeneralController>().channelForCall = null;
                                     Get.find<GeneralController>().update();
 
                                     ///---make-notification
-                                    Get.find<GeneralController>().updateNotificationBody('New Appointment Are You Live!', '', '/requestForLive', 'mentee/appointment/log', null);
+                                    Get.find<GeneralController>().updateNotificationBody('New Appointment Are You Live!', '', '/requestForLive', 'mentee/appointment-log-detail', null);
                                     Get.find<GeneralController>().updateUserIdForSendNotification(ConsultantAppointmentDetailLogic().selectedAppointmentData.mentorId);
 
                                     ///----send-sms
@@ -679,8 +674,6 @@ class _SlotSelectionState extends State<SlotSelection> {
                                 right: 15.w,
                                 child: InkWell(
                                   onTap: () {
-                                    print("object 3");
-                                    print("object  ${widget.appointmentId}");
                                     // return;
                                     if (!disableButton!) {
                                       Get.to(AppointmentQuestionPage(appointmentId: widget.appointmentId, mentorId: 0, showPaymentSection: false));

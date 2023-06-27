@@ -384,9 +384,11 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                                     child: InkWell(
                                                       onTap: () {
                                                         Get.to(ImageViewScreen(
-                                                          networkImage: _createProfileLogic.forDisplayExperienceList![index].imagePath!.contains('assets')
-                                                              ? '$mediaUrl${_createProfileLogic.forDisplayExperienceList![index].imagePath}'
-                                                              : _createProfileLogic.forDisplayExperienceList![index].imagePath!,
+                                                          networkImage:
+                                                          Get.find<GeneralController>().checKImage(_createProfileLogic.forDisplayExperienceList![index].imagePath!),
+                                                          // _createProfileLogic.forDisplayExperienceList![index].imagePath!.contains('assets')
+                                                          //     ? '$mediaUrl${_createProfileLogic.forDisplayExperienceList![index].imagePath}'
+                                                          //     : _createProfileLogic.forDisplayExperienceList![index].imagePath!,
                                                         ));
                                                       },
                                                       child: SizedBox(
@@ -394,9 +396,12 @@ class _ExperienceInfoViewState extends State<ExperienceInfoView> {
                                                           width: 30.w,
                                                           child: ClipRRect(
                                                             borderRadius: BorderRadius.circular(4.r),
-                                                            child: Image.network(_createProfileLogic.forDisplayExperienceList![index].imagePath!.contains('assets')
-                                                                ? '$mediaUrl${_createProfileLogic.forDisplayExperienceList![index].imagePath}'
-                                                                : _createProfileLogic.forDisplayExperienceList![index].imagePath!),
+                                                            child: Image.network(
+                                                                Get.find<GeneralController>().checKImage(_createProfileLogic.forDisplayExperienceList![index].imagePath!),
+                                                                // _createProfileLogic.forDisplayExperienceList![index].imagePath!.contains('assets')
+                                                                // ? '$mediaUrl${_createProfileLogic.forDisplayExperienceList![index].imagePath}'
+                                                                // : _createProfileLogic.forDisplayExperienceList![index].imagePath!
+                                                              ),
                                                           )),
                                                     ),
                                                   )

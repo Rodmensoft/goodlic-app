@@ -11,6 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import '../../../../controller/general_controller.dart';
 import '../logic.dart';
 
 class ConsultantGridView extends StatefulWidget {
@@ -47,6 +48,8 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                           padding: EdgeInsets.only(top: 0.h),
                           child: InkWell(
                             onTap: () {
+                              Get.find<GeneralController>().storageBox.write('consultantID',  _allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user?.id);
+
                               Get.find<UserHomeLogic>().selectedConsultantID = _allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user?.id;
                               Get.find<UserHomeLogic>().selectedConsultantName = '${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user?.firstName} '
                                   '${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user?.lastName}';
@@ -72,9 +75,10 @@ class _ConsultantGridViewState extends State<ConsultantGridView> {
                                       child: _allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.data?[index].user?.imagePath == null
                                           ? const SizedBox()
                                           : Image.network(
-                                              (_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.data?[index].user?.imagePath ?? "").contains('assets')
-                                                  ? '$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}'
-                                                  : '${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}',
+                                        Get.find<GeneralController>().checKImage(_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath!),
+                                              // (_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors?.data?[index].user?.imagePath ?? "").contains('assets')
+                                              //     ? '$mediaUrl${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}'
+                                              //     : '${_allConsultantsLogic.allConsultantList[widget.parentIndex].mentors!.data![index].user!.imagePath}',
                                               width: double.infinity,
                                               fit: BoxFit.fill,
                                               height: double.infinity,

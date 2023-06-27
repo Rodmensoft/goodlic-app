@@ -82,13 +82,14 @@ class UserHomeLogic extends GetxController {
 }
 
 class HomeStyling {
-  HomeStyling({required this.id, this.title, this.subTitle, this.image, this.color, this.gender});
+  HomeStyling({required this.id, this.title, this.subTitle, this.image, this.color, this.gender,this.icon});
 
   int? id;
   String? title;
   String? subTitle;
   String? image;
   Color? color;
+  String? icon;
   String? gender;
 }
 

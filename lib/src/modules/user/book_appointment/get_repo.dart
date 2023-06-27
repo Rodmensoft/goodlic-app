@@ -9,6 +9,56 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'model/multiple_upload_files_model.dart';
+
+deleteUploadedFiles(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    Get.find<BookAppointmentLogic>().multipleUploadFilesModel = MultipleUploadFilesModel.fromJson(response);
+    Get.find<GeneralController>().updateFormLoaderController(false);
+    if (Get.find<BookAppointmentLogic>().multipleUploadFilesModel.status == true) {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+      Get.find<BookAppointmentLogic>().ListOfFile.removeAt(Get.find<BookAppointmentLogic>().value!);
+
+
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return CustomDialogBox(
+              title: LanguageConstant.failed.tr,
+              titleColor: customDialogErrorColor,
+              descriptions: '${LanguageConstant.tryAgain.tr}!',
+              text: LanguageConstant.ok.tr,
+              functionCall: () {
+                Navigator.pop(context);
+              },
+              img: 'assets/Icons/dialog_error.svg',
+            );
+          });
+    }
+  } else {
+    Get.find<GeneralController>().updateFormLoaderController(false);
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CustomDialogBox(
+            title: LanguageConstant.failed.tr,
+            titleColor: customDialogErrorColor,
+            descriptions: '${LanguageConstant.tryAgain.tr}!',
+            text: LanguageConstant.ok.tr,
+            functionCall: () {
+              Navigator.pop(context);
+            },
+            img: 'assets/Icons/dialog_error.svg',
+          );
+        });
+  }
+}
+
 getScheduleAvailableDaysRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<BookAppointmentLogic>().getScheduleAvailableDays = GetScheduleAvailableDays.fromJson(response);

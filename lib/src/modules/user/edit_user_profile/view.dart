@@ -17,8 +17,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:resize/resize.dart';
 import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
+import '../../../../route_generator.dart';
+import '../home/logic.dart';
+import '../home/view.dart';
 import 'logic.dart';
 
 class EditUserProfilePage extends StatefulWidget {
@@ -38,21 +42,18 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
     // TODO: implement initState
     super.initState();
 
-    Get.find<EditUserProfileLogic>().scrollController = ScrollController()
-      ..addListener(Get.find<EditUserProfileLogic>().scrollListener);
+    Get.find<EditUserProfileLogic>().scrollController = ScrollController()..addListener(Get.find<EditUserProfileLogic>().scrollListener);
 
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       Get.find<GeneralController>().updateFormLoaderController(true);
     });
-    getMethod(
-        context,
-        getMenteeProfileUrl,
-        {
-          'token': '123',
-          'user_id': Get.find<GeneralController>().storageBox.read('userID')
-        },
-        true,
-        getMenteeProfileRepo);
+    getMethod(context, getMenteeProfileUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getMenteeProfileRepo);
+
+     //Get.find<EditUserProfileLogic>().firstNameController.text = Get.find<EditUserProfileLogic>().getMenteeProfileModel.data?.user?.firstName! ?? "hiiii";
+    if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data?.user?.country == null) {
+      Get.find<EditUserProfileLogic>().selectedCountry = Get.find<GeneralController>().initialCountry.value;
+      getState();
+    }
   }
 
   @override
@@ -64,754 +65,1328 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
     super.dispose();
   }
 
+  getState() async {
+    await Future.delayed(Duration(seconds: 5));
+    Get.put(EditUserProfileLogic());
+    if (Get.find<EditUserProfileLogic>().countryDropDownList.contains(Get.find<GeneralController>().initialCountry.value)) {
+      var countryId = Get.find<EditUserProfileLogic>()
+          .menteeProfileGenericDataModel
+          .data
+          ?.countries![Get.find<EditUserProfileLogic>().countryDropDownList.indexOf(Get.find<GeneralController>().initialCountry.value)]
+          .id;
+
+      getMethod(context, getstatesByIdUrl, {'token': '123', 'country_id': countryId}, false, getStateRepo);
+
+      Get.find<EditUserProfileLogic>().selectedState = Get.find<GeneralController>().initialState.value;
+      getCities();
+     }
+  }
+  getCities() async {
+    await Future.delayed(Duration(seconds: 5));
+    Get.put(EditUserProfileLogic());
+    if (Get.find<EditUserProfileLogic>().stateDropDownList.contains(Get.find<GeneralController>().initialState.value)) {
+      var countryId = Get.find<EditUserProfileLogic>()
+          .stateByModel
+          .data
+          ?.states![Get.find<EditUserProfileLogic>().stateDropDownList.indexOf(Get.find<GeneralController>().initialState.value)]
+          .id;
+
+      getMethod(context, getCitiesByIdUrl, {'token': '123', 'state_id': countryId}, false, getCitiesRepo);
+
+      Get.find<EditUserProfileLogic>().selectedCity = Get.find<GeneralController>().initialCity.value;
+
+    }
+  }
+
   final GlobalKey<FormState> _profileFormKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(builder: (_generalController) {
       return GetBuilder<EditUserProfileLogic>(builder: (_editUserProfileLogic) {
-        return GestureDetector(
-          onTap: () {
-            _generalController.focusOut(context);
-          },
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            backgroundColor: customThemeColor,
-            body: NestedScrollView(
-                controller: _editUserProfileLogic.scrollController,
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  return <Widget>[
-                    ///---header
-                    SliverAppBar(
-                      expandedHeight: MediaQuery.of(context).size.height * .2,
-                      floating: true,
-                      pinned: true,
-                      snap: true,
-                      elevation: 0,
-                      backgroundColor: _editUserProfileLogic.isShrink
-                          ? customThemeColor
-                          : Colors.transparent,
-                      leading: InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset('assets/Icons/whiteBackArrow.svg'),
-                          ],
-                        ),
-                      ),
-                      flexibleSpace: FlexibleSpaceBar(
-                        centerTitle: true,
-                        background: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(40.r))),
+        return ModalProgressHUD(
+          progressIndicator: const CircularProgressIndicator(
+            color: customThemeColor,
+          ),
+          inAsyncCall: _generalController.formLoaderController && Get.find<EditUserProfileLogic>().selectedCity=="" ,
+
+          child: GestureDetector(
+            onTap: () {
+              _generalController.focusOut(context);
+            },
+            child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              backgroundColor: customThemeColor,
+              body: NestedScrollView(
+                  controller: _editUserProfileLogic.scrollController,
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
+                    return <Widget>[
+                      ///---header
+                      SliverAppBar(
+                        expandedHeight: MediaQuery.of(context).size.height * .2,
+                        floating: true,
+                        pinned: true,
+                        snap: true,
+                        elevation: 0,
+                        backgroundColor: _editUserProfileLogic.isShrink
+                            ? customThemeColor
+                            : Colors.transparent,
+                        leading: InkWell(
+                          onTap: () {
+                            Get.offAllNamed(PageRoutes.userHome);
+                          },
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Stack(
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/images/bookAppointmentAppBar.svg',
-                                    width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height *
-                                        .23,
-                                    fit: BoxFit.fill,
-                                  ),
-                                  SafeArea(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.w, 25.h, 16.w, 16.h),
-                                      child: Stack(
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                height: 25.h,
-                                              ),
-                                              Text(
-                                                LanguageConstant.editProfile.tr,
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        SarabunFontFamily.bold,
-                                                    fontSize: 28.sp,
-                                                    color:
-                                                        customLightThemeColor),
-                                              ),
-                                              SizedBox(
-                                                height: 10.h,
-                                              ),
-                                              Text(
-                                                LanguageConstant
-                                                    .editYourProfile.tr,
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        SarabunFontFamily
-                                                            .medium,
-                                                    fontSize: 12.sp,
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              SvgPicture.asset('assets/Icons/whiteBackArrow.svg'),
                             ],
                           ),
                         ),
-                      ),
-                    )
-                  ];
-                },
-                body: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
-                      color: customTextFieldColor,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25.0),
-                          topRight: Radius.circular(25.0))),
-                  child: _generalController.formLoaderController!
-                      ? const Center(child: CircularProgressIndicator())
-                      : Stack(children: [
-                          SingleChildScrollView(
-                            child: Form(
-                              key: _profileFormKey,
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 25.h),
-                                  InkWell(
-                                    onTap: () {
-                                      imagePickerDialog(context);
-                                    },
-                                    child: SizedBox(
-                                      height: 103.h,
-                                      width: 190.w,
-                                      child: _editUserProfileLogic
-                                                  .profileImage ==
-                                              null
-                                          ? _editUserProfileLogic
-                                                      .getMenteeProfileModel
-                                                      .data ==
-                                                  null
-                                              ? Image.asset(
-                                                  'assets/images/upload_pic_holder.png',
-                                                  fit: BoxFit.fill,
-                                                )
-                                              : _editUserProfileLogic
-                                                          .getMenteeProfileModel
-                                                          .data!
-                                                          .user!
-                                                          .imagePath ==
-                                                      null
-                                                  ? Image.asset(
-                                                      'assets/images/upload_pic_holder.png',
-                                                      fit: BoxFit.fill,
-                                                    )
-                                                  : ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.r),
-                                                      child: Image.network(
-                                                        _editUserProfileLogic
-                                                                .getMenteeProfileModel
-                                                                .data!
-                                                                .user!
-                                                                .imagePath!
-                                                                .contains(
-                                                                    'assets')
-                                                            ? '$mediaUrl${_editUserProfileLogic.getMenteeProfileModel.data!.user!.imagePath}'
-                                                            : '${_editUserProfileLogic.getMenteeProfileModel.data!.user!.imagePath}',
-                                                        fit: BoxFit.cover,
-                                                      ))
-                                          : ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              child: Image.file(
-                                                _editUserProfileLogic
-                                                    .profileImage!,
-                                                fit: BoxFit.cover,
-                                              )),
+                        flexibleSpace: FlexibleSpaceBar(
+                          centerTitle: true,
+                          background: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.vertical(
+                                    bottom: Radius.circular(40.r))),
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/images/bookAppointmentAppBar.svg',
+                                      width: MediaQuery.of(context).size.width,
+                                      height: MediaQuery.of(context).size.height *
+                                          .23,
+                                      fit: BoxFit.fill,
                                     ),
-                                  ),
-                                  SizedBox(height: 25.h),
-
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.w, 0.h, 16.w, 16.h),
-                                    child: Row(
-                                      children: [
-                                        Text('Hide Profile'.toUpperCase(),
-                                            style: state.hideTextStyle),
-                                        const Spacer(),
-                                        Switch(
-                                            activeColor: customThemeColor,
-                                            value: _editUserProfileLogic
-                                                .profileHiddenSwitch!,
-                                            onChanged: (bool? newValue) {
-                                              _editUserProfileLogic
-                                                  .updateProfileHiddenSwitch(
-                                                      newValue);
-                                              _generalController
-                                                  .updateFormLoaderController(
-                                                      true);
-                                              postMethod(
-                                                  context,
-                                                  changeProfileVisibilityUrl,
-                                                  {
-                                                    'token': '123',
-                                                    'user_id': Get.find<
-                                                            GeneralController>()
-                                                        .storageBox
-                                                        .read('userID'),
-                                                    'visibility':
-                                                        newValue! ? true : false
-                                                  },
-                                                  true,
-                                                  getProfileVisibilityRepo);
-                                            })
-                                      ],
-                                    ),
-                                  ),
-
-                                  ///---first-name
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.w, 0.h, 16.w, 16.h),
-                                    child: TextFormField(
-                                      controller: _editUserProfileLogic
-                                          .firstNameController,
-                                      keyboardType: TextInputType.name,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.allow(
-                                            RegExp("[a-zA-Z ]"))
-                                      ],
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                25.w, 15.h, 25.w, 15.h),
-                                        hintText: LanguageConstant.firstName.tr,
-                                        hintStyle: state.hintTextStyle,
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: customLightThemeColor)),
-                                        errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.red)),
-                                      ),
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return LanguageConstant
-                                              .fieldRequired.tr;
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                    ),
-                                  ),
-
-                                  ///---last-name
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.w, 0.h, 16.w, 16.h),
-                                    child: TextFormField(
-                                      controller: _editUserProfileLogic
-                                          .lastNameController,
-                                      keyboardType: TextInputType.name,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.allow(
-                                            RegExp("[a-zA-Z ]"))
-                                      ],
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                25.w, 15.h, 25.w, 15.h),
-                                        hintText: LanguageConstant.lastName.tr,
-                                        hintStyle: state.hintTextStyle,
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: customLightThemeColor)),
-                                        errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            borderSide: const BorderSide(
-                                                color: Colors.red)),
-                                      ),
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return LanguageConstant
-                                              .fieldRequired.tr;
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                    ),
-                                  ),
-
-                                  ///---gender
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.w, 0.h, 16.w, 16.h),
-                                    child: ButtonTheme(
-                                      alignedDropdown: true,
-                                      child: DropdownButtonHideUnderline(
-                                        child: DropdownButtonFormField<String>(
-                                          onTap: () {
-                                            FocusScopeNode currentFocus =
-                                                FocusScope.of(context);
-                                            if (!currentFocus.hasPrimaryFocus) {
-                                              currentFocus.unfocus();
-                                            }
-                                          },
-                                          hint: Text(
-                                            LanguageConstant.gender.tr,
-                                            style: state.hintTextStyle,
-                                          ),
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    15.w, 14.h, 15.w, 14.h),
-                                            fillColor: Colors.white,
-                                            filled: true,
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.r),
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent)),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.r),
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent)),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.r),
-                                                borderSide: const BorderSide(
-                                                    color:
-                                                        customLightThemeColor)),
-                                            errorBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.r),
-                                                borderSide: const BorderSide(
-                                                    color: Colors.red)),
-                                          ),
-                                          isExpanded: true,
-                                          focusColor: Colors.white,
-                                          style: state.textFieldTextStyle,
-                                          iconEnabledColor: customThemeColor,
-                                          icon: const Icon(
-                                              Icons.keyboard_arrow_down),
-                                          iconSize: 25,
-                                          value: _editUserProfileLogic
-                                                      .selectedGender ==
-                                                  null
-                                              ? _editUserProfileLogic
-                                                  .selectedGender
-                                              : _editUserProfileLogic
-                                                  .selectedGender
-                                                  .toString()
-                                                  .capitalize,
-                                          items: _editUserProfileLogic
-                                              .genderDropDownList
-                                              .map<DropdownMenuItem<String>>(
-                                                  (String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(
-                                                value,
-                                                style: state.textFieldTextStyle,
-                                              ),
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? value) {
-                                            _editUserProfileLogic
-                                                .selectedGender = value;
-                                            _editUserProfileLogic.update();
-                                          },
-                                          validator: (String? value) {
-                                            if (value == null) {
-                                              return LanguageConstant
-                                                  .fieldRequired.tr;
-                                            } else {
-                                              return null;
-                                            }
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  ///---city-country
-                                  Row(
-                                    children: [
-                                      ///---country
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.w, 0.h, 8.w, 16.h),
-                                          child: ButtonTheme(
-                                            alignedDropdown: true,
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButtonFormField<
-                                                  String>(
-                                                onTap: () {
-                                                  FocusScopeNode currentFocus =
-                                                      FocusScope.of(context);
-                                                  if (!currentFocus
-                                                      .hasPrimaryFocus) {
-                                                    currentFocus.unfocus();
-                                                  }
-                                                },
-                                                hint: Text(
-                                                  LanguageConstant.country.tr,
-                                                  style: state.hintTextStyle,
+                                    SafeArea(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.w, 25.h, 16.w, 16.h),
+                                        child: Stack(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  height: 25.h,
                                                 ),
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(15.w, 14.h,
-                                                              15.w, 14.h),
-                                                  fillColor: Colors.white,
-                                                  filled: true,
-                                                  enabledBorder: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.r),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color: Colors
-                                                                  .transparent)),
-                                                  border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.r),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color: Colors
-                                                                  .transparent)),
-                                                  focusedBorder: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.r),
-                                                      borderSide: const BorderSide(
-                                                          color:
-                                                              customLightThemeColor)),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.r),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                                  color: Colors
-                                                                      .red)),
+                                                 Text(
+
+                                                   _editUserProfileLogic.getMenteeProfileModel.data?.user?.mentee?.isProfileCompleted.toString() == '0'
+                                                      ? LanguageConstant.createProfile.tr
+                                                      : LanguageConstant.editProfile.tr,
+                                                  style: TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 28.sp, color: Colors.white),
                                                 ),
-                                                isExpanded: true,
-                                                focusColor: Colors.white,
-                                                style: state.textFieldTextStyle,
-                                                iconEnabledColor:
-                                                    customThemeColor,
-                                                icon: const Icon(
-                                                    Icons.keyboard_arrow_down),
-                                                iconSize: 25,
-                                                value: _editUserProfileLogic
-                                                    .selectedCountry,
-                                                items: _editUserProfileLogic
-                                                    .countryDropDownList
-                                                    .map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (String value) {
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: value,
-                                                    child: Text(
-                                                      value,
-                                                      style: state
-                                                          .textFieldTextStyle,
-                                                    ),
-                                                  );
-                                                }).toList(),
-                                                onChanged: (String? value) {
-                                                  _editUserProfileLogic
-                                                      .selectedCountry = value;
-                                                  _editUserProfileLogic
-                                                      .update();
-                                                  Get.find<GeneralController>()
-                                                      .updateFormLoaderController(
-                                                          true);
-                                                  getMethod(
-                                                      context,
-                                                      getCitiesByIdUrl,
-                                                      {
-                                                        'token': '123',
-                                                        'country_id': _editUserProfileLogic
-                                                            .menteeProfileGenericDataModel
-                                                            .data!
-                                                            .countries![_editUserProfileLogic
-                                                                .countryDropDownList
-                                                                .indexOf(
-                                                                    _editUserProfileLogic
-                                                                        .selectedCountry!)]
-                                                            .id
-                                                      },
-                                                      false,
-                                                      getCitiesRepo);
-                                                },
-                                                validator: (String? value) {
-                                                  if (value == null) {
-                                                    return LanguageConstant
-                                                        .fieldRequired.tr;
-                                                  } else {
-                                                    return null;
-                                                  }
-                                                },
-                                              ),
+                                                SizedBox(
+                                                  height: 10.h,
+                                                ),
+                                                Text(
+                                                  _editUserProfileLogic.getMenteeProfileModel.data?.user?.mentee?.isProfileCompleted.toString() == '0'
+                                                      ? LanguageConstant.createYourProfile.tr
+                                                      : LanguageConstant.editYourProfile.tr,
+
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          SarabunFontFamily
+                                                              .medium,
+                                                      fontSize: 12.sp,
+                                                      color: Colors.white),
+                                                ),
+                                              ],
                                             ),
-                                          ),
+                                          ],
                                         ),
                                       ),
-
-                                      ///---city
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  8.w, 0.h, 16.w, 16.h),
-                                          child: ButtonTheme(
-                                            alignedDropdown: true,
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButtonFormField<
-                                                  String>(
-                                                onTap: () {
-                                                  FocusScopeNode currentFocus =
-                                                      FocusScope.of(context);
-                                                  if (!currentFocus
-                                                      .hasPrimaryFocus) {
-                                                    currentFocus.unfocus();
-                                                  }
-                                                },
-                                                hint: Text(
-                                                  LanguageConstant.city.tr,
-                                                  style: state.hintTextStyle,
-                                                ),
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(15.w, 14.h,
-                                                              15.w, 14.h),
-                                                  fillColor: Colors.white,
-                                                  enabled: true,
-                                                  filled: true,
-                                                  enabledBorder: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.r),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color: Colors
-                                                                  .transparent)),
-                                                  border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.r),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color: Colors
-                                                                  .transparent)),
-                                                  focusedBorder: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.r),
-                                                      borderSide: const BorderSide(
-                                                          color:
-                                                              customLightThemeColor)),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.r),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                                  color: Colors
-                                                                      .red)),
-                                                ),
-                                                isExpanded: true,
-                                                focusColor: Colors.white,
-                                                style: state.textFieldTextStyle,
-                                                iconEnabledColor:
-                                                    customThemeColor,
-                                                icon: const Icon(
-                                                    Icons.keyboard_arrow_down),
-                                                iconSize: 25,
-                                                value: _editUserProfileLogic
-                                                    .selectedCity,
-                                                items: _editUserProfileLogic
-                                                    .cityDropDownList
-                                                    .map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (String value) {
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: value,
-                                                    child: Text(
-                                                      value,
-                                                      style: state
-                                                          .textFieldTextStyle,
-                                                    ),
-                                                  );
-                                                }).toList(),
-                                                onChanged: (String? value) {
-                                                  _editUserProfileLogic
-                                                      .selectedCity = value;
-                                                  _editUserProfileLogic
-                                                      .update();
-                                                },
-                                                validator: (String? value) {
-                                                  if (value == null) {
-                                                    return LanguageConstant
-                                                        .fieldRequired.tr;
-                                                  } else {
-                                                    return null;
-                                                  }
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                          Positioned(
-                            bottom: 0.h,
-                            left: 15.w,
-                            right: 15.w,
-                            child: InkWell(
-                              onTap: () {
-                                _generalController.focusOut(context);
-                                if (_profileFormKey.currentState!.validate()) {
-                                  if (_editUserProfileLogic.profileImage !=
-                                      null) {
-                                    Get.find<GeneralController>()
-                                        .updateFormLoaderController(true);
-                                    menteeUpdateProfileImageRepo(
-                                        _editUserProfileLogic.profileImage);
-                                  } else if (_editUserProfileLogic
-                                              .getMenteeProfileModel
-                                              .data!
-                                              .user!
-                                              .imagePath !=
-                                          null &&
-                                      _editUserProfileLogic.profileImage ==
-                                          null) {
-                                    Get.find<GeneralController>()
-                                        .updateFormLoaderController(true);
-                                    postMethod(
-                                        context,
-                                        updateMenteeProfileUrl,
-                                        {
-                                          'token': '123',
-                                          'user_id':
-                                              Get.find<GeneralController>()
-                                                  .storageBox
-                                                  .read('userID'),
-                                          'first_name': _editUserProfileLogic
-                                              .firstNameController.text,
-                                          'last_name': _editUserProfileLogic
-                                              .lastNameController.text,
-                                          'gender': _editUserProfileLogic
-                                              .selectedGender,
-                                          'country': _editUserProfileLogic
-                                              .menteeProfileGenericDataModel
-                                              .data!
-                                              .countries![_editUserProfileLogic
-                                                  .countryDropDownList
-                                                  .indexOf(_editUserProfileLogic
-                                                      .selectedCountry!)]
-                                              .id,
-                                          'city': _editUserProfileLogic
-                                              .selectedCity,
+                        ),
+                      )
+                    ];
+                  },
+                  body: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                        color: customTextFieldColor,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25.0),
+                            topRight: Radius.circular(25.0))),
+                    child:
+                    // _generalController.formLoaderController!
+                    //     ? const Center(child: CircularProgressIndicator()):
+                         Stack(children: [
+                            SingleChildScrollView(
+                              child: Form(
+                                key: _profileFormKey,
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 25.h),
+                                    InkWell(
+                                      onTap: () {
+                                        imagePickerDialog(context);
+                                      },
+                                      child: SizedBox(
+                                        height: 103.h,
+                                        width: 190.w,
+                                        child: _editUserProfileLogic
+                                                    .profileImage ==
+                                                null
+                                            ? _editUserProfileLogic
+                                                        .getMenteeProfileModel
+                                                        .data ==
+                                                    null
+                                                ? Image.asset(
+                                                    'assets/images/upload_pic_holder.png',
+                                                    fit: BoxFit.fill,
+                                                  )
+                                                : _editUserProfileLogic
+                                                            .getMenteeProfileModel
+                                                            .data!
+                                                            .user!
+                                                            .imagePath ==
+                                                        null
+                                                    ? Image.asset(
+                                                        'assets/images/upload_pic_holder.png',
+                                                        fit: BoxFit.fill,
+                                                      )
+                                                    : ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                8.r),
+                                                        child: Image.network(
+                                                          Get.find<GeneralController>().checKImage(_editUserProfileLogic.getMenteeProfileModel.data!.user!.imagePath!),
+                                                          // _editUserProfileLogic
+                                                          //         .getMenteeProfileModel
+                                                          //         .data!
+                                                          //         .user!
+                                                          //         .imagePath!
+                                                          //         .contains(
+                                                          //             'assets')
+                                                          //     ? '$mediaUrl${_editUserProfileLogic.getMenteeProfileModel.data!.user!.imagePath}'
+                                                          //     : '${_editUserProfileLogic.getMenteeProfileModel.data!.user!.imagePath}',
+                                                          fit: BoxFit.cover,
+                                                        ))
+                                            : ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                child: Image.file(
+                                                  _editUserProfileLogic
+                                                      .profileImage!,
+                                                  fit: BoxFit.cover,
+                                                )),
+                                      ),
+                                    ),
+                                    SizedBox(height: 25.h),
+
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.w, 0.h, 16.w, 16.h),
+                                      child: Row(
+                                        children: [
+                                          Text('Hide Profile'.toUpperCase(),
+                                              style: state.hideTextStyle),
+                                          const Spacer(),
+                                          Switch(
+                                              activeColor: customThemeColor,
+                                              value: _editUserProfileLogic
+                                                  .profileHiddenSwitch!,
+                                              onChanged: (bool? newValue) {
+                                                _editUserProfileLogic
+                                                    .updateProfileHiddenSwitch(
+                                                        newValue);
+                                                _generalController
+                                                    .updateFormLoaderController(
+                                                        true);
+                                                postMethod(
+                                                    context,
+                                                    changeProfileVisibilityUrl,
+                                                    {
+                                                      'token': '123',
+                                                      'user_id': Get.find<
+                                                              GeneralController>()
+                                                          .storageBox
+                                                          .read('userID'),
+                                                      'visibility':
+                                                          newValue! ? true : false
+                                                    },
+                                                    true,
+                                                    getProfileVisibilityRepo);
+                                              })
+                                        ],
+                                      ),
+                                    ),
+
+                                    ///---first-name
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.w, 0.h, 16.w, 16.h),
+                                      child: TextFormField(
+                                        controller: _editUserProfileLogic
+                                            .firstNameController,
+                                        keyboardType: TextInputType.name,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp("[a-zA-Z ]"))
+                                        ],
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  25.w, 15.h, 25.w, 15.h),
+                                          hintText: LanguageConstant.firstName.tr,
+                                          hintStyle: state.hintTextStyle,
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent)),
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent)),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(
+                                                  color: customLightThemeColor)),
+                                          errorBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(
+                                                  color: Colors.red)),
+                                        ),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
+                                          } else {
+                                            return null;
+                                          }
                                         },
-                                        true,
-                                        menteeUpdateProfileRepo);
-                                  } else {
-                                    showDialog(
-                                        context: context,
-                                        barrierDismissible: false,
-                                        builder: (BuildContext context) {
-                                          return CustomDialogBox(
-                                            title: LanguageConstant.sorry.tr,
-                                            titleColor: customDialogErrorColor,
-                                            descriptions: LanguageConstant
-                                                .uploadYourProfilePicture.tr.tr,
-                                            text: LanguageConstant.ok.tr,
-                                            functionCall: () {
-                                              Navigator.pop(context);
+                                      ),
+                                    ),
+
+                                    ///---last-name
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.w, 0.h, 16.w, 16.h),
+                                      child: TextFormField(
+                                        controller: _editUserProfileLogic
+                                            .lastNameController,
+                                        keyboardType: TextInputType.name,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp("[a-zA-Z ]"))
+                                        ],
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  25.w, 15.h, 25.w, 15.h),
+                                          hintText: LanguageConstant.lastName.tr,
+                                          hintStyle: state.hintTextStyle,
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent)),
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent)),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(
+                                                  color: customLightThemeColor)),
+                                          errorBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                              borderSide: const BorderSide(
+                                                  color: Colors.red)),
+                                        ),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return LanguageConstant
+                                                .fieldRequired.tr;
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
+                                      child: TextFormField(
+                                        style: state.textFieldTextStyle,
+                                        controller: _editUserProfileLogic.emailController,
+                                        keyboardType: TextInputType.emailAddress,
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
+                                          hintText: 'Email Address',
+                                          hintStyle: state.hintTextStyle,
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customThemeColor)),
+                                          errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                                        ),
+                                        validator: (String? value) {
+                                          if (value!.isEmpty) {
+                                            return 'Field Required'.tr;
+                                          } else if (!GetUtils.isEmail(_editUserProfileLogic.emailController.text)) {
+                                            return 'Enter Valid Email';
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                      ),
+                                    ),///phone
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 15.w, 16.h),
+                                      child: TextFormField(
+                                        style: state.textFieldTextStyle,
+                                        controller: _editUserProfileLogic.phoneController,
+                                        keyboardType: TextInputType.phone,
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsetsDirectional.fromSTEB(25.w, 15.h, 25.w, 15.h),
+                                          hintText: 'Phone no',
+                                          hintStyle: state.hintTextStyle,
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customThemeColor)),
+                                          errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                                        ),
+                                        validator: (String? value) {
+                                          if (value!.isEmpty) {
+                                            return 'Field Required'.tr;
+                                          } else if (!GetUtils.isPhoneNumber(_editUserProfileLogic.phoneController.text)) {
+                                            return 'Enter Valid Phone';
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    ///---gender
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.w, 0.h, 16.w, 16.h),
+                                      child: ButtonTheme(
+                                        alignedDropdown: true,
+                                        child: DropdownButtonHideUnderline(
+                                          child: DropdownButtonFormField<String>(
+                                            onTap: () {
+                                              FocusScopeNode currentFocus =
+                                                  FocusScope.of(context);
+                                              if (!currentFocus.hasPrimaryFocus) {
+                                                currentFocus.unfocus();
+                                              }
                                             },
-                                            img:
-                                                'assets/Icons/dialog_error.svg',
-                                          );
-                                        });
-                                  }
-                                }
-                              },
-                              child: MyCustomBottomBar(
-                                title: LanguageConstant.update.tr,
-                                disable: false,
+                                            hint: Text(
+                                              LanguageConstant.gender.tr,
+                                              style: state.hintTextStyle,
+                                            ),
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  EdgeInsetsDirectional.fromSTEB(
+                                                      15.w, 14.h, 15.w, 14.h),
+                                              fillColor: Colors.white,
+                                              filled: true,
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8.r),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.transparent)),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8.r),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.transparent)),
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8.r),
+                                                  borderSide: const BorderSide(
+                                                      color:
+                                                          customLightThemeColor)),
+                                              errorBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8.r),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.red)),
+                                            ),
+                                            isExpanded: true,
+                                            focusColor: Colors.white,
+                                            style: state.textFieldTextStyle,
+                                            iconEnabledColor: customThemeColor,
+                                            icon: const Icon(
+                                                Icons.keyboard_arrow_down),
+                                            iconSize: 25,
+                                            value: _editUserProfileLogic
+                                                        .selectedGender ==
+                                                    null
+                                                ? _editUserProfileLogic
+                                                    .selectedGender
+                                                : _editUserProfileLogic
+                                                    .selectedGender
+                                                    .toString()
+                                                    .capitalize,
+                                            items: _editUserProfileLogic
+                                                .genderDropDownList
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(
+                                                  value,
+                                                  style: state.textFieldTextStyle,
+                                                ),
+                                              );
+                                            }).toList(),
+                                            onChanged: (String? value) {
+                                              _editUserProfileLogic
+                                                  .selectedGender = value;
+                                              _editUserProfileLogic.update();
+                                            },
+                                            validator: (String? value) {
+                                              if (value == null) {
+                                                return LanguageConstant
+                                                    .fieldRequired.tr;
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        ///---country
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                16.w, 0.h, 8.w, 16.h),
+                                            child: ButtonTheme(
+                                              alignedDropdown: true,
+                                              child: DropdownButtonHideUnderline(
+                                                child: DropdownButtonFormField<
+                                                    String>(
+                                                  onTap: () {
+                                                    FocusScopeNode currentFocus =
+                                                    FocusScope.of(context);
+                                                    if (!currentFocus
+                                                        .hasPrimaryFocus) {
+                                                      currentFocus.unfocus();
+                                                    }
+                                                  },
+                                                  hint: Text(
+                                                    LanguageConstant.country.tr,
+                                                    style: state.hintTextStyle,
+                                                  ),
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(15.w, 14.h,
+                                                        15.w, 14.h),
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    enabledBorder: OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r),
+                                                        borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                    border: OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r),
+                                                        borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                    focusedBorder: OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r),
+                                                        borderSide: const BorderSide(
+                                                            color:
+                                                            customLightThemeColor)),
+                                                    errorBorder:
+                                                    OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            8.r),
+                                                        borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .red)),
+                                                  ),
+                                                  isExpanded: true,
+                                                  focusColor: Colors.white,
+                                                  style: state.textFieldTextStyle,
+                                                  iconEnabledColor:
+                                                  customThemeColor,
+                                                  icon: const Icon(
+                                                      Icons.keyboard_arrow_down),
+                                                  iconSize: 25,
+                                                  value: _editUserProfileLogic
+                                                      .selectedCountry,
+                                                  items: _editUserProfileLogic
+                                                      .countryDropDownList
+                                                      .map<
+                                                      DropdownMenuItem<
+                                                          String>>(
+                                                          (String value) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: value,
+                                                          child: Text(
+                                                            value,
+                                                            style: state
+                                                                .textFieldTextStyle,
+                                                          ),
+                                                        );
+                                                      }).toList(),
+                                                  onChanged: (String? value) async {
+                                                    _editUserProfileLogic.selectedCountry = value;
+                                                    _editUserProfileLogic.selectedState=null;
+                                                    _editUserProfileLogic.selectedCity=null;
+
+                                                    _editUserProfileLogic.update();
+                                                    Get.find<GeneralController>().updateFormLoaderController(true);
+                                                   await  getMethod(context, getstatesByIdUrl,
+                                                        {
+                                                          'token': '123',
+                                                          'country_id': _editUserProfileLogic.menteeProfileGenericDataModel.data!.countries![_editUserProfileLogic.countryDropDownList.indexOf(_editUserProfileLogic.selectedCountry!)].id
+                                                        },
+                                                        false,
+                                                        getStateRepo);
+                                                  },
+                                                  validator: (String? value) {
+                                                    if (value == null) {
+                                                      return LanguageConstant
+                                                          .fieldRequired.tr;
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        ///---state
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                8.w, 0.h, 16.w, 16.h),
+                                            child: ButtonTheme(
+                                              alignedDropdown: true,
+                                              child: DropdownButtonHideUnderline(
+                                                child: DropdownButtonFormField<String>(
+                                                  onTap: () {
+                                                    FocusScopeNode currentFocus =
+                                                    FocusScope.of(context);
+                                                    if (!currentFocus
+                                                        .hasPrimaryFocus) {
+                                                      currentFocus.unfocus();
+                                                    }
+                                                  },
+                                                  hint: Text(
+                                                    LanguageConstant.state.tr,
+                                                    style: state.hintTextStyle,
+                                                  ),
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(15.w, 14.h,
+                                                        15.w, 14.h),
+                                                    fillColor: Colors.white,
+                                                    enabled: true,
+                                                    filled: true,
+                                                    enabledBorder: OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r),
+                                                        borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                    border: OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r),
+                                                        borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                    focusedBorder: OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r),
+                                                        borderSide: const BorderSide(
+                                                            color:
+                                                            customLightThemeColor)),
+                                                    errorBorder:
+                                                    OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            8.r),
+                                                        borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .red)),
+                                                  ),
+                                                  isExpanded: true,
+                                                  focusColor: Colors.white,
+                                                  style: state.textFieldTextStyle,
+                                                  iconEnabledColor: customThemeColor,
+                                                  icon: const Icon(
+                                                      Icons.keyboard_arrow_down),
+                                                  iconSize: 25,
+                                                  value: _editUserProfileLogic.selectedState,
+                                                  items: Get.find<EditUserProfileLogic>().stateDropDownList.map<DropdownMenuItem<String>>((dynamic value) {
+                                                    return DropdownMenuItem<String>(
+                                                          value: value,
+                                                          child: Text(
+                                                            value,
+                                                            style: state.textFieldTextStyle,
+                                                          ),
+                                                        );
+                                                      }).toList(),
+                                                  onChanged: (String? value) {
+                                                    _editUserProfileLogic.selectedState = value;
+                                                    _editUserProfileLogic.selectedCity=null;
+                                                    getMethod(context, getCitiesByIdUrl,
+                                                        {
+                                                          'token': '123',
+                                                          'state_id': _editUserProfileLogic.stateByModel.data!.states![_editUserProfileLogic.stateDropDownList.indexOf(_editUserProfileLogic.selectedState!)].id
+                                                        },
+                                                        false,
+                                                        getCitiesRepo);
+                                                    _editUserProfileLogic.update();
+                                                  },
+                                                  validator: (String? value) {
+                                                    if (value == null) {
+                                                      return LanguageConstant
+                                                          .fieldRequired.tr;
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        ///---country
+
+
+                                        ///---city
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                8.w, 0.h, 16.w, 16.h),
+                                            child: ButtonTheme(
+                                              alignedDropdown: true,
+                                              child: DropdownButtonHideUnderline(
+                                                child: DropdownButtonFormField<
+                                                    String>(
+                                                  onTap: () {
+                                                    FocusScopeNode currentFocus =
+                                                    FocusScope.of(context);
+                                                    if (!currentFocus
+                                                        .hasPrimaryFocus) {
+                                                      currentFocus.unfocus();
+                                                    }
+                                                  },
+                                                  hint: Text(
+                                                    LanguageConstant.city.tr,
+                                                    style: state.hintTextStyle,
+                                                  ),
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(15.w, 14.h,
+                                                        15.w, 14.h),
+                                                    fillColor: Colors.white,
+                                                    enabled: true,
+                                                    filled: true,
+                                                    enabledBorder: OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r),
+                                                        borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                    border: OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r),
+                                                        borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                    focusedBorder: OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r),
+                                                        borderSide: const BorderSide(
+                                                            color:
+                                                            customLightThemeColor)),
+                                                    errorBorder:
+                                                    OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            8.r),
+                                                        borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .red)),
+                                                  ),
+                                                  isExpanded: true,
+                                                  focusColor: Colors.white,
+                                                  style: state.textFieldTextStyle,
+                                                  iconEnabledColor:
+                                                  customThemeColor,
+                                                  icon: const Icon(
+                                                      Icons.keyboard_arrow_down),
+                                                  iconSize: 25,
+                                                  value: _editUserProfileLogic
+                                                      .selectedCity,
+                                                  items: _editUserProfileLogic
+                                                      .cityDropDownList
+                                                      .map<
+                                                      DropdownMenuItem<
+                                                          String>>(
+                                                          (String value) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: value,
+                                                          child: Text(
+                                                            value,
+                                                            style: state
+                                                                .textFieldTextStyle,
+                                                          ),
+                                                        );
+                                                      }).toList(),
+                                                  onChanged: (String? value) {
+                                                    _editUserProfileLogic
+                                                        .selectedCity = value;
+                                                    _editUserProfileLogic
+                                                        .update();
+                                                  },
+                                                  validator: (String? value) {
+                                                    if (value == null) {
+                                                      return LanguageConstant
+                                                          .fieldRequired.tr;
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    ///---city-state-country
+                                    // Row(
+                                    //   children: [
+                                    //     ///---country
+                                    //     Expanded(
+                                    //       child: Padding(
+                                    //         padding:
+                                    //             EdgeInsetsDirectional.fromSTEB(
+                                    //                 16.w, 0.h, 8.w, 16.h),
+                                    //         child: ButtonTheme(
+                                    //           alignedDropdown: true,
+                                    //           child: DropdownButtonHideUnderline(
+                                    //             child: DropdownButtonFormField<
+                                    //                 String>(
+                                    //               onTap: () {
+                                    //                 FocusScopeNode currentFocus =
+                                    //                     FocusScope.of(context);
+                                    //                 if (!currentFocus
+                                    //                     .hasPrimaryFocus) {
+                                    //                   currentFocus.unfocus();
+                                    //                 }
+                                    //               },
+                                    //               hint: Text(
+                                    //                 LanguageConstant.country.tr,
+                                    //                 style: state.hintTextStyle,
+                                    //               ),
+                                    //               decoration: InputDecoration(
+                                    //                 contentPadding:
+                                    //                     EdgeInsetsDirectional
+                                    //                         .fromSTEB(15.w, 14.h,
+                                    //                             15.w, 14.h),
+                                    //                 fillColor: Colors.white,
+                                    //                 filled: true,
+                                    //                 enabledBorder: OutlineInputBorder(
+                                    //                     borderRadius:
+                                    //                         BorderRadius.circular(
+                                    //                             8.r),
+                                    //                     borderSide:
+                                    //                         const BorderSide(
+                                    //                             color: Colors
+                                    //                                 .transparent)),
+                                    //                 border: OutlineInputBorder(
+                                    //                     borderRadius:
+                                    //                         BorderRadius.circular(
+                                    //                             8.r),
+                                    //                     borderSide:
+                                    //                         const BorderSide(
+                                    //                             color: Colors
+                                    //                                 .transparent)),
+                                    //                 focusedBorder: OutlineInputBorder(
+                                    //                     borderRadius:
+                                    //                         BorderRadius.circular(
+                                    //                             8.r),
+                                    //                     borderSide: const BorderSide(
+                                    //                         color:
+                                    //                             customLightThemeColor)),
+                                    //                 errorBorder:
+                                    //                     OutlineInputBorder(
+                                    //                         borderRadius:
+                                    //                             BorderRadius
+                                    //                                 .circular(
+                                    //                                     8.r),
+                                    //                         borderSide:
+                                    //                             const BorderSide(
+                                    //                                 color: Colors
+                                    //                                     .red)),
+                                    //               ),
+                                    //               isExpanded: true,
+                                    //               focusColor: Colors.white,
+                                    //               style: state.textFieldTextStyle,
+                                    //               iconEnabledColor:
+                                    //                   customThemeColor,
+                                    //               icon: const Icon(
+                                    //                   Icons.keyboard_arrow_down),
+                                    //               iconSize: 25,
+                                    //               value: _editUserProfileLogic
+                                    //                   .selectedCountry,
+                                    //               items: _editUserProfileLogic
+                                    //                   .countryDropDownList
+                                    //                   .map<
+                                    //                           DropdownMenuItem<
+                                    //                               String>>(
+                                    //                       (String value) {
+                                    //                 return DropdownMenuItem<
+                                    //                     String>(
+                                    //                   value: value,
+                                    //                   child: Text(
+                                    //                     value,
+                                    //                     style: state
+                                    //                         .textFieldTextStyle,
+                                    //                   ),
+                                    //                 );
+                                    //               }).toList(),
+                                    //               onChanged: (String? value) {
+                                    //                 _editUserProfileLogic
+                                    //                     .selectedCountry = value;
+                                    //                 _editUserProfileLogic
+                                    //                     .update();
+                                    //                 Get.find<GeneralController>()
+                                    //                     .updateFormLoaderController(
+                                    //                         true);
+                                    //                 // getMethod(
+                                    //                 //     context,
+                                    //                 //     getCitiesByIdUrl,
+                                    //                 //     {
+                                    //                 //       'token': '123',
+                                    //                 //       'country_id': _editUserProfileLogic
+                                    //                 //           .menteeProfileGenericDataModel
+                                    //                 //           .data!
+                                    //                 //           .countries![_editUserProfileLogic
+                                    //                 //               .countryDropDownList
+                                    //                 //               .indexOf(
+                                    //                 //                   _editUserProfileLogic
+                                    //                 //                       .selectedCountry!)]
+                                    //                 //           .id
+                                    //                 //     },
+                                    //                 //     false,
+                                    //                 //     getStateRepo);
+                                    //               },
+                                    //               validator: (String? value) {
+                                    //                 if (value == null) {
+                                    //                   return LanguageConstant
+                                    //                       .fieldRequired.tr;
+                                    //                 } else {
+                                    //                   return null;
+                                    //                 }
+                                    //               },
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //
+                                    //     ///---state
+                                    //     Expanded(
+                                    //       child: Padding(
+                                    //         padding:
+                                    //             EdgeInsetsDirectional.fromSTEB(
+                                    //                 8.w, 0.h, 16.w, 16.h),
+                                    //         child: ButtonTheme(
+                                    //           alignedDropdown: true,
+                                    //           child: DropdownButtonHideUnderline(
+                                    //             child: DropdownButtonFormField<
+                                    //                 String>(
+                                    //               onTap: () {
+                                    //                 FocusScopeNode currentFocus =
+                                    //                     FocusScope.of(context);
+                                    //                 if (!currentFocus
+                                    //                     .hasPrimaryFocus) {
+                                    //                   currentFocus.unfocus();
+                                    //                 }
+                                    //               },
+                                    //               hint: Text(
+                                    //                 LanguageConstant.state.tr,
+                                    //                 style: state.hintTextStyle,
+                                    //               ),
+                                    //               decoration: InputDecoration(
+                                    //                 contentPadding:
+                                    //                     EdgeInsetsDirectional
+                                    //                         .fromSTEB(15.w, 14.h,
+                                    //                             15.w, 14.h),
+                                    //                 fillColor: Colors.white,
+                                    //                 enabled: true,
+                                    //                 filled: true,
+                                    //                 enabledBorder: OutlineInputBorder(
+                                    //                     borderRadius:
+                                    //                         BorderRadius.circular(
+                                    //                             8.r),
+                                    //                     borderSide:
+                                    //                         const BorderSide(
+                                    //                             color: Colors
+                                    //                                 .transparent)),
+                                    //                 border: OutlineInputBorder(
+                                    //                     borderRadius:
+                                    //                         BorderRadius.circular(
+                                    //                             8.r),
+                                    //                     borderSide:
+                                    //                         const BorderSide(
+                                    //                             color: Colors
+                                    //                                 .transparent)),
+                                    //                 focusedBorder: OutlineInputBorder(
+                                    //                     borderRadius:
+                                    //                         BorderRadius.circular(
+                                    //                             8.r),
+                                    //                     borderSide: const BorderSide(
+                                    //                         color:
+                                    //                             customLightThemeColor)),
+                                    //                 errorBorder:
+                                    //                     OutlineInputBorder(
+                                    //                         borderRadius:
+                                    //                             BorderRadius
+                                    //                                 .circular(
+                                    //                                     8.r),
+                                    //                         borderSide:
+                                    //                             const BorderSide(
+                                    //                                 color: Colors
+                                    //                                     .red)),
+                                    //               ),
+                                    //               isExpanded: true,
+                                    //               focusColor: Colors.white,
+                                    //               style: state.textFieldTextStyle,
+                                    //               iconEnabledColor:
+                                    //                   customThemeColor,
+                                    //               icon: const Icon(
+                                    //                   Icons.keyboard_arrow_down),
+                                    //               iconSize: 25,
+                                    //               value: _editUserProfileLogic
+                                    //                   .selectedState,
+                                    //               items: _editUserProfileLogic
+                                    //                   .stateDropDownList
+                                    //                   .map<
+                                    //                           DropdownMenuItem<
+                                    //                               String>>(
+                                    //                       (String value) {
+                                    //                 return DropdownMenuItem<
+                                    //                     String>(
+                                    //                   value: value,
+                                    //                   child: Text(
+                                    //                     value,
+                                    //                     style: state
+                                    //                         .textFieldTextStyle,
+                                    //                   ),
+                                    //                 );
+                                    //               }).toList(),
+                                    //               onChanged: (String? value) {
+                                    //                 _editUserProfileLogic
+                                    //                     .selectedState = value;
+                                    //                 _editUserProfileLogic
+                                    //                     .update();
+                                    //               },
+                                    //               validator: (String? value) {
+                                    //                 if (value == null) {
+                                    //                   return LanguageConstant
+                                    //                       .fieldRequired.tr;
+                                    //                 } else {
+                                    //                   return null;
+                                    //                 }
+                                    //               },
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                    // Row(
+                                    //   children: [
+                                    //     ///---country
+                                    //
+                                    //
+                                    //     ///---city
+                                    //     Expanded(
+                                    //       child: Padding(
+                                    //         padding:
+                                    //         EdgeInsetsDirectional.fromSTEB(
+                                    //             8.w, 0.h, 16.w, 16.h),
+                                    //         child: ButtonTheme(
+                                    //           alignedDropdown: true,
+                                    //           child: DropdownButtonHideUnderline(
+                                    //             child: DropdownButtonFormField<
+                                    //                 String>(
+                                    //               onTap: () {
+                                    //                 FocusScopeNode currentFocus =
+                                    //                 FocusScope.of(context);
+                                    //                 if (!currentFocus
+                                    //                     .hasPrimaryFocus) {
+                                    //                   currentFocus.unfocus();
+                                    //                 }
+                                    //               },
+                                    //               hint: Text(
+                                    //                 LanguageConstant.city.tr,
+                                    //                 style: state.hintTextStyle,
+                                    //               ),
+                                    //               decoration: InputDecoration(
+                                    //                 contentPadding:
+                                    //                 EdgeInsetsDirectional
+                                    //                     .fromSTEB(15.w, 14.h,
+                                    //                     15.w, 14.h),
+                                    //                 fillColor: Colors.white,
+                                    //                 enabled: true,
+                                    //                 filled: true,
+                                    //                 enabledBorder: OutlineInputBorder(
+                                    //                     borderRadius:
+                                    //                     BorderRadius.circular(
+                                    //                         8.r),
+                                    //                     borderSide:
+                                    //                     const BorderSide(
+                                    //                         color: Colors
+                                    //                             .transparent)),
+                                    //                 border: OutlineInputBorder(
+                                    //                     borderRadius:
+                                    //                     BorderRadius.circular(
+                                    //                         8.r),
+                                    //                     borderSide:
+                                    //                     const BorderSide(
+                                    //                         color: Colors
+                                    //                             .transparent)),
+                                    //                 focusedBorder: OutlineInputBorder(
+                                    //                     borderRadius:
+                                    //                     BorderRadius.circular(
+                                    //                         8.r),
+                                    //                     borderSide: const BorderSide(
+                                    //                         color:
+                                    //                         customLightThemeColor)),
+                                    //                 errorBorder:
+                                    //                 OutlineInputBorder(
+                                    //                     borderRadius:
+                                    //                     BorderRadius
+                                    //                         .circular(
+                                    //                         8.r),
+                                    //                     borderSide:
+                                    //                     const BorderSide(
+                                    //                         color: Colors
+                                    //                             .red)),
+                                    //               ),
+                                    //               isExpanded: true,
+                                    //               focusColor: Colors.white,
+                                    //               style: state.textFieldTextStyle,
+                                    //               iconEnabledColor:
+                                    //               customThemeColor,
+                                    //               icon: const Icon(
+                                    //                   Icons.keyboard_arrow_down),
+                                    //               iconSize: 25,
+                                    //               value: _editUserProfileLogic
+                                    //                   .selectedCity,
+                                    //               items: _editUserProfileLogic
+                                    //                   .cityDropDownList
+                                    //                   .map<
+                                    //                   DropdownMenuItem<
+                                    //                       String>>(
+                                    //                       (String value) {
+                                    //                     return DropdownMenuItem<
+                                    //                         String>(
+                                    //                       value: value,
+                                    //                       child: Text(
+                                    //                         value,
+                                    //                         style: state
+                                    //                             .textFieldTextStyle,
+                                    //                       ),
+                                    //                     );
+                                    //                   }).toList(),
+                                    //               onChanged: (String? value) {
+                                    //                 _editUserProfileLogic
+                                    //                     .selectedCity = value;
+                                    //                 _editUserProfileLogic
+                                    //                     .update();
+                                    //               },
+                                    //               validator: (String? value) {
+                                    //                 if (value == null) {
+                                    //                   return LanguageConstant
+                                    //                       .fieldRequired.tr;
+                                    //                 } else {
+                                    //                   return null;
+                                    //                 }
+                                    //               },
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                  ],
+                                ),
                               ),
                             ),
-                          )
-                        ]),
-                )),
+                            Positioned(
+                              bottom: 0.h,
+                              left: 15.w,
+                              right: 15.w,
+                              child: InkWell(
+                                onTap: () {
+                                  _generalController.focusOut(context);
+                                  if (_profileFormKey.currentState!.validate()) {
+                                    if (_editUserProfileLogic.profileImage !=
+                                        null) {
+                                      Get.find<GeneralController>()
+                                          .updateFormLoaderController(true);
+                                      menteeUpdateProfileImageRepo(
+                                          _editUserProfileLogic.profileImage);
+                                    } else if (_editUserProfileLogic
+                                                .getMenteeProfileModel
+                                                .data!
+                                                .user!
+                                                .imagePath !=
+                                            null &&
+                                        _editUserProfileLogic.profileImage ==
+                                            null) {
+                                      Get.find<GeneralController>()
+                                          .updateFormLoaderController(true);
+                                      postMethod(
+                                          context,
+                                          updateMenteeProfileUrl,
+                                          {
+                                            'token': '123',
+                                            'user_id':
+                                                Get.find<GeneralController>()
+                                                    .storageBox
+                                                    .read('userID'),
+                                            'first_name': _editUserProfileLogic
+                                                .firstNameController.text,
+                                            'last_name': _editUserProfileLogic
+                                                .lastNameController.text,
+                                            'email': _editUserProfileLogic.emailController.text,
+                                            'gender': _editUserProfileLogic.selectedGender,
+                                            'phone':_editUserProfileLogic.phoneController.text,
+                                            'country': _editUserProfileLogic
+                                                .menteeProfileGenericDataModel
+                                                .data!
+                                                .countries![_editUserProfileLogic
+                                                    .countryDropDownList
+                                                    .indexOf(_editUserProfileLogic
+                                                        .selectedCountry!)]
+                                                .id,
+                                            'city': _editUserProfileLogic
+                                                .selectedCity,
+                                            'state_id':_editUserProfileLogic
+                                                .stateByModel
+                                                .data!
+                                                .states![_editUserProfileLogic
+                                                .stateDropDownList
+                                                .indexOf(_editUserProfileLogic
+                                                .selectedState!)]
+                                                .id,
+                                            // 'state_id': _editUserProfileLogic.stateByModel
+                                            //   .data
+                                            //   ?.states![Get.find<EditUserProfileLogic>().stateDropDownList.indexOf(Get.find<GeneralController>().initialState.value)]
+                                            //   .id;
+                                          },
+                                          true,
+                                          menteeUpdateProfileRepo);
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          barrierDismissible: false,
+                                          builder: (BuildContext context) {
+                                            return CustomDialogBox(
+                                              title: LanguageConstant.sorry.tr,
+                                              titleColor: customDialogErrorColor,
+                                              descriptions: LanguageConstant
+                                                  .uploadYourProfilePicture.tr.tr,
+                                              text: LanguageConstant.ok.tr,
+                                              functionCall: () {
+                                                Navigator.pop(context);
+                                              },
+                                              img:
+                                                  'assets/Icons/dialog_error.svg',
+                                            );
+                                          });
+                                    }
+                                  }
+                                },
+                                child: MyCustomBottomBar(
+                                  title: _editUserProfileLogic.getMenteeProfileModel.data?.user?.mentee?.isProfileCompleted.toString() == '0'
+                                      ? LanguageConstant.createProfile.tr
+                                      : LanguageConstant.update.tr,
+                                  disable: false,
+                                ),
+                              ),
+                            )
+                          ]),
+                  )),
+            ),
           ),
         );
       });

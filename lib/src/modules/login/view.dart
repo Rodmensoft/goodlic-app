@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         accessToken: googleSignInAuthentication?.accessToken,
         idToken: googleSignInAuthentication?.idToken,
       );
-      print('This is $credential');
+
 
       final UserCredential authResult = await FirebaseAuth.instance.signInWithCredential(credential);
       final User? user = authResult.user;
@@ -230,7 +230,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                                                           borderRadius: BorderRadius.circular(10),
                                                                         ),
                                                                         child: IntlPhoneField(
-                                                                          initialCountryCode: 'PK',
+                                                                          initialCountryCode: _generalController.initialCountryCode.value,
                                                                           controller: _loginLogic.loginTextEditingController,
                                                                           //  style: GoogleFonts.poppins(color: Colors.black),
                                                                           inputFormatters: [

@@ -7,7 +7,7 @@ class UserDrawerState {
   TextStyle? nameTextStyle;
   TextStyle? emailTextStyle;
   TextStyle? titleTextStyle;
-
+  TextStyle? urlTextStyle;
   UserDrawerState() {
     ///Initialize variables
     nameTextStyle = TextStyle(
@@ -15,6 +15,8 @@ class UserDrawerState {
       fontSize: 16.sp,
       color: Colors.white
     );
+    urlTextStyle = TextStyle(fontFamily: SarabunFontFamily.bold, fontSize: 20.sp, decoration: TextDecoration.underline, color: Colors.white);
+
     emailTextStyle = TextStyle(
       fontFamily: SarabunFontFamily.light,
       fontSize: 12.sp,

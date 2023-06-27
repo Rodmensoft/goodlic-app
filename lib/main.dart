@@ -26,6 +26,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:global_configuration/global_configuration.dart';
@@ -93,7 +94,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
   @override
   void initState() {
     // TODO: implement initState
-    // Add the observer.
+    Get.find<GeneralController>().getCurrentLocation();  // Add the observer.
     WidgetsBinding.instance.addObserver(this);
 
     ///---for-language-check
@@ -169,7 +170,18 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
         route = message.data['routeApp'];
       }
     });
-
+    ///  Get location permission
+    Get.find<GeneralController>().getCurrentLocation();
+    Geolocator.requestPermission().then((permission) {
+      if (permission == LocationPermission.denied) {
+        Get.find<GeneralController>().getCurrentLocation();
+        // TODO: Handle denied permission
+      } else if (permission == LocationPermission.whileInUse) {
+        Get.find<GeneralController>().getCurrentLocation();
+      } else if (permission == LocationPermission.always) {
+        Get.find<GeneralController>().getCurrentLocation();
+      }
+    });
     /// Get config Credential
 
     getMethod(
@@ -255,6 +267,7 @@ class _InitClassState extends State<InitClass> with WidgetsBindingObserver {
           Get.put(ChatLogic());
           Get.put(ConsultantProfileLogic());
           Get.put(BookAppointmentLogic());
+          Get.find<GeneralController>().getCurrentLocation();
           return GetMaterialApp(
             navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,

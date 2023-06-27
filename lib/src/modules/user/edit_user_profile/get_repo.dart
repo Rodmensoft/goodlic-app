@@ -8,11 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 getMenteeProfileRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  Get.put(EditUserProfileLogic());
   if (responseCheck) {
     Get.find<EditUserProfileLogic>().getMenteeProfileModel = GetMenteeProfileModel.fromJson(response);
     if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.status == true) {
       getMethod(context, mentorProfileGenericDataUrl, {'token': '123'}, false, getGenericDataMenteeRepo);
-
+//print("State is ${Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.stateId }");
       Get.find<EditUserProfileLogic>()
           .updateProfileHiddenSwitch(Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.mentee!.identityHidden == 0 ? false : true);
       if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.firstName != null) {
@@ -24,19 +25,34 @@ getMenteeProfileRepo(BuildContext context, bool responseCheck, Map<String, dynam
 
         Get.find<EditUserProfileLogic>().update();
       }
+      if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.email != null) {
+        Get.find<EditUserProfileLogic>().emailController.text = Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.email!;
+
+        Get.find<EditUserProfileLogic>().update();
+      }
+      if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.phone != null) {
+        Get.find<EditUserProfileLogic>().phoneController.text = Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.phone!;
+
+        Get.find<EditUserProfileLogic>().update();
+      }
       if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.gender != null) {
         Get.find<EditUserProfileLogic>().selectedGender = Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.gender!;
 
         Get.find<EditUserProfileLogic>().update();
       }
       if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.city != null) {
-        Get.find<EditUserProfileLogic>().selectedCity = Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.city!;
+       // Get.find<EditUserProfileLogic>().selectedCity = Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.city!;
 
         Get.find<EditUserProfileLogic>().update();
       }
-      if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.country != null) {
-        getMethod(context, getCitiesByIdUrl, {'token': '123', 'country_id': Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.country}, false,
+      if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.stateId != null) {
+        getMethod(context, getCitiesByIdUrl, {'token': '123', 'state_id': Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.stateId}, false,
             getCitiesRepo);
+        Get.find<EditUserProfileLogic>().update();
+      }
+      if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.country != null) {
+        getMethod(context, getstatesByIdUrl, {'token': '123', 'country_id': Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.country}, false,
+            getStateRepo);
 
         Get.find<EditUserProfileLogic>().update();
       } else {
@@ -52,6 +68,7 @@ getMenteeProfileRepo(BuildContext context, bool responseCheck, Map<String, dynam
 }
 
 getGenericDataMenteeRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  (EditUserProfileLogic());
   if (responseCheck) {
     Get.find<EditUserProfileLogic>().menteeProfileGenericDataModel = MenteeProfileGenericDataModel.fromJson(response);
     if (Get.find<EditUserProfileLogic>().menteeProfileGenericDataModel.status == true) {
@@ -75,7 +92,33 @@ getGenericDataMenteeRepo(BuildContext context, bool responseCheck, Map<String, d
   }
 }
 
+
+
+getStateRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  Get.put(EditUserProfileLogic());
+  if (responseCheck) {
+    Get.find<EditUserProfileLogic>().stateByModel = StateModel.fromJson(response);
+    if (Get.find<EditUserProfileLogic>().stateByModel.status == true) {
+      ///---cities
+      Get.find<EditUserProfileLogic>().stateDropDownList = [];
+      Get.find<EditUserProfileLogic>().update();
+      for (var element in Get.find<EditUserProfileLogic>().stateByModel.data!.states!) {
+        if (element.id == Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.stateId) {
+          Get.find<EditUserProfileLogic>().selectedState = element.name;
+        }
+        Get.find<EditUserProfileLogic>().updateStateDropDownList(element.name!);
+      }
+
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    }
+  } else if (!responseCheck) {
+    Get.find<GeneralController>().updateFormLoaderController(false);
+  }
+}
 getCitiesRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  Get.put(EditUserProfileLogic());
   if (responseCheck) {
     Get.find<EditUserProfileLogic>().citiesByIdModel = CitiesByIdModel.fromJson(response);
     if (Get.find<EditUserProfileLogic>().citiesByIdModel.status == true) {
@@ -83,6 +126,10 @@ getCitiesRepo(BuildContext context, bool responseCheck, Map<String, dynamic> res
       Get.find<EditUserProfileLogic>().cityDropDownList = [];
       Get.find<EditUserProfileLogic>().update();
       for (var element in Get.find<EditUserProfileLogic>().citiesByIdModel.data!.cities!) {
+        if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.city != null) {
+          Get.find<EditUserProfileLogic>().selectedCity = Get.find<EditUserProfileLogic>().getMenteeProfileModel.data!.user!.city!;
+
+        }
         Get.find<EditUserProfileLogic>().updateCityDropDownList(element.name!);
       }
 

@@ -6,6 +6,7 @@ import 'package:resize/resize.dart';
 class AboutUsState {
   TextStyle? headingTextStyle;
   TextStyle? descTextStyle;
+  TextStyle? descriptionTextStyle;
   TextStyle? subHeadingTextStyle;
   AboutUsState() {
     ///Initialize variables
@@ -17,7 +18,11 @@ class AboutUsState {
     descTextStyle = TextStyle(
         fontSize: 14.sp,
         fontFamily: SarabunFontFamily.regular,
-        color: customTextBlackColor);
+        color: Colors.white);
+    descriptionTextStyle = TextStyle(
+        fontSize: 14.sp,
+        fontFamily: SarabunFontFamily.regular,
+        color: Colors.white);
     subHeadingTextStyle = TextStyle(
         fontSize: 14.sp,
         fontFamily: SarabunFontFamily.bold,

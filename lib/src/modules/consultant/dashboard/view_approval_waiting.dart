@@ -43,7 +43,7 @@ class _MentorApprovalWaitingViewState extends State<MentorApprovalWaitingView> {
                     padding: const EdgeInsets.fromLTRB(5, 10, 10, 0),
                     child: InkWell(
                       onTap: () {
-                        Get.find<GeneralController>().storageBox.erase();
+                        //Get.find<GeneralController>().storageBox.erase();
                         Navigator.pop(context);
                         Get.offAllNamed(PageRoutes.userHome);
                       },

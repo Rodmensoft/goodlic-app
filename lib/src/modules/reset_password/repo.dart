@@ -19,7 +19,7 @@ forgetPasswordRepo(
     Get.find<GeneralController>().updateFormLoaderController(false);
 
     if (Get.find<ResetPasswordLogic>().forgetPasswordModel.status == true) {
-      Get.toNamed(PageRoutes.newPassword);
+      Get.toNamed(PageRoutes.login);
     } else {
       showDialog(
           context: context,
@@ -31,6 +31,7 @@ forgetPasswordRepo(
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
+
               },
               img: 'assets/Icons/dialog_error.svg',
             );

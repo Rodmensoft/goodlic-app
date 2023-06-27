@@ -46,6 +46,8 @@ String getMentorProfileForMenteeUrl = apiBaseUrl + 'get-mentor-details';
 ///---consultant-profile-section
 String mentorProfileGenericDataUrl = apiBaseUrl + 'generic_mentor';
 String getCitiesByIdUrl = apiBaseUrl + 'cities';
+String getstatesByIdUrl = apiBaseUrl + 'states';
+
 String getCountriesUrl = apiBaseUrl + 'countries';
 String mentorParentCategoryDataUrl = apiBaseUrl + 'mentorCategoriesList';
 String mentorChildCategoryDataUrl = apiBaseUrl + 'mentorChildCategoriesList';
@@ -102,6 +104,8 @@ String getCategoriesWithMentorURL = apiBaseUrl + 'categories/with/mentors';
 String getScheduleAvailableDaysURL = apiBaseUrl + 'get-scheduled-available-days';
 String getScheduleSlotsForMenteeUrl = apiBaseUrl + 'get-date-schedule';
 String bookAppointmentUrl = apiBaseUrl + 'bookAppointment';
+String uploadMultipleUrl = apiBaseUrl + 'upload_dropzone_images';
+String deleteMultipleUrl = apiBaseUrl + 'delete_media_file';
 
 ///---appointment-log-user
 String getUserAllAppointmentsURL = apiBaseUrl + 'all-status-menteeAppointments';
@@ -171,3 +175,5 @@ String getGeneralSettingUrl = apiBaseUrl + 'general_settings';
 /// Get Terms and Conditions
 
 String getTermsConditionsUrl = apiBaseUrl + 'terms_conditions';
+/// about us
+String getAboutUsUrl =apiBaseUrl+'get_about_us_page_content';

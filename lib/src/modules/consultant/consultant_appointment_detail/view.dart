@@ -36,7 +36,7 @@ class _ConsultantAppointmentDetailPageState extends State<ConsultantAppointmentD
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    Get.find<GeneralController>().storageBox.remove('appointmentId');
     Get.find<ConsultantAppointmentDetailLogic>().scrollController = ScrollController()
       ..addListener(Get.find<ConsultantAppointmentDetailLogic>().scrollListener);
 

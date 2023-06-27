@@ -69,23 +69,28 @@ class MessageData {
 
 class Messages {
   Messages({
-      int? id, 
-      String? message, 
-      int? senderId, 
-      String? senderName, 
-      int? receiverId, 
-      String? receiverName, 
-      String? createdAt, 
-      String? updatedAt,}){
+    int? id,
+    String? message,
+    int? senderId,
+    dynamic attachmentUrl,
+    int? isAttachment,
+    String? senderName,
+    int? receiverId,
+    String? receiverName,
+    String? createdAt,
+    String? updatedAt,
+  }) {
     _id = id;
     _message = message;
     _senderId = senderId;
     _senderName = senderName;
+    _attachmentUrl = attachmentUrl;
+    _isAttachment = isAttachment;
     _receiverId = receiverId;
     _receiverName = receiverName;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
-}
+  }
 
   Messages.fromJson(dynamic json) {
     _id = int.parse(json['id'].toString());
@@ -93,6 +98,8 @@ class Messages {
     _senderId = json['sender_id'];
     _senderName = json['sender_name'];
     _receiverId = json['receiver_id'];
+    _attachmentUrl = json['attachment_url'];
+    _isAttachment = json['is_attachment'];
     _receiverName = json['receiver_name'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
@@ -103,6 +110,8 @@ class Messages {
   String? _senderName;
   int? _receiverId;
   String? _receiverName;
+  dynamic _attachmentUrl;
+  int? _isAttachment;
   String? _createdAt;
   String? _updatedAt;
 
@@ -110,6 +119,8 @@ class Messages {
   String? get message => _message;
   int? get senderId => _senderId;
   String? get senderName => _senderName;
+  dynamic get attachmentUrl => _attachmentUrl;
+  int? get isAttachment => _isAttachment;
   int? get receiverId => _receiverId;
   String? get receiverName => _receiverName;
   String? get createdAt => _createdAt;
@@ -122,10 +133,11 @@ class Messages {
     map['sender_id'] = _senderId;
     map['sender_name'] = _senderName;
     map['receiver_id'] = _receiverId;
+    map['attachment_url'] = _attachmentUrl;
+    map['is_attachment'] = _isAttachment;
     map['receiver_name'] = _receiverName;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
     return map;
   }
-
 }

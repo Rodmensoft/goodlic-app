@@ -182,40 +182,41 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                       ),
                                     ),
 
-                                    ///---document
-                                    _appointmentDetailLogic.selectedAppointmentData.file == null || _appointmentDetailLogic.selectedAppointmentData.file == ''
-                                        ? const SizedBox()
-                                        : Expanded(
-                                            flex: 2,
-                                            child: InkWell(
-                                              onTap: () {
-                                                launch(_appointmentDetailLogic.selectedAppointmentData.file!.contains('assets')
-                                                    ? '$mediaUrl/${_appointmentDetailLogic.selectedAppointmentData.file}'
-                                                    : '${_appointmentDetailLogic.selectedAppointmentData.file}');
-                                              },
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    LanguageConstant.document.tr,
-                                                    style: state.sectionLabelTextStyle,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 8.h,
-                                                  ),
-                                                  Text(
-                                                    _appointmentDetailLogic.selectedAppointmentData.fileType!,
-                                                    softWrap: true,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    maxLines: 1,
-                                                    style: state.sectionDataTextStyle!
-                                                        .copyWith(color: customLightThemeColor, decoration: TextDecoration.underline),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
+
+
+                                    // // _appointmentDetailLogic.selectedAppointmentData.file == null || _appointmentDetailLogic.selectedAppointmentData.file == ''
+                                    //     ? const SizedBox()
+                                    //     : Expanded(
+                                    //         flex: 2,
+                                    //         child: InkWell(
+                                    //           onTap: () {
+                                    //             launch(_appointmentDetailLogic.selectedAppointmentData.file!.contains('assets')
+                                    //                 ? '$mediaUrl/${_appointmentDetailLogic.selectedAppointmentData.file}'
+                                    //                 : '${_appointmentDetailLogic.selectedAppointmentData.file}');
+                                    //           },
+                                    //           child: Column(
+                                    //             crossAxisAlignment: CrossAxisAlignment.start,
+                                    //             mainAxisAlignment: MainAxisAlignment.center,
+                                    //             children: [
+                                    //               Text(
+                                    //                 LanguageConstant.document.tr,
+                                    //                 style: state.sectionLabelTextStyle,
+                                    //               ),
+                                    //               SizedBox(
+                                    //                 height: 8.h,
+                                    //               ),
+                                    //               Text(
+                                    //                 _appointmentDetailLogic.selectedAppointmentData.fileType!,
+                                    //                 softWrap: true,
+                                    //                 overflow: TextOverflow.ellipsis,
+                                    //                 maxLines: 1,
+                                    //                 style: state.sectionDataTextStyle!
+                                    //                     .copyWith(color: customLightThemeColor, decoration: TextDecoration.underline),
+                                    //               ),
+                                    //             ],
+                                    //           ),
+                                    //         ),
+                                    //       ),
                                   ],
                                 ),
                                 SizedBox(
@@ -251,7 +252,71 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
                                 SizedBox(
                                   height: 18.h,
                                 ),
-
+                                _appointmentDetailLogic.selectedAppointmentData.media!.isEmpty
+                                    ? const SizedBox()
+                                    : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LanguageConstant.document.tr,
+                                      style: state.sectionLabelTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 8.h,
+                                    ),
+                                    Container(
+                                      height: 100,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 4),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: Text(_appointmentDetailLogic.selectedAppointmentData.media![index].name!,
+                                                      softWrap: true, overflow: TextOverflow.ellipsis, maxLines: 1, style: state.sectionDataTextStyle),
+                                                ),
+                                                SizedBox(
+                                                  width: 10.w,
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    launchUrl(
+                                                      Uri.parse('$mediaUrl/${_appointmentDetailLogic.selectedAppointmentData.media![index].url}'),
+                                                      mode: LaunchMode.externalApplication,
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      color: customThemeColor,
+                                                      borderRadius: BorderRadius.circular(10.0),
+                                                    ),
+                                                    width: 55,
+                                                    height: 25,
+                                                    child: Center(
+                                                      child: Text("View",
+                                                          style: TextStyle(
+                                                            // fontFamily: Sub.semiBold,
+                                                            fontSize: 12.sp,
+                                                            color: Colors.white,
+                                                          )),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 10.w,
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                        itemCount: _appointmentDetailLogic.selectedAppointmentData.media!.length,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 ///---- attachment and notes
                                 _appointmentDetailLogic.selectedAppointmentData.appointmentStatus == 2
                                     ? Row(

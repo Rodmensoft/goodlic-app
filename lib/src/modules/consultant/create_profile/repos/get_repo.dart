@@ -46,24 +46,7 @@ getGenericDataRepo(BuildContext context, bool responseCheck, Map<String, dynamic
   }
 }
 
-getCitiesRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
-  if (responseCheck) {
-    Get.find<CreateProfileLogic>().citiesByIdModel = CitiesByIdModel.fromJson(response);
-    if (Get.find<CreateProfileLogic>().citiesByIdModel.status == true) {
-      ///---cities
-      Get.find<CreateProfileLogic>().emptyCityDropDownList();
-      for (var element in Get.find<CreateProfileLogic>().citiesByIdModel.data!.cities!) {
-        Get.find<CreateProfileLogic>().updateCityDropDownList(element.name!);
-      }
 
-      Get.find<GeneralController>().updateFormLoaderController(false);
-    } else {
-      Get.find<GeneralController>().updateFormLoaderController(false);
-    }
-  } else if (!responseCheck) {
-    Get.find<GeneralController>().updateFormLoaderController(false);
-  }
-}
 
 getParentCategoryRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
@@ -85,5 +68,43 @@ getChildCategoryRepo(BuildContext context, bool responseCheck, Map<String, dynam
     print(response);
     Get.find<CreateProfileLogic>().subCategoriesModel = SubCategoriesModel.fromJson(response);
     log('getChildCategoryRepo ------>> ${Get.find<CreateProfileLogic>().subCategoriesModel.success}');
+  }
+}
+getCitiesRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  if (responseCheck) {
+    Get.find<CreateProfileLogic>().citiesByIdModel = CitiesByIdModel.fromJson(response);
+    if (Get.find<CreateProfileLogic>().citiesByIdModel.status == true) {
+      ///---cities
+      Get.find<CreateProfileLogic>().emptyCityDropDownList();
+      for (var element in Get.find<CreateProfileLogic>().citiesByIdModel.data!.cities!) {
+        Get.find<CreateProfileLogic>().updateCityDropDownList(element.name!);
+      }
+
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    }
+  } else if (!responseCheck) {
+    Get.find<GeneralController>().updateFormLoaderController(false);
+  }
+}
+getStateRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
+  Get.put(CreateProfileLogic());
+  if (responseCheck) {
+    Get.find<CreateProfileLogic>().stateByModel = StateModel.fromJson(response);
+    if (Get.find<CreateProfileLogic>().stateByModel.status == true) {
+      ///---cities
+      Get.find<CreateProfileLogic>().stateDropDownList = [];
+      Get.find<CreateProfileLogic>().update();
+      for (var element in Get.find<CreateProfileLogic>().stateByModel.data!.states!) {
+        Get.find<CreateProfileLogic>().updateStateDropDownList(element.name!);
+      }
+
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    } else {
+      Get.find<GeneralController>().updateFormLoaderController(false);
+    }
+  } else if (!responseCheck) {
+    Get.find<GeneralController>().updateFormLoaderController(false);
   }
 }

@@ -22,7 +22,7 @@ getUserProfileRepo(BuildContext context, bool responseCheck, Map<String, dynamic
 
 getUserProfileForEditRepo(BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
-    Get.find<GeneralController>().getConsultantProfileModel = GetConsultantProfileModel.fromJson(response);
+     Get.find<GeneralController>().getConsultantProfileModel = GetConsultantProfileModel.fromJson(response);
     if (Get.find<GeneralController>().getConsultantProfileModel.status == true) {
       getMethod(context, mentorProfileGenericDataUrl, {'token': '123'}, false, getGenericDataRepo);
       getMethod(context, getCitiesByIdUrl, {'token': '123', 'country_id': Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.country}, false, getCitiesRepo);
@@ -31,15 +31,20 @@ getUserProfileForEditRepo(BuildContext context, bool responseCheck, Map<String, 
       Get.find<EditConsultantProfileLogic>().firstNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.firstName!;
       Get.find<EditConsultantProfileLogic>().lastNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.lastName!;
       Get.find<EditConsultantProfileLogic>().fatherNameController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.fatherName!;
+      Get.find<EditConsultantProfileLogic>().emailController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.email!;
+      Get.find<EditConsultantProfileLogic>().phoneController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.phone!;
+
+
       Get.find<EditConsultantProfileLogic>().cnicController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.cnic!;
       Get.find<EditConsultantProfileLogic>().addressController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.address!;
       Get.find<EditConsultantProfileLogic>().aboutController.text = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.about!;
       if (Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.gender != null) {
         Get.find<EditConsultantProfileLogic>().selectedGender = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.gender!.capitalize;
       }
-
-      Get.find<EditConsultantProfileLogic>().selectedReligion = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.religion!.capitalize;
-      Get.find<EditConsultantProfileLogic>().dobController.text = DateFormat('dd-MM-yyyy').format(DateTime.parse(Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.dob!));
+      if (Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.religion != null) {
+        Get.find<EditConsultantProfileLogic>().selectedReligion = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.religion!.capitalize;
+      }
+       Get.find<EditConsultantProfileLogic>().dobController.text = DateFormat('dd-MM-yyyy').format(DateTime.parse(Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.dob!));
       Get.find<EditConsultantProfileLogic>().selectedDob = DateTime.parse(Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.dob!);
       Get.find<EditConsultantProfileLogic>().selectedCity = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.city!;
       Get.find<EditConsultantProfileLogic>().forDisplayEducationList = Get.find<GeneralController>().getConsultantProfileModel.data!.userDetail!.educations!;

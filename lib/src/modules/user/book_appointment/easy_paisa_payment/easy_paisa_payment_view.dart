@@ -444,19 +444,19 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
               iosId: "1",
               title: "Special",
               action: () async {
-                print("clicked!");
+
                 print(await webViewController?.getSelectedText());
                 await webViewController?.clearFocus();
               })
         ],
         options: ContextMenuOptions(hideDefaultSystemContextMenuItems: false),
         onCreateContextMenu: (hitTestResult) async {
-          print("onCreateContextMenu");
+
           print(hitTestResult.extra);
           print(await webViewController?.getSelectedText());
         },
         onHideContextMenu: () {
-          print("onHideContextMenu");
+
         },
         onContextMenuActionItemClicked: (contextMenuItemClicked) async {
           var id = (Platform.isAndroid) ? contextMenuItemClicked.androidId : contextMenuItemClicked.iosId;

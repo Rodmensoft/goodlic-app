@@ -61,7 +61,7 @@ class _RazorPayWalletViewState extends State<RazorPayWalletView> {
   }
 
   launchRazorPay() {
-    print('testing......');
+
     var option = {
       'key': '${GlobalConfiguration().get('razorpay_key')}',
       'amount': num.parse(amountController.text) * 100,
@@ -248,7 +248,7 @@ class _RazorPayWalletViewState extends State<RazorPayWalletView> {
                     /// Make Payment Button
                     InkWell(
                       onTap: () {
-                        print('Ahmad.............');
+
                         launchRazorPay();
                       },
                       child: const MyCustomBottomBar(

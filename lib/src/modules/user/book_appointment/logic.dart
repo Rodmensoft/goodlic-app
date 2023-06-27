@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:consultant_product/multi_language/language_constants.dart';
 import 'package:consultant_product/src/modules/user/book_appointment/model/book_appointment.dart';
@@ -15,6 +16,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:resize/resize.dart';
 
 import 'model/get_schedule_available_days.dart';
+import 'model/multiple_upload_files_model.dart';
 import 'state.dart';
 
 class BookAppointmentLogic extends GetxController {
@@ -24,7 +26,7 @@ class BookAppointmentLogic extends GetxController {
   GetAppDetailForReschedule getAppDetailForReschedule = GetAppDetailForReschedule();
   GetPaymentMethods getPaymentMethods = GetPaymentMethods();
   // GetConfigCredentialModel getConfigCredentialModel = GetConfigCredentialModel();
-
+  MultipleUploadFilesModel multipleUploadFilesModel = MultipleUploadFilesModel();
   var cardNumberMask = MaskTextInputFormatter(mask: '#### #### #### ####');
   var cardExpiryMask = MaskTextInputFormatter(mask: '##/##');
   final TextEditingController paymentAccountNumberTextController = TextEditingController();
@@ -189,9 +191,25 @@ class BookAppointmentLogic extends GetxController {
     ShiftType(title: 'razorpay', image: 'assets/Icons/razorpay.svg', isSelected: false),
     ShiftType(title: 'paytm', image: 'assets/Icons/paytm.svg', isSelected: false),
   ];
+  RxList<dynamic> ListOfFile = [].obs;
 
+  RxInt listOfFileIndex = 0.obs;
+
+  removeFile(int index) {
+    ListOfFile.removeAt(index);
+    ListOfFile.refresh();
+  }
+  int? value;
+  getValue(int myValue) {
+    value = myValue;
+    print(value);
+  }
+  List<File>? selectedFiles = [];
   String? selectedFileName;
   FilePickerResult? filePickerResult;
+
+  List<String>? selectedFilesName;
+
 
   updateSelectedFileName(String? newValue) {
     selectedFileName = newValue;

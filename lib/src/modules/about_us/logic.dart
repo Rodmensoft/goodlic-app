@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import 'model.dart';
 import 'state.dart';
 
 class AboutUsLogic extends GetxController {
   final AboutUsState state = AboutUsState();
-
+  AboutUsModel aboutUsModel = AboutUsModel();
   ///----app-bar-settings-----start
   ScrollController? scrollController;
   bool lastStatus = true;

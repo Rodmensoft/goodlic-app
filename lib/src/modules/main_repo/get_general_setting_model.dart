@@ -65,11 +65,11 @@ class Data {
     String? phone,
     String? companyEmail,
     String? currencySymbol,
+    num? minimumAppointmentFee,
     String? aboutCompany,
     String? loginType,
-    dynamic longitude,
-    dynamic latitude,
-  }) {
+    String? longitude,
+    String? latitude,}){
     _id = id;
     _logo = logo;
     _title = title;
@@ -83,10 +83,11 @@ class Data {
     _phone = phone;
     _companyEmail = companyEmail;
     _currencySymbol = currencySymbol;
+    _minimumAppointmentFee = minimumAppointmentFee;
     _aboutCompany = aboutCompany;
+    _loginType = loginType;
     _longitude = longitude;
     _latitude = latitude;
-    _loginType = loginType;
   }
 
   Data.fromJson(dynamic json) {
@@ -103,6 +104,7 @@ class Data {
     _phone = json['phone'];
     _companyEmail = json['company_email'];
     _currencySymbol = json['currency_symbol'];
+    _minimumAppointmentFee = json['minimum_appointment_fee'];
     _aboutCompany = json['about_company'];
     _loginType = json['login_type'];
     _longitude = json['longitude'];
@@ -121,47 +123,48 @@ class Data {
   String? _phone;
   String? _companyEmail;
   String? _currencySymbol;
+  num? _minimumAppointmentFee;
   String? _aboutCompany;
   String? _loginType;
-  dynamic _longitude;
-  dynamic _latitude;
-  Data copyWith(
-          {num? id,
-          String? logo,
-          String? title,
-          String? tagline,
-          String? seoDes,
-          String? seoKeywords,
-          String? facebookLink,
-          String? twitterLink,
-          String? linkdenLink,
-          String? address,
-          String? phone,
-          String? companyEmail,
-          String? currencySymbol,
-          String? aboutCompany,
-          String? loginType,
-          dynamic longitude,
-          dynamic latitude}) =>
-      Data(
-        id: id ?? _id,
-        logo: logo ?? _logo,
-        title: title ?? _title,
-        tagline: tagline ?? _tagline,
-        seoDes: seoDes ?? _seoDes,
-        seoKeywords: seoKeywords ?? _seoKeywords,
-        facebookLink: facebookLink ?? _facebookLink,
-        twitterLink: twitterLink ?? _twitterLink,
-        linkdenLink: linkdenLink ?? _linkdenLink,
-        address: address ?? _address,
-        phone: phone ?? _phone,
-        companyEmail: companyEmail ?? _companyEmail,
-        currencySymbol: currencySymbol ?? _currencySymbol,
-        aboutCompany: aboutCompany ?? _aboutCompany,
-        loginType: loginType ?? _loginType,
-        longitude: longitude ?? _longitude,
-        latitude: latitude ?? _latitude,
-      );
+  String? _longitude;
+  String? _latitude;
+  Data copyWith({  num? id,
+    String? logo,
+    String? title,
+    String? tagline,
+    String? seoDes,
+    String? seoKeywords,
+    String? facebookLink,
+    String? twitterLink,
+    String? linkdenLink,
+    String? address,
+    String? phone,
+    String? companyEmail,
+    String? currencySymbol,
+    num? minimumAppointmentFee,
+    String? aboutCompany,
+    String? loginType,
+    String? longitude,
+    String? latitude,
+  }) => Data(  id: id ?? _id,
+    logo: logo ?? _logo,
+    title: title ?? _title,
+    tagline: tagline ?? _tagline,
+    seoDes: seoDes ?? _seoDes,
+    seoKeywords: seoKeywords ?? _seoKeywords,
+    facebookLink: facebookLink ?? _facebookLink,
+    twitterLink: twitterLink ?? _twitterLink,
+    linkdenLink: linkdenLink ?? _linkdenLink,
+    address: address ?? _address,
+    phone: phone ?? _phone,
+    companyEmail: companyEmail ?? _companyEmail,
+    currencySymbol: currencySymbol ?? _currencySymbol,
+    minimumAppointmentFee: minimumAppointmentFee ?? _minimumAppointmentFee,
+    aboutCompany: aboutCompany ?? _aboutCompany,
+    loginType: loginType ?? _loginType,
+    longitude: longitude ?? _longitude,
+    latitude: latitude ?? _latitude,
+  );
   num? get id => _id;
   String? get logo => _logo;
   String? get title => _title;
@@ -175,10 +178,11 @@ class Data {
   String? get phone => _phone;
   String? get companyEmail => _companyEmail;
   String? get currencySymbol => _currencySymbol;
+  num? get minimumAppointmentFee => _minimumAppointmentFee;
   String? get aboutCompany => _aboutCompany;
   String? get loginType => _loginType;
-  dynamic get longitude => _longitude;
-  dynamic get latitude => _latitude;
+  String? get longitude => _longitude;
+  String? get latitude => _latitude;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -195,10 +199,12 @@ class Data {
     map['phone'] = _phone;
     map['company_email'] = _companyEmail;
     map['currency_symbol'] = _currencySymbol;
+    map['minimum_appointment_fee'] = _minimumAppointmentFee;
     map['about_company'] = _aboutCompany;
     map['login_type'] = _loginType;
     map['longitude'] = _longitude;
     map['latitude'] = _latitude;
     return map;
   }
+
 }

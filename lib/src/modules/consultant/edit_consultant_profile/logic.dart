@@ -107,12 +107,14 @@ class EditConsultantProfileLogic extends GetxController {
   ///-------------------------------general-tab
   MentorProfileGenericDataModel mentorProfileGenericDataModel = MentorProfileGenericDataModel();
   CitiesByIdModel citiesByIdModel = CitiesByIdModel();
+  StateModel stateByModel=StateModel();
   GeneralInfoPostModel generalInfoPostModel = GeneralInfoPostModel();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController fatherNameController = TextEditingController();
   final TextEditingController cnicController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController dobController = TextEditingController();
   final TextEditingController aboutController = TextEditingController();
@@ -162,6 +164,14 @@ class EditConsultantProfileLogic extends GetxController {
   updateCityDropDownList(String newValue) {
     cityDropDownList.add(newValue);
 
+    update();
+  }
+  String? selectedState;
+
+  List<String> stateDropDownList = [];
+
+  updateStateDropDownList(String newValue) {
+    stateDropDownList.add(newValue);
     update();
   }
 

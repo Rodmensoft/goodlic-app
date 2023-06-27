@@ -255,6 +255,7 @@ class UserAppointmentsData {
     String? fileConsultant,
     String? filetypeConsultant,
     bool? reschudlable,
+    List<Media>? media,
   }) {
     _id = id;
     _menteeId = menteeId;
@@ -283,6 +284,7 @@ class UserAppointmentsData {
     _fileConsultant = fileConsultant;
     _filetypeConsultant = filetypeConsultant;
     _reschudlable = reschudlable;
+    _media = media;
   }
 
   UserAppointmentsData.fromJson(dynamic json) {
@@ -313,6 +315,12 @@ class UserAppointmentsData {
     _fileConsultant = json['file_consultant'];
     _filetypeConsultant = json['filetype_consultant'];
     _reschudlable = json['reschudlable'];
+    if (json['media'] != null) {
+      _media = [];
+      json['media'].forEach((v) {
+        _media?.add(Media.fromJson(v));
+      });
+    }
   }
   int? _id;
   int? _menteeId;
@@ -341,6 +349,7 @@ class UserAppointmentsData {
   String? _fileConsultant;
   String? _filetypeConsultant;
   bool? _reschudlable;
+  List<Media>? _media;
 
   int? get id => _id;
   int? get menteeId => _menteeId;
@@ -369,6 +378,7 @@ class UserAppointmentsData {
   String? get fileConsultant => _fileConsultant;
   String? get filetypeConsultant => _filetypeConsultant;
   bool? get reschudlable => _reschudlable;
+  List<Media>? get media => _media;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -400,6 +410,9 @@ class UserAppointmentsData {
     map['reschudlable'] = _reschudlable;
     if (_mentor != null) {
       map['mentor'] = _mentor?.toJson();
+    }
+    if (_media != null) {
+      map['media'] = _media?.map((v) => v.toJson()).toList();
     }
     return map;
   }
@@ -715,6 +728,75 @@ class UserCountry {
     map['updated_at'] = _updatedAt;
     map['flag'] = _flag;
     map['wikiDataId'] = _wikiDataId;
+    return map;
+  }
+}
+
+class Media {
+  Media({
+    int? id,
+    String? name,
+    dynamic description,
+    double? size,
+    String? fileType,
+    String? url,
+    int? bookingAppointmentId,
+    String? createdAt,
+    String? updatedAt,
+  }) {
+    _id = id;
+    _name = name;
+    _description = description;
+    _size = size;
+    _fileType = fileType;
+    _url = url;
+    _bookingAppointmentId = bookingAppointmentId;
+    _createdAt = createdAt;
+    _updatedAt = updatedAt;
+  }
+
+  Media.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'];
+    _description = json['description'];
+    _size = json['size'];
+    _fileType = json['file_type'];
+    _url = json['url'];
+    _bookingAppointmentId = json['booking_appointment_id'];
+    _createdAt = json['created_at'];
+    _updatedAt = json['updated_at'];
+  }
+  int? _id;
+  String? _name;
+  dynamic _description;
+  double? _size;
+  String? _fileType;
+  String? _url;
+  int? _bookingAppointmentId;
+  String? _createdAt;
+  String? _updatedAt;
+
+  int? get id => _id;
+  String? get name => _name;
+  dynamic get description => _description;
+  double? get size => _size;
+  String? get fileType => _fileType;
+  String? get url => _url;
+  int? get bookingAppointmentId => _bookingAppointmentId;
+  String? get createdAt => _createdAt;
+  String? get updatedAt => _updatedAt;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['name'] = _name;
+    map['description'] = _description;
+    map['size'] = _size;
+    map['file_type'] = _fileType;
+    map['url'] = _url;
+    map['booking_appointment_id'] = _bookingAppointmentId;
+    map['created_at'] = _createdAt;
+    map['updated_at'] = _updatedAt;
     return map;
   }
 }

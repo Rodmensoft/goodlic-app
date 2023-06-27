@@ -12,6 +12,10 @@ import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
+import '../../../api_services/get_service.dart';
+import '../edit_user_profile/get_repo.dart';
+import '../edit_user_profile/logic.dart';
+
 class UserDrawerPage extends StatefulWidget {
   const UserDrawerPage({Key? key}) : super(key: key);
 
@@ -23,6 +27,25 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
   final logic = Get.put(UserDrawerLogic());
 
   final state = Get.find<UserDrawerLogic>().state;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Get.put(EditUserProfileLogic());
+     getMethod(
+        context,
+        getMenteeProfileUrl,
+        {
+          'token': '123',
+          'user_id': Get.find<GeneralController>().storageBox.read('userID')
+        },
+        true,
+        getMenteeProfileRepo);
+     if (Get.find<EditUserProfileLogic>().getMenteeProfileModel.data?.user?.country == null) {
+      Get.find<EditUserProfileLogic>().selectedCountry = Get.find<GeneralController>().initialCountry.value;
+
+    }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -141,33 +164,19 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                               Container(
                                                 height: 49.h,
                                                 width: 49.w,
-                                                decoration: const BoxDecoration(
-                                                    color: Colors.grey,
-                                                    shape: BoxShape.circle),
-                                                child: _userHomeLogic
-                                                            .getUserProfileModel
-                                                            .data!
-                                                            .user!
-                                                            .imagePath ==
-                                                        null
+                                                decoration: const BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
+                                                child: _userHomeLogic.getUserProfileModel.data?.user?.imagePath == null
                                                     ? const SizedBox()
                                                     : ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(30),
-                                                        child: Image.network(
-                                                          _userHomeLogic
-                                                                  .getUserProfileModel
-                                                                  .data!
-                                                                  .user!
-                                                                  .imagePath!
-                                                                  .contains(
-                                                                      'assets')
-                                                              ? '$mediaUrl${_userHomeLogic.getUserProfileModel.data!.user!.imagePath}'
-                                                              : '${_userHomeLogic.getUserProfileModel.data!.user!.imagePath}',
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
+                                                  borderRadius: BorderRadius.circular(30),
+                                                  child: Image.network(
+                                                    Get.find<GeneralController>().checKImage(_userHomeLogic.getUserProfileModel.data!.user!.imagePath),
+                                                    // _userHomeLogic.getUserProfileModel.data!.user!.imagePath!.contains('assets')
+                                                    //     ? '$mediaUrl${_userHomeLogic.getUserProfileModel.data!.user!.imagePath}'
+                                                    //     : '${_userHomeLogic.getUserProfileModel.data!.user!.imagePath}',
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
                                               ),
                                               SizedBox(
                                                 width: 15.w,
@@ -179,14 +188,19 @@ class _UserDrawerPageState extends State<UserDrawerPage> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   ///---name
-                                                  Text(
-                                                    _userHomeLogic
-                                                            .getUserProfileModel
-                                                            .data!
-                                                            .user!
-                                                            .firstName ??
-                                                        '',
+                                                  _userHomeLogic.getUserProfileModel.data?.user?.firstName != null
+                                                      ? Text(
+                                                    _userHomeLogic.getUserProfileModel.data?.user?.firstName ?? '',
                                                     style: state.nameTextStyle,
+                                                  )
+                                                      : InkWell(
+                                                    onTap: () {
+                                                      Get.toNamed(PageRoutes.editUserProfile);
+                                                    },
+                                                    child: Text(
+                                                      'Create Your Profile',
+                                                      style: state.nameTextStyle,
+                                                    ),
                                                   ),
 
                                                   SizedBox(

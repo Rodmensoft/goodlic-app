@@ -15,6 +15,8 @@ import 'package:dio/dio.dart' as dio_instance;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../route_generator.dart';
+
 menteeUpdateProfileRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
@@ -39,13 +41,14 @@ menteeUpdateProfileRepo(
               text: LanguageConstant.ok.tr,
               functionCall: () {
                 Navigator.pop(context);
-                Get.back();
+                Get.offAllNamed(PageRoutes.userHome);
               },
               img: 'assets/Icons/dialog_success.svg',
             );
           });
       Get.find<GeneralController>().updateFormLoaderController(false);
     } else {
+
       showDialog(
           context: Get.context!,
           barrierDismissible: false,
@@ -90,16 +93,28 @@ menteeUpdateProfileImageRepo(File? file1) async {
     'user_id': Get.find<GeneralController>().storageBox.read('userID'),
     'first_name': Get.find<EditUserProfileLogic>().firstNameController.text,
     'last_name': Get.find<EditUserProfileLogic>().lastNameController.text,
-    'gender': Get.find<EditUserProfileLogic>().selectedGender,
-    'country': Get.find<EditUserProfileLogic>()
-        .menteeProfileGenericDataModel
-        .data!
-        .countries![Get.find<EditUserProfileLogic>()
+        'email': Get.find<EditUserProfileLogic>().emailController.text,
+        'gender': Get.find<EditUserProfileLogic>().selectedGender,
+        'phone':Get.find<EditUserProfileLogic>().phoneController.text,
+        'country': Get.find<EditUserProfileLogic>()
+            .menteeProfileGenericDataModel
+            .data!
+            .countries![Get.find<EditUserProfileLogic>()
             .countryDropDownList
-            .indexOf(Get.find<EditUserProfileLogic>().selectedCountry!)]
-        .id,
-    'city': Get.find<EditUserProfileLogic>().selectedCity,
-    'image': await dio_instance.MultipartFile.fromFile(
+            .indexOf(Get.find<EditUserProfileLogic>()
+            .selectedCountry!)]
+            .id,
+        'city': Get.find<EditUserProfileLogic>()
+            .selectedCity,
+        'state_id':Get.find<EditUserProfileLogic>()
+          .stateByModel
+          .data!
+          .states![Get.find<EditUserProfileLogic>()
+          .stateDropDownList
+          .indexOf(Get.find<EditUserProfileLogic>()
+          .selectedState!)]
+          .id,
+    'picture': await dio_instance.MultipartFile.fromFile(
       file1!.path,
     )
   });
@@ -139,7 +154,7 @@ menteeUpdateProfileImageRepo(File? file1) async {
             });
         Get.find<GeneralController>().updateFormLoaderController(false);
       } else {
-        showDialog(
+       showDialog(
             context: Get.context!,
             barrierDismissible: false,
             builder: (BuildContext context) {

@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import '../../../controller/general_controller.dart';
+
 paymentBottomSheetForWallet(BuildContext context) async {
   return Get.bottomSheet(
     ///---payment-method-area
@@ -85,7 +87,8 @@ paymentBottomSheetForWallet(BuildContext context) async {
                               ? ClipRRect(
                                   borderRadius: BorderRadius.circular(8.r),
                                   child: Image.network(
-                                    '$mediaUrl${Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath}',
+                                    Get.find<GeneralController>().checKImage(Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath!),
+                                   // '$mediaUrl${Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath}',
                                     width: double.infinity,
                                     height: double.infinity,
                                   ),
@@ -95,7 +98,8 @@ paymentBottomSheetForWallet(BuildContext context) async {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Image.network(
-                                      '$mediaUrl${Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath}',
+                          Get.find<GeneralController>().checKImage(Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath!),
+                                    //  '$mediaUrl${Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath}',
                                       width: MediaQuery.of(context).size.width * .15,
                                     ),
                                   ],

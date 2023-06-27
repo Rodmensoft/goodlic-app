@@ -34,7 +34,7 @@ stripePaymentRepo(
             'New Appointment For You',
             '',
             null,
-            'mentee/appointment/log',
+            'mentee/appointment-log-detail',
             null);
 
         ///----send-sms

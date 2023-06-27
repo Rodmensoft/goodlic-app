@@ -57,8 +57,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
         },
         false,
         getMentorScheduleRepo);
-  }
-
+    }
+ num? minPayment =Get.find<GeneralController>().getGeneralSettingModel?.data?.minimumAppointmentFee;
   bool timeValidator = false;
 
   @override
@@ -383,9 +383,8 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                       if (value!.isEmpty) {
                                         return LanguageConstant
                                             .fieldRequired.tr;
-                                      } else if (int.parse(value.toString()) <
-                                          100) {
-                                        return '${LanguageConstant.minChargesIs.tr}\n${LanguageConstant.rs.tr}. 100'
+                                      } else if (int.parse(value.toString()) < minPayment!) {
+                                        return '${LanguageConstant.minChargesIs.tr}\n${LanguageConstant.rs.tr}. $minPayment'
                                             .tr;
                                       } else {
                                         return null;
@@ -1280,6 +1279,7 @@ class _ScheduleCreatePageState extends State<ScheduleCreatePage> {
                                               child: Center(
                                                 child: InkWell(
                                                   onTap: () {
+
                                                     FocusScopeNode
                                                         currentFocus =
                                                         FocusScope.of(context);

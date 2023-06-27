@@ -114,8 +114,8 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             /// Address
                                             InkWell(
                                               onTap: () {
-                                                MapsLauncher.launchCoordinates(double.parse((Get.find<MainLogic>().getGeneralSettingModel.data?.latitude).toString()),
-                                                    double.parse((Get.find<MainLogic>().getGeneralSettingModel.data?.longitude).toString()), 'Here');
+                                                MapsLauncher.launchCoordinates(double.parse((Get.find<GeneralController>().getGeneralSettingModel.data?.latitude).toString()),
+                                                    double.parse((Get.find<GeneralController>().getGeneralSettingModel.data?.longitude).toString()), 'Here');
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.all(Radius.circular(8.r))),
@@ -132,7 +132,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                     style: state.titleTextStyle,
                                                   ),
                                                   subtitle: Text(
-                                                    Get.find<MainLogic>().getGeneralSettingModel.data?.address ?? '',
+                                                    Get.find<GeneralController>().getGeneralSettingModel.data?.address ?? '',
                                                     style: state.subTitleTextStyle,
                                                   ),
                                                 ),
@@ -143,7 +143,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             /// Call
                                             InkWell(
                                               onTap: () {
-                                                _contactUsLogic.makePhoneCall(Get.find<MainLogic>().getGeneralSettingModel.data!.phone ?? '');
+                                                _contactUsLogic.makePhoneCall(Get.find<GeneralController>().getGeneralSettingModel.data!.phone ?? '');
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.all(Radius.circular(8.r))),
@@ -160,7 +160,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                     style: state.titleTextStyle,
                                                   ),
                                                   subtitle: Text(
-                                                    Get.find<MainLogic>().getGeneralSettingModel.data?.phone ?? '',
+                                                    Get.find<GeneralController>().getGeneralSettingModel.data?.phone ?? '',
                                                     style: state.subTitleTextStyle,
                                                   ),
                                                 ),
@@ -171,7 +171,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                             /// Email
                                             InkWell(
                                               onTap: () {
-                                                _contactUsLogic.sendMail(Get.find<MainLogic>().getGeneralSettingModel.data?.companyEmail ?? '');
+                                                _contactUsLogic.sendMail(Get.find<GeneralController>().getGeneralSettingModel.data?.companyEmail ?? '');
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(color: customThemeColor, borderRadius: BorderRadius.all(Radius.circular(8.r))),
@@ -188,7 +188,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                                     style: state.titleTextStyle,
                                                   ),
                                                   subtitle: Text(
-                                                    Get.find<MainLogic>().getGeneralSettingModel.data?.companyEmail ?? '',
+                                                    Get.find<GeneralController>().getGeneralSettingModel.data?.companyEmail ?? '',
                                                     style: state.subTitleTextStyle,
                                                   ),
                                                 ),

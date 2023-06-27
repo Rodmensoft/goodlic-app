@@ -8,6 +8,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import '../../../../controller/general_controller.dart';
+
 class AppointmentDetailBox extends StatelessWidget {
   const AppointmentDetailBox({
     Key? key,
@@ -75,7 +77,8 @@ class AppointmentDetailBox extends StatelessWidget {
                           child: image == null
                               ? const SizedBox()
                               : Image.network(
-                                  image!.contains('assets') ? '$mediaUrl$image' : image!,
+                            Get.find<GeneralController>().checKImage(image!),
+                                 // image!.contains('assets') ? '$mediaUrl$image' : image!,
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, object, trace) {
                                     return const Icon(

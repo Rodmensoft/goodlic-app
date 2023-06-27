@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
+import '../../../../controller/general_controller.dart';
+
 class CategoriesWidget extends StatefulWidget {
   const CategoriesWidget({Key? key}) : super(key: key);
 
@@ -113,16 +115,56 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                       SizedBox(
                                         height: 14.h,
                                       ),
-                                      CircleAvatar(
-                                        radius: 20.r,
-                                        backgroundColor: _userHomeLogic.categoriesColor[index],
-                                        child: CircleAvatar(
-                                          radius: 18.r,
-                                          backgroundImage: NetworkImage(
-                                            _userHomeLogic.categoriesList[index].image!.contains('assets')
-                                                ? '$mediaUrl${_userHomeLogic.categoriesList[index].image!}'
-                                                : _userHomeLogic.categoriesList[index].image!,
-                                          ),
+                                      Container(
+                                        height: 40.h,
+                                        width: 40.w,
+                                        color: _userHomeLogic.categoriesColor[index],
+                                        child: Image.network(
+                                        Get.find<GeneralController>().checKImage(_userHomeLogic.categoriesList[index].icon!)
+                                         // '$mediaUrl${_userHomeLogic.categoriesList[index].icon}'
+                                          ,
+                                          loadingBuilder:
+                                              (BuildContext context,
+                                              Widget child,
+                                              ImageChunkEvent?
+                                              loadingProgress) {
+                                            if (loadingProgress == null)
+                                              return child;
+                                            return Center(
+                                              child: SizedBox(
+                                                height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                    3,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                    2,
+                                                child:
+                                                CircularProgressIndicator(
+                                                  value: loadingProgress
+                                                      .expectedTotalBytes !=
+                                                      null
+                                                      ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                      loadingProgress
+                                                          .expectedTotalBytes!
+                                                      : null,
+                                                  color: customThemeColor,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                            return SizedBox(
+                                              height: MediaQuery.of(context).size.height / 43,
+                                              width: MediaQuery.of(context).size.width / 22,
+                                              child:  Center(
+                                                child: Image.network("https://us.123rf.com/450wm/mathier/mathier1905/mathier190500002/mathier190500002.jpg?ver=6"),
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
                                       SizedBox(

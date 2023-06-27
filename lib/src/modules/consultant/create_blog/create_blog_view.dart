@@ -258,7 +258,7 @@ class _CreateBlogPageState extends State<CreateBlogPage> {
                                       // },
                                       onChangeContent: (String? value) {
                                         logic.description = value ?? "";
-                                        print('content changed to $value');
+
                                       },
                                     )),
                                 SizedBox(height: 14.h),
@@ -283,9 +283,10 @@ class _CreateBlogPageState extends State<CreateBlogPage> {
                                                   child: ClipRRect(
                                                       borderRadius: BorderRadius.circular(8.r),
                                                       child: Image.network(
-                                                        logic.blogDetailsModel.data!.blog!.imagePath!.contains('assets')
-                                                            ? '$mediaUrl${logic.blogDetailsModel.data?.blog?.imagePath}'
-                                                            : '${logic.blogDetailsModel.data?.blog?.imagePath}',
+                                                        Get.find<GeneralController>().checKImage(logic.blogDetailsModel.data?.blog?.imagePath ??""),
+                                                        // logic.blogDetailsModel.data!.blog!.imagePath!.contains('assets')
+                                                        //     ? '$mediaUrl${logic.blogDetailsModel.data?.blog?.imagePath}'
+                                                        //     : '${logic.blogDetailsModel.data?.blog?.imagePath}',
                                                         fit: BoxFit.cover,
                                                       )),
                                                 )
@@ -329,7 +330,7 @@ class _CreateBlogPageState extends State<CreateBlogPage> {
                               if (!createBlogLogic.formKey.currentState!.validate()) {
                                 return;
                               }
-                              print(createBlogLogic.description);
+
                               if (((createBlogLogic.description ?? "").trim()).isEmpty) {
                                 showDialog(
                                     context: context,

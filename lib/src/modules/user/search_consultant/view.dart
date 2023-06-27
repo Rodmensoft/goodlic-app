@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
+import '../../../controller/general_controller.dart';
 import 'logic.dart';
 
 class SearchConsultantPage extends StatefulWidget {
@@ -159,9 +160,10 @@ class _SearchConsultantPageState extends State<SearchConsultantPage> {
                                                           : ClipRRect(
                                                               borderRadius: BorderRadius.circular(8.r),
                                                               child: Image.network(
-                                                                _searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath!.contains('assets')
-                                                                    ? '$mediaUrl${_searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath}'
-                                                                    : '${_searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath}',
+                                                                Get.find<GeneralController>().checKImage(_searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath!),
+                                                                // _searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath!.contains('assets')
+                                                                //     ? '$mediaUrl${_searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath}'
+                                                                //     : '${_searchConsultantLogic.searchConsultantModel.data!.results![index].user!.imagePath}',
                                                                 width: 76.w,
                                                                 height: 85.h,
                                                                 fit: BoxFit.cover,

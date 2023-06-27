@@ -118,7 +118,7 @@ class LanguagesChang extends Translations {
           'professional_consultants': 'Professional Consultants',
           'my_appointments': 'My Appointments',
           'manage_and_see_your_appointments_log': 'Manage And See Your Appointments Log',
-          'appt_detail': 'Appt Detail',
+          'appt_detail': 'Appointment Detail',
           'your_appointment_detail_with_null': 'Your Appointment Detail With Null',
           'reg_no': 'Reg No.',
           'question': 'Question',

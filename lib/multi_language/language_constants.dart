@@ -196,6 +196,7 @@ class LanguageConstant {
   static const String male = 'male';
   static const String female = 'female';
   static const String city = 'city';
+  static const String state = 'state';
   static const String country = 'country';
   static const String institute = 'institute';
   static const String year = 'year';

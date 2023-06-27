@@ -8,6 +8,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
 
+import '../../../../controller/general_controller.dart';
+
 paymentBottomSheetForLater(BuildContext context) async {
   return Get.bottomSheet(
     ///---payment-method-area
@@ -64,7 +66,10 @@ paymentBottomSheetForLater(BuildContext context) async {
                                   padding: const EdgeInsets.all(8.0),
                                   child: SvgPicture.asset(Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath!),
                                 )
-                              : Image.network('$mediaUrl${Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath}')
+                              : Image.network(
+                             // '$mediaUrl${Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath}'
+                              Get.find<GeneralController>().checKImage(Get.find<BookAppointmentLogic>().getPaymentMethodList[index].imagePath!)
+                          )
                           // Get.find<BookAppointmentLogic>().getPaymentMethodList[index].code!.contains('braintreePayment')
                           //     ? ClipRRect(
                           //         borderRadius: BorderRadius.circular(8.r),

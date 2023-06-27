@@ -126,7 +126,8 @@ class AllBlogsPage extends StatelessWidget {
                                                         borderRadius: BorderRadius.circular(14),
                                                         child: (e.imagePath ?? "").isNotEmpty
                                                             ? Image.network(
-                                                                e.imagePath!.contains('assets') ? '$mediaUrl${e.imagePath}' : '${e.imagePath}',
+                                                          Get.find<GeneralController>().checKImage( e.imagePath!),
+                                                               // e.imagePath!.contains('assets') ? '$mediaUrl${e.imagePath}' : '${e.imagePath}',
                                                                 fit: BoxFit.fill,
                                                               )
                                                             : Image.asset(

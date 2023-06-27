@@ -140,6 +140,7 @@ class ConsultantAppointmentDetailLogic extends GetxController {
     Get.find<ChatLogic>().userEmail = selectedAppointmentData.mentee!.email;
     Get.find<ChatLogic>().userImage = selectedAppointmentData.mentee!.imagePath;
     Get.find<ChatLogic>().updateGetMessagesLoader(true);
+    Get.find<GeneralController>().storageBox.write('appointmentId',selectedAppointmentData.id);
     Get.find<ChatLogic>().updateSenderMessageGetId(Get.find<GeneralController>().storageBox.read('userID'));
     Get.find<ChatLogic>().updateReceiverMessageGetId(selectedAppointmentData.menteeId);
     Get.toNamed(PageRoutes.chatScreen);

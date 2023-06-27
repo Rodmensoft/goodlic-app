@@ -56,9 +56,45 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Get.find<GeneralController>().updateFormLoaderController(false);
+      Get.find<CreateProfileLogic>().addressController.text = Get.find<GeneralController>().initialAddress.value;
+
+      getState();
     });
   }
+  getState() async {
+    await Future.delayed(Duration(seconds: 5));
+    Get.put(CreateProfileLogic());
+    if (Get.find<CreateProfileLogic>().countryDropDownList.contains(Get.find<GeneralController>().initialCountry.value)) {
+      var countryId = Get.find<CreateProfileLogic>()
+          .mentorProfileGenericDataModel
+          .data
+          ?.countries![Get.find<CreateProfileLogic>().countryDropDownList.indexOf(Get.find<GeneralController>().initialCountry.value)]
+          .id;
 
+      getMethod(context, getstatesByIdUrl, {'token': '123', 'country_id': countryId}, false, getStateRepo);
+
+      Get.find<CreateProfileLogic>().selectedState = Get.find<GeneralController>().initialState.value;
+
+      getCities();
+    }
+  }
+
+
+  getCities() async {
+    await Future.delayed(Duration(seconds: 5));
+
+    if (Get.find<CreateProfileLogic>().stateDropDownList.contains(Get.find<GeneralController>().initialState.value)) {
+      var countryId = Get.find<CreateProfileLogic>()
+          .stateByModel
+          .data
+          ?.states![Get.find<CreateProfileLogic>().stateDropDownList.indexOf(Get.find<GeneralController>().initialState.value)]
+          .id;
+
+      getMethod(context, getCitiesByIdUrl, {'token': '123', 'state_id': countryId}, false, getCitiesRepo);
+
+      Get.find<CreateProfileLogic>().selectedCity = Get.find<GeneralController>().initialCity.value;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GeneralController>(
@@ -96,9 +132,10 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             child: ClipRRect(
                                                 borderRadius: BorderRadius.circular(5),
                                                 child: Image.network(
-                                                  _createProfileLogic.generalInfoPostModel.data!.userDetail!.imagePath!.contains('assets')
-                                                      ? '$mediaUrl${_createProfileLogic.generalInfoPostModel.data!.userDetail!.imagePath}'
-                                                      : '${_createProfileLogic.generalInfoPostModel.data!.userDetail!.imagePath}',
+                                                  Get.find<GeneralController>().checKImage(_createProfileLogic.generalInfoPostModel.data!.userDetail!.imagePath!),
+                                                  // _createProfileLogic.generalInfoPostModel.data!.userDetail!.imagePath!.contains('assets')
+                                                  //     ? '$mediaUrl${_createProfileLogic.generalInfoPostModel.data!.userDetail!.imagePath}'
+                                                  //     : '${_createProfileLogic.generalInfoPostModel.data!.userDetail!.imagePath}',
                                                   fit: BoxFit.cover,
                                                 )),
                                           ),
@@ -212,52 +249,97 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                               ),
                             ),
 
-                            // ///---email-field
-                            // Padding(
-                            //   padding: EdgeInsetsDirectional.fromSTEB(
-                            //       15.w, 0, 15.w, 16.h),
-                            //   child: TextFormField(
-                            //     style: state.textFieldTextStyle,
-                            //     controller: _createProfileLogic.emailController,
-                            //     keyboardType: TextInputType.emailAddress,
-                            //     decoration: InputDecoration(
-                            //       contentPadding:
-                            //           EdgeInsetsDirectional.fromSTEB(
-                            //               25.w, 15.h, 25.w, 15.h),
-                            //       hintText: 'Email Address',
-                            //       hintStyle: state.hintTextStyle,
-                            //       fillColor: Colors.white,
-                            //       filled: true,
-                            //       enabledBorder: OutlineInputBorder(
-                            //           borderRadius: BorderRadius.circular(8.r),
-                            //           borderSide: const BorderSide(
-                            //               color: Colors.transparent)),
-                            //       border: OutlineInputBorder(
-                            //           borderRadius: BorderRadius.circular(8.r),
-                            //           borderSide: const BorderSide(
-                            //               color: Colors.transparent)),
-                            //       focusedBorder: OutlineInputBorder(
-                            //           borderRadius: BorderRadius.circular(8.r),
-                            //           borderSide: const BorderSide(
-                            //               color: customLightThemeColor)),
-                            //       errorBorder: OutlineInputBorder(
-                            //           borderRadius: BorderRadius.circular(8.r),
-                            //           borderSide:
-                            //               const BorderSide(color: Colors.red)),
-                            //     ),
-                            //     validator: (String? value) {
-                            //       if (value!.isEmpty) {
-                            //         return 'Field Required'.tr;
-                            //       } else if (!GetUtils.isEmail(
-                            //           _createProfileLogic
-                            //               .emailController.text)) {
-                            //         return 'Enter Valid Email';
-                            //       } else {
-                            //         return null;
-                            //       }
-                            //     },
-                            //   ),
-                            // ),
+                            ///---email-field
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  15.w, 0, 15.w, 16.h),
+                              child: TextFormField(
+                                style: state.textFieldTextStyle,
+                                controller: _createProfileLogic.emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          25.w, 15.h, 25.w, 15.h),
+                                  hintText: 'Email Address',
+                                  hintStyle: state.hintTextStyle,
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: customLightThemeColor)),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide:
+                                          const BorderSide(color: Colors.red)),
+                                ),
+                                validator: (String? value) {
+                                  if (value!.isEmpty) {
+                                    return 'Field Required'.tr;
+                                  } else if (!GetUtils.isEmail(
+                                      _createProfileLogic
+                                          .emailController.text)) {
+                                    return 'Enter Valid Email';
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  15.w, 0, 15.w, 16.h),
+                              child: TextFormField(
+                                style: state.textFieldTextStyle,
+                                controller: _createProfileLogic.phoneController,
+                                keyboardType: TextInputType.phone,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      25.w, 15.h, 25.w, 15.h),
+                                  hintText: 'Phone Number',
+                                  hintStyle: state.hintTextStyle,
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: const BorderSide(
+                                          color: customLightThemeColor)),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide:
+                                      const BorderSide(color: Colors.red)),
+                                ),
+                                validator: (String? value) {
+                                  if (value!.isEmpty) {
+                                    return 'Field Required'.tr;
+                                  } else if (!GetUtils.isPhoneNumber(
+                                      _createProfileLogic
+                                          .phoneController.text)) {
+                                    return 'Enter Valid Phone number';
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                              ),
+                            ),
 
                             ///---cnic-field
                             Padding(
@@ -608,19 +690,160 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                             ),
 
                             ///---country-city
+                            // Row(
+                            //   children: [
+                            //     ///---country
+                            //     Expanded(
+                            //       child: Padding(
+                            //         padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 8.w, 16.h),
+                            //         child: ButtonTheme(
+                            //           alignedDropdown: true,
+                            //           child: DropdownButtonHideUnderline(
+                            //             child: DropdownButtonFormField<String>(
+                            //               onTap: () {
+                            //                 FocusScopeNode currentFocus = FocusScope.of(context);
+                            //                 if (!currentFocus.hasPrimaryFocus) {
+                            //                   currentFocus.unfocus();
+                            //                 }
+                            //               },
+                            //               hint: Text(
+                            //                 LanguageConstant.country.tr,
+                            //                 style: state.hintTextStyle,
+                            //               ),
+                            //               decoration: InputDecoration(
+                            //                 contentPadding: EdgeInsetsDirectional.fromSTEB(15.w, 14.h, 15.w, 14.h),
+                            //                 fillColor: Colors.white,
+                            //                 filled: true,
+                            //                 enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                            //                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                            //                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                            //                 errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                            //               ),
+                            //               isExpanded: true,
+                            //               focusColor: Colors.white,
+                            //               style: state.textFieldTextStyle,
+                            //               iconEnabledColor: customThemeColor,
+                            //               icon: const Icon(Icons.keyboard_arrow_down),
+                            //               iconSize: 25,
+                            //               value: _createProfileLogic.selectedCountry,
+                            //               items: _createProfileLogic.countryDropDownList.map<DropdownMenuItem<String>>((String value) {
+                            //                 return DropdownMenuItem<String>(
+                            //                   value: value,
+                            //                   child: Text(
+                            //                     value,
+                            //                     style: state.textFieldTextStyle,
+                            //                   ),
+                            //                 );
+                            //               }).toList(),
+                            //               onChanged: (String? value) {
+                            //                 setState(() {
+                            //                   _createProfileLogic.selectedCountry = value;
+                            //                 });
+                            //                 Get.find<GeneralController>().updateFormLoaderController(true);
+                            //                 getMethod(
+                            //                     context,
+                            //                     getCitiesByIdUrl,
+                            //                     {
+                            //                       'token': '123',
+                            //                       'country_id': _createProfileLogic
+                            //                           .mentorProfileGenericDataModel.data!.countries![_createProfileLogic.countryDropDownList.indexOf(_createProfileLogic.selectedCountry!)].id
+                            //                     },
+                            //                     false,
+                            //                     getCitiesRepo);
+                            //               },
+                            //               validator: (String? value) {
+                            //                 if (value == null) {
+                            //                   return LanguageConstant.fieldRequired.tr;
+                            //                 } else {
+                            //                   return null;
+                            //                 }
+                            //               },
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //
+                            //     ///---city
+                            //     Expanded(
+                            //       child: Padding(
+                            //         padding: EdgeInsetsDirectional.fromSTEB(8.w, 0, 15.w, 16.h),
+                            //         child: ButtonTheme(
+                            //           alignedDropdown: true,
+                            //           child: DropdownButtonHideUnderline(
+                            //             child: DropdownButtonFormField<String>(
+                            //               onTap: () {
+                            //                 FocusScopeNode currentFocus = FocusScope.of(context);
+                            //                 if (!currentFocus.hasPrimaryFocus) {
+                            //                   currentFocus.unfocus();
+                            //                 }
+                            //               },
+                            //               hint: Text(
+                            //                 LanguageConstant.city.tr,
+                            //                 style: state.hintTextStyle,
+                            //               ),
+                            //               decoration: InputDecoration(
+                            //                 contentPadding: EdgeInsetsDirectional.fromSTEB(15.w, 14.h, 15.w, 14.h),
+                            //                 fillColor: Colors.white,
+                            //                 filled: true,
+                            //                 enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                            //                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
+                            //                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
+                            //                 errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                            //               ),
+                            //               isExpanded: true,
+                            //               focusColor: Colors.white,
+                            //               style: state.textFieldTextStyle,
+                            //               iconEnabledColor: customThemeColor,
+                            //               icon: const Icon(Icons.keyboard_arrow_down),
+                            //               iconSize: 25,
+                            //               value: _createProfileLogic.selectedCity,
+                            //               items: _createProfileLogic.cityDropDownList.map<DropdownMenuItem<String>>((String value) {
+                            //                 return DropdownMenuItem<String>(
+                            //                   value: value,
+                            //                   child: Text(
+                            //                     value,
+                            //                     style: state.textFieldTextStyle,
+                            //                   ),
+                            //                 );
+                            //               }).toList(),
+                            //               onChanged: (String? value) {
+                            //                 setState(() {
+                            //                   _createProfileLogic.selectedCity = value;
+                            //                 });
+                            //               },
+                            //               validator: (String? value) {
+                            //                 if (value == null) {
+                            //                   return LanguageConstant.fieldRequired.tr;
+                            //                 } else {
+                            //                   return null;
+                            //                 }
+                            //               },
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                             Row(
                               children: [
                                 ///---country
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(15.w, 0, 8.w, 16.h),
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
+                                        16.w, 0.h, 8.w, 16.h),
                                     child: ButtonTheme(
                                       alignedDropdown: true,
                                       child: DropdownButtonHideUnderline(
-                                        child: DropdownButtonFormField<String>(
+                                        child: DropdownButtonFormField<
+                                            String>(
                                           onTap: () {
-                                            FocusScopeNode currentFocus = FocusScope.of(context);
-                                            if (!currentFocus.hasPrimaryFocus) {
+                                            FocusScopeNode currentFocus =
+                                            FocusScope.of(context);
+                                            if (!currentFocus
+                                                .hasPrimaryFocus) {
                                               currentFocus.unfocus();
                                             }
                                           },
@@ -629,49 +852,90 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             style: state.hintTextStyle,
                                           ),
                                           decoration: InputDecoration(
-                                            contentPadding: EdgeInsetsDirectional.fromSTEB(15.w, 14.h, 15.w, 14.h),
+                                            contentPadding:
+                                            EdgeInsetsDirectional
+                                                .fromSTEB(15.w, 14.h,
+                                                15.w, 14.h),
                                             fillColor: Colors.white,
                                             filled: true,
-                                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
-                                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
-                                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
-                                            errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    8.r),
+                                                borderSide:
+                                                const BorderSide(
+                                                    color: Colors
+                                                        .transparent)),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    8.r),
+                                                borderSide:
+                                                const BorderSide(
+                                                    color: Colors
+                                                        .transparent)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    8.r),
+                                                borderSide: const BorderSide(
+                                                    color:
+                                                    customLightThemeColor)),
+                                            errorBorder:
+                                            OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius
+                                                    .circular(
+                                                    8.r),
+                                                borderSide:
+                                                const BorderSide(
+                                                    color: Colors
+                                                        .red)),
                                           ),
                                           isExpanded: true,
                                           focusColor: Colors.white,
                                           style: state.textFieldTextStyle,
-                                          iconEnabledColor: customThemeColor,
-                                          icon: const Icon(Icons.keyboard_arrow_down),
+                                          iconEnabledColor:
+                                          customThemeColor,
+                                          icon: const Icon(
+                                              Icons.keyboard_arrow_down),
                                           iconSize: 25,
-                                          value: _createProfileLogic.selectedCountry,
-                                          items: _createProfileLogic.countryDropDownList.map<DropdownMenuItem<String>>((String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(
-                                                value,
-                                                style: state.textFieldTextStyle,
-                                              ),
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? value) {
-                                            setState(() {
-                                              _createProfileLogic.selectedCountry = value;
-                                            });
+                                          value: _createProfileLogic
+                                              .selectedCountry,
+                                          items: _createProfileLogic
+                                              .countryDropDownList
+                                              .map<
+                                              DropdownMenuItem<
+                                                  String>>(
+                                                  (String value) {
+                                                return DropdownMenuItem<
+                                                    String>(
+                                                  value: value,
+                                                  child: Text(
+                                                    value,
+                                                    style: state
+                                                        .textFieldTextStyle,
+                                                  ),
+                                                );
+                                              }).toList(),
+                                          onChanged: (String? value) async {
+                                            _createProfileLogic.selectedCountry = value;
+                                            _createProfileLogic.selectedState = null;
+                                            _createProfileLogic.selectedCity=null;
+                                            _createProfileLogic.update();
                                             Get.find<GeneralController>().updateFormLoaderController(true);
-                                            getMethod(
-                                                context,
-                                                getCitiesByIdUrl,
+                                            await  getMethod(context, getstatesByIdUrl,
                                                 {
                                                   'token': '123',
-                                                  'country_id': _createProfileLogic
-                                                      .mentorProfileGenericDataModel.data!.countries![_createProfileLogic.countryDropDownList.indexOf(_createProfileLogic.selectedCountry!)].id
+                                                  'country_id': _createProfileLogic.mentorProfileGenericDataModel.data!.countries![_createProfileLogic.countryDropDownList.indexOf(_createProfileLogic.selectedCountry!)].id
                                                 },
                                                 false,
-                                                getCitiesRepo);
-                                          },
+                                                getStateRepo);
+                                            },
                                           validator: (String? value) {
                                             if (value == null) {
-                                              return LanguageConstant.fieldRequired.tr;
+                                              return LanguageConstant
+                                                  .fieldRequired.tr;
                                             } else {
                                               return null;
                                             }
@@ -682,41 +946,79 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                   ),
                                 ),
 
-                                ///---city
+                                ///---state
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(8.w, 0, 15.w, 16.h),
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
+                                        8.w, 0.h, 16.w, 16.h),
                                     child: ButtonTheme(
                                       alignedDropdown: true,
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButtonFormField<String>(
                                           onTap: () {
-                                            FocusScopeNode currentFocus = FocusScope.of(context);
-                                            if (!currentFocus.hasPrimaryFocus) {
+                                            FocusScopeNode currentFocus =
+                                            FocusScope.of(context);
+                                            if (!currentFocus
+                                                .hasPrimaryFocus) {
                                               currentFocus.unfocus();
                                             }
                                           },
                                           hint: Text(
-                                            LanguageConstant.city.tr,
+                                            LanguageConstant.state.tr,
                                             style: state.hintTextStyle,
                                           ),
                                           decoration: InputDecoration(
-                                            contentPadding: EdgeInsetsDirectional.fromSTEB(15.w, 14.h, 15.w, 14.h),
+                                            contentPadding:
+                                            EdgeInsetsDirectional
+                                                .fromSTEB(15.w, 14.h,
+                                                15.w, 14.h),
                                             fillColor: Colors.white,
+                                            enabled: true,
                                             filled: true,
-                                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
-                                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.transparent)),
-                                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: customLightThemeColor)),
-                                            errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r), borderSide: const BorderSide(color: Colors.red)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    8.r),
+                                                borderSide:
+                                                const BorderSide(
+                                                    color: Colors
+                                                        .transparent)),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    8.r),
+                                                borderSide:
+                                                const BorderSide(
+                                                    color: Colors
+                                                        .transparent)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    8.r),
+                                                borderSide: const BorderSide(
+                                                    color:
+                                                    customLightThemeColor)),
+                                            errorBorder:
+                                            OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius
+                                                    .circular(
+                                                    8.r),
+                                                borderSide:
+                                                const BorderSide(
+                                                    color: Colors
+                                                        .red)),
                                           ),
                                           isExpanded: true,
                                           focusColor: Colors.white,
                                           style: state.textFieldTextStyle,
                                           iconEnabledColor: customThemeColor,
-                                          icon: const Icon(Icons.keyboard_arrow_down),
+                                          icon: const Icon(
+                                              Icons.keyboard_arrow_down),
                                           iconSize: 25,
-                                          value: _createProfileLogic.selectedCity,
-                                          items: _createProfileLogic.cityDropDownList.map<DropdownMenuItem<String>>((String value) {
+                                          value: _createProfileLogic.selectedState,
+                                          items: Get.find<CreateProfileLogic>().stateDropDownList.map<DropdownMenuItem<String>>((dynamic value) {
                                             return DropdownMenuItem<String>(
                                               value: value,
                                               child: Text(
@@ -726,13 +1028,138 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                             );
                                           }).toList(),
                                           onChanged: (String? value) {
-                                            setState(() {
-                                              _createProfileLogic.selectedCity = value;
-                                            });
+                                            _createProfileLogic.selectedState = value;
+                                            _createProfileLogic.selectedCity=null;
+                                            getMethod(context, getCitiesByIdUrl,
+                                                {
+                                                  'token': '123',
+                                                  'state_id': _createProfileLogic.stateByModel.data!.states![_createProfileLogic.stateDropDownList.indexOf(_createProfileLogic.selectedState!)].id
+                                                },
+                                                false,
+                                                getCitiesRepo);
+                                            _createProfileLogic.update();
                                           },
                                           validator: (String? value) {
                                             if (value == null) {
-                                              return LanguageConstant.fieldRequired.tr;
+                                              return LanguageConstant
+                                                  .fieldRequired.tr;
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                ///---country
+
+
+                                ///---city
+                                Expanded(
+                                  child: Padding(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(
+                                        8.w, 0.h, 16.w, 16.h),
+                                    child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButtonHideUnderline(
+                                        child: DropdownButtonFormField<
+                                            String>(
+                                          onTap: () {
+                                            FocusScopeNode currentFocus =
+                                            FocusScope.of(context);
+                                            if (!currentFocus
+                                                .hasPrimaryFocus) {
+                                              currentFocus.unfocus();
+                                            }
+                                          },
+                                          hint: Text(
+                                            LanguageConstant.city.tr,
+                                            style: state.hintTextStyle,
+                                          ),
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                            EdgeInsetsDirectional
+                                                .fromSTEB(15.w, 14.h,
+                                                15.w, 14.h),
+                                            fillColor: Colors.white,
+                                            enabled: true,
+                                            filled: true,
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    8.r),
+                                                borderSide:
+                                                const BorderSide(
+                                                    color: Colors
+                                                        .transparent)),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    8.r),
+                                                borderSide:
+                                                const BorderSide(
+                                                    color: Colors
+                                                        .transparent)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    8.r),
+                                                borderSide: const BorderSide(
+                                                    color:
+                                                    customLightThemeColor)),
+                                            errorBorder:
+                                            OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius
+                                                    .circular(
+                                                    8.r),
+                                                borderSide:
+                                                const BorderSide(
+                                                    color: Colors
+                                                        .red)),
+                                          ),
+                                          isExpanded: true,
+                                          focusColor: Colors.white,
+                                          style: state.textFieldTextStyle,
+                                          iconEnabledColor:
+                                          customThemeColor,
+                                          icon: const Icon(
+                                              Icons.keyboard_arrow_down),
+                                          iconSize: 25,
+                                          value: _createProfileLogic
+                                              .selectedCity,
+                                          items: _createProfileLogic
+                                              .cityDropDownList
+                                              .map<
+                                              DropdownMenuItem<
+                                                  String>>(
+                                                  (String value) {
+                                                return DropdownMenuItem<
+                                                    String>(
+                                                  value: value,
+                                                  child: Text(
+                                                    value,
+                                                    style: state
+                                                        .textFieldTextStyle,
+                                                  ),
+                                                );
+                                              }).toList(),
+                                          onChanged: (String? value) {
+                                            _createProfileLogic
+                                                .selectedCity = value;
+                                            _createProfileLogic
+                                                .update();
+                                          },
+                                          validator: (String? value) {
+                                            if (value == null) {
+                                              return LanguageConstant
+                                                  .fieldRequired.tr;
                                             } else {
                                               return null;
                                             }
@@ -773,8 +1200,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                     'last_name': _createProfileLogic.lastNameController.text,
                                     'father_name': _createProfileLogic.fatherNameController.text,
                                     'cnic': _createProfileLogic.cnicController.text,
-                                    // 'email': _createProfileLogic
-                                    //     .emailController.text,
+                                    'email': _createProfileLogic.emailController.text,
+                                    'phone': _createProfileLogic.phoneController.text,
                                     'address': _createProfileLogic.addressController.text,
                                     'about': _createProfileLogic.aboutController.text,
                                     'gender': _createProfileLogic.selectedGender,
@@ -785,6 +1212,7 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
                                     'country':
                                         _createProfileLogic.mentorProfileGenericDataModel.data!.countries![_createProfileLogic.countryDropDownList.indexOf(_createProfileLogic.selectedCountry!)].id,
                                     'city': _createProfileLogic.selectedCity,
+                                    'state_id':_createProfileLogic.selectedState,
                                   },
                                   true,
                                   mentorGeneralInfo2Repo);
@@ -910,7 +1338,9 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
       'last_name': Get.find<CreateProfileLogic>().lastNameController.text,
       'father_name': Get.find<CreateProfileLogic>().fatherNameController.text,
       'cnic': Get.find<CreateProfileLogic>().cnicController.text,
-      // 'email': Get.find<CreateProfileLogic>().emailController.text,
+       'email': Get.find<CreateProfileLogic>().emailController.text,
+
+      'phone': Get.find<CreateProfileLogic>().phoneController.text,
       'address': Get.find<CreateProfileLogic>().addressController.text,
       'about': Get.find<CreateProfileLogic>().aboutController.text,
       'gender': Get.find<CreateProfileLogic>().selectedGender,
@@ -924,6 +1354,8 @@ class _GeneralInfoViewState extends State<GeneralInfoView> {
       'country':
           Get.find<CreateProfileLogic>().mentorProfileGenericDataModel.data!.countries![Get.find<CreateProfileLogic>().countryDropDownList.indexOf(Get.find<CreateProfileLogic>().selectedCountry!)].id,
       'city': Get.find<CreateProfileLogic>().selectedCity,
+      'state_id':   Get.find<CreateProfileLogic>().stateByModel.data!.states![Get.find<CreateProfileLogic>().stateDropDownList.indexOf(Get.find<CreateProfileLogic>().selectedState!)].id,
+
       'picture': await dio_instance.MultipartFile.fromFile(
         file1!.path,
       )

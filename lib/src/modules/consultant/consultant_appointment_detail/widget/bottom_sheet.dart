@@ -191,40 +191,41 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                     ),
 
                                     ///---document
-                                    _consultantAppointmentDetailLogic.selectedAppointmentData.file == null ||
-                                            _consultantAppointmentDetailLogic.selectedAppointmentData.file == ''
-                                        ? const SizedBox()
-                                        : Expanded(
-                                            flex: 2,
-                                            child: InkWell(
-                                              onTap: () {
-                                                launch(_consultantAppointmentDetailLogic.selectedAppointmentData.file!.contains('assets')
-                                                    ? '$mediaUrl/${_consultantAppointmentDetailLogic.selectedAppointmentData.file}'
-                                                    : '${_consultantAppointmentDetailLogic.selectedAppointmentData.file}');
-                                              },
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    LanguageConstant.document.tr,
-                                                    style: state.sectionLabelTextStyle,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 8.h,
-                                                  ),
-                                                  Text(
-                                                    _consultantAppointmentDetailLogic.selectedAppointmentData.fileType!,
-                                                    softWrap: true,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    maxLines: 1,
-                                                    style: state.sectionDataTextStyle!
-                                                        .copyWith(color: customLightThemeColor, decoration: TextDecoration.underline),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
+                                    // _consultantAppointmentDetailLogic.selectedAppointmentData.file == null ||
+                                    //         _consultantAppointmentDetailLogic.selectedAppointmentData.file == ''
+                                    //     ? const SizedBox()
+                                    //     : Expanded(
+                                    //         flex: 2,
+                                    //         child: InkWell(
+                                    //           onTap: () {
+                                    //             launch(_consultantAppointmentDetailLogic.selectedAppointmentData.file!.contains('assets')
+                                    //                 ? '$mediaUrl/${_consultantAppointmentDetailLogic.selectedAppointmentData.file}'
+                                    //                 : '${_consultantAppointmentDetailLogic.selectedAppointmentData.file}');
+                                    //           },
+                                    //           child: Column(
+                                    //             crossAxisAlignment: CrossAxisAlignment.start,
+                                    //             mainAxisAlignment: MainAxisAlignment.center,
+                                    //             children: [
+                                    //               Text(
+                                    //                 LanguageConstant.document.tr,
+                                    //                 style: state.sectionLabelTextStyle,
+                                    //               ),
+                                    //               SizedBox(
+                                    //                 height: 8.h,
+                                    //               ),
+                                    //               Text(
+                                    //                 _consultantAppointmentDetailLogic.selectedAppointmentData.fileType!,
+                                    //                 softWrap: true,
+                                    //                 overflow: TextOverflow.ellipsis,
+                                    //                 maxLines: 1,
+                                    //                 style: state.sectionDataTextStyle!
+                                    //                     .copyWith(color: customLightThemeColor, decoration: TextDecoration.underline),
+                                    //               ),
+                                    //             ],
+                                    //           ),
+                                    //         ),
+                                    //       ),
+
                                   ],
                                 ),
                                 SizedBox(
@@ -261,7 +262,76 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                 SizedBox(
                                   height: 18.h,
                                 ),
+                                _consultantAppointmentDetailLogic.selectedAppointmentData.media!.isEmpty
+                                    ?const SizedBox():
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      LanguageConstant.document.tr,
+                                      style: state.sectionLabelTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 8.h,
+                                    ),
+                                    Container(
+                                      height: 110,
+                                      child: ListView.builder(
 
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 4),
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    _consultantAppointmentDetailLogic.selectedAppointmentData.media![index].name!,
+                                                    softWrap: true,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    style: state.sectionDataTextStyle,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 10.w,
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    launchUrl(
+                                                      Uri.parse('$mediaUrl/${_consultantAppointmentDetailLogic.selectedAppointmentData.media![index].url}'),
+                                                      mode: LaunchMode.externalApplication,
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      color: customThemeColor,
+                                                      borderRadius: BorderRadius.circular(10.0),
+                                                    ),
+                                                    width: 55,
+                                                    height: 25,
+                                                    child: Center(
+                                                      child: Text("View",
+                                                          style: TextStyle(
+                                                            //    fontFamily: PoppinsFontFamily.semiBold,
+                                                            fontSize: 12.sp,
+                                                            color: Colors.white,
+                                                          )),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 10.w,
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                        itemCount: _consultantAppointmentDetailLogic.selectedAppointmentData.media!.length,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 ///---- attachment and notes
                                 _consultantAppointmentDetailLogic.selectedAppointmentData.appointmentStatus == 2
                                     ? Row(
@@ -536,7 +606,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                   onTap: () {
                                                     ///---make-notification
                                                     Get.find<GeneralController>()
-                                                        .updateNotificationBody('Your Appointment is Accepted', '', null, 'mentee/appointment/log', null);
+                                                        .updateNotificationBody('Your Appointment is Accepted', '', null, 'mentee/appointment-log-detail', null);
                                                     Get.find<GeneralController>()
                                                         .updateUserIdForSendNotification(_consultantAppointmentDetailLogic.selectedAppointmentData.menteeId);
                                                     Get.find<GeneralController>().updateFormLoaderController(true);
@@ -573,7 +643,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
                                                   onTap: () {
                                                     ///---make-notification
                                                     Get.find<GeneralController>()
-                                                        .updateNotificationBody('Your Appointment is Cancelled', '', null, 'mentee/appointment/log', null);
+                                                        .updateNotificationBody('Your Appointment is Cancelled', '', null, 'mentee/appointment-log-detail', null);
                                                     Get.find<GeneralController>()
                                                         .updateUserIdForSendNotification(_consultantAppointmentDetailLogic.selectedAppointmentData.menteeId);
                                                     Get.find<GeneralController>().updateFormLoaderController(true);
@@ -1111,7 +1181,7 @@ class _ModalInsideModalForConsultantState extends State<ModalInsideModalForConsu
             degreeImage = null;
             log('testing message.... ${response.data['message']}');
           });
-          Get.find<GeneralController>().updateNotificationBody('Your Appointment is Completed', '', null, 'mentee/appointment/log', null);
+          Get.find<GeneralController>().updateNotificationBody('Your Appointment is Completed', '', null, 'mentee/appointment-log-detail', null);
           Get.find<GeneralController>().updateUserIdForSendNotification(ConsultantAppointmentDetailLogic().selectedAppointmentData.menteeId);
           Get.find<GeneralController>().updateFormLoaderController(true);
           Get.find<ConsultantAppointmentLogic>().updateGetUserAppointmentLoader(true);

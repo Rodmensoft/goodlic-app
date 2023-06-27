@@ -62,31 +62,31 @@ class LoginLogic extends GetxController {
       timeout: const Duration(seconds: 55),
       verificationCompleted: (AuthCredential credential) async {
         log('Credential from verificationCompleted ---->> $credential');
-        Get.find<GeneralController>().updateFormLoaderController(true);
-        User? user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
-
-        if (user != null) {
-          log('user added by otp');
-
-          Get.find<GeneralController>().storageBox.write('userID', Get.find<LoginLogic>().loginOtpModel.data!.userDetail![0].id);
-          Get.find<GeneralController>().storageBox.write('authToken', Get.find<LoginLogic>().loginOtpModel.data!.accessToken);
-
-          if (Get.find<LoginLogic>().loginModel.data!.role == 'Mentee') {
-            Get.find<GeneralController>().storageBox.write('userRole', Get.find<LoginLogic>().loginModel.data!.role);
-
-            Get.offAllNamed(PageRoutes.userHome);
-            log('loginRepoMentee ------>> ${Get.find<LoginLogic>().loginModel.data}');
-          } else {
-            Get.find<GeneralController>().storageBox.write('userRole', Get.find<LoginLogic>().loginModel.data!.role);
-
-            Get.offAllNamed(PageRoutes.consultantDashboard);
-            log('loginRepoMentor ------>> ${Get.find<LoginLogic>().loginModel.data}');
-          }
-        } else {
-          Get.find<GeneralController>().updateFormLoaderController(false);
-          Get.find<GeneralController>().update();
-          log("Error");
-        }
+        // Get.find<GeneralController>().updateFormLoaderController(true);
+        // User? user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+        //
+        // if (user != null) {
+        //   log('user added by otp');
+        //
+        //   Get.find<GeneralController>().storageBox.write('userID', Get.find<LoginLogic>().loginOtpModel.data!.userDetail![0].id);
+        //   Get.find<GeneralController>().storageBox.write('authToken', Get.find<LoginLogic>().loginOtpModel.data!.accessToken);
+        //
+        //   if (Get.find<LoginLogic>().loginModel.data?.role == 'Mentee') {
+        //     Get.find<GeneralController>().storageBox.write('userRole', Get.find<LoginLogic>().loginModel.data!.role);
+        //
+        //     Get.offAllNamed(PageRoutes.userHome);
+        //     log('loginRepoMentee ------>> ${Get.find<LoginLogic>().loginModel.data}');
+        //   } else {
+        //     Get.find<GeneralController>().storageBox.write('userRole', Get.find<LoginLogic>().loginModel.data!.role);
+        //
+        //     Get.offAllNamed(PageRoutes.consultantDashboard);
+        //     log('loginRepoMentor ------>> ${Get.find<LoginLogic>().loginModel.data}');
+        //   }
+        // } else {
+        //   Get.find<GeneralController>().updateFormLoaderController(false);
+        //   Get.find<GeneralController>().update();
+        //   log("Error");
+        // }
       },
       verificationFailed: (FirebaseAuthException exception) {
         log('Exception ---->> ${exception.message}');
@@ -112,7 +112,7 @@ class LoginLogic extends GetxController {
       );
 
       User? user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
-      print(user.toString());
+
 
       if (user != null) {
         log('user added by otp');

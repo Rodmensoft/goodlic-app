@@ -5,6 +5,6 @@ import 'package:get/get.dart';
 
 class MainLogic extends GetxController {
   GetConfigCredentialModel getConfigCredentialModel = GetConfigCredentialModel();
-  GetGeneralSettingModel getGeneralSettingModel = GetGeneralSettingModel();
+ // GetGeneralSettingModel getGeneralSettingModel = GetGeneralSettingModel();
   TermsConditionModel termsConditionModel = TermsConditionModel();
 }

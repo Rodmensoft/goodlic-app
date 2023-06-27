@@ -36,7 +36,7 @@ class _ConsultantAppointmentPageState extends State<ConsultantAppointmentPage> w
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    Get.find<GeneralController>().storageBox.remove('appointmentId');
     getMethod(context, getConsultantAllAppointmentsURL, {'token': '123', 'mentor_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getConsultantAllAppointmentsRepo);
     Get.find<ConsultantAppointmentLogic>().tabController = TabController(length: logic.tabBarList.length, vsync: this);
 

@@ -466,11 +466,16 @@ class _CallWaitingViewState extends State<CallWaitingView> {
                           color: Colors.white,
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                              image: NetworkImage(Get.find<AgoraLogic>()
-                                      .userImage!
-                                      .contains('assets')
-                                  ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
-                                  : Get.find<AgoraLogic>().userImage!))),
+                              image: NetworkImage(
+                                  Get.find<GeneralController>().checKImage(Get.find<AgoraLogic>().userImage!),
+                                  // Get.find<AgoraLogic>()
+                                  //     .userImage!
+                                  //     .contains('assets')
+                                  // ? '$mediaUrl${Get.find<AgoraLogic>().userImage}'
+                                  // : Get.find<AgoraLogic>().userImage!
+                                )
+
+                          )),
                     ),
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 27.h, 0, 0),

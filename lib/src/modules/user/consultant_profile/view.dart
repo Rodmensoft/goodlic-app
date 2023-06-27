@@ -18,11 +18,14 @@ import 'package:resize/resize.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
 import '../../../api_services/urls.dart';
+import '../edit_user_profile/get_repo.dart';
+import '../edit_user_profile/logic.dart';
 import 'logic.dart';
 
 class ConsultantProfilePage extends StatefulWidget {
   int? appointmentId;
   int? mentorId;
+
   bool? reschedule;
   ConsultantProfilePage({Key? key, this.appointmentId, this.mentorId, this.reschedule}) : super(key: key);
 
@@ -39,6 +42,12 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    Get.put(UserHomeLogic());
+
+    Get.put(EditUserProfileLogic());
+    getMethod(context, getMenteeProfileUrl, {'token': '123', 'user_id': Get.find<GeneralController>().storageBox.read('userID')}, true, getMenteeProfileRepo);
+
     widget.mentorId != null
         ? getMethod(context, getMentorProfileForMenteeUrl, {'token': '123', 'mentor_id': widget.mentorId}, true, getMentorProfileForMenteeRepo)
         : getMethod(context, getMentorProfileForMenteeUrl, {'token': '123', 'mentor_id': Get.find<UserHomeLogic>().selectedConsultantID}, true, getMentorProfileForMenteeRepo);
@@ -132,9 +141,10 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                                       ));
                                                     },
                                                     child: Image.network(
-                                                      _consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath.contains('assets')
-                                                          ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
-                                                          : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
+                  Get.find<GeneralController>().checKImage(_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath),
+                                                      // _consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath.contains('assets')
+                                                      //     ? '$mediaUrl${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}'
+                                                      //     : '${_consultantProfileLogic.consultantProfileModel.data!.userDetail!.imagePath}',
                                                       width: MediaQuery.of(context).size.width,
                                                       fit: BoxFit.fill,
                                                       errorBuilder: (context, error, stackTrace) {
@@ -477,7 +487,22 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                     _consultantProfileLogic.consultantProfileLoader!
                         ? const SizedBox()
                         : Get.find<GeneralController>().storageBox.hasData('authToken')
-                            ? widget.reschedule == true
+                        ?  Get.find<EditUserProfileLogic>().getMenteeProfileModel.data?.user?.mentee?.isProfileCompleted.toString() == '0'
+                             ? Positioned(
+                               bottom: 0.h,
+                               left: 15.w,
+                               right: 15.w,
+                               child: InkWell(
+                                 onTap: () {
+                                   Get.toNamed(PageRoutes.editUserProfile);
+                                 },
+                                 child: MyCustomBottomBar(
+                                   title: LanguageConstant.createProfile.tr,
+                                   disable: false,
+                                 ),
+                               ),
+                             )
+                            : widget.reschedule == true
                                 ? Positioned(
                                     bottom: 0.h,
                                     left: 15.w,
@@ -512,6 +537,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                                 right: 15.w,
                                 child: InkWell(
                                   onTap: () {
+                                    Get.find<GeneralController>().storageBox.write('route', "ConsultantProfilePage");
                                     Get.toNamed(PageRoutes.login);
                                   },
                                   child: MyCustomBottomBar(

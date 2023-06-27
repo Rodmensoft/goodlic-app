@@ -81,6 +81,7 @@ class MentorCategoriesHome {
     int? parentId,
     String? name,
     String? slug,
+    String? category_icon,
     String? imagePath,
     dynamic description,
     String? createdAt,
@@ -94,6 +95,7 @@ class MentorCategoriesHome {
     _imagePath = imagePath;
     _description = description;
     _createdAt = createdAt;
+    _category_icon = category_icon;
     _updatedAt = updatedAt;
     _mentorPCount = mentorPCount;
   }
@@ -103,6 +105,7 @@ class MentorCategoriesHome {
     _parentId = json['parent_id'];
     _name = json['name'];
     _slug = json['slug'];
+    _category_icon =json["category_icon"];
     _imagePath = json['image_path'];
     _description = json['description'];
     _createdAt = json['created_at'];
@@ -115,6 +118,7 @@ class MentorCategoriesHome {
   String? _name;
   String? _slug;
   String? _imagePath;
+  String? _category_icon;
   dynamic _description;
   String? _createdAt;
   String? _updatedAt;
@@ -127,6 +131,7 @@ class MentorCategoriesHome {
   String? get name => _name;
 
   String? get slug => _slug;
+  String? get category_icon=> _category_icon;
 
   String? get imagePath => _imagePath;
 
@@ -144,6 +149,7 @@ class MentorCategoriesHome {
     map['parent_id'] = _parentId;
     map['name'] = _name;
     map['slug'] = _slug;
+    map[" category_icon"]=_category_icon ;
     map['image_path'] = _imagePath;
     map['description'] = _description;
     map['created_at'] = _createdAt;

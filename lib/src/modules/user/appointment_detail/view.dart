@@ -39,7 +39,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    Get.find<GeneralController>().storageBox.remove('appointmentId');
     getMethod(
         context,
         getExistRatingUrl,

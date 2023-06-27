@@ -480,9 +480,11 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                     child: InkWell(
                                                       onTap: () {
                                                         Get.to(ImageViewScreen(
-                                                          networkImage: _createProfileLogic.forDisplayEducationList![index].imagePath!.contains('assets')
-                                                              ? '$mediaUrl${_createProfileLogic.forDisplayEducationList![index].imagePath}'
-                                                              : _createProfileLogic.forDisplayEducationList![index].imagePath!,
+                                                          networkImage:
+                                                          Get.find<GeneralController>().checKImage(_createProfileLogic.forDisplayEducationList![index].imagePath!),
+                                                          // _createProfileLogic.forDisplayEducationList![index].imagePath!.contains('assets')
+                                                          //     ? '$mediaUrl${_createProfileLogic.forDisplayEducationList![index].imagePath}'
+                                                          //     : _createProfileLogic.forDisplayEducationList![index].imagePath!,
                                                         ));
                                                       },
                                                       child: SizedBox(
@@ -490,9 +492,13 @@ class _EducationalInfoViewState extends State<EducationalInfoView> {
                                                           width: 30.w,
                                                           child: ClipRRect(
                                                             borderRadius: BorderRadius.circular(4.r),
-                                                            child: Image.network(_createProfileLogic.forDisplayEducationList![index].imagePath!.contains('assets')
-                                                                ? '$mediaUrl${_createProfileLogic.forDisplayEducationList![index].imagePath}'
-                                                                : _createProfileLogic.forDisplayEducationList![index].imagePath!),
+                                                            child:
+                                                            Image.network(
+                                                                Get.find<GeneralController>().checKImage(_createProfileLogic.forDisplayEducationList![index].imagePath!),
+                                                                // _createProfileLogic.forDisplayEducationList![index].imagePath!.contains('assets')
+                                                                // ? '$mediaUrl${_createProfileLogic.forDisplayEducationList![index].imagePath}'
+                                                                // : _createProfileLogic.forDisplayEducationList![index].imagePath!
+                                                              ),
                                                           )),
                                                     ),
                                                   )
