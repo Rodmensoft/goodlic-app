@@ -45,7 +45,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-!.fvm/fvm_config.json
+#flutter version 3.0.1
+!.fvm/fvm_config.json 
 .fvm/
 
 .vscode
