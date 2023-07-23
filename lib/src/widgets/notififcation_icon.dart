@@ -10,8 +10,9 @@ class CustomNotificationIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: Colors.transparent,
-      onTap: (){
-
+      onTap: () {
+        // TODO notifications
+        print('send noti');
       },
       child: Padding(
         padding: const EdgeInsetsDirectional.only(end: 15),

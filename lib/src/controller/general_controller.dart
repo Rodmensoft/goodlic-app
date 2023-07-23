@@ -222,6 +222,7 @@ class GeneralController extends GetxController {
     Language(2, 'اردو', '🇵🇰', 'ur', 'PK'),
     Language(3, 'हिन्दी', '🇮🇳', 'hi', 'IN'),
     Language(4, 'বাংলা', '🇧🇩', 'bn', 'BD'),
+    Language(5, 'Español', 'es', 'es', 'ES'),
   ];
 
   Language? selectedLocale;
