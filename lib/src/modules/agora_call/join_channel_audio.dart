@@ -172,7 +172,7 @@ class _State extends State<JoinChannelAudio> {
                         height: 130.h,
                         width: 130.w,
                         decoration: const BoxDecoration(
-                            color: Colors.transparent,
+                            color: customThemeColor,
                             image: DecorationImage(
                                 image: AssetImage(
                                     'assets/Icons/splash_logo.png'))),

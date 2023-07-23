@@ -1,0 +1,5 @@
+flutter_icons:
+  image_path: "assets/icono.png"
+  android: true # can specify file name here e.g. "ic_launcher"
+  ios: true # can specify file name here e.g. "My-Launcher-Icon"
+  remove_alpha_ios: true

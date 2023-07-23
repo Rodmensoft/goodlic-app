@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1092278578798-1d9r9h5ivkgojlel9q317a73gv9fvf6b.apps.googleusercontent.com</string>
+	<string>772934118449-a5pusvljk1crd1tq5l53j3qlnhoo4m9u.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1092278578798-1d9r9h5ivkgojlel9q317a73gv9fvf6b</string>
+	<string>com.googleusercontent.apps.772934118449-a5pusvljk1crd1tq5l53j3qlnhoo4m9u</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>772934118449-l9tse4qig0n8fjpt8l7m5gloiedmdorr.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC9wIhHgZe5_bLXkQZZJp6ZjCojUzGux3M</string>
+	<string>AIzaSyD_eVXMeJfLkugSvmbCdPe6pjGy91ghMIE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1092278578798</string>
+	<string>772934118449</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.consultantProduct</string>
+	<string>com.jr.goodlic</string>
 	<key>PROJECT_ID</key>
-	<string>consultant-ec812</string>
+	<string>rodmensoft-example1</string>
 	<key>STORAGE_BUCKET</key>
-	<string>consultant-ec812.appspot.com</string>
+	<string>rodmensoft-example1.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1092278578798:ios:88699d407f9690c460c07f</string>
+	<string>1:772934118449:ios:de8a66e25f59d4e8177910</string>
 </dict>
 </plist>

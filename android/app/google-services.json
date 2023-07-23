@@ -1,49 +1,71 @@
 {
   "project_info": {
-    "project_number": "1092278578798",
-    "project_id": "consultant-ec812",
-    "storage_bucket": "consultant-ec812.appspot.com"
+    "project_number": "772934118449",
+    "project_id": "rodmensoft-example1",
+    "storage_bucket": "rodmensoft-example1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1092278578798:android:4d8177f57b21f88960c07f",
+        "mobilesdk_app_id": "1:772934118449:android:915aa4631561d1b1177910",
         "android_client_info": {
           "package_name": "com.example.consultantProduct"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1092278578798-too60gd4431mrqf959hoolgpgqlau505.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.consultantProduct",
-            "certificate_hash": "38ecb4ffd54c9fa9b479e1ffed59a1993d3c5ef6"
-          }
-        },
-        {
-          "client_id": "1092278578798-g47tg815aeoblnqtqsn2ni18pnnvd2a0.apps.googleusercontent.com",
+          "client_id": "772934118449-55vkfi1ng0h929jl2j7ucah0li7g64bm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCbl8Ef8i2t4AC_4BY_40g36YbTj_MWj3Y"
+          "current_key": "AIzaSyAHZTNp7D6PYFIj_VVHOZOqtKj6OBNccVQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1092278578798-g47tg815aeoblnqtqsn2ni18pnnvd2a0.apps.googleusercontent.com",
+              "client_id": "772934118449-55vkfi1ng0h929jl2j7ucah0li7g64bm.apps.googleusercontent.com",
               "client_type": 3
-            },
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772934118449:android:ce7f6b05759de8e6177910",
+        "android_client_info": {
+          "package_name": "com.jr.goodlic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772934118449-l9tse4qig0n8fjpt8l7m5gloiedmdorr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jr.goodlic",
+            "certificate_hash": "d9b10e7ea4e4fb39d5e5dc1f7c35457294f7ff01"
+          }
+        },
+        {
+          "client_id": "772934118449-55vkfi1ng0h929jl2j7ucah0li7g64bm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHZTNp7D6PYFIj_VVHOZOqtKj6OBNccVQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
             {
-              "client_id": "1092278578798-1d9r9h5ivkgojlel9q317a73gv9fvf6b.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.consultantProduct"
-              }
+              "client_id": "772934118449-55vkfi1ng0h929jl2j7ucah0li7g64bm.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         }
